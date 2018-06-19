@@ -1,34 +1,86 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import cloneDeep from './clone-deep'
-// import log4V from './plugins/Log4V'
+import seqDsl from 'sequence-parser'
+import createLogger from 'vuex/dist/logger'
 
-import {SeqDiagram, Store} from './main'
+import SeqDiagram from './components/SeqDiagram.vue'
 
-Vue.use(Vuex)
-// Vue.use(log4V)
+import './components/Cosmetic.css'
 
-Vue.component('seq-diagram', SeqDiagram)
-
-Vue.config.productionTip = false
-
-/* eslint-disable */
-import demo1 from './demo1.js'
-import demo2 from './demo2.js'
-import demo3 from './demo3.js'
-import demo4 from './demo4.js'
-import demo5 from './demo5.js'
-import demo6 from './demo6.js'
-
-function snapshotStore (code) {
-  Store.state.code = code
-  return new Vuex.Store(cloneDeep({modules: {Store}}))
+const Store = {
+  state: {
+    // 'lifeLineDimensions' is decided by code and browser's behavior.
+    // It cannot be a simple getter (which is a computed value of a state property).
+    lifeLineDimensions: {},
+    firstInvocations: {},
+    code: '',
+    events: []
+  },
+  getters: {
+    // We are using getters to avoid hard coding module's name ($store.Store.state)
+    // in the components. Not sure if this is the best practice.
+    firstInvocations: (state) => state.firstInvocations,
+    starter: (state, getters) => {
+      let starterExp = getters.rootContext.starterExp()
+      return starterExp && starterExp.starter() && starterExp.starter().getCode() || 'Starter'
+    },
+    rootContext: (state) => {
+      return seqDsl.RootContext(state.code)
+    },
+    participants: (state, getters) => {
+      return seqDsl.Participants(getters.rootContext)
+    },
+    centerOf: (state) => (entity) => {
+      return state.lifeLineDimensions[entity] &&
+        (state.lifeLineDimensions[entity].left + state.lifeLineDimensions[entity].width / 2)
+    },
+    leftOf: (state) => (entity) => {
+      return state.lifeLineDimensions[entity] && state.lifeLineDimensions[entity].left
+    },
+    rightOf: (state) => (entity) => {
+      return state.lifeLineDimensions[entity] &&
+        (state.lifeLineDimensions[entity].left + state.lifeLineDimensions[entity].width)
+    },
+    widthOf: (state) => (entity) => {
+      return state.lifeLineDimensions[entity] && state.lifeLineDimensions[entity].width
+    },
+    distance: (state, getters) => (from, to) => {
+      return getters.centerOf(from) - getters.centerOf(to)
+    }
+  },
+  mutations: {
+    code: function (state, payload) {
+      state.code = payload
+    },
+    event: function (state, payload) {
+      state.events.push(payload)
+    },
+    onMessageMounted: function (state, payload) {
+      if (state.firstInvocations[payload.entity]) return
+      state.firstInvocations[payload.entity] = {
+        top: payload.top,
+        type: payload.type
+      }
+      state.firstInvocations = Object.assign({}, state.firstInvocations)
+    },
+    onLifeLineLayerMountedOrUpdated: function (state, payload) {
+      state.lifeLineDimensions = payload
+    },
+    onMessageLayerMountedOrUpdated: function (state, payload) {
+      state.firstInvocations = payload
+    }
+  },
+  actions: {
+    updateCode: function (context, payload) {
+      context.commit('code', payload.code)
+    }
+  },
+  // TODO: Enable strict for development?
+  strict: false,
+  plugins: [createLogger()]
 }
-Store.state.code = demo1
-new Vue({el: '#demo1', store: new Vuex.Store(Store)})
-// new Vue({el: '#demo1', store: snapshotStore(demo1)})
-// new Vue({el: '#demo2', store: snapshotStore(demo2)})
-// new Vue({el: '#demo3', store: snapshotStore(demo3)})
-// new Vue({el: '#demo4', store: snapshotStore(demo4)})
-// new Vue({el: '#demo5', store: snapshotStore(demo5)})
-// new Vue({el: '#demo6', store: snapshotStore(demo6)})
+
+let Version = '0.0.1'
+export {
+  Version,
+  Store,
+  SeqDiagram
+}
