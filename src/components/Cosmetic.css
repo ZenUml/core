@@ -1,0 +1,57 @@
+/*Color, font and position of labels (not the component itself)*/
+.sequence-diagram {
+  font-family: Helvetica, Verdana, serif;
+  font-size: 16px;
+  background-color: #fafafa;
+}
+
+.sequence-diagram .participant {
+  font-weight: bold;
+  background: #fff;
+}
+
+.sequence-diagram .participant,
+.sequence-diagram .occurrence {
+  border-style: solid;
+  border-color: #808080;
+}
+
+.sequence-diagram .message {
+  border-bottom-color: #808080;
+}
+
+.occurrence {
+  border-style: solid;
+  border-color: #808080;
+  background-color: #d3d3d3;
+}
+
+.sequence-diagram .fragment {
+  border-style: solid;
+  border-color: #aaa;
+  border-radius: 2px;
+}
+
+.sequence-diagram .fragment .header .name label {
+  color: #000;
+  font-weight: 700;
+  background-color:rgba(170, 170, 170, 0.5);
+}
+
+.sequence-diagram .fragment.alt div.divider {
+  border-bottom-style: dashed;
+  border-bottom-color: #555;
+}
+
+.sequence-diagram .lifeline .line {
+  border-left-style: dashed;
+  border-left-color: #808080;
+}
+
+.comments {
+  color: grey;
+}
+
+.comments:hover {
+  color: black;
+}

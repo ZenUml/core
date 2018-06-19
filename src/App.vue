@@ -1,17 +1,18 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <SeqDiagram />
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import SeqDiagram from './components/SeqDiagram'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    HelloWorld,
+    SeqDiagram
   }
 }
 </script>
