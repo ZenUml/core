@@ -1,6 +1,6 @@
 {
   "name": "vue-sequence",
-  "version": "0.5.27",
+  "version": "0.5.28",
   "main": "./dist/vue-sequence.common.js",
   "private": false,
   "scripts": {
