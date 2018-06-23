@@ -1,14 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import cloneDeep from './clone-deep'
-// import log4V from './plugins/Log4V'
+import log4V from './plugins/Log4V'
 import App from './App.vue'
-
 
 import {SeqDiagram, Store} from './index'
 
 Vue.use(Vuex)
-// Vue.use(log4V)
+Vue.use(log4V)
 
 Vue.component('seq-diagram', SeqDiagram)
 
@@ -27,7 +26,8 @@ function snapshotStore (code) {
   return new Vuex.Store(cloneDeep({modules: {Store}}))
 }
 Store.state.code = demo1
-new Vue({el: '#app', store: new Vuex.Store(Store), render: h => h(App)})
+window.app = new Vue({el: '#app', store: new Vuex.Store(Store), render: h => h(App)})
+window.store = app.$store
 // new Vue({el: '#demo1', store: snapshotStore(demo1)})
 // new Vue({el: '#demo2', store: snapshotStore(demo2)})
 // new Vue({el: '#demo3', store: snapshotStore(demo3)})

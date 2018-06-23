@@ -53,14 +53,6 @@ const Store = {
     event: function (state, payload) {
       state.events.push(payload)
     },
-    onMessageMounted: function (state, payload) {
-      if (state.firstInvocations[payload.entity]) return
-      state.firstInvocations[payload.entity] = {
-        top: payload.top,
-        type: payload.type
-      }
-      state.firstInvocations = Object.assign({}, state.firstInvocations)
-    },
     onLifeLineLayerMountedOrUpdated: function (state, payload) {
       state.lifeLineDimensions = payload
     },

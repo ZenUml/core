@@ -15,8 +15,8 @@
         return this.to || (this.context.to() && this.context.to().getCode()) || this.from
       }
     },
-    components: {
-      'block': () => import(/* webpackMode: "eager" */ './Block.vue')
+    beforeCreate: function () {
+      this.$options.components.Block = require('./Block.vue').default
     }
   }
 </script>

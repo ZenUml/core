@@ -23,22 +23,6 @@
         }
       }
     },
-    // TODO: there is a big assumption that message is mounted after message layer
-    // This has been made true only because block is import()'ed in occurrence!
-    mounted () {
-      let parent = this.$parent
-      let to = parent.to
-      let yOfMessageLayer = 0
-      while(parent.$options.name !== 'message-layer') {
-        parent = parent.$parent
-      }
-      yOfMessageLayer = parent.$el.getBoundingClientRect().y
-      this.$store.commit('onMessageMounted', {
-        entity: to,
-        top: this.$el.getBoundingClientRect().y - yOfMessageLayer,
-        type: this.type
-      })
-    },
     components: {
       Point
     }

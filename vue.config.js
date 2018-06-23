@@ -1,10 +1,13 @@
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
-
   configureWebpack: {
-    entry: ['./src/index.js'],
+    entry: ['./src/main.js'],
     externals: {
-      'sequence-parser': 'sequence-parser'
-    }
+      'sequenceParser': 'sequence-parser'
+    },
+    plugins: [
+      new UglifyJsPlugin()
+    ]
   }
 };

@@ -1,8 +1,8 @@
 {
   "name": "vue-sequence",
-  "version": "0.1.0",
+  "version": "0.5.27",
   "main": "./dist/vue-sequence.common.js",
-  "private": true,
+  "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib --name vue-sequence ./src/index.js",

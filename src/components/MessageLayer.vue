@@ -6,6 +6,7 @@
 
 <script>
   import { mapGetters } from 'vuex'
+  import Block from './Block'
 
   export default {
     name: 'message-layer',
@@ -15,12 +16,52 @@
         return this.centerOf(this.starter)
       }
     },
+    mounted () {
+      // We don't need to emitFirstInvocations here because `updated` will be called
+      // after lifeline-layer is mounted (updating lifeLineDimensions).
+      // Messages layout is NOT finalised after the first round of mounting.
+    },
+    updated () {
+      this.emitFirstInvocations()
+    },
+    methods: {
+      emitFirstInvocations () {
+        let firstInvocations = {}
+        this.$store.getters.participants.forEach(participant => {
+          firstInvocations[participant] = this.firstInvocation(participant)
+        })
+        this.$store.commit('onMessageLayerMountedOrUpdated', firstInvocations)
+      },
+      firstInvocation (entity) {
+        let messageLayerRect = this.$el.getBoundingClientRect()
+
+        function _loop (comp) {
+          let tagName = comp.$options.name
+          if (tagName === 'message' || tagName === 'self-invocation') {
+            let parent = comp.$parent
+            if ((parent.to || parent.source || parent.target) === entity) {
+              let invocationRect = comp.$el.getBoundingClientRect()
+              return {
+                type: comp.$parent.$options.name,
+                top: invocationRect.y - messageLayerRect.y
+              }
+            }
+          }
+
+          for (let child of comp.$children) {
+            let result = _loop(child)
+            if (result) {
+              return result
+            }
+          }
+          return null
+        }
+        // 'this' is the MessageLayer
+        return _loop(this)
+      }
+    },
     components: {
-      // block with mounted after message layer.
-      // use `webpackMode: "eager"` to prevent code splitting
-      // code splitting is causing issue https://github.com/vuejs/vue-cli/issues/1607
-      block: () => import(/* webpackMode: "eager" */ './Block.vue')
-      // Block
+      Block
     }
   }
 </script>
