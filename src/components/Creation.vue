@@ -2,7 +2,8 @@
   <div class="interaction creation sync" :class="{ 'right-to-left':rightToLeft }" :style="{width: Math.abs(interactionWidth) + 'px'}">
     <comment v-if="comment" :comment="comment" />
     <message class="invocation" :content="methodSignature" :rtl="rightToLeft" :style="{width: invocationWidth + 'px'}" type="creation"/>
-    <div class="participant">
+    <div class="participant place-holder">
+      <!--This line is to set the height of the place-holder-->
       <label class="name">{{to}}</label>
     </div>
     <occurrence :context="context" :from="to" :to="to"/>
@@ -73,14 +74,9 @@
     text-align: left;
   }
 
-  .participant {
-    display: inline-block;
-    transform: translateX(50%);
+  .participant.place-holder {
+    visibility: hidden;
     margin-top: -10px;
-  }
-
-  .right-to-left>.participant {
-    transform: translateX(-50%);
   }
 
   .creation > .message.invocation {
