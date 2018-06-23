@@ -2,7 +2,7 @@
   <div class="interaction sync" :class="{ 'right-to-left':rightToLeft }" :style="{width: Math.abs(interactionWidth) + 'px'}">
     <comment v-if="comment" :comment="comment"/>
     <message :content="methodSignature" :rtl="rightToLeft" type="sync"/>
-    <occurrence :context="context" :from="to"/>
+    <occurrence :context="context" :participant="to"/>
     <message class="return" v-if="assignee" :content="assignee" :rtl="!rightToLeft" type="return"/>
   </div>
 </template>

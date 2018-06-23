@@ -2,7 +2,7 @@
   <div class="interaction self sync">
     <comment v-if="comment" :comment="comment" />
     <self-invocation :signature="methodSignature"/>
-    <occurrence :context="context" :from="from"/>
+    <occurrence :context="context" :participant="from"/>
   </div>
 </template>
 

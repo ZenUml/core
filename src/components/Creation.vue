@@ -6,7 +6,7 @@
       <!--This line is to set the height of the place-holder-->
       <label class="name">{{to}}</label>
     </div>
-    <occurrence :context="context" :from="to" :to="to"/>
+    <occurrence :context="context" :participant="to"/>
     <message class="return" v-if="assignee" :content="assignee" :rtl="!rightToLeft" type="return"/>
   </div>
 </template>
