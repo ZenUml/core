@@ -5783,9 +5783,9 @@ send@0.16.2:
     range-parser "~1.2.0"
     statuses "~1.4.0"
 
-sequence-parser@^0.5.12:
-  version "0.5.12"
-  resolved "https://registry.yarnpkg.com/sequence-parser/-/sequence-parser-0.5.12.tgz#27b40e7fa638b6713a21afdecb8b8bc60bd322ba"
+sequence-parser@^0.5.13:
+  version "0.5.13"
+  resolved "https://registry.yarnpkg.com/sequence-parser/-/sequence-parser-0.5.13.tgz#5884b0f6e844b91360e8e0016e5b272dea5e5b42"
   dependencies:
     antlr4 "^4.7.0"
 
