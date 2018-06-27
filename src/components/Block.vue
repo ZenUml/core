@@ -14,7 +14,7 @@
     props: ['from', 'context'],
     computed: {
       statements: function () {
-        return this.context.stat()
+        return this.context && this.context.stat()
       }
     },
     components: {
