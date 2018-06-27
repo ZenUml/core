@@ -1,7 +1,7 @@
 {
   "name": "vue-sequence",
-  "version": "0.5.32",
-  "main": "./dist/vue-sequence.common.js",
+  "version": "0.5.34",
+  "main": "./dist/vue-sequence.umd.min.js",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
