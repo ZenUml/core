@@ -12,17 +12,14 @@
 
 .sequence-diagram .participant,
 .sequence-diagram .occurrence {
-  border-style: solid;
-  border-color: #808080;
+  border: 2px solid rgba(3, 3, 3, 0.05);
 }
 
 .sequence-diagram .message {
   border-bottom-color: #808080;
 }
 
-.occurrence {
-  border-style: solid;
-  border-color: #808080;
+.sequence-diagram .occurrence {
   background-color: #d3d3d3;
 }
 

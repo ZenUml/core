@@ -36,6 +36,5 @@
     min-width: 88px;
     max-width: 250px;
     text-align: center;
-    border-width: 2px;
   }
 </style>
