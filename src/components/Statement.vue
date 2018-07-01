@@ -92,13 +92,18 @@
   .comments {
     position: relative; /* for Z axis position overlay lifeline at root level */
     text-align: left;
-    border: solid 1px gray;
+    border: solid 1px transparent;
     background: white;
     padding: 5px;
     width: 300px;
     font-size: 0.8em;
     font-style: italic;
     line-height: 1em;
+    opacity: 0.5;
+  }
+
+  .comments:hover {
+    color: black;
   }
 
   .fragment>.comments {
