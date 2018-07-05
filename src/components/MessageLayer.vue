@@ -130,9 +130,14 @@
 
   .fragment {
     border-width: 1px;
+    margin: 2px 0;
   }
 
+  .fragment .header label {
+    padding: 0 10px;
+  }
   .fragment .header .name label {
     padding: 0 10px;
+    background: rgba(170, 170, 170, 0.1);
   }
 </style>

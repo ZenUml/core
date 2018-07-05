@@ -42,4 +42,8 @@
     margin-left: 50%;
     border-left-width: 1px;
   }
+
+  .lifeline>.participant {
+    z-index: 100;
+  }
 </style>

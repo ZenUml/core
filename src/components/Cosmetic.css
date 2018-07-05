@@ -27,12 +27,13 @@
   border-style: solid;
   border-color: #aaa;
   border-radius: 2px;
+  background: #fafafa;
+  opacity: 0.9;
 }
 
 .sequence-diagram .fragment .header .name label {
-  color: #000;
+  color: #555;
   font-weight: 700;
-  background-color:rgba(170, 170, 170, 0.5);
 }
 
 .sequence-diagram .fragment.alt div.divider {
