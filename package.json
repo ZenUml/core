@@ -1,12 +1,12 @@
 {
   "name": "vue-sequence",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "main": "./dist/vue-sequence.umd.min.js",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib --name vue-sequence ./src/index.js",
-    "build-crx": "vue-cli-service build --mode development --target lib --name vue-sequence ./src/index.js",
+    "build-crx": "vue-cli-service build --mode production --target lib --name vue-sequence ./src/index.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
