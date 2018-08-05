@@ -4,12 +4,16 @@ export default {
   computed: {
     boundary: function () {
       const that = this
-      let arr = [this.from, ...seqDsl.Participants(this.context)]
+      let arrayLeft = [this.from, ...seqDsl.Participants(this.context)]
         .map(function (participant) {
-          return that.$store.getters.centerOf(participant)
+          return that.$store.getters.leftOf(participant)
         })
-      let min = Math.min(...arr)
-      let max = Math.max(...arr)
+      let arrayRight = [this.from, ...seqDsl.Participants(this.context)]
+        .map(function (participant) {
+          return that.$store.getters.rightOf(participant)
+        })
+      let min = Math.min(...arrayLeft)
+      let max = Math.max(...arrayRight)
       return {
         min: min,
         max: max,
@@ -23,13 +27,13 @@ export default {
       return this.$store.getters.centerOf(this.from)
     },
     offsetX: function () {
-      let extra = 10 * this.depth + 50
+      let extra = 10 * this.depth
       return this.centerOfFrom - this.boundary.min + extra
     },
     fragmentStyle: function () {
       return {
         transform: 'translateX(' + this.offsetX * (-1) + 'px)',
-        width: (this.boundary.width + 20 * this.depth + 100) + 'px'
+        width: (this.boundary.width + 20 * this.depth + 50) + 'px'
       }
     },
     blockStyle: function () {

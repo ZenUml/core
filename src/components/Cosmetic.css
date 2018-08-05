@@ -26,7 +26,7 @@
   border-style: solid;
   border-color: #aaa;
   border-radius: 2px;
-  background: #fafafa;
+  background: rgba(255,255,255,.2);
   opacity: 0.9;
 }
 

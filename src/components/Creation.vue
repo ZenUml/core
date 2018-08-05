@@ -76,11 +76,7 @@
 
   .participant.place-holder {
     visibility: hidden;
-    margin-top: -10px;
-  }
-
-  .creation > .message.invocation {
-    top: 10px;
+    margin-top: -20px;
   }
 
   .creation.right-to-left > .message.invocation {
