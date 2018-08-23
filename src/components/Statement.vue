@@ -95,7 +95,7 @@
     border: solid 1px transparent;
     background: white;
     padding: 5px;
-    width: 300px;
+    width: 500px;
     font-size: 0.8em;
     font-style: italic;
     line-height: 1em;
