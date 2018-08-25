@@ -101,6 +101,11 @@
 
   .message svg {
     position: absolute;
+    width: 10px;
+  }
+
+  .message.self svg {
+    width: 40px;
   }
 
   .message svg.arrow polyline {

@@ -70,7 +70,7 @@ const Store = {
   plugins: [createLogger()]
 }
 
-let Version = '0.6.1'
+let Version = '0.6.3'
 export {
   Version,
   Store,
