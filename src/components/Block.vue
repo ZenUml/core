@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-for="(stat, index) in statements" :key="index">
-      <statement :context="stat" :from="from"/>
+      <statement :context="stat" :from="from" :offset="offset"/>
     </div>
   </div>
 </template>
@@ -11,7 +11,7 @@
 
   export default {
     name: 'block',
-    props: ['from', 'context'],
+    props: ['from', 'context', 'offset'],
     computed: {
       statements: function () {
         return this.context && this.context.stat()

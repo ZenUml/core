@@ -1,8 +1,12 @@
 <template>
-  <div class="interaction sync" :class="{ 'right-to-left':rightToLeft }" :style="{width: Math.abs(interactionWidth) + 'px'}">
+  <div class="interaction sync"
+       :entity-width="interactionWidth"
+       :class="{ 'right-to-left':rightToLeft }"
+       :style="{width: interactionWidth + 'px'}">
     <comment v-if="comment" :comment="comment"/>
     <message :content="methodSignature" :rtl="rightToLeft" type="sync"/>
-    <occurrence :context="context" :participant="to"/>
+    <!--We reset the offset here to make it simple; re-entering a method should be rare.-->
+    <occurrence :context="context" :participant="to" :offset="0"/>
     <message class="return" v-if="assignee" :content="assignee" :rtl="!rightToLeft" type="return"/>
   </div>
 </template>
@@ -14,14 +18,19 @@
 
   export default {
     name: 'interaction',
-    props: ['from', 'context', 'comment'],
+    props: ['from', 'context', 'comment', 'offset'],
     computed: {
       interactionWidth: function () {
         // This is called in the beforeMount hook. By this time, the beforeMount methods
         // of LifeLines have been called. But since lifelines have not been mounted, the following
         // distance will return 0.
-        // The core problem - Interaction is
-        return this.$store.getters.distance(this.to, this.from)
+
+        let distance = this.$store.getters.distance(this.to, this.from)
+        let safeOffset = this.offset || 0
+        if (distance < 0) {
+          return Math.abs(distance) - safeOffset + 12
+        }
+        return Math.abs(distance) - safeOffset
       },
       occurrenceLeft: function () {
         return this.rightToLeft ? -14 : this.interactionWidth - 14

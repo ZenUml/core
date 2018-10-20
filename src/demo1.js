@@ -11,8 +11,15 @@ export default `// comments at the beginning should be ignored
 RET ret = A.methodA(a, b) { 
   // A comment for self interaction
   selfMethod() {
+  selfMethod2() {
+  B.method()
+  }
     // A sync interaction after a self interaction
-    B.method()
+    B.method() {
+      selfB() {
+        A.method()
+      }
+    }
   }
   // A comment for creation
   b = new B()

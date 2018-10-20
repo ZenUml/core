@@ -1,8 +1,8 @@
 <template>
   <div class="message self">
     <svg class="arrow" width="44" height="34">
-      <polyline points="0,2 28,2 28,25 8,25"></polyline>
-      <polyline class="head" points="10,19 0,25 10,31"></polyline>
+      <polyline points="0,2 28,2 28,25 14,25"></polyline>
+      <polyline class="head" points="16,19 6,25 16,31"></polyline>
       <!--TODO: What is the below line used for?-->
       <!--<polyline class="closed" points="28,32 28,18"></polyline>-->
     </svg>

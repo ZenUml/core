@@ -131,6 +131,7 @@
   .interaction.self > .occurrence {
     left: -8px;               /* overlay occurrence bar on the existing bar. */
     margin-top: -10px;
+    margin-left: 6px;
   }
 
   .fragment {

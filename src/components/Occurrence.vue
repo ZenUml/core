@@ -2,14 +2,16 @@
   <div class="occurrence">
     <block v-if="this.context.block()"
            :context="context.block()"
-           :from="participant"></block>
+           :from="participant"
+           :offset="offset"
+    ></block>
   </div>
 </template>
 
 <script type="text/babel">
   export default {
     name: 'occurrence',
-    props: ['context', 'participant'],
+    props: ['context', 'participant', 'offset'],
     beforeCreate: function () {
       this.$options.components.Block = require('./Block.vue').default
     }

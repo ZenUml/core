@@ -26,6 +26,7 @@
         :context="stat.message()"
         :from="from"
         :comment="comment"
+        :offset="offset"
       >
       </interaction>
       <self-interaction
@@ -33,6 +34,7 @@
         :context="stat.message()"
         :from="from"
         :comment="comment"
+        :offset="offset"
       >
       </self-interaction>
       <fragment-alt
@@ -63,7 +65,7 @@
 
   export default {
     name: 'statement',
-    props: ['from', 'context'],
+    props: ['from', 'context', 'offset'],
     computed: {
       stat: function () {
         return this.context
