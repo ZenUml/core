@@ -30,9 +30,9 @@ RET ret = A.methodA(a, b) {
   B->C: Async Message
   // A comment for alt
   if (X) {
-    B.alternative() {
+    alternative() {
       // A comment for creation
-      a = new A() {
+      A.method() {
         // A comment for creation
         b = new B()
         C.method

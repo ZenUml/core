@@ -19,17 +19,24 @@
 
   export default {
     name: 'creation',
-    props: ['from', 'context', 'comment'],
+    props: ['from', 'context', 'comment', 'offset'],
     computed: {
       ...mapGetters(['distance', 'centerOf', 'rightOf', 'leftOf', 'widthOf']),
       interactionWidth: function () {
-        return this.distance(this.to, this.from)
+        let distance = this.$store.getters.distance(this.to, this.from)
+        let safeOffset = this.offset || 0
+        if (distance < 0) {
+          return Math.abs(distance) - safeOffset + 12
+        }
+        return Math.abs(distance) - safeOffset
       },
       invocationWidth: function () {
+        let safeOffset = this.offset || 0
+
         if (this.rightToLeft) {
-          return this.centerOf(this.from) - this.rightOf(this.to) - 6
+          return this.centerOf(this.from) - this.rightOf(this.to) - safeOffset + 6
         }
-        return this.leftOf(this.to) - this.centerOf(this.from) - 6
+        return this.leftOf(this.to) - this.centerOf(this.from) - safeOffset - 6
       },
       rightToLeft: function () {
         return this.distance(this.to, this.from) < 0

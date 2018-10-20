@@ -19,6 +19,7 @@
         :context="stat.creation()"
         :from="from"
         :comment="comment"
+        :offset="offset"
       >
       </creation>
       <interaction
