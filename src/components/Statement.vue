@@ -43,6 +43,7 @@
         :context="stat.alt()"
         :from="from"
         :comment="comment"
+        :offset="offset"
       >
       </fragment-alt>
       <fragment-loop
@@ -50,6 +51,7 @@
         :context="stat.loop()"
         :from="from"
         :comment="comment"
+        :offset="offset"
       >
       </fragment-loop>
   </div>

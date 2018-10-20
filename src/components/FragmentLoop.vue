@@ -7,7 +7,9 @@
     </div>
     <block :style="blockStyle"
            :context="context.braceBlock().block()"
-           :from="from"></block>
+           :from="from"
+           :offset="offset"
+    ></block>
   </div>
 </template>
 
@@ -16,7 +18,7 @@
 
   export default {
     name: 'fragment-loop',
-    props: ['from', 'context', 'comment'],
+    props: ['from', 'context', 'comment', 'offset'],
     mixins: [fragment],
     computed: {
       condition: function () {

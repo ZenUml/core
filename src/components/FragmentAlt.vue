@@ -7,20 +7,26 @@
     </div>
     <block :style="blockStyle"
            :context="context.ifBlock().braceBlock().block()"
-           :from="from"></block>
+           :from="from"
+           :offset="offset"
+    ></block>
     <template v-for="(elseIfBlock, index) in context.elseIfBlock()">
       <div class="divider" :key="index"></div>
       <div class="name" :key="index+100">else if [{{elseIfBlock.parExpr().expr().getCode()}}]</div>
       <block :style="blockStyle"
              :context="elseIfBlock.braceBlock().block()"
-             :from="from" :key="index+1000"></block>
+             :from="from"
+             :offset="offset"
+             :key="index+1000"></block>
     </template>
     <template v-if="context.elseBlock()">
       <div class="divider"></div>
       <div class="name">else</div>
       <block :style="blockStyle"
              :context="context.elseBlock().braceBlock().block()"
-             :from="from"></block>
+             :from="from"
+             :offset="offset"
+      ></block>
     </template>
   </div>
 </template>
@@ -29,7 +35,7 @@
   import fragment from './FragmentMixin'
   export default {
     name: 'fragment-alt',
-    props: ['from', 'context', 'comment'],
+    props: ['from', 'context', 'comment', 'offset'],
     mixins: [fragment],
     computed: {
       condition: function () {
