@@ -28,7 +28,7 @@
         let distance = this.$store.getters.distance(this.to, this.from)
         let safeOffset = this.offset || 0
         if (distance < 0) {
-          return Math.abs(distance) - safeOffset + 12
+          return Math.abs(distance) + safeOffset
         }
         return Math.abs(distance) - safeOffset
       },
