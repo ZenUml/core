@@ -19,11 +19,8 @@
     name: 'statement',
     props: ['from', 'context', 'offset'],
     computed: {
-      stat: function () {
-        return this.context
-      },
       comment: function () {
-        return this.stat && this.stat.comment() ? this.stat.comment().getCode() : ''
+        return this.context.comment() ? this.context.comment().getCode() : ''
       },
       subStatement: function () {
         let that = this
@@ -32,15 +29,15 @@
           alt: 'FragmentAlt',
           creation: 'Creation',
           message: function () {
-            let isSelf = !that.stat.message().to() || that.stat.message().to().getCode() === that.from
+            let isSelf = !that.context.message().to() || that.context.message().to().getCode() === that.from
             return isSelf ? 'SelfInteraction' : 'Interaction'
           },
           asyncMessage: function () {
-            let isSelf = that.stat.asyncMessage().source().getCode() === that.stat.asyncMessage().target().getCode()
+            let isSelf = that.context.asyncMessage().source().getCode() === that.context.asyncMessage().target().getCode()
             return isSelf ? 'SelfInteractionAsync' : 'InteractionAsync'
           }
         }
-        let key = Object.keys(dict).find(x => that.stat[x]() !== null)
+        let key = Object.keys(dict).find(x => that.context[x]() !== null)
         let dictElement = dict[key]
         return typeof dictElement === 'function' ? dictElement() : dictElement
       }
