@@ -2,7 +2,7 @@
   <div class="interaction self sync">
     <comment v-if="comment" :comment="comment" />
     <self-invocation :signature="methodSignature"/>
-    <occurrence :context="context" :participant="from" :offset="(offset || 0) + 6"/>
+    <occurrence :context="message" :participant="from" :offset="(offset || 0) + 6"/>
   </div>
 </template>
 
@@ -15,8 +15,11 @@
     name: 'self-interaction',
     props: ['from', 'context', 'comment', 'offset'],
     computed: {
+      message: function () {
+        return this.context.message()
+      },
       methodSignature: function () {
-        return this.context.signature().getCode()
+        return this.message.signature().getCode()
       }
     },
     components: {

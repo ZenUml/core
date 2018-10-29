@@ -6,11 +6,11 @@
       <label class="condition">[{{condition}}]</label>
     </div>
     <block :style="blockStyle"
-           :context="context.ifBlock().braceBlock().block()"
+           :context="alt.ifBlock().braceBlock().block()"
            :from="from"
            :offset="offset"
     ></block>
-    <template v-for="(elseIfBlock, index) in context.elseIfBlock()">
+    <template v-for="(elseIfBlock, index) in alt.elseIfBlock()">
       <div class="divider" :key="index"></div>
       <div class="name" :key="index+100">else if [{{elseIfBlock.parExpr().expr().getCode()}}]</div>
       <block :style="blockStyle"
@@ -19,11 +19,11 @@
              :offset="offset"
              :key="index+1000"></block>
     </template>
-    <template v-if="context.elseBlock()">
+    <template v-if="alt.elseBlock()">
       <div class="divider"></div>
       <div class="name">else</div>
       <block :style="blockStyle"
-             :context="context.elseBlock().braceBlock().block()"
+             :context="alt.elseBlock().braceBlock().block()"
              :from="from"
              :offset="offset"
       ></block>
@@ -38,8 +38,11 @@
     props: ['from', 'context', 'comment', 'offset'],
     mixins: [fragment],
     computed: {
+      alt: function () {
+        return this.context.alt()
+      },
       condition: function () {
-        return this.context.ifBlock().parExpr().expr().getCode()
+        return this.alt.ifBlock().parExpr().expr().getCode()
       }
     },
     beforeCreate: function () {

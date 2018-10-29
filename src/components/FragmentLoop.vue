@@ -6,7 +6,7 @@
       <label class="condition">[{{condition}}]</label>
     </div>
     <block :style="blockStyle"
-           :context="context.braceBlock().block()"
+           :context="loop.braceBlock().block()"
            :from="from"
            :offset="offset"
     ></block>
@@ -21,8 +21,11 @@
     props: ['from', 'context', 'comment', 'offset'],
     mixins: [fragment],
     computed: {
+      loop: function () {
+        return this.context.loop()
+      },
       condition: function () {
-        return this.context.parExpr().expr().getCode()
+        return this.loop.parExpr().expr().getCode()
       }
     },
     beforeCreate: function () {

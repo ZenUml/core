@@ -6,7 +6,7 @@
       <!--This line is to set the height of the place-holder-->
       <label class="name">{{to}}</label>
     </div>
-    <occurrence :context="context" :participant="to"/>
+    <occurrence :context="creation" :participant="to"/>
     <message class="return" v-if="assignee" :content="assignee" :rtl="!rightToLeft" type="return"/>
   </div>
 </template>
@@ -22,6 +22,9 @@
     props: ['from', 'context', 'comment', 'offset'],
     computed: {
       ...mapGetters(['distance', 'centerOf', 'rightOf', 'leftOf', 'widthOf']),
+      creation: function () {
+        return this.context.creation()
+      },
       interactionWidth: function () {
         let distance = this.$store.getters.distance(this.to, this.from)
         let safeOffset = this.offset || 0
@@ -42,7 +45,7 @@
         return this.distance(this.to, this.from) < 0
       },
       methodSignature: function () {
-        const params = this.context.parameters()
+        const params = this.creation.parameters()
         const text = (params && params.parameter() && params.parameter().length > 0) ? params.getCode() : 'create'
         return '«' + text + '»'
       },
@@ -50,15 +53,15 @@
         function safeCodeGetter (context) {
           return (context && context.getCode()) || ''
         }
-        let assignment = this.context.assignment()
+        let assignment = this.creation.assignment()
         if (!assignment) return ''
         let assignee = safeCodeGetter(assignment.assignee())
         const type = safeCodeGetter(assignment.type())
         return assignee + (type ? ':' + type : '')
       },
       to: function () {
-        const assignee = this.context.assignment() && this.context.assignment().assignee().getText()
-        const type = this.context.constructor().getText()
+        const assignee = this.creation.assignment() && this.creation.assignment().assignee().getText()
+        const type = this.creation.constructor().getText()
         return assignee ? assignee + ':' + type : type
       }
     },

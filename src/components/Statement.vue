@@ -1,60 +1,9 @@
 <template>
-  <div>
-      <interaction-async
-        v-if="stat.asyncMessage() && !isSelfAsyncMessage(stat.asyncMessage())"
-        :context = "stat.asyncMessage()"
-        :from="from"
-        :comment="comment"
-      >
-      </interaction-async>
-      <self-interaction-async
-        v-if="stat.asyncMessage() && isSelfAsyncMessage(stat.asyncMessage())"
-        :context = "stat.asyncMessage()"
-        :from="from"
-        :comment="comment"
-      >
-      </self-interaction-async>
-      <creation
-        v-if="stat.creation()"
-        :context="stat.creation()"
-        :from="from"
-        :comment="comment"
-        :offset="offset"
-      >
-      </creation>
-      <interaction
-        v-if="!!stat.message() && !!stat.message().to() && !(stat.message().to().getCode() === from)"
-        :context="stat.message()"
-        :from="from"
-        :comment="comment"
-        :offset="offset"
-      >
-      </interaction>
-      <self-interaction
-        v-if="!!stat.message() && (!stat.message().to() || stat.message().to().getCode() === from)"
-        :context="stat.message()"
-        :from="from"
-        :comment="comment"
-        :offset="offset"
-      >
-      </self-interaction>
-      <fragment-alt
-        v-if="!!stat.alt()"
-        :context="stat.alt()"
-        :from="from"
-        :comment="comment"
-        :offset="offset"
-      >
-      </fragment-alt>
-      <fragment-loop
-        v-if="!!stat.loop()"
-        :context="stat.loop()"
-        :from="from"
-        :comment="comment"
-        :offset="offset"
-      >
-      </fragment-loop>
-  </div>
+  <component v-bind:is="subStatement"
+             :context="context"
+             :from="from"
+             :comment="comment"
+             :offset="offset"></component>
 </template>
 
 <script>
@@ -75,11 +24,25 @@
       },
       comment: function () {
         return this.stat && this.stat.comment() ? this.stat.comment().getCode() : ''
-      }
-    },
-    methods: {
-      isSelfAsyncMessage: function (asyncContext) {
-        return asyncContext.source().getCode() === asyncContext.target().getCode()
+      },
+      subStatement: function () {
+        let that = this
+        let dict = {
+          loop: 'FragmentLoop',
+          alt: 'FragmentAlt',
+          creation: 'Creation',
+          message: function () {
+            let isSelf = !that.stat.message().to() || that.stat.message().to().getCode() === that.from
+            return isSelf ? 'SelfInteraction' : 'Interaction'
+          },
+          asyncMessage: function () {
+            let isSelf = that.stat.asyncMessage().source().getCode() === that.stat.asyncMessage().target().getCode()
+            return isSelf ? 'SelfInteractionAsync' : 'InteractionAsync'
+          }
+        }
+        let key = Object.keys(dict).find(x => that.stat[x]() !== null)
+        let dictElement = dict[key]
+        return typeof dictElement === 'function' ? dictElement() : dictElement
       }
     },
     components: {

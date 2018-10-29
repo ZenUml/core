@@ -6,7 +6,7 @@
     <comment v-if="comment" :comment="comment"/>
     <message :content="methodSignature" :rtl="rightToLeft" type="sync"/>
     <!--We reset the offset here to make it simple; re-entering a method should be rare.-->
-    <occurrence :context="context" :participant="to" :offset="0"/>
+    <occurrence :context="message" :participant="to" :offset="0"/>
     <message class="return" v-if="assignee" :content="assignee" :rtl="!rightToLeft" type="return"/>
   </div>
 </template>
@@ -20,6 +20,9 @@
     name: 'interaction',
     props: ['from', 'context', 'comment', 'offset'],
     computed: {
+      message: function () {
+        return this.context.message()
+      },
       interactionWidth: function () {
         // This is called in the beforeMount hook. By this time, the beforeMount methods
         // of LifeLines have been called. But since lifelines have not been mounted, the following
@@ -39,20 +42,20 @@
         return this.$store.getters.distance(this.to, this.from) < 0
       },
       methodSignature: function () {
-        return this.context.signature().getCode()
+        return this.message.signature().getCode()
       },
       assignee: function () {
         function safeCodeGetter (context) {
           return (context && context.getCode()) || ''
         }
-        let assignment = this.context.assignment()
+        let assignment = this.message.assignment()
         if (!assignment) return ''
         let assignee = safeCodeGetter(assignment.assignee())
         const type = safeCodeGetter(assignment.type())
         return assignee + (type ? ':' + type : '')
       },
       to: function () {
-        return this.context.to().getCode()
+        return this.message.to().getCode()
       }
     },
     components: {

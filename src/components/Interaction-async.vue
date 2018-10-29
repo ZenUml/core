@@ -14,6 +14,9 @@
     name: 'interaction-async',
     props: ['from', 'context', 'comment'],
     computed: {
+      asyncMessage: function () {
+        return this.context.asyncMessage()
+      },
       interactionWidth: function () {
         return this.$store.getters.distance(this.target, this.source)
       },
@@ -24,13 +27,13 @@
         return this.$store.getters.distance(this.target, this.source) < 0
       },
       methodSignature: function () {
-        return this.context.content().getCode()
+        return this.asyncMessage.content().getCode()
       },
       source: function () {
-        return this.context.source().getCode()
+        return this.asyncMessage.source().getCode()
       },
       target: function () {
-        return this.context.target().getCode()
+        return this.asyncMessage.target().getCode()
       }
     },
     components: {

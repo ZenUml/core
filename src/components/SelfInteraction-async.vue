@@ -14,14 +14,17 @@
     name: 'self-interaction-async',
     props: ['from', 'context', 'comment'],
     computed: {
+      asyncMessage: function () {
+        return this.context.asyncMessage()
+      },
       left: function () {
         return this.$store.getters.distance(this.to, this.from)
       },
       methodSignature: function () {
-        return this.context.content().getCode()
+        return this.asyncMessage.content().getCode()
       },
       to: function () {
-        return this.context.target().getCode()
+        return this.asyncMessage.target().getCode()
       }
     },
     components: {
