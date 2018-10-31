@@ -20,7 +20,7 @@
     props: ['from', 'context', 'offset'],
     computed: {
       comment: function () {
-        return this.context.comment() ? this.context.comment().getCode() : ''
+        return this.context.comment() ? this.context.comment().COMMENT().join('<br/>') : ''
       },
       subStatement: function () {
         let that = this

@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@vue/cli": "^3.0.0-rc.5",
-    "sequence-parser": "^0.5.13",
+    "sequence-parser": "^0.5.14",
     "vue": "^2.5.16",
     "vuex": "^3.0.1"
   },

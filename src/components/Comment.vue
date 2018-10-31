@@ -1,5 +1,5 @@
 <template>
-  <div class="comments">{{comment}}</div>
+  <div class="comments" v-html="comment"></div>
 </template>
 
 <script type="text/babel">
