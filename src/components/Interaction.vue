@@ -1,6 +1,5 @@
 <template>
   <div class="interaction sync"
-       :entity-width="interactionWidth"
        :class="{ 'right-to-left':rightToLeft }"
        :style="{width: interactionWidth + 'px'}">
     <comment v-if="comment" :comment="comment"/>
