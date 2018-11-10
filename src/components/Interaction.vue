@@ -24,10 +24,6 @@
         return this.context.message()
       },
       interactionWidth: function () {
-        // This is called in the beforeMount hook. By this time, the beforeMount methods
-        // of LifeLines have been called. But since lifelines have not been mounted, the following
-        // distance will return 0.
-
         let distance = this.$store.getters.distance(this.to, this.from)
         let safeOffset = this.offset || 0
         if (distance < 0) {
