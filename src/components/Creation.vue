@@ -1,7 +1,7 @@
 <template>
   <div class="interaction creation sync" :class="{ 'right-to-left':rightToLeft }" :style="{width: Math.abs(interactionWidth) + 'px'}">
     <comment v-if="comment" :comment="comment" />
-    <message class="invocation" :content="methodSignature" :rtl="rightToLeft" :style="{width: invocationWidth + 'px'}" type="creation"/>
+    <message class="invocation" :content="signature" :rtl="rightToLeft" :style="{width: invocationWidth + 'px'}" type="creation"/>
     <div class="participant place-holder">
       <!--This line is to set the height of the place-holder-->
       <label class="name">{{to}}</label>
@@ -44,7 +44,7 @@
       rightToLeft: function () {
         return this.distance(this.to, this.from) < 0
       },
-      methodSignature: function () {
+      signature: function () {
         const params = this.creation.parameters()
         const text = (params && params.parameter() && params.parameter().length > 0) ? params.getCode() : 'create'
         return '«' + text + '»'

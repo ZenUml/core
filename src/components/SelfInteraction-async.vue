@@ -1,7 +1,7 @@
 <template>
   <div class="interaction self async" :style="{ left: (left) + 'px' }">
     <comment v-if="comment" :comment="comment"/>
-    <self-invocation :signature="methodSignature"/>
+    <self-invocation :signature="signature"/>
   </div>
 </template>
 
@@ -20,7 +20,7 @@
       left: function () {
         return this.$store.getters.distance(this.to, this.from)
       },
-      methodSignature: function () {
+      signature: function () {
         return this.asyncMessage.content().getCode()
       },
       to: function () {

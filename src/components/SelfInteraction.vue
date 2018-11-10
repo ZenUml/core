@@ -1,7 +1,7 @@
 <template>
   <div class="interaction self sync">
     <comment v-if="comment" :comment="comment" />
-    <self-invocation :signature="methodSignature"/>
+    <self-invocation :signature="signature"/>
     <occurrence :context="message" :participant="from" :offset="(offset || 0) + 6"/>
   </div>
 </template>
@@ -18,7 +18,7 @@
       message: function () {
         return this.context.message()
       },
-      methodSignature: function () {
+      signature: function () {
         return this.message.signature().getCode()
       }
     },

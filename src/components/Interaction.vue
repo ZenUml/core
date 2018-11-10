@@ -1,10 +1,10 @@
 <template>
   <div class="interaction sync"
-       :signature="methodSignature"
+       :signature="signature"
        :class="{ 'right-to-left':rightToLeft }"
        :style="{width: interactionWidth + 'px'}">
     <comment v-if="comment" :comment="comment"/>
-    <message :content="methodSignature" :rtl="rightToLeft" type="sync"/>
+    <message :content="signature" :rtl="rightToLeft" type="sync"/>
     <!--We reset the offset here to make it simple; re-entering a method should be rare.-->
     <occurrence :context="message" :participant="to" :offset="0"/>
     <message class="return" v-if="assignee" :content="assignee" :rtl="!rightToLeft" type="return"/>
@@ -37,7 +37,7 @@
       rightToLeft: function () {
         return this.$store.getters.distance(this.to, this.from) < 0
       },
-      methodSignature: function () {
+      signature: function () {
         return this.message.signature().getCode()
       },
       assignee: function () {

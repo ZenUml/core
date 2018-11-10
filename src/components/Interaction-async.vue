@@ -1,7 +1,7 @@
 <template>
   <div class="interaction async" :class="{ 'right-to-left':rightToLeft }" :style="{width: Math.abs(interactionWidth) + 'px', left: left + 'px'}">
     <comment v-if="comment" :comment="comment"/>
-    <message :content="methodSignature" :rtl="rightToLeft" type="async"/>
+    <message :content="signature" :rtl="rightToLeft" type="async"/>
     <div class="invisible-occurrence"></div>
   </div>
 </template>
@@ -26,7 +26,7 @@
       rightToLeft: function () {
         return this.$store.getters.distance(this.target, this.source) < 0
       },
-      methodSignature: function () {
+      signature: function () {
         return this.asyncMessage.content().getCode()
       },
       source: function () {
