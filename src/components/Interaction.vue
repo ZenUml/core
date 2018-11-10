@@ -1,5 +1,6 @@
 <template>
   <div class="interaction sync"
+       :signature="methodSignature"
        :class="{ 'right-to-left':rightToLeft }"
        :style="{width: interactionWidth + 'px'}">
     <comment v-if="comment" :comment="comment"/>
