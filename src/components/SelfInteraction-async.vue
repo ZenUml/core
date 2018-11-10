@@ -23,7 +23,7 @@
         return this.$store.getters.distance(this.to, this.from)
       },
       signature: function () {
-        return this.asyncMessage.content().getCode()
+        return this.asyncMessage.content().getCode().replace(/^:+/g, '')
       },
       to: function () {
         return this.asyncMessage.target().getCode()

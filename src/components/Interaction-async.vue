@@ -30,7 +30,7 @@
         return this.$store.getters.distance(this.target, this.source) < 0
       },
       signature: function () {
-        return this.asyncMessage.content().getCode()
+        return this.asyncMessage.content().getCode().replace(/^:+/g, '')
       },
       source: function () {
         return this.asyncMessage.source().getCode()
