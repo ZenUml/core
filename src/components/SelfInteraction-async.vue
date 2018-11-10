@@ -1,5 +1,7 @@
 <template>
-  <div class="interaction self async" :style="{ left: (left) + 'px' }">
+  <div class="interaction self async"
+       :signature="signature"
+       :style="{ left: (left) + 'px' }">
     <comment v-if="comment" :comment="comment"/>
     <self-invocation :signature="signature"/>
   </div>

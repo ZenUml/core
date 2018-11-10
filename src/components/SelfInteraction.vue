@@ -1,5 +1,6 @@
 <template>
-  <div class="interaction self sync">
+  <div class="interaction self sync"
+       :signature="signature">
     <comment v-if="comment" :comment="comment" />
     <self-invocation :signature="signature"/>
     <occurrence :context="message" :participant="from" :offset="(offset || 0) + 6"/>

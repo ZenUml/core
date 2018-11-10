@@ -1,5 +1,8 @@
 <template>
-  <div class="interaction async" :class="{ 'right-to-left':rightToLeft }" :style="{width: Math.abs(interactionWidth) + 'px', left: left + 'px'}">
+  <div class="interaction async"
+       :signature="signature"
+       :class="{ 'right-to-left':rightToLeft }"
+       :style="{width: Math.abs(interactionWidth) + 'px', left: left + 'px'}">
     <comment v-if="comment" :comment="comment"/>
     <message :content="signature" :rtl="rightToLeft" type="async"/>
     <div class="invisible-occurrence"></div>

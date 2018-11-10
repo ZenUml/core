@@ -1,5 +1,8 @@
 <template>
-  <div class="interaction creation sync" :class="{ 'right-to-left':rightToLeft }" :style="{width: Math.abs(interactionWidth) + 'px'}">
+  <div class="interaction creation sync"
+       :signature="signature"
+       :class="{ 'right-to-left':rightToLeft }"
+       :style="{width: Math.abs(interactionWidth) + 'px'}">
     <comment v-if="comment" :comment="comment" />
     <message class="invocation" :content="signature" :rtl="rightToLeft" :style="{width: invocationWidth + 'px'}" type="creation"/>
     <div class="participant place-holder">
