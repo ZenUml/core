@@ -66,6 +66,7 @@
 
   .lifeline.starter.hidden {
     visibility: hidden;
+    margin-left: -40px; /* Remove the extra margin created by starter */
   }
   /* >>> deep selector. By default scoped style will not leak into child component.
    * The deep selector ensure that it affects child components.

@@ -6,9 +6,9 @@
 // Nested method
 // Assignment
 export default `// comments at the beginning should be ignored
-@Starter(User)
+//@Starter(User)
 // This is comment
-RET ret = A.methodA(a, b) { 
+ret = A.methodA(a, b) { 
     // A comment for self interaction
     // A second line w/ <sp3ci@l/> chars ignored  
     res2 = selfMethod() {
