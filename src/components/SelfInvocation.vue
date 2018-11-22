@@ -6,14 +6,14 @@
       <!--TODO: What is the below line used for?-->
       <!--<polyline class="closed" points="28,32 28,18"></polyline>-->
     </svg>
-    <div class="name">{{signature}}</div>
+    <div class="name"><span v-if="assignee">{{assignee}} = </span> {{signature}}</div>
   </div>
 </template>
 
 <script type="text/babel">
   export default {
     name: 'self-invocation',
-    props: ['signature']
+    props: ['signature', 'assignee']
   }
 </script>
 

@@ -11,7 +11,7 @@ export default `// comments at the beginning should be ignored
 RET ret = A.methodA(a, b) { 
     // A comment for self interaction
     // A second line w/ <sp3ci@l/> chars ignored  
-    selfMethod() {
+    res2 = selfMethod() {
     selfMethod2() {
       B.method()
     }
