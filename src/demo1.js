@@ -13,12 +13,12 @@ ret = A.methodA(a, b) {
     // A second line w/ <sp3ci@l/> chars ignored  
     res2 = selfMethod() {
     selfMethod2() {
-      B.method()
+      Type b = B.method()
     }
     // A sync interaction after a self interaction
     B.method() {
       selfB() {
-        A.method()
+        Type a = A.method()
       }
     }
   }

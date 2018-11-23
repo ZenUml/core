@@ -30,7 +30,7 @@
         return assignee + (type ? ':' + type : '')
       },
       signature: function () {
-        return this.message.signature().getCode()
+        return this.message.func().signature().getCode()
       }
     },
     components: {

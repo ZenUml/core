@@ -29,7 +29,7 @@
           alt: 'FragmentAlt',
           creation: 'Creation',
           message: function () {
-            let isSelf = !that.context.message().to() || that.context.message().to().getCode() === that.from
+            let isSelf = !that.context.message().func().to() || that.context.message().func().to().getCode() === that.from
             return isSelf ? 'SelfInteraction' : 'Interaction'
           },
           asyncMessage: function () {

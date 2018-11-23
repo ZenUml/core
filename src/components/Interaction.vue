@@ -38,7 +38,7 @@
         return this.$store.getters.distance(this.to, this.from) < 0
       },
       signature: function () {
-        return this.message.signature().getCode()
+        return this.message.func().signature().getCode()
       },
       assignee: function () {
         function safeCodeGetter (context) {
@@ -51,7 +51,7 @@
         return assignee + (type ? ':' + type : '')
       },
       to: function () {
-        return this.message.to().getCode()
+        return this.message.func().to().getCode()
       }
     },
     components: {
