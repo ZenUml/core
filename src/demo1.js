@@ -30,7 +30,7 @@ ret = A.methodA(a, b) {
   // A comment for async message
   B->C: Async Message
   // A comment for alt
-  if (X) {
+  if (A.isTrue()) {
     B.alternative() {
       // A comment for creation
       a = new A() {
@@ -45,7 +45,7 @@ ret = A.methodA(a, b) {
     D.method()
   }
   // A comment for loop
-  forEach(Z) {
+  forEach(Z.NotFinished()) {
     Z.method()
   }
 }`
