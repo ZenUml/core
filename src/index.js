@@ -4,6 +4,8 @@ import createLogger from 'vuex/dist/logger'
 import SeqDiagram from './components/SeqDiagram.vue'
 
 import './components/Cosmetic.css'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 const Store = {
   state: {

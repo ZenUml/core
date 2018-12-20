@@ -7,7 +7,7 @@ module.exports = {
     //   'sequence-parser': 'commonjs sequence-parser'
     // },
     plugins: [
-      new UglifyJsPlugin()
+      // new UglifyJsPlugin()
     ]
   }
 };

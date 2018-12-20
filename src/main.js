@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import BootstrapVue from 'bootstrap-vue'
 import cloneDeep from './clone-deep'
 import log4V from './plugins/Log4V'
 import App from './App.vue'
@@ -8,6 +9,7 @@ import {SeqDiagram, Store} from './index'
 
 Vue.use(Vuex)
 Vue.use(log4V)
+Vue.use(BootstrapVue)
 
 Vue.component('seq-diagram', SeqDiagram)
 

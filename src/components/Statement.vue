@@ -1,9 +1,18 @@
 <template>
-  <component v-bind:is="subStatement"
-             :context="context"
-             :from="from"
-             :comment="comment"
-             :offset="offset"></component>
+  <div class="statement">
+    <div @click="showCollapse = !showCollapse; notShowCollapse = !showCollapse" class="button">
+      <i class="fa"
+         :class="{'fa-compress': showCollapse, 'fa-expand': !showCollapse}" aria-hidden="true"></i></div>
+    <component v-if="showCollapse" v-bind:is="subStatement"
+               :context="context"
+               :from="from"
+               :comment="comment"
+               :offset="offset"></component>
+    <label v-if="notShowCollapse">
+      ...
+    </label>
+
+  </div>
 </template>
 
 <script>
@@ -18,6 +27,12 @@
   export default {
     name: 'statement',
     props: ['from', 'context', 'offset'],
+    data: function() {
+      return {
+        showCollapse: true,
+        notShowCollapse: false
+      }
+    },
     computed: {
       comment: function () {
         return this.context.comment() ? this.context.comment().COMMENT().join('<br/>') : ''
@@ -54,6 +69,28 @@
   }
 </script>
 <style>
+  .statement .button {
+    display: none;
+    /*position: absolute;*/
+    background-color: transparent;
+    border-color: transparent;
+    color: #aaaaaa;
+    z-index: 10000;
+  }
+
+  .statement:hover>.button {
+    display: block;
+    position: absolute;
+    z-index: 10000;
+  }
+
+  .statement .card {
+    width: 200px;
+    background-color: transparent;
+  }
+  .statement .card-body {
+    padding: 5px 20px;
+  }
   .comments {
     position: relative; /* for Z axis position overlay lifeline at root level */
     text-align: left;

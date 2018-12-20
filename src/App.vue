@@ -1,6 +1,11 @@
 <template>
   <div id="app">
-    <SeqDiagram />
+    <div>
+      <b-btn v-b-toggle.collapse1 variant="primary">Toggle Collapse</b-btn>
+      <b-collapse id="collapse1" visible class="mt-2">
+        <SeqDiagram />
+      </b-collapse>
+    </div>
   </div>
 </template>
 
