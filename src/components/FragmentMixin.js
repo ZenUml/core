@@ -12,7 +12,8 @@ export default {
         .map(function (participant) {
           return that.$store.getters.rightOf(participant)
         })
-      let min = Math.min(...arrayLeft)
+      // shift 20px the fragment is at the top level (starter is a participant)
+      let min = Math.max(20, Math.min(...arrayLeft))
       let max = Math.max(...arrayRight)
       return {
         min: min,
