@@ -32,12 +32,12 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .message {
-    width: calc(100% - 14px);
+    width: calc(100% - 16px);
     border-bottom-width: 2px;
     white-space: nowrap;
   }
 
   .sync > .message {
-    left: 6px;
+    left: 8px;
   }
 </style>

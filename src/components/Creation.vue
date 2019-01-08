@@ -37,9 +37,9 @@
         let safeOffset = this.offset || 0
 
         if (this.rightToLeft) {
-          return this.centerOf(this.from) - this.rightOf(this.to) - safeOffset + 6
+          return this.centerOf(this.from) - this.rightOf(this.to) - safeOffset + 8
         }
-        return this.leftOf(this.to) - this.centerOf(this.from) - safeOffset - 6
+        return this.leftOf(this.to) - this.centerOf(this.from) - safeOffset - 8
       },
       rightToLeft: function () {
         return this.distance(this.to, this.from) < 0
