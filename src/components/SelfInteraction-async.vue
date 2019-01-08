@@ -3,13 +3,13 @@
        :signature="signature"
        :style="{ left: (left) + 'px' }">
     <comment v-if="comment" :comment="comment"/>
-    <self-invocation :signature="signature"/>
+    <self-invocation-async :signature="signature"/>
   </div>
 </template>
 
 <script type="text/babel">
   import Comment from './Comment.vue'
-  import SelfInvocation from './SelfInvocation'
+  import SelfInvocationAsync from './SelfInvocation-async'
   import Occurrence from './Occurrence.vue'
 
   export default {
@@ -31,7 +31,7 @@
     },
     components: {
       Comment,
-      SelfInvocation,
+      SelfInvocationAsync,
       Occurrence
     }
   }

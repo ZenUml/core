@@ -1,8 +1,8 @@
 <template>
   <div class="message self">
     <svg class="arrow" width="44" height="34">
-      <polyline points="0,2 28,2 28,25 14,25"></polyline>
-      <polyline class="head" points="18,19 8,25 18,31"></polyline>
+      <polyline points="0,2 28,2 28,25 1,25"></polyline>
+      <polyline class="head" points="11,19 1,25 11,31"></polyline>
       <!--TODO: What is the below line used for?-->
       <!--<polyline class="closed" points="28,32 28,18"></polyline>-->
     </svg>
@@ -12,7 +12,7 @@
 
 <script type="text/babel">
   export default {
-    name: 'self-invocation',
+    name: 'self-invocation-async',
     props: ['signature', 'assignee']
   }
 </script>
@@ -41,7 +41,7 @@
     fill: none;
   }
   .message.self svg.arrow polyline.head {
-    fill: #808080;
+    fill: none;
   }
 
 </style>
