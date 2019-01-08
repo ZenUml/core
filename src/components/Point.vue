@@ -26,6 +26,10 @@
     fill: #808080;
   }
 
+  .async>.message>.point>svg.arrow> polyline {
+    fill: none;
+  }
+
   .right-to-left.point {
     left: 0;
     right: auto;

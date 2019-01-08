@@ -36,6 +36,7 @@ ret = A.methodA(a, b) {
       a = new A() {
         // A comment for creation
         b = new B()
+        b:B.methodB()
         C.method
       }
     }
