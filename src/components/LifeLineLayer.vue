@@ -16,6 +16,9 @@
       ...mapGetters({ entities: 'participants' }),
       lifeLineHidden () {
         return this.starter === 'Starter'
+      },
+      entities () {
+        return this.$store.getters.participants.filter( p => p !== this.starter)
       }
     },
     mounted () {
