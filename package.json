@@ -1,6 +1,6 @@
 {
   "name": "vue-sequence",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "main": "./dist/vue-sequence.umd.min.js",
   "private": false,
   "scripts": {
