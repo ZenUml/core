@@ -69,6 +69,7 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .message-layer {
+    display: inline-block;
     padding-top: 60px;
     padding-bottom: 40px;
   }

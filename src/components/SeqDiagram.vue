@@ -1,16 +1,28 @@
 <template>
-  <div class="sequence-diagram" >
+  <div class="sequence-diagram" :style="{'width': width + 'px'}">
+    <div class="title">
+      <div class="container">
+        <label>Title</label>
+      </div>
+    </div>
     <life-line-layer/>
     <message-layer/>
   </div>
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
   import LifeLineLayer from './LifeLineLayer.vue'
   import MessageLayer from './MessageLayer.vue'
 
   export default {
     name: 'seq-diagram',
+    computed: {
+      ...mapGetters(['distance', 'participants', 'starter']),
+      width() {
+        return this.distance(this.participants[this.participants.length - 1], this.starter) + 150
+      }
+    },
     components: {
       LifeLineLayer,
       MessageLayer
@@ -24,10 +36,18 @@
   }
 
   .sequence-diagram {
+    display: inline-block;
     position: relative;     /* Make sure its descendants can be positioned */
     box-sizing: border-box; /* Reset box-sizing for the diagram */
     line-height: normal;    /* Reset line-height for the diagram */
     text-align: left;
+    border: 2px solid rgba(3, 3, 3, 0.05);
+  }
+
+  .title .container {
+    display: inline-block;
+    padding: 5px;
+    background: rgba(170, 170, 170, 0.1);
   }
 
   /* .participant is shared by MessageLayer and LifeLineLayer */
