@@ -1,10 +1,6 @@
 <template>
   <div class="sequence-diagram" :style="{'width': width + 'px'}">
-    <div class="title">
-      <div class="container">
-        <label>Title</label>
-      </div>
-    </div>
+    <name/>
     <life-line-layer/>
     <message-layer/>
   </div>
@@ -12,6 +8,7 @@
 
 <script>
   import { mapGetters } from 'vuex'
+  import Name from './Name.vue'
   import LifeLineLayer from './LifeLineLayer.vue'
   import MessageLayer from './MessageLayer.vue'
 
@@ -24,6 +21,7 @@
       }
     },
     components: {
+      Name,
       LifeLineLayer,
       MessageLayer
     }
@@ -42,12 +40,6 @@
     line-height: normal;    /* Reset line-height for the diagram */
     text-align: left;
     border: 2px solid rgba(3, 3, 3, 0.05);
-  }
-
-  .title .container {
-    display: inline-block;
-    padding: 5px;
-    background: rgba(170, 170, 170, 0.1);
   }
 
   /* .participant is shared by MessageLayer and LifeLineLayer */

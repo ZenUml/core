@@ -57,6 +57,8 @@
     display: flex;        /* This is to remove spaces between inline-blocks, not necessary for generated and non-formatted code*/
     white-space: nowrap;  /* why? */
     position: absolute;   /* So that message layer is overlaid. */
+    padding-top: 35px;    /* To give space to diagram name */
+    padding-bottom: 10px; /* To give 10px margin at the bottom of the frame */
     height: 100%;         /* To give height to the line */
   }
 

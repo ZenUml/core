@@ -70,7 +70,7 @@
 <style scoped>
   .message-layer {
     display: inline-block;
-    padding-top: 60px;
+    padding-top: 80px; /* increased to allow space for the diagram name */
     padding-bottom: 40px;
   }
 </style>
