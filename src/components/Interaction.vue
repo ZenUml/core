@@ -31,9 +31,6 @@
         }
         return Math.abs(distance) - safeOffset
       },
-      occurrenceLeft: function () {
-        return this.rightToLeft ? -14 : this.interactionWidth - 14
-      },
       rightToLeft: function () {
         return this.$store.getters.distance(this.to, this.from) < 0
       },
