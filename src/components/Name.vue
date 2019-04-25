@@ -1,10 +1,17 @@
 <template>
   <div class="name">
     <div class="container">
-      <label>Title</label>
+      <label>{{title}}</label>
     </div>
   </div>
 </template>
+
+<script>
+  export default {
+    name: 'name',
+    props: ['title']
+  }
+</script>
 
 <style>
   .name .container {

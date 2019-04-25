@@ -1,6 +1,6 @@
 <template>
   <div class="sequence-diagram" :style="{'width': width + 'px'}">
-    <name/>
+    <name title="This is a title"/>
     <life-line-layer/>
     <message-layer/>
   </div>

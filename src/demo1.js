@@ -6,4 +6,7 @@
 // Nested method
 // Assignment
 export default `// This is title
-A.method()`
+A.method()
+// Comment
+B.method
+`
