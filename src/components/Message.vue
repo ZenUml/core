@@ -1,13 +1,17 @@
 <template>
   <div class="message" :style="{'border-bottom-style': borderStyle}">
     <div class="name">{{content}}</div>
-    <point fill="true" :rtl="rtl"/>
+    <point :fill="fill" :rtl="rtl"/>
   </div>
 </template>
 
 <script type="text/babel">
   import Point from './Point'
 
+  // An asynchronous Message (messageSort equals asynchCall or asynchSignal) has an open arrow head.
+  // A synchronous Message (messageSort equals synchCall) has a filled arrow head.
+  // A reply Message (messageSort equals reply) has a dashed line with either an open or filled arrow head.
+  // An object creation Message (messageSort equals createMessage) has a dashed line with an open arrow head.
   export default {
     name: 'message',
     props: ['content', 'rtl', 'type'],
@@ -16,10 +20,20 @@
         switch (this.type) {
           case 'sync':
           case 'async':
-          case 'creation':
             return 'solid'
+          case 'creation':
           case 'return':
             return 'dashed'
+        }
+      },
+      fill () {
+        switch (this.type) {
+          case 'sync':
+          case 'async':
+            return true
+          case 'creation':
+          case 'return':
+            return false
         }
       }
     },

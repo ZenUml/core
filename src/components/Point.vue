@@ -1,5 +1,5 @@
 <template>
-  <div class="point" :class="{ fill: fill, 'right-to-left':rtl }">
+  <div class="point" :class="{ 'fill': fill, 'right-to-left':rtl }">
     <svg class="arrow" height="20">
       <polyline class="right" points="0,7 10,13 0,19"></polyline>
       <polyline class="left" points="10,7 0,13 10,19"></polyline>
