@@ -1,5 +1,5 @@
 <template>
-  <div :id="entity" class="lifeline" :style="{'paddingTop': top + 'px'} ">
+  <div :id="entity" class="lifeline" :style="{'paddingTop': top + 'px', 'margin-left': (index + 1) * 50 + 'px'} ">
     <div class="participant">
       <label class="name">{{entity}}</label>
     </div>
@@ -12,7 +12,7 @@
 
   export default {
     name: 'life-line',
-    props: ['entity'],
+    props: ['entity', 'index'],
     computed: {
       ...mapGetters(['firstInvocations']),
       top () {
@@ -32,15 +32,17 @@
 <style scoped>
   /* LifeLineLayer's display is flex, its children don't need display:inline-block */
   .lifeline {
-    display: flex;            /* So that .line fill the remaining height */
-    flex-direction: column;
+    display: inline-block;            /* So that .line fill the remaining height */
+    height: 100%;
     margin: 0 20px;
+    vertical-align: top;
   }
 
   .lifeline .line {
     flex: 1;                /* To fill the remaining height */
     margin-left: 50%;
     border-left-width: 1px;
+    height: 100%;
   }
 
   .lifeline>.participant {
