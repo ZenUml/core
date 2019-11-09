@@ -32,8 +32,9 @@ const Store = {
       return state.lifeLineDimensions[entity] &&
         (state.lifeLineDimensions[entity].left + state.lifeLineDimensions[entity].width / 2)
     },
-    leftOf: (state) => (entity) => {
-      return state.lifeLineDimensions[entity] && state.lifeLineDimensions[entity].left
+    leftOf: (state, getters) => (entity) => {
+      let index = getters.participants.indexOf(entity);
+      return (index + 1) * 100;
     },
     rightOf: (state) => (entity) => {
       return state.lifeLineDimensions[entity] &&
