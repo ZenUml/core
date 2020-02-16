@@ -2,7 +2,7 @@
 // Right to left
 // RTL in if
 // RTL in while
-export default `RET ret = A.methodA() {
+export default `@Starter(ZenUML) RET ret = A.methodA() {
   B.methodB() {
     A.methodA()
   }
@@ -14,6 +14,6 @@ export default `RET ret = A.methodA() {
   while (Y) {
     C.methodC() {
       A.methodA()
-    }  
-  }  
+    }
+  }
 }`

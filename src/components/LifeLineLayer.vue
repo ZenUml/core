@@ -75,7 +75,20 @@
    * The deep selector ensure that it affects child components.
    */
   .starter >>> .participant {
-    border-radius: 50%;
+    border: 0;
+    padding-bottom: 0;
+  }
+  .starter >>> .participant::before {
+    content: '';
+    display: block;
+    height: 45px;
+    width: 88px;
+    position: relative;
+    top: -10px;
+    background-size: 80px;
+    background-image: url("../assets/actor.svg");
+    background-position: center;
+    background-repeat: no-repeat
   }
 </style>
 
