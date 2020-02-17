@@ -1,6 +1,6 @@
 <template>
   <div class="life-line-layer">
-    <life-line :entity="starter" :ref="starter" class="starter" :class="{hidden: lifeLineHidden}"/>
+    <life-line :entity="starter" :ref="starter" :isStarter="true" :class="{hidden: lifeLineHidden}"/>
     <life-line v-for="entity in entities" :key="entity" :ref="entity" :entity="entity"/>
   </div>
 </template>
@@ -75,20 +75,7 @@
    * The deep selector ensure that it affects child components.
    */
   .starter >>> .participant {
-    border: 0;
-    padding-bottom: 0;
-  }
-  .starter >>> .participant::before {
-    content: '';
-    display: block;
-    height: 45px;
-    width: 88px;
-    position: relative;
-    top: -10px;
-    background-size: 80px;
-    background-image: url("../assets/actor.svg");
-    background-position: center;
-    background-repeat: no-repeat
+    border-radius: 50%;
   }
 </style>
 
