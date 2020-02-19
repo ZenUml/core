@@ -1,6 +1,6 @@
 <template>
   <div class="life-line-layer">
-    <life-line :entity="starter" :ref="starter" class="starter" :class="{hidden: lifeLineHidden}"/>
+    <life-line :entity="starter" :ref="starter" :class="{hidden: lifeLineHidden, actor: isStarterAnActor}"/>
     <life-line v-for="entity in entities" :key="entity" :ref="entity" :entity="entity"/>
   </div>
 </template>
@@ -14,6 +14,9 @@
     computed: {
       ...mapGetters(['starter']),
       ...mapGetters({ entities: 'participants' }),
+      isStarterAnActor() {
+        return this.starter === "User" || this.starter === "Actor";
+      },
       lifeLineHidden () {
         return this.starter === 'Starter'
       },
@@ -63,19 +66,39 @@
   /* Though it is scoped, a child component's root node will be effected by both parent's scoped CSS and the child's
    * scoped CSS.
    */
-  .lifeline.starter {
+  .lifeline>.participant:first-child {
     transform: translateX(6px);
   }
 
-  .lifeline.starter.hidden {
+  .lifeline.hidden {
     visibility: hidden;
     margin-left: -40px; /* Remove the extra margin created by starter */
   }
+
   /* >>> deep selector. By default scoped style will not leak into child component.
    * The deep selector ensure that it affects child components.
    */
-  .starter >>> .participant {
+  .lifeline:first-child >>> .participant {
     border-radius: 50%;
+  }
+
+  .lifeline.actor >>> .participant {
+    text-align: center;
+    font-weight: bold;
+    border: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .lifeline.actor >>> .participant::before {
+    content: '';
+    display: block;
+    height: 45px;
+    width: 88px;
+    background-size: 80px;
+    background-image: url("../assets/actor.svg");
+    background-position: center;
+    background-repeat: no-repeat;
   }
 </style>
 

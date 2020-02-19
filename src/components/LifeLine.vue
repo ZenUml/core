@@ -1,5 +1,7 @@
 <template>
-  <div :id="entity" class="lifeline" :style="{'paddingTop': top + 'px'} ">
+  <div  :id="entity"
+        class="lifeline"
+        :style="{'paddingTop': top + 'px'} ">
     <div class="participant">
       <label class="name">{{entity}}</label>
     </div>
