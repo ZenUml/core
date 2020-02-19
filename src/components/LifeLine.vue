@@ -1,9 +1,8 @@
 <template>
   <div  :id="entity"
         class="lifeline"
-        v-bind:class="{'starter': isStarter }"
         :style="{'paddingTop': top + 'px'} ">
-    <div v-bind:class="{'participant': !isActor,'actor': isActor}">
+    <div class="participant">
       <label class="name">{{entity}}</label>
     </div>
     <div class="line"></div>
@@ -15,12 +14,9 @@
 
   export default {
     name: 'life-line',
-    props: ['entity', 'isStarter'],
+    props: ['entity'],
     computed: {
       ...mapGetters(['firstInvocations']),
-      isActor() {
-        return this.entity==="User"||this.entity==="Actor";
-      },
       top () {
         if (this.firstInvocationIsCreation) {
           return this.firstInvocations[this.entity].top - 3
@@ -51,19 +47,5 @@
 
   .lifeline>.participant {
     z-index: 100;
-  }
-  .actor {
-    text-align: center;
-    font-weight: bold;
-  }
-  .actor::before {
-    content: '';
-    display: block;
-    height: 45px;
-    width: 88px;
-    background-size: 80px;
-    background-image: url("../assets/actor.svg");
-    background-position: center;
-    background-repeat: no-repeat;
   }
 </style>
