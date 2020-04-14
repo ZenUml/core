@@ -5,11 +5,18 @@
 // Self-method
 // Nested method
 // Assignment
-export default `// comments at the beginning should be ignored
-@Starter(User)
-Client1->A.method()
+export default `
+A B Client1 Client2
+Client1 Client2
+// comments at the beginning should be ignored
+Client1->A.method() {
+  B:method()
+}
+Client2->B.method()
+Client1->C.method()
 // This is a comment
-ret = A.methodA(a, b) { 
+ret = Client1->A.methodA(a, b) { 
+    D:method()
     // A comment for self interaction
     // A second line w/ <sp3ci@l/> chars ignored  
     res2 = selfMethod() {
