@@ -1,7 +1,7 @@
 <template>
   <div class="occurrence">
-    <block v-if="this.context.block()"
-           :context="context.block()"
+    <block v-if="this.context.braceBlock()"
+           :context="context.braceBlock().block()"
            :from="participant"
            :offset="offset"
     ></block>
@@ -18,8 +18,8 @@
   }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+
+<style>
   .occurrence {
     margin-top: -2px; /* To offset Message's border-bottom width */
   }

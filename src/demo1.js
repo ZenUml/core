@@ -6,14 +6,16 @@
 // Nested method
 // Assignment
 export default `// comments at the beginning should be ignored
-//@Starter(User)
-// This is comment
+@Starter(User)
+Client1->A.method()
+// This is a comment
 ret = A.methodA(a, b) { 
     // A comment for self interaction
     // A second line w/ <sp3ci@l/> chars ignored  
     res2 = selfMethod() {
     selfMethod2() {
       Type b = B.method()
+      A->B.method()
     }
     // A sync interaction after a self interaction
     B.method() {
@@ -36,7 +38,7 @@ ret = A.methodA(a, b) {
       a = new A() {
         // A comment for creation
         b = new B()
-        b:B.methodB()
+        "b:B".methodB()
         C.method
       }
     }

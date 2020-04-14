@@ -20,7 +20,10 @@
     props: ['from', 'context', 'offset'],
     computed: {
       comment: function () {
-        return this.context.comment() ? this.context.comment().COMMENT().join('<br/>') : ''
+        return this.context.comment() ? this.context.comment().map(c => c.commentContent().getCode()).join('<br/>') : ''
+      },
+      realFrom: function() {
+        return this.context.message().func().from() && this.context.message().func().from().getCode() || this.from;
       },
       subStatement: function () {
         let that = this
@@ -29,11 +32,13 @@
           alt: 'FragmentAlt',
           creation: 'Creation',
           message: function () {
-            let isSelf = !that.context.message().func().to() || that.context.message().func().to().getCode() === that.from
+            let isSelf = !that.context.message().func().to() || that.context.message().func().to().getCode() === that.realFrom
             return isSelf ? 'SelfInteraction' : 'Interaction'
           },
           asyncMessage: function () {
-            let isSelf = that.context.asyncMessage().source().getCode() === that.context.asyncMessage().target().getCode()
+            const source = that.context.asyncMessage().source() && that.context.asyncMessage().source().getCode()
+            const target = that.context.asyncMessage().target() && that.context.asyncMessage().target().getCode()
+            let isSelf = source === target
             return isSelf ? 'SelfInteractionAsync' : 'InteractionAsync'
           }
         }

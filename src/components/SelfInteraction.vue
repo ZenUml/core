@@ -1,6 +1,8 @@
 <template>
   <div class="interaction self sync"
-       :signature="signature">
+       :signature="signature"
+       :style="{transform: 'translateX(' + translateX + 'px)'}"
+  >
     <comment v-if="comment" :comment="comment" />
     <self-invocation :signature="signature" :assignee="assignee"/>
     <occurrence :context="message" :participant="from" :offset="(offset || 0) + 6"/>
@@ -29,8 +31,18 @@
         const type = safeCodeGetter(assignment.type())
         return assignee + (type ? ':' + type : '')
       },
+      translateX: function() {
+        let offsetFrom = this.$store.getters.distance(this.realFrom, this.from);
+        if (this.rightToLeft) {
+          return offsetFrom - this.interactionWidth;
+        }
+        return offsetFrom
+      },
+      realFrom: function() {
+        return this.message.func().from() && this.message.func().from().getCode() || this.from
+      },
       signature: function () {
-        return this.message.func().signature().getCode()
+        return this.message.func().signature().map(s => s.getCode()).join('.')
       }
     },
     components: {

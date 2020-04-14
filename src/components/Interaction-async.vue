@@ -30,13 +30,13 @@
         return this.$store.getters.distance(this.target, this.source) < 0
       },
       signature: function () {
-        return this.asyncMessage.content().getCode().replace(/^:+/g, '')
+        return this.asyncMessage.content().getCode()
       },
       source: function () {
-        return this.asyncMessage.source().getCode()
+        return this.asyncMessage.source() && this.asyncMessage.source().getCode() || this.from
       },
       target: function () {
-        return this.asyncMessage.target().getCode()
+        return this.asyncMessage.target() && this.asyncMessage.target().getCode()
       }
     },
     components: {
