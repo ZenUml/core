@@ -26,7 +26,7 @@ ret = A.methodA(a, b) {
   }
   // A comment for creation
   b = new B()
-  b:B.method()
+  "b:B".method()
   // A comment for async self
   B->B: Self Async
   // A comment for async message
