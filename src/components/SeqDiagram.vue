@@ -19,7 +19,7 @@
 </script>
 
 <style>
-  *, *:before, *:after {
+  .sequence-diagram * {
     box-sizing: inherit;
   }
 

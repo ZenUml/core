@@ -72,13 +72,3 @@
   }
 </script>
 
-
-<style>
-  .interaction {
-    /*padding-left: 6px;*/
-  }
-
-  .interaction.right-to-left {
-    transform: translateX(-100%);
-  }
-</style>

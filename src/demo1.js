@@ -12,6 +12,7 @@ Client1 Client2
 Client1->A.method() {
   B:method()
 }
+Client2->Client1: Message
 Client2->B.method()
 Client1->C.method()
 // This is a comment
