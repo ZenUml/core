@@ -28,10 +28,7 @@
       interactionWidth: function () {
         let distance = this.distance(this.to, this.realFrom)
         let safeOffset = this.offset || 0
-        if (distance < 0) {
-          return Math.abs(distance) + safeOffset
-        }
-        return Math.abs(distance) - safeOffset
+        return Math.abs(distance - safeOffset)
       },
       translateX: function() {
         let offsetFrom = this.distance(this.realFrom, this.from);

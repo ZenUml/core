@@ -1,25 +1,27 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils'
+import {createLocalVue, shallowMount} from '@vue/test-utils'
 import Vuex from 'vuex'
 import Interaction from './Interaction'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
 
-describe('Interaction', () => {
-
-  it('interactionWidth with offset = 1, distance = 100', () => {
-    let store
-    store = new Vuex.Store({
+describe('Interaction width', () => {
+  test.each([
+    [1, 100, 99],
+    [-1, 100, 101],
+    [1, -100, 101],
+    [-1, -100, 99]
+  ])('If offset is %s and distance is %s, interactionWidth should be %s', (offset, distance, width) => {
+    const store = new Vuex.Store({
       getters: {
-        distance: () => () => 100
+        distance: () => () => distance
       }
     })
     const wrapper = shallowMount(Interaction, {
       store, localVue, propsData: {
-        offset: 1,
+        offset: offset,
       }
-    })
-
-    expect(wrapper.vm.interactionWidth).toBe(99)
+    });
+    expect(wrapper.vm.interactionWidth).toBe(width)
   })
 })
