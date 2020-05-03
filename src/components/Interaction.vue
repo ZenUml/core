@@ -35,9 +35,6 @@
         const moveTo = this.rightToLeft ? this.to : this.realFrom
         return this.distance(moveTo, this.from)
       },
-      occurrenceLeft: function () {
-        return this.rightToLeft ? -14 : this.interactionWidth - 14
-      },
       rightToLeft: function () {
         return this.distance(this.to, this.realFrom) < 0
       },
