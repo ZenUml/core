@@ -23,7 +23,7 @@
     computed: {
       ...mapGetters(['distance']),
       message: function () {
-        return this.context.message()
+        return this.context?.message()
       },
       interactionWidth: function () {
         let distance = this.distance(this.to, this.realFrom)
@@ -47,23 +47,20 @@
         return this.distance(this.to, this.realFrom) < 0
       },
       signature: function () {
-        return this.message.func().signature().map(s => s.getCode()).join('.')
+        return this.message?.func().signature().map(s => s.getCode()).join('.')
       },
       assignee: function () {
-        function safeCodeGetter (context) {
-          return (context && context.getCode()) || ''
-        }
-        let assignment = this.message.assignment()
+        let assignment = this.message?.assignment()
         if (!assignment) return ''
-        let assignee = safeCodeGetter(assignment.assignee())
-        const type = safeCodeGetter(assignment.type())
+        let assignee = (assignment.assignee()?.getCode()) || ''
+        const type = (assignment.type()?.getCode()) || ''
         return assignee + (type ? ':' + type : '')
       },
       realFrom: function() {
-        return this.message.func().from() && this.message.func().from().getCode() || this.from
+        return this.message?.func()?.from().getCode() || this.from
       },
       to: function () {
-        return this.message.func().to().getCode()
+        return this.message?.func().to().getCode()
       }
     },
     components: {
