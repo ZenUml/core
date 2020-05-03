@@ -10,7 +10,7 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+  import {mapGetters, mapMutations} from 'vuex'
 
   export default {
     name: 'life-line',
@@ -27,8 +27,11 @@
         return this.firstInvocations[this.entity] && this.firstInvocations[this.entity].type === 'creation'
       }
     },
+    methods: {
+      ...mapMutations(['onLifelineMounted'])
+    },
     mounted() {
-      this.$store.state.onLifelineMounted(this, this.$vnode.elm);
+      this.onLifelineMounted(this, this.$vnode.elm);
     }
   }
 </script>

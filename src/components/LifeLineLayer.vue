@@ -6,14 +6,13 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+  import {mapGetters, mapMutations} from 'vuex'
   import LifeLine from './LifeLine.vue'
 
   export default {
     name: 'life-line-layer',
     computed: {
-      ...mapGetters(['starter']),
-      ...mapGetters({ entities: 'participants' }),
+      ...mapGetters(['starter', 'participants']),
       isStarterAnActor() {
         return this.starter === "User" || this.starter === "Actor";
       },
@@ -21,7 +20,7 @@
         return this.starter === 'Starter'
       },
       entities () {
-        return this.$store.getters.participants.filter( p => p !== this.starter)
+        return this.participants.filter( p => p !== this.starter)
       }
     },
     mounted () {
@@ -31,6 +30,7 @@
       this.emitDimensions()
     },
     methods: {
+      ...mapMutations(['onLifeLineLayerMountedOrUpdated']),
       emitDimensions () {
         let lifeLineDimensions = {}
         let starterEl = this.$refs[this.starter].$el
@@ -45,7 +45,7 @@
             width: el.offsetWidth
           }
         })
-        this.$store.commit('onLifeLineLayerMountedOrUpdated', lifeLineDimensions)
+        this.onLifeLineLayerMountedOrUpdated(lifeLineDimensions)
       }
     },
     components: {

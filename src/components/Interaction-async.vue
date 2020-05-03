@@ -12,22 +12,24 @@
 <script type="text/babel">
   import Comment from './Comment.vue'
   import Message from './Message'
+  import {mapGetters} from "vuex";
 
   export default {
     name: 'interaction-async',
     props: ['from', 'context', 'comment'],
     computed: {
+      ...mapGetters(['distance']),
       asyncMessage: function () {
         return this.context.asyncMessage()
       },
       interactionWidth: function () {
-        return this.$store.getters.distance(this.target, this.source)
+        return this.distance(this.target, this.source)
       },
       left: function () {
-        return this.rightToLeft ? this.$store.getters.distance(this.target, this.from) : this.$store.getters.distance(this.source, this.from)
+        return this.rightToLeft ? this.distance(this.target, this.from) : this.distance(this.source, this.from)
       },
       rightToLeft: function () {
-        return this.$store.getters.distance(this.target, this.source) < 0
+        return this.distance(this.target, this.source) < 0
       },
       signature: function () {
         return this.asyncMessage.content().getCode()

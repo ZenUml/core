@@ -15,16 +15,18 @@
   import Comment from './Comment.vue'
   import Occurrence from './Occurrence.vue'
   import Message from './Message'
+  import {mapGetters} from "vuex";
 
   export default {
     name: 'interaction',
     props: ['from', 'context', 'comment', 'offset'],
     computed: {
+      ...mapGetters(['distance']),
       message: function () {
         return this.context.message()
       },
       interactionWidth: function () {
-        let distance = this.$store.getters.distance(this.to, this.realFrom)
+        let distance = this.distance(this.to, this.realFrom)
         let safeOffset = this.offset || 0
         if (distance < 0) {
           return Math.abs(distance) + safeOffset
@@ -32,7 +34,7 @@
         return Math.abs(distance) - safeOffset
       },
       translateX: function() {
-        let offsetFrom = this.$store.getters.distance(this.realFrom, this.from);
+        let offsetFrom = this.distance(this.realFrom, this.from);
         if (this.rightToLeft) {
           return offsetFrom - this.interactionWidth;
         }
@@ -42,7 +44,7 @@
         return this.rightToLeft ? -14 : this.interactionWidth - 14
       },
       rightToLeft: function () {
-        return this.$store.getters.distance(this.to, this.realFrom) < 0
+        return this.distance(this.to, this.realFrom) < 0
       },
       signature: function () {
         return this.message.func().signature().map(s => s.getCode()).join('.')

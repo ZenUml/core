@@ -1,16 +1,18 @@
 import seqDsl from 'sequence-parser'
+import {mapGetters} from "vuex";
 
 export default {
   computed: {
+    ...mapGetters(['leftOf', 'rightOf', 'centerOf']),
     boundary: function () {
       const that = this
       let arrayLeft = [this.from, ...seqDsl.Participants(this.context)]
         .map(function (participant) {
-          return that.$store.getters.leftOf(participant)
+          return that.leftOf(participant)
         })
       let arrayRight = [this.from, ...seqDsl.Participants(this.context)]
         .map(function (participant) {
-          return that.$store.getters.rightOf(participant)
+          return that.rightOf(participant)
         })
       // shift 20px the fragment is at the top level (starter is a participant)
       let min = Math.max(20, Math.min(...arrayLeft))
@@ -25,7 +27,7 @@ export default {
       return seqDsl.Depth(this.context)
     },
     centerOfFrom: function () {
-      return this.$store.getters.centerOf(this.from)
+      return this.centerOf(this.from)
     },
     offsetX: function () {
       let extra = 10 * this.depth

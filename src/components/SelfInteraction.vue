@@ -13,11 +13,13 @@
   import Comment from './Comment.vue'
   import Occurrence from './Occurrence.vue'
   import SelfInvocation from './SelfInvocation'
+  import {mapGetters} from "vuex";
 
   export default {
     name: 'self-interaction',
     props: ['from', 'context', 'comment', 'offset'],
     computed: {
+      ...mapGetters(['distance']),
       message: function () {
         return this.context.message()
       },
@@ -32,7 +34,7 @@
         return assignee + (type ? ':' + type : '')
       },
       translateX: function() {
-        let offsetFrom = this.$store.getters.distance(this.realFrom, this.from);
+        let offsetFrom = this.distance(this.realFrom, this.from);
         if (this.rightToLeft) {
           return offsetFrom - this.interactionWidth;
         }

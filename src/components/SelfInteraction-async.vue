@@ -11,16 +11,18 @@
   import Comment from './Comment.vue'
   import SelfInvocationAsync from './SelfInvocation-async'
   import Occurrence from './Occurrence.vue'
+  import {mapGetters} from "vuex";
 
   export default {
     name: 'self-interaction-async',
     props: ['from', 'context', 'comment'],
     computed: {
+      ...mapGetters(['distance']),
       asyncMessage: function () {
         return this.context.asyncMessage()
       },
       left: function () {
-        return this.$store.getters.distance(this.to, this.from)
+        return this.distance(this.to, this.from)
       },
       signature: function () {
         return this.asyncMessage.content().getCode().replace(/^:+/g, '')

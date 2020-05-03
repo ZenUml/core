@@ -29,7 +29,7 @@
         return this.context.creation()
       },
       interactionWidth: function () {
-        let distance = this.$store.getters.distance(this.to, this.from)
+        let distance = this.distance(this.to, this.from)
         let safeOffset = this.offset || 0
         return Math.abs(distance) - safeOffset
       },

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+  import {mapGetters, mapMutations} from 'vuex'
   import Block from './Block'
 
   export default {
@@ -25,12 +25,13 @@
       this.emitFirstInvocations()
     },
     methods: {
+      ...mapMutations(['onMessageLayerMountedOrUpdated']),
       emitFirstInvocations () {
         let firstInvocations = {}
         this.participants.forEach(participant => {
           firstInvocations[participant] = this.firstInvocation(participant)
         })
-        this.$store.commit('onMessageLayerMountedOrUpdated', firstInvocations)
+        this.onMessageLayerMountedOrUpdated(firstInvocations);
       },
       firstInvocation (entity) {
         let messageLayerRect = this.$el.getBoundingClientRect()
