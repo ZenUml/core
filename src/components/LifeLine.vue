@@ -26,6 +26,9 @@
       firstInvocationIsCreation () {
         return this.firstInvocations[this.entity] && this.firstInvocations[this.entity].type === 'creation'
       }
+    },
+    mounted() {
+      this.$store.state.onLifelineMounted(this, this.$vnode.elm);
     }
   }
 </script>

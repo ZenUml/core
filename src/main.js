@@ -26,6 +26,9 @@ function snapshotStore (code) {
   return new Vuex.Store(cloneDeep({modules: {Store}}))
 }
 Store.state.code = demo1
+Store.state.onLifelineMounted = function(vueComp, elm) {
+  console.log('Callback installed on', vueComp, elm);
+}
 window.app = new Vue({el: '#app', store: new Vuex.Store(Store), render: h => h(App)})
 window.store = app.$store
 // new Vue({el: '#demo1', store: snapshotStore(demo1)})
