@@ -11,7 +11,7 @@
   export default {
     name: 'message-layer',
     computed: {
-      ...mapGetters(['rootContext', 'starter', 'centerOf']),
+      ...mapGetters(['participants', 'rootContext', 'starter', 'centerOf']),
       paddingLeft () {
         return this.centerOf(this.starter)
       }
@@ -27,7 +27,7 @@
     methods: {
       emitFirstInvocations () {
         let firstInvocations = {}
-        this.$store.getters.participants.forEach(participant => {
+        this.participants.forEach(participant => {
           firstInvocations[participant] = this.firstInvocation(participant)
         })
         this.$store.commit('onMessageLayerMountedOrUpdated', firstInvocations)
