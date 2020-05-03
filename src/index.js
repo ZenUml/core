@@ -12,7 +12,9 @@ const Store = {
     lifeLineDimensions: {},
     firstInvocations: {},
     code: '',
-    events: []
+    events: [],
+    // To be overridden by plugins
+    onLifelineMounted: () => {}
   },
   getters: {
     // We are using getters to avoid hard coding module's name ($store.Store.state)
@@ -44,7 +46,8 @@ const Store = {
     },
     distance: (state, getters) => (from, to) => {
       return getters.centerOf(from) - getters.centerOf(to)
-    }
+    },
+    onLifelineMounted: (state) => state.onLifelineMounted
   },
   mutations: {
     code: function (state, payload) {

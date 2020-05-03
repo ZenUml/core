@@ -10,13 +10,13 @@
 </template>
 
 <script>
-  import {mapGetters, mapMutations} from 'vuex'
+  import {mapGetters} from 'vuex'
 
   export default {
     name: 'life-line',
     props: ['entity'],
     computed: {
-      ...mapGetters(['firstInvocations']),
+      ...mapGetters(['firstInvocations', 'onLifelineMounted']),
       top () {
         if (this.firstInvocationIsCreation) {
           return this.firstInvocations[this.entity].top - 3
@@ -26,9 +26,6 @@
       firstInvocationIsCreation () {
         return this.firstInvocations[this.entity] && this.firstInvocations[this.entity].type === 'creation'
       }
-    },
-    methods: {
-      ...mapMutations(['onLifelineMounted'])
     },
     mounted() {
       this.onLifelineMounted(this, this.$vnode.elm);

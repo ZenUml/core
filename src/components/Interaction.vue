@@ -31,11 +31,9 @@
         return Math.abs(distance - safeOffset)
       },
       translateX: function() {
-        let offsetFrom = this.distance(this.realFrom, this.from);
-        if (this.rightToLeft) {
-          return offsetFrom - this.interactionWidth;
-        }
-        return offsetFrom
+        // The starting point is always this.from
+        const moveTo = this.rightToLeft ? this.to : this.realFrom
+        return this.distance(moveTo, this.from)
       },
       occurrenceLeft: function () {
         return this.rightToLeft ? -14 : this.interactionWidth - 14
@@ -54,10 +52,10 @@
         return assignee + (type ? ':' + type : '')
       },
       realFrom: function() {
-        return this.message?.func()?.from().getCode() || this.from
+        return this.message?.func()?.from()?.getCode() || this.from
       },
       to: function () {
-        return this.message?.func().to().getCode()
+        return this.message?.func()?.to()?.getCode()
       }
     },
     components: {
