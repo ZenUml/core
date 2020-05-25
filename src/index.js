@@ -1,5 +1,4 @@
 import seqDsl from 'sequence-parser'
-import createLogger from 'vuex/dist/logger'
 
 import SeqDiagram from './components/SeqDiagram.vue'
 
@@ -70,7 +69,6 @@ const Store = {
   },
   // TODO: Enable strict for development?
   strict: false,
-  plugins: [createLogger()]
 }
 
 let Version = '0.6.3'
