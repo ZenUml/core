@@ -2,7 +2,7 @@
   <div  :id="entity"
         class="lifeline"
         :style="{'paddingTop': top + 'px'} ">
-    <div class="participant">
+    <div class="participant" :class="{'selected': selected}" @click="selected = !selected">
       <label class="name">{{entity}}</label>
     </div>
     <div class="line"></div>
@@ -14,6 +14,11 @@
 
   export default {
     name: 'life-line',
+    data() {
+      return {
+        selected: false
+      }
+    },
     props: ['entity'],
     computed: {
       ...mapGetters(['firstInvocations', 'onLifelineMounted']),
