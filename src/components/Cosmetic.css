@@ -45,3 +45,7 @@
   border-left-color: #808080;
 }
 
+/*Interactive classes*/
+.sequence-diagram .selected {
+  border-color: rgba(3, 3, 3, 0.55)
+}
