@@ -2,7 +2,7 @@
   <div  :id="entity"
         class="lifeline"
         :style="{'paddingTop': top + 'px'} ">
-    <div class="participant" :class="{'selected': selected}" @click="selected = !selected">
+    <div class="participant" :class="{'selected': selected}" @click="onSelect">
       <label class="name">{{entity}}</label>
     </div>
     <div class="line"></div>
@@ -30,6 +30,12 @@
       },
       firstInvocationIsCreation () {
         return this.firstInvocations[this.entity] && this.firstInvocations[this.entity].type === 'creation'
+      }
+    },
+    methods: {
+      onSelect() {
+        this.selected = !this.selected
+        this.$store.commit('onSelect', this.entity)
       }
     },
     mounted() {

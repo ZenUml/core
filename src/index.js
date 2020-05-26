@@ -12,6 +12,7 @@ const Store = {
     firstInvocations: {},
     code: '',
     events: [],
+    selected: {},
     // To be overridden by plugins
     onLifelineMounted: () => {}
   },
@@ -60,6 +61,9 @@ const Store = {
     },
     onMessageLayerMountedOrUpdated: function (state, payload) {
       state.firstInvocations = payload
+    },
+    onSelect: function (state, payload) {
+      state.selected[payload] = !state.selected[payload]
     }
   },
   actions: {
