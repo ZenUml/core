@@ -12,7 +12,7 @@ const Store = {
     firstInvocations: {},
     code: '',
     events: [],
-    selected: {},
+    selected: [],
     // To be overridden by plugins
     onLifelineMounted: () => {}
   },
@@ -63,7 +63,11 @@ const Store = {
       state.firstInvocations = payload
     },
     onSelect: function (state, payload) {
-      state.selected[payload] = !state.selected[payload]
+      if (state.selected.includes(payload)) {
+        state.selected = state.selected.filter(p => p !== payload)
+      } else {
+        state.selected.push(payload)
+      }
     }
   },
   actions: {
