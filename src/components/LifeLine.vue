@@ -14,14 +14,12 @@
 
   export default {
     name: 'life-line',
-    data() {
-      return {
-        selected: false
-      }
-    },
     props: ['entity'],
     computed: {
       ...mapGetters(['firstInvocations', 'onLifelineMounted']),
+      selected () {
+        return this.$store.state.selected.includes(this.entity)
+      },
       top () {
         if (this.firstInvocationIsCreation) {
           return this.firstInvocations[this.entity].top - 3
@@ -34,7 +32,6 @@
     },
     methods: {
       onSelect() {
-        this.selected = !this.selected
         this.$store.commit('onSelect', this.entity)
       }
     },
