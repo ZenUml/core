@@ -6,6 +6,10 @@
     "build": "vue-cli-service build --target lib --modern --name vue-sequence ./src/index.js",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
+    "antlr:clear": "rm -rf src/generated-parser",
+    "antlr:lexer": "cd src/g4 && antlr4 -o ../generated-parser/ -Dlanguage=JavaScript ./sequenceLexer.g4",
+    "antlr:parser": "cd src/g4 && antlr4 -o ../generated-parser/ -Dlanguage=JavaScript ./sequenceParser.g4",
+    "antlr": "yarn antlr:clear && yarn antlr:lexer && yarn antlr:parser",
     "babel": "babel --presets es2015 dist/vue-sequence.umd.js -o dist/vue-sequence.umd.es5.js",
     "build-crx": "vue-cli-service build --mode production --target lib --name vue-sequence ./src/index.js",
     "start": "vue-cli-service serve"
@@ -13,6 +17,7 @@
   "main": "./dist/vue-sequence.umd.min.js",
   "dependencies": {
     "@vue/cli": "^3.0.0-rc.5",
+    "antlr4": "^4.8.0",
     "sequence-parser": "^0.8.8",
     "vue": "^2.5.16",
     "vuex": "^3.0.1"
