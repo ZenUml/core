@@ -13,7 +13,7 @@
   "main": "./dist/vue-sequence.umd.min.js",
   "dependencies": {
     "@vue/cli": "^3.0.0-rc.5",
-    "sequence-parser": "^0.8.6",
+    "sequence-parser": "^0.8.8",
     "vue": "^2.5.16",
     "vuex": "^3.0.1"
   },
