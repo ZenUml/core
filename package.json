@@ -16,14 +16,13 @@
   },
   "main": "./dist/vue-sequence.umd.min.js",
   "dependencies": {
-    "@vue/cli": "^3.0.0-rc.5",
     "antlr4": "^4.8.0",
-    "sequence-parser": "^0.8.8",
     "vue": "^2.5.16",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.9.0",
+    "@vue/cli": "^3.0.0-rc.5",
     "@vue/cli-plugin-babel": "^3.0.0-rc.2",
     "@vue/cli-plugin-eslint": "^3.0.0-rc.2",
     "@vue/cli-plugin-unit-jest": "~4.3.0",
