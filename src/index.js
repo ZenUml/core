@@ -1,4 +1,4 @@
-import seqDsl from './parser/index'
+import {RootContext, Participants} from './parser/index.js'
 
 import SeqDiagram from './components/SeqDiagram.vue'
 
@@ -25,10 +25,10 @@ const Store = {
       return starterExp && starterExp.starter() && starterExp.starter().getCode() || 'Starter'
     },
     rootContext: (state) => {
-      return seqDsl.RootContext(state.code)
+      return RootContext(state.code)
     },
     participants: (state, getters) => {
-      return seqDsl.Participants(getters.rootContext)
+      return Participants(getters.rootContext)
     },
     centerOf: (state) => (entity) => {
       return state.lifeLineDimensions[entity] &&

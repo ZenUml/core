@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.9.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.10.1",
     "@vue/cli": "^3.0.0-rc.5",
     "@vue/cli-plugin-babel": "^3.0.0-rc.2",
     "@vue/cli-plugin-eslint": "^3.0.0-rc.2",
