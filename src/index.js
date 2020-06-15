@@ -1,4 +1,4 @@
-import seqDsl from './parser/index'
+import seqDsl from './parser'
 
 import SeqDiagram from './components/SeqDiagram.vue'
 

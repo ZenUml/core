@@ -6,7 +6,7 @@ var ChildFragmentDetector = require('./ChildFragmentDetecotr')
 
 const errors = [];
 class SeqErrorListener extends antlr4.error.ErrorListener {
-  syntaxError(recognizer, offendingSymbol, line, column, msg, err) {
+  syntaxError(recognizer, offendingSymbol, line, column, msg) {
     errors.push(`${offendingSymbol} line ${line}, col ${column}: ${msg}`);
   }
 }

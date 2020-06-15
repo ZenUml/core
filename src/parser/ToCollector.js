@@ -41,11 +41,11 @@ ToCollector.prototype.enterCreation = function (ctx) {
     descendantTos[participant] = { width: 0 };
 }
 
-ToCollector.prototype.enterParameters = function (ctx) {
+ToCollector.prototype.enterParameters = function () {
     isBlind = true;
 }
 
-ToCollector.prototype.exitParameters = function (ctx) {
+ToCollector.prototype.exitParameters = function () {
     isBlind = false;
 }
 

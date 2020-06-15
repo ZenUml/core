@@ -1,4 +1,4 @@
-import seqDsl from '../parser/index'
+import seqDsl from '../parser'
 import {mapGetters} from "vuex";
 
 export default {
