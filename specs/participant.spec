@@ -23,6 +23,7 @@ Explicit declaration can be useful to re-order the participant lifelines (row #4
       | text      | participants |
       |-----------|--------------|
       | A         | [A]          |
+      | A A       | [A]          |
       | A B       | [A,B]        |
       | A\\nB     | [A,B]        |
       | B A\\nA.m | [B,A]        |
