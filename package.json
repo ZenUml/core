@@ -1,6 +1,6 @@
 {
   "name": "vue-sequence",
-  "version": "0.9.9",
+  "version": "1.0.0",
   "private": false,
   "scripts": {
     "build": "vue-cli-service build --target lib --modern --name vue-sequence ./src/index.js",
