@@ -5,7 +5,7 @@
   "scripts": {
     "build": "vue-cli-service build --target lib --modern --name vue-sequence ./src/index.js",
     "test:unit": "vue-cli-service test:unit",
-    "test:spec": "gauge run specs",
+    "test:specs": "gauge run specs",
     "lint": "vue-cli-service lint",
     "antlr:clear": "rm -rf src/generated-parser",
     "antlr:lexer": "cd src/g4 && antlr4 -o ../generated-parser/ -Dlanguage=JavaScript ./sequenceLexer.g4",
