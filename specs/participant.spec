@@ -9,7 +9,7 @@ In most cases, you do not need to explicitly declare participants, as the the pa
 * Extract participants from DSL
 
 | text          | participants | note                             |
-|:--------------|:-------------|:---------------------------------|
+|--------------|-------------|---------------------------------|
 | A.m           | [A]          |                                  |
 | A.m B.m       | [A,B]        |                                  |
 | A.m { B.m }   | [A,B]        |                                  |
@@ -23,7 +23,7 @@ Explicit declaration can be useful to re-order the participant lifelines (row #4
 * Extract participants from DSL
 
 | text      | participants | note                                 |
-|:----------|:-------------|:-------------------------------------|
+|----------|-------------|-------------------------------------|
 | A         | [A]          |                                      |
 | A A       | [A]          |                                      |
 | A B       | [A,B]        |                                      |

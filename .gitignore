@@ -2,6 +2,11 @@
 node_modules
 /dist
 
+# gauge files
+.gauge
+reports
+logs
+
 # local env files
 .env.local
 .env.*.local
