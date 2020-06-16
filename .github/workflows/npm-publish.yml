@@ -5,8 +5,7 @@ name: Publish to NPM
 
 on:
   push:
-    tags:
-      - release-*
+    branches: [ master ]
 
 jobs:
   build:
@@ -27,7 +26,6 @@ jobs:
       - name: Test
         run: yarn test:unit
       - name: Publish
-        if: github.ref == 'refs/heads/master'
         uses: mikeal/merge-release@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
