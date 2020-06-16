@@ -2,21 +2,27 @@
   <div  :id="entity"
         class="lifeline"
         :style="{'paddingTop': top + 'px'} ">
+    <canvas :id="entity + '-canvas'"></canvas>
     <div class="participant" :class="{'selected': selected}" @click="onSelect">
       <label class="name">{{entity}}</label>
     </div>
+
     <div class="line"></div>
   </div>
 </template>
 
 <script>
   import {mapGetters} from 'vuex'
+  // import rough from 'roughjs'
 
   export default {
     name: 'life-line',
     props: ['entity'],
     computed: {
       ...mapGetters(['firstInvocations', 'onLifelineMounted']),
+      canvasId () {
+        return this.entity + '-canvas'
+      },
       selected () {
         return this.$store.state.selected.includes(this.entity)
       },
@@ -35,6 +41,16 @@
         this.$store.commit('onSelect', this.entity)
       }
     },
+    updated() {
+      console.log('$$$updated');
+      const rc = rough.canvas(document.getElementById(this.entity + '-canvas'));
+      rc.rectangle(0, 0, this.$vnode.elm.offsetWidth, 40, {
+        fill: 'red',
+        hachureAngle: 60, // angle of hachure,
+        fillStyle: 'zigzag',
+        hachureGap: 4
+      }); // x, y, width, height
+    },
     mounted() {
       this.onLifelineMounted(this, this.$vnode.elm);
     }
@@ -48,6 +64,15 @@
     display: flex;            /* So that .line fill the remaining height */
     flex-direction: column;
     margin: 0 20px;
+    font-family: 'Cabin Sketch', cursive;
+  }
+
+  .lifeline canvas {
+    position: absolute;
+  }
+
+  .lifeline .participant {
+    background-color: transparent;
   }
 
   .lifeline .line {

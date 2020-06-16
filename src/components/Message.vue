@@ -49,6 +49,7 @@
     width: calc(100% - 16px);
     border-bottom-width: 2px;
     white-space: nowrap;
+    font-family: 'Cabin Sketch', cursive;
   }
 
   .sync > .message {
