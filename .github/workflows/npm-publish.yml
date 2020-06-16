@@ -25,6 +25,8 @@ jobs:
       - run: yarn install
       - name: Test
         run: yarn test:unit
+      - name: Build
+        run: yarn build
       - name: Publish
         uses: mikeal/merge-release@master
         env:
