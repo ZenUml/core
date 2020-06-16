@@ -1,4 +1,4 @@
-import seqDsl from 'sequence-parser'
+import {RootContext, Participants} from './parser/index.js'
 
 import SeqDiagram from './components/SeqDiagram.vue'
 
@@ -12,6 +12,7 @@ const Store = {
     firstInvocations: {},
     code: '',
     events: [],
+    selected: [],
     // To be overridden by plugins
     onLifelineMounted: () => {}
   },
@@ -24,10 +25,10 @@ const Store = {
       return starterExp && starterExp.starter() && starterExp.starter().getCode() || 'Starter'
     },
     rootContext: (state) => {
-      return seqDsl.RootContext(state.code)
+      return RootContext(state.code)
     },
     participants: (state, getters) => {
-      return seqDsl.Participants(getters.rootContext)
+      return Participants(getters.rootContext)
     },
     centerOf: (state) => (entity) => {
       return state.lifeLineDimensions[entity] &&
@@ -60,6 +61,13 @@ const Store = {
     },
     onMessageLayerMountedOrUpdated: function (state, payload) {
       state.firstInvocations = payload
+    },
+    onSelect: function (state, payload) {
+      if (state.selected.includes(payload)) {
+        state.selected = state.selected.filter(p => p !== payload)
+      } else {
+        state.selected.push(payload)
+      }
     }
   },
   actions: {

@@ -1,4 +1,4 @@
-import seqDsl from 'sequence-parser'
+import {Participants, Depth} from '../parser'
 import {mapGetters} from "vuex";
 
 export default {
@@ -6,11 +6,11 @@ export default {
     ...mapGetters(['leftOf', 'rightOf', 'centerOf']),
     boundary: function () {
       const that = this
-      let arrayLeft = [this.from, ...seqDsl.Participants(this.context)]
+      let arrayLeft = [this.from, ...Participants(this.context)]
         .map(function (participant) {
           return that.leftOf(participant)
         })
-      let arrayRight = [this.from, ...seqDsl.Participants(this.context)]
+      let arrayRight = [this.from, ...Participants(this.context)]
         .map(function (participant) {
           return that.rightOf(participant)
         })
@@ -24,7 +24,7 @@ export default {
       }
     },
     depth: function () {
-      return seqDsl.Depth(this.context)
+      return Depth(this.context)
     },
     centerOfFrom: function () {
       return this.centerOf(this.from)

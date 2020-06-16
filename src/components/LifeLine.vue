@@ -2,7 +2,7 @@
   <div  :id="entity"
         class="lifeline"
         :style="{'paddingTop': top + 'px'} ">
-    <div class="participant">
+    <div class="participant" :class="{'selected': selected}" @click="onSelect">
       <label class="name">{{entity}}</label>
     </div>
     <div class="line"></div>
@@ -17,6 +17,9 @@
     props: ['entity'],
     computed: {
       ...mapGetters(['firstInvocations', 'onLifelineMounted']),
+      selected () {
+        return this.$store.state.selected.includes(this.entity)
+      },
       top () {
         if (this.firstInvocationIsCreation) {
           return this.firstInvocations[this.entity].top - 3
@@ -25,6 +28,11 @@
       },
       firstInvocationIsCreation () {
         return this.firstInvocations[this.entity] && this.firstInvocations[this.entity].type === 'creation'
+      }
+    },
+    methods: {
+      onSelect() {
+        this.$store.commit('onSelect', this.entity)
       }
     },
     mounted() {
