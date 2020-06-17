@@ -37,7 +37,7 @@
     "@vue/cli-service": "^3.0.0-rc.2",
     "@vue/test-utils": "^1.0.3",
     "core-js": "2.6.5",
-    "svg-url-loader": "^5.0.0",
+    "svg-url-loader": "^6.0.0",
     "taiko": "^1.0.11",
     "terser-webpack-plugin": "^2.3.5",
     "vue-template-compiler": "^2.5.16",
