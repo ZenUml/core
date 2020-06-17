@@ -35,6 +35,10 @@
   font-weight: 700;
 }
 
+.sequence-diagram .fragment .header label.else-if {
+  display: none;
+}
+
 .sequence-diagram .fragment.alt div.divider {
   border-bottom-style: dashed;
   border-bottom-color: #555;
