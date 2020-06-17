@@ -38,7 +38,7 @@
     "@vue/test-utils": "^1.0.3",
     "core-js": "2.6.5",
     "svg-url-loader": "^6.0.0",
-    "taiko": "^1.0.11",
+    "taiko": "^1.0.12",
     "terser-webpack-plugin": "^2.3.5",
     "vue-template-compiler": "^2.5.16",
     "webpack": "^4.43.0",

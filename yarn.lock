@@ -555,20 +555,10 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
-"@babel/parser@^7.1.0", "@babel/parser@^7.4.3", "@babel/parser@^7.9.6":
-  version "7.9.6"
-  resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.9.6.tgz#3b1bbb30dabe600cd72db58720998376ff653bc7"
-  integrity sha512-AoeIEJn8vt+d/6+PXDRPaksYhnlbMIiejioBZvvMQsOjW/JYK6k/0dKnvvP3EhK5GfMBWDPtrxRtegWdAcdq9Q==
-
-"@babel/parser@^7.1.3", "@babel/parser@^7.10.1", "@babel/parser@^7.10.2", "@babel/parser@^7.9.4":
+"@babel/parser@^7.1.0", "@babel/parser@^7.1.3", "@babel/parser@^7.1.6", "@babel/parser@^7.10.1", "@babel/parser@^7.10.2", "@babel/parser@^7.4.3", "@babel/parser@^7.7.0", "@babel/parser@^7.8.6", "@babel/parser@^7.9.0", "@babel/parser@^7.9.4", "@babel/parser@^7.9.6":
   version "7.10.2"
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.10.2.tgz#871807f10442b92ff97e4783b9b54f6a0ca812d0"
   integrity sha512-PApSXlNMJyB4JiGVhCOlzKIif+TKFTvu0aQAhnTvfP/z3vVSN6ZypH5bfUNwFXXjRQtUEBNFd2PtmCmG2Py3qQ==
-
-"@babel/parser@^7.1.6", "@babel/parser@^7.7.0", "@babel/parser@^7.8.6", "@babel/parser@^7.9.0":
-  version "7.9.4"
-  resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.9.4.tgz#68a35e6b0319bbc014465be43828300113f2f2e8"
-  integrity sha512-bC49otXX6N0/VYhgOMh4gnP26E9xnDZK3TmbNpxYzzz9BQLBosQwfyOe9/cXUU3txYhTzLCbcqd5c8y/OmCjHA==
 
 "@babel/plugin-proposal-async-generator-functions@^7.10.1":
   version "7.10.1"
@@ -13431,10 +13421,10 @@ table@5.4.6:
     slice-ansi "^2.1.0"
     string-width "^3.0.0"
 
-taiko@^1.0.11:
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/taiko/-/taiko-1.0.11.tgz#a95d09a8ab4ee371c84f6d042ba7ee1c6b7cd07a"
-  integrity sha512-evE7Qa7+TLawzY5GQgFgnPBNA+HYz/tzSw+MGGe+klQ5lSINhzDI/WwwDPVbU7mtVH4sevGWi856D8MJTty2tw==
+taiko@^1.0.12:
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/taiko/-/taiko-1.0.12.tgz#d3a64a15715ab1c7905d05257bbccc513e0572a6"
+  integrity sha512-VwBpeG++k652wH0fCtm7QV0D3n5/k4c07+7Km27wpQy2pm+Qonmlft10Etwoh7HbS2OjMoHs52tp4K4dF0S8og==
   dependencies:
     "@babel/parser" "^7.9.4"
     chrome-remote-interface "^0.28.1"
