@@ -12,7 +12,7 @@
     ></block>
     <template v-for="(elseIfBlock, index) in alt.elseIfBlock()">
       <div class="divider" :key="index"></div>
-      <div class="name" :key="index+100">else if [{{elseIfBlock.parExpr().expr().getCode()}}]</div>
+      <div class="header" :key="index+100"><label class="else-if">else if</label> <label class="condition">[{{elseIfBlock.parExpr().expr().getCode()}}]</label></div>
       <block :style="blockStyle"
              :context="elseIfBlock.braceBlock().block()"
              :from="from"
@@ -21,7 +21,7 @@
     </template>
     <template v-if="alt.elseBlock()">
       <div class="divider"></div>
-      <div class="name">else</div>
+      <div class="header"><label>[else]</label></div>
       <block :style="blockStyle"
              :context="alt.elseBlock().braceBlock().block()"
              :from="from"

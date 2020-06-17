@@ -5,7 +5,6 @@
 }
 
 .sequence-diagram .participant {
-  font-weight: bold;
   background: #fff;
 }
 
@@ -33,6 +32,10 @@
 .sequence-diagram .fragment .header .name label {
   color: #555;
   font-weight: 700;
+}
+
+.sequence-diagram .fragment .header label.else-if {
+  display: none;
 }
 
 .sequence-diagram .fragment.alt div.divider {
