@@ -19,7 +19,7 @@
   "dependencies": {
     "antlr4": "^4.8.0",
     "vue": "^2.5.16",
-    "vuex": "^3.0.1",
+    "vuex": "^3.4.0",
     "gauge-ts": "0.0.5"
   },
   "devDependencies": {
