@@ -23,7 +23,7 @@
     "gauge-ts": "0.0.5"
   },
   "devDependencies": {
-    "@babel/cli": "^7.10.1",
+    "@babel/cli": "^7.10.3",
     "@babel/core": "^7.10.2",
     "@babel/plugin-proposal-optional-chaining": "^7.10.1",
     "@babel/plugin-transform-arrow-functions": "^7.10.1",
