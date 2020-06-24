@@ -27,8 +27,27 @@ jobs:
         run: yarn test:unit
       - name: Build
         run: yarn build
-      - name: Publish
-        uses: mikeal/merge-release@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+      - uses: actions/upload-artifact@v1
+        with:
+          name: build_123
+          path: dist
+
+  publish:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x]
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v1
+        with:
+          name: build_123
+      - shell: bash
+        run: |
+          npm publish --dry-run
+      # - name: Publish
+      #   uses: mikeal/merge-release@master
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
