@@ -33,7 +33,7 @@
     "@vue/cli": "^4.4.4",
     "@vue/cli-plugin-babel": "^3.0.0-rc.2",
     "@vue/cli-plugin-eslint": "^3.0.0-rc.2",
-    "@vue/cli-plugin-unit-jest": "~4.4.4",
+    "@vue/cli-plugin-unit-jest": "~4.4.6",
     "@vue/cli-service": "^4.4.4",
     "@vue/test-utils": "^1.0.3",
     "core-js": "2.6.5",
