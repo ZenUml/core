@@ -8,7 +8,13 @@
 export default `
 A B Client1 Client2
 Client1 Client2
-// comments at the beginning should be ignored
+// The **first** comment
+//- [x] Task 1
+//- [ ] Task 2
+//
+//|a|b|
+//|-|-|
+//|c|d|
 Client1->A.method() {
   B:method()
 }

@@ -52,7 +52,7 @@ stat
  ;
 
 comment
- : DS commentContent COMMENT_END?
+ : DS commentContent? COMMENT_END?
  ;
 
 commentContent
