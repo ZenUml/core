@@ -52,3 +52,16 @@
 .sequence-diagram .selected {
   border-color: rgba(3, 3, 3, 0.55)
 }
+
+.sequence-diagram .comments p,
+.sequence-diagram .comments ul {
+  margin: 0;
+}
+
+.sequence-diagram .comments ul li {
+  list-style-type: none;
+}
+
+.sequence-diagram .comments ul li input[type="checkbox"] {
+  margin-left: -2em;
+}
