@@ -20,7 +20,7 @@
     props: ['from', 'context', 'offset'],
     computed: {
       comment: function () {
-        return this.context.comment() ? this.context.comment().map(c => c.commentContent().getCode()).join('\n') : ''
+        return this.context.comment() ? this.context.comment().map(c => c.commentContent()?.getCode() || '').join('\n') : ''
       },
       realFrom: function() {
         return this.context.message().func().from() && this.context.message().func().from().getCode() || this.from;
