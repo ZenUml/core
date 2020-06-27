@@ -6,22 +6,24 @@
 // Nested method
 // Assignment
 export default `
-A B Client1 Client2
-Client1 Client2
-// The **first** comment that support [link](https://www.zenuml.com)
-//## Task list
-//- [x] Task 1
-//- [ ] Task 2
-//
-//|a|b|
-//|-|-|
-//|c|d|
-//
-// Inline \`code\`
-//\`\`\`
-// function() { console.log() }
-//\`\`\`
-Client1->A.method() {
-  B:method()
+@Starter(inGenious)
+// POST /block-card + otar
+// \`\`\`
+// return: [
+//   {action1, confirm: encrypted}
+//   {action2, confirm: encrypted}
+//   {action3, confirm: encrypted}
+// ]
+// \`\`\`
+ActionService.lodgeBlockCardAction() {
+  // GET /cards + JWT
+  // 1. Card 1, blocked
+  // 1. Card 2, inactive
+  // 1. Card 3, active
+  CardService.getCardList()
+  
+  //- [ ] To be implemented
+  //- [x] Already done
+  buildCarousel()
 }
 `
