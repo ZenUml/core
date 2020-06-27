@@ -27,7 +27,7 @@
           </code>
         `
       }
-      return code
+      return `<code>${code}</code>`
     }
   };
 
