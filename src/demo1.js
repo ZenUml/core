@@ -24,12 +24,12 @@ export default `
 // \`\`\`javascript
 // for(int i = 0; i < 5; i++) {
 //   doSomething()
+//   return: [
+//     {action1, confirm: encrypted}
+//     {action2, confirm: encrypted}
+//     {action3, confirm: encrypted}
+//   ]
 // }
-// return: [
-//   {action1, confirm: encrypted}
-//   {action2, confirm: encrypted}
-//   {action3, confirm: encrypted}
-// ]
 // \`\`\`
 AnotherService.lodgeBlockCardAction() {
   // GET /cards + JWT
@@ -41,13 +41,6 @@ AnotherService.lodgeBlockCardAction() {
   //- [x] Already done
   //
   //
-// \`\`\`
-// return: [
-//   {action1, confirm: encrypted}
-//   {action2, confirm: encrypted}
-//   {action3, confirm: encrypted}
-// ]
-// \`\`\`
   buildCarousel()
 }
 `
