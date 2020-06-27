@@ -8,19 +8,30 @@
 export default `
 @Starter(inGenious)
 // POST /block-door
-// All possibilities stage 1
+// 
+// All possibilities \`stage 1\`
 // 1. application/json
 // 1. text/text
 // 
 // 
-// \`\`\`
+// |a|b|
+// |-|-|
+// |c|d|
+// |e|f|
+// |g|h|
+// 
+// 
+// \`\`\`javascript
+// for(int i = 0; i < 5; i++) {
+//   doSomething()
+// }
 // return: [
 //   {action1, confirm: encrypted}
 //   {action2, confirm: encrypted}
 //   {action3, confirm: encrypted}
 // ]
 // \`\`\`
-AotherService.lodgeBlockCardAction() {
+AnotherService.lodgeBlockCardAction() {
   // GET /cards + JWT
   // 1. Door 1, blocked
   // 1. Door 2, inactive
