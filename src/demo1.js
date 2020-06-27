@@ -7,7 +7,12 @@
 // Assignment
 export default `
 @Starter(inGenious)
-// POST /block-card + otar
+// POST /block-door
+// All possibilities stage 1
+// 1. application/json
+// 1. text/text
+// 
+// 
 // \`\`\`
 // return: [
 //   {action1, confirm: encrypted}
@@ -15,15 +20,23 @@ export default `
 //   {action3, confirm: encrypted}
 // ]
 // \`\`\`
-ActionService.lodgeBlockCardAction() {
+AotherService.lodgeBlockCardAction() {
   // GET /cards + JWT
-  // 1. Card 1, blocked
-  // 1. Card 2, inactive
-  // 1. Card 3, active
-  CardService.getCardList()
+  // 1. Door 1, blocked
+  // 1. Door 2, inactive
+  DoorService.getList()
   
   //- [ ] To be implemented
   //- [x] Already done
+  //
+  //
+// \`\`\`
+// return: [
+//   {action1, confirm: encrypted}
+//   {action2, confirm: encrypted}
+//   {action3, confirm: encrypted}
+// ]
+// \`\`\`
   buildCarousel()
 }
 `

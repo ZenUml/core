@@ -53,8 +53,10 @@
   border-color: rgba(3, 3, 3, 0.55)
 }
 
+.sequence-diagram .comments pre,
 .sequence-diagram .comments p {
   margin: 0;
+  padding-left: 5px;
 }
 
 .sequence-diagram .comments ol,
