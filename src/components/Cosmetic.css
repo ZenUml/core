@@ -331,3 +331,35 @@ table th[class*="col-"] {
 .table-hover > tbody > tr.danger:hover > th {
   background-color: #ebcccc;
 }
+
+.http-method-post {
+  color: #09825d;
+}
+
+.rest-api .http-method-post {
+  color: #0d4b3b;
+}
+
+.http-method-get {
+  color: #3a97d4;
+}
+
+.rest-api .http-method-get {
+  color: #2f3d89;
+}
+
+.http-method-delete {
+  color: #e56f4a;
+}
+
+.rest-api .http-method-delete {
+  color: #7e1e23;
+}
+
+a:hover .http-method-delete,a:hover .http-method-get,a:hover .http-method-post {
+  filter: brightness(85%)
+}
+
+.dark-mode a:hover .http-method-delete,.dark-mode a:hover .http-method-get,.dark-mode a:hover .http-method-post {
+  filter: brightness(115%)
+}

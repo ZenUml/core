@@ -7,9 +7,13 @@
 // Assignment
 export default `
 @Starter(Client)
-// POST /block-door
+// \`POST /orders/\`
 // 
-// All possibilities \`stage 1\`
+// \`GET /orders/:id\`
+// 
+// \`OPTIONS /orders/:id\`
+// 
+// All possibilities \`POST /order/:id\`
 // 1. application/json
 // 1. text/text
 // 
