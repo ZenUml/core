@@ -16,12 +16,10 @@
             `
     },
     codespan(code) {
-      /* eslint-disable */
-      console.log(code)
       const endpointPattern = /(GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH)\s+(.+)/ig
       // let found = code.match(endpointPattern)
       let found = endpointPattern.exec(code)
-      if (found.length === 3) {
+      if (found?.length === 3) {
         return `
           <code class="rest-api">
           <span class="http-method-${found[1].toLowerCase()}">${found[1]}</span>
