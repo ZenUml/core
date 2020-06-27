@@ -67,8 +67,7 @@
     padding: 5px;
     width: 500px;
     font-size: 0.8em;
-    font-style: italic;
-    line-height: 1em;
+    line-height: 1.5em;
     opacity: 0.5;
   }
 

@@ -6,7 +6,7 @@
 // Nested method
 // Assignment
 export default `
-@Starter(inGenious)
+@Starter(Client)
 // POST /block-door
 // 
 // All possibilities \`stage 1\`
