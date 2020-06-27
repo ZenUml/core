@@ -19,8 +19,6 @@
 
   marked.setOptions({
     highlight: function (code, language) {
-      /* eslint-disable */
-      console.log(arguments)
       const validLanguage = highlightjs.getLanguage(language) ? language : 'plaintext'
       return highlightjs.highlight(validLanguage, code).value
     }
