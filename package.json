@@ -19,6 +19,7 @@
   "dependencies": {
     "antlr4": "^4.8.0",
     "gauge-ts": "0.0.5",
+    "highlight.js": "^10.1.1",
     "highlightjs": "^9.16.2",
     "marked": "^1.1.0",
     "vue": "^2.5.16",
