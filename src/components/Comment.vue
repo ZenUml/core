@@ -16,8 +16,6 @@
             `
     },
     codespan(code) {
-      /* eslint-disable */
-      console.log(code)
       const endpointPattern = /(GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH)\s+(.+)/ig
       // let found = code.match(endpointPattern)
       let found = endpointPattern.exec(code)
