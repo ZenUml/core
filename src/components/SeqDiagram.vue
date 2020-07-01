@@ -14,7 +14,6 @@
 
   Vue.use(Vuex)
   const store = new Vuex.Store(Store)
-
   export default {
     store,
     name: 'seq-diagram',
@@ -23,7 +22,7 @@
       MessageLayer
     },
     mounted() {
-      store.dispatch('updateCode', { code: 'A.method12 {B.m12}'})
+      store.dispatch('updateCode', { code: 'A.method12 {B.m1}'})
     }
   }
 </script>
