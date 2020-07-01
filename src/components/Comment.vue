@@ -4,7 +4,19 @@
 
 <script type="text/babel">
   import marked from 'marked'
-  import highlightjs from 'highlight.js'
+  import highlightjs from 'highlight.js/lib/core'
+  //
+  // Languages import
+  import javascript from 'highlight.js/lib/languages/javascript'
+  import bash from 'highlight.js/lib/languages/bash'
+  import yaml from 'highlight.js/lib/languages/yaml'
+
+  // Register languages
+  highlightjs.registerLanguage('javascript', javascript)
+  highlightjs.registerLanguage('bash', bash)
+  highlightjs.registerLanguage('yaml', yaml)
+
+  // import highlightjs from 'highlight.js'
   // Override function
   const renderer = {
     table(header, body) {
@@ -33,7 +45,7 @@
 
   marked.setOptions({
     highlight: function (code, language) {
-      const validLanguage = highlightjs.getLanguage(language) ? language : 'plaintext'
+      const validLanguage = highlightjs.getLanguage(language) ? language : 'javascript'
       return highlightjs.highlight(validLanguage, code).value
     }
   })
@@ -50,3 +62,6 @@
     }
   }
 </script>
+<style>
+  @import '~highlight.js/styles/github-gist.css';
+</style>

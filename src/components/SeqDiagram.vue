@@ -22,7 +22,7 @@
       MessageLayer
     },
     mounted() {
-      store.dispatch('updateCode', { code: 'A.method12 {B.m1}'})
+      store.dispatch('updateCode', { code: 'A.method()'})
     }
   }
 </script>
