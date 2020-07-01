@@ -2,6 +2,10 @@
 node_modules
 /dist
 
+# antlr4
+gen/
+src/g4/sequenceLexer.tokens
+
 # gauge
 .gauge
 logs/

@@ -4,6 +4,7 @@
   "private": false,
   "scripts": {
     "build": "vue-cli-service build --target lib --modern --name vue-sequence ./src/index.js",
+    "build:wc": "vue-cli-service build --target wc --name sequence-diagram ./src/components/SeqDiagram.vue",
     "test:unit": "vue-cli-service test:unit",
     "test:specs": "gauge run specs",
     "lint": "vue-cli-service lint",

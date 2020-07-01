@@ -6,14 +6,26 @@
 </template>
 
 <script>
+  import Vue from 'vue'
+  import Vuex from 'vuex'
   import LifeLineLayer from './LifeLineLayer.vue'
   import MessageLayer from './MessageLayer.vue'
+  import Store from '../store'
+  import './Cosmetic.css'
+
+
+  Vue.use(Vuex)
+  const store = new Vuex.Store(Store)
 
   export default {
+    store,
     name: 'seq-diagram',
     components: {
       LifeLineLayer,
       MessageLayer
+    },
+    mounted() {
+      store.dispatch('updateCode', { code: 'A.method12 {B.m12}'})
     }
   }
 </script>
@@ -37,4 +49,371 @@
     max-width: 250px;
     text-align: center;
   }
+
+  /*Color, font and position of labels (not the component itself)*/
+  .sequence-diagram {
+    font-family: Helvetica, Verdana, serif;
+    font-size: 16px;
+  }
+
+  .sequence-diagram .participant {
+    background: #fff;
+  }
+
+  .sequence-diagram .participant,
+  .sequence-diagram .occurrence {
+    border: 2px solid rgba(3, 3, 3, 0.05);
+  }
+
+  .sequence-diagram .message {
+    border-bottom-color: #808080;
+  }
+
+  .sequence-diagram .occurrence {
+    background-color: #d3d3d3;
+  }
+
+  .sequence-diagram .fragment {
+    border-style: solid;
+    border-color: #aaa;
+    border-radius: 2px;
+    background: rgba(255,255,255,.2);
+    opacity: 0.9;
+  }
+
+  .sequence-diagram .fragment .header .name label {
+    color: #555;
+    font-weight: 700;
+  }
+
+  .sequence-diagram .fragment .header label.else-if {
+    display: none;
+  }
+
+  .sequence-diagram .fragment.alt div.divider {
+    border-bottom-style: dashed;
+    border-bottom-color: #555;
+  }
+
+  .sequence-diagram .lifeline .line {
+    border-left-style: dashed;
+    border-left-color: #808080;
+  }
+
+  /*Interactive classes*/
+  .sequence-diagram .selected {
+    border-color: rgba(3, 3, 3, 0.55)
+  }
+
+  .sequence-diagram .comments pre,
+  .sequence-diagram .comments p {
+    margin: 0;
+    padding-left: 5px;
+    line-height: 1.5em;
+  }
+
+  .sequence-diagram .comments ol,
+  .sequence-diagram .comments ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+
+  .sequence-diagram .comments ul li {
+    list-style-type: none;
+  }
+
+  .sequence-diagram .comments ul li input[type="checkbox"] {
+    margin-left: -1em;
+  }
+
+  .sequence-diagram .comments table {
+    /* Remove spacing between table cells (from Normalize.css) */
+    border-collapse: collapse;
+    border-spacing: 0;
+    empty-cells: show;
+    border: 1px solid #cbcbcb;
+  }
+
+  .sequence-diagram .comments table caption {
+    color: #000;
+    font: italic 85%/1 arial, sans-serif;
+    padding: 1em 0;
+    text-align: center;
+  }
+
+  .sequence-diagram .comments table td,
+  .sequence-diagram .comments table th {
+    border-left: 1px solid #cbcbcb;/*  inner column border */
+    font-size: inherit;
+    margin: 0;
+    overflow: visible; /*to make ths where the title is really long work*/
+    padding: 0.5em 1em; /* cell padding */
+  }
+
+  .sequence-diagram .comments table thead {
+    background-color: #e0e0e0;
+    color: #000;
+    text-align: left;
+    vertical-align: bottom;
+  }
+
+  /*
+  striping:
+     even - #fff (white)
+     odd  - #f2f2f2 (light gray)
+  */
+  .sequence-diagram .comments table td {
+    background-color: transparent;
+  }
+  code,
+  kbd,
+  pre,
+  samp {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  }
+  pre {
+    display: block;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    font-size: 13px;
+    line-height: 1.42857143;
+    word-break: break-all;
+    word-wrap: break-word;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  pre>code {
+    color: #333;
+    background-color: transparent;
+  }
+
+  code {
+    padding: 2px 4px;
+    font-size: 90%;
+    color: #c7254e;
+    background-color: #f9f2f4;
+    border-radius: 4px;
+  }
+
+  table {
+    background-color: transparent;
+  }
+  th {
+    text-align: left;
+  }
+  .table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+  .table > thead > tr > th,
+  .table > tbody > tr > th,
+  .table > tfoot > tr > th,
+  .table > thead > tr > td,
+  .table > tbody > tr > td,
+  .table > tfoot > tr > td {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+  }
+  .table > thead > tr > th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #ddd;
+  }
+  .table > caption + thead > tr:first-child > th,
+  .table > colgroup + thead > tr:first-child > th,
+  .table > thead:first-child > tr:first-child > th,
+  .table > caption + thead > tr:first-child > td,
+  .table > colgroup + thead > tr:first-child > td,
+  .table > thead:first-child > tr:first-child > td {
+    border-top: 0;
+  }
+  .table > tbody + tbody {
+    border-top: 2px solid #ddd;
+  }
+  .table .table {
+    background-color: #fff;
+  }
+  .table-condensed > thead > tr > th,
+  .table-condensed > tbody > tr > th,
+  .table-condensed > tfoot > tr > th,
+  .table-condensed > thead > tr > td,
+  .table-condensed > tbody > tr > td,
+  .table-condensed > tfoot > tr > td {
+    padding: 5px;
+  }
+  .table-bordered {
+    border: 1px solid #ddd;
+  }
+  .table-bordered > thead > tr > th,
+  .table-bordered > tbody > tr > th,
+  .table-bordered > tfoot > tr > th,
+  .table-bordered > thead > tr > td,
+  .table-bordered > tbody > tr > td,
+  .table-bordered > tfoot > tr > td {
+    border: 1px solid #ddd;
+  }
+  .table-bordered > thead > tr > th,
+  .table-bordered > thead > tr > td {
+    border-bottom-width: 2px;
+  }
+  .table-striped > tbody > tr:nth-child(odd) > td,
+  .table-striped > tbody > tr:nth-child(odd) > th {
+    background-color: #f9f9f9;
+  }
+  .table-hover > tbody > tr:hover > td,
+  .table-hover > tbody > tr:hover > th {
+    background-color: #f5f5f5;
+  }
+  table col[class*="col-"] {
+    position: static;
+    display: table-column;
+    float: none;
+  }
+  table td[class*="col-"],
+  table th[class*="col-"] {
+    position: static;
+    display: table-cell;
+    float: none;
+  }
+  .table > thead > tr > td.active,
+  .table > tbody > tr > td.active,
+  .table > tfoot > tr > td.active,
+  .table > thead > tr > th.active,
+  .table > tbody > tr > th.active,
+  .table > tfoot > tr > th.active,
+  .table > thead > tr.active > td,
+  .table > tbody > tr.active > td,
+  .table > tfoot > tr.active > td,
+  .table > thead > tr.active > th,
+  .table > tbody > tr.active > th,
+  .table > tfoot > tr.active > th {
+    background-color: #f5f5f5;
+  }
+  .table-hover > tbody > tr > td.active:hover,
+  .table-hover > tbody > tr > th.active:hover,
+  .table-hover > tbody > tr.active:hover > td,
+  .table-hover > tbody > tr:hover > .active,
+  .table-hover > tbody > tr.active:hover > th {
+    background-color: #e8e8e8;
+  }
+  .table > thead > tr > td.success,
+  .table > tbody > tr > td.success,
+  .table > tfoot > tr > td.success,
+  .table > thead > tr > th.success,
+  .table > tbody > tr > th.success,
+  .table > tfoot > tr > th.success,
+  .table > thead > tr.success > td,
+  .table > tbody > tr.success > td,
+  .table > tfoot > tr.success > td,
+  .table > thead > tr.success > th,
+  .table > tbody > tr.success > th,
+  .table > tfoot > tr.success > th {
+    background-color: #dff0d8;
+  }
+  .table-hover > tbody > tr > td.success:hover,
+  .table-hover > tbody > tr > th.success:hover,
+  .table-hover > tbody > tr.success:hover > td,
+  .table-hover > tbody > tr:hover > .success,
+  .table-hover > tbody > tr.success:hover > th {
+    background-color: #d0e9c6;
+  }
+  .table > thead > tr > td.info,
+  .table > tbody > tr > td.info,
+  .table > tfoot > tr > td.info,
+  .table > thead > tr > th.info,
+  .table > tbody > tr > th.info,
+  .table > tfoot > tr > th.info,
+  .table > thead > tr.info > td,
+  .table > tbody > tr.info > td,
+  .table > tfoot > tr.info > td,
+  .table > thead > tr.info > th,
+  .table > tbody > tr.info > th,
+  .table > tfoot > tr.info > th {
+    background-color: #d9edf7;
+  }
+  .table-hover > tbody > tr > td.info:hover,
+  .table-hover > tbody > tr > th.info:hover,
+  .table-hover > tbody > tr.info:hover > td,
+  .table-hover > tbody > tr:hover > .info,
+  .table-hover > tbody > tr.info:hover > th {
+    background-color: #c4e3f3;
+  }
+  .table > thead > tr > td.warning,
+  .table > tbody > tr > td.warning,
+  .table > tfoot > tr > td.warning,
+  .table > thead > tr > th.warning,
+  .table > tbody > tr > th.warning,
+  .table > tfoot > tr > th.warning,
+  .table > thead > tr.warning > td,
+  .table > tbody > tr.warning > td,
+  .table > tfoot > tr.warning > td,
+  .table > thead > tr.warning > th,
+  .table > tbody > tr.warning > th,
+  .table > tfoot > tr.warning > th {
+    background-color: #fcf8e3;
+  }
+  .table-hover > tbody > tr > td.warning:hover,
+  .table-hover > tbody > tr > th.warning:hover,
+  .table-hover > tbody > tr.warning:hover > td,
+  .table-hover > tbody > tr:hover > .warning,
+  .table-hover > tbody > tr.warning:hover > th {
+    background-color: #faf2cc;
+  }
+  .table > thead > tr > td.danger,
+  .table > tbody > tr > td.danger,
+  .table > tfoot > tr > td.danger,
+  .table > thead > tr > th.danger,
+  .table > tbody > tr > th.danger,
+  .table > tfoot > tr > th.danger,
+  .table > thead > tr.danger > td,
+  .table > tbody > tr.danger > td,
+  .table > tfoot > tr.danger > td,
+  .table > thead > tr.danger > th,
+  .table > tbody > tr.danger > th,
+  .table > tfoot > tr.danger > th {
+    background-color: #f2dede;
+  }
+  .table-hover > tbody > tr > td.danger:hover,
+  .table-hover > tbody > tr > th.danger:hover,
+  .table-hover > tbody > tr.danger:hover > td,
+  .table-hover > tbody > tr:hover > .danger,
+  .table-hover > tbody > tr.danger:hover > th {
+    background-color: #ebcccc;
+  }
+
+  .http-method-post {
+    color: #09825d;
+  }
+
+  .rest-api .http-method-post {
+    color: #0d4b3b;
+  }
+
+  .http-method-get {
+    color: #3a97d4;
+  }
+
+  .rest-api .http-method-get {
+    color: #2f3d89;
+  }
+
+  .http-method-delete {
+    color: #e56f4a;
+  }
+
+  .rest-api .http-method-delete {
+    color: #7e1e23;
+  }
+
+  a:hover .http-method-delete,a:hover .http-method-get,a:hover .http-method-post {
+    filter: brightness(85%)
+  }
+
+  .dark-mode a:hover .http-method-delete,.dark-mode a:hover .http-method-get,.dark-mode a:hover .http-method-post {
+    filter: brightness(115%)
+  }
+
 </style>
