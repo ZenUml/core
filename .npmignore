@@ -14,8 +14,11 @@ specs
 
 dist/demo.html
 dist/vue-sequence.common.*
+dist/sequence-diagram.js
 dist/vue-sequence.umd.js
 dist/*.map
+
+gen/
 
 manifest.json
 jest.config.js
