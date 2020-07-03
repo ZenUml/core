@@ -1,5 +1,8 @@
 <template>
   <div class="sequence-diagram" >
+    <div ref="dsl" class="zenuml-dsl">
+      <slot></slot>
+    </div>
     <life-line-layer/>
     <message-layer/>
   </div>
@@ -22,7 +25,25 @@
       MessageLayer
     },
     mounted() {
-      store.dispatch('updateCode', { code: 'A.method()'})
+      // Callback function to execute when mutations are observed
+      const callback = function(mutationsList) {
+        // Use traditional 'for loops' for IE 11
+        for(let mutation of mutationsList) {
+          if (mutation.type === 'childList') {
+            store.dispatch('updateCode', { code: mutation.addedNodes[0]?.textContent || 'Example.method'})
+          }
+        }
+      }
+
+      // Create an observer instance linked to the callback function
+      const observer = new MutationObserver(callback);
+
+      // Start observing the target node for configured mutations
+      // The slot is added after $nextTick. Chaining next tick does not work.
+      const targetNode = this.$refs['dsl'];
+      // Options for the observer (which mutations to observe)
+      const config = { childList: true};
+      observer.observe(targetNode, config);
     }
   }
 </script>
