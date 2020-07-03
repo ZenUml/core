@@ -1,8 +1,5 @@
 <template>
   <div class="sequence-diagram" >
-    <div ref="dsl" class="zenuml-dsl">
-      <slot></slot>
-    </div>
     <life-line-layer/>
     <message-layer/>
   </div>
