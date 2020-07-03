@@ -1,6 +1,6 @@
 {
-  "name": "vue-sequence",
-  "version": "1.0.0",
+  "name": "sequence-diagram",
+  "version": "0.1.0",
   "private": false,
   "scripts": {
     "build": "vue-cli-service build --target lib --modern --name vue-sequence ./src/index.js",
@@ -16,7 +16,7 @@
     "build-crx": "vue-cli-service build --mode production --target lib --name vue-sequence ./src/index.js",
     "start": "vue-cli-service serve"
   },
-  "main": "./dist/vue-sequence.umd.min.js",
+  "main": "./dist/sequence-diagram.min.js",
   "dependencies": {
     "antlr4": "^4.8.0",
     "gauge-ts": "0.0.5",
