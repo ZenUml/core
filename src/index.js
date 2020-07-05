@@ -72,7 +72,7 @@ const Store = {
   },
   actions: {
     updateCode: function (context, payload) {
-      context.commit('code', payload.code)
+      context.commit('code', payload)
     }
   },
   // TODO: Enable strict for development?
