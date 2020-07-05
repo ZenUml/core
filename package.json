@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": false,
   "scripts": {
-    "build": "vue-cli-service build --target lib --modern --name vue-sequence ./src/index.js",
+    "build": "vue-cli-service build --target lib --name vue-sequence ./src/index.js",
     "test:unit": "vue-cli-service test:unit",
     "test:specs": "gauge run specs",
     "lint": "vue-cli-service lint",
