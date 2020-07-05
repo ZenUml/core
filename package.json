@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": false,
   "scripts": {
-    "build": "vue-cli-service build --target lib --modern --name vue-sequence ./src/index.js",
+    "build": "vue-cli-service build --target lib --name vue-sequence ./src/index.js",
     "test:unit": "vue-cli-service test:unit",
     "test:specs": "gauge run specs",
     "lint": "vue-cli-service lint",
@@ -20,7 +20,6 @@
     "antlr4": "^4.8.0",
     "gauge-ts": "0.0.5",
     "highlight.js": "^10.1.1",
-    "highlightjs": "^9.16.2",
     "marked": "^1.1.0",
     "vue": "^2.5.16",
     "vuex": "^3.4.0"

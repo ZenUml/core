@@ -4,7 +4,20 @@
 
 <script type="text/babel">
   import marked from 'marked'
-  import highlightjs from 'highlight.js'
+  import highlightjs from 'highlight.js/lib/core'
+
+  // Languages import
+  import plaintext from 'highlight.js/lib/languages/plaintext'
+  import javascript from 'highlight.js/lib/languages/javascript'
+  import bash from 'highlight.js/lib/languages/bash'
+  import yaml from 'highlight.js/lib/languages/yaml'
+
+  // Register languages
+  highlightjs.registerLanguage('plaintext', plaintext)
+  highlightjs.registerLanguage('javascript', javascript)
+  highlightjs.registerLanguage('bash', bash)
+  highlightjs.registerLanguage('yaml', yaml)
+
   // Override function
   const renderer = {
     table(header, body) {
@@ -33,6 +46,9 @@
 
   marked.setOptions({
     highlight: function (code, language) {
+      if (!language) {
+        return highlightjs.highlightAuto(code).value
+      }
       const validLanguage = highlightjs.getLanguage(language) ? language : 'plaintext'
       return highlightjs.highlight(validLanguage, code).value
     }
