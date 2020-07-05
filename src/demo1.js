@@ -10,8 +10,9 @@ export default `
 // Make sure \`a\`
 // 
 //\`\`\`
-//function(a) {
-//}
+//property:
+//  - p1
+//  - true
 // \`\`\`
 OrderService.create()
 `
