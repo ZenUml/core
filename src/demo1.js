@@ -8,6 +8,11 @@
 export default `
 // \`POST order\`
 // Make sure \`a\`
+// 
+//\`\`\`
+//function(a) {
+//}
+// \`\`\`
 OrderService.create()
 `
 
