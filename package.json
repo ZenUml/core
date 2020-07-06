@@ -21,7 +21,7 @@
     "highlight.js": "^10.1.1",
     "marked": "^1.1.0",
     "vue": "^2.5.16",
-    "vuex": "^3.4.0"
+    "vuex": "^3.5.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.4",
