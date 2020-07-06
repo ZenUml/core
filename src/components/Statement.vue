@@ -20,7 +20,7 @@
     props: ['from', 'context', 'offset'],
     computed: {
       comment: function () {
-        return this.context.comment() ? this.context.comment().map(c => c.commentContent().getCode()).join('<br/>') : ''
+        return this.context.comment() ? this.context.comment().map(c => c.commentContent()?.getCode() || '').join('\n') : ''
       },
       realFrom: function() {
         return this.context.message().func().from() && this.context.message().func().from().getCode() || this.from;
@@ -67,13 +67,13 @@
     padding: 5px;
     width: 500px;
     font-size: 0.8em;
-    font-style: italic;
-    line-height: 1em;
+    line-height: 1.5em;
     opacity: 0.5;
   }
 
   .comments:hover {
     color: black;
+    opacity: 0.9;
   }
 
   .fragment>.comments {
