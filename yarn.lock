@@ -4622,10 +4622,10 @@ commander@^4.0.1:
   resolved "https://registry.yarnpkg.com/commander/-/commander-4.1.1.tgz#9fd602bd936294e9e9ef46a3f4d6964044b18068"
   integrity sha512-NOKm8xhkzAjzFx8B2v5OAHT+u5pRQc2UCa2Vq9jYL/31o2wi9mxBA7LIFs3sV5VSC49z6pEhfbMULvShKj26WA==
 
-commander@^5.0.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-5.1.0.tgz#46abbd1652f8e059bddaef99bbdcb2ad9cf179ae"
-  integrity sha512-P0CysNDQ7rtVw4QIQtm+MRxV66vKFSvlsQvGYXZWR3qFU0jlMKHZZZgw8e+8DSah4UDKMqnknRDQz+xuQXQ/Zg==
+commander@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-6.0.0.tgz#2b270da94f8fb9014455312f829a1129dbf8887e"
+  integrity sha512-s7EA+hDtTYNhuXkTlhqew4txMZVdszBmKWSPEMxGr8ru8JXR7bLUFIAtPhcSuFdJQ0ILMxnJi8GkQL0yvDy/YA==
 
 commander@~2.19.0:
   version "2.19.0"
@@ -12989,14 +12989,14 @@ table@5.4.6:
     slice-ansi "^2.1.0"
     string-width "^3.0.0"
 
-taiko@^1.0.12:
-  version "1.0.12"
-  resolved "https://registry.yarnpkg.com/taiko/-/taiko-1.0.12.tgz#d3a64a15715ab1c7905d05257bbccc513e0572a6"
-  integrity sha512-VwBpeG++k652wH0fCtm7QV0D3n5/k4c07+7Km27wpQy2pm+Qonmlft10Etwoh7HbS2OjMoHs52tp4K4dF0S8og==
+taiko@^1.0.16:
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/taiko/-/taiko-1.0.16.tgz#84230ce860fdfa8473105f5564cfb9e13c5ee723"
+  integrity sha512-yr9Xs8ZLtlzMPSg+/6A7XpQlt+yf9a33A7YyfxZ9fDX64ZAeVGybQ0s9P/BxR9JRgByiyXlFWrFGWolADr/+NA==
   dependencies:
     "@babel/parser" "^7.9.4"
     chrome-remote-interface "^0.28.1"
-    commander "^5.0.0"
+    commander "^6.0.0"
     debug "^4.1.1"
     extract-zip "^2.0.0"
     fs-extra "^9.0.0"
