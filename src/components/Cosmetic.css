@@ -1,7 +1,6 @@
 /*Color, font and position of labels (not the component itself)*/
 .sequence-diagram {
-  font-family: Helvetica, Verdana, serif;
-  font-size: 16px;
+  display: inline-block;  /* Limit the size when exporting to images */
 }
 
 .sequence-diagram .participant {
