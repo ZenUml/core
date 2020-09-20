@@ -5,7 +5,7 @@
   >
     <comment v-if="comment" :comment="comment" />
     <self-invocation :signature="signature" :assignee="assignee"/>
-    <occurrence :context="message" :participant="from" :offset="(offset || 0) + 6"/>
+    <occurrence :context="message" :participant="realFrom" :offset="(offset || 0) + 6"/>
   </div>
 </template>
 
