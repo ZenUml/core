@@ -1,10 +1,10 @@
 <template>
   <div>
-    <transition name="fade">
+    <transition-group name="fade">
       <div v-for="(stat, index) in statements" :key="index">
         <statement :context="stat" :from="from" :offset="offset"/>
       </div>
-    </transition>
+    </transition-group>
   </div>
 </template>
 
