@@ -1,8 +1,10 @@
 <template>
   <div>
-    <div v-for="(stat, index) in statements" :key="index">
-      <statement :context="stat" :from="from" :offset="offset"/>
-    </div>
+    <transition name="fade">
+      <div v-for="(stat, index) in statements" :key="index">
+        <statement :context="stat" :from="from" :offset="offset"/>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -22,3 +24,7 @@
     }
   }
 </script>
+
+<style>
+
+</style>
