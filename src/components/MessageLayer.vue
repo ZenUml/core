@@ -11,12 +11,12 @@
   export default {
     name: 'message-layer',
     computed: {
-      ...mapGetters(['participants', 'rootContext', 'starter', 'centerOf', 'widthBetween']),
+      ...mapGetters(['participants', 'rootContext', 'starter', 'centerOf', 'rightOf']),
       paddingLeft () {
         return this.centerOf(this.starter)
       },
       width() {
-        return this.widthBetween(this.starter, this.participants[this.participants.length-1])
+        return this.rightOf(this.participants[this.participants.length-1]) + (this.starter === 'Starter' ? 100 : 40)
       }
     },
     mounted () {

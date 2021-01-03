@@ -5,7 +5,8 @@
 // Self-method
 // Nested method
 // Assignment
-export default `A.m() {
+export default `
+A.m() {
   A->A.x {
     B.m
     C.m
