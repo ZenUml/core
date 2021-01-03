@@ -363,25 +363,3 @@ a:hover .http-method-delete,a:hover .http-method-get,a:hover .http-method-post {
 .dark-mode a:hover .http-method-delete,.dark-mode a:hover .http-method-get,.dark-mode a:hover .http-method-post {
   filter: brightness(115%)
 }
-
-.fade-enter-active, .fade-leave-active {
-  animation: bounce-in .3s;
-}
-
-.fade-enter, .fade-leave-to {
-  animation: bounce-in .3s reverse;
-}
-
-@keyframes bounce-in {
-  0% {
-    transform: scale(0);
-  }
-
-  50% {
-    transform: scale(1.1);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-}
