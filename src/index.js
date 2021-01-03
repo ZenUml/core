@@ -44,8 +44,14 @@ const Store = {
     widthOf: (state) => (entity) => {
       return state.lifeLineDimensions[entity] && state.lifeLineDimensions[entity].width
     },
+    // deprecated: It should return centerOf(to) - centerOf(from)
     distance: (state, getters) => (from, to) => {
       return getters.centerOf(from) - getters.centerOf(to)
+    },
+    widthBetween: (state, getters) => (from, to) => {
+      const left = getters.distance(from, to) < 0 ? from : to
+      const right = getters.distance(from, to) < 0 ? to: from
+      return getters.rightOf(right) - getters.leftOf(left)
     },
     onLifelineMounted: (state) => state.onLifelineMounted
   },

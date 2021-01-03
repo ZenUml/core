@@ -1,5 +1,5 @@
 <template>
-  <div class="message-layer" >
+  <div class="message-layer" :style="{'width': width + 'px'}">
     <block :context="rootContext.block()" :from="starter" :style="{'padding-left': paddingLeft + 'px'}"/>
   </div>
 </template>
@@ -11,9 +11,12 @@
   export default {
     name: 'message-layer',
     computed: {
-      ...mapGetters(['participants', 'rootContext', 'starter', 'centerOf']),
+      ...mapGetters(['participants', 'rootContext', 'starter', 'centerOf', 'widthBetween']),
       paddingLeft () {
         return this.centerOf(this.starter)
+      },
+      width() {
+        return this.widthBetween(this.starter, this.participants[this.participants.length-1])
       }
     },
     mounted () {

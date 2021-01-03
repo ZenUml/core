@@ -8,5 +8,6 @@
 export default `A.m() {
   A->A.x {
     B.m
+    C.m
   }
 }`
