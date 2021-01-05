@@ -92,25 +92,13 @@
 
 .sequence-diagram .comments table td,
 .sequence-diagram .comments table th {
-  border-left: 1px solid #cbcbcb;/*  inner column border */
-  font-size: inherit;
-  margin: 0;
-  overflow: visible; /*to make ths where the title is really long work*/
   padding: 0.5em 1em; /* cell padding */
 }
 
 .sequence-diagram .comments table thead {
   background-color: #e0e0e0;
-  color: #000;
-  text-align: left;
-  vertical-align: bottom;
 }
 
-/*
-striping:
-   even - #fff (white)
-   odd  - #f2f2f2 (light gray)
-*/
 .sequence-diagram .comments table td {
   background-color: transparent;
 }
