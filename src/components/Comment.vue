@@ -58,3 +58,10 @@
     }
   }
 </script>
+
+<style>
+.comments {
+  width: fit-content;
+  white-space: nowrap;
+}
+</style>

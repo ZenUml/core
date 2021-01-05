@@ -60,12 +60,6 @@
 </script>
 <style>
   .comments {
-    position: relative; /* for Z axis position overlay lifeline at root level */
-    text-align: left;
-    border: solid 1px transparent;
-    background: white;
-    padding: 5px;
-    width: 500px;
     font-size: 0.8em;
     line-height: 1.5em;
     opacity: 0.5;
