@@ -3,7 +3,7 @@ $participant-box-shadow: #83c4f8;
 
 $lifeline: #2097F7;
 
-$line-color: #2097F7;
+$line: #2097F7;
 $fragment-border: #2097F7;
 
 $occurrence-background: #E5FDE8;
@@ -29,7 +29,19 @@ $occurrence-box-shadow: #93C69B;
   }
   .message-layer {
     .message {
-      border-bottom-color: $line-color;
+      border-bottom-color: $line;
+      svg.arrow polyline {
+        stroke: $line;
+        fill: $line;
+      }
+    }
+    .message.self {
+      svg.arrow polyline {
+        fill: none;
+      }
+      svg.arrow polyline.head {
+        fill: $line;
+      }
     }
     .occurrence {
       background: $occurrence-background;
