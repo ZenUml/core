@@ -74,7 +74,6 @@
 
   .lifeline.actor >>> .participant {
     text-align: center;
-    font-weight: bold;
     border: 0;
     padding-top: 0;
     padding-bottom: 0;
@@ -83,20 +82,11 @@
   .lifeline.actor >>> .participant::before {
     content: '';
     display: block;
-    height: 45px;
-    width: 88px;
-    background-size: 80px;
+    height: 35px;
+    background-size: 50px;
     background-image: url("../assets/actor.svg");
     background-position: center;
     background-repeat: no-repeat;
-  }
-
-  .lifeline.actor > .participant {
-    text-align: center;
-    font-weight: bold;
-    border: 0;
-    padding-top: 0;
-    padding-bottom: 0;
   }
 
 </style>
