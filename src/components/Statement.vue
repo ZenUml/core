@@ -66,13 +66,12 @@
   }
 
   .comments:hover {
-    color: black;
     opacity: 0.9;
   }
 
   .fragment>.comments {
     width: 100%;
-    border-bottom: solid 1px gray;
+    border-bottom: solid 1px;
     border-top: none;
     border-left: none;
     border-right: none;
