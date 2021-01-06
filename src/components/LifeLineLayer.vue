@@ -99,15 +99,5 @@
     padding-bottom: 0;
   }
 
-  .lifeline.actor > .participant::before {
-    content: '';
-    display: block;
-    height: 45px;
-    width: 88px;
-    background-size: 80px;
-    background-image: url("../assets/actor.svg");
-    background-position: center;
-    background-repeat: no-repeat;
-  }
 </style>
 
