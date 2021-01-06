@@ -11,6 +11,12 @@ $occurrence-border: #65BF73;
 $occurrence-box-shadow: #93C69B;
 .blue-river .sequence-diagram {
   .life-line-layer {
+    .lifeline.actor {
+      .participant::before {
+        // see https://codepen.io/sosuke/pen/Pjoqqp for how it works
+        filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
+      }
+    }
     .participant {
       background: $participant-background;
       box-shadow: 4px 4px 0 $participant-box-shadow;
