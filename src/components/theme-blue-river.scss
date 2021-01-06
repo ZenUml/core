@@ -11,7 +11,8 @@ $occurrence-box-shadow: #93C69B;
 
 $fragment-border: #2097F7;
 $fragment-label-background: #5452F6;
-$fragment-condition-label: #65BF73;
+$fragment-condition-label: #FFFFFF;
+$fragment-condition-label-background: #65BF73;
 
 .blue-river .sequence-diagram {
   color: $font-color;
@@ -59,15 +60,29 @@ $fragment-condition-label: #65BF73;
         .name {
           label {
             display: inline-block;
+            min-width: 50px;
             background: $fragment-label-background;
             color: white;
-            padding: 2px 10px;
+            padding: 2px 0 2px 10px;
           }
         }
+        .name::after {
+          content: "SO";
+          display: inline-block;
+          background: $fragment-label-background;
+          margin-left: -23px;
+          width: 34px;
+          transform: translateY(-2px);
+          height: 22px;
+          clip-path: polygon(66% 0, 100% 0, 100% 66%, 66% 100%);
+        }
+
         >label {
+          display: inline-block;
+          min-width: 50px;
           font-weight: bold;
-          margin-left: 100px;
           color: $fragment-condition-label;
+          background: $fragment-condition-label-background;
         }
       }
       .comments {
