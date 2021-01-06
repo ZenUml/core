@@ -1,0 +1,44 @@
+$participant-background: #2097F7;
+$participant-box-shadow: #83c4f8;
+
+$lifeline: #2097F7;
+
+$line-color: #2097F7;
+$fragment-border: #2097F7;
+
+$occurrence-background: #E5FDE8;
+$occurrence-border: #65BF73;
+$occurrence-box-shadow: #93C69B;
+.blue-river.sequence-diagram {
+  .life-line-layer {
+    .participant {
+      background: $participant-background;
+      box-shadow: 4px 4px 0 $participant-box-shadow;
+      border-radius: 9px;
+      color: white;
+    }
+    .line {
+      border-left-color: $lifeline;
+    }
+  }
+  .message-layer {
+    .message {
+      border-bottom-color: $line-color;
+    }
+    .occurrence {
+      background: $occurrence-background;
+      border: 1px solid $occurrence-border;
+      box-shadow: 4px 4px 0 $occurrence-box-shadow;
+    }
+    .fragment {
+      border-color: $fragment-border;
+      .comments {
+        border-color: inherit;
+      }
+      .divider {
+        border-bottom-color: inherit;
+      }
+    }
+
+  }
+}
