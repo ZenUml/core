@@ -7,6 +7,10 @@
 
 .sequence-diagram .participant {
   background: #fff;
+  background: #2097F6;
+  box-shadow: 4.38934px 4.38px 0px #83c4f8;
+  border-radius: 9px;
+  color: white;
 }
 
 .sequence-diagram .participant,
@@ -15,19 +19,26 @@
 }
 
 .sequence-diagram .message {
-  border-bottom-color: #808080;
+  border-bottom-color: #2097F7;
 }
 
 .sequence-diagram .occurrence {
   background-color: #d3d3d3;
+  background: #E5FDE8;
+  border: 1px solid #65BF73;
+  box-shadow: 4px 4px 0px #93C69B;
 }
 
 .sequence-diagram .fragment {
   border-style: solid;
-  border-color: #aaa;
+  border-color: #2097F6;
   border-radius: 2px;
   background: rgba(255,255,255,.2);
   opacity: 0.9;
+}
+
+.sequence-diagram .fragment>.comments {
+  border-color: #2097F6;
 }
 
 .sequence-diagram .fragment .header .name label {
@@ -41,12 +52,12 @@
 
 .sequence-diagram .fragment.alt div.divider {
   border-bottom-style: dashed;
-  border-bottom-color: #555;
+  border-bottom-color: #2097F6;
 }
 
 .sequence-diagram .lifeline .line {
   border-left-style: dashed;
-  border-left-color: #808080;
+  border-left-color: #2097F7;
 }
 
 /*Interactive classes*/
