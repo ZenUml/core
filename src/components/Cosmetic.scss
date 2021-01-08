@@ -1,165 +1,124 @@
 /*Color, font and position of labels (not the component itself)*/
+
 .sequence-diagram {
   font-family: Helvetica, Verdana, serif;
   font-size: 16px;
-  display: inline-block;  /* Limit the size when exporting to images */
-}
+  /* Limit the size when exporting to images */
+  display: inline-block;
 
-.sequence-diagram .participant {
-  background: #fff;
-}
+  .participant {
+    background: #fff;
+    border: 2px solid rgba(3, 3, 3, 0.05);
+  }
 
-.sequence-diagram .participant,
-.sequence-diagram .occurrence {
-  border: 2px solid rgba(3, 3, 3, 0.05);
-}
+  .occurrence {
+    border: 2px solid rgba(3, 3, 3, 0.05);
+  }
 
-.sequence-diagram .message {
-  border-bottom-color: #808080;
-}
+  .message {
+    display: block;
+    border-bottom-color: #808080;
+  }
 
-.sequence-diagram .occurrence {
-  background-color: #d3d3d3;
-}
+  .occurrence {
+    background-color: #d3d3d3;
+  }
 
-.sequence-diagram .fragment {
-  border-style: solid;
-  border-color: #aaa;
-  border-radius: 2px;
-  background: rgba(255,255,255,.2);
-  opacity: 0.9;
-}
+  .fragment {
+    border-style: solid;
+    border-color: #aaa;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.2);
+    opacity: 0.9;
 
-.sequence-diagram .fragment .header .name label {
-  color: #555;
-  font-weight: 700;
-}
+    .header {
+      .name label {
+        color: #555;
+        font-weight: 700;
+      }
 
-.sequence-diagram .fragment .header label.else-if {
-  display: none;
-}
+      label.else-if {
+        display: none;
+      }
+    }
 
-.sequence-diagram .fragment.alt div.divider {
-  border-bottom-style: dashed;
-  border-bottom-color: #555;
-}
+    &.alt div.divider {
+      border-bottom-style: dashed;
+      border-bottom-color: #555;
+    }
+  }
 
-.sequence-diagram .lifeline .line {
-  border-left-style: dashed;
-  border-left-color: #808080;
-}
+  .lifeline .line {
+    border-left-style: dashed;
+    border-left-color: #808080;
+  }
 
-/*Interactive classes*/
-.sequence-diagram .selected {
-  border-color: rgba(3, 3, 3, 0.55)
-}
+  .selected {
+    border-color: rgba(3, 3, 3, 0.55);
+  }
 
-.sequence-diagram .comments pre,
-.sequence-diagram .comments p {
-  margin: 0;
-  padding-left: 5px;
-  line-height: 1.5em;
-}
+  .comments {
+    pre, p {
+      margin: 0;
+      padding-left: 5px;
+      line-height: 1.5em;
+    }
 
-.sequence-diagram .comments ol,
-.sequence-diagram .comments ul {
-  margin: 0;
-  padding-left: 20px;
-}
+    code {
+      font-size: 90%;
+      color: #c7254e;
+      background-color: #f9f2f4;
+      border-radius: 4px;
+    }
 
-.sequence-diagram .comments ul li {
-  list-style-type: none;
-}
+    .rest-api .http-method-post {
+      color: #0d4b3b;
+    }
 
-.sequence-diagram .comments ul li input[type="checkbox"] {
-  margin-left: -1em;
-}
+    .rest-api .http-method-get {
+      color: #2f3d89;
+    }
 
-.sequence-diagram .comments table {
-  /* Remove spacing between table cells (from Normalize.css) */
-  border-collapse: collapse;
-  border-spacing: 0;
-  empty-cells: show;
-  border: 1px solid #cbcbcb;
-}
+    .rest-api .http-method-delete {
+      color: #7e1e23;
+    }
 
-.sequence-diagram .comments table caption {
-  color: #000;
-  font: italic 85%/1 arial, sans-serif;
-  padding: 1em 0;
-  text-align: center;
-}
+    ol {
+      margin: 0;
+      padding-left: 20px;
+    }
 
-.sequence-diagram .comments table td,
-.sequence-diagram .comments table th {
-  padding: 0.5em 1em; /* cell padding */
-}
+    ul {
+      margin: 0;
+      padding-left: 20px;
 
-.sequence-diagram .comments table thead {
-  background-color: #e0e0e0;
-}
+      li {
+        list-style-type: none;
 
-.sequence-diagram .comments table td {
-  background-color: transparent;
-}
-code,
-kbd,
-pre,
-samp {
-  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
-}
-pre {
-  display: block;
-  padding: 9.5px;
-  margin: 0 0 10px;
-  font-size: 13px;
-  line-height: 1.42857143;
-  word-break: break-all;
-  word-wrap: break-word;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
+        input[type="checkbox"] {
+          margin-left: -1em;
+        }
+      }
+    }
 
-pre>code {
-  color: #333;
-  background-color: transparent;
-}
+    table {
+      /* Remove spacing between table cells (from Normalize.css) */
+      border-collapse: collapse;
+      border-spacing: 0;
+      empty-cells: show;
+      border: 1px solid #cbcbcb;
 
-code {
-  font-size: 90%;
-  color: #c7254e;
-  background-color: #f9f2f4;
-  border-radius: 4px;
-}
+      td, th {
+        padding: 0.5em;
+      }
 
-.http-method-post {
-  color: #09825d;
-}
+      thead {
+        background-color: #e0e0e0;
+      }
 
-.rest-api .http-method-post {
-  color: #0d4b3b;
-}
-
-.http-method-get {
-  color: #3a97d4;
-}
-
-.rest-api .http-method-get {
-  color: #2f3d89;
-}
-
-.http-method-delete {
-  color: #e56f4a;
-}
-
-.rest-api .http-method-delete {
-  color: #7e1e23;
-}
-
-a:hover .http-method-delete,a:hover .http-method-get,a:hover .http-method-post {
-  filter: brightness(85%)
-}
-
-.dark-mode a:hover .http-method-delete,.dark-mode a:hover .http-method-get,.dark-mode a:hover .http-method-post {
-  filter: brightness(115%)
+      td {
+        background-color: transparent;
+      }
+    }
+  }
 }
