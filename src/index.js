@@ -2,7 +2,7 @@ import {RootContext, Participants} from './parser/index.js'
 
 import SeqDiagram from './components/SeqDiagram.vue'
 
-import './components/Cosmetic.css'
+import './components/Cosmetic.scss'
 import './components/theme-blue-river.scss'
 
 const Store = {
