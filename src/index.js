@@ -49,11 +49,6 @@ const Store = {
     distance: (state, getters) => (from, to) => {
       return getters.centerOf(from) - getters.centerOf(to)
     },
-    widthBetween: (state, getters) => (from, to) => {
-      const left = getters.distance(from, to) < 0 ? from : to
-      const right = getters.distance(from, to) < 0 ? to: from
-      return getters.rightOf(right) - getters.leftOf(left)
-    },
     onLifelineMounted: (state) => state.onLifelineMounted
   },
   mutations: {
