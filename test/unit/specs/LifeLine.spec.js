@@ -4,9 +4,10 @@ import {Store} from '@/index'
 import LifeLine from '@/components/LifeLine'
 const localVue = createLocalVue()
 localVue.use(Vuex)
-Store.state.code = 'abc'
+const storeConfig = Store()
+storeConfig.state.code = 'abc'
 
-const store = new Vuex.Store(Store)
+const store = new Vuex.Store(storeConfig)
 describe('select a participant', () => {
   it('For VM and HTML and store', async () => {
     store.state.firstInvocations = {

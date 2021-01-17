@@ -15,11 +15,12 @@ describe('Interaction width', () => {
     [-1,  25, 10, 14],
   ])('If offset is %s and distance is %s, interactionWidth should be %s', (offset, a, b, width) => {
     Interaction.computed.to = () => 'B';
-    Store.getters.centerOf = () => (participant) => {
+    const storeConfig = Store()
+    storeConfig.getters.centerOf = () => (participant) => {
       if(participant === 'A') return a
       if(participant === 'B') return b
     };
-    const store = new Vuex.Store(Store)
+    const store = new Vuex.Store(storeConfig)
     const wrapper = shallowMount(Interaction, {
       store, localVue, propsData: {
         from: 'A',
@@ -36,13 +37,14 @@ describe('Translate X', () => {
   it('when left to right', function () {
     Interaction.computed.realFrom = () => 'A'
     Interaction.computed.to = () => 'C'
-    Store.getters.centerOf = () => (participant) => {
+    const storeConfig = Store()
+    storeConfig.getters.centerOf = () => (participant) => {
       if(participant === 'A') return 10
       if(participant === 'B') return 25
       if(participant === 'C') return 35
     };
 
-    const store = new Vuex.Store(Store)
+    const store = new Vuex.Store(storeConfig)
     const wrapper = shallowMount(Interaction, {
       store, localVue, propsData: {
         from: 'B',
@@ -57,13 +59,14 @@ describe('Translate X', () => {
   it('when right to left', function () {
     Interaction.computed.realFrom = () => 'B'
     Interaction.computed.to = () => 'A'
-    Store.getters.centerOf = () => (participant) => {
+    const storeConfig = Store()
+    storeConfig.getters.centerOf = () => (participant) => {
       if(participant === 'A') return 10
       if(participant === 'B') return 25
       if(participant === 'C') return 35
     };
 
-    const store = new Vuex.Store(Store)
+    const store = new Vuex.Store(storeConfig)
     const wrapper = shallowMount(Interaction, {
       store, localVue, propsData: {
         from: 'C',
