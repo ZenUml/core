@@ -1,13 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import cloneDeep from './clone-deep'
-import log4V from './plugins/Log4V'
-import App from './App.vue'
+// import log4V from './plugins/Log4V'
 
 import {SeqDiagram, Store} from './index'
 
 Vue.use(Vuex)
-Vue.use(log4V)
+// Vue.use(log4V)
 
 Vue.component('seq-diagram', SeqDiagram)
 
@@ -16,24 +14,20 @@ Vue.config.productionTip = false
 /* eslint-disable */
 import demo1 from './demo1.js'
 import demo2 from './demo2.js'
-import demo3 from './demo3.js'
-import demo4 from './demo4.js'
-import demo5 from './demo5.js'
-import demo6 from './demo6.js'
-
-function snapshotStore (code) {
-  Store.state.code = code
-  return new Vuex.Store(cloneDeep({modules: {Store}}))
-}
-Store.state.code = demo1
-Store.state.onLifelineMounted = function(vueComp, elm) {
-  console.log('Callback installed on', vueComp, elm);
-}
-window.app = new Vue({el: '#app', store: new Vuex.Store(Store), render: h => h(App)})
-window.store = app.$store
-// new Vue({el: '#demo1', store: snapshotStore(demo1)})
-// new Vue({el: '#demo2', store: snapshotStore(demo2)})
-// new Vue({el: '#demo3', store: snapshotStore(demo3)})
-// new Vue({el: '#demo4', store: snapshotStore(demo4)})
-// new Vue({el: '#demo5', store: snapshotStore(demo5)})
-// new Vue({el: '#demo6', store: snapshotStore(demo6)})
+const store1 = Store()
+store1.state.code = demo1
+// store1.state.onLifelineMounted = function(vueComp, elm) {
+//   console.log('Callback installed on', vueComp, elm)
+// }
+/**
+ * el and render work together. They do nothing but replace el with a node created by 'h'.
+ * There is no magic in 'h' it creates a "virtual node".
+ * See https://vuejs.org/v2/guide/render-function.html#The-Virtual-DOM
+ * These two Vue instances are rendered on public/index.html.
+ * The previous version used h(App). That was kind of wrong, because when doing that we do not need to
+ * define the seq-diagram component here.
+ */
+new Vue({el: '#demo1', store: new Vuex.Store(store1), render: h => h('seq-diagram') })
+const store2 = Store()
+store2.state.code = demo2
+new Vue({el: '#demo2', store: new Vuex.Store(store2), render: h => h('seq-diagram') })
