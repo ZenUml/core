@@ -6,6 +6,14 @@ COL
  : ':' -> pushMode(EVENT)
  ;
 
+IOPEN
+ : '<<'
+ ;
+
+ICLOSE
+ : '>>'
+ ;
+
 ARROW
  : '->'
  ;

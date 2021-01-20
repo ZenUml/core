@@ -17,7 +17,11 @@ starter
  ;
 
 participant
- : name width?
+ : interfase? name width?
+ ;
+
+interfase
+ : IOPEN name ICLOSE
  ;
 
 name
