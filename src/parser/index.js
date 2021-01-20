@@ -26,17 +26,19 @@ antlr4.ParserRuleContext.prototype.getCode = function() {
 
 antlr4.ParserRuleContext.prototype.getComment = function() {
   let tokenIndex = this.start.tokenIndex;
-  let channel = sequenceLexer.sequenceLexer.prototype.channelNames.indexOf('HIDDEN');
+  let channel = sequenceLexer.sequenceLexer.prototype.channelNames.indexOf('COMMENT_CHANNEL');
   if (this instanceof this.parser.braceBlock().constructor) {
-    return this.parser
+    let hiddenTokensToLeft = this.parser
       .getTokenStream()
-      .getHiddenTokensToLeft(this.stop.tokenIndex, channel)
+      .getHiddenTokensToLeft(this.stop.tokenIndex, channel);
+    return hiddenTokensToLeft && hiddenTokensToLeft
       .map(t => t.text)
       .join('');
   }
-  return this.parser
+  let hiddenTokensToLeft1 = this.parser
     .getTokenStream()
-    .getHiddenTokensToLeft(tokenIndex, channel)
+    .getHiddenTokensToLeft(tokenIndex, channel);
+  return hiddenTokensToLeft1 && hiddenTokensToLeft1
     .map( t => t.text)
     .join('');
 };

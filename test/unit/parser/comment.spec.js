@@ -7,7 +7,7 @@ test('comment only block is valid', () => {
   let message = rootContext.block().stat()[0]
     .message();
   let braceBlock = message.braceBlock();
-  expect(braceBlock.getComment()).toBe(' // comment \n ')
+  expect(braceBlock.getComment()).toBe('// comment \n')
 })
 
 test('comment after method call is valid', () => {
@@ -18,5 +18,5 @@ test('comment after method call is valid', () => {
   let message = rootContext.block().stat()[0]
     .message();
   let braceBlock = message.braceBlock();
-  expect(braceBlock.getComment()).toBe(' \n// comment \n ')
+  expect(braceBlock.getComment()).toBe('// comment \n')
 })

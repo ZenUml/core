@@ -1,5 +1,7 @@
 lexer grammar sequenceLexer;
-
+channels {
+  COMMENT_CHANNEL
+}
 COL
  : ':' -> pushMode(EVENT)
  ;
@@ -74,7 +76,7 @@ SPACE
  ;
 
 COMMENT
- : '//' .*? '\n' -> channel(HIDDEN)
+ : '//' .*? '\n' -> channel(COMMENT_CHANNEL)
  ;
 OTHER
  : .

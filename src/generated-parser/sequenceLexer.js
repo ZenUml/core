@@ -190,17 +190,17 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u0002\u0002\u0002\u0124\u0125\u0003\u0002\u0002\u0002\u0124\u0122\u0003",
     "\u0002\u0002\u0002\u0125\u0127\u0003\u0002\u0002\u0002\u0126\u0124\u0003",
     "\u0002\u0002\u0002\u0127\u0128\u0007\f\u0002\u0002\u0128\u0129\u0003",
-    "\u0002\u0002\u0002\u0129\u012a\b,\u0003\u0002\u012aY\u0003\u0002\u0002",
+    "\u0002\u0002\u0002\u0129\u012a\b,\u0004\u0002\u012aY\u0003\u0002\u0002",
     "\u0002\u012b\u012c\u000b\u0002\u0002\u0002\u012c[\u0003\u0002\u0002",
     "\u0002\u012d\u012f\n\u0006\u0002\u0002\u012e\u012d\u0003\u0002\u0002",
     "\u0002\u012f\u0130\u0003\u0002\u0002\u0002\u0130\u012e\u0003\u0002\u0002",
     "\u0002\u0130\u0131\u0003\u0002\u0002\u0002\u0131]\u0003\u0002\u0002",
     "\u0002\u0132\u0133\t\u0006\u0002\u0002\u0133\u0134\u0003\u0002\u0002",
-    "\u0002\u0134\u0135\b/\u0004\u0002\u0135_\u0003\u0002\u0002\u0002\u0136",
+    "\u0002\u0134\u0135\b/\u0005\u0002\u0135_\u0003\u0002\u0002\u0002\u0136",
     "\u0137\t\b\u0002\u0002\u0137\u0138\u0003\u0002\u0002\u0002\u0138\u0139",
     "\b0\u0003\u0002\u0139a\u0003\u0002\u0002\u0002\u000f\u0002\u0003\u00ce",
-    "\u00ef\u00f5\u00fa\u0100\u0107\u0109\u010f\u0111\u0124\u0130\u0005\u0007",
-    "\u0003\u0002\u0002\u0003\u0002\u0006\u0002\u0002"].join("");
+    "\u00ef\u00f5\u00fa\u0100\u0107\u0109\u010f\u0111\u0124\u0130\u0006\u0007",
+    "\u0003\u0002\u0002\u0003\u0002\u0002\u0004\u0002\u0006\u0002\u0002"].join("");
 
 
 var atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
@@ -271,9 +271,12 @@ sequenceLexer.EVENT_PAYLOAD_LXR = 45;
 sequenceLexer.EVENT_END = 46;
 sequenceLexer.WS = 47;
 
+sequenceLexer.COMMENT_CHANNEL = 2;
+
 sequenceLexer.EVENT = 1;
 
-sequenceLexer.prototype.channelNames = [ "DEFAULT_TOKEN_CHANNEL", "HIDDEN" ];
+sequenceLexer.prototype.channelNames = [ "DEFAULT_TOKEN_CHANNEL", "HIDDEN", 
+                                                                            "COMMENT_CHANNEL" ];
 
 sequenceLexer.prototype.modeNames = [ "DEFAULT_MODE", "EVENT" ];
 
