@@ -24,6 +24,23 @@ antlr4.ParserRuleContext.prototype.getCode = function() {
   return this.parser.getTokenStream().getText(this.getSourceInterval()).replace(/^"(.*)"$/, '$1')
 };
 
+antlr4.ParserRuleContext.prototype.getComment = function() {
+  let tokenIndex = this.start.tokenIndex;
+  let channel = sequenceLexer.sequenceLexer.prototype.channelNames.indexOf('HIDDEN');
+  if (this instanceof this.parser.braceBlock().constructor) {
+    return this.parser
+      .getTokenStream()
+      .getHiddenTokensToLeft(this.stop.tokenIndex, channel)
+      .map(t => t.text)
+      .join('');
+  }
+  return this.parser
+    .getTokenStream()
+    .getHiddenTokensToLeft(tokenIndex, channel)
+    .map( t => t.text)
+    .join('');
+};
+
 antlr4.ParserRuleContext.prototype.returnedValue = function() {
   return this.braceBlock().block().ret().value()
 }

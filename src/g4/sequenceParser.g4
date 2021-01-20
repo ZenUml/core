@@ -5,11 +5,11 @@ options {
 }
 
 prog
- : (participant)* ((participant EOF) | (starterExp? block comment? EOF))
+ : (participant)* ((participant EOF) | (starterExp? block EOF))
  ;
 
 starterExp
- : comment* AT STARTER_LXR OPAR starter? CPAR
+ : AT STARTER_LXR OPAR starter? CPAR
  ;
 
 starter
@@ -17,7 +17,7 @@ starter
  ;
 
 participant
- : comment* name width?
+ : name width?
  ;
 
 name
@@ -29,7 +29,7 @@ width
  ;
 
 block
- : (CR* stat CR*)* ret?
+ : (CR* stat CR*)+ ret?
  ;
 
 ret
@@ -41,22 +41,14 @@ value
  ;
 
 stat
- : comment* alt
- | comment* loop
- | comment* creation
- | comment* asyncMessage
- | comment* message
- | comment* anonymousBlock
- | comment+
+ : alt
+ | loop
+ | creation
+ | asyncMessage
+ | message
+ | anonymousBlock
+ | ret
  | OTHER {console.log("unknown char: " + $OTHER.text);}
- ;
-
-comment
- : DS commentContent? COMMENT_END?
- ;
-
-commentContent
- : COMMENT_LXR
  ;
 
 anonymousBlock
@@ -170,7 +162,7 @@ elseBlock
  ;
 
 braceBlock
- : OBRACE (block|comment+) CBRACE
+ : OBRACE block? CBRACE
  ;
 
 loop
