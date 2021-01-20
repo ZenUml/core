@@ -92,8 +92,6 @@ EVENT_END
  : [\r\n] -> popMode
  ;
 
-
-
 WS
 : [ ] -> channel(HIDDEN)
 ;

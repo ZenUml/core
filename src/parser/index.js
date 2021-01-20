@@ -34,7 +34,7 @@ antlr4.ParserRuleContext.prototype.getComment = function() {
     .getTokenStream()
     .getHiddenTokensToLeft(tokenIndex, channel);
   return hiddenTokensToLeft && hiddenTokensToLeft
-    .map(t => t.text)
+    .map(t => t.text.substring(2))  // skip '//'
     .join('');
 };
 

@@ -17,7 +17,7 @@ test('`if` with a block', () => {
 
 test('`if` with comments only', () => {
     let braceBlock = braceBlockOfIf('if(x) { // comment \n\r}');
-    expect(braceBlock.getComment()).toBe('// comment \n')
+    expect(braceBlock.getComment()).toBe(' comment \n')
 })
 
 test('`if` with comments and a block', () => {
