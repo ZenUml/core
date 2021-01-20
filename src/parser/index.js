@@ -30,10 +30,10 @@ antlr4.ParserRuleContext.prototype.getComment = function() {
   if (this instanceof this.parser.braceBlock().constructor) {
     tokenIndex = this.stop.tokenIndex
   }
-  let hiddenTokensToLeft1 = this.parser
+  let hiddenTokensToLeft = this.parser
     .getTokenStream()
     .getHiddenTokensToLeft(tokenIndex, channel);
-  return hiddenTokensToLeft1 && hiddenTokensToLeft1
+  return hiddenTokensToLeft && hiddenTokensToLeft
     .map(t => t.text)
     .join('');
 };
