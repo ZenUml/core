@@ -13,44 +13,45 @@ const Store = () => {
       lifeLineDimensions: {},
       firstInvocations: {},
       code: '',
-        events: [],
-        selected: [],
-        // To be overridden by plugins
-        onLifelineMounted: () => {}
+      events: [],
+      selected: [],
+      // To be overridden by plugins
+      onLifelineMounted: () => {
+      }
     },
     getters: {
       // We are using getters to avoid hard coding module's name ($store.Store.state)
       // in the components. Not sure if this is the best practice.
       firstInvocations: (state) => state.firstInvocations,
-        starter: (state, getters) => {
+      starter: (state, getters) => {
         let starterExp = getters.rootContext.starterExp()
         return starterExp && starterExp.starter() && starterExp.starter().getCode() || 'Starter'
       },
-        rootContext: (state) => {
+      rootContext: (state) => {
         return RootContext(state.code)
       },
-        participants: (state, getters) => {
+      participants: (state, getters) => {
         return Array.from(Participants2(getters.rootContext).keys())
       },
-        centerOf: (state) => (entity) => {
+      centerOf: (state) => (entity) => {
         return state.lifeLineDimensions[entity] &&
           (state.lifeLineDimensions[entity].left + state.lifeLineDimensions[entity].width / 2)
       },
-        leftOf: (state) => (entity) => {
+      leftOf: (state) => (entity) => {
         return state.lifeLineDimensions[entity] && state.lifeLineDimensions[entity].left
       },
-        rightOf: (state) => (entity) => {
+      rightOf: (state) => (entity) => {
         return state.lifeLineDimensions[entity] &&
           (state.lifeLineDimensions[entity].left + state.lifeLineDimensions[entity].width)
       },
-        widthOf: (state) => (entity) => {
+      widthOf: (state) => (entity) => {
         return state.lifeLineDimensions[entity] && state.lifeLineDimensions[entity].width
       },
-        // deprecated: It should return centerOf(to) - centerOf(from)
-        distance: (state, getters) => (from, to) => {
+      // deprecated: It should return centerOf(to) - centerOf(from)
+      distance: (state, getters) => (from, to) => {
         return getters.centerOf(from) - getters.centerOf(to)
       },
-        onLifelineMounted: (state) => state.onLifelineMounted
+      onLifelineMounted: (state) => state.onLifelineMounted
     },
     mutations: {
       code: function (state, payload) {
