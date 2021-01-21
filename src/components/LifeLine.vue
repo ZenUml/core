@@ -3,7 +3,7 @@
         class="lifeline"
         :style="{'paddingTop': top + 'px'} ">
     <div class="participant" :class="{'selected': selected}" @click="onSelect">
-      <label class="name">{{entity}}</label>
+      <label class="name">{{entity[0]}}</label>
     </div>
     <div class="line"></div>
   </div>

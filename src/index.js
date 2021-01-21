@@ -33,6 +33,9 @@ const Store = () => {
       participants: (state, getters) => {
         return Array.from(Participants2(getters.rootContext).keys())
       },
+      participants2: (state, getters) => {
+        return Participants2(getters.rootContext)
+      },
       centerOf: (state) => (entity) => {
         return state.lifeLineDimensions[entity] &&
           (state.lifeLineDimensions[entity].left + state.lifeLineDimensions[entity].width / 2)
