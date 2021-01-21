@@ -15,7 +15,7 @@ describe('select a participant', () => {
         top: 3
       }
     }
-    const propsData = {entity: 'A'}
+    const propsData = {entity: {name: 'A'}}
     let lifelineWrapper = mount(LifeLine, {store, localVue, propsData});
     expect(lifelineWrapper.vm.selected).toBeFalsy()
     expect(lifelineWrapper.find('.selected').exists()).toBeFalsy()
