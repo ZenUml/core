@@ -48,6 +48,10 @@ module.exports =  {
     const toCollector = new ToCollector();
     return toCollector.getAllTos(toCollector)(ctx)
   },
+  Participants2: function(ctx) {
+    const toCollector = new ToCollector();
+    return toCollector.getAllTos2(toCollector)(ctx)
+  },
   Errors: errors,
   /**
    * @return {number} how many levels of embedded fragments
