@@ -7,13 +7,13 @@ test('seqDsl should parse the to and method', () => {
 })
 
 test('seqDsl should get all participants', () => {
-    let rootContext = seqDsl.RootContext('A 100\r\nB.method()\r\nnew C()');
+    let rootContext = seqDsl.RootContext('A 100\r\nC.method()\r\nnew B()');
 
-    let participants = seqDsl.Participants(rootContext);
-    expect(participants.length).toBe(3)
-    expect(participants[0]).toBe('A')
-    expect(participants[1]).toBe('B')
-    expect(participants[2]).toBe('C')
+    let participants = seqDsl.Participants2(rootContext);
+    expect(Object.keys(participants).length).toBe(3)
+    expect(Object.keys(participants)[0]).toBe('A')
+    expect(Object.keys(participants)[1]).toBe('C')
+    expect(Object.keys(participants)[2]).toBe('B')
 })
 
 test('seqDsl should parse Starter', () => {
