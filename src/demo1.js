@@ -6,6 +6,7 @@
 // Nested method
 // Assignment
 export default `// comments at the beginning should be ignored
+<<B>> B
 @Starter(User)
 // This is comment
 //
