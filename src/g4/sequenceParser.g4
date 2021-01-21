@@ -5,7 +5,9 @@ options {
 }
 
 prog
- : (participant)* ((participant EOF) | (starterExp? block EOF))
+ : participant+ EOF
+ | participant* starterExp EOF
+ | participant* starterExp? block EOF // The final complete syntax
  ;
 
 starterExp

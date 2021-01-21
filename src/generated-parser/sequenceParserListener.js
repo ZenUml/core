@@ -47,6 +47,15 @@ sequenceParserListener.prototype.exitParticipant = function(ctx) {
 };
 
 
+// Enter a parse tree produced by sequenceParser#interfase.
+sequenceParserListener.prototype.enterInterfase = function(ctx) {
+};
+
+// Exit a parse tree produced by sequenceParser#interfase.
+sequenceParserListener.prototype.exitInterfase = function(ctx) {
+};
+
+
 // Enter a parse tree produced by sequenceParser#name.
 sequenceParserListener.prototype.enterName = function(ctx) {
 };
