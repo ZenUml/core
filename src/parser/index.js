@@ -27,7 +27,7 @@ antlr4.ParserRuleContext.prototype.getCode = function() {
 antlr4.ParserRuleContext.prototype.getComment = function() {
   let tokenIndex = this.start.tokenIndex;
   let channel = sequenceLexer.sequenceLexer.prototype.channelNames.indexOf('COMMENT_CHANNEL');
-  if (this instanceof this.parser.braceBlock().constructor) {
+  if (this.constructor.name === 'BraceBlockContext') {
     tokenIndex = this.stop.tokenIndex
   }
   let hiddenTokensToLeft = this.parser
