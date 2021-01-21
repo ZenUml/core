@@ -15,10 +15,15 @@ describe('ToCollector', () => {
       expect(participants.A.width).toBe(0)
     })
 
-    test('A 1024', () => {
+    test('with width', () => {
       let participants = getParticipants2('A 1024');
       expect(participants.A.width).toBe(1024)
     })
+  })
+
+  describe('with interface', () => {
+    let participants = getParticipants2('<<A>> A1')
+    expect(participants.A1.interface).toBe('<<A>>')
   })
 
   test('A 1024 \\nA 1025 - Same participant can be added only once', () => {
