@@ -6,11 +6,11 @@ export default {
     ...mapGetters(['leftOf', 'rightOf', 'centerOf']),
     boundary: function () {
       const that = this
-      let arrayLeft = [this.from, ...Object.keys(Participants2(this.context))]
+      let arrayLeft = [this.from, ...Array.from(Participants2(this.context).keys())]
         .map(function (participant) {
           return that.leftOf(participant)
         })
-      let arrayRight = [this.from, ...Object.keys(Participants2(this.context))]
+      let arrayRight = [this.from, ...Array.from(Participants2(this.context).keys())]
         .map(function (participant) {
           return that.rightOf(participant)
         })

@@ -30,7 +30,7 @@ const Store = () => {
         return RootContext(state.code)
       },
         participants: (state, getters) => {
-        return Object.keys(Participants2(getters.rootContext))
+        return Array.from(Participants2(getters.rootContext).keys())
       },
         centerOf: (state) => (entity) => {
         return state.lifeLineDimensions[entity] &&

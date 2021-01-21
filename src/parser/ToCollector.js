@@ -4,7 +4,7 @@ const sequenceParserListener = require('../generated-parser/sequenceParserListen
 let descendantTos = undefined;
 let isBlind = false;
 const ToCollector = function () {
-  descendantTos = {}
+  descendantTos = new Map()
   sequenceParserListener.sequenceParserListener.call(this)
   return this
 };
@@ -16,15 +16,15 @@ let onTo = function (ctx) {
   let participant = ctx.getText();
   // remove leading and trailing quotes (e.g. "a:A" becomes a:A
   participant = participant.replace(/^"(.*)"$/, '$1');
-  descendantTos[participant] = {width: 0};
+  descendantTos.set(participant, {});
 };
 
 let onParticipant = function (ctx) {
   if (isBlind) return;
   let participant = ctx.name().getText();
   let interfase = ctx.interfase()?.getText();
-  let width = (ctx.width && ctx.width()) ? Number.parseInt(ctx.width().getText()) : 0;
-  descendantTos[participant] = {width: width, interface: interfase};
+  let width = (ctx.width && ctx.width()) && Number.parseInt(ctx.width().getText()) || undefined;
+  descendantTos.set(participant, {width: width, interface: interfase});
 };
 ToCollector.prototype.enterParticipant = onParticipant
 
@@ -39,7 +39,7 @@ ToCollector.prototype.enterCreation = function (ctx) {
   const assignee = ctx.assignment() && ctx.assignment().assignee().getText();
   const type = ctx.constructor().getText();
   const participant = assignee ? assignee + ':' + type : type;
-  descendantTos[participant] = {width: 0};
+  descendantTos.set(participant, {});
 }
 
 ToCollector.prototype.enterParameters = function () {
