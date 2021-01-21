@@ -1,7 +1,7 @@
 <template>
   <div class="life-line-layer">
     <life-line :entity="[starter]" :ref="starter" class="starter" :class="{hidden: lifeLineHidden, actor: isStarterAnActor}"/>
-    <life-line v-for="entity in entities" :key="entity[0]" :ref="entity[0]" :entity="entity"/>
+    <life-line v-for="entity in entities" :key="entity.name" :ref="entity.name" :entity="entity"/>
   </div>
 </template>
 
@@ -20,7 +20,9 @@
         return this.starter === 'Starter'
       },
       entities () {
-        return Array.from(this.participants2.entries()).filter( (entry) => entry[0] !== this.starter)
+        return Array.from(this.participants2.entries())
+          .map(entry => {return {name: entry[0]}})
+          .filter((entry) => entry.name !== this.starter)
       }
     },
     mounted () {
@@ -39,8 +41,8 @@
           width: starterEl.offsetWidth
         }
         this.entities.forEach(entity => {
-          let el = this.$refs[entity[0]][0].$el
-          lifeLineDimensions[entity[0]] = {
+          let el = this.$refs[entity.name][0].$el
+          lifeLineDimensions[entity.name] = {
             left: el.offsetLeft,
             width: el.offsetWidth
           }
