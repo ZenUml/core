@@ -27,17 +27,23 @@ describe('with width', () => {
     let participants = getParticipants('A 1024');
     expect(participants.get('A').width).toBe(1024)
   })
-  test('A 1024 \\nA 1025 - Same participant can be added only once', () => {
+  test('Redefining is ignored', () => {
     // `A` will be parsed as a participant which matches `participant EOF`
     let participants = getParticipants('A 1024\r\nA 1025');
     expect(Array.from(participants.keys()).length).toBe(1)
-    expect(participants.get('A').width).toBe(1025)
+    expect(participants.get('A').width).toBe(1024)
   })
 })
 
 describe('with interface', () => {
-  let participants = getParticipants('<<A>> A1')
-  expect(participants.get('A1').stereotype).toBe('A')
+  test('<<A>> A1', () => {
+    let participants = getParticipants('<<A>> A1')
+    expect(participants.get('A1').stereotype).toBe('A')
+  })
+  test('Redefining is ignored', () => {
+    let participants = getParticipants('<<A>> A1 A1')
+    expect(participants.get('A1').stereotype).toBe('A')
+  })
 })
 
 describe('implicit', () => {

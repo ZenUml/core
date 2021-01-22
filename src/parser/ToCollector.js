@@ -24,7 +24,7 @@ let onParticipant = function (ctx) {
   let participant = ctx.name().getText();
   let stereotype = ctx.stereotype()?.name()?.getText();
   let width = (ctx.width && ctx.width()) && Number.parseInt(ctx.width().getText()) || undefined;
-  descendantTos.set(participant, {width: width, stereotype: stereotype});
+  descendantTos.set(participant, descendantTos.get(participant) || {width: width, stereotype: stereotype});
 };
 ToCollector.prototype.enterParticipant = onParticipant
 
