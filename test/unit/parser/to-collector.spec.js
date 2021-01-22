@@ -23,7 +23,7 @@ describe('ToCollector', () => {
 
   describe('with interface', () => {
     let participants = getParticipants2('<<A>> A1')
-    expect(participants.get('A1').interface).toBe('A')
+    expect(participants.get('A1').stereotype).toBe('A')
   })
 
   test('A 1024 \\nA 1025 - Same participant can be added only once', () => {

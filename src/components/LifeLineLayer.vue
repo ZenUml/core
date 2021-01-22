@@ -21,7 +21,7 @@
       },
       entities () {
         return Array.from(this.participants.entries())
-          .map(entry => {return {name: entry[0], interface: entry[1].interface}})
+          .map(entry => {return {name: entry[0], stereotype: entry[1].stereotype}})
           .filter((entry) => entry.name !== this.starter)
       }
     },
