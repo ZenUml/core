@@ -17,6 +17,8 @@ export default `
 // |val1|val2|
 Leo.attention() {
   Meow.execute()
-  Kick.kick()
+  if(x) {
+    Kick.kick()
+  }
 }
 `

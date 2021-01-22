@@ -42,7 +42,7 @@
         return this.context.alt()
       },
       condition: function () {
-        return this.alt.ifBlock().parExpr().expr().getCode()
+        return this.alt.ifBlock().parExpr().condition().getCode()
       }
     },
     beforeCreate: function () {

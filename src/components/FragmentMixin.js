@@ -1,4 +1,4 @@
-import {participants, Depth} from '../parser'
+import {Participants, Depth} from '../parser'
 import {mapGetters} from "vuex";
 
 export default {
@@ -6,11 +6,11 @@ export default {
     ...mapGetters(['leftOf', 'rightOf', 'centerOf']),
     boundary: function () {
       const that = this
-      let arrayLeft = [this.from, ...Array.from(participants(this.context).keys())]
+      let arrayLeft = [this.from, ...Array.from(Participants(this.context).keys())]
         .map(function (participant) {
           return that.leftOf(participant)
         })
-      let arrayRight = [this.from, ...Array.from(participants(this.context).keys())]
+      let arrayRight = [this.from, ...Array.from(Participants(this.context).keys())]
         .map(function (participant) {
           return that.rightOf(participant)
         })

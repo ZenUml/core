@@ -506,5 +506,14 @@ sequenceParserListener.prototype.exitParExpr = function(ctx) {
 };
 
 
+// Enter a parse tree produced by sequenceParser#condition.
+sequenceParserListener.prototype.enterCondition = function(ctx) {
+};
+
+// Exit a parse tree produced by sequenceParser#condition.
+sequenceParserListener.prototype.exitCondition = function(ctx) {
+};
+
+
 
 exports.sequenceParserListener = sequenceParserListener;

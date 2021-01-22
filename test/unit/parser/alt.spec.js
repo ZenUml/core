@@ -25,6 +25,14 @@ test('`if` with comments and a block', () => {
     expect(braceBlock.getComment()).toBeNull()
 })
 
+describe('if - incomplete', () => {
+  test('', () => {
+    let rootContext = seqDsl.RootContext('if(x)');
+    expect(rootContext.block().stat()[0].alt().ifBlock().parExpr().condition().getText())
+      .toBe('x')
+  })
+})
+
 function braceBlockOfIf(code) {
     let rootContext = seqDsl.RootContext(code);
     return rootContext.block().stat()[0].alt().ifBlock().braceBlock();

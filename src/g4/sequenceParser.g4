@@ -159,6 +159,7 @@ alt
 
 ifBlock
  : IF parExpr braceBlock
+ | IF parExpr
  ;
 
 elseIfBlock
@@ -201,6 +202,11 @@ atom
  ;
 
 parExpr
- : OPAR expr CPAR
+ : OPAR condition CPAR
+ ;
+
+condition
+ : atom
+ | expr
  ;
 
