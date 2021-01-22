@@ -1,6 +1,6 @@
 <template>
   <div class="life-line-layer">
-    <life-line :entity="[starter]" :ref="starter" class="starter" :class="{hidden: lifeLineHidden, actor: isStarterAnActor}"/>
+    <life-line :entity="{name: starter}" :ref="starter" class="starter" :class="{hidden: lifeLineHidden, actor: isStarterAnActor}"/>
     <life-line v-for="entity in entities" :key="entity.name" :ref="entity.name" :entity="entity"/>
   </div>
 </template>
@@ -21,7 +21,7 @@
       },
       entities () {
         return Array.from(this.participants2.entries())
-          .map(entry => {return {name: entry[0]}})
+          .map(entry => {return {name: entry[0], interface: entry[1].interface}})
           .filter((entry) => entry.name !== this.starter)
       }
     },

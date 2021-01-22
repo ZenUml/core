@@ -16,7 +16,7 @@ let onTo = function (ctx) {
   let participant = ctx.getText();
   // remove leading and trailing quotes (e.g. "a:A" becomes a:A
   participant = participant.replace(/^"(.*)"$/, '$1');
-  descendantTos.set(participant, {});
+  descendantTos.set(participant, descendantTos.get(participant) || {});
 };
 
 let onParticipant = function (ctx) {
@@ -39,7 +39,7 @@ ToCollector.prototype.enterCreation = function (ctx) {
   const assignee = ctx.assignment() && ctx.assignment().assignee().getText();
   const type = ctx.constructor().getText();
   const participant = assignee ? assignee + ':' + type : type;
-  descendantTos.set(participant, {});
+  descendantTos.set(participant, descendantTos.get(participant) || {});
 }
 
 ToCollector.prototype.enterParameters = function () {

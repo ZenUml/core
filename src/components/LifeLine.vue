@@ -3,6 +3,7 @@
         class="lifeline"
         :style="{'paddingTop': top + 'px'} ">
     <div class="participant" :class="{'selected': selected}" @click="onSelect">
+      <label class="interface">{{entity.interface}}</label>
       <label class="name">{{entity.name}}</label>
     </div>
     <div class="line"></div>
@@ -48,6 +49,10 @@
     display: flex;            /* So that .line fill the remaining height */
     flex-direction: column;
     margin: 0 20px;
+  }
+
+  .lifeline>.participant>.interface {
+    display: block;
   }
 
   .lifeline .line {
