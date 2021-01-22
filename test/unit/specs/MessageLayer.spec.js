@@ -6,8 +6,11 @@ const localVue = createLocalVue()
 localVue.use(Vuex)
 const storeConfig = Store()
 storeConfig.state.code = 'a'
+let participants = new Map()
+participants.set('a', {})
+storeConfig.getters.participants2 = () => participants
 storeConfig.getters.rightOf = function () {
-  return () => 100;
+  return (p) => p === 'a' ? 100 : NaN
 }
 
 const store = new Vuex.Store(storeConfig)

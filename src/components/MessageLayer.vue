@@ -16,7 +16,7 @@
         return this.centerOf(this.starter)
       },
       width() {
-        let rearParticipant = Array.from(this.participants2);
+        let rearParticipant = Array.from(this.participants2.keys()).pop();
         return this.rightOf(rearParticipant) + (this.starter === 'Starter' ? 100 : 40)
       }
     },
