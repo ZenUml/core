@@ -3,7 +3,7 @@ let ToCollector = require('../../../src/parser/ToCollector')
 function getParticipants2(code) {
     let rootContext = seqDsl.RootContext(code);
     const toCollector = new ToCollector();
-    return toCollector.getAllTos2(toCollector)(rootContext);
+    return toCollector.getAllTos(toCollector)(rootContext);
 }
 
 describe('ToCollector', () => {

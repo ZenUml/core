@@ -46,7 +46,7 @@ module.exports =  {
   RootContext: rootContext,
   Participants: function(ctx) {
     const toCollector = new ToCollector();
-    return toCollector.getAllTos2(toCollector)(ctx)
+    return toCollector.getAllTos(toCollector)(ctx)
   },
   Errors: errors,
   /**

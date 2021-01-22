@@ -51,7 +51,7 @@ ToCollector.prototype.exitParameters = function () {
 }
 const walker = antlr4.tree.ParseTreeWalker.DEFAULT
 
-ToCollector.prototype.getAllTos2 = function (me) {
+ToCollector.prototype.getAllTos = function (me) {
   return function (context) {
     walker.walk(me, context)
     return descendantTos
