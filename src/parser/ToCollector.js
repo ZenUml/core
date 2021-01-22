@@ -20,8 +20,9 @@ let onTo = function (ctx) {
 };
 
 let onParticipant = function (ctx) {
+  // if(!(ctx?.name())) return;
   if (isBlind) return;
-  let participant = ctx.name().getText();
+  let participant = ctx?.name()?.getText() || 'Missing `Participant`';
   let stereotype = ctx.stereotype()?.name()?.getText();
   let width = (ctx.width && ctx.width()) && Number.parseInt(ctx.width().getText()) || undefined;
   descendantTos.set(participant, descendantTos.get(participant) || {width: width, stereotype: stereotype});

@@ -83,6 +83,13 @@ describe('implicit', () => {
   })
 })
 
+describe('Invalid input', () => {
+  test('<<', () => {
+    let participants = getParticipants('<<');
+    expect(Array.from(participants.keys())[0]).toBe('Missing `Participant`')
+  })
+})
+
 
 
 
