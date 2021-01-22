@@ -8,7 +8,7 @@ const storeConfig = Store()
 storeConfig.state.code = 'a'
 let participants = new Map()
 participants.set('a', {})
-storeConfig.getters.participants2 = () => participants
+storeConfig.getters.participants = () => participants
 storeConfig.getters.rightOf = function () {
   return (p) => p === 'a' ? 100 : NaN
 }

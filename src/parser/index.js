@@ -44,7 +44,7 @@ antlr4.ParserRuleContext.prototype.returnedValue = function() {
 
 module.exports =  {
   RootContext: rootContext,
-  Participants2: function(ctx) {
+  Participants: function(ctx) {
     const toCollector = new ToCollector();
     return toCollector.getAllTos2(toCollector)(ctx)
   },

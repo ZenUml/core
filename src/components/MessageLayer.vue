@@ -11,12 +11,12 @@
   export default {
     name: 'message-layer',
     computed: {
-      ...mapGetters(['participants', 'participants2', 'rootContext', 'starter', 'centerOf', 'rightOf']),
+      ...mapGetters(['participants', 'participants', 'rootContext', 'starter', 'centerOf', 'rightOf']),
       paddingLeft () {
         return this.centerOf(this.starter)
       },
       width() {
-        let rearParticipant = Array.from(this.participants2.keys()).pop();
+        let rearParticipant = Array.from(this.participants.keys()).pop();
         return this.rightOf(rearParticipant) + (this.starter === 'Starter' ? 100 : 40)
       }
     },
@@ -32,7 +32,7 @@
       ...mapMutations(['onMessageLayerMountedOrUpdated']),
       emitFirstInvocations () {
         let firstInvocations = {}
-        this.participants2.forEach(participant => {
+        this.participants.forEach(participant => {
           firstInvocations[participant.key] = this.firstInvocation(participant.key)
         })
         this.onMessageLayerMountedOrUpdated(firstInvocations);

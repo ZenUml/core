@@ -12,7 +12,7 @@
   export default {
     name: 'life-line-layer',
     computed: {
-      ...mapGetters(['starter', 'participants2']),
+      ...mapGetters(['starter', 'participants']),
       isStarterAnActor() {
         return this.starter === "User" || this.starter === "Actor";
       },
@@ -20,7 +20,7 @@
         return this.starter === 'Starter'
       },
       entities () {
-        return Array.from(this.participants2.entries())
+        return Array.from(this.participants.entries())
           .map(entry => {return {name: entry[0], interface: entry[1].interface}})
           .filter((entry) => entry.name !== this.starter)
       }

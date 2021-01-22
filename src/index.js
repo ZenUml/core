@@ -1,4 +1,4 @@
-import {RootContext, Participants2} from './parser/index.js'
+import {RootContext, Participants} from './parser/index.js'
 
 import SeqDiagram from './components/SeqDiagram.vue'
 
@@ -30,8 +30,8 @@ const Store = () => {
       rootContext: (state) => {
         return RootContext(state.code)
       },
-      participants2: (state, getters) => {
-        return Participants2(getters.rootContext)
+      participants: (state, getters) => {
+        return Participants(getters.rootContext)
       },
       centerOf: (state) => (entity) => {
         return state.lifeLineDimensions[entity] &&
