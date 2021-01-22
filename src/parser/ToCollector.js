@@ -49,15 +49,7 @@ ToCollector.prototype.enterParameters = function () {
 ToCollector.prototype.exitParameters = function () {
   isBlind = false;
 }
-
 const walker = antlr4.tree.ParseTreeWalker.DEFAULT
-
-ToCollector.prototype.getAllTos = function (me) {
-  return function (context) {
-    walker.walk(me, context)
-    return Object.keys(descendantTos)
-  }
-}
 
 ToCollector.prototype.getAllTos2 = function (me) {
   return function (context) {
