@@ -28,6 +28,9 @@ $fragment-condition-label-background: #65BF73;
       box-shadow: 4px 4px 0 $participant-box-shadow;
       border-radius: 9px;
       color: white;
+      .interface {
+        font-size: 0.8em;
+      }
     }
     .line {
       border-left-color: $lifeline;
