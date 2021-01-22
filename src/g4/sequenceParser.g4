@@ -160,6 +160,7 @@ alt
 ifBlock
  : IF parExpr braceBlock
  | IF parExpr
+ | IF
  ;
 
 elseIfBlock
@@ -172,6 +173,7 @@ elseBlock
 
 braceBlock
  : OBRACE block? CBRACE
+ | OBRACE
  ;
 
 loop
@@ -203,6 +205,9 @@ atom
 
 parExpr
  : OPAR condition CPAR
+ | OPAR condition
+ | OPAR CPAR
+ | OPAR
  ;
 
 condition

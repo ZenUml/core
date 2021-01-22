@@ -5,7 +5,8 @@
       <div class="name"><label>Alt</label></div>
       <label class="condition">[{{condition}}]</label>
     </div>
-    <block :style="blockStyle"
+    <block v-if="alt.ifBlock().braceBlock()"
+           :style="blockStyle"
            :context="alt.ifBlock().braceBlock().block()"
            :from="from"
            :offset="offset"
