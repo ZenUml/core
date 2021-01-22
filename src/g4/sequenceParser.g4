@@ -103,7 +103,8 @@ signature
  ;
 
 invocation
- : (OPAR parameters? CPAR)
+ : OPAR
+ | OPAR parameters? CPAR
  ;
 
 assignment

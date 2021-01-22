@@ -20,6 +20,11 @@ describe('message - incomplete', () => {
     let message = getMessageContext('A.')
     expect(message.func().to().getText()).toBe('A')
   })
+  test('A.m(', () => {
+    let message = getMessageContext('A.m(');
+    let signatureElement = message.func().signature()[0];
+    expect(signatureElement.getText()).toBe('m(')
+  })
 })
 
 test('seqDsl should parse a simple method with a method call as parameter', () => {
