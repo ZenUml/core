@@ -22,9 +22,9 @@ let onTo = function (ctx) {
 let onParticipant = function (ctx) {
   if (isBlind) return;
   let participant = ctx.name().getText();
-  let interfase = ctx.interfase()?.name()?.getText();
+  let stereotype = ctx.stereotype()?.name()?.getText();
   let width = (ctx.width && ctx.width()) && Number.parseInt(ctx.width().getText()) || undefined;
-  descendantTos.set(participant, {width: width, stereotype: interfase});
+  descendantTos.set(participant, {width: width, stereotype: stereotype});
 };
 ToCollector.prototype.enterParticipant = onParticipant
 

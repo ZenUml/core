@@ -284,7 +284,7 @@ var literalNames = [ null, "':'", "'<<'", "'>>'", "'->'", "'@'", "'||'",
                      "'false'", "'nil'", "'if'", "'else'", null, "'return'", 
                      "'new'", "'Starter'", "'Theme'", "'.'" ];
 
-var symbolicNames = [ null, "COL", "IOPEN", "ICLOSE", "ARROW", "AT", "OR", 
+var symbolicNames = [ null, "COL", "SOPEN", "SCLOSE", "ARROW", "AT", "OR", 
                       "AND", "EQ", "NEQ", "GT", "LT", "GTEQ", "LTEQ", "PLUS", 
                       "MINUS", "MULT", "DIV", "MOD", "POW", "NOT", "SCOL", 
                       "COMMA", "ASSIGN", "OPAR", "CPAR", "OBRACE", "CBRACE", 
@@ -293,7 +293,7 @@ var symbolicNames = [ null, "COL", "IOPEN", "ICLOSE", "ARROW", "AT", "OR",
                       "FLOAT", "STRING", "CR", "SPACE", "COMMENT", "OTHER", 
                       "EVENT_PAYLOAD_LXR", "EVENT_END", "WS" ];
 
-var ruleNames =  [ "prog", "starterExp", "starter", "participant", "interfase", 
+var ruleNames =  [ "prog", "starterExp", "starter", "participant", "stereotype", 
                    "name", "width", "block", "ret", "value", "stat", "anonymousBlock", 
                    "creation", "message", "func", "from", "signature", "invocation", 
                    "assignment", "asyncMessage", "content", "source", "target", 
@@ -322,8 +322,8 @@ Object.defineProperty(sequenceParser.prototype, "atn", {
 
 sequenceParser.EOF = antlr4.Token.EOF;
 sequenceParser.COL = 1;
-sequenceParser.IOPEN = 2;
-sequenceParser.ICLOSE = 3;
+sequenceParser.SOPEN = 2;
+sequenceParser.SCLOSE = 3;
 sequenceParser.ARROW = 4;
 sequenceParser.AT = 5;
 sequenceParser.OR = 6;
@@ -375,7 +375,7 @@ sequenceParser.RULE_prog = 0;
 sequenceParser.RULE_starterExp = 1;
 sequenceParser.RULE_starter = 2;
 sequenceParser.RULE_participant = 3;
-sequenceParser.RULE_interfase = 4;
+sequenceParser.RULE_stereotype = 4;
 sequenceParser.RULE_name = 5;
 sequenceParser.RULE_width = 6;
 sequenceParser.RULE_block = 7;
@@ -504,7 +504,7 @@ sequenceParser.prototype.prog = function() {
                     this.state = 80;
                     this.match(sequenceParser.LT);
                     break;
-                case sequenceParser.IOPEN:
+                case sequenceParser.SOPEN:
                 case sequenceParser.ID:
                 case sequenceParser.STRING:
                     this.state = 81;
@@ -516,7 +516,7 @@ sequenceParser.prototype.prog = function() {
                 this.state = 84; 
                 this._errHandler.sync(this);
                 _la = this._input.LA(1);
-            } while(_la===sequenceParser.IOPEN || _la===sequenceParser.LT || _la===sequenceParser.ID || _la===sequenceParser.STRING);
+            } while(_la===sequenceParser.SOPEN || _la===sequenceParser.LT || _la===sequenceParser.ID || _la===sequenceParser.STRING);
             this.state = 86;
             this.match(sequenceParser.EOF);
             break;
@@ -526,7 +526,7 @@ sequenceParser.prototype.prog = function() {
             this.state = 90;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-            while(_la===sequenceParser.IOPEN || _la===sequenceParser.ID || _la===sequenceParser.STRING) {
+            while(_la===sequenceParser.SOPEN || _la===sequenceParser.ID || _la===sequenceParser.STRING) {
                 this.state = 87;
                 this.participant();
                 this.state = 92;
@@ -755,8 +755,8 @@ ParticipantContext.prototype.name = function() {
     return this.getTypedRuleContext(NameContext,0);
 };
 
-ParticipantContext.prototype.interfase = function() {
-    return this.getTypedRuleContext(InterfaseContext,0);
+ParticipantContext.prototype.stereotype = function() {
+    return this.getTypedRuleContext(StereotypeContext,0);
 };
 
 ParticipantContext.prototype.width = function() {
@@ -795,9 +795,9 @@ sequenceParser.prototype.participant = function() {
             this.state = 121;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-            if(_la===sequenceParser.IOPEN) {
+            if(_la===sequenceParser.SOPEN) {
                 this.state = 120;
-                this.interfase();
+                this.stereotype();
             }
 
             this.state = 123;
@@ -815,7 +815,7 @@ sequenceParser.prototype.participant = function() {
         case 2:
             this.enterOuterAlt(localctx, 2);
             this.state = 127;
-            this.interfase();
+            this.stereotype();
             break;
 
         case 3:
@@ -848,7 +848,7 @@ sequenceParser.prototype.participant = function() {
 };
 
 
-function InterfaseContext(parser, parent, invokingState) {
+function StereotypeContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
 	}
@@ -857,50 +857,50 @@ function InterfaseContext(parser, parent, invokingState) {
 	}
 	antlr4.ParserRuleContext.call(this, parent, invokingState);
     this.parser = parser;
-    this.ruleIndex = sequenceParser.RULE_interfase;
+    this.ruleIndex = sequenceParser.RULE_stereotype;
     return this;
 }
 
-InterfaseContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
-InterfaseContext.prototype.constructor = InterfaseContext;
+StereotypeContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+StereotypeContext.prototype.constructor = StereotypeContext;
 
-InterfaseContext.prototype.IOPEN = function() {
-    return this.getToken(sequenceParser.IOPEN, 0);
+StereotypeContext.prototype.SOPEN = function() {
+    return this.getToken(sequenceParser.SOPEN, 0);
 };
 
-InterfaseContext.prototype.name = function() {
+StereotypeContext.prototype.name = function() {
     return this.getTypedRuleContext(NameContext,0);
 };
 
-InterfaseContext.prototype.GT = function() {
+StereotypeContext.prototype.GT = function() {
     return this.getToken(sequenceParser.GT, 0);
 };
 
-InterfaseContext.prototype.ICLOSE = function() {
-    return this.getToken(sequenceParser.ICLOSE, 0);
+StereotypeContext.prototype.SCLOSE = function() {
+    return this.getToken(sequenceParser.SCLOSE, 0);
 };
 
-InterfaseContext.prototype.enterRule = function(listener) {
+StereotypeContext.prototype.enterRule = function(listener) {
     if(listener instanceof sequenceParserListener ) {
-        listener.enterInterfase(this);
+        listener.enterStereotype(this);
 	}
 };
 
-InterfaseContext.prototype.exitRule = function(listener) {
+StereotypeContext.prototype.exitRule = function(listener) {
     if(listener instanceof sequenceParserListener ) {
-        listener.exitInterfase(this);
+        listener.exitStereotype(this);
 	}
 };
 
 
 
 
-sequenceParser.InterfaseContext = InterfaseContext;
+sequenceParser.StereotypeContext = StereotypeContext;
 
-sequenceParser.prototype.interfase = function() {
+sequenceParser.prototype.stereotype = function() {
 
-    var localctx = new InterfaseContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 8, sequenceParser.RULE_interfase);
+    var localctx = new StereotypeContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 8, sequenceParser.RULE_stereotype);
     try {
         this.state = 149;
         this._errHandler.sync(this);
@@ -909,13 +909,13 @@ sequenceParser.prototype.interfase = function() {
         case 1:
             this.enterOuterAlt(localctx, 1);
             this.state = 134;
-            this.match(sequenceParser.IOPEN);
+            this.match(sequenceParser.SOPEN);
             break;
 
         case 2:
             this.enterOuterAlt(localctx, 2);
             this.state = 135;
-            this.match(sequenceParser.IOPEN);
+            this.match(sequenceParser.SOPEN);
             this.state = 136;
             this.name();
             break;
@@ -923,7 +923,7 @@ sequenceParser.prototype.interfase = function() {
         case 3:
             this.enterOuterAlt(localctx, 3);
             this.state = 137;
-            this.match(sequenceParser.IOPEN);
+            this.match(sequenceParser.SOPEN);
             this.state = 138;
             this.name();
             this.state = 139;
@@ -933,7 +933,7 @@ sequenceParser.prototype.interfase = function() {
         case 4:
             this.enterOuterAlt(localctx, 4);
             this.state = 141;
-            this.match(sequenceParser.IOPEN);
+            this.match(sequenceParser.SOPEN);
             this.state = 142;
             this.match(sequenceParser.GT);
             break;
@@ -941,19 +941,19 @@ sequenceParser.prototype.interfase = function() {
         case 5:
             this.enterOuterAlt(localctx, 5);
             this.state = 143;
-            this.match(sequenceParser.IOPEN);
+            this.match(sequenceParser.SOPEN);
             this.state = 144;
-            this.match(sequenceParser.ICLOSE);
+            this.match(sequenceParser.SCLOSE);
             break;
 
         case 6:
             this.enterOuterAlt(localctx, 6);
             this.state = 145;
-            this.match(sequenceParser.IOPEN);
+            this.match(sequenceParser.SOPEN);
             this.state = 146;
             this.name();
             this.state = 147;
-            this.match(sequenceParser.ICLOSE);
+            this.match(sequenceParser.SCLOSE);
             break;
 
         }

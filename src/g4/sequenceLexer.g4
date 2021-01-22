@@ -6,11 +6,11 @@ COL
  : ':' -> pushMode(EVENT)
  ;
 
-IOPEN
+SOPEN
  : '<<'
  ;
 
-ICLOSE
+SCLOSE
  : '>>'
  ;
 

@@ -230,8 +230,8 @@ Object.defineProperty(sequenceLexer.prototype, "atn", {
 
 sequenceLexer.EOF = antlr4.Token.EOF;
 sequenceLexer.COL = 1;
-sequenceLexer.IOPEN = 2;
-sequenceLexer.ICLOSE = 3;
+sequenceLexer.SOPEN = 2;
+sequenceLexer.SCLOSE = 3;
 sequenceLexer.ARROW = 4;
 sequenceLexer.AT = 5;
 sequenceLexer.OR = 6;
@@ -298,7 +298,7 @@ sequenceLexer.prototype.literalNames = [ null, "':'", "'<<'", "'>>'", "'->'",
                                          null, "'return'", "'new'", "'Starter'", 
                                          "'Theme'", "'.'" ];
 
-sequenceLexer.prototype.symbolicNames = [ null, "COL", "IOPEN", "ICLOSE", 
+sequenceLexer.prototype.symbolicNames = [ null, "COL", "SOPEN", "SCLOSE", 
                                           "ARROW", "AT", "OR", "AND", "EQ", 
                                           "NEQ", "GT", "LT", "GTEQ", "LTEQ", 
                                           "PLUS", "MINUS", "MULT", "DIV", 
@@ -312,7 +312,7 @@ sequenceLexer.prototype.symbolicNames = [ null, "COL", "IOPEN", "ICLOSE",
                                           "EVENT_PAYLOAD_LXR", "EVENT_END", 
                                           "WS" ];
 
-sequenceLexer.prototype.ruleNames = [ "COL", "IOPEN", "ICLOSE", "ARROW", 
+sequenceLexer.prototype.ruleNames = [ "COL", "SOPEN", "SCLOSE", "ARROW", 
                                       "AT", "OR", "AND", "EQ", "NEQ", "GT", 
                                       "LT", "GTEQ", "LTEQ", "PLUS", "MINUS", 
                                       "MULT", "DIV", "MOD", "POW", "NOT", 

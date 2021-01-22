@@ -4,8 +4,8 @@ test('<<Person>> Bob', () => {
     let rootContext = seqDsl.RootContext('<<Person>> Bob\n');
     let participant = rootContext.participant()[0];
     expectText(participant).toBe('<<Person>>Bob')
-    let interfase = participant.interfase();
-    expectText(interfase).toBe('<<Person>>')
+    let stereotype = participant.stereotype();
+    expectText(stereotype).toBe('<<Person>>')
 })
 
 describe('Error recovery', () => {
@@ -13,9 +13,8 @@ describe('Error recovery', () => {
     let rootContext = seqDsl.RootContext('<<');
     let participant = rootContext.participant()[0];
     expectText(participant).toBe('<<')
-    let interfase = participant.interfase();
-    expectText(interfase).toBe('<<')
-
+    let stereotype = participant.stereotype();
+    expectText(stereotype).toBe('<<')
   });
 })
 

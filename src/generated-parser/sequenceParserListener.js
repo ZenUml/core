@@ -47,12 +47,12 @@ sequenceParserListener.prototype.exitParticipant = function(ctx) {
 };
 
 
-// Enter a parse tree produced by sequenceParser#interfase.
-sequenceParserListener.prototype.enterInterfase = function(ctx) {
+// Enter a parse tree produced by sequenceParser#stereotype.
+sequenceParserListener.prototype.enterStereotype = function(ctx) {
 };
 
-// Exit a parse tree produced by sequenceParser#interfase.
-sequenceParserListener.prototype.exitInterfase = function(ctx) {
+// Exit a parse tree produced by sequenceParser#stereotype.
+sequenceParserListener.prototype.exitStereotype = function(ctx) {
 };
 
 

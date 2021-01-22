@@ -19,18 +19,18 @@ starter
  ;
 
 participant
- : interfase? name width?
- | interfase
+ : stereotype? name width?
+ | stereotype
  | name width?
  ;
 
-interfase
- : IOPEN
- | IOPEN name
- | IOPEN name GT
- | IOPEN GT         // Some people may write <<>> first then put in the interface name
- | IOPEN ICLOSE
- | IOPEN name ICLOSE
+stereotype
+ : SOPEN
+ | SOPEN name
+ | SOPEN name GT
+ | SOPEN GT         // Some people may write <<>> first then put in the interface name
+ | SOPEN SCLOSE
+ | SOPEN name SCLOSE
  ;
 
 name
