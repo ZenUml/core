@@ -32,8 +32,8 @@
       ...mapMutations(['onMessageLayerMountedOrUpdated']),
       emitFirstInvocations () {
         let firstInvocations = {}
-        this.participants.forEach(participant => {
-          firstInvocations[participant] = this.firstInvocation(participant)
+        this.participants2.forEach(participant => {
+          firstInvocations[participant.key] = this.firstInvocation(participant.key)
         })
         this.onMessageLayerMountedOrUpdated(firstInvocations);
       },

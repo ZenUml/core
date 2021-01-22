@@ -30,9 +30,6 @@ const Store = () => {
       rootContext: (state) => {
         return RootContext(state.code)
       },
-      participants: (state, getters) => {
-        return Array.from(Participants2(getters.rootContext).keys())
-      },
       participants2: (state, getters) => {
         return Participants2(getters.rootContext)
       },
