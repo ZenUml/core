@@ -77,13 +77,6 @@ message
  : assignment? func (SCOL | braceBlock)?
  ;
 
-//event
-// : (from ARROW)? to COL payload
-// ;
-//
-//payload
-// : CONTENT_LXR
-// ;
 /**
  * Order is impportant below. This allows the follow three status being valid:
  * a. A - participant
