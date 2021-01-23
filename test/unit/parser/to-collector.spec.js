@@ -8,18 +8,14 @@ function getParticipants(code) {
 }
 
 describe('Plain participants', () => {
-  test('A', () => {
+  test.each([
+    'A', 'A\n', 'A\n\r'
+  ])('get participant with width and stereotype undefined', (code) => {
     // `A` will be parsed as a participant which matches `participant EOF`
-    let participants = getParticipants('A');
+    let participants = getParticipants(code);
     expect(participants.size).toBe(1)
     expect(participants.get('A').width).toBeUndefined()
-  })
-
-  test('A - one line but with CRs', () => {
-    // `A` will be parsed as a participant
-    let participants = getParticipants('A\n\r');
-    expect(participants.size).toBe(1)
-    expect(participants.get('A').width).toBeUndefined()
+    expect(participants.get('A').stereotype).toBeUndefined()
   })
 })
 describe('with width', () => {
