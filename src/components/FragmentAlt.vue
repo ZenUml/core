@@ -13,7 +13,10 @@
     ></block>
     <template v-for="(elseIfBlock, index) in alt.elseIfBlock()">
       <div class="divider" :key="index"></div>
-      <div class="header" :key="index+100"><label class="else-if">else if</label> <label class="condition">[{{elseIfBlock.parExpr().expr().getCode()}}]</label></div>
+      <div class="header" :key="index+100">
+        <label class="else-if">else if</label>
+        <label class="condition">[{{elseIfBlock.parExpr().condition().getCode()}}]</label>
+      </div>
       <block :style="blockStyle"
              :context="elseIfBlock.braceBlock().block()"
              :from="from"
