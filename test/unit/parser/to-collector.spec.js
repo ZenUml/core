@@ -6,6 +6,17 @@ function getParticipants(code) {
   const toCollector = new ToCollector();
   return toCollector.getAllTos(toCollector)(rootContext);
 }
+test('smoke test', () => {
+  const code = `
+    <<A>> B 1024
+    C.m
+    D->E:m
+    new F
+  `
+  let participants = getParticipants(code);
+  expect(Array.from(participants.keys())).toStrictEqual(['B', 'C', 'D', 'E', 'F'])
+  expect(participants.get('B')).toStrictEqual({stereotype: 'A', 'width': 1024})
+})
 
 describe('Plain participants', () => {
   test.each([
@@ -19,26 +30,30 @@ describe('Plain participants', () => {
   })
 })
 describe('with width', () => {
-  test('with width', () => {
-    let participants = getParticipants('A 1024');
-    expect(participants.get('A').width).toBe(1024)
-  })
-  test('Redefining is ignored', () => {
+  test.each([
+    ['A 1024', 1024],
+    ['A 1024 A 1025', 1024],
+    ['A 1024\nA 1025', 1024]
+  ])('code:%s => width:%s', (code, width) => {
     // `A` will be parsed as a participant which matches `participant EOF`
-    let participants = getParticipants('A 1024\r\nA 1025');
+    let participants = getParticipants(code);
     expect(participants.size).toBe(1)
-    expect(participants.get('A').width).toBe(1024)
+    expect(participants.keys().next().value).toBe('A')
+    expect(participants.values().next().value.width).toBe(width)
   })
 })
 
 describe('with interface', () => {
-  test('<<A>> A1', () => {
-    let participants = getParticipants('<<A>> A1')
-    expect(participants.get('A1').stereotype).toBe('A')
-  })
-  test('Redefining is ignored', () => {
-    let participants = getParticipants('<<A>> A1 A1')
-    expect(participants.get('A1').stereotype).toBe('A')
+  test.each([
+    ['<<A>> X 1024', 'A'],
+    ['<<A>> X <<B>> X', 'A'], // Ignore redefining
+    ['<<A>> X\n<<B>> X', 'A']
+  ])('code:%s => width:%s', (code, stereotype) => {
+    // `A` will be parsed as a participant which matches `participant EOF`
+    let participants = getParticipants(code);
+    expect(participants.size).toBe(1)
+    expect(participants.keys().next().value).toBe('X')
+    expect(participants.values().next().value.stereotype).toBe(stereotype)
   })
 })
 
