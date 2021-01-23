@@ -6,9 +6,6 @@ const localVue = createLocalVue()
 localVue.use(Vuex)
 const storeConfig = Store()
 storeConfig.state.code = 'a'
-let participants = new Map()
-participants.set('a', {})
-storeConfig.getters.participants = () => participants
 storeConfig.getters.rightOf = function () {
   return (p) => p === 'a' ? 100 : NaN
 }
@@ -16,12 +13,15 @@ storeConfig.getters.rightOf = function () {
 const store = new Vuex.Store(storeConfig)
 
 describe('MessageLayer', () => {
+  let messageLayerWrapper = mount(MessageLayer, {store, localVue})
   it('should have a width', async () => {
-    let messageLayerWrapper = mount(MessageLayer, {store, localVue})
     expect(messageLayerWrapper.find('.message-layer').exists()).toBeTruthy()
-    await messageLayerWrapper.vm.$nextTick()
-
+    // We do not need to wait until next tick in **test**.
+    // await messageLayerWrapper.vm.$nextTick()
     expect(messageLayerWrapper.find('.message-layer').attributes().style)
       .toBe('width: 200px;')
+  })
+  it('gets participant names', async () => {
+    expect(messageLayerWrapper.vm.participantNames()[0]).toBe('a')
   })
 })

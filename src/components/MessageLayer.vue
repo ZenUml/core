@@ -16,7 +16,7 @@
         return this.centerOf(this.starter)
       },
       width() {
-        let rearParticipant = Array.from(this.participants.keys()).pop();
+        let rearParticipant = this.participantNames().pop();
         return this.rightOf(rearParticipant) + (this.starter === 'Starter' ? 100 : 40)
       }
     },
@@ -30,9 +30,13 @@
     },
     methods: {
       ...mapMutations(['onMessageLayerMountedOrUpdated']),
+      participantNames() {
+        // According to the doc, computed properties are cached.
+        return Array.from(this.participants.keys())
+      },
       emitFirstInvocations () {
         let firstInvocations = {}
-        Array.from(this.participants.keys()).forEach(name => {
+        this.participantNames().forEach(name => {
           firstInvocations[name] = this.firstInvocation(name)
         })
         this.onMessageLayerMountedOrUpdated(firstInvocations);
