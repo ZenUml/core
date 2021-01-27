@@ -5,8 +5,8 @@ options {
 }
 
 prog
- : EOF                        // Nothing needs to be a valid prog
- |(LT | participant)+ EOF     //  swallow '<' so it is not rendered to the diagram
+ : EOF                        // An empty string is a valid prog
+ | (LT | participant)+ EOF     // swallow '<' so it is not rendered to the diagram
  | participant* starterExp EOF
  | participant* starterExp? block EOF // The final complete syntax
  ;

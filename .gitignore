@@ -4,6 +4,7 @@ node_modules
 
 # antlr4
 gen
+.antlr
 src/g4/sequenceLexer.tokens
 src/generated-parser/sequenceParser.interp
 src/generated-parser/sequenceLexer.interp
