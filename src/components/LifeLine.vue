@@ -1,5 +1,5 @@
 <template>
-  <div  :id="entity"
+  <div  :id="entity.name"
         class="lifeline"
         :style="{'paddingTop': top + 'px'} ">
     <div class="participant" :class="{'selected': selected}" @click="onSelect">
