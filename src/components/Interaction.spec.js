@@ -21,11 +21,15 @@ describe('Highlight current interact based on position of cursor', () => {
     expect(wrapper.vm.isCurrent).toBe(false)
   })
   test.each([
-    [0, false],
+    [null, false],
+    [undefined, false],
+    [-1, false],
+    [0, true],
     [1, true],
     [3, true],
     [6, true],
-    [7, false],
+    [7, true],
+    [8, false],
   ])('Interaction: if cursor is %s then isCurrent will be %s ', (cursor, isCurrent) => {
     const storeConfig = Store()
     storeConfig.state.cursor = cursor

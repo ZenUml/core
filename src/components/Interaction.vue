@@ -56,10 +56,10 @@
         return this.message?.func()?.to()?.getCode()
       },
       isCurrent: function () {
-        let start = this.message?.start.start
+        let start = this.context?.start.start
         let stop = this.message?.func()?.stop.stop
-        if (!this.cursor || (start === null || start === undefined) || ! stop) return false
-        return this.cursor > start && this.cursor < stop
+        if ((this.cursor === null || this.cursor === undefined) || (start === null || start === undefined) || ! stop) return false
+        return this.cursor >= start && this.cursor <= stop
       }
     },
     components: {
