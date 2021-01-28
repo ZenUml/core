@@ -84,7 +84,7 @@ SPACE
  ;
 
 COMMENT
- : '//' .*? '\n'? -> channel(COMMENT_CHANNEL)
+ : '//' .*? '\n' -> channel(COMMENT_CHANNEL)
  ;
 OTHER
  : .
