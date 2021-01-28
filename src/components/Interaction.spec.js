@@ -6,13 +6,48 @@ import { Store } from '../index'
 const localVue = createLocalVue()
 localVue.use(Vuex)
 
+describe('Highlight current interact based on position of cursor', () => {
+  test('Interaction is not current by default', () => {
+    const storeConfig = Store()
+    const store = new Vuex.Store(storeConfig)
+    store.commit('code', 'A.m')
+    const rootContext = store.getters.rootContext
+    const wrapper = shallowMount(Interaction, {
+      store, localVue, propsData: {
+        from: 'A',
+        context: rootContext.block().stat()[0]
+      }
+    });
+    expect(wrapper.vm.isCurrent).toBe(false)
+  })
+  test.each([
+    [0, false],
+    [1, true],
+    [3, true],
+    [6, true],
+    [7, false],
+  ])('Interaction: if cursor is %s then isCurrent will be %s ', (cursor, isCurrent) => {
+    const storeConfig = Store()
+    storeConfig.state.cursor = cursor
+    const store = new Vuex.Store(storeConfig)
+    store.commit('code', 'A.method')
+    const rootContext = store.getters.rootContext
+    const wrapper = shallowMount(Interaction, {
+      store, localVue, propsData: {
+        from: 'A',
+        context: rootContext.block().stat()[0]
+      }
+    });
+    expect(wrapper.vm.isCurrent).toBe(isCurrent)
+  })
+})
 describe('Interaction width', () => {
   test.each([
     // A --- ?px ---> B
-    [ 1,  10, 25, 14],
-    [ 1,  25, 10, 16],
-    [-1,  10, 25, 16],
-    [-1,  25, 10, 14],
+    [ 1,  10, 25, 15],
+    [ 1,  25, 10, 17],
+    [-1,  10, 25, 17],
+    [-1,  25, 10, 15],
   ])('If offset is %s and distance is %s, interactionWidth should be %s', (offset, a, b, width) => {
     Interaction.computed.to = () => 'B';
     const storeConfig = Store()

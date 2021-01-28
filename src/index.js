@@ -15,6 +15,7 @@ const Store = () => {
       code: '',
       events: [],
       selected: [],
+      cursor: undefined,
       // To be overridden by plugins
       onLifelineMounted: () => {
       }
@@ -23,6 +24,7 @@ const Store = () => {
       // We are using getters to avoid hard coding module's name ($store.Store.state)
       // in the components. Not sure if this is the best practice.
       firstInvocations: (state) => state.firstInvocations,
+      cursor: (state) => state.cursor,
       starter: (state, getters) => {
         let starterExp = getters.rootContext.starterExp()
         return starterExp && starterExp.starter() && starterExp.starter().getCode() || 'Starter'

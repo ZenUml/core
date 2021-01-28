@@ -1,7 +1,7 @@
 <template>
   <div class="interaction sync"
        :signature="signature"
-       :class="{ 'right-to-left':rightToLeft }"
+       :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent }"
        :style="{width: interactionWidth + 'px', transform: 'translateX(' + translateX + 'px)'}">
     <comment v-if="comment" :comment="comment"/>
     <message :content="signature" :rtl="rightToLeft" type="sync"/>
@@ -21,14 +21,15 @@
     name: 'interaction',
     props: ['from', 'context', 'comment', 'offset'],
     computed: {
-      ...mapGetters(['distance']),
+      ...mapGetters(['distance', 'cursor']),
       message: function () {
         return this.context?.message()
       },
       interactionWidth: function () {
         let distance = this.distance(this.to, this.realFrom)
         let safeOffset = this.offset || 0
-        return Math.abs(distance - safeOffset)
+        // +1 for the added border
+        return Math.abs(distance - safeOffset) + 1
       },
       translateX: function() {
         // The starting point is always this.from
@@ -53,6 +54,12 @@
       },
       to: function () {
         return this.message?.func()?.to()?.getCode()
+      },
+      isCurrent: function () {
+        let start = this.message?.start.start
+        let stop = this.message?.func()?.stop.stop
+        if (!this.cursor || (start === null || start === undefined) || ! stop) return false
+        return this.cursor > start && this.cursor < stop
       }
     },
     components: {
@@ -62,4 +69,12 @@
     }
   }
 </script>
-
+<style scoped>
+  .interaction {
+    /*Keep dashed here otherwise no space is given to the border*/
+    border: 1px dashed transparent;
+  }
+  .interaction.highlight {
+    border-color: inherit;
+  }
+</style>
