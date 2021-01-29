@@ -1,7 +1,7 @@
 <template>
   <div class="interaction sync"
        :signature="signature"
-       :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent }"
+       :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent, 'self': isSelf }"
        :style="{width: interactionWidth + 'px', transform: 'translateX(' + translateX + 'px)'}">
     <comment v-if="comment" :comment="comment"/>
     <component v-bind:is="invocation"
@@ -31,6 +31,11 @@
     computed: {
       ...mapGetters(['distance', 'cursor']),
       interactionWidth: function () {
+        if (this.context && this.isSelf) {
+          const leftOfMessage = 30
+          const averageWidthOfChar = 10
+          return averageWidthOfChar * (this.assignee?.length + this.signature?.length) + leftOfMessage
+        }
         let distance = this.distance(this.to, this.realFrom)
         let safeOffset = this.offset || 0
         // +1 for the added border
