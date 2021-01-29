@@ -41,12 +41,3 @@
     }
   }
 </script>
-<style scoped>
-  .interaction {
-    /*Keep dashed here otherwise no space is given to the border*/
-    border: 1px dashed transparent;
-  }
-  .interaction.highlight {
-    border-color: inherit;
-  }
-</style>

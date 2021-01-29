@@ -93,6 +93,14 @@
     margin-bottom: 5px;   /* To create some margin for cosmetic only */
   }
 
+  .interaction {
+    /*Keep dashed here otherwise no space is given to the border*/
+    border: 1px dashed transparent;
+  }
+  .interaction.highlight {
+    border-color: inherit;
+  }
+
   .message {
     position: relative;   /* positioning Point */
   }
