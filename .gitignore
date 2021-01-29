@@ -11,8 +11,8 @@ src/generated-parser/sequenceLexer.interp
 
 # gauge
 .gauge
-logs/
-reports/
+reports
+logs
 
 # local env files
 .env.local
