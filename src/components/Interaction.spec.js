@@ -8,20 +8,19 @@ localVue.use(Vuex)
 
 describe('Highlight current interact based on position of cursor', () => {
   test.each([
-    [null, false],
-    [undefined, false],
-    [-1, false],
-    [0, true],
-    [1, true],
-    [3, true],
-    [6, true],
-    [7, true],
-    [8, false],
-  ])('Interaction: if cursor is %s then isCurrent will be %s ', (cursor, isCurrent) => {
+    ['A.bc', null, false],
+    ['A.bc', undefined, false],
+    ['A.bc', -1, false],
+    ['A.bc', 0, true],
+    ['A.bc', 1, true],
+    ['A.bc', 2, true],
+    ['A.bc', 3, true],
+    ['A.bc', 4, false],
+  ])('Interaction: for code: `%s` if cursor is %s then isCurrent will be %s ', (code, cursor, isCurrent) => {
     const storeConfig = Store()
     storeConfig.state.cursor = cursor
     const store = new Vuex.Store(storeConfig)
-    store.commit('code', 'A.method')
+    store.commit('code', code)
     const rootContext = store.getters.rootContext
     const wrapper = shallowMount(Interaction, {
       store, localVue, propsData: {
