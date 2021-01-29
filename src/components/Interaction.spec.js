@@ -98,6 +98,6 @@ describe('Translate X', () => {
         from: 'C',
       }
     });
-    expect(wrapper.vm.translateX).toBe(-25)
+    expect(wrapper.vm.translateX).toBe(-26)
   });
 })
