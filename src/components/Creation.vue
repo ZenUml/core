@@ -75,13 +75,8 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .interaction.creation {
-    text-align: right;
-  }
-
   .interaction.creation.right-to-left {
     transform: translateX(-100%);
-    text-align: left;
   }
 
   .participant.place-holder {
