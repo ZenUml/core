@@ -44,7 +44,7 @@
         return this.distance(this.to, this.realFrom) < 0
       },
       signature: function () {
-        return this.message?.func().signature().map(s => s.getCode()).join('.')
+        return this.func?.signature().map(s => s.getCode()).join('.')
       },
       assignee: function () {
         let assignment = this.message?.assignment()
@@ -54,15 +54,18 @@
         return assignee + (type ? ':' + type : '')
       },
       realFrom: function() {
-        return this.message?.func()?.from()?.getCode() || this.from
+        return this.func?.from()?.getCode() || this.from
       },
       to: function () {
-        return this.message?.func()?.to()?.getCode()
+        return this.func?.to()?.getCode()
+      },
+      func: function() {
+        return this.message?.func()
       },
       isCurrent: function () {
-        let start = this.context?.start.start
-        // it still consider the current element if the cursor is just after the end of the function
-        let stop = this.message?.func()?.stop.stop + 1
+        let start = this.func?.start.start
+        // it is still considered as the current element if the cursor is just after the end of the function
+        let stop = this.func?.stop.stop + 1
         if (isNullOrUndefined(this.cursor) || isNullOrUndefined(start) || isNullOrUndefined(stop)) return false
         return this.cursor >= start && this.cursor <= stop
       }
