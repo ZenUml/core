@@ -11,7 +11,7 @@
              type="sync"></component>
 <!--    <message :content="signature" :rtl="rightToLeft" type="sync"/>-->
     <!--We reset the offset here to make it simple; re-entering a method should be rare.-->
-    <occurrence :context="message" :participant="isSelf? realFrom: to" :offset="0"/>
+    <occurrence :context="message" :participant="isSelf? realFrom: to" :offset="isSelf ? (offset || 0) + 6 : 0"/>
     <message class="return" v-if="assignee && !isSelf" :content="assignee" :rtl="!rightToLeft" type="return"/>
   </div>
 </template>

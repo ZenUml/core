@@ -31,7 +31,8 @@
       interactionWidth: function () {
         let distance = this.distance(this.to, this.from)
         let safeOffset = this.offset || 0
-        return Math.abs(distance) - safeOffset
+        let widthForInteractionBorders = 2
+        return Math.abs(distance) - safeOffset + widthForInteractionBorders
       },
       invocationWidth: function () {
         let safeOffset = this.offset || 0

@@ -29,7 +29,8 @@ export default {
     translateX: function() {
       // The starting point is always this.from
       const moveTo = this.rightToLeft ? this.to : this.realFrom
-      return this.distance(moveTo, this.from)
+      // -1 for interaction when right to left
+      return this.distance(moveTo, this.from) + (this.rightToLeft ? -1 : 0)
     },
     rightToLeft: function () {
       return this.distance(this.to, this.realFrom) < 0
