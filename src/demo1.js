@@ -19,7 +19,9 @@ RET ret = A.methodA(a, b) {
   // [X](http://x.x)
   RET ret2 = selfMethod() {
     // A sync interaction after a self interaction
-  B.method()
+    B.method() {
+      A.method()
+    }
   }
   // A comment for creation
   b = new B()
@@ -35,7 +37,11 @@ RET ret = A.methodA(a, b) {
       a = new A() {
         // A comment for creation
         b = new B()
-        C.method
+        // Right to left
+        C.method() {
+          // Further right to left
+          "b:B".method()        
+        }
         self()
       }
     }

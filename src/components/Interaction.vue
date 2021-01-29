@@ -9,9 +9,7 @@
              :assignee="assignee"
              :rtl="rightToLeft"
              type="sync"></component>
-<!--    <message :content="signature" :rtl="rightToLeft" type="sync"/>-->
-    <!--We reset the offset here to make it simple; re-entering a method should be rare.-->
-    <occurrence :context="message" :participant="isSelf? realFrom: to" :offset="isSelf ? (offset || 0) + 6 : 0"/>
+    <occurrence :context="message" :participant="isSelf? realFrom : to" :offset="passOnOffset"/>
     <message class="return" v-if="assignee && !isSelf" :content="assignee" :rtl="!rightToLeft" type="return"/>
   </div>
 </template>
@@ -30,6 +28,12 @@
     mixins: [InteractionMixin],
     computed: {
       ...mapGetters(['distance', 'cursor']),
+      passOnOffset: function() {
+        // Offset is introduced for sync self interaction. Each time we enters a self sync interaction the offset
+        // increases by 6px (half of the width of an execution bar). However, we set the offset back to 0 when
+        // it enters a non-self sync interaction.
+        return this.isSelf ? (this.offset || 0) + 6 : 0
+      },
       interactionWidth: function () {
         if (this.context && this.isSelf) {
           const leftOfMessage = 30
