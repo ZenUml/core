@@ -4,10 +4,15 @@
        :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent }"
        :style="{width: interactionWidth + 'px', transform: 'translateX(' + translateX + 'px)'}">
     <comment v-if="comment" :comment="comment"/>
-    <message :content="signature" :rtl="rightToLeft" type="sync"/>
+    <component v-bind:is="invocation"
+             :content="signature"
+             :assignee="assignee"
+             :rtl="rightToLeft"
+             type="sync"></component>
+<!--    <message :content="signature" :rtl="rightToLeft" type="sync"/>-->
     <!--We reset the offset here to make it simple; re-entering a method should be rare.-->
-    <occurrence :context="message" :participant="to" :offset="0"/>
-    <message class="return" v-if="assignee" :content="assignee" :rtl="!rightToLeft" type="return"/>
+    <occurrence :context="message" :participant="isSelf? realFrom: to" :offset="0"/>
+    <message class="return" v-if="assignee && !isSelf" :content="assignee" :rtl="!rightToLeft" type="return"/>
   </div>
 </template>
 
@@ -17,6 +22,7 @@
   import Message from './Message'
   import {mapGetters} from "vuex";
   import InteractionMixin from './InteractionMixin'
+  import SelfInvocation from './SelfInvocation'
 
   export default {
     name: 'interaction',
@@ -33,9 +39,17 @@
       to: function () {
         return this.func?.to()?.getCode()
       },
+      isSelf: function() {
+        return !this.context?.message().func().to() || this.context?.message().func().to().getCode() === this.realFrom
+      },
+      invocation: function () {
+        // return 'Message'
+        return this.isSelf ? 'SelfInvocation' : 'Message'
+      }
     },
     components: {
       Message,
+      SelfInvocation,
       Comment,
       Occurrence
     }

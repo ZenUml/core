@@ -20,7 +20,7 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .message.self {
-    height: 34px; /* Same height as svg */
+    height: 26px;
   }
 
   .sync > .message.self {

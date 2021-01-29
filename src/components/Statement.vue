@@ -32,8 +32,9 @@
           alt: 'FragmentAlt',
           creation: 'Creation',
           message: function () {
-            let isSelf = !that.context.message().func().to() || that.context.message().func().to().getCode() === that.realFrom
-            return isSelf ? 'SelfInteraction' : 'Interaction'
+            return 'Interaction'
+            // let isSelf = !that.context.message().func().to() || that.context.message().func().to().getCode() === that.realFrom
+            // return isSelf ? 'SelfInteraction' : 'Interaction'
           },
           asyncMessage: function () {
             const source = that.context.asyncMessage().source() && that.context.asyncMessage().source().getCode()

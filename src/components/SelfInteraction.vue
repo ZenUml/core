@@ -5,7 +5,7 @@
        :style="{width: interactionWidth + 'px', transform: 'translateX(' + translateX + 'px)'}"
   >
     <comment v-if="comment" :comment="comment" />
-    <self-invocation :signature="signature" :assignee="assignee"/>
+    <self-invocation :content="signature" :assignee="assignee"/>
     <occurrence :context="message" :participant="realFrom" :offset="(offset || 0) + 6"/>
   </div>
 </template>
