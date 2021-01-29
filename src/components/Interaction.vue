@@ -18,10 +18,6 @@
   import {mapGetters} from "vuex";
   import InteractionMixin from './InteractionMixin'
 
-  function isNullOrUndefined(value) {
-    return value === null || value === undefined
-  }
-
   export default {
     name: 'interaction',
     props: ['from', 'context', 'comment', 'offset'],
@@ -37,13 +33,6 @@
       to: function () {
         return this.func?.to()?.getCode()
       },
-      isCurrent: function () {
-        let start = this.func?.start.start
-        // it is still considered as the current element if the cursor is just after the end of the function
-        let stop = this.func?.stop.stop + 1
-        if (isNullOrUndefined(this.cursor) || isNullOrUndefined(start) || isNullOrUndefined(stop)) return false
-        return this.cursor >= start && this.cursor <= stop
-      }
     },
     components: {
       Message,

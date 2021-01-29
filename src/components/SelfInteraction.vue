@@ -1,7 +1,8 @@
 <template>
   <div class="interaction self sync"
        :signature="signature"
-       :style="{transform: 'translateX(' + translateX + 'px)'}"
+       :class="{ 'highlight': isCurrent }"
+       :style="{width: interactionWidth + 'px', transform: 'translateX(' + translateX + 'px)'}"
   >
     <comment v-if="comment" :comment="comment" />
     <self-invocation :signature="signature" :assignee="assignee"/>
@@ -21,7 +22,12 @@
     props: ['from', 'context', 'comment', 'offset'],
     mixins: [InteractionMixin],
     computed: {
-      ...mapGetters(['distance']),
+      ...mapGetters(['distance', 'cursor']),
+      interactionWidth: function () {
+        const leftOfMessage = 30
+        const averageWidthOfChar = 10
+        return averageWidthOfChar * (this.assignee.length + this.signature.length) + leftOfMessage
+      }
     },
     components: {
       Comment,
@@ -33,5 +39,12 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .interaction {
+    /*Keep dashed here otherwise no space is given to the border*/
+    border: 1px dashed transparent;
+  }
+  .interaction.highlight {
+    border-color: inherit;
+  }
 
 </style>
