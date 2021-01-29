@@ -17,6 +17,10 @@
   import Message from './Message'
   import {mapGetters} from "vuex";
 
+  function isNullOrUndefined(value) {
+    return value === null || value === undefined
+  }
+
   export default {
     name: 'interaction',
     props: ['from', 'context', 'comment', 'offset'],
@@ -57,8 +61,9 @@
       },
       isCurrent: function () {
         let start = this.context?.start.start
-        let stop = this.message?.func()?.stop.stop
-        if ((this.cursor === null || this.cursor === undefined) || (start === null || start === undefined) || ! stop) return false
+        // it still consider the current element if the cursor is just after the end of the function
+        let stop = this.message?.func()?.stop.stop + 1
+        if (isNullOrUndefined(this.cursor) || isNullOrUndefined(start) || isNullOrUndefined(stop)) return false
         return this.cursor >= start && this.cursor <= stop
       }
     },

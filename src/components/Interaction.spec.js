@@ -15,7 +15,8 @@ describe('Highlight current interact based on position of cursor', () => {
     ['A.bc', 1, true],
     ['A.bc', 2, true],
     ['A.bc', 3, true],
-    ['A.bc', 4, false],
+    ['A.bc', 4, true],
+    ['A.bc', 5, false],
   ])('Interaction: for code: `%s` if cursor is %s then isCurrent will be %s ', (code, cursor, isCurrent) => {
     const storeConfig = Store()
     storeConfig.state.cursor = cursor
