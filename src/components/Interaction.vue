@@ -16,6 +16,7 @@
   import Occurrence from './Occurrence.vue'
   import Message from './Message'
   import {mapGetters} from "vuex";
+  import InteractionMixin from './InteractionMixin'
 
   function isNullOrUndefined(value) {
     return value === null || value === undefined
@@ -24,43 +25,17 @@
   export default {
     name: 'interaction',
     props: ['from', 'context', 'comment', 'offset'],
+    mixins: [InteractionMixin],
     computed: {
       ...mapGetters(['distance', 'cursor']),
-      message: function () {
-        return this.context?.message()
-      },
       interactionWidth: function () {
         let distance = this.distance(this.to, this.realFrom)
         let safeOffset = this.offset || 0
         // +1 for the added border
         return Math.abs(distance - safeOffset) + 1
       },
-      translateX: function() {
-        // The starting point is always this.from
-        const moveTo = this.rightToLeft ? this.to : this.realFrom
-        return this.distance(moveTo, this.from)
-      },
-      rightToLeft: function () {
-        return this.distance(this.to, this.realFrom) < 0
-      },
-      signature: function () {
-        return this.func?.signature().map(s => s.getCode()).join('.')
-      },
-      assignee: function () {
-        let assignment = this.message?.assignment()
-        if (!assignment) return ''
-        let assignee = (assignment.assignee()?.getCode()) || ''
-        const type = (assignment.type()?.getCode()) || ''
-        return assignee + (type ? ':' + type : '')
-      },
-      realFrom: function() {
-        return this.func?.from()?.getCode() || this.from
-      },
       to: function () {
         return this.func?.to()?.getCode()
-      },
-      func: function() {
-        return this.message?.func()
       },
       isCurrent: function () {
         let start = this.func?.start.start

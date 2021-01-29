@@ -17,7 +17,7 @@ RET ret = A.methodA(a, b) {
   // A comment for self interaction<br>
   // \`POST /order\` <br>
   // [X](http://x.x)
-  selfMethod() {
+  RET ret2 = selfMethod() {
     // A sync interaction after a self interaction
   B.method()
   }
