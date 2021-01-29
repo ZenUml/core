@@ -17,12 +17,20 @@ test('`if` with a block', () => {
 
 test('`if` with comments only', () => {
     let braceBlock = braceBlockOfIf('if(x) { // comment \n\r}');
-    expectText(braceBlock.block().stat()[0].comment()[0].commentContent()).toBe(' comment ')
+    expect(braceBlock.getComment()).toBe(' comment \n')
 })
 
 test('`if` with comments and a block', () => {
     let braceBlock = braceBlockOfIf('if(x) { // comment \n\r doSomething \n\r}');
-    expectText(braceBlock.block().stat()[0].comment()[0].commentContent()).toBe(" comment ")
+    expect(braceBlock.getComment()).toBeNull()
+})
+
+describe('if - incomplete', () => {
+  test('', () => {
+    let rootContext = seqDsl.RootContext('if(x)');
+    expect(rootContext.block().stat()[0].alt().ifBlock().parExpr().condition().getText())
+      .toBe('x')
+  })
 })
 
 function braceBlockOfIf(code) {

@@ -12,7 +12,7 @@ test('Empty `loop`', () => {
 test('`loop` with comments', () => {
     let rootContext = seqDsl.RootContext('while(x) { // comment \n\r}');
     let block = rootContext.block();
-    expect(block.stat()[0].loop().braceBlock().block().stat()[0].comment()[0].commentContent().getText()).toBe(' comment ')
+    expect(block.stat()[0].loop().braceBlock().getComment()).toBe(' comment \n')
 })
 
 test('`loop` with block', () => {

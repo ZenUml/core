@@ -4,9 +4,10 @@ import {Store} from '@/index'
 import LifeLine from '@/components/LifeLine'
 const localVue = createLocalVue()
 localVue.use(Vuex)
-Store.state.code = 'abc'
+const storeConfig = Store()
+storeConfig.state.code = 'abc'
 
-const store = new Vuex.Store(Store)
+const store = new Vuex.Store(storeConfig)
 describe('select a participant', () => {
   it('For VM and HTML and store', async () => {
     store.state.firstInvocations = {
@@ -14,7 +15,7 @@ describe('select a participant', () => {
         top: 3
       }
     }
-    const propsData = {entity: 'A'}
+    const propsData = {entity: {name: 'A'}}
     let lifelineWrapper = mount(LifeLine, {store, localVue, propsData});
     expect(lifelineWrapper.vm.selected).toBeFalsy()
     expect(lifelineWrapper.find('.selected').exists()).toBeFalsy()

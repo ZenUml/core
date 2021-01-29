@@ -5,14 +5,18 @@
       <div class="name"><label>Alt</label></div>
       <label class="condition">[{{condition}}]</label>
     </div>
-    <block :style="blockStyle"
+    <block v-if="alt.ifBlock().braceBlock()"
+           :style="blockStyle"
            :context="alt.ifBlock().braceBlock().block()"
            :from="from"
            :offset="offset"
     ></block>
     <template v-for="(elseIfBlock, index) in alt.elseIfBlock()">
       <div class="divider" :key="index"></div>
-      <div class="header" :key="index+100"><label class="else-if">else if</label> <label class="condition">[{{elseIfBlock.parExpr().expr().getCode()}}]</label></div>
+      <div class="header" :key="index+100">
+        <label class="else-if">else if</label>
+        <label class="condition">[{{elseIfBlock.parExpr().condition().getCode()}}]</label>
+      </div>
       <block :style="blockStyle"
              :context="elseIfBlock.braceBlock().block()"
              :from="from"
@@ -42,7 +46,7 @@
         return this.context.alt()
       },
       condition: function () {
-        return this.alt.ifBlock().parExpr().expr().getCode()
+        return this.alt.ifBlock().parExpr().condition().getCode()
       }
     },
     beforeCreate: function () {

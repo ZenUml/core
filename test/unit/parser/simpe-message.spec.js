@@ -1,5 +1,32 @@
 let seqDsl = require('../../../src/parser/index');
 
+function getMessageContext(code) {
+  let rootContext = seqDsl.RootContext(code);
+  expect(seqDsl.RootContext).not.toBeNull()
+  let message = rootContext.block().stat()[0].message();
+  return message;
+}
+
+describe('message - complete', () => {
+  test('A.m', () => {
+    let message = getMessageContext('A.m');
+    let signatureElement = message.func().signature()[0];
+    expect(signatureElement.getText()).toBe('m')
+  })
+})
+
+describe('message - incomplete', () => {
+  test('A.', () => {
+    let message = getMessageContext('A.')
+    expect(message.func().to().getText()).toBe('A')
+  })
+  test('A.m(', () => {
+    let message = getMessageContext('A.m(');
+    let signatureElement = message.func().signature()[0];
+    expect(signatureElement.getText()).toBe('m(')
+  })
+})
+
 test('seqDsl should parse a simple method with a method call as parameter', () => {
     let rootContext = seqDsl.RootContext('B.method(getCount(1))');
     expect(seqDsl.RootContext).not.toBeNull()

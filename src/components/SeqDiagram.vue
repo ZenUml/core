@@ -1,5 +1,5 @@
 <template>
-  <div class="sequence-diagram" >
+  <div class="sequence-diagram" ref="diagram" >
     <life-line-layer/>
     <message-layer/>
   </div>
@@ -8,12 +8,25 @@
 <script>
   import LifeLineLayer from './LifeLineLayer.vue'
   import MessageLayer from './MessageLayer.vue'
+  import domtoimage from 'dom-to-image-more'
 
   export default {
     name: 'seq-diagram',
     components: {
       LifeLineLayer,
       MessageLayer
+    },
+    methods: {
+      toPng() {
+        return domtoimage.toPng(this.$refs['diagram'])
+      },
+      toBlob() {
+        return domtoimage.toBlob(this.$refs['diagram'])
+      },
+      toJpeg() {
+        // It does not render the 'User' svg icon.
+        return domtoimage.toJpeg(this.$refs['diagram'], { quality: 0.95, bgcolor: 'white' })
+      }
     }
   }
 </script>

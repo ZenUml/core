@@ -2,7 +2,14 @@
 node_modules
 /dist
 
-# gauge files
+# antlr4
+gen
+.antlr
+src/g4/sequenceLexer.tokens
+src/generated-parser/sequenceParser.interp
+src/generated-parser/sequenceLexer.interp
+
+# gauge
 .gauge
 reports
 logs

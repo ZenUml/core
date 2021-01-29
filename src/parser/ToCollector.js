@@ -4,26 +4,28 @@ const sequenceParserListener = require('../generated-parser/sequenceParserListen
 let descendantTos = undefined;
 let isBlind = false;
 const ToCollector = function () {
-    descendantTos = {}
-    sequenceParserListener.sequenceParserListener.call(this)
-    return this
+  descendantTos = new Map()
+  sequenceParserListener.sequenceParserListener.call(this)
+  return this
 };
 
 ToCollector.prototype = Object.create(sequenceParserListener.sequenceParserListener.prototype)
 
 let onTo = function (ctx) {
-    if (isBlind) return;
-    let participant = ctx.getText();
-    // remove leading and trailing quotes (e.g. "a:A" becomes a:A
-    participant = participant.replace(/^"(.*)"$/, '$1');
-    descendantTos[participant] = { width: 0 };
+  if (isBlind) return;
+  let participant = ctx.getText();
+  // remove leading and trailing quotes (e.g. "a:A" becomes a:A
+  participant = participant.replace(/^"(.*)"$/, '$1');
+  descendantTos.set(participant, descendantTos.get(participant) || {});
 };
 
 let onParticipant = function (ctx) {
-    if (isBlind) return;
-    let participant = ctx.name().getText();
-    let width = (ctx.width && ctx.width()) ? Number.parseInt(ctx.width().getText()) : 0;
-    descendantTos[participant] = { width: width };
+  // if(!(ctx?.name())) return;
+  if (isBlind) return;
+  let participant = ctx?.name()?.getText() || 'Missing `Participant`';
+  let stereotype = ctx.stereotype()?.name()?.getText();
+  let width = (ctx.width && ctx.width()) && Number.parseInt(ctx.width().getText()) || undefined;
+  descendantTos.set(participant, descendantTos.get(participant) || {width: width, stereotype: stereotype});
 };
 ToCollector.prototype.enterParticipant = onParticipant
 
@@ -34,35 +36,27 @@ ToCollector.prototype.enterSource = onTo
 ToCollector.prototype.enterTarget = onTo
 
 ToCollector.prototype.enterCreation = function (ctx) {
-    if (isBlind) return;
-    const assignee = ctx.assignment() && ctx.assignment().assignee().getText();
-    const type = ctx.constructor().getText();
-    const participant = assignee ? assignee + ':' + type : type;
-    descendantTos[participant] = { width: 0 };
+  if (isBlind) return;
+  const assignee = ctx.assignment() && ctx.assignment().assignee().getText();
+  const type = ctx.constructor().getText();
+  const participant = assignee ? assignee + ':' + type : type;
+  descendantTos.set(participant, descendantTos.get(participant) || {});
 }
 
 ToCollector.prototype.enterParameters = function () {
-    isBlind = true;
+  isBlind = true;
 }
 
 ToCollector.prototype.exitParameters = function () {
-    isBlind = false;
+  isBlind = false;
 }
-
 const walker = antlr4.tree.ParseTreeWalker.DEFAULT
 
 ToCollector.prototype.getAllTos = function (me) {
-    return function (context) {
-        walker.walk(me, context)
-        return Object.keys(descendantTos)
-    }
-}
-
-ToCollector.prototype.getAllTos2 = function (me) {
-    return function (context) {
-        walker.walk(me, context)
-        return descendantTos
-    }
+  return function (context) {
+    walker.walk(me, context)
+    return descendantTos
+  }
 }
 
 module.exports = ToCollector;

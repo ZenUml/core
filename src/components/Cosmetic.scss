@@ -1,0 +1,124 @@
+/*Color, font and position of labels (not the component itself)*/
+
+.sequence-diagram {
+  font-family: Helvetica, Verdana, serif;
+  font-size: 16px;
+  /* Limit the size when exporting to images */
+  display: inline-block;
+
+  .participant {
+    background: #fff;
+    border: 2px solid rgba(3, 3, 3, 0.05);
+  }
+
+  .occurrence {
+    border: 2px solid rgba(3, 3, 3, 0.05);
+  }
+
+  .message {
+    display: block;
+    border-bottom-color: #808080;
+  }
+
+  .occurrence {
+    background-color: #d3d3d3;
+  }
+
+  .fragment {
+    border-style: solid;
+    border-color: #aaa;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.2);
+    opacity: 0.9;
+
+    .header {
+      .name label {
+        color: #555;
+        font-weight: 700;
+      }
+
+      label.else-if {
+        display: none;
+      }
+    }
+
+    &.alt div.divider {
+      border-bottom-style: dashed;
+      border-bottom-color: #555;
+    }
+  }
+
+  .lifeline .line {
+    border-left-style: dashed;
+    border-left-color: #808080;
+  }
+
+  .selected {
+    border-color: rgba(3, 3, 3, 0.55);
+  }
+
+  .comments {
+    pre, p {
+      margin: 0;
+      padding-left: 5px;
+      line-height: 1.5em;
+    }
+
+    code {
+      font-size: 90%;
+      color: #c7254e;
+      background-color: #f9f2f4;
+      border-radius: 4px;
+    }
+
+    .rest-api .http-method-post {
+      color: #0d4b3b;
+    }
+
+    .rest-api .http-method-get {
+      color: #2f3d89;
+    }
+
+    .rest-api .http-method-delete {
+      color: #7e1e23;
+    }
+
+    ol {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 20px;
+
+      li {
+        list-style-type: none;
+
+        input[type="checkbox"] {
+          margin-left: -1em;
+        }
+      }
+    }
+
+    table {
+      /* Remove spacing between table cells (from Normalize.css) */
+      border-collapse: collapse;
+      border-spacing: 0;
+      empty-cells: show;
+      border: 1px solid #cbcbcb;
+
+      td, th {
+        padding: 0.5em;
+      }
+
+      thead {
+        background-color: #e0e0e0;
+      }
+
+      td {
+        background-color: transparent;
+      }
+    }
+  }
+}

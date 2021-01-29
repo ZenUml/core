@@ -20,7 +20,7 @@
     props: ['from', 'context', 'offset'],
     computed: {
       comment: function () {
-        return this.context.comment() ? this.context.comment().map(c => c.commentContent()?.getCode() || '').join('\n') : ''
+        return this.context.getComment() ? this.context.getComment() : ''
       },
       realFrom: function() {
         return this.context.message().func().from() && this.context.message().func().from().getCode() || this.from;
@@ -32,8 +32,9 @@
           alt: 'FragmentAlt',
           creation: 'Creation',
           message: function () {
-            let isSelf = !that.context.message().func().to() || that.context.message().func().to().getCode() === that.realFrom
-            return isSelf ? 'SelfInteraction' : 'Interaction'
+            return 'Interaction'
+            // let isSelf = !that.context.message().func().to() || that.context.message().func().to().getCode() === that.realFrom
+            // return isSelf ? 'SelfInteraction' : 'Interaction'
           },
           asyncMessage: function () {
             const source = that.context.asyncMessage().source() && that.context.asyncMessage().source().getCode()
@@ -60,25 +61,18 @@
 </script>
 <style>
   .comments {
-    position: relative; /* for Z axis position overlay lifeline at root level */
-    text-align: left;
-    border: solid 1px transparent;
-    background: white;
-    padding: 5px;
-    width: 500px;
     font-size: 0.8em;
     line-height: 1.5em;
     opacity: 0.5;
   }
 
   .comments:hover {
-    color: black;
     opacity: 0.9;
   }
 
   .fragment>.comments {
     width: 100%;
-    border-bottom: solid 1px gray;
+    border-bottom: solid 1px;
     border-top: none;
     border-left: none;
     border-right: none;

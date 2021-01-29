@@ -1,7 +1,7 @@
 <template>
   <div class="life-line-layer">
-    <life-line :entity="starter" :ref="starter" class="starter" :class="{hidden: lifeLineHidden, actor: isStarterAnActor}"/>
-    <life-line v-for="entity in entities" :key="entity" :ref="entity" :entity="entity"/>
+    <life-line :entity="{name: starter}" :ref="starter" class="starter" :class="{hidden: lifeLineHidden, actor: isStarterAnActor}"/>
+    <life-line v-for="entity in entities" :key="entity.name" :ref="entity.name" :entity="entity"/>
   </div>
 </template>
 
@@ -20,7 +20,9 @@
         return this.starter === 'Starter'
       },
       entities () {
-        return this.participants.filter( p => p !== this.starter)
+        return Array.from(this.participants.entries())
+          .map(entry => {return {name: entry[0], stereotype: entry[1].stereotype}})
+          .filter((entry) => entry.name !== this.starter)
       }
     },
     mounted () {
@@ -39,8 +41,8 @@
           width: starterEl.offsetWidth
         }
         this.entities.forEach(entity => {
-          let el = this.$refs[entity][0].$el
-          lifeLineDimensions[entity] = {
+          let el = this.$refs[entity.name][0].$el
+          lifeLineDimensions[entity.name] = {
             left: el.offsetLeft,
             width: el.offsetWidth
           }
@@ -74,7 +76,6 @@
 
   .lifeline.actor >>> .participant {
     text-align: center;
-    font-weight: bold;
     border: 0;
     padding-top: 0;
     padding-bottom: 0;
@@ -83,31 +84,12 @@
   .lifeline.actor >>> .participant::before {
     content: '';
     display: block;
-    height: 45px;
-    width: 88px;
-    background-size: 80px;
+    height: 35px;
+    background-size: 50px;
     background-image: url("../assets/actor.svg");
     background-position: center;
     background-repeat: no-repeat;
   }
 
-  .lifeline.actor > .participant {
-    text-align: center;
-    font-weight: bold;
-    border: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-
-  .lifeline.actor > .participant::before {
-    content: '';
-    display: block;
-    height: 45px;
-    width: 88px;
-    background-size: 80px;
-    background-image: url("../assets/actor.svg");
-    background-position: center;
-    background-repeat: no-repeat;
-  }
 </style>
 

@@ -7,13 +7,13 @@ test('seqDsl should parse the to and method', () => {
 })
 
 test('seqDsl should get all participants', () => {
-    let rootContext = seqDsl.RootContext('A 100\r\nB.method()\r\nnew C()');
+    let rootContext = seqDsl.RootContext('A 100\r\nC.method()\r\nnew B()');
 
     let participants = seqDsl.Participants(rootContext);
-    expect(participants.length).toBe(3)
-    expect(participants[0]).toBe('A')
-    expect(participants[1]).toBe('B')
-    expect(participants[2]).toBe('C')
+    expect(Array.from(participants.keys()).length).toBe(3)
+    expect(Array.from(participants.keys())[0]).toBe('A')
+    expect(Array.from(participants.keys())[1]).toBe('C')
+    expect(Array.from(participants.keys())[2]).toBe('B')
 })
 
 test('seqDsl should parse Starter', () => {
@@ -27,17 +27,16 @@ test('seqDsl should parse Description allowing @', () => {
     let starter = rootContext.starterExp();
     expect(starter.starter().getText()).toBe('X')
 
-    let comment = starter.comment()
-    expect(comment[1].commentContent().getText()).toBe(' Comment allows @ ')
+    let comment = starter.getComment()
+    expect(comment).toBe(' title \r\n Comment allows @ \r\n')
 })
 
 test('Description should allow multi-lines', () => {
   let rootContext = seqDsl.RootContext('//first line\r\n// 2nd line \r\n// 3rd line\r\n  @Starter(X) A a = new A()');
   let starterExp = rootContext.starterExp();
   expect(starterExp.starter().getText()).toBe('X')
-  let comments = rootContext.starterExp().comment()
-  expect(comments[0].commentContent().getText()).toBe('first line')
-  expect(comments[1].commentContent().getText()).toBe(' 2nd line ')
+  let comments = rootContext.starterExp().getComment()
+  expect(comments).toBe('first line\r\n 2nd line \r\n 3rd line\r\n')
 })
 
 test('Async message', () => {

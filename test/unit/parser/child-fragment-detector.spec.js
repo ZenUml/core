@@ -6,7 +6,7 @@ function getDepth(code) {
 }
 
 test('get depth 0', () => {
-    let depth = getDepth('A.method()');
+    let depth = getDepth('//C1\n//C2\nA.method()');
     expect(depth).toBe(0)
 })
 

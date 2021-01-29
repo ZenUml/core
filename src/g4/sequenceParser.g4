@@ -5,11 +5,14 @@ options {
 }
 
 prog
- : (participant)* ((participant EOF) | (starterExp? block comment? EOF))
+ : EOF                        // An empty string is a valid prog
+ | (LT | participant)+ EOF     // swallow '<' so it is not rendered to the diagram
+ | participant* starterExp EOF
+ | participant* starterExp? block EOF // The final complete syntax
  ;
 
 starterExp
- : comment* AT STARTER_LXR OPAR starter? CPAR
+ : AT STARTER_LXR OPAR starter? CPAR
  ;
 
 starter
@@ -17,7 +20,18 @@ starter
  ;
 
 participant
- : comment* name width?
+ : stereotype? name width?
+ | stereotype
+ | name width?
+ ;
+
+stereotype
+ : SOPEN
+ | SOPEN name
+ | SOPEN name GT
+ | SOPEN GT         // Some people may write <<>> first then put in the interface name
+ | SOPEN SCLOSE
+ | SOPEN name SCLOSE
  ;
 
 name
@@ -29,7 +43,7 @@ width
  ;
 
 block
- : (CR* stat CR*)* ret?
+ : (CR* stat CR*)+ ret?
  ;
 
 ret
@@ -41,22 +55,14 @@ value
  ;
 
 stat
- : comment* alt
- | comment* loop
- | comment* creation
- | comment* asyncMessage
- | comment* message
- | comment* anonymousBlock
- | comment+
+ : alt
+ | loop
+ | creation
+ | asyncMessage
+ | message
+ | anonymousBlock
+ | ret
  | OTHER {console.log("unknown char: " + $OTHER.text);}
- ;
-
-comment
- : DS commentContent? COMMENT_END?
- ;
-
-commentContent
- : COMMENT_LXR
  ;
 
 anonymousBlock
@@ -71,13 +77,6 @@ message
  : assignment? func (SCOL | braceBlock)?
  ;
 
-//event
-// : (from ARROW)? to COL payload
-// ;
-//
-//payload
-// : CONTENT_LXR
-// ;
 /**
  * Order is impportant below. This allows the follow three status being valid:
  * a. A - participant
@@ -98,7 +97,8 @@ signature
  ;
 
 invocation
- : (OPAR parameters? CPAR)
+ : OPAR
+ | OPAR parameters? CPAR
  ;
 
 assignment
@@ -159,6 +159,8 @@ alt
 
 ifBlock
  : IF parExpr braceBlock
+ | IF parExpr
+ | IF
  ;
 
 elseIfBlock
@@ -170,7 +172,8 @@ elseBlock
  ;
 
 braceBlock
- : OBRACE (block|comment+) CBRACE
+ : OBRACE block? CBRACE
+ | OBRACE
  ;
 
 loop
@@ -201,6 +204,14 @@ atom
  ;
 
 parExpr
- : OPAR expr CPAR
+ : OPAR condition CPAR
+ | OPAR condition
+ | OPAR CPAR
+ | OPAR
+ ;
+
+condition
+ : atom
+ | expr
  ;
 

@@ -1,79 +1,110 @@
 let seqDsl = require('../../../src/parser/index');
 let ToCollector = require('../../../src/parser/ToCollector')
-function getParticipants2(code) {
-    let rootContext = seqDsl.RootContext(code);
-    const toCollector = new ToCollector();
-    return toCollector.getAllTos2(toCollector)(rootContext);
+
+function getParticipants(code) {
+  let rootContext = seqDsl.RootContext(code);
+  const toCollector = new ToCollector();
+  return toCollector.getAllTos(toCollector)(rootContext);
 }
+test('smoke test', () => {
+  const code = `
+    <<A>> B 1024
+    C.m
+    D->E:m
+    new F
+  `
+  let participants = getParticipants(code);
+  expect(Array.from(participants.keys())).toStrictEqual(['B', 'C', 'D', 'E', 'F'])
+  expect(participants.get('B')).toStrictEqual({stereotype: 'A', 'width': 1024})
+})
 
-describe('ToCollector', () => {
-  describe('should collect participant from the `participant` section', () => {
-    test('A', () => {
-      // `A` will be parsed as a participant which matches `participant EOF`
-      let participants = getParticipants2('A');
-      expect(Object.keys(participants).length).toBe(1)
-      expect(participants.A.width).toBe(0)
-    })
-
-    test('A 1024', () => {
-      let participants = getParticipants2('A 1024');
-      expect(participants.A.width).toBe(1024)
-    })
-  })
-
-  test('A 1024 \\nA 1025 - Same participant can be added only once', () => {
+describe('Plain participants', () => {
+  test.each([
+    'A', 'A\n', 'A\n\r'
+  ])('get participant with width and stereotype undefined', (code) => {
     // `A` will be parsed as a participant which matches `participant EOF`
-    let participants = getParticipants2('A 1024\r\nA 1025');
-    expect(Object.keys(participants).length).toBe(1)
-    expect(participants.A.width).toBe(1025)
+    let participants = getParticipants(code);
+    expect(participants.size).toBe(1)
+    expect(participants.get('A').width).toBeUndefined()
+    expect(participants.get('A').stereotype).toBeUndefined()
+  })
+})
+describe('with width', () => {
+  test.each([
+    ['A 1024', 1024],
+    ['A 1024 A 1025', 1024],
+    ['A 1024\nA 1025', 1024]
+  ])('code:%s => width:%s', (code, width) => {
+    // `A` will be parsed as a participant which matches `participant EOF`
+    let participants = getParticipants(code);
+    expect(participants.size).toBe(1)
+    expect(participants.keys().next().value).toBe('A')
+    expect(participants.values().next().value.width).toBe(width)
+  })
+})
+
+describe('with interface', () => {
+  test.each([
+    ['<<A>> X 1024', 'A'],
+    ['<<A>> X <<B>> X', 'A'], // Ignore redefining
+    ['<<A>> X\n<<B>> X', 'A']
+  ])('code:%s => width:%s', (code, stereotype) => {
+    // `A` will be parsed as a participant which matches `participant EOF`
+    let participants = getParticipants(code);
+    expect(participants.size).toBe(1)
+    expect(participants.keys().next().value).toBe('X')
+    expect(participants.values().next().value.stereotype).toBe(stereotype)
+  })
+})
+
+describe('implicit', () => {
+  describe('from new', () => {
+    test('from new', () => {
+      let participants = getParticipants('new A()');
+      expect(Array.from(participants.keys())[0]).toBe('A')
+    })
+    test('seqDsl should treat creation as a participant - assignment', () => {
+      let participants = getParticipants('a = new A()');
+      expect(participants.size).toBe(1)
+      expect(participants.get('a:A').width).toBeUndefined()
+    })
+    test('seqDsl should treat creation as a participant - assignment with type', () => {
+      let participants = getParticipants('A a = new A()');
+      expect(participants.size).toBe(2)
+      expect(participants.get('a:A').width).toBeUndefined()
+    })
+  })
+
+  describe('from method call', () => {
+    test('seqDsl should get all participants but ignore parameters - method call', () => {
+      let participants = getParticipants('"b:B".method(x.m)');
+      expect(participants.size).toBe(1)
+      expect(participants.get('b:B').width).toBeUndefined()
+    })
+    test('seqDsl should get all participants but ignore parameters - creation', () => {
+      let participants = getParticipants('"b:B".method(new X())');
+      expect(participants.size).toBe(1)
+      expect(participants.get('b:B').width).toBeUndefined()
+    })
+
+    test('seqDsl should get all participants including from', () => {
+      let participants = getParticipants('A->B.m');
+      expect(participants.size).toBe(2)
+    })
+  })
+})
+
+describe('Invalid input', () => {
+  test('<<', () => {
+    let participants = getParticipants('<<');
+    expect(Array.from(participants.keys())[0]).toBe('Missing `Participant`')
   })
 })
 
 
-test('A - one line but with CRs', () => {
-    // `A` will be parsed as a participant
-    let participants = getParticipants2('A\n\r');
-    expect(Object.keys(participants).length).toBe(1)
-    expect(participants.A.width).toBe(0)
-})
 
-test('seqDsl should get all participants', () => {
-    let participants = getParticipants2('"b:B".method()');
-    expect(Object.keys(participants).length).toBe(1)
-    expect(participants['b:B'].width).toBe(0)
-})
 
-test('seqDsl should treat creation as a participant - nake', () => {
-    let participants = getParticipants2('new A()');
-    expect(Object.keys(participants).length).toBe(1)
-    expect(participants.A.width).toBe(0)
-})
 
-test('seqDsl should treat creation as a participant - assignment', () => {
-    let participants = getParticipants2('a = new A()');
-    expect(Object.keys(participants).length).toBe(1)
-    expect(participants['a:A'].width).toBe(0)
-})
 
-test('seqDsl should treat creation as a participant - assignment with type', () => {
-    let participants = getParticipants2('A a = new A()');
-    expect(Object.keys(participants).length).toBe(2)
-    expect(participants['a:A'].width).toBe(0)
-})
 
-test('seqDsl should get all participants but ignore parameters - method call', () => {
-    let participants = getParticipants2('"b:B".method(x.m)');
-    expect(Object.keys(participants).length).toBe(1)
-    expect(participants['b:B'].width).toBe(0)
-})
 
-test('seqDsl should get all participants but ignore parameters - creation', () => {
-    let participants = getParticipants2('"b:B".method(new X())');
-    expect(Object.keys(participants).length).toBe(1)
-    expect(participants['b:B'].width).toBe(0)
-})
-
-test('seqDsl should get all participants including from', () => {
-    let participants = getParticipants2('A->B.m');
-    expect(Object.keys(participants).length).toBe(2)
-})

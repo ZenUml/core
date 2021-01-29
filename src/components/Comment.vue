@@ -20,14 +20,6 @@
 
   // Override function
   const renderer = {
-    table(header, body) {
-      return `
-            <table class="table table-striped">
-              <thead>${header}</thead>
-              <tbody>${body}</tbody>
-            <table>
-            `
-    },
     codespan(code) {
       const endpointPattern = /(GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH)\s+(.+)/ig
       // let found = code.match(endpointPattern)
@@ -66,3 +58,10 @@
     }
   }
 </script>
+
+<style>
+.comments {
+  width: fit-content;
+  white-space: nowrap;
+}
+</style>

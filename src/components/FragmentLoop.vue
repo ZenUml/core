@@ -25,7 +25,7 @@
         return this.context.loop()
       },
       condition: function () {
-        return this.loop.parExpr().expr().getCode()
+        return this.loop.parExpr().condition().getCode()
       }
     },
     beforeCreate: function () {

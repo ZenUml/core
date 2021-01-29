@@ -1,13 +1,18 @@
 <template>
   <div class="interaction sync"
        :signature="signature"
-       :class="{ 'right-to-left':rightToLeft }"
+       :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent, 'self': isSelf }"
        :style="{width: interactionWidth + 'px', transform: 'translateX(' + translateX + 'px)'}">
     <comment v-if="comment" :comment="comment"/>
-    <message :content="signature" :rtl="rightToLeft" type="sync"/>
+    <component v-bind:is="invocation"
+             :content="signature"
+             :assignee="assignee"
+             :rtl="rightToLeft"
+             type="sync"></component>
+<!--    <message :content="signature" :rtl="rightToLeft" type="sync"/>-->
     <!--We reset the offset here to make it simple; re-entering a method should be rare.-->
-    <occurrence :context="message" :participant="to" :offset="0"/>
-    <message class="return" v-if="assignee" :content="assignee" :rtl="!rightToLeft" type="return"/>
+    <occurrence :context="message" :participant="isSelf? realFrom: to" :offset="0"/>
+    <message class="return" v-if="assignee && !isSelf" :content="assignee" :rtl="!rightToLeft" type="return"/>
   </div>
 </template>
 
@@ -16,50 +21,42 @@
   import Occurrence from './Occurrence.vue'
   import Message from './Message'
   import {mapGetters} from "vuex";
+  import InteractionMixin from './InteractionMixin'
+  import SelfInvocation from './SelfInvocation'
 
   export default {
     name: 'interaction',
     props: ['from', 'context', 'comment', 'offset'],
+    mixins: [InteractionMixin],
     computed: {
-      ...mapGetters(['distance']),
-      message: function () {
-        return this.context?.message()
-      },
+      ...mapGetters(['distance', 'cursor']),
       interactionWidth: function () {
+        if (this.context && this.isSelf) {
+          const leftOfMessage = 30
+          const averageWidthOfChar = 10
+          return averageWidthOfChar * (this.assignee?.length + this.signature?.length) + leftOfMessage
+        }
         let distance = this.distance(this.to, this.realFrom)
         let safeOffset = this.offset || 0
-        return Math.abs(distance - safeOffset)
-      },
-      translateX: function() {
-        // The starting point is always this.from
-        const moveTo = this.rightToLeft ? this.to : this.realFrom
-        return this.distance(moveTo, this.from)
-      },
-      rightToLeft: function () {
-        return this.distance(this.to, this.realFrom) < 0
-      },
-      signature: function () {
-        return this.message?.func().signature().map(s => s.getCode()).join('.')
-      },
-      assignee: function () {
-        let assignment = this.message?.assignment()
-        if (!assignment) return ''
-        let assignee = (assignment.assignee()?.getCode()) || ''
-        const type = (assignment.type()?.getCode()) || ''
-        return assignee + (type ? ':' + type : '')
-      },
-      realFrom: function() {
-        return this.message?.func()?.from()?.getCode() || this.from
+        // +1 for the added border
+        return Math.abs(distance - safeOffset) + 1
       },
       to: function () {
-        return this.message?.func()?.to()?.getCode()
+        return this.func?.to()?.getCode()
+      },
+      isSelf: function() {
+        return !this.context?.message().func().to() || this.context?.message().func().to().getCode() === this.realFrom
+      },
+      invocation: function () {
+        // return 'Message'
+        return this.isSelf ? 'SelfInvocation' : 'Message'
       }
     },
     components: {
       Message,
+      SelfInvocation,
       Comment,
       Occurrence
     }
   }
 </script>
-

@@ -1,12 +1,17 @@
 lexer grammar sequenceLexer;
-
-DS
- : '//' -> pushMode(COMMENT_MODE)
- ;
-
-
+channels {
+  COMMENT_CHANNEL
+}
 COL
  : ':' -> pushMode(EVENT)
+ ;
+
+SOPEN
+ : '<<'
+ ;
+
+SCLOSE
+ : '>>'
  ;
 
 ARROW
@@ -78,6 +83,9 @@ SPACE
  : [ \t] -> channel(HIDDEN)
  ;
 
+COMMENT
+ : '//' .*? '\n' -> channel(COMMENT_CHANNEL)
+ ;
 OTHER
  : .
  ;
@@ -89,17 +97,6 @@ EVENT_PAYLOAD_LXR
  ;
 
 EVENT_END
- : [\r\n] -> popMode
- ;
-
-
-mode COMMENT_MODE;
-
-COMMENT_LXR
- : ~[\r\n]+
- ;
-
-COMMENT_END
  : [\r\n] -> popMode
  ;
 

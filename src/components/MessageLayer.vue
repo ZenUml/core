@@ -1,5 +1,5 @@
 <template>
-  <div class="message-layer" >
+  <div class="message-layer" :style="{'width': width + 'px'}">
     <block :context="rootContext.block()" :from="starter" :style="{'padding-left': paddingLeft + 'px'}"/>
   </div>
 </template>
@@ -11,9 +11,13 @@
   export default {
     name: 'message-layer',
     computed: {
-      ...mapGetters(['participants', 'rootContext', 'starter', 'centerOf']),
+      ...mapGetters(['participants', 'rootContext', 'starter', 'centerOf', 'rightOf']),
       paddingLeft () {
         return this.centerOf(this.starter)
+      },
+      width() {
+        let rearParticipant = this.participantNames().pop();
+        return this.rightOf(rearParticipant) + (this.starter === 'Starter' ? 100 : 40)
       }
     },
     mounted () {
@@ -26,10 +30,14 @@
     },
     methods: {
       ...mapMutations(['onMessageLayerMountedOrUpdated']),
+      participantNames() {
+        // According to the doc, computed properties are cached.
+        return Array.from(this.participants.keys())
+      },
       emitFirstInvocations () {
         let firstInvocations = {}
-        this.participants.forEach(participant => {
-          firstInvocations[participant] = this.firstInvocation(participant)
+        this.participantNames().forEach(name => {
+          firstInvocations[name] = this.firstInvocation(name)
         })
         this.onMessageLayerMountedOrUpdated(firstInvocations);
       },
@@ -83,6 +91,14 @@
     position: relative;   /* To provide width for .return */
     margin-top: 10px;     /* To create some margin for cosmetic only */
     margin-bottom: 5px;   /* To create some margin for cosmetic only */
+  }
+
+  .interaction {
+    /*Keep dashed here otherwise no space is given to the border*/
+    border: 1px dashed transparent;
+  }
+  .interaction.highlight {
+    border-color: inherit;
   }
 
   .message {

@@ -1,4 +1,4 @@
-// Generated from ./sequenceParser.g4 by ANTLR 4.5.3
+// Generated from ./sequenceParser.g4 by ANTLR 4.8
 // jshint ignore: start
 var antlr4 = require('antlr4/index');
 
@@ -44,6 +44,15 @@ sequenceParserListener.prototype.enterParticipant = function(ctx) {
 
 // Exit a parse tree produced by sequenceParser#participant.
 sequenceParserListener.prototype.exitParticipant = function(ctx) {
+};
+
+
+// Enter a parse tree produced by sequenceParser#stereotype.
+sequenceParserListener.prototype.enterStereotype = function(ctx) {
+};
+
+// Exit a parse tree produced by sequenceParser#stereotype.
+sequenceParserListener.prototype.exitStereotype = function(ctx) {
 };
 
 
@@ -98,24 +107,6 @@ sequenceParserListener.prototype.enterStat = function(ctx) {
 
 // Exit a parse tree produced by sequenceParser#stat.
 sequenceParserListener.prototype.exitStat = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#comment.
-sequenceParserListener.prototype.enterComment = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#comment.
-sequenceParserListener.prototype.exitComment = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#commentContent.
-sequenceParserListener.prototype.enterCommentContent = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#commentContent.
-sequenceParserListener.prototype.exitCommentContent = function(ctx) {
 };
 
 
@@ -512,6 +503,15 @@ sequenceParserListener.prototype.enterParExpr = function(ctx) {
 
 // Exit a parse tree produced by sequenceParser#parExpr.
 sequenceParserListener.prototype.exitParExpr = function(ctx) {
+};
+
+
+// Enter a parse tree produced by sequenceParser#condition.
+sequenceParserListener.prototype.enterCondition = function(ctx) {
+};
+
+// Exit a parse tree produced by sequenceParser#condition.
+sequenceParserListener.prototype.exitCondition = function(ctx) {
 };
 
 
