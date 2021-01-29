@@ -7,19 +7,6 @@ const localVue = createLocalVue()
 localVue.use(Vuex)
 
 describe('Highlight current interact based on position of cursor', () => {
-  test('Interaction is not current by default', () => {
-    const storeConfig = Store()
-    const store = new Vuex.Store(storeConfig)
-    store.commit('code', 'A.m')
-    const rootContext = store.getters.rootContext
-    const wrapper = shallowMount(Interaction, {
-      store, localVue, propsData: {
-        from: 'A',
-        context: rootContext.block().stat()[0]
-      }
-    });
-    expect(wrapper.vm.isCurrent).toBe(false)
-  })
   test.each([
     [null, false],
     [undefined, false],
