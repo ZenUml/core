@@ -56,6 +56,7 @@ value
 
 stat
  : alt
+ | par
  | loop
  | creation
  | asyncMessage
@@ -63,6 +64,10 @@ stat
  | anonymousBlock
  | ret
  | OTHER {console.log("unknown char: " + $OTHER.text);}
+ ;
+
+par
+ : PAR braceBlock
  ;
 
 anonymousBlock

@@ -53,6 +53,7 @@ RETURN : 'return';
 NEW: 'new';
 STARTER_LXR: 'Starter';
 THEME_LXR: 'Theme';
+PAR : 'par';
 
 DOT
  : '.'

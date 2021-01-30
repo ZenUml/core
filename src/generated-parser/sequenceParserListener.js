@@ -110,6 +110,15 @@ sequenceParserListener.prototype.exitStat = function(ctx) {
 };
 
 
+// Enter a parse tree produced by sequenceParser#par.
+sequenceParserListener.prototype.enterPar = function(ctx) {
+};
+
+// Exit a parse tree produced by sequenceParser#par.
+sequenceParserListener.prototype.exitPar = function(ctx) {
+};
+
+
 // Enter a parse tree produced by sequenceParser#anonymousBlock.
 sequenceParserListener.prototype.enterAnonymousBlock = function(ctx) {
 };
