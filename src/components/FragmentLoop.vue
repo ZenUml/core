@@ -5,7 +5,7 @@
       <div class="name"><label>Loop</label></div>
       <label class="condition">[{{condition}}]</label>
     </div>
-    <block :style="blockStyle"
+    <block :fragment-offset="offsetX"
            :context="loop.braceBlock().block()"
            :from="from"
            :offset="offset"

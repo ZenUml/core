@@ -38,12 +38,6 @@ export default {
         transform: 'translateX(' + this.offsetX * (-1) + 'px)',
         width: (this.boundary.width + 20 * this.depth + 50) + 'px'
       }
-    },
-    blockStyle: function () {
-      return {
-        // 1px for the border of alt fragment
-        marginLeft: (this.offsetX - 1) + 'px'
-      }
     }
   }
 }

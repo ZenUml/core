@@ -2,7 +2,7 @@
   <div class="interaction async"
        :signature="signature"
        :class="{ 'right-to-left':rightToLeft }"
-       :style="{width: Math.abs(interactionWidth) + 'px', left: left + 'px'}">
+       :style="{width: Math.abs(interactionWidth) + 'px', left: left + (fragmentOffset || 0) + 'px'}">
     <comment v-if="comment" :comment="comment"/>
     <message :content="signature" :rtl="rightToLeft" type="async"/>
     <div class="invisible-occurrence"></div>
@@ -16,7 +16,7 @@
 
   export default {
     name: 'interaction-async',
-    props: ['from', 'context', 'comment'],
+    props: ['from', 'context', 'comment', 'fragmentOffset'],
     computed: {
       ...mapGetters(['distance']),
       asyncMessage: function () {

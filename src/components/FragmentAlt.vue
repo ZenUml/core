@@ -6,7 +6,7 @@
       <label class="condition">[{{condition}}]</label>
     </div>
     <block v-if="alt.ifBlock().braceBlock()"
-           :style="blockStyle"
+           :fragment-offset="offsetX"
            :context="alt.ifBlock().braceBlock().block()"
            :from="from"
            :offset="offset"
@@ -17,7 +17,7 @@
         <label class="else-if">else if</label>
         <label class="condition">[{{elseIfBlock.parExpr().condition().getCode()}}]</label>
       </div>
-      <block :style="blockStyle"
+      <block :fragment-offset="offsetX"
              :context="elseIfBlock.braceBlock().block()"
              :from="from"
              :offset="offset"
@@ -26,7 +26,7 @@
     <template v-if="alt.elseBlock()">
       <div class="divider"></div>
       <div class="header"><label>[else]</label></div>
-      <block :style="blockStyle"
+      <block :fragment-offset="offsetX"
              :context="alt.elseBlock().braceBlock().block()"
              :from="from"
              :offset="offset"

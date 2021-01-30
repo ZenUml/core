@@ -30,7 +30,7 @@ export default {
       // The starting point is always this.from
       const moveTo = this.rightToLeft ? this.to : this.realFrom
       // -1 for interaction when right to left
-      return this.distance(moveTo, this.from) + (this.rightToLeft ? -1 : 0)
+      return this.distance(moveTo, this.from) + (this.rightToLeft ? -1 : 0) + this.fragmentOffset
     },
     rightToLeft: function () {
       return this.distance(this.to, this.realFrom) < 0

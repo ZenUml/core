@@ -74,10 +74,11 @@ describe('Translate X', () => {
     const wrapper = shallowMount(Interaction, {
       store, localVue, propsData: {
         from: 'B',
+        fragmentOffset: 7
       }
     });
 
-    expect(wrapper.vm.translateX).toBe(-15)
+    expect(wrapper.vm.translateX).toBe(-8)
   });
 
   // A      B      C
@@ -96,8 +97,9 @@ describe('Translate X', () => {
     const wrapper = shallowMount(Interaction, {
       store, localVue, propsData: {
         from: 'C',
+        fragmentOffset: 7
       }
     });
-    expect(wrapper.vm.translateX).toBe(-26)
+    expect(wrapper.vm.translateX).toBe(-19)
   });
 })

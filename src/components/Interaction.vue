@@ -24,7 +24,7 @@
 
   export default {
     name: 'interaction',
-    props: ['from', 'context', 'comment', 'offset'],
+    props: ['from', 'context', 'comment', 'offset', 'fragmentOffset'],
     mixins: [InteractionMixin],
     computed: {
       ...mapGetters(['distance', 'cursor']),

@@ -1,6 +1,7 @@
 <template>
   <component v-bind:is="subStatement"
              :context="context"
+             :fragment-offset="fragmentOffset || 0"
              :from="from"
              :comment="comment"
              :offset="offset"></component>
@@ -17,7 +18,7 @@
 
   export default {
     name: 'statement',
-    props: ['from', 'context', 'offset'],
+    props: ['from', 'context', 'offset', 'fragmentOffset'],
     computed: {
       comment: function () {
         return this.context.getComment() ? this.context.getComment() : ''
