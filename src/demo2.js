@@ -1,5 +1,16 @@
-// Advanced functionality:
-// Right to left
-// RTL in if
-// RTL in while
-export default `Demo2`
+// Alt
+export default `
+ if(x) {
+   A.m
+   B.m {
+     if(y) {
+       C.m
+       D.m
+       B.m
+     }
+     if(z) {
+       A.m
+     }
+   }
+ }
+`

@@ -7,7 +7,6 @@
 // Assignment
 export default `// comments at the beginning should be ignored
 <<A>> A
-@Starter(User)
 // This is comment
 //
 // |col1|col2|

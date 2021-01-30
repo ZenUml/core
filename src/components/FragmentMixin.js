@@ -1,22 +1,25 @@
-import {Participants, Depth} from '../parser'
-import {mapGetters} from "vuex";
+import {Depth, Participants} from '../parser'
+import {mapGetters} from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters(['leftOf', 'rightOf', 'centerOf']),
+    ...mapGetters(['participants', 'leftOf', 'rightOf', 'centerOf']),
+    localParticipants: function() {
+      // [A, B, C, D] the order may not be the same as appeared on the Lifeline layer
+      return [this.from, ...Array.from(Participants(this.context).keys())]
+    },
+    leftParticipant: function () {
+      const allParticipants = Array.from(this.participants.keys());
+      return allParticipants.find(p => this.localParticipants.includes(p))
+    },
+    rightParticipant: function () {
+      const allParticipants = Array.from(this.participants.keys());
+      return allParticipants.reverse().find(p => this.localParticipants.includes(p))
+    },
     boundary: function () {
-      const that = this
-      let arrayLeft = [this.from, ...Array.from(Participants(this.context).keys())]
-        .map(function (participant) {
-          return that.leftOf(participant)
-        })
-      let arrayRight = [this.from, ...Array.from(Participants(this.context).keys())]
-        .map(function (participant) {
-          return that.rightOf(participant)
-        })
       // shift 20px the fragment is at the top level (starter is a participant)
-      let min = Math.max(20, Math.min(...arrayLeft))
-      let max = Math.max(...arrayRight)
+      let min = this.from === 'Starter' ? 20 : this.leftOf(this.leftParticipant)
+      let max = this.rightOf(this.rightParticipant)
       return {
         min: min,
         max: max,
