@@ -13,6 +13,7 @@
   import InteractionAsync from './Interaction-async.vue'
   import SelfInteractionAsync from './SelfInteraction-async.vue'
   import FragmentAlt from './FragmentAlt.vue'
+  import FragmentPar from './FragmentPar.vue'
   import FragmentLoop from './FragmentLoop.vue'
 
   export default {
@@ -30,6 +31,7 @@
         let dict = {
           loop: 'FragmentLoop',
           alt: 'FragmentAlt',
+          par: 'FragmentPar',
           creation: 'Creation',
           message: 'Interaction',
           asyncMessage: function () {
@@ -50,6 +52,7 @@
       InteractionAsync,
       SelfInteractionAsync,
       FragmentAlt,
+      FragmentPar,
       FragmentLoop
     }
   }

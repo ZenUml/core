@@ -43,7 +43,7 @@ width
  ;
 
 block
- : (CR* stat CR*)+ ret?
+ : stat+ ret?
  ;
 
 ret

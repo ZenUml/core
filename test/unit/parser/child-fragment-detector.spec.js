@@ -29,3 +29,8 @@ test('get depth 2 if / while', () => {
     let depth = getDepth('A.method() { if (c1) { while (c2) { B.m() }}}');
     expect(depth).toBe(2)
 })
+
+test('get depth 3 if / while / par', () => {
+    let depth = getDepth('A.method() { if (c1) { while (c2) { B.m() par { C.m } }}}');
+    expect(depth).toBe(3)
+})
