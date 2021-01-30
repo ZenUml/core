@@ -1,6 +1,9 @@
 // Alt
 export default `
  if(x) {
+   self
+ }
+ if(x) {
    A.m
    B.m {
      if(y) {
