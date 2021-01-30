@@ -11,7 +11,6 @@
   import Creation from './Creation.vue'
   import Interaction from './Interaction.vue'
   import InteractionAsync from './Interaction-async.vue'
-  import SelfInteraction from './SelfInteraction.vue'
   import SelfInteractionAsync from './SelfInteraction-async.vue'
   import FragmentAlt from './FragmentAlt.vue'
   import FragmentLoop from './FragmentLoop.vue'
@@ -32,11 +31,7 @@
           loop: 'FragmentLoop',
           alt: 'FragmentAlt',
           creation: 'Creation',
-          message: function () {
-            return 'Interaction'
-            // let isSelf = !that.context.message().func().to() || that.context.message().func().to().getCode() === that.realFrom
-            // return isSelf ? 'SelfInteraction' : 'Interaction'
-          },
+          message: 'Interaction',
           asyncMessage: function () {
             const source = that.context.asyncMessage().source() && that.context.asyncMessage().source().getCode()
             const target = that.context.asyncMessage().target() && that.context.asyncMessage().target().getCode()
@@ -53,7 +48,6 @@
       Creation,
       Interaction,
       InteractionAsync,
-      SelfInteraction,
       SelfInteractionAsync,
       FragmentAlt,
       FragmentLoop
