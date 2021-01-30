@@ -17,14 +17,11 @@
 
   export default {
     name: 'fragment-par',
-    props: ['from', 'context', 'comment', 'selfCallIndent'],
+    props: ['from', 'context', 'comment', 'selfCallIndent', 'fragmentOffset'],
     mixins: [fragment],
     computed: {
       par: function () {
         return this.context.par()
-      },
-      condition: function () {
-        return ''
       }
     },
     beforeCreate: function () {
@@ -34,7 +31,7 @@
   }
 </script>
 <style>
-  .fragment.par>.block>.statement-container:nth-child(even) {
+  .fragment.par>.block>.statement-container:not(:first-child) {
     border-top: 1px dashed;
   }
 </style>
