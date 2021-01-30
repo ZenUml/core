@@ -9,7 +9,7 @@
              :assignee="assignee"
              :rtl="rightToLeft"
              type="sync"></component>
-    <occurrence :context="message" :participant="isSelf? realFrom : to" :offset="passOnOffset"/>
+    <occurrence :context="message" :participant="isSelf? realFrom : to" :selfCallIndent="passOnOffset"/>
     <message class="return" v-if="assignee && !isSelf" :content="assignee" :rtl="!rightToLeft" type="return"/>
   </div>
 </template>
@@ -24,15 +24,15 @@
 
   export default {
     name: 'interaction',
-    props: ['from', 'context', 'comment', 'offset', 'fragmentOffset'],
+    props: ['from', 'context', 'comment', 'selfCallIndent', 'fragmentOffset'],
     mixins: [InteractionMixin],
     computed: {
       ...mapGetters(['distance', 'cursor']),
       passOnOffset: function() {
-        // Offset is introduced for sync self interaction. Each time we enters a self sync interaction the offset
-        // increases by 6px (half of the width of an execution bar). However, we set the offset back to 0 when
+        // selfCallIndent is introduced for sync self interaction. Each time we enters a self sync interaction the selfCallIndent
+        // increases by 6px (half of the width of an execution bar). However, we set the selfCallIndent back to 0 when
         // it enters a non-self sync interaction.
-        return this.isSelf ? (this.offset || 0) + 6 : 0
+        return this.isSelf ? (this.selfCallIndent || 0) + 6 : 0
       },
       interactionWidth: function () {
         if (this.context && this.isSelf) {
@@ -41,7 +41,7 @@
           return averageWidthOfChar * (this.assignee?.length + this.signature?.length) + leftOfMessage
         }
         let distance = this.distance(this.to, this.realFrom)
-        let safeOffset = this.offset || 0
+        let safeOffset = this.selfCallIndent || 0
         // +1 for the added border
         return Math.abs(distance - safeOffset) + 1
       },

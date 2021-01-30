@@ -4,7 +4,7 @@
              :fragment-offset="fragmentOffset || 0"
              :from="from"
              :comment="comment"
-             :offset="offset"></component>
+             :selfCallIndent="selfCallIndent"></component>
 </template>
 
 <script>
@@ -17,7 +17,7 @@
 
   export default {
     name: 'statement',
-    props: ['from', 'context', 'offset', 'fragmentOffset'],
+    props: ['from', 'context', 'selfCallIndent', 'fragmentOffset'],
     computed: {
       comment: function () {
         return this.context.getComment() ? this.context.getComment() : ''

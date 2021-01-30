@@ -8,7 +8,7 @@
     <block :fragment-offset="offsetX"
            :context="loop.braceBlock().block()"
            :from="from"
-           :offset="offset"
+           :selfCallIndent="selfCallIndent"
     ></block>
   </div>
 </template>
@@ -18,7 +18,7 @@
 
   export default {
     name: 'fragment-loop',
-    props: ['from', 'context', 'comment', 'offset'],
+    props: ['from', 'context', 'comment', 'selfCallIndent'],
     mixins: [fragment],
     computed: {
       loop: function () {

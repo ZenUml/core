@@ -9,7 +9,7 @@
            :fragment-offset="offsetX"
            :context="alt.ifBlock().braceBlock().block()"
            :from="from"
-           :offset="offset"
+           :selfCallIndent="selfCallIndent"
     ></block>
     <template v-for="(elseIfBlock, index) in alt.elseIfBlock()">
       <div class="divider" :key="index"></div>
@@ -20,7 +20,7 @@
       <block :fragment-offset="offsetX"
              :context="elseIfBlock.braceBlock().block()"
              :from="from"
-             :offset="offset"
+             :selfCallIndent="selfCallIndent"
              :key="index+1000"></block>
     </template>
     <template v-if="alt.elseBlock()">
@@ -29,7 +29,7 @@
       <block :fragment-offset="offsetX"
              :context="alt.elseBlock().braceBlock().block()"
              :from="from"
-             :offset="offset"
+             :selfCallIndent="selfCallIndent"
       ></block>
     </template>
   </div>
@@ -39,7 +39,7 @@
   import fragment from './FragmentMixin'
   export default {
     name: 'fragment-alt',
-    props: ['from', 'context', 'comment', 'offset'],
+    props: ['from', 'context', 'comment', 'selfCallIndent'],
     mixins: [fragment],
     computed: {
       alt: function () {

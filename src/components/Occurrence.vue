@@ -3,7 +3,7 @@
     <block v-if="this.context.braceBlock()"
            :context="context.braceBlock().block()"
            :from="participant"
-           :offset="offset"
+           :selfCallIndent="selfCallIndent"
     ></block>
   </div>
 </template>
@@ -11,7 +11,7 @@
 <script type="text/babel">
   export default {
     name: 'occurrence',
-    props: ['context', 'participant', 'offset'],
+    props: ['context', 'participant', 'selfCallIndent'],
     beforeCreate: function () {
       this.$options.components.Block = require('./Block.vue').default
     }

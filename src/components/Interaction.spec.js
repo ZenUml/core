@@ -39,7 +39,7 @@ describe('Interaction width', () => {
     [ 1,  25, 10, 17],
     [-1,  10, 25, 17],
     [-1,  25, 10, 15],
-  ])('If offset is %s and distance is %s, interactionWidth should be %s', (offset, a, b, width) => {
+  ])('If selfCallIndent is %s and distance is %s, interactionWidth should be %s', (selfCallIndent, a, b, width) => {
     Interaction.computed.to = () => 'B';
     const storeConfig = Store()
     storeConfig.getters.centerOf = () => (participant) => {
@@ -50,7 +50,7 @@ describe('Interaction width', () => {
     const wrapper = shallowMount(Interaction, {
       store, localVue, propsData: {
         from: 'A',
-        offset: offset,
+        selfCallIndent: selfCallIndent,
       }
     });
     expect(wrapper.vm.interactionWidth).toBe(width)

@@ -22,7 +22,7 @@
 
   export default {
     name: 'creation',
-    props: ['from', 'context', 'comment', 'offset'],
+    props: ['from', 'context', 'comment', 'selfCallIndent'],
     computed: {
       ...mapGetters(['distance', 'centerOf', 'rightOf', 'leftOf', 'widthOf']),
       creation: function () {
@@ -30,12 +30,12 @@
       },
       interactionWidth: function () {
         let distance = this.distance(this.to, this.from)
-        let safeOffset = this.offset || 0
+        let safeOffset = this.selfCallIndent || 0
         let widthForInteractionBorders = 2
         return Math.abs(distance) - safeOffset + widthForInteractionBorders
       },
       invocationWidth: function () {
-        let safeOffset = this.offset || 0
+        let safeOffset = this.selfCallIndent || 0
 
         if (this.rightToLeft) {
           return this.centerOf(this.from) - this.rightOf(this.to) - safeOffset + 8
