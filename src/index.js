@@ -5,6 +5,17 @@ import SeqDiagram from './components/SeqDiagram.vue'
 import './components/Cosmetic.scss'
 import './components/theme-blue-river.scss'
 
+class Participants2 {
+  _participants
+  constructor(participants) {
+    this._participants = participants
+  }
+
+  names() {
+    return Array.from(this._participants.keys())
+  }
+}
+
 const Store = () => {
   return {
     state: {
@@ -33,7 +44,10 @@ const Store = () => {
         return RootContext(state.code)
       },
       participants: (state, getters) => {
-        return Participants(getters.rootContext)
+        return getters.participants2._participants
+      },
+      participants2: (state, getters) => {
+        return new Participants2(Participants(getters.rootContext))
       },
       centerOf: (state) => (entity) => {
         return state.lifeLineDimensions[entity] &&
