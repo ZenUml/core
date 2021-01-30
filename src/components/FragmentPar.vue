@@ -33,3 +33,8 @@
     }
   }
 </script>
+<style>
+  .fragment.par>.block>.statement-container:nth-child(even) {
+    border-top: 1px dashed;
+  }
+</style>

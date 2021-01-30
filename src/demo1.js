@@ -11,5 +11,6 @@ export default `
   }
   par {
     A.method
+    A.method
   }
 `

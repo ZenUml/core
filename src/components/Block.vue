@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div v-for="(stat, index) in statements" :key="index">
+  <div class="block">
+    <div class="statement-container" v-for="(stat, index) in statements" :key="index">
       <statement :context="stat" :from="from" :selfCallIndent="selfCallIndent" :fragment-offset="fragmentOffset"/>
     </div>
   </div>
@@ -23,6 +23,3 @@
   }
 </script>
 
-<style>
-
-</style>
