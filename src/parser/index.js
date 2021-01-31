@@ -21,10 +21,6 @@ function rootContext(code) {
 }
 
 function getFrom(ctx) {
-  let from = ctx.from()
-  if (from) {
-    return from.getText();
-  }
   // e.g. A.m1 {m2}, ctx = m2:func, parent = m2:message
   let parent = ctx.parentCtx
   while (parent && parent.constructor.name !== 'BraceBlockContext') {
@@ -74,7 +70,7 @@ module.exports =  {
     const toCollector = new ToCollector();
     return toCollector.getAllTos(toCollector)(ctx)
   },
-  getFrom: getFrom,
+  getParentFrom: getFrom,
   Errors: errors,
   /**
    * @return {number} how many levels of embedded fragments

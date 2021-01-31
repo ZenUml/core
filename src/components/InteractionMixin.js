@@ -1,4 +1,4 @@
-import {getFrom} from '../parser'
+import {getParentFrom} from '../parser'
 function isNullOrUndefined(value) {
   return value === null || value === undefined
 }
@@ -9,7 +9,7 @@ export default {
       return this.context?.message()
     },
     realFrom: function() {
-      return getFrom(this.func) || this.starter
+      return getParentFrom(this.func) || this.starter
     },
     func: function() {
       return this.message?.func()

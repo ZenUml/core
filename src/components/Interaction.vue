@@ -21,13 +21,17 @@
   import {mapGetters} from "vuex";
   import InteractionMixin from './InteractionMixin'
   import SelfInvocation from './SelfInvocation'
+  import {getParentFrom} from '../parser'
 
   export default {
     name: 'interaction',
-    props: ['from', 'context', 'comment', 'selfCallIndent', 'fragmentOffset'],
+    props: ['context', 'comment', 'selfCallIndent', 'fragmentOffset'],
     mixins: [InteractionMixin],
     computed: {
       ...mapGetters(['starter', 'distance', 'cursor']),
+      from: function() {
+        return this.func && getParentFrom(this.func) || this.starter
+      },
       passOnOffset: function() {
         // selfCallIndent is introduced for sync self interaction. Each time we enters a self sync interaction the selfCallIndent
         // increases by 6px (half of the width of an execution bar). However, we set the selfCallIndent back to 0 when
