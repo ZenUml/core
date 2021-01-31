@@ -1,7 +1,7 @@
 <template>
   <div class="interaction async"
        :signature="signature"
-       :class="{ 'right-to-left':rightToLeft }"
+       :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent }"
        :style="{width: Math.abs(interactionWidth) + 'px', left: left + (fragmentOffset || 0) + 'px'}">
     <comment v-if="comment" :comment="comment"/>
     <message :content="signature" :rtl="rightToLeft" type="async"/>
@@ -14,11 +14,15 @@
   import Message from './Message'
   import {mapGetters} from "vuex";
 
+  function isNullOrUndefined(value) {
+    return value === null || value === undefined
+  }
+
   export default {
     name: 'interaction-async',
     props: ['from', 'context', 'comment', 'fragmentOffset'],
     computed: {
-      ...mapGetters(['distance']),
+      ...mapGetters(['distance', 'cursor']),
       asyncMessage: function () {
         return this.context.asyncMessage()
       },
@@ -39,6 +43,12 @@
       },
       target: function () {
         return this.asyncMessage.target() && this.asyncMessage.target().getCode()
+      },
+      isCurrent: function () {
+        const start = this.asyncMessage.start.start
+        const stop = this.asyncMessage.stop.stop + 1
+        if (isNullOrUndefined(this.cursor) || isNullOrUndefined(start) || isNullOrUndefined(stop)) return false
+        return this.cursor >= start && this.cursor <= stop
       }
     },
     components: {
