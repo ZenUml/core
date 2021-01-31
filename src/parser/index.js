@@ -20,6 +20,32 @@ function rootContext(code) {
   return parser._syntaxErrors ? null : parser.prog();
 }
 
+function getFrom(ctx) {
+  let from = ctx.from()
+  if (from) {
+    return from.getText();
+  }
+  // e.g. A.m1 {m2}, ctx = m2:func, parent = m2:message
+  let parent = ctx.parentCtx
+  while (parent && parent.constructor.name !== 'BraceBlockContext') {
+    parent = parent.parentCtx
+  }
+  // from = m1
+  let fromMessage = parent?.parentCtx
+  while (fromMessage && fromMessage.constructor.name !== 'MessageContext') {
+    fromMessage = fromMessage.parentCtx
+  }
+  let func = fromMessage?.func()
+  if (!func) {
+    return undefined;
+  }
+  let to = func.to()
+  if (!to) {
+    return getFrom(func);
+  }
+  return to.getText()
+}
+
 antlr4.ParserRuleContext.prototype.getCode = function() {
   return this.parser.getTokenStream().getText(this.getSourceInterval()).replace(/^"(.*)"$/, '$1')
 };
@@ -48,6 +74,7 @@ module.exports =  {
     const toCollector = new ToCollector();
     return toCollector.getAllTos(toCollector)(ctx)
   },
+  getFrom: getFrom,
   Errors: errors,
   /**
    * @return {number} how many levels of embedded fragments

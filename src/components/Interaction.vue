@@ -27,7 +27,7 @@
     props: ['from', 'context', 'comment', 'selfCallIndent', 'fragmentOffset'],
     mixins: [InteractionMixin],
     computed: {
-      ...mapGetters(['distance', 'cursor']),
+      ...mapGetters(['starter', 'distance', 'cursor']),
       passOnOffset: function() {
         // selfCallIndent is introduced for sync self interaction. Each time we enters a self sync interaction the selfCallIndent
         // increases by 6px (half of the width of an execution bar). However, we set the selfCallIndent back to 0 when
