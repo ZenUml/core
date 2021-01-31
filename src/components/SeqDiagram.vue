@@ -1,7 +1,7 @@
 <template>
   <div class="sequence-diagram" ref="diagram" >
     <life-line-layer/>
-    <message-layer/>
+    <message-layer :context="rootContext.block()"/>
   </div>
 </template>
 
@@ -9,12 +9,16 @@
   import LifeLineLayer from './LifeLineLayer.vue'
   import MessageLayer from './MessageLayer.vue'
   import domtoimage from 'dom-to-image-more'
+  import {mapGetters} from 'vuex'
 
   export default {
     name: 'seq-diagram',
     components: {
       LifeLineLayer,
       MessageLayer
+    },
+    computed: {
+      ...mapGetters(['rootContext'])
     },
     methods: {
       toPng() {
