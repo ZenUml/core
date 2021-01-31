@@ -27,10 +27,10 @@
     },
     methods: {
       toPng() {
-        return domtoimage.toPng(this.$refs['diagram'])
+        return domtoimage.toPng(this.$refs['diagram'], {})
       },
       toBlob() {
-        return domtoimage.toBlob(this.$refs['diagram'])
+        return domtoimage.toBlob(this.$refs['diagram'], {})
       },
       toJpeg() {
         // It does not render the 'User' svg icon.
