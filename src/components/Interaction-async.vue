@@ -18,6 +18,7 @@
   import SelfInvocationAsync from './SelfInvocation-async'
   import Message from './Message'
   import {mapGetters} from "vuex";
+  import {getParentFrom} from '../parser'
 
   function isNullOrUndefined(value) {
     return value === null || value === undefined
@@ -25,9 +26,12 @@
 
   export default {
     name: 'interaction-async',
-    props: ['from', 'context', 'comment', 'fragmentOffset'],
+    props: ['starter', 'context', 'comment', 'fragmentOffset'],
     computed: {
       ...mapGetters(['distance', 'cursor']),
+      from: function() {
+        return getParentFrom(this.context) || this.starter
+      },
       asyncMessage: function () {
         return this.context.asyncMessage()
       },
