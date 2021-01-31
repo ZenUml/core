@@ -15,7 +15,7 @@ test('smoke test', () => {
   `
   let participants = getParticipants(code);
   expect(Array.from(participants.keys())).toStrictEqual(['B', 'C', 'D', 'E', 'F'])
-  expect(participants.get('B')).toStrictEqual({stereotype: 'A', 'width': 1024})
+  expect(participants.get('B')).toStrictEqual({explicit: true, groupId: undefined, stereotype: 'A', 'width': 1024})
 })
 
 describe('Plain participants', () => {
@@ -54,6 +54,20 @@ describe('with interface', () => {
     expect(participants.size).toBe(1)
     expect(participants.keys().next().value).toBe('X')
     expect(participants.values().next().value.stereotype).toBe(stereotype)
+  })
+})
+
+describe('with group', () => {
+  test.each([
+    ['group { A }', 'A', 1],
+    ['group group1 { A }', 'A', 'group1'],
+    ['group "group 2" { A }', 'A', 'group 2'],
+  ])('code:%s => participant:%s', (code, participant, groupId) => {
+    // `A` will be parsed as a participant which matches `participant EOF`
+    let participants = getParticipants(code);
+    expect(participants.size).toBe(1)
+    expect(participants.keys().next().value).toBe(participant)
+    expect(participants.values().next().value.groupId).toBe(groupId)
   })
 })
 

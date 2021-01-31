@@ -11,11 +11,11 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
+  import {mapGetters, mapMutations} from 'vuex'
 
   export default {
     name: 'life-line',
-    props: ['entity'],
+    props: ['entity', 'context'],
     computed: {
       ...mapGetters(['firstInvocations', 'onLifelineMounted']),
       selected () {
@@ -32,12 +32,29 @@
       }
     },
     methods: {
+      ...mapMutations(['onLifelinePositioned']),
       onSelect() {
         this.$store.commit('onSelect', this.entity.name)
       }
     },
     mounted() {
+      /* eslint-disable */
+      console.log('mounted el', this.entity.name, this.$el.offsetLeft)
+      this.onLifelinePositioned({
+        name: this.entity.name,
+        dimensions: {
+          left: this.$el.offsetLeft,
+          width: this.$el.offsetWidth
+        }
+      })
       this.onLifelineMounted(this, this.$vnode.elm);
+    },
+    updated() {
+      /* eslint-disable */
+      console.log(arguments)
+    },
+    destroyed() {
+      console.log('destroyed el', this.entity.name, this.$el.offsetLeft)
     }
   }
 </script>

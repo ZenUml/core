@@ -11,7 +11,6 @@
   import Creation from './Creation.vue'
   import Interaction from './Interaction.vue'
   import InteractionAsync from './Interaction-async.vue'
-  import SelfInteractionAsync from './SelfInteraction-async.vue'
   import FragmentAlt from './FragmentAlt.vue'
   import FragmentPar from './FragmentPar.vue'
   import FragmentLoop from './FragmentLoop.vue'
@@ -34,23 +33,16 @@
           par: 'FragmentPar',
           creation: 'Creation',
           message: 'Interaction',
-          asyncMessage: function () {
-            const source = that.context.asyncMessage().source() && that.context.asyncMessage().source().getCode()
-            const target = that.context.asyncMessage().target() && that.context.asyncMessage().target().getCode()
-            let isSelf = source === target
-            return isSelf ? 'SelfInteractionAsync' : 'InteractionAsync'
-          }
+          asyncMessage: 'InteractionAsync'
         }
         let key = Object.keys(dict).find(x => that.context[x]() !== null)
-        let dictElement = dict[key]
-        return typeof dictElement === 'function' ? dictElement() : dictElement
+        return dict[key]
       }
     },
     components: {
       Creation,
       Interaction,
       InteractionAsync,
-      SelfInteractionAsync,
       FragmentAlt,
       FragmentPar,
       FragmentLoop

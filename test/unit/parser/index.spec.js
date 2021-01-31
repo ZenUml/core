@@ -18,13 +18,13 @@ test('seqDsl should get all participants', () => {
 
 test('seqDsl should parse Starter', () => {
     let rootContext = seqDsl.RootContext('@Starter(X) A a = new A()');
-    let starter = rootContext.starterExp();
+    let starter = rootContext.head().starterExp();
     expect(starter.getText()).toBe('@Starter(X)')
 })
 
 test('seqDsl should parse Description allowing @', () => {
     let rootContext = seqDsl.RootContext('// title \r\n// Comment allows @ \r\n @Starter(X) A a = new A()');
-    let starter = rootContext.starterExp();
+    let starter = rootContext.head().starterExp();
     expect(starter.starter().getText()).toBe('X')
 
     let comment = starter.getComment()
@@ -33,9 +33,9 @@ test('seqDsl should parse Description allowing @', () => {
 
 test('Description should allow multi-lines', () => {
   let rootContext = seqDsl.RootContext('//first line\r\n// 2nd line \r\n// 3rd line\r\n  @Starter(X) A a = new A()');
-  let starterExp = rootContext.starterExp();
+  let starterExp = rootContext.head().starterExp();
   expect(starterExp.starter().getText()).toBe('X')
-  let comments = rootContext.starterExp().getComment()
+  let comments = rootContext.head().starterExp().getComment()
   expect(comments).toBe('first line\r\n 2nd line \r\n 3rd line\r\n')
 })
 

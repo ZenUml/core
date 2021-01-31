@@ -1,6 +1,6 @@
 <template>
   <div class="message-layer" :style="{'width': width + 'px'}">
-    <block :context="rootContext.block()" :from="starter" :style="{'padding-left': paddingLeft + 'px'}"/>
+    <block :context="context" :from="starter" :style="{'padding-left': paddingLeft + 'px'}"/>
   </div>
 </template>
 
@@ -10,8 +10,9 @@
 
   export default {
     name: 'message-layer',
+    props: ['context'],
     computed: {
-      ...mapGetters(['participants', 'rootContext', 'starter', 'centerOf', 'rightOf']),
+      ...mapGetters(['participants', 'starter', 'centerOf', 'rightOf']),
       paddingLeft () {
         return this.centerOf(this.starter)
       },
@@ -21,9 +22,7 @@
       }
     },
     mounted () {
-      // We don't need to emitFirstInvocations here because `updated` will be called
-      // after lifeline-layer is mounted (updating lifeLineDimensions).
-      // Messages layout is NOT finalised after the first round of mounting.
+      this.emitFirstInvocations()
     },
     updated () {
       this.emitFirstInvocations()

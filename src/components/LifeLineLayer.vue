@@ -1,57 +1,56 @@
 <template>
   <div class="life-line-layer">
-    <life-line :entity="{name: starter}" :ref="starter" class="starter" :class="{hidden: lifeLineHidden, actor: isStarterAnActor}"/>
+    <life-line :entity="{name: starter}" :ref="starter" class="starter" :class="{hidden: !isStarterExplicitlyDefined, actor: isStarterAnActor}"/>
+    <template v-for="(child, index) in groupAndParticipants">
+      <component :key="index" v-bind:is="lifelineComponent(child)" :context="child" :entity="{name: child.name && child.name() && child.name().getText()}"/>
+    </template>
     <life-line v-for="entity in entities" :key="entity.name" :ref="entity.name" :entity="entity"/>
   </div>
 </template>
 
 <script>
-  import {mapGetters, mapMutations} from 'vuex'
+  import {mapGetters} from 'vuex'
   import LifeLine from './LifeLine.vue'
+  import LifeLineGroup from './LifeLineGroup'
 
   export default {
     name: 'life-line-layer',
+    props: ['context'],
     computed: {
       ...mapGetters(['starter', 'participants']),
       isStarterAnActor() {
         return this.starter === "User" || this.starter === "Actor";
       },
-      lifeLineHidden () {
-        return this.starter === 'Starter'
+      isStarterExplicitlyDefined() {
+        return !!this.context?.starterExp()
       },
       entities () {
         return Array.from(this.participants.entries())
-          .map(entry => {return {name: entry[0], stereotype: entry[1].stereotype}})
-          .filter((entry) => entry.name !== this.starter)
-      }
-    },
-    mounted () {
-      this.emitDimensions()
-    },
-    updated () {
-      this.emitDimensions()
-    },
-    methods: {
-      ...mapMutations(['onLifeLineLayerMountedOrUpdated']),
-      emitDimensions () {
-        let lifeLineDimensions = {}
-        let starterEl = this.$refs[this.starter].$el
-        lifeLineDimensions[this.starter] = {
-          left: starterEl.offsetLeft,
-          width: starterEl.offsetWidth
-        }
-        this.entities.forEach(entity => {
-          let el = this.$refs[entity.name][0].$el
-          lifeLineDimensions[entity.name] = {
-            left: el.offsetLeft,
-            width: el.offsetWidth
+          .map(entry => {return {name: entry[0], stereotype: entry[1].stereotype, explicit: !!entry[1].explicit}})
+          .filter((entry) => entry.name !== this.starter && !entry.explicit)
+      },
+      groupAndParticipants() {
+        /* eslint-disable */
+        console.log(this.context?.children)
+
+        return this.context?.children.filter(c => c.constructor.name === 'GroupContext' || c.constructor.name === 'ParticipantContext')
+      },
+      lifelineComponent() {
+        // const that = this
+        return function (child) {
+          /* eslint-disable */
+          console.log('!!!!', child.constructor.name)
+          if (child.constructor.name === 'GroupContext') {
+            return 'LifeLineGroup'
+          } else {
+            return 'LifeLine'
           }
-        })
-        this.onLifeLineLayerMountedOrUpdated(lifeLineDimensions)
+        }
       }
     },
     components: {
-      LifeLine
+      LifeLine,
+      LifeLineGroup
     }
   }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div class="sequence-diagram" ref="diagram" >
-    <life-line-layer/>
-    <message-layer/>
+    <life-line-layer :context="rootContext.head()"/>
+    <message-layer :context="rootContext.block()" :key="generation"/>
   </div>
 </template>
 
@@ -9,24 +9,36 @@
   import LifeLineLayer from './LifeLineLayer.vue'
   import MessageLayer from './MessageLayer.vue'
   import domtoimage from 'dom-to-image-more'
+  import {mapGetters} from 'vuex'
 
   export default {
     name: 'seq-diagram',
+    data: function() {
+      return {
+        generation: 0
+      }
+    },
     components: {
       LifeLineLayer,
       MessageLayer
     },
+    computed: {
+      ...mapGetters(['rootContext'])
+    },
     methods: {
       toPng() {
-        return domtoimage.toPng(this.$refs['diagram'])
+        return domtoimage.toPng(this.$refs['diagram'], {})
       },
       toBlob() {
-        return domtoimage.toBlob(this.$refs['diagram'])
+        return domtoimage.toBlob(this.$refs['diagram'], {})
       },
       toJpeg() {
         // It does not render the 'User' svg icon.
         return domtoimage.toJpeg(this.$refs['diagram'], { quality: 0.95, bgcolor: 'white' })
       }
+    },
+    mounted() {
+      this.generation++
     }
   }
 </script>

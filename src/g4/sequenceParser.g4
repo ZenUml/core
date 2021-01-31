@@ -5,10 +5,21 @@ options {
 }
 
 prog
- : EOF                        // An empty string is a valid prog
- | (LT | participant)+ EOF     // swallow '<' so it is not rendered to the diagram
- | participant* starterExp EOF
- | participant* starterExp? block EOF // The final complete syntax
+ : EOF                            // An empty string is a valid prog
+// | LT EOF                       // Parser auto recover from this
+ | head EOF
+ | head? block EOF
+ ;
+
+head
+ : (group | participant)+
+ | (group | participant)* starterExp
+ ;
+
+group
+ : GROUP name?
+ | GROUP name? OBRACE
+ | GROUP name? OBRACE participant* CBRACE
  ;
 
 starterExp
