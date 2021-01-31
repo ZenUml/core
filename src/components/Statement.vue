@@ -22,9 +22,6 @@
       comment: function () {
         return this.context.getComment() ? this.context.getComment() : ''
       },
-      realFrom: function() {
-        return this.context.message().func().from() && this.context.message().func().from().getCode() || this.from;
-      },
       subStatement: function () {
         let that = this
         let dict = {
