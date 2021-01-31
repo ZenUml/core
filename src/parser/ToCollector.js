@@ -1,8 +1,27 @@
 const antlr4 = require('antlr4/index');
 const sequenceParserListener = require('../generated-parser/sequenceParserListener');
+(function() {
+  if ( typeof Object.id == "undefined" ) {
+    var id = 0;
 
+    Object.id = function(o) {
+      if ( typeof o.__uniqueid == "undefined" ) {
+        Object.defineProperty(o, "__uniqueid", {
+          value: ++id,
+          enumerable: false,
+          // This could go either way, depending on your
+          // interpretation of what an "id" is
+          writable: false
+        });
+      }
+
+      return o.__uniqueid;
+    };
+  }
+})();
 let descendantTos = undefined;
 let isBlind = false;
+let groupId = undefined;
 const ToCollector = function () {
   descendantTos = new Map()
   sequenceParserListener.sequenceParserListener.call(this)
@@ -25,7 +44,7 @@ let onParticipant = function (ctx) {
   let participant = ctx?.name()?.getText() || 'Missing `Participant`';
   let stereotype = ctx.stereotype()?.name()?.getText();
   let width = (ctx.width && ctx.width()) && Number.parseInt(ctx.width().getText()) || undefined;
-  descendantTos.set(participant, descendantTos.get(participant) || {width: width, stereotype: stereotype});
+  descendantTos.set(participant, descendantTos.get(participant) || {width, stereotype, groupId});
 };
 ToCollector.prototype.enterParticipant = onParticipant
 
@@ -49,6 +68,16 @@ ToCollector.prototype.enterParameters = function () {
 
 ToCollector.prototype.exitParameters = function () {
   isBlind = false;
+}
+
+ToCollector.prototype.enterGroup = function (ctx) {
+  // group { A } => groupId = 1
+  // group group1 { A } => groupId = "group1"
+  groupId = ctx.name()?.getText().replace(/^"|"$/g, '') || Object.id(ctx);
+}
+
+ToCollector.prototype.exitGroup = function () {
+  groupId = undefined;
 }
 const walker = antlr4.tree.ParseTreeWalker.DEFAULT
 

@@ -54,6 +54,7 @@ NEW: 'new';
 STARTER_LXR: 'Starter';
 THEME_LXR: 'Theme';
 PAR : 'par';
+GROUP : 'group';
 
 DOT
  : '.'
