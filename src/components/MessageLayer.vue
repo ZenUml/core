@@ -22,9 +22,7 @@
       }
     },
     mounted () {
-      // We don't need to emitFirstInvocations here because `updated` will be called
-      // after lifeline-layer is mounted (updating lifeLineDimensions).
-      // Messages layout is NOT finalised after the first round of mounting.
+      this.emitFirstInvocations()
     },
     updated () {
       this.emitFirstInvocations()
