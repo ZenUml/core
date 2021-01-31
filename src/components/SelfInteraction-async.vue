@@ -25,7 +25,7 @@
         return this.distance(this.to, this.from) + (this.fragmentOffset || 0)
       },
       signature: function () {
-        return this.asyncMessage.content().getCode().replace(/^:+/g, '')
+        return this.asyncMessage.content().getCode()
       },
       to: function () {
         return this.asyncMessage.target().getCode()
