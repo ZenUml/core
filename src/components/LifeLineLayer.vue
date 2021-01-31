@@ -4,7 +4,7 @@
     <template v-for="(child, index) in children">
       <component :key="index" v-bind:is="lifelineComponent(child)" :context="child" :entity="{name: child.name() && child.name().getText()}"/>
     </template>
-<!--    <life-line v-for="entity in entities" :key="entity.name" :ref="entity.name" :entity="entity"/>-->
+    <life-line v-for="entity in entities" :key="entity.name" :ref="entity.name" :entity="entity"/>
   </div>
 </template>
 
@@ -26,8 +26,8 @@
       },
       entities () {
         return Array.from(this.participants.entries())
-          .map(entry => {return {name: entry[0], stereotype: entry[1].stereotype}})
-          .filter((entry) => entry.name !== this.starter)
+          .map(entry => {return {name: entry[0], stereotype: entry[1].stereotype, explicit: !!entry[1].explicit}})
+          .filter((entry) => entry.name !== this.starter && !entry.explicit)
       },
       children() {
         /* eslint-disable */

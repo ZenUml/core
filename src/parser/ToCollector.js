@@ -45,7 +45,8 @@ let onParticipant = function (ctx) {
   let participant = ctx?.name()?.getText() || 'Missing `Participant`';
   let stereotype = ctx.stereotype()?.name()?.getText();
   let width = (ctx.width && ctx.width()) && Number.parseInt(ctx.width().getText()) || undefined;
-  descendantTos.set(participant, descendantTos.get(participant) || {width, stereotype, groupId});
+  const explicit = true;
+  descendantTos.set(participant, descendantTos.get(participant) || {width, stereotype, groupId, explicit});
 };
 ToCollector.prototype.enterParticipant = onParticipant
 

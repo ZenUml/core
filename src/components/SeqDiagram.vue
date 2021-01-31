@@ -1,13 +1,11 @@
 <template>
   <div class="sequence-diagram" ref="diagram" >
     <life-line-layer :context="rootContext.head()"/>
-    <div ref="container" />
-<!--    <message-layer :context="rootContext.block()"/>-->
+    <message-layer ref="messageLayer" :context="rootContext.block()" :key="generation"/>
   </div>
 </template>
 
 <script>
-  import Vue from 'vue'
   import LifeLineLayer from './LifeLineLayer.vue'
   import MessageLayer from './MessageLayer.vue'
   import domtoimage from 'dom-to-image-more'
@@ -15,6 +13,11 @@
 
   export default {
     name: 'seq-diagram',
+    data: function() {
+      return {
+        generation: 0
+      }
+    },
     components: {
       LifeLineLayer,
       MessageLayer
@@ -35,14 +38,7 @@
       }
     },
     mounted() {
-      const MessageLayerClass = Vue.extend(MessageLayer)
-      const instance = new MessageLayerClass({
-        propsData: {
-          context: this.rootContext.block()
-        },
-        store: this.$store
-      })
-      instance.$mount(this.$refs['container'])
+      this.generation++
     }
   }
 </script>
