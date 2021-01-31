@@ -1,13 +1,17 @@
 <template>
   <div class="life-line-layer">
     <life-line :entity="{name: starter}" :ref="starter" class="starter" :class="{hidden: !isStarterExplicitlyDefined, actor: isStarterAnActor}"/>
-    <life-line v-for="entity in entities" :key="entity.name" :ref="entity.name" :entity="entity"/>
+    <template v-for="(child, index) in children">
+      <component :key="index" v-bind:is="lifelineComponent(child)" :context="child" :entity="{name: child.name() && child.name().getText()}"/>
+    </template>
+<!--    <life-line v-for="entity in entities" :key="entity.name" :ref="entity.name" :entity="entity"/>-->
   </div>
 </template>
 
 <script>
   import {mapGetters, mapMutations} from 'vuex'
   import LifeLine from './LifeLine.vue'
+  import LifeLineGroup from './LifeLineGroup'
 
   export default {
     name: 'life-line-layer',
@@ -24,6 +28,24 @@
         return Array.from(this.participants.entries())
           .map(entry => {return {name: entry[0], stereotype: entry[1].stereotype}})
           .filter((entry) => entry.name !== this.starter)
+      },
+      children() {
+        /* eslint-disable */
+        console.log(this.context?.children)
+
+        return this.context?.children
+      },
+      lifelineComponent() {
+        // const that = this
+        return function (child) {
+          /* eslint-disable */
+          console.log('!!!!', child.constructor.name)
+          if (child.constructor.name === 'GroupContext') {
+            return 'LifeLineGroup'
+          } else {
+            return 'LifeLine'
+          }
+        }
       }
     },
     mounted () {
@@ -35,24 +57,25 @@
     methods: {
       ...mapMutations(['onLifeLineLayerMountedOrUpdated']),
       emitDimensions () {
-        let lifeLineDimensions = {}
-        let starterEl = this.$refs[this.starter].$el
-        lifeLineDimensions[this.starter] = {
-          left: starterEl.offsetLeft,
-          width: starterEl.offsetWidth
-        }
-        this.entities.forEach(entity => {
-          let el = this.$refs[entity.name][0].$el
-          lifeLineDimensions[entity.name] = {
-            left: el.offsetLeft,
-            width: el.offsetWidth
-          }
-        })
-        this.onLifeLineLayerMountedOrUpdated(lifeLineDimensions)
+        // let lifeLineDimensions = {}
+        // let starterEl = this.$refs[this.starter].$el
+        // lifeLineDimensions[this.starter] = {
+        //   left: starterEl.offsetLeft,
+        //   width: starterEl.offsetWidth
+        // }
+        // this.entities.forEach(entity => {
+        //   let el = this.$refs[entity.name][0].$el
+        //   lifeLineDimensions[entity.name] = {
+        //     left: el.offsetLeft,
+        //     width: el.offsetWidth
+        //   }
+        // })
+        // this.onLifeLineLayerMountedOrUpdated(lifeLineDimensions)
       }
     },
     components: {
-      LifeLine
+      LifeLine,
+      LifeLineGroup
     }
   }
 </script>

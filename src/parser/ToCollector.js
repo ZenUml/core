@@ -5,6 +5,7 @@ const sequenceParserListener = require('../generated-parser/sequenceParserListen
     var id = 0;
 
     Object.id = function(o) {
+      if (!o) return 0;
       if ( typeof o.__uniqueid == "undefined" ) {
         Object.defineProperty(o, "__uniqueid", {
           value: ++id,

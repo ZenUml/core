@@ -1,11 +1,13 @@
 <template>
   <div class="sequence-diagram" ref="diagram" >
     <life-line-layer :context="rootContext.head()"/>
-    <message-layer :context="rootContext.block()"/>
+    <div ref="container" />
+<!--    <message-layer :context="rootContext.block()"/>-->
   </div>
 </template>
 
 <script>
+  import Vue from 'vue'
   import LifeLineLayer from './LifeLineLayer.vue'
   import MessageLayer from './MessageLayer.vue'
   import domtoimage from 'dom-to-image-more'
@@ -31,6 +33,16 @@
         // It does not render the 'User' svg icon.
         return domtoimage.toJpeg(this.$refs['diagram'], { quality: 0.95, bgcolor: 'white' })
       }
+    },
+    mounted() {
+      const MessageLayerClass = Vue.extend(MessageLayer)
+      const instance = new MessageLayerClass({
+        propsData: {
+          context: this.rootContext.block()
+        },
+        store: this.$store
+      })
+      instance.$mount(this.$refs['container'])
     }
   }
 </script>

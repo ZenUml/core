@@ -10,7 +10,7 @@ const Store = () => {
     state: {
       // 'lifeLineDimensions' is decided by code and browser's behavior.
       // It cannot be a simple getter (which is a computed value of a state property).
-      lifeLineDimensions: {},
+      lifeLineDimensions: new Map(),
       firstInvocations: {},
       code: '',
       events: [],
@@ -36,18 +36,18 @@ const Store = () => {
         return Participants(getters.rootContext)
       },
       centerOf: (state) => (entity) => {
-        return state.lifeLineDimensions[entity] &&
-          (state.lifeLineDimensions[entity].left + state.lifeLineDimensions[entity].width / 2)
+        return state.lifeLineDimensions.get(entity) &&
+          (state.lifeLineDimensions.get(entity).left + state.lifeLineDimensions.get(entity).width / 2)
       },
       leftOf: (state) => (entity) => {
-        return state.lifeLineDimensions[entity] && state.lifeLineDimensions[entity].left
+        return state.lifeLineDimensions.get(entity) && state.lifeLineDimensions.get(entity).left
       },
       rightOf: (state) => (entity) => {
-        return state.lifeLineDimensions[entity] &&
-          (state.lifeLineDimensions[entity].left + state.lifeLineDimensions[entity].width)
+        return state.lifeLineDimensions.get(entity) &&
+          (state.lifeLineDimensions.get(entity).left + state.lifeLineDimensions.get(entity).width)
       },
       widthOf: (state) => (entity) => {
-        return state.lifeLineDimensions[entity] && state.lifeLineDimensions[entity].width
+        return state.lifeLineDimensions.get(entity) && state.lifeLineDimensions.get(entity).width
       },
       // deprecated: It should return centerOf(to) - centerOf(from)
       distance: (state, getters) => (from, to) => {
@@ -61,6 +61,9 @@ const Store = () => {
       },
       event: function (state, payload) {
         state.events.push(payload)
+      },
+      onLifelinePositioned: function(state, payload) {
+        state.lifeLineDimensions.set(payload.name, payload.dimensions)
       },
       onLifeLineLayerMountedOrUpdated: function (state, payload) {
         state.lifeLineDimensions = payload
