@@ -10,7 +10,6 @@
       <block v-if="alt.ifBlock().braceBlock()"
              :fragment-offset="offsetX"
              :context="alt.ifBlock().braceBlock().block()"
-             :from="from"
              :selfCallIndent="selfCallIndent"
       ></block>
     </div>
@@ -22,7 +21,6 @@
         </div>
         <block :fragment-offset="offsetX"
                :context="elseIfBlock.braceBlock().block()"
-               :from="from"
                :selfCallIndent="selfCallIndent"
                :key="index+2000"></block>
       </div>
@@ -32,7 +30,6 @@
         <div class="header"><label>[else]</label></div>
         <block :fragment-offset="offsetX"
                :context="alt.elseBlock().braceBlock().block()"
-               :from="from"
                :selfCallIndent="selfCallIndent"
         ></block>
       </div>

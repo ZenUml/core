@@ -1,6 +1,6 @@
 <template>
   <div class="message-layer" :style="{'width': width + 'px'}">
-    <block :context="context" :from="starter" :style="{'padding-left': paddingLeft + 'px'}"/>
+    <block :context="context" :style="{'padding-left': paddingLeft + 'px'}"/>
   </div>
 </template>
 

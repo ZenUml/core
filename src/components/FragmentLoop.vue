@@ -7,7 +7,6 @@
     </div>
     <block :fragment-offset="offsetX"
            :context="loop.braceBlock().block()"
-           :from="from"
            :selfCallIndent="selfCallIndent"
     ></block>
   </div>
