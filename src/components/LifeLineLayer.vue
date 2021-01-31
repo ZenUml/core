@@ -1,6 +1,6 @@
 <template>
   <div class="life-line-layer">
-    <life-line :entity="{name: starter}" :ref="starter" class="starter" :class="{hidden: lifeLineHidden, actor: isStarterAnActor}"/>
+    <life-line :entity="{name: starter}" :ref="starter" class="starter" :class="{hidden: !isStarterExplicitlyDefined, actor: isStarterAnActor}"/>
     <life-line v-for="entity in entities" :key="entity.name" :ref="entity.name" :entity="entity"/>
   </div>
 </template>
@@ -11,13 +11,14 @@
 
   export default {
     name: 'life-line-layer',
+    props: ['context'],
     computed: {
       ...mapGetters(['starter', 'participants']),
       isStarterAnActor() {
         return this.starter === "User" || this.starter === "Actor";
       },
-      lifeLineHidden () {
-        return this.starter === 'Starter'
+      isStarterExplicitlyDefined() {
+        return !!this.context?.starterExp()
       },
       entities () {
         return Array.from(this.participants.entries())
