@@ -12,6 +12,7 @@ export default `// comments at the beginning should be ignored
 // |col1|col2|
 // |----|----|
 // |val1|val2|
+@Starter(User)
 RET ret = A.methodA(a, b) {
   // A comment for self interaction<br>
   // \`POST /order\` <br>

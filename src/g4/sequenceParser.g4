@@ -7,9 +7,13 @@ options {
 prog
  : EOF                            // An empty string is a valid prog
 // | LT EOF                       // Parser auto recover from this
- | (group | participant)+ EOF
- | (group | participant)* starterExp EOF
- | (group | participant)* starterExp? block EOF // The final complete syntax
+ | head EOF
+ | head? block EOF
+ ;
+
+head
+ : (group | participant)+
+ | (group | participant)* starterExp
  ;
 
 group
