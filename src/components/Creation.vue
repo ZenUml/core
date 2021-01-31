@@ -19,12 +19,16 @@
   import Comment from './Comment.vue'
   import Message from './Message'
   import Occurrence from './Occurrence'
+  import {getParentFrom} from '../parser'
 
   export default {
     name: 'creation',
-    props: ['from', 'context', 'comment', 'selfCallIndent'],
+    props: ['starter', 'context', 'comment', 'selfCallIndent'],
     computed: {
       ...mapGetters(['distance', 'centerOf', 'rightOf', 'leftOf', 'widthOf']),
+      from: function() {
+        return getParentFrom(this.context) || this.starter
+      },
       creation: function () {
         return this.context.creation()
       },
