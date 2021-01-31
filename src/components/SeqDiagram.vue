@@ -1,7 +1,7 @@
 <template>
   <div class="sequence-diagram" ref="diagram" >
     <life-line-layer :context="rootContext.head()"/>
-    <message-layer ref="messageLayer" :context="rootContext.block()" :key="generation"/>
+    <message-layer :context="rootContext.block()" :key="generation"/>
   </div>
 </template>
 
