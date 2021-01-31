@@ -15,12 +15,16 @@
 
 <script>
   import fragment from './FragmentMixin'
+  import {getParentFrom} from '../parser'
 
   export default {
     name: 'fragment-loop',
-    props: ['from', 'context', 'comment', 'selfCallIndent', 'fragmentOffset'],
+    props: ['starter', 'context', 'comment', 'selfCallIndent', 'fragmentOffset'],
     mixins: [fragment],
     computed: {
+      from: function() {
+        return getParentFrom(this.context) || this.starter
+      },
       loop: function () {
         return this.context.loop()
       },

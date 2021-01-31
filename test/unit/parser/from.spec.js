@@ -39,7 +39,9 @@ describe('Get `from` from context', () => {
     let rootContext = seqDsl.RootContext('A.m1 { if(x) { m2 }}');
     let m1 = rootContext.block().stat()[0].message()
     expectText(m1).toBe('A.m1{if(x){m2}}')
-    let m2 = m1.braceBlock().block().stat()[0].alt().ifBlock().braceBlock().block().stat()[0].message();
+    let alt = m1.braceBlock().block().stat()[0].alt()
+    expect(getParentFrom(alt)).toBe('A')
+    let m2 = alt.ifBlock().braceBlock().block().stat()[0].message();
     expectText(m2).toBe('m2')
     expect(getParentFrom(m2.func())).toBe('A')
   })

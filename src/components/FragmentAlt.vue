@@ -42,11 +42,16 @@
 
 <script>
   import fragment from './FragmentMixin'
+  import {getParentFrom} from '../parser'
+
   export default {
     name: 'fragment-alt',
-    props: ['from', 'context', 'comment', 'selfCallIndent', 'fragmentOffset'],
+    props: ['starter', 'context', 'comment', 'selfCallIndent', 'fragmentOffset'],
     mixins: [fragment],
     computed: {
+      from: function() {
+        return getParentFrom(this.context) || this.starter
+      },
       alt: function () {
         return this.context.alt()
       },
