@@ -15,7 +15,7 @@ test('smoke test', () => {
   `
   let participants = getParticipants(code);
   expect(Array.from(participants.keys())).toStrictEqual(['B', 'C', 'D', 'E', 'F'])
-  expect(participants.get('B')).toStrictEqual({groupId: undefined, stereotype: 'A', 'width': 1024})
+  expect(participants.get('B')).toStrictEqual({explicit: true, groupId: undefined, stereotype: 'A', 'width': 1024})
 })
 
 describe('Plain participants', () => {
