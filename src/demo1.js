@@ -6,6 +6,10 @@
 // Nested method
 // Assignment
 export default `// comments at the beginning should be ignored
+group {
+  B
+  C
+}
 <<A>> A
 // This is comment
 //

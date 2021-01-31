@@ -1,10 +1,16 @@
 <template>
   <div class="life-line-layer">
-    <life-line :entity="{name: starter}" :ref="starter" class="starter" :class="{hidden: !isStarterExplicitlyDefined, actor: isStarterAnActor}"/>
+    <life-line :entity="{name: starter}" class="starter"
+               :class="{hidden: !isStarterExplicitlyDefined, actor: isStarterAnActor}"/>
     <template v-for="(child, index) in groupAndParticipants">
-      <component :key="index" v-bind:is="lifelineComponent(child)" :context="child" :entity="{name: child.name && child.name() && child.name().getText()}"/>
+      <life-line-group :key="index"
+                       v-if="child.constructor.name === 'GroupContext'"
+                       :context="child" />
+      <life-line :key="index"
+                 v-if="child.constructor.name === 'ParticipantContext'"
+                 :entity="{name: child.name && child.name() && child.name().getText()}" />
     </template>
-    <life-line v-for="entity in entities" :key="entity.name" :ref="entity.name" :entity="entity"/>
+    <life-line v-for="entity in entities" :key="entity.name" :entity="entity"/>
   </div>
 </template>
 
@@ -30,22 +36,7 @@
           .filter((entry) => entry.name !== this.starter && !entry.explicit)
       },
       groupAndParticipants() {
-        /* eslint-disable */
-        console.log(this.context?.children)
-
         return this.context?.children.filter(c => c.constructor.name === 'GroupContext' || c.constructor.name === 'ParticipantContext')
-      },
-      lifelineComponent() {
-        // const that = this
-        return function (child) {
-          /* eslint-disable */
-          console.log('!!!!', child.constructor.name)
-          if (child.constructor.name === 'GroupContext') {
-            return 'LifeLineGroup'
-          } else {
-            return 'LifeLine'
-          }
-        }
       }
     },
     components: {
