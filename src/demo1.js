@@ -5,4 +5,9 @@
 // Self-method
 // Nested method
 // Assignment
-export default `A->B: message`
+export default `
+// async message comment
+A->B: message
+// self message comment
+A->A: message A to A
+`

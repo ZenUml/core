@@ -4,13 +4,18 @@
        :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent }"
        :style="{width: Math.abs(interactionWidth) + 'px', left: left + (fragmentOffset || 0) + 'px'}">
     <comment v-if="comment" :comment="comment"/>
-    <message :content="signature" :rtl="rightToLeft" type="async"/>
+<!--    <message :content="signature" :rtl="rightToLeft" type="async"/>-->
+    <component v-bind:is="invocation"
+               :content="signature"
+               :rtl="rightToLeft"
+               type="async" />
     <div class="invisible-occurrence"></div>
   </div>
 </template>
 
 <script type="text/babel">
   import Comment from './Comment.vue'
+  import SelfInvocationAsync from './SelfInvocation-async'
   import Message from './Message'
   import {mapGetters} from "vuex";
 
@@ -49,10 +54,19 @@
         const stop = this.asyncMessage.stop.stop + 1
         if (isNullOrUndefined(this.cursor) || isNullOrUndefined(start) || isNullOrUndefined(stop)) return false
         return this.cursor >= start && this.cursor <= stop
+      },
+      isSelf: function () {
+        const source = this.asyncMessage.source().getCode()
+        const target = this.asyncMessage.target().getCode()
+        return source === target
+      },
+      invocation: function () {
+        return this.isSelf ? 'SelfInvocationAsync' : 'Message'
       }
     },
     components: {
       Comment,
+      SelfInvocationAsync,
       Message
     }
   }

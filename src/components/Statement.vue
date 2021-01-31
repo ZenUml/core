@@ -35,10 +35,10 @@
           creation: 'Creation',
           message: 'Interaction',
           asyncMessage: function () {
-            const source = that.context.asyncMessage().source() && that.context.asyncMessage().source().getCode()
-            const target = that.context.asyncMessage().target() && that.context.asyncMessage().target().getCode()
-            let isSelf = source === target
-            return isSelf ? 'SelfInteractionAsync' : 'InteractionAsync'
+            // const source = that.context.asyncMessage().source() && that.context.asyncMessage().source().getCode()
+            // const target = that.context.asyncMessage().target() && that.context.asyncMessage().target().getCode()
+            // let isSelf = source === target
+            return 'InteractionAsync'
           }
         }
         let key = Object.keys(dict).find(x => that.context[x]() !== null)
