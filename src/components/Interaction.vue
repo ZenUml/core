@@ -9,7 +9,7 @@
              :assignee="assignee"
              :rtl="rightToLeft"
              type="sync"></component>
-    <occurrence :context="message" :participant="isSelf? realFrom : to" :selfCallIndent="passOnOffset"/>
+    <occurrence :context="message" :participant="isSelf? from : to" :selfCallIndent="passOnOffset"/>
     <message class="return" v-if="assignee && !isSelf" :content="assignee" :rtl="!rightToLeft" type="return"/>
   </div>
 </template>
@@ -28,8 +28,8 @@
     props: ['context', 'comment', 'selfCallIndent', 'fragmentOffset'],
     mixins: [InteractionMixin],
     computed: {
-      ...mapGetters(['starter', 'distance', 'cursor']),
-      from: function() {
+      ...mapGetters(['starter', 'distance', 'distance2', 'centerOf', 'cursor']),
+      inheritedFrom: function() {
         return GetInheritedFrom(this.context)
       },
       passOnOffset: function() {
@@ -44,16 +44,23 @@
           const averageWidthOfChar = 10
           return averageWidthOfChar * (this.assignee?.length + this.signature?.length) + leftOfMessage
         }
-        let distance = this.distance(this.to, this.realFrom)
+
+        let dist = this.distance(this.from, this.to)
+        if (this.outOfBand) {
+          return Math.abs(dist)
+        }
         let safeOffset = this.selfCallIndent || 0
-        // +1 for the added border
-        return Math.abs(distance - safeOffset) + 1
+        if (!this.rightToLeft) {
+          return Math.abs(dist) - safeOffset
+        } else {
+          return Math.abs(dist) + safeOffset
+        }
       },
       to: function () {
         return this.func?.to()?.getCode()
       },
       isSelf: function() {
-        return !this.context?.message().func().to() || this.context?.message().func().to().getCode() === this.realFrom
+        return !this.context?.message().func().to() || this.context?.message().func().to().getCode() === this.from
       },
       invocation: function () {
         // return 'Message'

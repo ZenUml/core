@@ -46,6 +46,7 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .message {
+    box-sizing: content-box;
     width: calc(100% - 16px);
     border-bottom-width: 2px;
     white-space: nowrap;
