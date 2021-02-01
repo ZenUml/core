@@ -20,7 +20,7 @@
     "antlr4": "~4.8.0",
     "dom-to-image-more": "^2.8.0",
     "highlight.js": "^10.1.1",
-    "marked": "^1.1.0",
+    "marked": "^1.2.8",
     "vue": "^2.5.16",
     "vuex": "^3.5.1"
   },
