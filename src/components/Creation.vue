@@ -2,7 +2,7 @@
   <div class="interaction creation sync"
        :signature="signature"
        :class="{ 'right-to-left':rightToLeft }"
-       :style="{width: Math.abs(interactionWidth) + 'px'}">
+       :style="style">
     <comment v-if="comment" :comment="comment" />
     <message class="invocation" :content="signature" :rtl="rightToLeft" :style="{width: invocationWidth + 'px'}" type="creation"/>
     <div class="participant place-holder">
@@ -23,9 +23,18 @@
 
   export default {
     name: 'creation',
-    props: ['starter', 'context', 'comment', 'selfCallIndent'],
+    props: ['context', 'comment', 'selfCallIndent', 'fragmentOffset'],
     computed: {
-      ...mapGetters(['distance', 'centerOf', 'rightOf', 'leftOf', 'widthOf']),
+      ...mapGetters(['starter', 'distance', 'centerOf', 'rightOf', 'leftOf', 'widthOf']),
+      style: function() {
+        const ret = {
+          width: Math.abs(this.interactionWidth) + 'px'
+        }
+        if (!this.rightToLeft) {
+          ret.transform = 'translateX(' + this.fragmentOffset + 'px)'
+        }
+        return ret
+      },
       from: function() {
         return getParentFrom(this.context) || this.starter
       },
@@ -66,7 +75,7 @@
       },
       to: function () {
         const assignee = this.creation.assignment() && this.creation.assignment().assignee().getText()
-        const type = this.creation.constructor().getText()
+        const type = this.creation.construct().getText()
         return assignee ? assignee + ':' + type : type
       }
     },

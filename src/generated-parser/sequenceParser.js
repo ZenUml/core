@@ -328,7 +328,7 @@ var ruleNames =  [ "prog", "head", "group", "starterExp", "starter", "participan
                    "stereotype", "name", "width", "block", "ret", "value", 
                    "stat", "par", "anonymousBlock", "creation", "message", 
                    "func", "from", "signature", "invocation", "assignment", 
-                   "asyncMessage", "content", "source", "target", "constructor", 
+                   "asyncMessage", "content", "source", "target", "construct", 
                    "type", "assignee", "to", "methodName", "parameters", 
                    "parameter", "declaration", "alt", "ifBlock", "elseIfBlock", 
                    "elseBlock", "braceBlock", "loop", "expr", "atom", "parExpr", 
@@ -431,7 +431,7 @@ sequenceParser.RULE_asyncMessage = 22;
 sequenceParser.RULE_content = 23;
 sequenceParser.RULE_source = 24;
 sequenceParser.RULE_target = 25;
-sequenceParser.RULE_constructor = 26;
+sequenceParser.RULE_construct = 26;
 sequenceParser.RULE_type = 27;
 sequenceParser.RULE_assignee = 28;
 sequenceParser.RULE_to = 29;
@@ -1910,8 +1910,8 @@ CreationContext.prototype.NEW = function() {
     return this.getToken(sequenceParser.NEW, 0);
 };
 
-CreationContext.prototype.constructor = function() {
-    return this.getTypedRuleContext(ConstructorContext,0);
+CreationContext.prototype.construct = function() {
+    return this.getTypedRuleContext(ConstructContext,0);
 };
 
 CreationContext.prototype.assignment = function() {
@@ -1973,7 +1973,7 @@ sequenceParser.prototype.creation = function() {
         this.state = 221;
         this.match(sequenceParser.NEW);
         this.state = 222;
-        this.constructor();
+        this.construct();
         this.state = 228;
         this._errHandler.sync(this);
         var la_ = this._interp.adaptivePredict(this._input,25,this._ctx);
@@ -2849,7 +2849,7 @@ sequenceParser.prototype.target = function() {
 };
 
 
-function ConstructorContext(parser, parent, invokingState) {
+function ConstructContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
 	}
@@ -2858,38 +2858,38 @@ function ConstructorContext(parser, parent, invokingState) {
 	}
 	antlr4.ParserRuleContext.call(this, parent, invokingState);
     this.parser = parser;
-    this.ruleIndex = sequenceParser.RULE_constructor;
+    this.ruleIndex = sequenceParser.RULE_construct;
     return this;
 }
 
-ConstructorContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
-ConstructorContext.prototype.constructor = ConstructorContext;
+ConstructContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+ConstructContext.prototype.constructor = ConstructContext;
 
-ConstructorContext.prototype.ID = function() {
+ConstructContext.prototype.ID = function() {
     return this.getToken(sequenceParser.ID, 0);
 };
 
-ConstructorContext.prototype.enterRule = function(listener) {
+ConstructContext.prototype.enterRule = function(listener) {
     if(listener instanceof sequenceParserListener ) {
-        listener.enterConstructor(this);
+        listener.enterConstruct(this);
 	}
 };
 
-ConstructorContext.prototype.exitRule = function(listener) {
+ConstructContext.prototype.exitRule = function(listener) {
     if(listener instanceof sequenceParserListener ) {
-        listener.exitConstructor(this);
+        listener.exitConstruct(this);
 	}
 };
 
 
 
 
-sequenceParser.ConstructorContext = ConstructorContext;
+sequenceParser.ConstructContext = ConstructContext;
 
-sequenceParser.prototype.constructor = function() {
+sequenceParser.prototype.construct = function() {
 
-    var localctx = new ConstructorContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 52, sequenceParser.RULE_constructor);
+    var localctx = new ConstructContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 52, sequenceParser.RULE_construct);
     try {
         this.enterOuterAlt(localctx, 1);
         this.state = 301;

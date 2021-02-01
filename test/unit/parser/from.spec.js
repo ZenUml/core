@@ -35,6 +35,15 @@ describe('Get `from` from context', () => {
     expect(getParentFrom(m2.func())).toBe('A')
   })
 
+  test('Embedded creation', () => {
+    let rootContext = seqDsl.RootContext('new A { m2 }');
+    let creation = rootContext.block().stat()[0].creation()
+    expectText(creation).toBe('newA{m2}')
+    let m2 = creation.braceBlock().block().stat()[0].message();
+    expectText(m2).toBe('m2')
+    expect(getParentFrom(m2.func())).toBe('A')
+  })
+
   test('Embedded in if', () => {
     let rootContext = seqDsl.RootContext('A.m1 { if(x) { m2 }}');
     let m1 = rootContext.block().stat()[0].message()

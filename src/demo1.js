@@ -40,6 +40,7 @@ RET ret = A.methodA(a, b) {
   }
   // A comment for alt
   if (X) {
+    new X()
     A->B: message
     self
     C->C: self

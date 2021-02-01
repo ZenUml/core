@@ -49,8 +49,10 @@ describe('Interaction width', () => {
     const store = new Vuex.Store(storeConfig)
     const wrapper = shallowMount(Interaction, {
       store, localVue, propsData: {
-        from: 'A',
         selfCallIndent: selfCallIndent,
+      },
+      computed: {
+        realFrom: function() { return 'A' }
       }
     });
     expect(wrapper.vm.interactionWidth).toBe(width)
@@ -75,9 +77,13 @@ describe('Translate X', () => {
       store, localVue, propsData: {
         from: 'B',
         fragmentOffset: 7
+      },
+      computed: {
+        from: function() { return 'B' }
       }
     });
-
+    expect(wrapper.vm.realFrom).toBe('A')
+    expect(wrapper.vm.from).toBe('B')
     expect(wrapper.vm.translateX).toBe(-8)
   });
 
@@ -98,6 +104,9 @@ describe('Translate X', () => {
       store, localVue, propsData: {
         from: 'C',
         fragmentOffset: 7
+      },
+      computed: {
+        from: function() { return 'C' },
       }
     });
     expect(wrapper.vm.translateX).toBe(-19)

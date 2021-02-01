@@ -21,6 +21,7 @@ function rootContext(code) {
 }
 
 function getFrom(ctx) {
+  if (!ctx) return undefined;
   // e.g. A.m1 {m2}, ctx = m2:func, parent = m2:message
   let parent = ctx.parentCtx
   while (parent && parent.constructor.name !== 'BraceBlockContext') {
@@ -28,18 +29,31 @@ function getFrom(ctx) {
   }
   // from = m1
   let fromMessage = parent?.parentCtx
-  while (fromMessage && fromMessage.constructor.name !== 'MessageContext') {
-    fromMessage = fromMessage.parentCtx
+  while (fromMessage &&
+  (fromMessage.constructor.name !== 'MessageContext' && fromMessage.constructor.name !== 'CreationContext')) {
+    fromMessage = fromMessage.parentCtx;
   }
-  let func = fromMessage?.func()
-  if (!func) {
+  if (!fromMessage) {
     return undefined;
   }
-  let to = func.to()
-  if (!to) {
-    return getFrom(func);
+  if (fromMessage.constructor.name === 'MessageContext') {
+    let func = fromMessage?.func()
+    if (!func) {
+      return undefined;
+    }
+    let to = func.to()
+    if (!to) {
+      return getFrom(func);
+    }
+    return to.getText()
   }
-  return to.getText()
+  if (fromMessage.constructor.name === 'CreationContext') {
+    const assignee = fromMessage.assignment() && fromMessage.assignment().assignee().getText();
+    const type = fromMessage.construct().getText();
+    const participant = assignee ? assignee + ':' + type : type;
+
+    return participant;
+  }
 }
 
 antlr4.ParserRuleContext.prototype.getCode = function() {
