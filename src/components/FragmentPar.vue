@@ -13,7 +13,7 @@
 
 <script>
   import fragment from './FragmentMixin'
-  import {getParentFrom} from '../parser'
+  import {GetInheritedFrom} from '../parser'
 
   export default {
     name: 'fragment-par',
@@ -21,7 +21,7 @@
     mixins: [fragment],
     computed: {
       from: function() {
-        return getParentFrom(this.context) || this.starter
+        return GetInheritedFrom(this.context)
       },
       par: function () {
         return this.context.par()

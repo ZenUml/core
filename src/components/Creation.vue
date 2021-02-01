@@ -19,7 +19,7 @@
   import Comment from './Comment.vue'
   import Message from './Message'
   import Occurrence from './Occurrence'
-  import {getParentFrom} from '../parser'
+  import {GetInheritedFrom} from '../parser'
 
   export default {
     name: 'creation',
@@ -36,7 +36,7 @@
         return ret
       },
       from: function() {
-        return getParentFrom(this.context) || this.starter
+        return GetInheritedFrom(this.context)
       },
       creation: function () {
         return this.context.creation()

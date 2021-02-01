@@ -20,40 +20,36 @@ function rootContext(code) {
   return parser._syntaxErrors ? null : parser.prog();
 }
 
-function getFrom(ctx) {
+function getInheritedFrom(ctx) {
+  // TODO: throw error?
   if (!ctx) return undefined;
-  // e.g. A.m1 {m2}, ctx = m2:func, parent = m2:message
-  let parent = ctx.parentCtx
-  while (parent && parent.constructor.name !== 'BraceBlockContext') {
-    parent = parent.parentCtx
-  }
-  // from = m1
-  let fromMessage = parent?.parentCtx
-  while (fromMessage &&
-  (fromMessage.constructor.name !== 'MessageContext' && fromMessage.constructor.name !== 'CreationContext')) {
-    fromMessage = fromMessage.parentCtx;
-  }
-  if (!fromMessage) {
-    return undefined;
-  }
-  if (fromMessage.constructor.name === 'MessageContext') {
-    let func = fromMessage?.func()
-    if (!func) {
-      return undefined;
-    }
-    let to = func.to()
-    if (!to) {
-      return getFrom(func);
-    }
-    return to.getText()
-  }
-  if (fromMessage.constructor.name === 'CreationContext') {
-    const assignee = fromMessage.assignment() && fromMessage.assignment().assignee().getText();
-    const type = fromMessage.construct().getText();
-    const participant = assignee ? assignee + ':' + type : type;
 
-    return participant;
-  }
+  // we need to find the closest BraceBlockContext
+  do {
+    if (ctx.constructor.name === 'ProgContext') {
+      return ctx.head()?.starterExp()?.starter()?.getText() || 'Starter'
+    }
+    ctx = ctx.parentCtx
+  } while (ctx && ctx.constructor.name !== 'BraceBlockContext')
+
+  // then find the closest Message or Creation which define the 'inherited from'
+  do {
+    if (ctx.constructor.name === 'ProgContext') {
+      return ctx.starterExp()?.getText() || 'Starter'
+    }
+    if (ctx.constructor.name === 'MessageContext') {
+      if (ctx.func()?.to()) {
+        return ctx.func().to().getText()
+      }
+
+    }
+    if (ctx.constructor.name === 'CreationContext') {
+      const assignee = ctx.assignment() && ctx.assignment().assignee().getText();
+      const type = ctx.construct().getText();
+      return assignee ? assignee + ':' + type : type;
+    }
+    ctx = ctx.parentCtx
+  } while (ctx)
 }
 
 antlr4.ParserRuleContext.prototype.getCode = function() {
@@ -84,7 +80,7 @@ module.exports =  {
     const toCollector = new ToCollector();
     return toCollector.getAllTos(toCollector)(ctx)
   },
-  getParentFrom: getFrom,
+  GetInheritedFrom: getInheritedFrom,
   Errors: errors,
   /**
    * @return {number} how many levels of embedded fragments

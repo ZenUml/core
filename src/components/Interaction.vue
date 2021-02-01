@@ -21,7 +21,7 @@
   import {mapGetters} from "vuex";
   import InteractionMixin from './InteractionMixin'
   import SelfInvocation from './SelfInvocation'
-  import {getParentFrom} from '../parser'
+  import {GetInheritedFrom} from '../parser'
 
   export default {
     name: 'interaction',
@@ -30,7 +30,7 @@
     computed: {
       ...mapGetters(['starter', 'distance', 'cursor']),
       from: function() {
-        return this.func && getParentFrom(this.func) || this.starter
+        return GetInheritedFrom(this.context)
       },
       passOnOffset: function() {
         // selfCallIndent is introduced for sync self interaction. Each time we enters a self sync interaction the selfCallIndent
