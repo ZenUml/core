@@ -43,3 +43,8 @@ A.m1 {
 It is allowed to have a `provided from` that equals to its 
 `inherited from`.
 
+# Discussion
+
+By definition, a root method has an `inherited from` as `Starter` or otherwise specified by `@StarterExp()`.
+
+`Starter`, unless it is explicitly defined, will not be displayed on the lifeline layer.
