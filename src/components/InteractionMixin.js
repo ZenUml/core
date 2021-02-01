@@ -34,7 +34,8 @@ export default {
       const dist = this.distance(moveTo, this.from)
       const rtlOffset = this.rightToLeft ? -1 : 0
       const fragmentOff = this.fragmentOffset || 0
-      return dist + rtlOffset + fragmentOff
+      const localSelfCallOffset = this.rightToLeft ? this.selfCallIndent * (-1) : this.selfCallIndent
+      return dist + rtlOffset + fragmentOff + localSelfCallOffset
     },
     rightToLeft: function () {
       return this.distance(this.to, this.realFrom) < 0
