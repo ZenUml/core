@@ -26,6 +26,7 @@ RET ret = A.methodA(a, b) {
     B.method() {
     A.method()
     }
+    B->C.syncMethod(from, abitrary, source, B)
   }
   // A comment for creation
   b = new B()

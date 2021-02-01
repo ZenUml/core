@@ -1,4 +1,3 @@
-import {getParentFrom} from '../parser'
 function isNullOrUndefined(value) {
   return value === null || value === undefined
 }
@@ -9,7 +8,11 @@ export default {
       return this.context?.message()
     },
     realFrom: function() {
-      return getParentFrom(this.func) || this.starter
+      return (this.func?.from()?.getText()) || this.from
+    },
+    outOfBand: function() {
+      const outOfBandFrom = this.func?.from()?.getText()
+      return outOfBandFrom && (outOfBandFrom !== this.from)
     },
     func: function() {
       return this.message?.func()
@@ -34,7 +37,8 @@ export default {
       const dist = this.distance(moveTo, this.from)
       const rtlOffset = this.rightToLeft ? -1 : 0
       const fragmentOff = this.fragmentOffset || 0
-      const localSelfCallOffset = this.rightToLeft ? this.selfCallIndent * (-1) : this.selfCallIndent
+      const indent = this.selfCallIndent || 0
+      const localSelfCallOffset = this.outOfBand ? 0 : (this.rightToLeft ? indent * (-1) : indent)
       return dist + rtlOffset + fragmentOff + localSelfCallOffset
     },
     rightToLeft: function () {
