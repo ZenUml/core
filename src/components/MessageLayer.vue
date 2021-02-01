@@ -94,7 +94,7 @@
 
   .interaction {
     /*Keep dashed here otherwise no space is given to the border*/
-    border: 1px dashed transparent;
+    border: 5px dashed red;
   }
   .interaction.highlight {
     border-color: inherit;
@@ -133,10 +133,11 @@
 
   .occurrence {
     position: relative;
-    width: 16px;
-    left: calc(100% - 8px);   /* Push the occurrence bar to the right */
+    width: 15px;
+    right: 0;
+    left: calc(100% - 2px);   /* This 100% will only consider the content width of interaction. */
     padding: 16px 0;          /* Provide default height for the occurrence bar */
-    padding-left: 6px;        /* Align the left of nested message to the center of the lifeline */
+    padding-left: 4px;        /* (OccurrenceWidth-1)/2 - OccurrenceBorderWidth - LifelineWidth*/
     border-width: 2px;
   }
 

@@ -47,12 +47,15 @@
 <style scoped>
   .message {
     box-sizing: content-box;
-    width: calc(100% - 16px);
+    /* 100% is the width of the content of interaction. */
+    /* 100% + InteractionBorderWidth x 2 - ((OccurrenceWidth-1)/2)x2*/
+    width: calc(100% - 4px);
     border-bottom-width: 2px;
     white-space: nowrap;
   }
 
   .sync > .message {
-    left: 8px;
+    /* (OccurrenceWidth-1)/2 - InteractionBorderWidth*/
+    left: 2px;
   }
 </style>

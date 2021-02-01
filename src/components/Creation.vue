@@ -44,16 +44,19 @@
       interactionWidth: function () {
         let distance = this.distance(this.to, this.from)
         let safeOffset = this.selfCallIndent || 0
-        let widthForInteractionBorders = 2
+        let widthForInteractionBorders = 0
+        if (this.rightToLeft) {
+          return Math.abs(distance) - safeOffset + widthForInteractionBorders + 2
+        }
         return Math.abs(distance) - safeOffset + widthForInteractionBorders
       },
       invocationWidth: function () {
         let safeOffset = this.selfCallIndent || 0
 
         if (this.rightToLeft) {
-          return this.centerOf(this.from) - this.rightOf(this.to) - safeOffset + 8
+          return this.centerOf(this.from) - this.rightOf(this.to) - safeOffset + 10
         }
-        return this.leftOf(this.to) - this.centerOf(this.from) - safeOffset - 8
+        return this.leftOf(this.to) - this.centerOf(this.from) - safeOffset - 10
       },
       rightToLeft: function () {
         return this.distance(this.to, this.from) < 0

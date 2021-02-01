@@ -62,7 +62,7 @@ export default {
           const dist = this.distance2(this.to, this.inheritedFrom)
           const indent = this.selfCallIndent || 0
           const fragmentOff = this.fragmentOffset || 0
-          return (dist + indent - fragmentOff) * (-1)
+          return (dist + indent - fragmentOff) * (-1) - 2
         }
       }
     },

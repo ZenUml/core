@@ -56,7 +56,7 @@
   }
 
   .lifeline.starter {
-    transform: translateX(6px);
+    /*transform: translateX(6px);*/
   }
 
   .lifeline.hidden {

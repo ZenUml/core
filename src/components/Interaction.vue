@@ -45,15 +45,16 @@
           return averageWidthOfChar * (this.assignee?.length + this.signature?.length) + leftOfMessage
         }
 
-        let dist = this.distance(this.from, this.to)
+        const dist = Math.abs(this.distance(this.from, this.to))
         if (this.outOfBand) {
-          return Math.abs(dist)
+          return dist
         }
         let safeOffset = this.selfCallIndent || 0
         if (!this.rightToLeft) {
-          return Math.abs(dist) - safeOffset
+          // Interaction width = dist + 1
+          return dist - safeOffset + 1
         } else {
-          return Math.abs(dist) + safeOffset
+          return dist + safeOffset + 2
         }
       },
       to: function () {
