@@ -11,9 +11,11 @@ B
 C
 @Starter(Z)
 A.method() {
-  for(i) {
-    B.method()
-    C.method()
+  C.method() {
+    B.method() {
+      D.method()
+    }
   }
+  
 }
 `

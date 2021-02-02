@@ -14,8 +14,10 @@ Each '◻' is a pixel
 ```
 
 #### 1. Interaction width
+
+Interaction will overlap the left lifeline but not the right.
 A has left as 2, center as 4 and right as 6; B has a/c/e. For Interaction `m2` in (A.m1{B.m2}),
-the width should be 4 to c (inclusive) that is 9 (`c - 4 + 1`). This is `distance(from, to) + lifelineWidth`.
+the width should be 4 to c (inclusive) that is 9 (`c - 4 + 1`). This is `distance(from, to)`.
 
 #### 2. Message width
 Message width should be 100% content + interactionBorderWidthx2 - ((OccurrenceWidth - 1)/2)x2 - interactionBorderWidth.

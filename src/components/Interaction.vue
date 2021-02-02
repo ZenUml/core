@@ -51,8 +51,8 @@
         }
         let safeOffset = this.selfCallIndent || 0
         if (!this.rightToLeft) {
-          // Interaction width = dist + 1
-          return dist - safeOffset + 1
+          // Interaction width = dist
+          return dist - safeOffset
         } else {
           return dist + safeOffset
         }
