@@ -11,12 +11,8 @@ B
 C
 @Starter(Z)
 A.method() {
-  C->B: async message
-  C->C: async self
-  method() {
-    C.method() {
-      B.method()
-    }
+  if(x) {
+    B.method()
   }
 }
 `

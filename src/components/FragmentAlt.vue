@@ -7,8 +7,9 @@
         <div class="name"><label>Alt</label></div>
         <label class="condition">[{{condition}}]</label>
       </div>
+<!-- fragment-offset set as offsetX - 4 for fragment border     -->
       <block v-if="alt.ifBlock().braceBlock()"
-             :fragment-offset="offsetX"
+             :fragment-offset="offsetX - 4"
              :context="alt.ifBlock().braceBlock().block()"
              :selfCallIndent="selfCallIndent"
       ></block>
@@ -19,7 +20,7 @@
           <label class="else-if">else if</label>
           <label class="condition">[{{elseIfBlock.parExpr().condition().getCode()}}]</label>
         </div>
-        <block :fragment-offset="offsetX"
+        <block :fragment-offset="offsetX - 4"
                :context="elseIfBlock.braceBlock().block()"
                :selfCallIndent="selfCallIndent"
                :key="index+2000"></block>
@@ -28,7 +29,7 @@
     <template v-if="alt.elseBlock()">
       <div class="segment">
         <div class="header"><label>[else]</label></div>
-        <block :fragment-offset="offsetX"
+        <block :fragment-offset="offsetX - 4"
                :context="alt.elseBlock().braceBlock().block()"
                :selfCallIndent="selfCallIndent"
         ></block>

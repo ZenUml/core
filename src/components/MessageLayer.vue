@@ -152,7 +152,7 @@
   }
 
   .fragment {
-    border-width: 1px;
+    border-width: 4px;
     margin: 2px 0;
   }
 
