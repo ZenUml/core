@@ -53,9 +53,8 @@ export default {
         if (!this.rightToLeft) {
           // A    B
           // inh  to
-          // const indent = this.selfCallIndent || 0
-          const fragmentOff = this.fragmentOffset || 0
-          return fragmentOff
+          // No self call indent here. It is used only for width.
+          return this.fragmentOffset || 0
         } else {
           // A    B
           // to   inh
