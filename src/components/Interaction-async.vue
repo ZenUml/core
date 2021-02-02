@@ -33,7 +33,7 @@
         return GetInheritedFrom(this.context)
       },
       asyncMessage: function () {
-        return this.context.asyncMessage()
+        return this.context?.asyncMessage()
       },
       interactionWidth: function () {
         return Math.abs(this.distance(this.target, this.source)) + 1
@@ -45,13 +45,13 @@
         return this.distance(this.target, this.source) < 0
       },
       signature: function () {
-        return this.asyncMessage.content().getCode()
+        return this.asyncMessage?.content()?.getCode()
       },
       source: function () {
-        return this.asyncMessage.source() && this.asyncMessage.source().getCode() || this.from
+        return this.asyncMessage?.source()?.getCode() || this.from
       },
       target: function () {
-        return this.asyncMessage.target() && this.asyncMessage.target().getCode()
+        return this.asyncMessage?.target()?.getCode()
       },
       isCurrent: function () {
         const start = this.asyncMessage.start.start
@@ -60,9 +60,7 @@
         return this.cursor >= start && this.cursor <= stop
       },
       isSelf: function () {
-        const source = this.asyncMessage.source().getCode()
-        const target = this.asyncMessage.target().getCode()
-        return source === target
+        return this.source === this.target
       },
       invocation: function () {
         return this.isSelf ? 'SelfInvocationAsync' : 'Message'

@@ -40,7 +40,7 @@ RET ret = A.methodA(a, b) {
     new X()
     A->B: message
     self
-    C->C: self
+    C: self
     B.alternative() {
       // A comment for creation
       a = new AHasAVerylongnamesoitislong() {
