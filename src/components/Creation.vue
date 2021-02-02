@@ -46,7 +46,7 @@
         let safeOffset = this.selfCallIndent || 0
         let widthForInteractionBorders = 0
         if (this.rightToLeft) {
-          return Math.abs(distance) - safeOffset + widthForInteractionBorders + 2
+          return Math.abs(distance) - safeOffset + widthForInteractionBorders
         }
         return Math.abs(distance) - safeOffset + widthForInteractionBorders
       },
