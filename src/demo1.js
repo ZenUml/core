@@ -11,8 +11,9 @@ B
 C
 @Starter(Z)
 A.method() {
-  if(x) {
+  par {
     B.method()
+    C.method()
   }
 }
 `
