@@ -141,7 +141,8 @@
   }
 
   .interaction.right-to-left > .occurrence {
-    left: -8px;               /* overlay occurrence bar on the existing bar. */
+    /* InteractionBorderWidth + (OccurrenceWidth-1)/2 */
+    left: -13px;               /* overlay occurrence bar on the existing bar. */
   }
 
   .interaction.self > .occurrence {

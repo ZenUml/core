@@ -54,7 +54,7 @@
           // Interaction width = dist + 1
           return dist - safeOffset + 1
         } else {
-          return dist + safeOffset + 2
+          return dist + safeOffset
         }
       },
       to: function () {
