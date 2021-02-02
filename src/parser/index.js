@@ -33,7 +33,7 @@ function getInheritedFrom(ctx) {
   } while (ctx && ctx.constructor.name !== 'BraceBlockContext')
 
   // then find the closest Message or Creation which define the 'inherited from'
-  do {
+  while (ctx && ctx.constructor) {
     if (ctx.constructor.name === 'ProgContext') {
       return ctx.starterExp()?.getText() || 'Starter'
     }
@@ -49,7 +49,8 @@ function getInheritedFrom(ctx) {
       return assignee ? assignee + ':' + type : type;
     }
     ctx = ctx.parentCtx
-  } while (ctx)
+  }
+  return undefined;
 }
 
 antlr4.ParserRuleContext.prototype.getCode = function() {
