@@ -15,7 +15,7 @@
 </template>
 
 <script type="text/babel">
-  import { mapGetters } from 'vuex'
+  import {mapGetters} from 'vuex'
   import Comment from './Comment.vue'
   import Message from './Message'
   import Occurrence from './Occurrence'
@@ -44,11 +44,8 @@
       interactionWidth: function () {
         let distance = this.distance(this.to, this.from)
         let safeOffset = this.selfCallIndent || 0
-        let widthForInteractionBorders = 0
-        if (this.rightToLeft) {
-          return Math.abs(distance) - safeOffset + widthForInteractionBorders
-        }
-        return Math.abs(distance) - safeOffset + widthForInteractionBorders
+
+        return Math.abs(distance) - safeOffset
       },
       invocationWidth: function () {
         let safeOffset = this.selfCallIndent || 0
