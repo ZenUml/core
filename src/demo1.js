@@ -11,7 +11,7 @@ B
 C
 @Starter(Z)
 A.method() {
-  par {
+  for(i) {
     B.method()
     C.method()
   }
