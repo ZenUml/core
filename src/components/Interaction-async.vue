@@ -2,7 +2,7 @@
   <div class="interaction async"
        :signature="signature"
        :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent }"
-       :style="{width: Math.abs(interactionWidth) + 'px', left: left + (fragmentOffset || 0) + 'px'}">
+       :style="{width: interactionWidth + 'px', left: left + (fragmentOffset || 0) + 'px'}">
     <comment v-if="comment" :comment="comment"/>
 <!--    <message :content="signature" :rtl="rightToLeft" type="async"/>-->
     <component v-bind:is="invocation"
@@ -36,7 +36,7 @@
         return this.context.asyncMessage()
       },
       interactionWidth: function () {
-        return this.distance(this.target, this.source)
+        return Math.abs(this.distance(this.target, this.source)) + 1
       },
       left: function () {
         return this.rightToLeft ? this.distance(this.target, this.from) : this.distance(this.source, this.from)

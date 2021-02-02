@@ -6,9 +6,12 @@
 // Nested method
 // Assignment
 export default `
+A
+B
+C
 @Starter(Z)
 A.method() {
-  B.method()
+  C->B:message
   method() {
     C.method() {
       B.method()
