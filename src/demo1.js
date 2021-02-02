@@ -7,7 +7,8 @@
 // Assignment
 export default `
 A.method() {
-  B.method() {
+  B.method()
+  method() {
     C.method()
   }
 }

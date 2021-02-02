@@ -53,9 +53,9 @@ export default {
         if (!this.rightToLeft) {
           // A    B
           // inh  to
-          const indent = this.selfCallIndent || 0
+          // const indent = this.selfCallIndent || 0
           const fragmentOff = this.fragmentOffset || 0
-          return indent + fragmentOff
+          return fragmentOff
         } else {
           // A    B
           // to   inh

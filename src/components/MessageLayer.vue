@@ -134,7 +134,6 @@
   .occurrence {
     position: relative;
     width: 15px;
-    right: 0;
     left: calc(100% - 2px);   /* This 100% will only consider the content width of interaction. */
     padding: 16px 0;          /* Provide default height for the occurrence bar */
     padding-left: 4px;        /* (OccurrenceWidth-1)/2 - OccurrenceBorderWidth - LifelineWidth*/
@@ -146,9 +145,9 @@
   }
 
   .interaction.self > .occurrence {
-    left: -8px;               /* overlay occurrence bar on the existing bar. */
+    /* width of InteractionBorderWidth */
+    left: -5px;               /* overlay occurrence bar on the existing bar. */
     margin-top: -10px;
-    margin-left: 6px;
   }
 
   .fragment {

@@ -27,6 +27,11 @@ Message width should be 100% content + interactionBorderWidthx2 - ((OccurrenceWi
 + InteractionBorderWidth x 2
 - ((OccurrenceWidth-1)/2) x 2
 ```
+
+#### 2. Self Occurrence Left
+```
+left: width of InteractionBorderWidth
+```
 ### Offset
 There are a few ways to implement offset, we have to combine them.
 
@@ -44,5 +49,4 @@ occurance must have a padding of 1 that is (width - boarder x 2 - 1) / 2.
 
 ## Self call indent
 
-If `m2` is within a self call, that pushed the starting point to
-4, the width has to be smaller
+

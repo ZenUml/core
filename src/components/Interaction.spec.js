@@ -35,8 +35,8 @@ describe('Highlight current interact based on position of cursor', () => {
 describe('Interaction width', () => {
   test.each([
     // A --- ?px ---> B
-    [ 1,  10, 25, 14],
-    [ 1,  25, 10, 16],
+    [ 1,  10, 25, 15],
+    [ 1,  25, 10, 18],
   ])('If selfCallIndent is %s and distance is %s, interactionWidth should be %s', (selfCallIndent, a, b, width) => {
     Interaction.computed.to = () => 'B';
     const storeConfig = Store()
