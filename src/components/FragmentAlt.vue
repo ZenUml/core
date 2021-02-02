@@ -7,10 +7,10 @@
         <div class="name"><label>Alt</label></div>
         <label class="condition">[{{condition}}]</label>
       </div>
+<!-- fragment-offset set as offsetX - 4 for fragment border     -->
       <block v-if="alt.ifBlock().braceBlock()"
-             :fragment-offset="offsetX"
+             :fragment-offset="offsetX - 4"
              :context="alt.ifBlock().braceBlock().block()"
-             :from="from"
              :selfCallIndent="selfCallIndent"
       ></block>
     </div>
@@ -20,9 +20,8 @@
           <label class="else-if">else if</label>
           <label class="condition">[{{elseIfBlock.parExpr().condition().getCode()}}]</label>
         </div>
-        <block :fragment-offset="offsetX"
+        <block :fragment-offset="offsetX - 4"
                :context="elseIfBlock.braceBlock().block()"
-               :from="from"
                :selfCallIndent="selfCallIndent"
                :key="index+2000"></block>
       </div>
@@ -30,9 +29,8 @@
     <template v-if="alt.elseBlock()">
       <div class="segment">
         <div class="header"><label>[else]</label></div>
-        <block :fragment-offset="offsetX"
+        <block :fragment-offset="offsetX - 4"
                :context="alt.elseBlock().braceBlock().block()"
-               :from="from"
                :selfCallIndent="selfCallIndent"
         ></block>
       </div>
@@ -42,11 +40,16 @@
 
 <script>
   import fragment from './FragmentMixin'
+  import {GetInheritedFrom} from '../parser'
+
   export default {
     name: 'fragment-alt',
-    props: ['from', 'context', 'comment', 'selfCallIndent', 'fragmentOffset'],
+    props: ['starter', 'context', 'comment', 'selfCallIndent', 'fragmentOffset'],
     mixins: [fragment],
     computed: {
+      from: function() {
+        return GetInheritedFrom(this.context)
+      },
       alt: function () {
         return this.context.alt()
       },

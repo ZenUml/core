@@ -5,9 +5,8 @@
       <div class="name"><label>Loop</label></div>
       <label class="condition">[{{condition}}]</label>
     </div>
-    <block :fragment-offset="offsetX"
+    <block :fragment-offset="offsetX - 4"
            :context="loop.braceBlock().block()"
-           :from="from"
            :selfCallIndent="selfCallIndent"
     ></block>
   </div>
@@ -15,12 +14,16 @@
 
 <script>
   import fragment from './FragmentMixin'
+  import {GetInheritedFrom} from '../parser'
 
   export default {
     name: 'fragment-loop',
-    props: ['from', 'context', 'comment', 'selfCallIndent', 'fragmentOffset'],
+    props: ['starter', 'context', 'comment', 'selfCallIndent', 'fragmentOffset'],
     mixins: [fragment],
     computed: {
+      from: function() {
+        return GetInheritedFrom(this.context)
+      },
       loop: function () {
         return this.context.loop()
       },

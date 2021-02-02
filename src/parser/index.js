@@ -20,6 +20,38 @@ function rootContext(code) {
   return parser._syntaxErrors ? null : parser.prog();
 }
 
+function getInheritedFrom(ctx) {
+  // TODO: throw error?
+  if (!ctx) return undefined;
+
+  // we need to find the closest BraceBlockContext
+  do {
+    if (ctx.constructor.name === 'ProgContext') {
+      return ctx.head()?.starterExp()?.starter()?.getText() || 'Starter'
+    }
+    ctx = ctx.parentCtx
+  } while (ctx && ctx.constructor.name !== 'BraceBlockContext')
+
+  // then find the closest Message or Creation which define the 'inherited from'
+  do {
+    if (ctx.constructor.name === 'ProgContext') {
+      return ctx.starterExp()?.getText() || 'Starter'
+    }
+    if (ctx.constructor.name === 'MessageContext') {
+      if (ctx.func()?.to()) {
+        return ctx.func().to().getText()
+      }
+
+    }
+    if (ctx.constructor.name === 'CreationContext') {
+      const assignee = ctx.assignment() && ctx.assignment().assignee().getText();
+      const type = ctx.construct().getText();
+      return assignee ? assignee + ':' + type : type;
+    }
+    ctx = ctx.parentCtx
+  } while (ctx)
+}
+
 antlr4.ParserRuleContext.prototype.getCode = function() {
   return this.parser.getTokenStream().getText(this.getSourceInterval()).replace(/^"(.*)"$/, '$1')
 };
@@ -48,6 +80,7 @@ module.exports =  {
     const toCollector = new ToCollector();
     return toCollector.getAllTos(toCollector)(ctx)
   },
+  GetInheritedFrom: getInheritedFrom,
   Errors: errors,
   /**
    * @return {number} how many levels of embedded fragments

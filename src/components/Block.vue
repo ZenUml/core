@@ -1,7 +1,7 @@
 <template>
   <div class="block">
     <div class="statement-container" v-for="(stat, index) in statements" :key="index">
-      <statement :context="stat" :from="from" :selfCallIndent="selfCallIndent" :fragment-offset="fragmentOffset"/>
+      <statement :context="stat" :selfCallIndent="selfCallIndent" :fragment-offset="fragmentOffset"/>
     </div>
   </div>
 </template>
@@ -11,7 +11,7 @@
 
   export default {
     name: 'block',
-    props: ['from', 'context', 'selfCallIndent', 'fragmentOffset'],
+    props: ['context', 'selfCallIndent', 'fragmentOffset'],
     computed: {
       statements: function () {
         return this.context && this.context.stat()

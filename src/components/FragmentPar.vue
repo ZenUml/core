@@ -4,9 +4,8 @@
     <div class="header">
       <div class="name"><label>Par</label></div>
     </div>
-    <block :fragmentOffset="offsetX"
+    <block :fragmentOffset="offsetX - 4"
            :context="par.braceBlock().block()"
-           :from="from"
            :selfCallIndent="selfCallIndent"
     ></block>
   </div>
@@ -14,12 +13,16 @@
 
 <script>
   import fragment from './FragmentMixin'
+  import {GetInheritedFrom} from '../parser'
 
   export default {
     name: 'fragment-par',
-    props: ['from', 'context', 'comment', 'selfCallIndent', 'fragmentOffset'],
+    props: ['starter', 'context', 'comment', 'selfCallIndent', 'fragmentOffset'],
     mixins: [fragment],
     computed: {
+      from: function() {
+        return GetInheritedFrom(this.context)
+      },
       par: function () {
         return this.context.par()
       }

@@ -35,10 +35,8 @@ describe('Highlight current interact based on position of cursor', () => {
 describe('Interaction width', () => {
   test.each([
     // A --- ?px ---> B
-    [ 1,  10, 25, 15],
-    [ 1,  25, 10, 17],
-    [-1,  10, 25, 17],
-    [-1,  25, 10, 15],
+    [ 1,  10, 25, 14],
+    [ 1,  25, 10, 16],
   ])('If selfCallIndent is %s and distance is %s, interactionWidth should be %s', (selfCallIndent, a, b, width) => {
     Interaction.computed.to = () => 'B';
     const storeConfig = Store()
@@ -49,8 +47,10 @@ describe('Interaction width', () => {
     const store = new Vuex.Store(storeConfig)
     const wrapper = shallowMount(Interaction, {
       store, localVue, propsData: {
-        from: 'A',
         selfCallIndent: selfCallIndent,
+      },
+      computed: {
+        from: function() { return 'A' }
       }
     });
     expect(wrapper.vm.interactionWidth).toBe(width)
@@ -58,10 +58,11 @@ describe('Interaction width', () => {
 })
 
 describe('Translate X', () => {
-  // A      B      C
-  // real   from   to
+  // A          B           C
+  // provided   inherited   to
   it('when left to right', function () {
-    Interaction.computed.realFrom = () => 'A'
+    Interaction.computed.providedFrom = () => 'A'
+    Interaction.computed.inheritedFrom = () => 'B'
     Interaction.computed.to = () => 'C'
     const storeConfig = Store()
     storeConfig.getters.centerOf = () => (participant) => {
@@ -72,19 +73,16 @@ describe('Translate X', () => {
 
     const store = new Vuex.Store(storeConfig)
     const wrapper = shallowMount(Interaction, {
-      store, localVue, propsData: {
-        from: 'B',
-        fragmentOffset: 7
-      }
+      store, localVue
     });
-
-    expect(wrapper.vm.translateX).toBe(-8)
+    expect(wrapper.vm.translateX).toBe(-15)
   });
 
   // A      B      C
   // to   real     from
   it('when right to left', function () {
-    Interaction.computed.realFrom = () => 'B'
+    Interaction.computed.providedFrom = () => 'B'
+    Interaction.computed.inheritedFrom = () => 'C'
     Interaction.computed.to = () => 'A'
     const storeConfig = Store()
     storeConfig.getters.centerOf = () => (participant) => {
@@ -95,11 +93,8 @@ describe('Translate X', () => {
 
     const store = new Vuex.Store(storeConfig)
     const wrapper = shallowMount(Interaction, {
-      store, localVue, propsData: {
-        from: 'C',
-        fragmentOffset: 7
-      }
+      store, localVue
     });
-    expect(wrapper.vm.translateX).toBe(-19)
+    expect(wrapper.vm.translateX).toBe(-25)
   });
 })

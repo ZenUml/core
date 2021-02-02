@@ -1,6 +1,6 @@
 <template>
   <div class="message-layer" :style="{'width': width + 'px'}">
-    <block :context="context" :from="starter" :style="{'padding-left': paddingLeft + 'px'}"/>
+    <block :context="context" :style="{'padding-left': paddingLeft + 'px'}"/>
   </div>
 </template>
 
@@ -94,7 +94,7 @@
 
   .interaction {
     /*Keep dashed here otherwise no space is given to the border*/
-    border: 1px dashed transparent;
+    border: 5px dashed red;
   }
   .interaction.highlight {
     border-color: inherit;
@@ -133,25 +133,26 @@
 
   .occurrence {
     position: relative;
-    width: 16px;
-    left: calc(100% - 8px);   /* Push the occurrence bar to the right */
+    width: 15px;
+    left: calc(100% - 2px);   /* This 100% will only consider the content width of interaction. */
     padding: 16px 0;          /* Provide default height for the occurrence bar */
-    padding-left: 6px;        /* Align the left of nested message to the center of the lifeline */
+    padding-left: 5px;        /* (OccurrenceWidth-1)/2 - OccurrenceBorderWidth*/
     border-width: 2px;
   }
 
   .interaction.right-to-left > .occurrence {
-    left: -8px;               /* overlay occurrence bar on the existing bar. */
+    /* InteractionBorderWidth + (OccurrenceWidth-1)/2 */
+    left: -12px;               /* overlay occurrence bar on the existing bar. */
   }
 
   .interaction.self > .occurrence {
-    left: -8px;               /* overlay occurrence bar on the existing bar. */
+    /* width of InteractionBorderWidth */
+    left: -5px;               /* overlay occurrence bar on the existing bar. */
     margin-top: -10px;
-    margin-left: 6px;
   }
 
   .fragment {
-    border-width: 1px;
+    border-width: 4px;
     margin: 2px 0;
   }
 

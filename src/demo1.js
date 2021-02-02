@@ -22,6 +22,7 @@ RET ret = A.methodA(a, b) {
     B.method() {
     A.method()
     }
+    B->C.syncMethod(from, abitrary, source, B)
   }
   // A comment for creation
   b = new B()
@@ -36,12 +37,13 @@ RET ret = A.methodA(a, b) {
   }
   // A comment for alt
   if (X) {
+    new X()
     A->B: message
     self
     C->C: self
     B.alternative() {
       // A comment for creation
-      a = new A() {
+      a = new AHasAVerylongnamesoitislong() {
         // A comment for creation
         b = new B()
         // Right to left

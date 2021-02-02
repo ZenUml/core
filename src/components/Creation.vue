@@ -2,7 +2,7 @@
   <div class="interaction creation sync"
        :signature="signature"
        :class="{ 'right-to-left':rightToLeft }"
-       :style="{width: Math.abs(interactionWidth) + 'px'}">
+       :style="style">
     <comment v-if="comment" :comment="comment" />
     <message class="invocation" :content="signature" :rtl="rightToLeft" :style="{width: invocationWidth + 'px'}" type="creation"/>
     <div class="participant place-holder">
@@ -15,32 +15,45 @@
 </template>
 
 <script type="text/babel">
-  import { mapGetters } from 'vuex'
+  import {mapGetters} from 'vuex'
   import Comment from './Comment.vue'
   import Message from './Message'
   import Occurrence from './Occurrence'
+  import {GetInheritedFrom} from '../parser'
 
   export default {
     name: 'creation',
-    props: ['from', 'context', 'comment', 'selfCallIndent'],
+    props: ['context', 'comment', 'selfCallIndent', 'fragmentOffset'],
     computed: {
-      ...mapGetters(['distance', 'centerOf', 'rightOf', 'leftOf', 'widthOf']),
+      ...mapGetters(['starter', 'distance', 'centerOf', 'rightOf', 'leftOf', 'widthOf']),
+      style: function() {
+        const ret = {
+          width: Math.abs(this.interactionWidth) + 'px'
+        }
+        if (!this.rightToLeft) {
+          ret.transform = 'translateX(' + this.fragmentOffset + 'px)'
+        }
+        return ret
+      },
+      from: function() {
+        return GetInheritedFrom(this.context)
+      },
       creation: function () {
         return this.context.creation()
       },
       interactionWidth: function () {
         let distance = this.distance(this.to, this.from)
         let safeOffset = this.selfCallIndent || 0
-        let widthForInteractionBorders = 2
-        return Math.abs(distance) - safeOffset + widthForInteractionBorders
+
+        return Math.abs(distance) - safeOffset
       },
       invocationWidth: function () {
         let safeOffset = this.selfCallIndent || 0
 
         if (this.rightToLeft) {
-          return this.centerOf(this.from) - this.rightOf(this.to) - safeOffset + 8
+          return this.centerOf(this.from) - this.rightOf(this.to) - safeOffset + 10
         }
-        return this.leftOf(this.to) - this.centerOf(this.from) - safeOffset - 8
+        return this.leftOf(this.to) - this.centerOf(this.from) - safeOffset - 10
       },
       rightToLeft: function () {
         return this.distance(this.to, this.from) < 0
@@ -62,7 +75,7 @@
       },
       to: function () {
         const assignee = this.creation.assignment() && this.creation.assignment().assignee().getText()
-        const type = this.creation.constructor().getText()
+        const type = this.creation.construct().getText()
         return assignee ? assignee + ':' + type : type
       }
     },

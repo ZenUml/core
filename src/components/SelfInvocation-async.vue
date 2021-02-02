@@ -20,6 +20,8 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .message.self {
+    /* InteractionBorderWidth */
+    transform: translateX(-5px);
     height: 26px;
   }
 

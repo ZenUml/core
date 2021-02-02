@@ -2,7 +2,7 @@
   <div class="interaction async"
        :signature="signature"
        :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent }"
-       :style="{width: Math.abs(interactionWidth) + 'px', left: left + (fragmentOffset || 0) + 'px'}">
+       :style="{width: interactionWidth + 'px', left: left + (fragmentOffset || 0) + 'px'}">
     <comment v-if="comment" :comment="comment"/>
 <!--    <message :content="signature" :rtl="rightToLeft" type="async"/>-->
     <component v-bind:is="invocation"
@@ -18,6 +18,7 @@
   import SelfInvocationAsync from './SelfInvocation-async'
   import Message from './Message'
   import {mapGetters} from "vuex";
+  import {GetInheritedFrom} from '../parser'
 
   function isNullOrUndefined(value) {
     return value === null || value === undefined
@@ -25,14 +26,17 @@
 
   export default {
     name: 'interaction-async',
-    props: ['from', 'context', 'comment', 'fragmentOffset'],
+    props: ['starter', 'context', 'comment', 'fragmentOffset'],
     computed: {
       ...mapGetters(['distance', 'cursor']),
+      from: function() {
+        return GetInheritedFrom(this.context)
+      },
       asyncMessage: function () {
         return this.context.asyncMessage()
       },
       interactionWidth: function () {
-        return this.distance(this.target, this.source)
+        return Math.abs(this.distance(this.target, this.source)) + 1
       },
       left: function () {
         return this.rightToLeft ? this.distance(this.target, this.from) : this.distance(this.source, this.from)

@@ -46,12 +46,16 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .message {
-    width: calc(100% - 16px);
+    box-sizing: content-box;
+    /* 100% is the width of the content of interaction. */
+    /* 100% + InteractionBorderWidth x 2 - ((OccurrenceWidth-1)/2)x2*/
+    width: calc(100% - 4px);
     border-bottom-width: 2px;
     white-space: nowrap;
   }
 
   .sync > .message {
-    left: 8px;
+    /* (OccurrenceWidth-1)/2 - InteractionBorderWidth*/
+    left: 2px;
   }
 </style>

@@ -7,8 +7,14 @@ export default {
     message: function () {
       return this.context?.message()
     },
-    realFrom: function() {
-      return this.func?.from()?.getCode() || this.from
+    providedFrom: function() {
+      return this.func?.from()?.getText()
+    },
+    from: function() {
+      return this.providedFrom || this.inheritedFrom
+    },
+    outOfBand: function() {
+      return !!this.providedFrom && (this.providedFrom !== this.inheritedFrom)
     },
     func: function() {
       return this.message?.func()
@@ -27,13 +33,40 @@ export default {
       return this.func?.signature().map(s => s.getCode()).join('.')
     },
     translateX: function() {
-      // The starting point is always this.from
-      const moveTo = this.rightToLeft ? this.to : this.realFrom
-      // -1 for interaction when right to left
-      return this.distance(moveTo, this.from) + (this.rightToLeft ? -1 : 0) + this.fragmentOffset
+      if (this.outOfBand) {
+        if (!this.rightToLeft) {
+          // A    B     C
+          // inh  pro   to
+          const dist = this.distance2(this.inheritedFrom, this.providedFrom)
+          const indent = this.selfCallIndent || 0
+          const fragmentOff = this.fragmentOffset || 0
+          return dist - indent + fragmentOff
+        } else {
+          // A    B     C
+          // to   pro   inh
+          const dist = this.distance2(this.to, this.inheritedFrom)
+          const indent = this.selfCallIndent || 0
+          const fragmentOff = this.fragmentOffset || 0
+          return (dist + indent - fragmentOff) * (-1)
+        }
+      } else {
+        if (!this.rightToLeft) {
+          // A    B
+          // inh  to
+          // No self call indent here. It is used only for width.
+          return this.fragmentOffset || 0
+        } else {
+          // A    B
+          // to   inh
+          const dist = this.distance2(this.to, this.inheritedFrom)
+          const indent = this.selfCallIndent || 0
+          const fragmentOff = this.fragmentOffset || 0
+          return (dist + indent - fragmentOff) * (-1)
+        }
+      }
     },
     rightToLeft: function () {
-      return this.distance(this.to, this.realFrom) < 0
+      return this.centerOf(this.to) < this.centerOf(this.from)
     },
     isCurrent: function () {
       let start = this.func?.start.start

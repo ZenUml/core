@@ -9,7 +9,7 @@
              :assignee="assignee"
              :rtl="rightToLeft"
              type="sync"></component>
-    <occurrence :context="message" :participant="isSelf? realFrom : to" :selfCallIndent="passOnOffset"/>
+    <occurrence :context="message" :participant="isSelf? from : to" :selfCallIndent="passOnOffset"/>
     <message class="return" v-if="assignee && !isSelf" :content="assignee" :rtl="!rightToLeft" type="return"/>
   </div>
 </template>
@@ -21,13 +21,17 @@
   import {mapGetters} from "vuex";
   import InteractionMixin from './InteractionMixin'
   import SelfInvocation from './SelfInvocation'
+  import {GetInheritedFrom} from '../parser'
 
   export default {
     name: 'interaction',
-    props: ['from', 'context', 'comment', 'selfCallIndent', 'fragmentOffset'],
+    props: ['context', 'comment', 'selfCallIndent', 'fragmentOffset'],
     mixins: [InteractionMixin],
     computed: {
-      ...mapGetters(['distance', 'cursor']),
+      ...mapGetters(['starter', 'distance', 'distance2', 'centerOf', 'cursor']),
+      inheritedFrom: function() {
+        return GetInheritedFrom(this.context)
+      },
       passOnOffset: function() {
         // selfCallIndent is introduced for sync self interaction. Each time we enters a self sync interaction the selfCallIndent
         // increases by 6px (half of the width of an execution bar). However, we set the selfCallIndent back to 0 when
@@ -40,16 +44,24 @@
           const averageWidthOfChar = 10
           return averageWidthOfChar * (this.assignee?.length + this.signature?.length) + leftOfMessage
         }
-        let distance = this.distance(this.to, this.realFrom)
+
+        const dist = Math.abs(this.distance(this.from, this.to))
+        if (this.outOfBand) {
+          return dist
+        }
         let safeOffset = this.selfCallIndent || 0
-        // +1 for the added border
-        return Math.abs(distance - safeOffset) + 1
+        if (!this.rightToLeft) {
+          // Interaction width = dist
+          return dist - safeOffset
+        } else {
+          return dist + safeOffset
+        }
       },
       to: function () {
         return this.func?.to()?.getCode()
       },
       isSelf: function() {
-        return !this.context?.message().func().to() || this.context?.message().func().to().getCode() === this.realFrom
+        return !this.context?.message().func().to() || this.context?.message().func().to().getCode() === this.from
       },
       invocation: function () {
         // return 'Message'

@@ -86,7 +86,7 @@ anonymousBlock
  ;
 
 creation
- : assignment? NEW constructor(OPAR parameters? CPAR)? (SCOL | braceBlock)?
+ : assignment? NEW construct(OPAR parameters? CPAR)? (SCOL | braceBlock)?
  ;
 
 message
@@ -137,7 +137,7 @@ target
  : ID | STRING
  ;
 
-constructor
+construct
  : ID
  ;
 
