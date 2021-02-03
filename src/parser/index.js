@@ -25,30 +25,32 @@ function getInheritedFrom(ctx) {
   if (!ctx) return undefined;
 
   // we need to find the closest BraceBlockContext
-  do {
-    if (ctx.constructor.name === 'ProgContext') {
-      return ctx.head()?.starterExp()?.starter()?.getText() || 'Starter'
+
+  const seqParser = sequenceParser.sequenceParser
+  while (ctx && !(ctx instanceof seqParser.BraceBlockContext)) {
+    if (ctx.constructor === seqParser.ProgContext) {
+      return ctx.head()?.starterExp()?.starter()?.getText() || 'Starter';
     }
-    ctx = ctx.parentCtx
-  } while (ctx && ctx.constructor.name !== 'BraceBlockContext')
+    ctx = ctx.parentCtx;
+  }
 
   // then find the closest Message or Creation which define the 'inherited from'
   while (ctx && ctx.constructor) {
-    if (ctx.constructor.name === 'ProgContext') {
-      return ctx.starterExp()?.getText() || 'Starter'
+    if (ctx instanceof seqParser.ProgContext) {
+      return ctx.starterExp()?.getText() || 'Starter';
     }
-    if (ctx.constructor.name === 'MessageContext') {
+    if (ctx instanceof seqParser.MessageContext) {
       if (ctx.func()?.to()) {
-        return ctx.func().to().getText()
+        return ctx.func().to().getText();
       }
 
     }
-    if (ctx.constructor.name === 'CreationContext') {
+    if (ctx instanceof seqParser.CreationContext) {
       const assignee = ctx.assignment() && ctx.assignment().assignee().getText();
       const type = ctx.construct().getText();
       return assignee ? assignee + ':' + type : type;
     }
-    ctx = ctx.parentCtx
+    ctx = ctx.parentCtx;
   }
   return undefined;
 }
