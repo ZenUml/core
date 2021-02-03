@@ -1,4 +1,4 @@
-import {RootContext, Participants} from './parser/index.js'
+import {RootContext, Participants, GroupContext, ParticipantContext} from './parser/index.js'
 
 import SeqDiagram from './components/SeqDiagram.vue'
 
@@ -22,6 +22,8 @@ const Store = () => {
       }
     },
     getters: {
+      GroupContext: () => GroupContext,
+      ParticipantContext: () => ParticipantContext,
       generation: (state) => state.generation,
       // We are using getters to avoid hard coding module's name ($store.Store.state)
       // in the components. Not sure if this is the best practice.

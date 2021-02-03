@@ -4,10 +4,10 @@
                :class="{hidden: !isStarterExplicitlyDefined, actor: isStarterAnActor}"/>
     <template v-for="(child, index) in groupAndParticipants">
       <life-line-group :key="index"
-                       v-if="child.constructor.name === 'GroupContext'"
+                       v-if="child instanceof GroupContext"
                        :context="child" />
       <life-line :key="index"
-                 v-if="child.constructor.name === 'ParticipantContext'"
+                 v-if="child instanceof ParticipantContext"
                  :entity="{name: child.name && child.name() && child.name().getText()}" />
     </template>
     <life-line v-for="entity in entities" :key="entity.name" :entity="entity"/>
@@ -23,7 +23,7 @@
     name: 'life-line-layer',
     props: ['context'],
     computed: {
-      ...mapGetters(['starter', 'participants']),
+      ...mapGetters(['starter', 'participants', 'GroupContext', 'ParticipantContext']),
       isStarterAnActor() {
         return this.starter === "User" || this.starter === "Actor";
       },
@@ -36,11 +36,14 @@
           .filter((entry) => entry.name !== this.starter && !entry.explicit)
       },
       groupAndParticipants() {
-        return this.context?.children.filter(c => c.constructor.name === 'GroupContext' || c.constructor.name === 'ParticipantContext')
+        return this.context?.children.filter(c => c instanceof this.GroupContext || c instanceof this.ParticipantContext)
       }
     },
     methods: {
-      ...mapMutations(['increaseGeneration'])
+      ...mapMutations(['increaseGeneration']),
+      isGroupContext(ctx) {
+        return ctx instanceof this.GroupContext
+      }
     },
     updated() {
       this.increaseGeneration()

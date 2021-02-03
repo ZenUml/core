@@ -81,6 +81,8 @@ antlr4.ParserRuleContext.prototype.returnedValue = function() {
 
 module.exports =  {
   RootContext: rootContext,
+  GroupContext: sequenceParser.sequenceParser.GroupContext,
+  ParticipantContext: sequenceParser.sequenceParser.ParticipantContext,
   Participants: function(ctx) {
     const toCollector = new ToCollector();
     return toCollector.getAllTos(toCollector)(ctx)
