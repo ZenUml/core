@@ -12,6 +12,7 @@ Vue.component('seq-diagram', SeqDiagram)
 Vue.config.productionTip = false
 
 /* eslint-disable */
+console.log('----------', VERSION)
 import demo1 from './demo1.js'
 import demo2 from './demo2.js'
 const store1 = Store()

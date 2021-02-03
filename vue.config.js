@@ -7,6 +7,11 @@ module.exports = {
     // https://cli.vuejs.org/guide/troubleshooting.html#symbolic-links-in-node-modules
     config.resolve.symlinks(false)
 
+    config.plugin('define').tap((definitions) => {
+      definitions[0]['VERSION'] = JSON.stringify(require('./package.json').version);
+      return definitions;
+    });
+
     // We need to clear the pre-built svg rule
     // use `vue-cli-service inspect to check the webpack
     // the built-in webpack uses file-loader
