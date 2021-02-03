@@ -8,7 +8,7 @@
                        :context="child" />
       <life-line :key="index"
                  v-if="child instanceof ParticipantContext"
-                 :entity="{name: child.name && child.name() && child.name().getText()}" />
+                 :entity="getParticipantEntity(child)" />
     </template>
     <life-line v-for="entity in entities" :key="entity.name" :entity="entity"/>
   </div>
@@ -41,8 +41,8 @@
     },
     methods: {
       ...mapMutations(['increaseGeneration']),
-      isGroupContext(ctx) {
-        return ctx instanceof this.GroupContext
+      getParticipantEntity(ctx) {
+        return {name: ctx.name && ctx.name()?.getText(), stereotype: ctx.stereotype && ctx.stereotype()?.name()?.getText()}
       }
     },
     updated() {
