@@ -94,9 +94,9 @@ const Store = () => {
   }
 }
 /* eslint-disable */
-const Version = VERSION
+const Version = VERSION || ''
 /* eslint-disable */
-const BuildTime = BUILD_TIME
+const BuildTime = BUILD_TIME || ''
 export {
   Version,
   BuildTime,
