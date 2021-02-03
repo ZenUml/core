@@ -4,7 +4,7 @@
     <div class="header">
       <div class="name"><label>Par</label></div>
     </div>
-    <block :fragmentOffset="offsetX - 4"
+    <block :fragmentOffset="offsetX - 1"
            :context="par.braceBlock().block()"
            :selfCallIndent="selfCallIndent"
     ></block>
