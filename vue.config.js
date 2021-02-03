@@ -1,7 +1,4 @@
 module.exports = {
-  css: {
-    extract: false
-  },
   chainWebpack: config =>{
     // A workaround that allows npm link or yarn link
     // https://cli.vuejs.org/guide/troubleshooting.html#symbolic-links-in-node-modules
