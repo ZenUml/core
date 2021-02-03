@@ -15,7 +15,7 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
+  import {mapGetters, mapMutations} from 'vuex'
   import LifeLine from './LifeLine.vue'
   import LifeLineGroup from './LifeLineGroup'
 
@@ -38,6 +38,15 @@
       groupAndParticipants() {
         return this.context?.children.filter(c => c.constructor.name === 'GroupContext' || c.constructor.name === 'ParticipantContext')
       }
+    },
+    methods: {
+      ...mapMutations(['increaseGeneration'])
+    },
+    updated() {
+      this.increaseGeneration()
+    },
+    mounted() {
+      this.increaseGeneration()
     },
     components: {
       LifeLine,

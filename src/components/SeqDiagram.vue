@@ -13,17 +13,12 @@
 
   export default {
     name: 'seq-diagram',
-    data: function() {
-      return {
-        generation: 0
-      }
-    },
     components: {
       LifeLineLayer,
       MessageLayer
     },
     computed: {
-      ...mapGetters(['rootContext'])
+      ...mapGetters(['rootContext', 'generation'])
     },
     methods: {
       toPng() {
@@ -36,9 +31,6 @@
         // It does not render the 'User' svg icon.
         return domtoimage.toJpeg(this.$refs['diagram'], { quality: 0.95, bgcolor: 'white' })
       }
-    },
-    mounted() {
-      this.generation++
     }
   }
 </script>

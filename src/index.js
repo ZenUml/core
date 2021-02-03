@@ -8,6 +8,7 @@ import './components/theme-blue-river.scss'
 const Store = () => {
   return {
     state: {
+      generation: 0,
       // 'lifeLineDimensions' is decided by code and browser's behavior.
       // It cannot be a simple getter (which is a computed value of a state property).
       lifeLineDimensions: new Map(),
@@ -21,6 +22,7 @@ const Store = () => {
       }
     },
     getters: {
+      generation: (state) => state.generation,
       // We are using getters to avoid hard coding module's name ($store.Store.state)
       // in the components. Not sure if this is the best practice.
       firstInvocations: (state) => state.firstInvocations,
@@ -61,8 +63,12 @@ const Store = () => {
       onLifelineMounted: (state) => state.onLifelineMounted
     },
     mutations: {
+      increaseGeneration: function(state) {
+        state.generation++
+      },
       code: function (state, payload) {
         state.code = payload
+        state.generation++
       },
       event: function (state, payload) {
         state.events.push(payload)

@@ -38,8 +38,6 @@
       }
     },
     mounted() {
-      /* eslint-disable */
-      console.log('mounted el', this.entity.name, this.$el.offsetLeft)
       this.onLifelinePositioned({
         name: this.entity.name,
         dimensions: {
@@ -50,11 +48,13 @@
       this.onLifelineMounted(this, this.$vnode.elm);
     },
     updated() {
-      /* eslint-disable */
-      console.log(arguments)
-    },
-    destroyed() {
-      console.log('destroyed el', this.entity.name, this.$el.offsetLeft)
+      this.onLifelinePositioned({
+        name: this.entity.name,
+        dimensions: {
+          left: this.$el.offsetLeft,
+          width: this.$el.offsetWidth
+        }
+      })
     }
   }
 </script>
