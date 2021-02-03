@@ -94,7 +94,7 @@
 
   .interaction {
     /*Keep dashed here otherwise no space is given to the border*/
-    border: 5px dashed red;
+    border: 5px dashed transparent;
   }
   .interaction.highlight {
     border-color: inherit;
@@ -152,7 +152,7 @@
   }
 
   .fragment {
-    border-width: 4px;
+    border-width: 1px;
     margin: 2px 0;
   }
 
