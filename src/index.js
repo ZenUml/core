@@ -93,10 +93,13 @@ const Store = () => {
     strict: false,
   }
 }
-
-let Version = '2.6.3'
+/* eslint-disable */
+const Version = VERSION
+/* eslint-disable */
+const BuildTime = BUILD_TIME
 export {
   Version,
+  BuildTime,
   Store,
   SeqDiagram
 }

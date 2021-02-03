@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 // import log4V from './plugins/Log4V'
 
-import {SeqDiagram, Store} from './index'
+import {SeqDiagram, Store, BuildTime, Version} from './index'
 
 Vue.use(Vuex)
 // Vue.use(log4V)
@@ -12,7 +12,8 @@ Vue.component('seq-diagram', SeqDiagram)
 Vue.config.productionTip = false
 
 /* eslint-disable */
-console.log('----------', VERSION)
+console.log('----------', Version)
+console.log('----------', BuildTime)
 import demo1 from './demo1.js'
 import demo2 from './demo2.js'
 const store1 = Store()

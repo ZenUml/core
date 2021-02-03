@@ -9,6 +9,7 @@ module.exports = {
 
     config.plugin('define').tap((definitions) => {
       definitions[0]['VERSION'] = JSON.stringify(require('./package.json').version);
+      definitions[0]['BUILD_TIME'] = JSON.stringify(new Date());
       return definitions;
     });
 
