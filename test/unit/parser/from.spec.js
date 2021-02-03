@@ -26,6 +26,15 @@ describe('Get `from` from context', () => {
     expect(GetInheritedFrom(m2.func())).toBe('A')
   })
 
+  test('Embedded', () => {
+    let rootContext = seqDsl.RootContext('"A".m1 { B.m2 }');
+    let m1 = rootContext.block().stat()[0].message()
+    expectText(m1).toBe('"A".m1{B.m2}')
+    let m2 = m1.braceBlock().block().stat()[0].message();
+    expectText(m2).toBe('B.m2')
+    expect(GetInheritedFrom(m2.func())).toBe('A')
+  })
+
   test('Embedded Self', () => {
     let rootContext = seqDsl.RootContext('A.m1 { m2 }');
     let m1 = rootContext.block().stat()[0].message()

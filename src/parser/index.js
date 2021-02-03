@@ -41,7 +41,9 @@ function getInheritedFrom(ctx) {
     }
     if (ctx instanceof seqParser.MessageContext) {
       if (ctx.func()?.to()) {
-        return ctx.func().to().getText();
+        let participant = ctx.func().to().getText()
+        participant = participant.replace(/^"(.*)"$/, '$1');
+        return participant;
       }
 
     }
