@@ -64,6 +64,18 @@ describe('Get `from` from context', () => {
     expect(GetInheritedFrom(m2.func())).toBe('A')
   })
 
+  test('Embedded in if at root', () => {
+    let rootContext = seqDsl.RootContext('if(x) { m1 A.m2 }');
+    let alt = rootContext.block().stat()[0].alt()
+    expect(GetInheritedFrom(alt)).toBe('Starter')
+    let m1 = alt.ifBlock().braceBlock().block().stat()[0].message();
+    expectText(m1).toBe('m1')
+    expect(GetInheritedFrom(m1.func())).toBe('Starter')
+    let m2 = alt.ifBlock().braceBlock().block().stat()[1].message();
+    expectText(m2).toBe('A.m2')
+    expect(GetInheritedFrom(m2.func())).toBe('Starter')
+  })
+
   test('Embedded in Self', () => {
     let rootContext = seqDsl.RootContext('A.m1 { m2 {m3} }');
     let m1 = rootContext.block().stat()[0].message()

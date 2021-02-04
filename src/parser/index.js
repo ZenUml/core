@@ -37,7 +37,7 @@ function getInheritedFrom(ctx) {
   // then find the closest Message or Creation which define the 'inherited from'
   while (ctx && ctx.constructor) {
     if (ctx instanceof seqParser.ProgContext) {
-      return ctx.starterExp()?.getText() || 'Starter';
+      return ctx.head()?.starterExp()?.getText() || 'Starter';
     }
     if (ctx instanceof seqParser.MessageContext) {
       if (ctx.func()?.to()) {
