@@ -13,8 +13,33 @@
     <noscript>
       <strong>We're sorry but vue-sequence doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
+    <script>
+      function debounce(func, wait, immediate) {
+        var timeout;
+        return function() {
+          var context = this, args = arguments;
+          var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+          };
+          var callNow = immediate && !timeout;
+          clearTimeout(timeout);
+          timeout = setTimeout(later, wait);
+          if (callNow) func.apply(context, args);
+        };
+      };
+      function updateCode(c) {
+        console.log('debouncing update code', c)
+        debounce(function () {
+          console.log('update code', c)
+          document.getElementsByClassName('sequence-diagram')[0].__vue__.$store.state.code = c
+        }, 100)
+      }
+    </script>
+    <textarea oninput="updateCode(this.value)"></textarea>
     <div id="demo1"></div>
     <div id="demo2"></div>
+
     <!-- built files will be auto injected -->
   </body>
 </html>
