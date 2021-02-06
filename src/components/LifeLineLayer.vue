@@ -2,7 +2,7 @@
   <div class="life-line-layer">
     <life-line :entity="{name: starter}" class="starter"
                :class="{hidden: !isStarterExplicitlyDefined, actor: isStarterAnActor}"/>
-    <template v-for="(child, index) in groupAndParticipants">
+    <template v-for="(child, index) in explictGroupAndParticipants">
       <life-line-group :key="index"
                        v-if="child instanceof GroupContext"
                        :context="child" />
@@ -10,7 +10,7 @@
                  v-if="child instanceof ParticipantContext"
                  :entity="getParticipantEntity(child)" />
     </template>
-    <life-line v-for="entity in entities" :key="entity.name" :entity="entity"/>
+    <life-line v-for="entity in implicitParticipants" :key="entity.name" :entity="entity"/>
   </div>
 </template>
 
@@ -30,12 +30,12 @@
       isStarterExplicitlyDefined() {
         return !!this.context?.starterExp()
       },
-      entities () {
+      implicitParticipants () {
         return Array.from(this.participants.entries())
           .map(entry => {return {name: entry[0], stereotype: entry[1].stereotype, explicit: !!entry[1].explicit}})
           .filter((entry) => entry.name !== this.starter && !entry.explicit)
       },
-      groupAndParticipants() {
+      explictGroupAndParticipants() {
         return this.context?.children.filter(c => c instanceof this.GroupContext || c instanceof this.ParticipantContext)
       }
     },

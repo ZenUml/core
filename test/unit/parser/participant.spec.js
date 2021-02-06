@@ -13,6 +13,14 @@ test('A participant - A B', () => {
   expectText(participants[1]).toBe('B')
 })
 
+// If you declare a participant twice, two participants will be created.
+test('A participant - A A', () => {
+  let rootContext = seqDsl.RootContext('A A');
+  let participants = rootContext.head().participant();
+  expectText(participants[0]).toBe('A')
+  expectText(participants[1]).toBe('A')
+})
+
 test('A participant - A \nB', () => {
   let rootContext = seqDsl.RootContext('A \nB');
   let participants = rootContext.head().participant();

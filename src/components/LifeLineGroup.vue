@@ -15,7 +15,7 @@
       content() {
         return this.context?.getText()
       },
-      entities() {
+      implicitParticipants() {
         return Array.from(Participants(this.context)?.entries())
           .map(entry => {return {name: entry[0], stereotype: entry[1].stereotype}})
       }
