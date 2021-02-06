@@ -68,6 +68,7 @@ value
 stat
  : alt
  | par
+ | opt
  | loop
  | creation
  | asyncMessage
@@ -79,6 +80,10 @@ stat
 
 par
  : PAR braceBlock
+ ;
+
+opt
+ : OPT braceBlock
  ;
 
 anonymousBlock

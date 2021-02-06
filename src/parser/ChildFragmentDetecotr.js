@@ -14,6 +14,10 @@ ChildFragmentDetector.prototype.constructor = ChildFragmentDetector
 var cursor = 0
 var max = 0
 
+ChildFragmentDetector.prototype.enterOpt = function () {
+    cursor++
+}
+
 ChildFragmentDetector.prototype.enterPar = function () {
     cursor++
 }
@@ -24,6 +28,10 @@ ChildFragmentDetector.prototype.enterLoop = function () {
     cursor++
 }
 
+ChildFragmentDetector.prototype.exitOpt = function () {
+    max = Math.max(max, cursor)
+    cursor--
+}
 ChildFragmentDetector.prototype.exitPar = function () {
     max = Math.max(max, cursor)
     cursor--
