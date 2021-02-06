@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import {RootContext, Participants, GroupContext, ParticipantContext} from './parser/index.js'
 
 import SeqDiagram from './components/SeqDiagram.vue'
@@ -68,10 +69,10 @@ const Store = () => {
       increaseGeneration: function(state) {
         state.generation++
       },
-      code: function (state, payload) {
+      code: _.debounce(function (state, payload) {
         state.code = payload
         state.generation++
-      },
+      }, 50),
       event: function (state, payload) {
         state.events.push(payload)
       },
