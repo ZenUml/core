@@ -29,11 +29,7 @@
         };
       };
       function updateCode(c) {
-        console.log('debouncing update code', c)
-        debounce(function () {
-          console.log('update code', c)
-          document.getElementsByClassName('sequence-diagram')[0].__vue__.$store.state.code = c
-        }, 100)
+        document.getElementsByClassName('sequence-diagram')[0].__vue__.$store.state.code = c
       }
     </script>
     <textarea oninput="updateCode(this.value)"></textarea>
