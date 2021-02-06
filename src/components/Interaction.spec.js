@@ -21,7 +21,7 @@ describe('Highlight current interact based on position of cursor', () => {
     const storeConfig = Store()
     storeConfig.state.cursor = cursor
     const store = new Vuex.Store(storeConfig)
-    store.commit('code', code)
+    store.state.code = code
     const rootContext = store.getters.rootContext
     const wrapper = shallowMount(Interaction, {
       store, localVue, propsData: {
