@@ -10,9 +10,17 @@ test('get depth 0', () => {
     expect(depth).toBe(0)
 })
 
-test('get depth 1', () => {
-    let depth = getDepth('A.method() { if (c1) { B.m() }}');
+describe('Depth 1', () => {
+  test.each([
+    ['if(x) {A.m}'],
+    ['loop(x) {A.m}'],
+    ['par {A.m}'],
+    ['opt {A.m}'],
+    ['A.method() { if (c1) { B.m() }}']
+  ])(`%s`, (code) => {
+    let depth = getDepth(code);
     expect(depth).toBe(1)
+  })
 })
 
 test('get depth 2', () => {
