@@ -13,6 +13,7 @@
   import FragmentAlt from './FragmentAlt.vue'
   import FragmentPar from './FragmentPar.vue'
   import FragmentLoop from './FragmentLoop.vue'
+  import FragmentOpt from './FragmentOpt.vue'
 
   export default {
     name: 'statement',
@@ -27,6 +28,7 @@
           loop: 'FragmentLoop',
           alt: 'FragmentAlt',
           par: 'FragmentPar',
+          opt: 'FragmentOpt',
           creation: 'Creation',
           message: 'Interaction',
           asyncMessage: 'InteractionAsync'
@@ -41,6 +43,7 @@
       InteractionAsync,
       FragmentAlt,
       FragmentPar,
+      FragmentOpt,
       FragmentLoop
     }
   }
