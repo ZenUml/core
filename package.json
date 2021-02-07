@@ -51,7 +51,7 @@
     "core-js": "^3.8.3",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
-    "gauge-ts": "0.0.5",
+    "gauge-ts": "0.1.0",
     "node-sass": "^5.0.0",
     "regenerator-runtime": "^0.13.7",
     "sass-loader": "^10.1.0",
