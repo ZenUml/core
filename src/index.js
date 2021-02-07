@@ -18,9 +18,9 @@ const Store = () => {
       events: [],
       selected: [],
       cursor: undefined,
-      // To be overridden by plugins
-      onLifelineMounted: () => {
-      }
+      // To be overridden by extensions
+      onLifelineMounted: () => {},
+      onClick: () => {}
     },
     getters: {
       GroupContext: () => GroupContext,
@@ -58,7 +58,6 @@ const Store = () => {
       distance: (state, getters) => (from, to) => {
         return getters.centerOf(from) - getters.centerOf(to)
       },
-      // deprecated: It should return centerOf(to) - centerOf(from)
       distance2: (state, getters) => (from, to) => {
         if (!from || !to) return 0
         return getters.centerOf(to) - getters.centerOf(from)

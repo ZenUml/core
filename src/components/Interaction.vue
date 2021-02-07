@@ -1,5 +1,6 @@
 <template>
   <div class="interaction sync"
+       v-on:click.stop="interactionClick"
        :signature="signature"
        :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent, 'self': isSelf }"
        :style="{width: interactionWidth + 'px', transform: 'translateX(' + translateX + 'px)'}">
@@ -66,6 +67,12 @@
       invocation: function () {
         // return 'Message'
         return this.isSelf ? 'SelfInvocation' : 'Message'
+      }
+    },
+    methods: {
+      interactionClick() {
+        /* eslint-disable */
+        console.log('Interaction clicked', this.signature)
       }
     },
     components: {

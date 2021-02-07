@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 // import log4V from './plugins/Log4V'
+import CodeRange from './plugins/CodeRange'
 
 import {SeqDiagram, Store, BuildTime, Version} from './index'
 
 Vue.use(Vuex)
 // Vue.use(log4V)
+Vue.use(CodeRange)
 
 Vue.component('seq-diagram', SeqDiagram)
 
