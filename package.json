@@ -17,6 +17,7 @@
   },
   "main": "./dist/vue-sequence.umd.min.js",
   "dependencies": {
+    "@types/assert": "^1.5.4",
     "antlr4": "~4.8.0",
     "dom-to-image-more": "^2.8.0",
     "gauge-ts": "0.1.0",

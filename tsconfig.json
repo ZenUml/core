@@ -1,18 +1,43 @@
 {
-    "compilerOptions": {
-        /* Basic Options */
-        "target": "es6",
-        /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'. */
-        "module": "commonjs",
-        /* Specify module code generation: 'none', commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
-        "lib": ["es2016"],                             /* Specify library files to be included in the compilation:  */
-        /* Module Resolution Options */
-        "moduleResolution": "node",
-        /* Experimental Options */
-        "experimentalDecorators": true,        /* Enables experimental support for ES7 decorators. */
-        "emitDecoratorMetadata": true,         /* Enables experimental support for emitting type metadata for decorators. */
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "target": "es6",
+    "module": "commonjs",
+    "strict": true,
+    "jsx": "preserve",
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "types": [
+      "webpack-env",
+      "jest"
+    ],
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
     },
+    "lib": [
+      "es2016",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "tests/**/*.ts",
+    "tests/**/*.tsx"
+  ],
     "exclude": [
-        "node_modules",
+    "node_modules"
     ]
 }
