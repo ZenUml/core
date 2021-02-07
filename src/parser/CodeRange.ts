@@ -1,15 +1,20 @@
-export class CodeRange {
-  start: number;
-  stop: number;
+interface Pos {
+  line: number;
+  col: number;
+}
 
-  private constructor(start: number, end: number) {
-    this.start = start;
-    this.stop = end;
+export class CodeRange {
+  start: Pos;
+  stop: Pos;
+
+  private constructor(startLine: number, startCol: number, endLine: number, endCol: number) {
+    this.start = {line: startLine, col: startCol};
+    this.stop = {line: endLine, col:endCol};
   }
 
   public static from(context: any) {
-    const start = context.start.start;
-    const stop = context.stop.stop + 1;
-    return new CodeRange(start, stop);
+    const start = context.start;
+    const stop = context.stop;
+    return new CodeRange(start.line, start.column, stop.line, stop.column+stop.text.length);
   }
 }
