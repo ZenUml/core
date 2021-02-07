@@ -1,5 +1,6 @@
 <template>
   <div class="interaction sync"
+       v-on:click.stop="onClick"
        :signature="signature"
        :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent, 'self': isSelf }"
        :style="{width: interactionWidth + 'px', transform: 'translateX(' + translateX + 'px)'}">
@@ -22,13 +23,14 @@
   import InteractionMixin from './InteractionMixin'
   import SelfInvocation from './SelfInvocation'
   import {GetInheritedFrom} from '../parser'
+  import {CodeRange} from '../parser/CodeRange'
 
   export default {
     name: 'interaction',
     props: ['context', 'comment', 'selfCallIndent', 'fragmentOffset'],
     mixins: [InteractionMixin],
     computed: {
-      ...mapGetters(['starter', 'distance', 'distance2', 'centerOf', 'cursor']),
+      ...mapGetters(['starter', 'distance', 'distance2', 'centerOf', 'cursor', 'onElementClick']),
       inheritedFrom: function() {
         return GetInheritedFrom(this.context)
       },
@@ -66,6 +68,11 @@
       invocation: function () {
         // return 'Message'
         return this.isSelf ? 'SelfInvocation' : 'Message'
+      }
+    },
+    methods: {
+      onClick() {
+        this.onElementClick(CodeRange.from(this.context))
       }
     },
     components: {

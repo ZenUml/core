@@ -25,6 +25,7 @@
           case 'return':
             return 'dashed'
         }
+        return ''
       },
       fill () {
         switch (this.type) {
@@ -35,6 +36,7 @@
           case 'return':
             return false
         }
+        return false
       }
     },
     components: {
