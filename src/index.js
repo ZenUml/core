@@ -5,6 +5,7 @@ import SeqDiagram from './components/SeqDiagram.vue'
 
 import './components/Cosmetic.scss'
 import './components/theme-blue-river.scss'
+// import {CodeRange} from './parser/CodeRange'
 
 const Store = () => {
   return {
@@ -18,8 +19,10 @@ const Store = () => {
       events: [],
       selected: [],
       cursor: undefined,
-      // To be overridden by plugins
-      onLifelineMounted: () => {
+      // To be overridden by extensions
+      onLifelineMounted: () => {},
+      onElementClick: (codeRange) => {
+        console.log('element clicked', codeRange)
       }
     },
     getters: {
@@ -63,7 +66,8 @@ const Store = () => {
         if (!from || !to) return 0
         return getters.centerOf(to) - getters.centerOf(from)
       },
-      onLifelineMounted: (state) => state.onLifelineMounted
+      onLifelineMounted: (state) => state.onLifelineMounted,
+      onElementClick: (state) => state.onElementClick
     },
     mutations: {
       increaseGeneration: function(state) {
