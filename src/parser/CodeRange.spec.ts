@@ -12,6 +12,6 @@ describe('CodeRange', () => {
     const message = getMessageContext('A.m');
     const codeRange = CodeRange.from(message);
     expect(codeRange.start).toBe(0);
-    expect(codeRange.end).toBe(3);
+    expect(codeRange.stop).toBe(3);
   });
 });

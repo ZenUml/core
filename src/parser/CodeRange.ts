@@ -1,10 +1,10 @@
 export class CodeRange {
   start: number;
-  end: number;
+  stop: number;
 
   private constructor(start: number, end: number) {
     this.start = start;
-    this.end = end;
+    this.stop = end;
   }
 
   public static from(context: any) {
