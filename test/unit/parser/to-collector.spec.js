@@ -8,13 +8,15 @@ function getParticipants(code) {
 }
 test('smoke test', () => {
   const code = `
+    C
     <<A>> B 1024
+    @Starter(B)
     C.m
     D->E:m
     new F
   `
   let participants = getParticipants(code);
-  expect(Array.from(participants.keys())).toStrictEqual(['B', 'C', 'D', 'E', 'F'])
+  expect(Array.from(participants.keys())).toStrictEqual(['C', 'B', 'D', 'E', 'F'])
   expect(participants.get('B')).toStrictEqual({explicit: true, groupId: undefined, stereotype: 'A', 'width': 1024})
 })
 
