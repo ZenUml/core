@@ -39,6 +39,8 @@ let onTo = function (ctx) {
   descendantTos.set(participant, descendantTos.get(participant) || {});
 };
 
+// Rules:
+// 1. Later declaration win
 let onParticipant = function (ctx) {
   // if(!(ctx?.name())) return;
   if (isBlind) return;
@@ -46,7 +48,7 @@ let onParticipant = function (ctx) {
   let stereotype = ctx.stereotype()?.name()?.getText();
   let width = (ctx.width && ctx.width()) && Number.parseInt(ctx.width().getText()) || undefined;
   const explicit = true;
-  descendantTos.set(participant, descendantTos.get(participant) || {width, stereotype, groupId, explicit});
+  descendantTos.set(participant, {width, stereotype, groupId, explicit});
 };
 ToCollector.prototype.enterParticipant = onParticipant
 

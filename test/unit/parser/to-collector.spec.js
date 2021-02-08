@@ -32,8 +32,8 @@ describe('Plain participants', () => {
 describe('with width', () => {
   test.each([
     ['A 1024', 1024],
-    ['A 1024 A 1025', 1024],
-    ['A 1024\nA 1025', 1024]
+    ['A 1024 A 1025', 1025],
+    ['A 1024\nA 1025', 1025]
   ])('code:%s => width:%s', (code, width) => {
     // `A` will be parsed as a participant which matches `participant EOF`
     let participants = getParticipants(code);
@@ -46,8 +46,8 @@ describe('with width', () => {
 describe('with interface', () => {
   test.each([
     ['<<A>> X 1024', 'A'],
-    ['<<A>> X <<B>> X', 'A'], // Ignore redefining
-    ['<<A>> X\n<<B>> X', 'A']
+    ['<<A>> X <<B>> X', 'B'], // Ignore redefining
+    ['<<A>> X\n<<B>> X', 'B']
   ])('code:%s => width:%s', (code, stereotype) => {
     // `A` will be parsed as a participant which matches `participant EOF`
     let participants = getParticipants(code);
