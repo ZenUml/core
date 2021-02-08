@@ -20,15 +20,28 @@ test('smoke test', () => {
   expect(participants.get('B')).toStrictEqual({explicit: true, groupId: undefined, stereotype: 'A', 'width': 1024})
 })
 
+test('smoke test2', () => {
+  const code = `
+    C
+    <<A>> B 1024
+    @Starter(B)
+    C.m
+    D->E:m
+    new F
+  `
+  let participants = getParticipants2(code);
+  expect(participants.Get('B')).toEqual({name: 'B', explicit: true, groupId: undefined, stereotype: 'A', 'width': 1024})
+})
+
 describe('Plain participants', () => {
   test.each([
     'A', 'A\n', 'A\n\r'
   ])('get participant with width and stereotype undefined', (code) => {
     // `A` will be parsed as a participant which matches `participant EOF`
-    let participants = getParticipants(code);
-    expect(participants.size).toBe(1)
-    expect(participants.get('A').width).toBeUndefined()
-    expect(participants.get('A').stereotype).toBeUndefined()
+    let participants = getParticipants2(code);
+    expect(participants.Size()).toBe(1)
+    expect(participants.Get('A').width).toBeUndefined()
+    expect(participants.Get('A').stereotype).toBeUndefined()
   })
 })
 describe('with width', () => {
@@ -87,8 +100,8 @@ describe('without group', () => {
   })
 })
 
-function getParticipants2() {
-  let rootContext = seqDsl.RootContext('A.method')
+function getParticipants2(code) {
+  let rootContext = seqDsl.RootContext(code)
   const toCollector = new ToCollector()
   return toCollector.getParticipants(rootContext)
 }
@@ -113,23 +126,29 @@ describe('implicit', () => {
 
   describe('from method call', () => {
     test('get participants', () => {
-      const participants = getParticipants2()
+      const participants = getParticipants2('A.method')
       expect(participants.Get('A'))
         .toEqual({name: 'A', stereotype: undefined, width: undefined});
     });
     test('seqDsl should get all participants but ignore parameters - method call', () => {
       let participants = getParticipants2('"b:B".method(x.m)');
-      expect(participants.Size()).toBe(1)
-      expect(participants.Get('b:B').width).toBeUndefined()
+      expect(participants.Size()).toBe(1);
+      console.log(participants);
+      expect(participants.Get('b:B').width).toBeUndefined();
     })
     test('seqDsl should get all participants but ignore parameters - creation', () => {
       let participants = getParticipants2('"b:B".method(new X())');
       expect(participants.Size()).toBe(1)
+      console.log(participants);
+
       expect(participants.Get('b:B').width).toBeUndefined()
     })
 
+
     test('seqDsl should get all participants including from', () => {
       let participants = getParticipants2('A->B.m');
+      console.log(participants);
+
       expect(participants.Size()).toBe(2)
     })
   })

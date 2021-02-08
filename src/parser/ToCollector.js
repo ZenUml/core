@@ -3,7 +3,7 @@ import {Participants} from './Participants'
 const antlr4 = require('antlr4/index');
 const sequenceParserListener = require('../generated-parser/sequenceParserListener');
 
-const participants = new Participants();
+let participants = undefined;
 let descendantTos = undefined;
 let isBlind = false;
 let groupId = undefined;
@@ -26,6 +26,7 @@ let onParticipant = function (ctx) {
   let width = (ctx.width && ctx.width()) && Number.parseInt(ctx.width().getText()) || undefined;
   const explicit = true;
   descendantTos.set(participant, {width, stereotype, groupId, explicit});
+  participants.Add(participant, stereotype, width, groupId, explicit);
 };
 ToCollector.prototype.enterParticipant = onParticipant
 
@@ -74,6 +75,7 @@ ToCollector.prototype.exitGroup = function () {
 const walker = antlr4.tree.ParseTreeWalker.DEFAULT
 
 ToCollector.prototype.getAllTos = function (me) {
+  participants = new Participants();
   return function (context) {
     walker.walk(me, context)
     return descendantTos;
@@ -81,6 +83,12 @@ ToCollector.prototype.getAllTos = function (me) {
 }
 
 ToCollector.prototype.getParticipants = function (context) {
+  participants = new Participants();
+  // return function (context) {
+  //   walker.walk(me, context)
+  //   return participants;
+  // }
+
   walker.walk(this, context)
   return participants;
 }
