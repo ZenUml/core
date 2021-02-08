@@ -1,12 +1,5 @@
 let seqDsl = require('../../../src/parser/index');
 let ToCollector = require('../../../src/parser/ToCollector')
-
-function getParticipants(code) {
-  let rootContext = seqDsl.RootContext(code);
-  const toCollector = new ToCollector();
-  return toCollector.getAllTos(toCollector)(rootContext);
-}
-
 test('smoke test2', () => {
   const code = `
     C
@@ -137,7 +130,6 @@ describe('implicit', () => {
       expect(participants.Size()).toBe(1)
       expect(participants.Get('b:B').width).toBeUndefined()
     })
-
 
     test('seqDsl should get all participants including from', () => {
       let participants = getParticipants2('A->B.m');
