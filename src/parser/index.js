@@ -88,7 +88,7 @@ module.exports =  {
   RootContext: rootContext,
   GroupContext: sequenceParser.sequenceParser.GroupContext,
   ParticipantContext: sequenceParser.sequenceParser.ParticipantContext,
-  Participants2: function(ctx) {
+  Participants: function(ctx) {
     const toCollector = new ToCollector();
     return toCollector.getParticipants(ctx)
   },

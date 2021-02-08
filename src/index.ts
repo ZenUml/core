@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import {RootContext, Participants2, GroupContext, ParticipantContext} from './parser/index.js'
+import {RootContext, Participants, GroupContext, ParticipantContext} from './parser/index.js'
 
 import SeqDiagram from './components/SeqDiagram.vue'
 
@@ -43,7 +43,7 @@ const Store = () => {
         return RootContext(state.code)
       },
       participants2: (state: any, getters: any) => {
-        return Participants2(getters.rootContext)
+        return Participants(getters.rootContext)
       },
       centerOf: (state: any) => (entity: any) => {
         return state.lifeLineDimensions.get(entity) &&

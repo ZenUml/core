@@ -8,7 +8,7 @@
 </template>
 
 <script>
-  import {Participants2} from '../parser'
+  import {Participants} from '../parser'
   import LifeLine from './LifeLine'
 
   export default {
@@ -19,7 +19,7 @@
         return this.context?.name()?.getText().replace(/^"(.*)"$/, '$1')
       },
       entities() {
-        return Participants2(this.context).Array()
+        return Participants(this.context).Array()
       }
     },
     components: {

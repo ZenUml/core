@@ -18,7 +18,7 @@
   import {mapGetters, mapMutations} from 'vuex'
   import LifeLine from './LifeLine.vue'
   import LifeLineGroup from './LifeLineGroup'
-  import {Participants2} from '../parser/index'
+  import {Participants} from '../parser/index'
 
   export default {
     name: 'life-line-layer',
@@ -41,7 +41,7 @@
     methods: {
       ...mapMutations(['increaseGeneration']),
       getParticipantEntity(ctx) {
-        return Participants2(ctx).First()
+        return Participants(ctx).First()
       }
     },
     updated() {

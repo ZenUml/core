@@ -1,4 +1,4 @@
-import {Depth, Participants2} from '../parser'
+import {Depth, Participants} from '../parser'
 import {mapGetters} from 'vuex'
 
 export default {
@@ -6,7 +6,7 @@ export default {
     ...mapGetters(['participants2', 'leftOf', 'rightOf', 'centerOf']),
     localParticipants: function() {
       // [A, B, C, D] the order may not be the same as appeared on the Lifeline layer
-      return [this.from, ...Participants2(this.context).ImplicitArray().map(p => p.name)]
+      return [this.from, ...Participants(this.context).ImplicitArray().map(p => p.name)]
     },
     leftParticipant: function () {
       const allParticipants = this.participants2.Names();
