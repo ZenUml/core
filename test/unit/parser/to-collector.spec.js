@@ -61,9 +61,10 @@ describe('with interface', () => {
 
 describe('with group', () => {
   test.each([
-    ['group { A }', 'A', 1],
+    ['group { A }', 'A', undefined],
     ['group group1 { A }', 'A', 'group1'],
     ['group "group 2" { A }', 'A', 'group 2'],
+    ['group "group 2" { A } group "group 3" { A }', 'A', 'group 3'],
   ])('code:%s => participant:%s', (code, participant, groupId) => {
     // `A` will be parsed as a participant which matches `participant EOF`
     let participants = getParticipants(code);
@@ -73,14 +74,10 @@ describe('with group', () => {
   })
 })
 
-describe('with group2', () => {
+describe('without group', () => {
   test.each([
     ['A.method', 'A', undefined],
     ['@Starter(A)', 'A', undefined],
-    ['group { A }', 'A', undefined],
-    ['group group1 { A } @Starter(A)', 'A', 'group1'],
-    ['group "group 2" { A }', 'A', 'group 2'],
-    ['group "group 2" { A } group "group 3" { A }', 'A', 'group 3'],
   ])('code:%s => participant:%s', (code, participant, groupId) => {
     // `A` will be parsed as a participant which matches `participant EOF`
     let participants = getParticipants(code);
