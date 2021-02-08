@@ -1,6 +1,9 @@
+import {Participants} from './Participants'
+
 const antlr4 = require('antlr4/index');
 const sequenceParserListener = require('../generated-parser/sequenceParserListener');
 
+const participants = new Participants();
 let descendantTos = undefined;
 let isBlind = false;
 let groupId = undefined;
@@ -32,6 +35,7 @@ let onTo = function (ctx) {
   // remove leading and trailing quotes (e.g. "a:A" becomes a:A
   participant = participant.replace(/^"(.*)"$/, '$1');
   descendantTos.set(participant, descendantTos.get(participant) || {});
+  participants.Add(participant);
 };
 
 
@@ -72,8 +76,13 @@ const walker = antlr4.tree.ParseTreeWalker.DEFAULT
 ToCollector.prototype.getAllTos = function (me) {
   return function (context) {
     walker.walk(me, context)
-    return descendantTos
+    return descendantTos;
   }
+}
+
+ToCollector.prototype.getParticipants = function (context) {
+  walker.walk(this, context)
+  return participants;
 }
 
 module.exports = ToCollector;
