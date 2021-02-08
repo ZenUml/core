@@ -98,6 +98,16 @@ describe('without group', () => {
     expect(participants.keys().next().value).toBe(participant)
     expect(participants.values().next().value.groupId).toBe(groupId)
   })
+
+  test.each([
+    ['A.method', 'A', undefined],
+    ['@Starter(A)', 'A', undefined],
+  ])('code:%s => participant:%s', (code, participant, groupId) => {
+    // `A` will be parsed as a participant which matches `participant EOF`
+    let participants = getParticipants2(code);
+    expect(participants.Size()).toBe(1)
+    expect(participants.Get('A').groupId).toBe(groupId)
+  })
 })
 
 function getParticipants2(code) {
@@ -111,6 +121,10 @@ describe('implicit', () => {
     test('from new', () => {
       let participants = getParticipants('new A()');
       expect(Array.from(participants.keys())[0]).toBe('A')
+    })
+    test('from new', () => {
+      let participants = getParticipants2('new A()');
+      expect(participants.Get('A')).toEqual( {"explicit": undefined, "groupId": undefined, "name": "A", "stereotype": undefined, "width": undefined})
     })
     test('seqDsl should treat creation as a participant - assignment', () => {
       let participants = getParticipants('a = new A()');

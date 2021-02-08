@@ -53,6 +53,7 @@ ToCollector.prototype.enterCreation = function (ctx) {
   const type = ctx.construct().getText();
   const participant = assignee ? assignee + ':' + type : type;
   descendantTos.set(participant, descendantTos.get(participant) || {});
+  participants.Add(participant);
 }
 
 ToCollector.prototype.enterParameters = function () {
