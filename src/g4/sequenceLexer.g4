@@ -56,6 +56,7 @@ THEME_LXR: 'Theme';
 PAR : 'par';
 GROUP : 'group';
 OPT : 'opt';
+AS : 'as';
 
 DOT
  : '.'

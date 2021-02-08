@@ -74,6 +74,15 @@ sequenceParserListener.prototype.exitStereotype = function(ctx) {
 };
 
 
+// Enter a parse tree produced by sequenceParser#label.
+sequenceParserListener.prototype.enterLabel = function(ctx) {
+};
+
+// Exit a parse tree produced by sequenceParser#label.
+sequenceParserListener.prototype.exitLabel = function(ctx) {
+};
+
+
 // Enter a parse tree produced by sequenceParser#name.
 sequenceParserListener.prototype.enterName = function(ctx) {
 };
