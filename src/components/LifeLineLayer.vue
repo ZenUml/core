@@ -24,7 +24,7 @@
     name: 'life-line-layer',
     props: ['context'],
     computed: {
-      ...mapGetters(['starter', 'participants', 'participants2', 'GroupContext', 'ParticipantContext']),
+      ...mapGetters(['starter', 'participants2', 'GroupContext', 'ParticipantContext']),
       isStarterAnActor() {
         return this.starter === "User" || this.starter === "Actor";
       },
@@ -41,8 +41,7 @@
     methods: {
       ...mapMutations(['increaseGeneration']),
       getParticipantEntity(ctx) {
-        const participants = Participants2(ctx)
-        return participants.First()
+        return Participants2(ctx).First()
       }
     },
     updated() {

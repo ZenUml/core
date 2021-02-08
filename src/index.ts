@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import {RootContext, Participants, Participants2, GroupContext, ParticipantContext} from './parser/index.js'
+import {RootContext, Participants2, GroupContext, ParticipantContext} from './parser/index.js'
 
 import SeqDiagram from './components/SeqDiagram.vue'
 
@@ -41,9 +41,6 @@ const Store = () => {
       },
       rootContext: (state: any) => {
         return RootContext(state.code)
-      },
-      participants: (state: any, getters: any) => {
-        return Participants(getters.rootContext)
       },
       participants2: (state: any, getters: any) => {
         console.log('calling getter');
