@@ -4,11 +4,9 @@ const antlr4 = require('antlr4/index');
 const sequenceParserListener = require('../generated-parser/sequenceParserListener');
 
 let participants = undefined;
-let descendantTos = undefined;
 let isBlind = false;
 let groupId = undefined;
 const ToCollector = function () {
-  descendantTos = new Map()
   sequenceParserListener.sequenceParserListener.call(this)
   return this
 };
@@ -17,7 +15,6 @@ ToCollector.prototype = Object.create(sequenceParserListener.sequenceParserListe
 // Rules:
 // 1. Later declaration win
 // 2. Participant declaration overwrite cannot be overwritten by To or Starter
-
 let onParticipant = function (ctx) {
   // if(!(ctx?.name())) return;
   if (isBlind) return;
@@ -25,7 +22,6 @@ let onParticipant = function (ctx) {
   let stereotype = ctx.stereotype()?.name()?.getText();
   let width = (ctx.width && ctx.width()) && Number.parseInt(ctx.width().getText()) || undefined;
   const explicit = true;
-  descendantTos.set(participant, {width, stereotype, groupId, explicit});
   participants.Add(participant, false, stereotype, width, groupId, explicit);
 };
 ToCollector.prototype.enterParticipant = onParticipant
@@ -35,7 +31,6 @@ let onTo = function (ctx) {
   let participant = ctx.getText();
   // remove leading and trailing quotes (e.g. "a:A" becomes a:A
   participant = participant.replace(/^"(.*)"$/, '$1');
-  descendantTos.set(participant, descendantTos.get(participant) || {});
   participants.Add(participant);
 };
 
@@ -50,7 +45,6 @@ ToCollector.prototype.enterStarter = function(ctx) {
   let participant = ctx.getText();
   // remove leading and trailing quotes (e.g. "a:A" becomes a:A
   participant = participant.replace(/^"(.*)"$/, '$1');
-  descendantTos.set(participant, descendantTos.get(participant) || {});
   participants.Add(participant, true)
 }
 
@@ -59,7 +53,6 @@ ToCollector.prototype.enterCreation = function (ctx) {
   const assignee = ctx.assignment() && ctx.assignment().assignee().getText();
   const type = ctx.construct().getText();
   const participant = assignee ? assignee + ':' + type : type;
-  descendantTos.set(participant, descendantTos.get(participant) || {});
   participants.Add(participant);
 }
 
@@ -81,14 +74,6 @@ ToCollector.prototype.exitGroup = function () {
   groupId = undefined;
 }
 const walker = antlr4.tree.ParseTreeWalker.DEFAULT
-
-ToCollector.prototype.getAllTos = function (me) {
-  participants = new Participants();
-  return function (context) {
-    walker.walk(me, context)
-    return descendantTos;
-  }
-}
 
 ToCollector.prototype.getParticipants = function (context) {
   participants = new Participants();
