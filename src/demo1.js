@@ -6,8 +6,7 @@
 // Nested method
 // Assignment
 export default `
-A
-B
+group {A B}
 @Starter(Macro)
 commentIds = LoadComments() {
   if(x) {

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import {Participants} from '../parser'
+  import {Participants2} from '../parser'
   import LifeLine from './LifeLine'
 
   export default {
@@ -15,9 +15,8 @@
       content() {
         return this.context?.getText()
       },
-      implicitParticipants() {
-        return Array.from(Participants(this.context)?.entries())
-          .map(entry => {return {name: entry[0], stereotype: entry[1].stereotype}})
+      entities() {
+        return Participants2(this.context).Array()
       }
     },
     components: {
@@ -29,5 +28,6 @@
 <style scoped>
   .lifeline-group {
     display: flex;
+    border: #5d5d5d solid 1px;
   }
 </style>
