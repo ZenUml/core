@@ -16,10 +16,13 @@ head
  | (group | participant)* starterExp
  ;
 
+// The following order is important.
+// It ensures group { A } will not be parsed as group + anonymouseBlock.
+// It seems that we should always put the longest rule at the top.
 group
- : GROUP name?
+ : GROUP name? OBRACE participant* CBRACE
  | GROUP name? OBRACE
- | GROUP name? OBRACE participant* CBRACE
+ | GROUP name?
  ;
 
 starterExp
