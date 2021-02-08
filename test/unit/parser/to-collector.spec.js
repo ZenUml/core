@@ -73,6 +73,23 @@ describe('with group', () => {
   })
 })
 
+describe('with group2', () => {
+  test.each([
+    ['A.method', 'A', undefined],
+    ['@Starter(A)', 'A', undefined],
+    ['group { A }', 'A', undefined],
+    ['group group1 { A } @Starter(A)', 'A', 'group1'],
+    ['group "group 2" { A }', 'A', 'group 2'],
+    ['group "group 2" { A } group "group 3" { A }', 'A', 'group 3'],
+  ])('code:%s => participant:%s', (code, participant, groupId) => {
+    // `A` will be parsed as a participant which matches `participant EOF`
+    let participants = getParticipants(code);
+    expect(participants.size).toBe(1)
+    expect(participants.keys().next().value).toBe(participant)
+    expect(participants.values().next().value.groupId).toBe(groupId)
+  })
+})
+
 describe('implicit', () => {
   describe('from new', () => {
     test('from new', () => {

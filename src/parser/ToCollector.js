@@ -1,25 +1,6 @@
 const antlr4 = require('antlr4/index');
 const sequenceParserListener = require('../generated-parser/sequenceParserListener');
-(function() {
-  if ( typeof Object.id == "undefined" ) {
-    var id = 0;
 
-    Object.id = function(o) {
-      if (!o) return 0;
-      if ( typeof o.__uniqueid == "undefined" ) {
-        Object.defineProperty(o, "__uniqueid", {
-          value: ++id,
-          enumerable: false,
-          // This could go either way, depending on your
-          // interpretation of what an "id" is
-          writable: false
-        });
-      }
-
-      return o.__uniqueid;
-    };
-  }
-})();
 let descendantTos = undefined;
 let isBlind = false;
 let groupId = undefined;
@@ -30,17 +11,10 @@ const ToCollector = function () {
 };
 
 ToCollector.prototype = Object.create(sequenceParserListener.sequenceParserListener.prototype)
-
-let onTo = function (ctx) {
-  if (isBlind) return;
-  let participant = ctx.getText();
-  // remove leading and trailing quotes (e.g. "a:A" becomes a:A
-  participant = participant.replace(/^"(.*)"$/, '$1');
-  descendantTos.set(participant, descendantTos.get(participant) || {});
-};
-
 // Rules:
 // 1. Later declaration win
+// 2. Participant declaration overwrite cannot be overwritten by To or Starter
+
 let onParticipant = function (ctx) {
   // if(!(ctx?.name())) return;
   if (isBlind) return;
@@ -52,11 +26,21 @@ let onParticipant = function (ctx) {
 };
 ToCollector.prototype.enterParticipant = onParticipant
 
+let onTo = function (ctx) {
+  if (isBlind) return;
+  let participant = ctx.getText();
+  // remove leading and trailing quotes (e.g. "a:A" becomes a:A
+  participant = participant.replace(/^"(.*)"$/, '$1');
+  descendantTos.set(participant, descendantTos.get(participant) || {});
+};
+
+
 ToCollector.prototype.enterFrom = onTo
 ToCollector.prototype.enterTo = onTo
 
 ToCollector.prototype.enterSource = onTo
 ToCollector.prototype.enterTarget = onTo
+ToCollector.prototype.enterStarter = onTo
 
 ToCollector.prototype.enterCreation = function (ctx) {
   if (isBlind) return;
@@ -77,7 +61,7 @@ ToCollector.prototype.exitParameters = function () {
 ToCollector.prototype.enterGroup = function (ctx) {
   // group { A } => groupId = 1
   // group group1 { A } => groupId = "group1"
-  groupId = ctx.name()?.getText().replace(/^"|"$/g, '') || Object.id(ctx);
+  groupId = ctx.name()?.getText().replace(/^"|"$/g, '');
 }
 
 ToCollector.prototype.exitGroup = function () {
