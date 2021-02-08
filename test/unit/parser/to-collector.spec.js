@@ -107,7 +107,7 @@ describe('implicit', () => {
   describe('from new', () => {
     test('from new', () => {
       let participants = getParticipants2('new A()');
-      expect(participants.Get('A')).toEqual( {"explicit": undefined, "groupId": undefined, "name": "A", "stereotype": undefined, "width": undefined})
+      expect(participants.Get('A')).toEqual( {"isStarter": false, "explicit": undefined, "groupId": undefined, "name": "A", "stereotype": undefined, "width": undefined})
     })
     test('seqDsl should treat creation as a participant - assignment', () => {
       let participants = getParticipants2('a = new A()');
@@ -125,7 +125,7 @@ describe('implicit', () => {
     test('get participants', () => {
       const participants = getParticipants2('A.method')
       expect(participants.Get('A'))
-        .toEqual({name: 'A', stereotype: undefined, width: undefined});
+        .toEqual({name: 'A', isStarter: false, stereotype: undefined, width: undefined});
     });
     test('seqDsl should get all participants but ignore parameters - method call', () => {
       let participants = getParticipants2('"b:B".method(x.m)');

@@ -25,8 +25,9 @@ export class Participants {
   private participants = new Map();
 
   public Add(name: string): void;
+  public Add(name: string, isStarter: boolean): void;
   public Add(name: string,
-             isStarter?: boolean,
+             isStarter = false,
              stereotype?: string,
              width?: number,
              groupId?: number | string,
