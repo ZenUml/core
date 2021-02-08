@@ -6,6 +6,19 @@
 // Nested method
 // Assignment
 export default `
-opt {
-A.m
-}`
+@Starter(Macro)
+commentIds = LoadComments() {
+  Confluence.getContentProerpty()
+}
+
+foreach(commentId) {
+  comment = Confluence.getComment(commentId)
+  
+  Render(comment) {
+    // if(commentIsOpen) {
+    //   show()
+    // }
+  }
+  
+}
+`
