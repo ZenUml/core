@@ -43,7 +43,6 @@ const Store = () => {
         return RootContext(state.code)
       },
       participants2: (state: any, getters: any) => {
-        console.log('calling getter');
         return Participants2(getters.rootContext)
       },
       centerOf: (state: any) => (entity: any) => {
