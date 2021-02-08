@@ -65,7 +65,7 @@ ToCollector.prototype.exitParameters = function () {
 }
 
 ToCollector.prototype.enterGroup = function (ctx) {
-  // group { A } => groupId = 1
+  // group { A } => groupId = undefined
   // group group1 { A } => groupId = "group1"
   groupId = ctx.name()?.getText().replace(/^"|"$/g, '');
 }
@@ -77,11 +77,6 @@ const walker = antlr4.tree.ParseTreeWalker.DEFAULT
 
 ToCollector.prototype.getParticipants = function (context) {
   participants = new Participants();
-  // return function (context) {
-  //   walker.walk(me, context)
-  //   return participants;
-  // }
-
   walker.walk(this, context)
   return participants;
 }
