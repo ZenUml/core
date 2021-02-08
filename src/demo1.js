@@ -10,7 +10,9 @@ A
 B
 @Starter(Macro)
 commentIds = LoadComments() {
-  Confluence.getContentProerpty()
+  if(x) {
+    Confluence.getContentProerpty()
+  }
 }
 
 foreach(commentId) {

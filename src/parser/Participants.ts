@@ -43,6 +43,10 @@ export class Participants {
       .filter(p => !p.explicit && !p.isStarter)
   }
 
+  Names() {
+    return Array.from(this.participants.keys())
+  }
+
   First() {
     return this.participants.values().next().value
   }
