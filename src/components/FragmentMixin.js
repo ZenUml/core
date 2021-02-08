@@ -3,17 +3,17 @@ import {mapGetters} from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters(['participants', 'leftOf', 'rightOf', 'centerOf']),
+    ...mapGetters(['participants2', 'leftOf', 'rightOf', 'centerOf']),
     localParticipants: function() {
       // [A, B, C, D] the order may not be the same as appeared on the Lifeline layer
-      return [this.from, ...Array.from(Participants(this.context).keys())]
+      return [this.from, ...Participants(this.context).ImplicitArray().map(p => p.name)]
     },
     leftParticipant: function () {
-      const allParticipants = Array.from(this.participants.keys());
+      const allParticipants = this.participants2.Names();
       return allParticipants.find(p => this.localParticipants.includes(p))
     },
     rightParticipant: function () {
-      const allParticipants = Array.from(this.participants.keys());
+      const allParticipants = this.participants2.Names();
       return allParticipants.reverse().find(p => this.localParticipants.includes(p))
     },
     boundary: function () {

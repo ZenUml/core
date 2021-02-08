@@ -20,6 +20,11 @@ function rootContext(code) {
   return parser._syntaxErrors ? null : parser.prog();
 }
 
+function getStarterText(ctx) {
+  return ctx.head()?.starterExp()?.starter()?.getText()
+}
+
+
 function getInheritedFrom(ctx) {
   // TODO: throw error?
   if (!ctx) return undefined;
@@ -29,7 +34,7 @@ function getInheritedFrom(ctx) {
   const seqParser = sequenceParser.sequenceParser
   while (ctx && !(ctx instanceof seqParser.BraceBlockContext)) {
     if (ctx.constructor === seqParser.ProgContext) {
-      return ctx.head()?.starterExp()?.starter()?.getText() || 'Starter';
+      return getStarterText(ctx) || 'Starter';
     }
     ctx = ctx.parentCtx;
   }
@@ -37,7 +42,7 @@ function getInheritedFrom(ctx) {
   // then find the closest Message or Creation which define the 'inherited from'
   while (ctx && ctx.constructor) {
     if (ctx instanceof seqParser.ProgContext) {
-      return ctx.head()?.starterExp()?.getText() || 'Starter';
+      return getStarterText(ctx) || 'Starter';
     }
     if (ctx instanceof seqParser.MessageContext) {
       if (ctx.func()?.to()) {
@@ -85,7 +90,7 @@ module.exports =  {
   ParticipantContext: sequenceParser.sequenceParser.ParticipantContext,
   Participants: function(ctx) {
     const toCollector = new ToCollector();
-    return toCollector.getAllTos(toCollector)(ctx)
+    return toCollector.getParticipants(ctx)
   },
   GetInheritedFrom: getInheritedFrom,
   Errors: errors,

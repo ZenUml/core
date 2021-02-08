@@ -1,6 +1,9 @@
 <template>
-  <div class="lifeline-group">
-    <life-line v-for="entity in entities" :key="entity.name" :ref="entity.name" :entity="entity"/>
+  <div>
+    <label v-if="name">{{name}}</label>
+    <div class="lifeline-group">
+      <life-line v-for="entity in entities" :key="entity.name" :ref="entity.name" :entity="entity"/>
+    </div>
   </div>
 </template>
 
@@ -12,12 +15,11 @@
     name: 'lifeline-group',
     props: ['context'],
     computed: {
-      content() {
-        return this.context?.getText()
+      name() {
+        return this.context?.name()?.getText().replace(/^"(.*)"$/, '$1')
       },
-      implicitParticipants() {
-        return Array.from(Participants(this.context)?.entries())
-          .map(entry => {return {name: entry[0], stereotype: entry[1].stereotype}})
+      entities() {
+        return Participants(this.context).Array()
       }
     },
     components: {
@@ -27,7 +29,18 @@
 </script>
 
 <style scoped>
+  div {
+    background-color: #eeffee;
+  }
+  label {
+    display: block;
+    text-align: center;
+    font-weight: bold;
+  }
+
   .lifeline-group {
     display: flex;
+    height: 100%;
+    /*opacity: 50%;*/
   }
 </style>
