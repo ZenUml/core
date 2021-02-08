@@ -26,7 +26,7 @@ let onParticipant = function (ctx) {
   let width = (ctx.width && ctx.width()) && Number.parseInt(ctx.width().getText()) || undefined;
   const explicit = true;
   descendantTos.set(participant, {width, stereotype, groupId, explicit});
-  participants.Add(participant, stereotype, width, groupId, explicit);
+  participants.Add(participant, false, stereotype, width, groupId, explicit);
 };
 ToCollector.prototype.enterParticipant = onParticipant
 
@@ -45,7 +45,14 @@ ToCollector.prototype.enterTo = onTo
 
 ToCollector.prototype.enterSource = onTo
 ToCollector.prototype.enterTarget = onTo
-ToCollector.prototype.enterStarter = onTo
+
+ToCollector.prototype.enterStarter = function(ctx) {
+  let participant = ctx.getText();
+  // remove leading and trailing quotes (e.g. "a:A" becomes a:A
+  participant = participant.replace(/^"(.*)"$/, '$1');
+  descendantTos.set(participant, descendantTos.get(participant) || {});
+  participants.Add(participant, true)
+}
 
 ToCollector.prototype.enterCreation = function (ctx) {
   if (isBlind) return;

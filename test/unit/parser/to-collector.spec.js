@@ -30,7 +30,7 @@ test('smoke test2', () => {
     new F
   `
   let participants = getParticipants2(code);
-  expect(participants.Get('B')).toEqual({name: 'B', explicit: true, groupId: undefined, stereotype: 'A', 'width': 1024})
+  expect(participants.Get('B')).toEqual({name: 'B', isStarter: false, explicit: true, groupId: undefined, stereotype: 'A', 'width': 1024})
 })
 
 describe('Plain participants', () => {

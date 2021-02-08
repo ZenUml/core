@@ -23,7 +23,7 @@
     name: 'life-line-layer',
     props: ['context'],
     computed: {
-      ...mapGetters(['starter', 'participants', 'GroupContext', 'ParticipantContext']),
+      ...mapGetters(['starter', 'participants', 'participants2', 'GroupContext', 'ParticipantContext']),
       isStarterAnActor() {
         return this.starter === "User" || this.starter === "Actor";
       },
@@ -31,9 +31,10 @@
         return !!this.context?.starterExp()
       },
       implicitParticipants () {
-        return Array.from(this.participants.entries())
-          .map(entry => {return {name: entry[0], stereotype: entry[1].stereotype, explicit: !!entry[1].explicit}})
-          .filter((entry) => entry.name !== this.starter && !entry.explicit)
+        /* eslint-disable */
+        console.log('All participants 2', this.participants2)
+        console.log('All participants 2', this.context)
+        return this.participants2.implicitArray()
       },
       explictGroupAndParticipants() {
         return this.context?.children.filter(c => c instanceof this.GroupContext || c instanceof this.ParticipantContext)

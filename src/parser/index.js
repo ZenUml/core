@@ -24,6 +24,7 @@ function getStarterText(ctx) {
   return ctx.head()?.starterExp()?.starter()?.getText()
 }
 
+
 function getInheritedFrom(ctx) {
   // TODO: throw error?
   if (!ctx) return undefined;
@@ -90,6 +91,10 @@ module.exports =  {
   Participants: function(ctx) {
     const toCollector = new ToCollector();
     return toCollector.getAllTos(toCollector)(ctx)
+  },
+  Participants2: function(ctx) {
+    const toCollector = new ToCollector();
+    return toCollector.getParticipants(ctx)
   },
   GetInheritedFrom: getInheritedFrom,
   Errors: errors,
