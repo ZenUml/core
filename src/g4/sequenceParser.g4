@@ -31,7 +31,7 @@ starter
  ;
 
 participant
- : stereotype? name width?
+ : stereotype? name width? label?
  | stereotype
  | name width?
  ;
@@ -43,6 +43,10 @@ stereotype
  | SOPEN GT         // Some people may write <<>> first then put in the interface name
  | SOPEN SCLOSE
  | SOPEN name SCLOSE
+ ;
+
+label
+ : AS name
  ;
 
 name
