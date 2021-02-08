@@ -6,6 +6,8 @@
 // Nested method
 // Assignment
 export default `
+A
+B
 @Starter(Macro)
 commentIds = LoadComments() {
   Confluence.getContentProerpty()

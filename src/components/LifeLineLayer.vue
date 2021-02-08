@@ -18,6 +18,7 @@
   import {mapGetters, mapMutations} from 'vuex'
   import LifeLine from './LifeLine.vue'
   import LifeLineGroup from './LifeLineGroup'
+  import {Participants2} from '../parser/index'
 
   export default {
     name: 'life-line-layer',
@@ -31,10 +32,7 @@
         return !!this.context?.starterExp()
       },
       implicitParticipants () {
-        /* eslint-disable */
-        console.log('All participants 2', this.participants2)
-        console.log('All participants 2', this.context)
-        return this.participants2.implicitArray()
+        return this.participants2.ImplicitArray()
       },
       explictGroupAndParticipants() {
         return this.context?.children.filter(c => c instanceof this.GroupContext || c instanceof this.ParticipantContext)
@@ -43,7 +41,8 @@
     methods: {
       ...mapMutations(['increaseGeneration']),
       getParticipantEntity(ctx) {
-        return {name: ctx.name && ctx.name()?.getText(), stereotype: ctx.stereotype && ctx.stereotype()?.name()?.getText()}
+        const participants = Participants2(ctx)
+        return participants.First()
       }
     },
     updated() {

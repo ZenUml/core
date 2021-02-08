@@ -37,12 +37,15 @@ export class Participants {
 
   // Returns an array of participants that are deduced from messages
   // It does not included the Starter.
-  implicitArray() {
+  ImplicitArray() {
     return Array.from(this.participants.entries())
       .map(entry => entry[1])
       .filter(p => !p.explicit && !p.isStarter)
   }
 
+  First() {
+    return this.participants.values().next().value
+  }
   Get(name: string) {
     return this.participants.get(name);
   }
