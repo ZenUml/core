@@ -16,7 +16,7 @@
     props: ['context'],
     computed: {
       name() {
-        return this.context?.name()?.getText()
+        return this.context?.name()?.getText().replace(/^"(.*)"$/, '$1')
       },
       entities() {
         return Participants2(this.context).Array()

@@ -7,7 +7,7 @@
 // Assignment
 export default `// comments at the beginning should be ignored
 <<A>> A
-group g1 {B C}
+group "Client GateWay" {B C}
 // This is comment
 //
 // |col1|col2|
