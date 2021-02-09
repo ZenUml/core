@@ -78,14 +78,18 @@ export class Participants {
     return Array.from(this.participants.keys())
   }
 
-  First() {
+  First(): Participant {
     return this.participants.values().next().value
   }
-  Get(name: string) {
+  Get(name: string): Participant {
     return this.participants.get(name);
   }
 
-  Size() {
+  Size(): number {
     return this.participants.size;
+  }
+  // It returns an abs
+  Distance(from: string, to: string) {
+    return Math.abs(this.Get(from).Center() - this.Get(to).Center())
   }
 }

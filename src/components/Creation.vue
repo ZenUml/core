@@ -25,10 +25,10 @@
     name: 'creation',
     props: ['context', 'comment', 'selfCallIndent', 'fragmentOffset'],
     computed: {
-      ...mapGetters(['participants2', 'starter', 'distance']),
+      ...mapGetters(['participants2', 'starter']),
       style: function() {
         const ret = {
-          width: Math.abs(this.interactionWidth) + 'px'
+          width: this.interactionWidth + 'px'
         }
         if (!this.rightToLeft) {
           ret.transform = 'translateX(' + this.fragmentOffset + 'px)'
@@ -44,12 +44,12 @@
         return this.context.creation()
       },
       interactionWidth: function () {
-        let distance = this.distance(this.to, this.from)
+        let distance = this.participants2.Distance(this.to, this.from)
         let safeOffset = this.selfCallIndent || 0
         if(this.rightToLeft) {
-          return Math.abs(distance) + safeOffset
+          return distance + safeOffset
         }
-        return Math.abs(distance) - safeOffset
+        return distance - safeOffset
       },
       fromParticipant: function() {
         return this.participants2.Get(this.from)
@@ -70,7 +70,7 @@
         return leftOfToParticipant - centerOfFromParticipant - safeOffset - occurrenceDelta
       },
       rightToLeft: function () {
-        return this.distance(this.to, this.from) < 0
+        return this.fromParticipant.Center() > this.toParticipant.Center()
       },
       signature: function () {
         const params = this.creation.parameters()
