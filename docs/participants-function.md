@@ -1,5 +1,9 @@
 # Shall `Participants` return with `Starter`?
 
+Short answer: Yes. If we do not include `Starter` or `from` in general
+cases, we would not be able to calculate center, left, right, etc.
+for them in the same way.
+
 `Participants` function takes a context as an input and returns
 all the participants of this context. It should return the `from`
 not the `Starter` unless `Starter` IS the `from`.
