@@ -44,16 +44,19 @@
       interactionWidth: function () {
         let distance = this.distance(this.to, this.from)
         let safeOffset = this.selfCallIndent || 0
-
+        if(this.rightToLeft) {
+          return Math.abs(distance) + safeOffset
+        }
         return Math.abs(distance) - safeOffset
       },
       invocationWidth: function () {
         let safeOffset = this.selfCallIndent || 0
-
+        // why this 8? 1px middle of occurrence, 7px for occurrenceWidth/2
+        const occurrenceDelta = 8;
         if (this.rightToLeft) {
-          return this.centerOf(this.from) - this.rightOf(this.to) - safeOffset + 10
+          return this.centerOf(this.from) - this.rightOf(this.to) + safeOffset - occurrenceDelta
         }
-        return this.leftOf(this.to) - this.centerOf(this.from) - safeOffset - 10
+        return this.leftOf(this.to) - this.centerOf(this.from) - safeOffset - occurrenceDelta
       },
       rightToLeft: function () {
         return this.distance(this.to, this.from) < 0
@@ -99,8 +102,9 @@
   }
 
   .creation.right-to-left > .message.invocation {
-    /* We can also set right: 6px; but we will also need to reset left: auto */
-    left: -6px;
+    /* 3 = (15:occurrenceWidth - 1) / 2 - 5:InteractionBorderWidth
+    We can also set right: 3px; but we will also need to reset left: auto */
+    left: -2px;
     /* moving .message to the right so that margin will take up the "available" space. It works like float: right.
        But this won't remove .message from the flow.
      */

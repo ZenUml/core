@@ -6,13 +6,9 @@
 // Nested method
 // Assignment
 export default `
-group {
-  cost 
-  price
-}
-@Starter(X)
-A.m() {
-cost.a
-price.b  
+A.method() {
+  selfM() {
+    new Basdfasdfasdfasdfasdfasd()
+  }
 }
 `
