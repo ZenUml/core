@@ -32,6 +32,8 @@
         }
         if (!this.rightToLeft) {
           ret.transform = 'translateX(' + this.fragmentOffset + 'px)'
+        } else {
+          ret.transform = 'translateX(calc(-100% + ' + this.fragmentOffset + 'px))'
         }
         return ret
       },
@@ -49,19 +51,23 @@
         }
         return Math.abs(distance) - safeOffset
       },
+      fromParticipant: function() {
+        return this.participants2.Get(this.from)
+      },
+      toParticipant: function() {
+        return this.participants2.Get(this.to)
+      },
       invocationWidth: function () {
         let safeOffset = this.selfCallIndent || 0
         // why this 8? 1px middle of occurrence, 7px for occurrenceWidth/2
         const occurrenceDelta = 8;
+        const centerOfFromParticipant = this.fromParticipant.Center()
         if (this.rightToLeft) {
-          const centerOf = this.participants2.Get(this.from).Center()
-          const rightOf = this.participants2.Get(this.to).Right()
-          return centerOf - rightOf + safeOffset - occurrenceDelta
+          const rightOfToParticipant = this.toParticipant.Right()
+          return centerOfFromParticipant - rightOfToParticipant + safeOffset - occurrenceDelta
         }
-        const centerOf1 = this.participants2.Get(this.from).Center()
-
-        const leftOf = this.participants2.Get(this.to).left
-        return leftOf - centerOf1 - safeOffset - occurrenceDelta
+        const leftOfToParticipant = this.toParticipant.left
+        return leftOfToParticipant - centerOfFromParticipant - safeOffset - occurrenceDelta
       },
       rightToLeft: function () {
         return this.distance(this.to, this.from) < 0

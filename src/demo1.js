@@ -9,8 +9,10 @@ export default `
 B A
 A.method() {
   selfM() {
-    new B()
-    new C()
+    if (X) {
+      new B()
+      new C()
+    }
   }
 }
 `
