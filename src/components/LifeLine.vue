@@ -23,7 +23,7 @@
       },
       top () {
         if (this.firstInvocationIsCreation) {
-          return this.firstInvocations[this.entity.name].top - 3
+          return this.firstInvocations[this.entity.name].top - 3 - this.$el?.offsetTop
         }
         return 0
       },
