@@ -25,7 +25,7 @@
     name: 'creation',
     props: ['context', 'comment', 'selfCallIndent', 'fragmentOffset'],
     computed: {
-      ...mapGetters(['starter', 'distance', 'centerOf', 'rightOf', 'leftOf', 'widthOf']),
+      ...mapGetters(['participants2', 'starter', 'distance']),
       style: function() {
         const ret = {
           width: Math.abs(this.interactionWidth) + 'px'
@@ -54,9 +54,14 @@
         // why this 8? 1px middle of occurrence, 7px for occurrenceWidth/2
         const occurrenceDelta = 8;
         if (this.rightToLeft) {
-          return this.centerOf(this.from) - this.rightOf(this.to) + safeOffset - occurrenceDelta
+          const centerOf = this.participants2.Get(this.from).Center()
+          const rightOf = this.participants2.Get(this.to).Right()
+          return centerOf - rightOf + safeOffset - occurrenceDelta
         }
-        return this.leftOf(this.to) - this.centerOf(this.from) - safeOffset - occurrenceDelta
+        const centerOf1 = this.participants2.Get(this.from).Center()
+
+        const leftOf = this.participants2.Get(this.to).left
+        return leftOf - centerOf1 - safeOffset - occurrenceDelta
       },
       rightToLeft: function () {
         return this.distance(this.to, this.from) < 0

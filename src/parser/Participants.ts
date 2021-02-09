@@ -1,10 +1,22 @@
 class Participant {
+  get width(): number {
+    return this._width || 0;
+  }
   name: string;
   private stereotype: string | undefined;
-  private width: number | undefined;
+  private _width: number | undefined;
   private groupId: number | string | undefined;
   private explicit: boolean | undefined;
   private isStarter: boolean | undefined;
+  private _left: number | undefined;
+
+  get top(): number {
+    return this._top || 0;
+  }
+  private _top: number | undefined;
+  get left(): number {
+    return this._left || 0;
+  }
 
   constructor(name: string,
               isStarter?: boolean,
@@ -14,10 +26,24 @@ class Participant {
               explicit?: boolean) {
     this.name = name;
     this.stereotype = stereotype;
-    this.width = width;
+    this._width = width;
     this.groupId = groupId;
     this.explicit = explicit;
     this.isStarter = isStarter;
+  }
+
+  public Posit(left: number, top?: number, width?: number) {
+    this._left = left;
+    this._top = top;
+    this._width = width;
+  }
+
+  public Center(): number {
+    return this.left + this.width / 2;
+  }
+
+  public Right(): number {
+    return this.left + this.width;
   }
 }
 

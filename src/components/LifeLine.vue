@@ -17,7 +17,7 @@
     name: 'life-line',
     props: ['entity', 'context'],
     computed: {
-      ...mapGetters(['firstInvocations', 'onLifelineMounted']),
+      ...mapGetters(['participants2', 'firstInvocations', 'onLifelineMounted']),
       selected () {
         return this.$store.state.selected.includes(this.entity.name)
       },
@@ -38,6 +38,8 @@
       }
     },
     mounted() {
+      this.participants2
+        .Get(this.entity.name)?.Posit(this.$el.offsetLeft, this.$el.offsetTop, this.$el.offsetWidth)
       this.onLifelinePositioned({
         name: this.entity.name,
         dimensions: {
