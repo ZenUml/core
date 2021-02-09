@@ -1,21 +1,21 @@
 class Participant {
-  get width(): number {
-    return this._width || 0;
-  }
   name: string;
   private stereotype: string | undefined;
   private _width: number | undefined;
   private groupId: number | string | undefined;
   private explicit: boolean | undefined;
   private isStarter: boolean | undefined;
+  private _top: number | undefined;
   private _left: number | undefined;
 
-  get top(): number {
-    return this._top || 0;
+  get top(): number | undefined{
+    return this._top;
   }
-  private _top: number | undefined;
-  get left(): number {
-    return this._left || 0;
+  get width(): number | undefined {
+    return this._width;
+  }
+  get left(): number | undefined {
+    return this._left;
   }
 
   constructor(name: string,
@@ -32,22 +32,33 @@ class Participant {
     this.isStarter = isStarter;
   }
 
+  public IsPositioned(): boolean {
+    return this._left !== undefined && this._top !== undefined && this._width !== undefined;
+  }
+
   public Posit(left: number, top?: number, width?: number) {
     this._left = left;
     this._top = top;
     this._width = width;
   }
 
-  public Center(): number {
-    return this.left + this.width / 2;
+  public Center(): number | undefined {
+    if (this.left && this.width) {
+      return this.left + this.width / 2;
+    }
+    return undefined
   }
 
-  public Right(): number {
-    return this.left + this.width;
+  public Right(): number | undefined {
+    if (this.left && this.width) {
+      return this.left + this.width;
+    }
+    return undefined
   }
 }
 
 export class Participants {
+  private NULL_PARTICIPANT = new Participant('__NULL__');
   private participants = new Map();
 
   public Add(name: string): void;
@@ -59,7 +70,9 @@ export class Participants {
              groupId?: number | string,
              explicit?: boolean): void {
     const participant = new Participant(name, isStarter, stereotype, width, groupId, explicit);
-    this.participants.set(participant.name, this.Get(name) || participant)
+    if (this.Get(name).name === '__NULL__') {
+      this.participants.set(participant.name, participant)
+    }
   }
 
   // Returns an array of participants that are deduced from messages
@@ -82,7 +95,7 @@ export class Participants {
     return this.participants.values().next().value
   }
   Get(name: string): Participant {
-    return this.participants.get(name);
+    return this.participants.get(name) || this.NULL_PARTICIPANT;
   }
 
   Size(): number {
@@ -90,6 +103,10 @@ export class Participants {
   }
   // It returns an abs
   Distance(from: string, to: string) {
-    return Math.abs(this.Get(from).Center() - this.Get(to).Center())
+    if (this.Get(from).IsPositioned() && this.Get(to).IsPositioned()) {
+      // @ts-ignore
+      return Math.abs(this.Get(from).Center() - this.Get(to).Center())
+    }
+    return undefined;
   }
 }

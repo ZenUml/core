@@ -77,6 +77,7 @@ const walker = antlr4.tree.ParseTreeWalker.DEFAULT
 
 ToCollector.prototype.getParticipants = function (context) {
   participants = new Participants();
+
   walker.walk(this, context)
   return participants;
 }
