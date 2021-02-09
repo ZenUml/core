@@ -24,8 +24,8 @@
   }
 
   .sync > .message.self {
-    /* (OccurrenceWidth-1)/2 - InteractionBorderWidth + LifelineWidth*/
-    left: 3px;
+    /* (OccurrenceWidth-1)/2 - InteractionBorderWidth*/
+    left: 2px;
   }
 
   .message .name {

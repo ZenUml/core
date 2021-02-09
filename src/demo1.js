@@ -6,9 +6,15 @@
 // Nested method
 // Assignment
 export default `
+A as "abcd asd"
 A.method() {
+  new B
   selfM() {
-    new Basdfasdfasdfasdfasdfasd()
+    new Basdfasdfasdfasdfasdfasd() {
+      A.m {
+        B.m
+      }
+    }
   }
 }
 `

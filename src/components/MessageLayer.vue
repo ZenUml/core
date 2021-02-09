@@ -146,8 +146,8 @@
   }
 
   .interaction.self > .occurrence {
-    /* width of InteractionBorderWidth */
-    left: -5px;               /* overlay occurrence bar on the existing bar. */
+    /* width of InteractionBorderWidth 5px + lifeline center 1px */
+    left: -6px;               /* overlay occurrence bar on the existing bar. */
     margin-top: -10px;
   }
 

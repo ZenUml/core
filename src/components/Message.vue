@@ -1,5 +1,5 @@
 <template>
-  <div class="message" :style="{'border-bottom-style': borderStyle}">
+  <div class="message" :class="{ 'right-to-left':rtl }" :style="{'border-bottom-style': borderStyle}">
     <div class="name">{{content}}</div>
     <point :fill="fill" :rtl="rtl"/>
   </div>
@@ -59,5 +59,10 @@
   .sync > .message {
     /* (OccurrenceWidth-1)/2 - InteractionBorderWidth*/
     left: 2px;
+  }
+
+  .sync > .right-to-left.message {
+    /* (OccurrenceWidth-1)/2 - InteractionBorderWidth + LifelineCenter*/
+    left: 3px;
   }
 </style>
