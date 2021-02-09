@@ -4,7 +4,7 @@
         :style="{'paddingTop': top + 'px'} ">
     <div class="participant" :class="{'selected': selected}" @click="onSelect">
       <label class="interface" v-if="entity.stereotype" >«{{entity.stereotype}}»</label>
-      <label class="name">{{entity.name}}</label>
+      <label class="name">{{entity.label || entity.name}}</label>
     </div>
     <div class="line"></div>
   </div>

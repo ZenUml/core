@@ -21,8 +21,9 @@ let onParticipant = function (ctx) {
   let participant = ctx?.name()?.getText() || 'Missing `Participant`';
   let stereotype = ctx.stereotype()?.name()?.getText();
   let width = (ctx.width && ctx.width()) && Number.parseInt(ctx.width().getText()) || undefined;
+  const label = ctx.label && ctx.label()?.name()?.getText();
   const explicit = true;
-  participants.Add(participant, false, stereotype, width, groupId, explicit);
+  participants.Add(participant, false, stereotype, width, groupId, label?.replaceAll('"', ''), explicit);
 };
 ToCollector.prototype.enterParticipant = onParticipant
 
