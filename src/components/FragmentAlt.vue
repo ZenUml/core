@@ -8,9 +8,9 @@
         <label class="condition">[{{condition}}]</label>
       </div>
 <!-- fragment-offset set as offsetX - 1 for fragment border     -->
-      <block v-if="alt.ifBlock().braceBlock()"
+      <block v-if="blockInIfBlock"
              :fragment-offset="offsetX - 1"
-             :context="alt.ifBlock().braceBlock().block()"
+             :context="blockInIfBlock"
              :selfCallIndent="selfCallIndent"
       ></block>
     </div>
@@ -21,16 +21,16 @@
           <label class="condition">[{{elseIfBlock.parExpr().condition().getCode()}}]</label>
         </div>
         <block :fragment-offset="offsetX - 1"
-               :context="elseIfBlock.braceBlock().block()"
+               :context="blockInElseIfBlock(elseIfBlock)"
                :selfCallIndent="selfCallIndent"
                :key="index+2000"></block>
       </div>
     </template>
-    <template v-if="alt.elseBlock()">
+    <template v-if="elseBlock">
       <div class="segment">
         <div class="header"><label>[else]</label></div>
         <block :fragment-offset="offsetX - 1"
-               :context="alt.elseBlock().braceBlock().block()"
+               :context="elseBlock"
                :selfCallIndent="selfCallIndent"
         ></block>
       </div>
@@ -52,6 +52,9 @@
       },
       alt: function () {
         return this.context.alt()
+      },
+      blockInIfBlock: function () {
+        return this.alt?.ifBlock()?.braceBlock()?.block()
       },
       condition: function () {
         return this.alt.ifBlock().parExpr().condition().getCode()
