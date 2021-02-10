@@ -6,5 +6,6 @@
 // Nested method
 // Assignment
 export default `
-if(x){}else if(y){} else{}
+User
+@Starter(User)
 `

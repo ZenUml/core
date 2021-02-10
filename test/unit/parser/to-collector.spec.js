@@ -82,6 +82,7 @@ describe('without group', () => {
   test.each([
     ['A.method', 'A', undefined],
     ['@Starter(A)', 'A', undefined],
+    ['A @Starter(A)', 'A', undefined],
   ])('code:%s => participant:%s', (code, participant, groupId) => {
     // `A` will be parsed as a participant which matches `participant EOF`
     let participants = getParticipants2(code);

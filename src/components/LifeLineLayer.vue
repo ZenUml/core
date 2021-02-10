@@ -35,7 +35,11 @@
         return this.participants2.ImplicitArray()
       },
       explictGroupAndParticipants() {
-        return this.context?.children.filter(c => c instanceof this.GroupContext || c instanceof this.ParticipantContext)
+        return this.context?.children.filter(c => {
+          const isGroup = c instanceof this.GroupContext
+          const isParticipant = (c instanceof this.ParticipantContext) && c.name().getText() !== this.starter
+          return isGroup || isParticipant
+        })
       }
     },
     methods: {
