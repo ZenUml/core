@@ -193,10 +193,13 @@ ifBlock
 
 elseIfBlock
  : ELSE IF parExpr braceBlock
+ | ELSE IF parExpr
+ | ELSE IF
  ;
 
 elseBlock
  : ELSE braceBlock
+ | ELSE
  ;
 
 braceBlock
@@ -206,6 +209,8 @@ braceBlock
 
 loop
  : WHILE parExpr braceBlock
+ | WHILE parExpr
+ | WHILE
  ;
 
 expr
