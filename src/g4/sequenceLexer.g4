@@ -75,8 +75,10 @@ FLOAT
  | '.' [0-9]+
  ;
 
+// As long as the text starts with double quotes, we treat it as a string before a closing double quote or change line
+// This is to allow the user to keep typing - A as "a long string before closing it with quote
 STRING
- : '"' (~["\r\n] | '""')* '"'
+ : '"' (~["\r\n] | '""')* ('"'|[\r\n])?
  ;
 
 CR
