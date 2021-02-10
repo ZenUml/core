@@ -98,8 +98,12 @@
     border-color: inherit;
   }
 
-  .interaction:hover {
+  .interaction.hover {
+    border-radius: 4px;
     background-color: #CAE6FE;
+  }
+
+  .interaction:hover {
     cursor: pointer;
   }
 

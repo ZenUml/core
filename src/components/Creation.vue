@@ -1,7 +1,10 @@
 <template>
   <div class="interaction creation sync"
+       v-on:click.stop="onClick"
+       v-on:mouseover.stop="mouseOver"
+       v-on:mouseout.stop="mouseOut"
        :signature="signature"
-       :class="{ 'right-to-left':rightToLeft }"
+       :class="{ 'right-to-left':rightToLeft, 'hover': hover }"
        :style="style">
     <comment v-if="comment" :comment="comment" />
     <message class="invocation" :content="signature" :rtl="rightToLeft" :style="{width: invocationWidth + 'px'}" type="creation"/>
@@ -20,12 +23,18 @@
   import Message from './Message'
   import Occurrence from './Occurrence'
   import {GetInheritedFrom} from '../parser'
+  import {CodeRange} from '../parser/CodeRange'
 
   export default {
     name: 'creation',
+    data() {
+      return {
+        hover: false
+      }
+    },
     props: ['context', 'comment', 'selfCallIndent', 'fragmentOffset'],
     computed: {
-      ...mapGetters(['starter', 'distance', 'centerOf', 'rightOf', 'leftOf', 'widthOf']),
+      ...mapGetters(['starter', 'onElementClick', 'distance', 'centerOf', 'rightOf', 'leftOf', 'widthOf']),
       style: function() {
         const ret = {
           width: Math.abs(this.interactionWidth) + 'px'
@@ -80,6 +89,17 @@
         const assignee = this.creation.assignment() && this.creation.assignment().assignee().getText()
         const type = this.creation.construct().getText()
         return assignee ? assignee + ':' + type : type
+      }
+    },
+    methods: {
+      onClick() {
+        this.onElementClick(CodeRange.from(this.context))
+      },
+      mouseOver() {
+        this.hover = true
+      },
+      mouseOut() {
+        this.hover = false
       }
     },
     components: {

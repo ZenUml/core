@@ -1,8 +1,10 @@
 <template>
   <div class="interaction sync"
        v-on:click.stop="onClick"
+       v-on:mouseover.stop="mouseOver"
+       v-on:mouseout.stop="mouseOut"
        :signature="signature"
-       :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent, 'self': isSelf }"
+       :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent, 'self': isSelf, 'hover': hover }"
        :style="{width: interactionWidth + 'px', transform: 'translateX(' + translateX + 'px)'}">
     <comment v-if="comment" :comment="comment"/>
     <component v-bind:is="invocation"
@@ -27,10 +29,15 @@
 
   export default {
     name: 'interaction',
+    data() {
+      return {
+        hover: false
+      }
+    },
     props: ['context', 'comment', 'selfCallIndent', 'fragmentOffset'],
     mixins: [InteractionMixin],
     computed: {
-      ...mapGetters(['starter', 'distance', 'distance2', 'centerOf', 'cursor', 'onElementClick']),
+      ...mapGetters(['starter', 'participants2', 'distance', 'distance2', 'centerOf', 'cursor', 'onElementClick']),
       inheritedFrom: function() {
         return GetInheritedFrom(this.context)
       },
@@ -73,6 +80,12 @@
     methods: {
       onClick() {
         this.onElementClick(CodeRange.from(this.context))
+      },
+      mouseOver() {
+        this.hover = true
+      },
+      mouseOut() {
+        this.hover = false
       }
     },
     components: {
