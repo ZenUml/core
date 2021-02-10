@@ -1,5 +1,6 @@
 <template>
   <div class="interaction async"
+       v-on:click.stop="onClick"
        :signature="signature"
        :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent }"
        :style="{width: interactionWidth + 'px', left: left + (fragmentOffset || 0) + 'px'}">
@@ -19,6 +20,7 @@
   import Message from './Message'
   import {mapGetters} from "vuex";
   import {GetInheritedFrom} from '../parser'
+  import {CodeRange} from '../parser/CodeRange'
 
   function isNullOrUndefined(value) {
     return value === null || value === undefined
@@ -28,7 +30,7 @@
     name: 'interaction-async',
     props: ['starter', 'context', 'comment', 'fragmentOffset'],
     computed: {
-      ...mapGetters(['distance', 'cursor']),
+      ...mapGetters(['distance', 'cursor', 'onElementClick']),
       from: function() {
         return GetInheritedFrom(this.context)
       },
@@ -64,6 +66,11 @@
       },
       invocation: function () {
         return this.isSelf ? 'SelfInvocationAsync' : 'Message'
+      }
+    },
+    methods: {
+      onClick() {
+        this.onElementClick(CodeRange.from(this.context))
       }
     },
     components: {

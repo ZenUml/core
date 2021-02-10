@@ -17554,6 +17554,22 @@ vue-loader@^15.9.2:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
+vue-sequence@^1.0.108:
+  version "1.0.108"
+  resolved "https://registry.yarnpkg.com/vue-sequence/-/vue-sequence-1.0.108.tgz#ca50beb439a5a9306ce34b0ec917939c8bcb6652"
+  integrity sha512-95BtWsmLjpqxIfPEWmpjfy87oXuk5oHVr8eYa6E36tDfiXsJQd06ce0pT1qoivmhahsM/ZupOpnluNxYlhWd3A==
+  dependencies:
+    "@types/assert" "^1.5.4"
+    antlr4 "~4.8.0"
+    dom-to-image-more "^2.8.0"
+    gauge-ts "0.1.0"
+    highlight.js "^10.1.1"
+    lodash "^4.17.20"
+    marked "^1.2.9"
+    vue "2.6.11"
+    vue-template-compiler "2.6.11"
+    vuex "^3.6.2"
+
 vue-style-loader@^4.1.0, vue-style-loader@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/vue-style-loader/-/vue-style-loader-4.1.2.tgz#dedf349806f25ceb4e64f3ad7c0a44fba735fcf8"
