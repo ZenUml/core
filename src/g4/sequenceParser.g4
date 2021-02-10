@@ -50,6 +50,7 @@ stereotype
 
 label
  : AS name
+ | AS
  ;
 
 name
