@@ -6,7 +6,7 @@
       <label class="condition">[{{condition}}]</label>
     </div>
     <block :fragment-offset="offsetX - 1"
-           :context="loop.braceBlock().block()"
+           :context="blockInLoop"
            :selfCallIndent="selfCallIndent"
     ></block>
   </div>
@@ -27,8 +27,11 @@
       loop: function () {
         return this.context.loop()
       },
+      blockInLoop: function () {
+        return this.loop?.braceBlock()?.block()
+      },
       condition: function () {
-        return this.loop.parExpr().condition().getCode()
+        return this.loop?.parExpr()?.condition()?.getText()
       }
     },
     beforeCreate: function () {
