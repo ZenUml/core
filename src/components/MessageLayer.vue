@@ -94,10 +94,7 @@
     border: 5px dashed transparent;
   }
 
-  .interaction.highlight {
-    border-color: inherit;
-  }
-
+  .interaction.highlight,
   .interaction.hover {
     border-radius: 4px;
     background-color: #CAE6FE;
