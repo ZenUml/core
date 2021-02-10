@@ -124,7 +124,8 @@ message
  * Also we support chained method, such as m1().m2()
  */
 func
- : (from ARROW)? (to DOT)? signature (DOT signature)*
+ : from ARROW to  // A->B
+ | (from ARROW)? (to DOT)? signature (DOT signature)*
  | (from ARROW)? to (DOT signature)+ DOT            // A->B.m1.
  | (from ARROW)? to DOT (DOT signature?)*           // A->B..m1
  ;
