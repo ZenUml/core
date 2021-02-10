@@ -18,7 +18,7 @@
       <div class="segment" :key="index+500">
         <div class="header" :key="index+1000">
           <label class="else-if">else if</label>
-          <label class="condition">[{{elseIfBlock.parExpr().condition().getCode()}}]</label>
+          <label class="condition">[{{conditionFromIfElseBlock(elseIfBlock)}}]</label>
         </div>
         <block :fragment-offset="offsetX - 1"
                :context="blockInElseIfBlock(elseIfBlock)"
@@ -57,7 +57,18 @@
         return this.alt?.ifBlock()?.braceBlock()?.block()
       },
       condition: function () {
-        return this.alt.ifBlock().parExpr().condition().getCode()
+        return this.conditionFromIfElseBlock(this.alt?.ifBlock())
+      },
+      elseBlock: function () {
+        return this.alt?.elseBlock()?.braceBlock()?.block()
+      }
+    },
+    methods: {
+      conditionFromIfElseBlock(ctx) {
+        return ctx?.parExpr()?.condition()?.getText()
+      },
+      blockInElseIfBlock(ctx) {
+        return ctx?.braceBlock()?.block()
       }
     },
     beforeCreate: function () {
