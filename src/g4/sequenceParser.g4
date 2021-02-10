@@ -80,8 +80,8 @@ stat
  | opt
  | loop
  | creation
- | asyncMessage
  | message
+ | asyncMessage
  | anonymousBlock
  | ret
  | OTHER {console.log("unknown char: " + $OTHER.text);}
@@ -117,7 +117,9 @@ message
  * Also we support chained method, such as m1().m2()
  */
 func
- : (((from ARROW)? to DOT signature) | (to DOT) | (signature)) (DOT signature)*
+ : (from ARROW)? (to DOT)? signature (DOT signature)*
+ | (from ARROW)? to (DOT signature)+ DOT            // A->B.m1.
+ | (from ARROW)? to DOT (DOT signature?)*           // A->B..m1
  ;
 
 from
@@ -138,8 +140,9 @@ assignment
  ;
 
 asyncMessage
- : (source ARROW)? target COL content
+ : source ARROW target COL content
  | source ARROW target COL
+ | target COL content
  | source ARROW target
  | source ARROW
  | source MINUS
