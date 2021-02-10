@@ -77,6 +77,7 @@ FLOAT
 
 // As long as the text starts with double quotes, we treat it as a string before a closing double quote or change line
 // This is to allow the user to keep typing - A as "a long string before closing it with quote
+// Note that most of our editors will auto-complete the double quote anyway.
 STRING
  : '"' (~["\r\n] | '""')* ('"'|[\r\n])?
  ;
