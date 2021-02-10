@@ -173,6 +173,15 @@ sequenceParserListener.prototype.exitCreation = function(ctx) {
 };
 
 
+// Enter a parse tree produced by sequenceParser#creationBody.
+sequenceParserListener.prototype.enterCreationBody = function(ctx) {
+};
+
+// Exit a parse tree produced by sequenceParser#creationBody.
+sequenceParserListener.prototype.exitCreationBody = function(ctx) {
+};
+
+
 // Enter a parse tree produced by sequenceParser#message.
 sequenceParserListener.prototype.enterMessage = function(ctx) {
 };

@@ -111,9 +111,12 @@ anonymousBlock
  ;
 
 creation
- : assignment? NEW construct(OPAR parameters? CPAR)? (SCOL | braceBlock)?
+ : creationBody (SCOL | braceBlock)?
  ;
 
+creationBody
+ : assignment? NEW construct(OPAR parameters? CPAR)?
+ ;
 message
  : assignment? func (SCOL | braceBlock)?
  ;

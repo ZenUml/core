@@ -53,8 +53,8 @@ function getInheritedFrom(ctx) {
 
     }
     if (ctx instanceof seqParser.CreationContext) {
-      const assignee = ctx.assignment() && ctx.assignment().assignee().getText();
-      const type = ctx.construct().getText();
+      const assignee = ctx.creationBody().assignment() && ctx.creationBody().assignment().assignee().getText();
+      const type = ctx.creationBody().construct().getText();
       return assignee ? assignee + ':' + type : type;
     }
     ctx = ctx.parentCtx;

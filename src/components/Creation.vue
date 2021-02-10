@@ -71,7 +71,7 @@
         return this.distance(this.to, this.from) < 0
       },
       signature: function () {
-        const params = this.creation.parameters()
+        const params = this.creation.creationBody().parameters()
         const text = (params && params.parameter() && params.parameter().length > 0) ? params.getCode() : 'create'
         return '«' + text + '»'
       },
@@ -79,15 +79,15 @@
         function safeCodeGetter (context) {
           return (context && context.getCode()) || ''
         }
-        let assignment = this.creation.assignment()
+        let assignment = this.creation.creationBody().assignment()
         if (!assignment) return ''
         let assignee = safeCodeGetter(assignment.assignee())
         const type = safeCodeGetter(assignment.type())
         return assignee + (type ? ':' + type : '')
       },
       to: function () {
-        const assignee = this.creation.assignment() && this.creation.assignment().assignee().getText()
-        const type = this.creation.construct().getText()
+        const assignee = this.creation.creationBody().assignment() && this.creation.creationBody().assignment().assignee().getText()
+        const type = this.creation.creationBody().construct().getText()
         return assignee ? assignee + ':' + type : type
       }
     },
