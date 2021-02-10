@@ -75,10 +75,13 @@ const Store = () => {
       increaseGeneration: function(state: any) {
         state.generation++
       },
-      code: _.debounce(function (state, payload) {
-        state.code = payload
-        state.generation++
-      }, 50),
+      code: function (state: any, payload: any) {
+        state.code = payload;
+        state.generation++;
+      },
+      cursor: function (state: any, payload: any) {
+        state.cursor = payload;
+      },
       event: function (state: any, payload: any) {
         state.events.push(payload)
       },
@@ -100,9 +103,10 @@ const Store = () => {
       }
     },
     actions: {
-      updateCode: function (context: any, payload: any) {
-        context.commit('code', payload)
-      }
+      updateCode: _.debounce(function (context: any, payload: any) {
+        context.commit('code', payload.code);
+        context.commit('cursor', payload.cursor);
+      }, 100)
     },
     // TODO: Enable strict for development?
     strict: false,
