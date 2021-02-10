@@ -90,14 +90,17 @@
     position: relative;   /* To provide width for .return */
     margin-top: 10px;     /* To create some margin for cosmetic only */
     margin-bottom: 5px;   /* To create some margin for cosmetic only */
-  }
-
-  .interaction {
     /*Keep dashed here otherwise no space is given to the border*/
     border: 5px dashed transparent;
   }
+
   .interaction.highlight {
     border-color: inherit;
+  }
+
+  .interaction:hover {
+    background-color: #CAE6FE;
+    cursor: pointer;
   }
 
   .message {
