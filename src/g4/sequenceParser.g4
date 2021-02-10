@@ -86,7 +86,9 @@ stat
  | loop
  | creation
  | message
- | asyncMessage
+ // Without 'EVENT_END' the change line char cannot match anything and results error
+ // This change line is lexed as EVENT_END because it was in Event_Mode
+ | asyncMessage EVENT_END?
  | anonymousBlock
  | ret
  | OTHER {console.log("unknown char: " + $OTHER.text);}
@@ -154,7 +156,7 @@ asyncMessage
  ;
 
 content
- : EVENT_PAYLOAD_LXR EVENT_END?
+ : EVENT_PAYLOAD_LXR
  ;
 
 source
