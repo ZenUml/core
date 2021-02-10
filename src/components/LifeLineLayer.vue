@@ -37,7 +37,7 @@
       explictGroupAndParticipants() {
         return this.context?.children.filter(c => {
           const isGroup = c instanceof this.GroupContext
-          const isParticipant = (c instanceof this.ParticipantContext) && c.name().getText() !== this.starter
+          const isParticipant = (c instanceof this.ParticipantContext) && c.name()?.getText() !== this.starter
           return isGroup || isParticipant
         })
       }

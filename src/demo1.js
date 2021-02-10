@@ -5,7 +5,7 @@
 // Self-method
 // Nested method
 // Assignment
-export default `
-User
+export default `User
 @Starter(User)
+A->B:
 `
