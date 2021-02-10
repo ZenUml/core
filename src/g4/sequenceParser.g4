@@ -87,10 +87,12 @@ stat
 
 par
  : PAR braceBlock
+ | PAR
  ;
 
 opt
  : OPT braceBlock
+ | OPT
  ;
 
 anonymousBlock
