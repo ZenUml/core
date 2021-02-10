@@ -56,6 +56,10 @@
     white-space: nowrap;
   }
 
+  .message .name {
+    min-height: 1em;
+  }
+
   .sync > .message {
     /* (OccurrenceWidth-1)/2 - InteractionBorderWidth*/
     left: 2px;
