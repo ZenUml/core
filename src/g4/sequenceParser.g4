@@ -68,15 +68,17 @@ width
  ;
 
 block
- : stat+ ret?
+ : stat*
  ;
 
 ret
  : RETURN value SCOL?
+ | RETURN value
+ | RETURN
  ;
 
 value
- : (atom | ID)
+ : (atom | ID | STRING)
  ;
 
 stat
