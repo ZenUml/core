@@ -40,12 +40,13 @@ participant
  ;
 
 stereotype
- : SOPEN
+ : SOPEN name SCLOSE
  | SOPEN name
  | SOPEN name GT
  | SOPEN GT         // Some people may write <<>> first then put in the interface name
  | SOPEN SCLOSE
- | SOPEN name SCLOSE
+ | SOPEN
+ | LT
  ;
 
 label
@@ -138,6 +139,10 @@ assignment
 
 asyncMessage
  : (source ARROW)? target COL content
+ | source ARROW target COL
+ | source ARROW target
+ | source ARROW
+ | source MINUS
  ;
 
 content
