@@ -116,6 +116,9 @@ creation
 
 creationBody
  : assignment? NEW construct(OPAR parameters? CPAR)?
+ | assignment? NEW construct OPAR
+ | assignment? NEW construct
+ | assignment? NEW
  ;
 
 message
@@ -124,6 +127,7 @@ message
 
 messageBody
  : assignment? func
+ | assignment
  ;
 /**
  * Order is impportant below. This allows the follow three status being valid:
