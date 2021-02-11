@@ -103,6 +103,9 @@ const Store = () => {
     },
     actions: {
       updateCode: _.debounce(function (context: any, payload: any) {
+        if (typeof payload === 'string') {
+          throw Error('You are using a old version of vue-sequence. New version requires {code, cursor}.')
+        }
         context.commit('code', payload.code);
         context.commit('cursor', payload.cursor);
       }, 100)
