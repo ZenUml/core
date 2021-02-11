@@ -70,7 +70,7 @@
         return this.func?.to()?.getCode()
       },
       isSelf: function() {
-        return !this.context?.message().func().to() || this.context?.message().func().to().getCode() === this.from
+        return !this.context?.message().messageBody().func().to() || this.context?.message().messageBody().func().to().getCode() === this.from
       },
       invocation: function () {
         // return 'Message'

@@ -117,10 +117,14 @@ creation
 creationBody
  : assignment? NEW construct(OPAR parameters? CPAR)?
  ;
+
 message
- : assignment? func (SCOL | braceBlock)?
+ : messageBody (SCOL | braceBlock)?
  ;
 
+messageBody
+ : assignment? func
+ ;
 /**
  * Order is impportant below. This allows the follow three status being valid:
  * a. A - participant

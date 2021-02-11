@@ -14,7 +14,7 @@ describe('Get `from` from context', () => {
     let rootContext = seqDsl.RootContext('A->B.m1');
     let m1 = rootContext.block().stat()[0].message()
     expectText(m1).toBe('A->B.m1')
-    expect(GetInheritedFrom(m1.func())).toBe('Starter')
+    expect(GetInheritedFrom(m1.messageBody().func())).toBe('Starter')
   })
 
   test('Embedded', () => {
@@ -23,7 +23,7 @@ describe('Get `from` from context', () => {
     expectText(m1).toBe('A.m1{B.m2}')
     let m2 = m1.braceBlock().block().stat()[0].message();
     expectText(m2).toBe('B.m2')
-    expect(GetInheritedFrom(m2.func())).toBe('A')
+    expect(GetInheritedFrom(m2.messageBody().func())).toBe('A')
   })
 
   test('Embedded', () => {
@@ -32,7 +32,7 @@ describe('Get `from` from context', () => {
     expectText(m1).toBe('"A".m1{B.m2}')
     let m2 = m1.braceBlock().block().stat()[0].message();
     expectText(m2).toBe('B.m2')
-    expect(GetInheritedFrom(m2.func())).toBe('A')
+    expect(GetInheritedFrom(m2.messageBody().func())).toBe('A')
   })
 
   test('Embedded Self', () => {
@@ -41,7 +41,7 @@ describe('Get `from` from context', () => {
     expectText(m1).toBe('A.m1{m2}')
     let m2 = m1.braceBlock().block().stat()[0].message();
     expectText(m2).toBe('m2')
-    expect(GetInheritedFrom(m2.func())).toBe('A')
+    expect(GetInheritedFrom(m2.messageBody().func())).toBe('A')
   })
 
   test('Embedded creation', () => {
@@ -50,7 +50,7 @@ describe('Get `from` from context', () => {
     expectText(creation).toBe('newA{m2}')
     let m2 = creation.braceBlock().block().stat()[0].message();
     expectText(m2).toBe('m2')
-    expect(GetInheritedFrom(m2.func())).toBe('A')
+    expect(GetInheritedFrom(m2.messageBody().func())).toBe('A')
   })
 
   test('Embedded in if', () => {
@@ -61,7 +61,7 @@ describe('Get `from` from context', () => {
     expect(GetInheritedFrom(alt)).toBe('A')
     let m2 = alt.ifBlock().braceBlock().block().stat()[0].message();
     expectText(m2).toBe('m2')
-    expect(GetInheritedFrom(m2.func())).toBe('A')
+    expect(GetInheritedFrom(m2.messageBody().func())).toBe('A')
   })
 
   test('Embedded in if at root', () => {
@@ -70,10 +70,10 @@ describe('Get `from` from context', () => {
     expect(GetInheritedFrom(alt)).toBe('Starter')
     let m1 = alt.ifBlock().braceBlock().block().stat()[0].message();
     expectText(m1).toBe('m1')
-    expect(GetInheritedFrom(m1.func())).toBe('Starter')
+    expect(GetInheritedFrom(m1.messageBody().func())).toBe('Starter')
     let m2 = alt.ifBlock().braceBlock().block().stat()[1].message();
     expectText(m2).toBe('A.m2')
-    expect(GetInheritedFrom(m2.func())).toBe('Starter')
+    expect(GetInheritedFrom(m2.messageBody().func())).toBe('Starter')
   })
 
   test('Embedded in Self', () => {
@@ -85,7 +85,7 @@ describe('Get `from` from context', () => {
     let m3 = m2.braceBlock().block().stat()[0].message();
     expectText(m3).toBe('m3')
 
-    expect(GetInheritedFrom(m3.func())).toBe('A')
+    expect(GetInheritedFrom(m3.messageBody().func())).toBe('A')
   })
 
   test('Embedded in Self', () => {
@@ -94,24 +94,24 @@ describe('Get `from` from context', () => {
     expectText(m1).toBe('m1{m2{m3}}')
     let m2 = m1.braceBlock().block().stat()[0].message();
     expectText(m2).toBe('m2{m3}')
-    expect(GetInheritedFrom(m2.func())).toBe('X')
+    expect(GetInheritedFrom(m2.messageBody().func())).toBe('X')
     let m3 = m2.braceBlock().block().stat()[0].message();
     expectText(m3).toBe('m3')
 
-    expect(GetInheritedFrom(m3.func())).toBe('X')
+    expect(GetInheritedFrom(m3.messageBody().func())).toBe('X')
   })
 
   test('root', () => {
     let rootContext = seqDsl.RootContext('A.m1');
     let message = rootContext.block().stat()[0].message();
     expectText(message).toBe('A.m1')
-    expect(GetInheritedFrom(message.func())).toBe('Starter')
+    expect(GetInheritedFrom(message.messageBody().func())).toBe('Starter')
   })
   test('root', () => {
     let rootContext = seqDsl.RootContext('@Starter(X)\nA.m1');
     let message = rootContext.block().stat()[0].message();
     expectText(message).toBe('A.m1')
-    expect(GetInheritedFrom(message.func())).toBe('X')
+    expect(GetInheritedFrom(message.messageBody().func())).toBe('X')
   })
 })
 

@@ -16,20 +16,20 @@ We will focus on messages: Creation and Messages (Sync & Async).
 
 Creations parser definition is:
 ```
-assignment? NEW construct(OPAR parameters? CPAR)? (SCOL | braceBlock)?
+creationBody (SCOL | braceBlock)?
 ```
 
 We will highlight the creation call and assignment but NOT the `braceBlock`. 
-The triggering cursor must be in between `assignment? NEW construct(OPAR parameters? CPAR)?`.
+The triggering cursor must be in between `creationBody`.
 
 ### Message
 
 Message parser definition is:
 ```
-assignment? func (SCOL | braceBlock)?
+messageBody (SCOL | braceBlock)?
 ```
 We will highlight the message call and assignment but NOT the `braceBlock`.
-The triggering cursor must be in between `assignment? func`.
+The triggering cursor must be in between `messageBody`.
 
 ### Async Message
 

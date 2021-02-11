@@ -5,4 +5,4 @@
 // Self-method
 // Nested method
 // Assignment
-export default `new A`
+export default `A.m`
