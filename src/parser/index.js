@@ -1,6 +1,8 @@
 var antlr4  = require('antlr4/index')
 var sequenceLexer = require('../generated-parser/sequenceLexer')
 var sequenceParser = require('../generated-parser/sequenceParser')
+require('./IsCurrent')
+require('./Owner')
 var ToCollector = require('./ToCollector')
 var ChildFragmentDetector = require('./ChildFragmentDetecotr')
 
@@ -20,48 +22,33 @@ function rootContext(code) {
   return parser._syntaxErrors ? null : parser.prog();
 }
 
-function getStarterText(ctx) {
-  return ctx.head()?.starterExp()?.starter()?.getText()
-}
-
-
-function getInheritedFrom(ctx) {
-  // TODO: throw error?
-  if (!ctx) return undefined;
-
-  // we need to find the closest BraceBlockContext
-
-  const seqParser = sequenceParser.sequenceParser
-  while (ctx && !(ctx instanceof seqParser.BraceBlockContext)) {
-    if (ctx.constructor === seqParser.ProgContext) {
-      return getStarterText(ctx) || 'Starter';
-    }
-    ctx = ctx.parentCtx;
-  }
-
-  // then find the closest Message or Creation which define the 'inherited from'
-  while (ctx && ctx.constructor) {
-    if (ctx instanceof seqParser.ProgContext) {
-      return getStarterText(ctx) || 'Starter';
-    }
-    if (ctx instanceof seqParser.MessageContext) {
-      if (ctx.func()?.to()) {
-        let participant = ctx.func().to().getText()
-        participant = participant.replace(/^"(.*)"$/, '$1');
-        return participant;
+const seqParser = sequenceParser.sequenceParser;
+const StatContext = seqParser.StatContext;
+const ProgContext = seqParser.ProgContext;
+const BraceBlockContext = seqParser.BraceBlockContext;
+StatContext.prototype.Origin = function() {
+  const block = this.parentCtx;
+  const blockParent = block.parentCtx;
+  if(blockParent instanceof ProgContext) {
+    return blockParent.Starter();
+  } else if (blockParent instanceof BraceBlockContext) {
+    let ctx = blockParent.parentCtx;
+    while (ctx && !(ctx instanceof StatContext)) {
+      if (ctx instanceof seqParser.MessageContext) {
+        return ctx.Owner();
       }
-
+      if (ctx instanceof seqParser.CreationContext) {
+        return ctx.Owner();
+      }
+      ctx = ctx.parentCtx;
     }
-    if (ctx instanceof seqParser.CreationContext) {
-      const assignee = ctx.assignment() && ctx.assignment().assignee().getText();
-      const type = ctx.construct().getText();
-      return assignee ? assignee + ':' + type : type;
-    }
-    ctx = ctx.parentCtx;
+    return ctx.Origin();
   }
-  return undefined;
 }
 
+ProgContext.prototype.Starter = function () {
+  return this.head()?.starterExp()?.starter()?.getText() || 'Starter'
+}
 antlr4.ParserRuleContext.prototype.getCode = function() {
   return this.parser.getTokenStream().getText(this.getSourceInterval()).replace(/^"(.*)"$/, '$1')
 };
@@ -92,7 +79,6 @@ module.exports =  {
     const toCollector = new ToCollector();
     return toCollector.getParticipants(ctx)
   },
-  GetInheritedFrom: getInheritedFrom,
   Errors: errors,
   /**
    * @return {number} how many levels of embedded fragments

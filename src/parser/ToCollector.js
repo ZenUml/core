@@ -51,8 +51,8 @@ ToCollector.prototype.enterStarter = function(ctx) {
 
 ToCollector.prototype.enterCreation = function (ctx) {
   if (isBlind) return;
-  const assignee = ctx.assignment() && ctx.assignment().assignee().getText();
-  const type = ctx.construct().getText();
+  const assignee = ctx.creationBody().assignment() && ctx.creationBody().assignment().assignee().getText();
+  const type = ctx.creationBody().construct().getText();
   const participant = assignee ? assignee + ':' + type : type;
   participants.Add(participant);
 }

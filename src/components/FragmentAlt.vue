@@ -40,7 +40,6 @@
 
 <script>
   import fragment from './FragmentMixin'
-  import {GetInheritedFrom} from '../parser'
 
   export default {
     name: 'fragment-alt',
@@ -48,7 +47,7 @@
     mixins: [fragment],
     computed: {
       from: function() {
-        return GetInheritedFrom(this.context)
+        return this.context.Origin()
       },
       alt: function () {
         return this.context.alt()

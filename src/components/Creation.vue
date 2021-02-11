@@ -4,7 +4,7 @@
        v-on:mouseover.stop="mouseOver"
        v-on:mouseout.stop="mouseOut"
        :signature="signature"
-       :class="{ 'right-to-left':rightToLeft, 'hover': hover }"
+       :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent, 'hover': hover }"
        :style="style">
     <comment v-if="comment" :comment="comment" />
     <message class="invocation" :content="signature" :rtl="rightToLeft" :style="{width: invocationWidth + 'px'}" type="creation"/>
@@ -22,7 +22,6 @@
   import Comment from './Comment.vue'
   import Message from './Message'
   import Occurrence from './Occurrence'
-  import {GetInheritedFrom} from '../parser'
   import {CodeRange} from '../parser/CodeRange'
 
   export default {
@@ -34,7 +33,7 @@
     },
     props: ['context', 'comment', 'selfCallIndent', 'fragmentOffset'],
     computed: {
-      ...mapGetters(['starter', 'onElementClick', 'distance', 'centerOf', 'rightOf', 'leftOf', 'widthOf']),
+      ...mapGetters(['starter', 'cursor', 'onElementClick', 'distance', 'centerOf', 'rightOf', 'leftOf', 'widthOf']),
       style: function() {
         const ret = {
           width: Math.abs(this.interactionWidth) + 'px'
@@ -45,7 +44,7 @@
         return ret
       },
       from: function() {
-        return GetInheritedFrom(this.context)
+        return this.context.Origin()
       },
       creation: function () {
         return this.context.creation()
@@ -71,7 +70,7 @@
         return this.distance(this.to, this.from) < 0
       },
       signature: function () {
-        const params = this.creation.parameters()
+        const params = this.creation.creationBody().parameters()
         const text = (params && params.parameter() && params.parameter().length > 0) ? params.getCode() : 'create'
         return '«' + text + '»'
       },
@@ -79,16 +78,19 @@
         function safeCodeGetter (context) {
           return (context && context.getCode()) || ''
         }
-        let assignment = this.creation.assignment()
+        let assignment = this.creation.creationBody().assignment()
         if (!assignment) return ''
         let assignee = safeCodeGetter(assignment.assignee())
         const type = safeCodeGetter(assignment.type())
         return assignee + (type ? ':' + type : '')
       },
       to: function () {
-        const assignee = this.creation.assignment() && this.creation.assignment().assignee().getText()
-        const type = this.creation.construct().getText()
+        const assignee = this.creation.creationBody().assignment() && this.creation.creationBody().assignment().assignee().getText()
+        const type = this.creation.creationBody().construct().getText()
         return assignee ? assignee + ':' + type : type
+      },
+      isCurrent: function () {
+        return this.creation.isCurrent(this.cursor)
       }
     },
     methods: {

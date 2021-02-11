@@ -36,8 +36,7 @@ const Store = () => {
       firstInvocations: (state: any) => state.firstInvocations,
       cursor: (state: any) => state.cursor,
       starter: (state: any, getters: any) => {
-        let starterExp = getters.rootContext.head()?.starterExp()
-        return starterExp?.starter()?.getCode() || 'Starter'
+        return getters.rootContext.Starter()
       },
       rootContext: (state: any) => {
         return RootContext(state.code)

@@ -2,7 +2,7 @@ let seqDsl = require('../../../src/parser/index');
 
 function getRootMethodSignature(rootContext) {
     return rootContext.block().stat()[0]
-        .message().func()
+        .message().messageBody().func()
         .signature().map(s => s.getCode()).join('.');
 }
 

@@ -14,7 +14,6 @@
 
 <script>
   import fragment from './FragmentMixin'
-  import {GetInheritedFrom} from '../parser'
 
   export default {
     name: 'fragment-loop',
@@ -22,7 +21,7 @@
     mixins: [fragment],
     computed: {
       from: function() {
-        return GetInheritedFrom(this.context)
+        return this.context.Origin()
       },
       loop: function () {
         return this.context.loop()

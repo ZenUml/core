@@ -1,6 +1,3 @@
-function isNullOrUndefined(value) {
-  return value === null || value === undefined
-}
 
 export default {
   computed: {
@@ -17,13 +14,13 @@ export default {
       return !!this.providedFrom && (this.providedFrom !== this.inheritedFrom)
     },
     func: function() {
-      return this.message?.func()
+      return this.message?.messageBody().func()
     },
     assignee: function () {
       function safeCodeGetter (context) {
         return (context && context.getCode()) || ''
       }
-      let assignment = this.message?.assignment()
+      let assignment = this.message?.messageBody().assignment()
       if (!assignment) return ''
       let assignee = safeCodeGetter(assignment.assignee())
       const type = safeCodeGetter(assignment.type())
@@ -69,11 +66,7 @@ export default {
       return this.centerOf(this.to) < this.centerOf(this.from)
     },
     isCurrent: function () {
-      let start = this.func?.start.start
-      // it is still considered as the current element if the cursor is just after the end of the function
-      let stop = this.func?.stop.stop + 1
-      if (isNullOrUndefined(this.cursor) || isNullOrUndefined(start) || isNullOrUndefined(stop)) return false
-      return this.cursor >= start && this.cursor <= stop
+      return this.message?.isCurrent(this.cursor);
     }
   }
 }
