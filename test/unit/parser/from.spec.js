@@ -1,4 +1,7 @@
 let seqDsl = require('../../../src/parser/index');
+const sequenceParser = require('../../../src/generated-parser/sequenceParser')
+
+const seqParser = sequenceParser.sequenceParser;
 
 // This spec shows how we get `from` from the context.
 // A.m1() { B.m2() } => m1 is from `Starter`, m2 is from `A'
@@ -9,12 +12,61 @@ let seqDsl = require('../../../src/parser/index');
 const GetInheritedFrom = seqDsl.GetInheritedFrom
 
 
+const StatContext = seqParser.StatContext;
+const ProgContext = seqParser.ProgContext;
+const BraceBlockContext = seqParser.BraceBlockContext;
+StatContext.prototype.Origin = function() {
+  const block = this.parentCtx;
+  const blockParent = block.parentCtx;
+  if(blockParent instanceof ProgContext) {
+    return 'Starter';
+  } else if (blockParent instanceof BraceBlockContext) {
+    let ctx = blockParent.parentCtx;
+    while (ctx && !(ctx instanceof StatContext)) {
+      if (ctx instanceof seqParser.MessageContext) {
+        if (ctx.messageBody().func()?.to()) {
+          let participant = ctx.messageBody().func().to().getText()
+          participant = participant.replace(/^"(.*)"$/, '$1');
+          return participant;
+        }
+
+      }
+      if (ctx instanceof seqParser.CreationContext) {
+        const assignee = ctx.creationBody().assignment() && ctx.creationBody().assignment().assignee().getText();
+        const type = ctx.creationBody().construct().getText();
+        return assignee ? assignee + ':' + type : type;
+      }
+    }
+    return ctx.Origin();
+  }
+}
 describe('Get `from` from context', () => {
+  test('Origin', () => {
+    let rootContext = seqDsl.RootContext('A->B.m1');
+    let stat = rootContext.block().stat()[0]
+
+    expectText(stat).toBe('A->B.m1')
+    expect(stat.Origin()).toBe('Starter')
+  })
+
   test('Explicit', () => {
     let rootContext = seqDsl.RootContext('A->B.m1');
     let m1 = rootContext.block().stat()[0].message()
     expectText(m1).toBe('A->B.m1')
     expect(GetInheritedFrom(m1.messageBody().func())).toBe('Starter')
+  })
+
+  test('Embedded', () => {
+    let rootContext = seqDsl.RootContext('A.m1 { B.m2 }');
+    const stat1 = rootContext.block().stat()[0];
+    expect(stat1.Origin()).toBe('Starter');
+    let m1 = stat1.message()
+    expectText(m1).toBe('A.m1{B.m2}')
+    const stat2 = m1.braceBlock().block().stat()[0]
+    expect(stat2.Origin()).toBe('A');
+    let m2 = stat2.message();
+    expectText(m2).toBe('B.m2')
+    expect(GetInheritedFrom(m2.messageBody().func())).toBe('A')
   })
 
   test('Embedded', () => {
