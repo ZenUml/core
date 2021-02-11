@@ -4,9 +4,12 @@ const sequenceParser = require('../generated-parser/sequenceParser')
 const seqParser = sequenceParser.sequenceParser;
 const CreationContext = seqParser.CreationContext;
 CreationContext.prototype.Owner = function () {
-  const assignee = this.creationBody().assignment() && this.creationBody().assignment().assignee().getText();
-  const type = this.creationBody().construct().getText();
-  return assignee ? assignee + ':' + type : type;
+  const assignee = this.creationBody()?.assignment()?.assignee()?.getText() || '';
+  const type = this.creationBody()?.construct()?.getText();
+  if (!type) {
+    return 'Missing Constructor'
+  }
+  return `${assignee}:${type}`;
 }
 
 

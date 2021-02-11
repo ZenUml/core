@@ -85,9 +85,7 @@
         return assignee + (type ? ':' + type : '')
       },
       to: function () {
-        const assignee = this.creation.creationBody().assignment() && this.creation.creationBody().assignment().assignee().getText()
-        const type = this.creation.creationBody().construct().getText()
-        return assignee ? assignee + ':' + type : type
+        return this.creation.Owner()
       },
       isCurrent: function () {
         return this.creation.isCurrent(this.cursor)
