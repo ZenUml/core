@@ -307,7 +307,7 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u0003\u0002\u0002\u0002\u019c\u019d\u00075\u0002\u0002\u019d9\u0003",
     "\u0002\u0002\u0002\u019e\u019f\u0007-\u0002\u0002\u019f;\u0003\u0002",
     "\u0002\u0002\u01a0\u01a1\t\u0002\u0002\u0002\u01a1=\u0003\u0002\u0002",
-    "\u0002\u01a2\u01a3\u0007-\u0002\u0002\u01a3?\u0003\u0002\u0002\u0002",
+    "\u0002\u01a2\u01a3\t\u0002\u0002\u0002\u01a3?\u0003\u0002\u0002\u0002",
     "\u01a4\u01a5\u0007-\u0002\u0002\u01a5A\u0003\u0002\u0002\u0002\u01a6",
     "\u01ab\u0007-\u0002\u0002\u01a7\u01a8\u0007\u0018\u0002\u0002\u01a8",
     "\u01aa\u0007-\u0002\u0002\u01a9\u01a7\u0003\u0002\u0002\u0002\u01aa",
@@ -3569,6 +3569,10 @@ ConstructContext.prototype.ID = function() {
     return this.getToken(sequenceParser.ID, 0);
 };
 
+ConstructContext.prototype.STRING = function() {
+    return this.getToken(sequenceParser.STRING, 0);
+};
+
 ConstructContext.prototype.enterRule = function(listener) {
     if(listener instanceof sequenceParserListener ) {
         listener.enterConstruct(this);
@@ -3590,10 +3594,18 @@ sequenceParser.prototype.construct = function() {
 
     var localctx = new ConstructContext(this, this._ctx, this.state);
     this.enterRule(localctx, 60, sequenceParser.RULE_construct);
+    var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
         this.state = 416;
-        this.match(sequenceParser.ID);
+        _la = this._input.LA(1);
+        if(!(_la===sequenceParser.ID || _la===sequenceParser.STRING)) {
+        this._errHandler.recoverInline(this);
+        }
+        else {
+        	this._errHandler.reportMatch(this);
+            this.consume();
+        }
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;

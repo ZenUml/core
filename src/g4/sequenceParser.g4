@@ -182,7 +182,7 @@ target
  ;
 
 construct
- : ID
+ : ID | STRING
  ;
 
 type
