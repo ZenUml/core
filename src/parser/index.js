@@ -30,7 +30,7 @@ StatContext.prototype.Origin = function() {
   const block = this.parentCtx;
   const blockParent = block.parentCtx;
   if(blockParent instanceof ProgContext) {
-    return getStarterText(blockParent) || 'Starter';
+    return blockParent.Starter();
   } else if (blockParent instanceof BraceBlockContext) {
     let ctx = blockParent.parentCtx;
     while (ctx && !(ctx instanceof StatContext)) {
@@ -46,49 +46,9 @@ StatContext.prototype.Origin = function() {
   }
 }
 
-
-function getStarterText(ctx) {
-  return ctx.head()?.starterExp()?.starter()?.getText()
+ProgContext.prototype.Starter = function () {
+  return this.head()?.starterExp()?.starter()?.getText() || 'Starter'
 }
-
-
-function getInheritedFrom(ctx) {
-  // TODO: throw error?
-  if (!ctx) return undefined;
-
-  // we need to find the closest BraceBlockContext
-
-  const seqParser = sequenceParser.sequenceParser
-  while (ctx && !(ctx instanceof seqParser.BraceBlockContext)) {
-    if (ctx.constructor === seqParser.ProgContext) {
-      return getStarterText(ctx) || 'Starter';
-    }
-    ctx = ctx.parentCtx;
-  }
-
-  // then find the closest Message or Creation which define the 'inherited from'
-  while (ctx && ctx.constructor) {
-    if (ctx instanceof seqParser.ProgContext) {
-      return getStarterText(ctx) || 'Starter';
-    }
-    if (ctx instanceof seqParser.MessageContext) {
-      if (ctx.messageBody().func()?.to()) {
-        let participant = ctx.messageBody().func().to().getText()
-        participant = participant.replace(/^"(.*)"$/, '$1');
-        return participant;
-      }
-
-    }
-    if (ctx instanceof seqParser.CreationContext) {
-      const assignee = ctx.creationBody().assignment() && ctx.creationBody().assignment().assignee().getText();
-      const type = ctx.creationBody().construct().getText();
-      return assignee ? assignee + ':' + type : type;
-    }
-    ctx = ctx.parentCtx;
-  }
-  return undefined;
-}
-
 antlr4.ParserRuleContext.prototype.getCode = function() {
   return this.parser.getTokenStream().getText(this.getSourceInterval()).replace(/^"(.*)"$/, '$1')
 };
@@ -119,7 +79,6 @@ module.exports =  {
     const toCollector = new ToCollector();
     return toCollector.getParticipants(ctx)
   },
-  GetInheritedFrom: getInheritedFrom,
   Errors: errors,
   /**
    * @return {number} how many levels of embedded fragments

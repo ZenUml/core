@@ -21,7 +21,6 @@
   import SelfInvocationAsync from './SelfInvocation-async'
   import Message from './Message'
   import {mapGetters} from "vuex";
-  import {GetInheritedFrom} from '../parser'
   import {CodeRange} from '../parser/CodeRange'
 
   function isNullOrUndefined(value) {
@@ -39,7 +38,7 @@
     computed: {
       ...mapGetters(['distance', 'cursor', 'onElementClick']),
       from: function() {
-        return GetInheritedFrom(this.context)
+        return this.context.Origin()
       },
       asyncMessage: function () {
         return this.context?.asyncMessage()

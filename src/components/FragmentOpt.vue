@@ -13,7 +13,6 @@
 
 <script>
   import fragment from './FragmentMixin'
-  import {GetInheritedFrom} from '../parser'
 
   export default {
     name: 'fragment-opt',
@@ -21,7 +20,7 @@
     mixins: [fragment],
     computed: {
       from: function() {
-        return GetInheritedFrom(this.context)
+        return this.context.Origin()
       },
       opt: function () {
         return this.context.opt()

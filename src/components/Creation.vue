@@ -22,7 +22,6 @@
   import Comment from './Comment.vue'
   import Message from './Message'
   import Occurrence from './Occurrence'
-  import {GetInheritedFrom} from '../parser'
   import {CodeRange} from '../parser/CodeRange'
 
   export default {
@@ -45,7 +44,7 @@
         return ret
       },
       from: function() {
-        return GetInheritedFrom(this.context)
+        return this.context.Origin()
       },
       creation: function () {
         return this.context.creation()
