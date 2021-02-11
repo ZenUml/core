@@ -71,7 +71,7 @@
       },
       signature: function () {
         const params = this.creation.creationBody().parameters()
-        const text = (params && params.parameter() && params.parameter().length > 0) ? params.getCode() : 'create'
+        const text = (params?.parameter()?.length > 0) ? params.getCode() : 'create'
         return '«' + text + '»'
       },
       assignee: function () {
