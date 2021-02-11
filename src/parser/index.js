@@ -1,6 +1,7 @@
 var antlr4  = require('antlr4/index')
 var sequenceLexer = require('../generated-parser/sequenceLexer')
 var sequenceParser = require('../generated-parser/sequenceParser')
+require('./IsCurrent')
 var ToCollector = require('./ToCollector')
 var ChildFragmentDetector = require('./ChildFragmentDetecotr')
 
@@ -60,15 +61,6 @@ function getInheritedFrom(ctx) {
     ctx = ctx.parentCtx;
   }
   return undefined;
-}
-
-const seqParser = sequenceParser.sequenceParser;
-const CreationContext = seqParser.CreationContext;
-CreationContext.prototype.isCurrent = function (cursor) {
-  const start = this.start.start;
-  const stop = this.creationBody().stop.stop + 1;
-
-  return cursor >= start && cursor <= stop;
 }
 
 antlr4.ParserRuleContext.prototype.getCode = function() {
