@@ -2,6 +2,7 @@ var antlr4  = require('antlr4/index')
 var sequenceLexer = require('../generated-parser/sequenceLexer')
 var sequenceParser = require('../generated-parser/sequenceParser')
 require('./IsCurrent')
+require('./Owner')
 var ToCollector = require('./ToCollector')
 var ChildFragmentDetector = require('./ChildFragmentDetecotr')
 
@@ -20,6 +21,31 @@ function rootContext(code) {
   parser.addErrorListener(new SeqErrorListener());
   return parser._syntaxErrors ? null : parser.prog();
 }
+
+const seqParser = sequenceParser.sequenceParser;
+const StatContext = seqParser.StatContext;
+const ProgContext = seqParser.ProgContext;
+const BraceBlockContext = seqParser.BraceBlockContext;
+StatContext.prototype.Origin = function() {
+  const block = this.parentCtx;
+  const blockParent = block.parentCtx;
+  if(blockParent instanceof ProgContext) {
+    return getStarterText(blockParent) || 'Starter';
+  } else if (blockParent instanceof BraceBlockContext) {
+    let ctx = blockParent.parentCtx;
+    while (ctx && !(ctx instanceof StatContext)) {
+      if (ctx instanceof seqParser.MessageContext) {
+        return ctx.Owner();
+      }
+      if (ctx instanceof seqParser.CreationContext) {
+        return ctx.Owner();
+      }
+      ctx = ctx.parentCtx;
+    }
+    return ctx.Origin();
+  }
+}
+
 
 function getStarterText(ctx) {
   return ctx.head()?.starterExp()?.starter()?.getText()

@@ -15,6 +15,13 @@ describe('message - complete', () => {
   })
 })
 
+describe('message - Owner', () => {
+  test('A.m', () => {
+    let message = getMessageContext('A.m');
+    expect(message.Owner()).toBe('A')
+  })
+})
+
 describe('message - incomplete', () => {
   test('A.', () => {
     let message = getMessageContext('A.')
