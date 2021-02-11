@@ -4,7 +4,7 @@
        v-on:mouseover.stop="mouseOver"
        v-on:mouseout.stop="mouseOut"
        :signature="signature"
-       :class="{ 'right-to-left':rightToLeft, 'hover': hover }"
+       :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent, 'hover': hover }"
        :style="style">
     <comment v-if="comment" :comment="comment" />
     <message class="invocation" :content="signature" :rtl="rightToLeft" :style="{width: invocationWidth + 'px'}" type="creation"/>
@@ -34,7 +34,7 @@
     },
     props: ['context', 'comment', 'selfCallIndent', 'fragmentOffset'],
     computed: {
-      ...mapGetters(['starter', 'onElementClick', 'distance', 'centerOf', 'rightOf', 'leftOf', 'widthOf']),
+      ...mapGetters(['starter', 'cursor', 'onElementClick', 'distance', 'centerOf', 'rightOf', 'leftOf', 'widthOf']),
       style: function() {
         const ret = {
           width: Math.abs(this.interactionWidth) + 'px'
@@ -89,6 +89,9 @@
         const assignee = this.creation.creationBody().assignment() && this.creation.creationBody().assignment().assignee().getText()
         const type = this.creation.creationBody().construct().getText()
         return assignee ? assignee + ':' + type : type
+      },
+      isCurrent: function () {
+        return this.creation.isCurrent(this.cursor)
       }
     },
     methods: {
