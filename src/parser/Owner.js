@@ -10,12 +10,12 @@ CreationContext.prototype.Assignee = function () {
  * @return {string}
  */
 CreationContext.prototype.Owner = function () {
-  const assignee = this.Assignee() || '';
+  const assignee = this.Assignee();
   const type = this.creationBody()?.construct()?.getText();
   if (!type) {
     return 'Missing Constructor'
   }
-  return `${assignee}:${type}`;
+  return assignee ? `${assignee}:${type}`: type;
 }
 
 
