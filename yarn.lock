@@ -2894,15 +2894,10 @@
     "@types/node" "*"
     form-data "^3.0.0"
 
-"@types/node@*", "@types/node@latest":
-  version "14.14.22"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.22.tgz"
-  integrity sha512-g+f/qj/cNcqKkc3tFqlXOYjrmZA+jNBiDzbP3kH+B+otKFqAdPgVTGP1IeKRdMml/aE69as5S4FqtxAbl+LaMw==
-
-"@types/node@>=12.12.47", "@types/node@>=6":
-  version "14.14.25"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.25.tgz"
-  integrity sha512-EPpXLOVqDvisVxtlbvzfyqSsFeQxltFbluZNRndIb8tr9KiBnYNLzrc1N3pyKUCww2RNrfHDViqDWWE1LCJQtQ==
+"@types/node@*", "@types/node@>=12.12.47", "@types/node@>=6", "@types/node@latest":
+  version "14.14.26"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.26.tgz#e40df24c957568f350cca04e63bfb1e1556d1cbf"
+  integrity sha512-skWxepWOs+VArEBWd2S/VR3wUavioIIx9/HzW+UJiIjtwa6+kNXdsOeq7FfxDXf56hIcL0ieo2brwMgBJ1+lhw==
 
 "@types/node@^10.1.0":
   version "10.17.51"
@@ -17553,22 +17548,6 @@ vue-loader@^15.9.2:
     loader-utils "^1.1.0"
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
-
-vue-sequence@^1.0.108:
-  version "1.0.108"
-  resolved "https://registry.yarnpkg.com/vue-sequence/-/vue-sequence-1.0.108.tgz#ca50beb439a5a9306ce34b0ec917939c8bcb6652"
-  integrity sha512-95BtWsmLjpqxIfPEWmpjfy87oXuk5oHVr8eYa6E36tDfiXsJQd06ce0pT1qoivmhahsM/ZupOpnluNxYlhWd3A==
-  dependencies:
-    "@types/assert" "^1.5.4"
-    antlr4 "~4.8.0"
-    dom-to-image-more "^2.8.0"
-    gauge-ts "0.1.0"
-    highlight.js "^10.1.1"
-    lodash "^4.17.20"
-    marked "^1.2.9"
-    vue "2.6.11"
-    vue-template-compiler "2.6.11"
-    vuex "^3.6.2"
 
 vue-style-loader@^4.1.0, vue-style-loader@^4.1.2:
   version "4.1.2"
