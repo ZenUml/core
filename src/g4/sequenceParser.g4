@@ -80,6 +80,7 @@ value
  : (atom | ID | STRING)
  ;
 
+// [Perf] Removing par and opt would improve if/else by about 10%; consider merging loop, par and opt.
 stat
  : alt
  | par
