@@ -9,6 +9,7 @@ function getMessageContext(code) {
 // Performance base line 1.966 ~ 2.1s on My MBP.
 // 2021-02-14: Improved to 1.4s.
 // 2021-02-14: Improved to 1s.
+// 2021-02-14: Improved by ~30% by moving (to DOT) to messageBody
 test('Profiling sync message', () => {
   var t0 = performance.now()
   for (let i = 0; i < 100; i++) {
@@ -42,6 +43,7 @@ test('Profiling prog.head', () => {
 // Perf re-baseline: 11461 on my MBP.
 // 2021-02-14: Improved to 2499ms.
 // 2021-02-14: Improved to 1454ms (~20%).
+// 2021-02-14: Improved to 930ms (~30%) by moving (to DOT) to messageBody
 test('Profiling if/else', () => {
   var t0 = performance.now()
   for (let i = 0; i < 100; i++) {

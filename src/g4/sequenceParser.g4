@@ -130,7 +130,7 @@ message
  ;
 
 messageBody
- : assignment? (from ARROW)? func
+ : assignment? (from ARROW)? ((to DOT) | func)
  | assignment
  ;
 
@@ -139,7 +139,6 @@ messageBody
 // if we remove the 'to DOT', but that would cause issues for 'A.'.
 func
  : (to DOT)? signature (DOT signature)*
- | to DOT
  ;
 
 from
