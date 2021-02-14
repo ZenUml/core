@@ -26,10 +26,7 @@ group
  ;
 
 starterExp
- : AT STARTER_LXR OPAR starter CPAR
- | AT STARTER_LXR OPAR CPAR
- | AT STARTER_LXR OPAR
- | AT STARTER_LXR
+ : AT STARTER_LXR (OPAR starter CPAR)?
  | AT ID
  | AT
  ;
