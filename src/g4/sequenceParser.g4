@@ -259,7 +259,7 @@ expr
  | atom                                 #atomExpr
  ;
 
-// [Perf tuniing] Merging below tokens does not help.
+// [Perf tuning] Merging below tokens does not help.
 atom
  : (INT | FLOAT)  #numberAtom
  | (TRUE | FALSE) #booleanAtom
@@ -268,6 +268,7 @@ atom
  | NIL            #nilAtom
  ;
 
+// [Perf tuning] Removing alternative rules does not help.
 parExpr
  : OPAR condition CPAR
  | OPAR condition
