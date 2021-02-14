@@ -5,4 +5,4 @@
 // Self-method
 // Nested method
 // Assignment
-export default `new "A B C D"`
+export default `B.`

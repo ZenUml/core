@@ -137,18 +137,13 @@ messageBody
  : assignment? func
  | assignment
  ;
-/**
- * Order is impportant below. This allows the follow three status being valid:
- * a. A - participant
- * b. A. - func matched by `to DOT`
- * c. A.m - func matched `to DOT signagure`
- * Also we support chained method, such as m1().m2()
- */
+
+// [Perf tuning] Performance improved 30% after we removed other
+// alternative rules (1.3s -> 1.0s). It would improve another 30%,
+// if we remove the 'to DOT', but that would cause issues for 'A.'.
 func
- : from ARROW to  // A->B
- | (from ARROW)? (to DOT)? signature (DOT signature)*
- | (from ARROW)? to (DOT signature)+ DOT            // A->B.m1.
- | (from ARROW)? to DOT (DOT signature?)*           // A->B..m1
+ : ((from ARROW)? (to DOT))? signature (DOT signature)*
+ | to DOT
  ;
 
 from
@@ -173,7 +168,6 @@ asyncMessage
  | source ARROW target COL
  | target COL content
  | source ARROW target
- | source ARROW
  | source MINUS
  ;
 
