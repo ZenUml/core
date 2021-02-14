@@ -7,6 +7,7 @@ function getMessageContext(code) {
   return message;
 }
 // Performance base line 1.966 ~ 2.1s on My MBP.
+// 2021-02-14: Improved to 1.4s.
 test('seqDsl should parse a simple method with quoted method name', () => {
   var t0 = performance.now()
   for (let i = 0; i < 100; i++) {
