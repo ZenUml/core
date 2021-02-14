@@ -41,7 +41,6 @@ starter
 participant
  : stereotype? name width? label?
  | stereotype
- | name width?
  ;
 
 stereotype
