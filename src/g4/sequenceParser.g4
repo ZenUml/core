@@ -226,13 +226,10 @@ ifBlock
 
 elseIfBlock
  : ELSE IF parExpr braceBlock
- | ELSE IF parExpr
- | ELSE IF
  ;
 
 elseBlock
  : ELSE braceBlock
- | ELSE
  ;
 
 braceBlock
