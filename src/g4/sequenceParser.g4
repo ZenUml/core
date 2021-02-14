@@ -248,6 +248,8 @@ loop
  | WHILE
  ;
 
+// [Perf tuning] Merging expr op expr does not help.
+// Removing `func` and `creation` could improve by 5 ~ 10%, but we cannot do that.
 expr
  : MINUS expr                           #unaryMinusExpr
  | NOT expr                             #notExpr
@@ -263,6 +265,7 @@ expr
  | atom                                 #atomExpr
  ;
 
+// [Perf tuniing] Merging below tokens does not help.
 atom
  : (INT | FLOAT)  #numberAtom
  | (TRUE | FALSE) #booleanAtom
