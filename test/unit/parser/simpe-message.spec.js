@@ -6,6 +6,15 @@ function getMessageContext(code) {
   let message = rootContext.block().stat()[0].message();
   return message;
 }
+// Performance base line 1.983s on My MBP.
+test('seqDsl should parse a simple method with quoted method name', () => {
+  var t0 = performance.now()
+  for (let i = 0; i < 100; i++) {
+    let rootContext = seqDsl.RootContext('B."method. {a,b} 1"(1,2)');
+  }
+  var t1 = performance.now()
+  console.log('parsing', t1 - t0);
+})
 
 describe('message - complete', () => {
   test('A.m', () => {
