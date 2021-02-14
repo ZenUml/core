@@ -117,11 +117,16 @@ creation
  : creationBody (SCOL | braceBlock)?
  ;
 
+// [Perf tuning] By removing alternative rules
+// the performence improves by 1/3 (2.1s -> 1.4s).
+// This means 'a = new' will be treated as error.
+// [Incomplete code] The following incomplete input
+// can be 'correctly'(with correct errors) parsed:
+// new
+// a = new
+// new A(
 creationBody
  : assignment? NEW construct(OPAR parameters? CPAR)?
- | assignment? NEW construct OPAR
- | assignment? NEW construct
- | assignment? NEW
  ;
 
 message
