@@ -38,6 +38,17 @@ test('Profiling prog.head', () => {
   console.log('parsing', t1 - t0);
 })
 
+// Perf baseline: 2345 on my MBP.
+// 2021-02-14: Improved to 1088ms.
+test('Profiling if/else', () => {
+  var t0 = performance.now()
+  for (let i = 0; i < 100; i++) {
+    let rootContext = seqDsl.RootContext('if(x>1){A.m}');
+  }
+  var t1 = performance.now()
+  console.log('parsing', t1 - t0);
+})
+
 describe('message - complete', () => {
   test('A.m', () => {
     let message = getMessageContext('A.m');

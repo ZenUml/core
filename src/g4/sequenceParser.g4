@@ -222,8 +222,6 @@ alt
 
 ifBlock
  : IF parExpr braceBlock
- | IF parExpr
- | IF
  ;
 
 elseIfBlock
