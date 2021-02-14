@@ -9,10 +9,11 @@ function getMessageContext(code) {
 // Performance base line 1.966 ~ 2.1s on My MBP.
 // 2021-02-14: Improved to 1.4s.
 // 2021-02-14: Improved to 1s.
+// 2021-02-14: Re-baseline to 1.5s after add 'x='
 test('Profiling sync message', () => {
   var t0 = performance.now()
   for (let i = 0; i < 100; i++) {
-    let rootContext = seqDsl.RootContext('B."method. {a,b} 1"(1,2)');
+    let rootContext = seqDsl.RootContext('x = B."method. {a,b} 1"(1,2)');
   }
   var t1 = performance.now()
   console.log('parsing', t1 - t0);
