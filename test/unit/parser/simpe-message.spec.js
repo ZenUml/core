@@ -40,6 +40,7 @@ test('Profiling prog.head', () => {
 
 // Perf re-baseline: 11461 on my MBP.
 // 2021-02-14: Improved to 2499ms.
+// 2021-02-14: Improved to 1454ms (~20%).
 test('Profiling if/else', () => {
   var t0 = performance.now()
   for (let i = 0; i < 100; i++) {

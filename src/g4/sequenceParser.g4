@@ -234,7 +234,6 @@ elseBlock
 
 braceBlock
  : OBRACE block? CBRACE
- | OBRACE
  ;
 
 loop
