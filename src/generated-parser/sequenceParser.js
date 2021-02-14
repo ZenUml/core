@@ -214,9 +214,9 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u0002\u0002\u0002\u0116\u0117\u0005.\u0018\u0002\u0117\u0118\u0007",
     "\u0006\u0002\u0002\u0118\u011a\u0003\u0002\u0002\u0002\u0119\u0116\u0003",
     "\u0002\u0002\u0002\u0119\u011a\u0003\u0002\u0002\u0002\u011a\u011f\u0003",
-    "\u0002\u0002\u0002\u011b\u011c\u0005D#\u0002\u011c\u011d\u0007,\u0002",
-    "\u0002\u011d\u0120\u0003\u0002\u0002\u0002\u011e\u0120\u0005,\u0017",
-    "\u0002\u011f\u011b\u0003\u0002\u0002\u0002\u011f\u011e\u0003\u0002\u0002",
+    "\u0002\u0002\u0002\u011b\u0120\u0005,\u0017\u0002\u011c\u011d\u0005",
+    "D#\u0002\u011d\u011e\u0007,\u0002\u0002\u011e\u0120\u0003\u0002\u0002",
+    "\u0002\u011f\u011b\u0003\u0002\u0002\u0002\u011f\u011c\u0003\u0002\u0002",
     "\u0002\u0120\u0123\u0003\u0002\u0002\u0002\u0121\u0123\u00054\u001b",
     "\u0002\u0122\u0114\u0003\u0002\u0002\u0002\u0122\u0121\u0003\u0002\u0002",
     "\u0002\u0123+\u0003\u0002\u0002\u0002\u0124\u0125\u0005D#\u0002\u0125",
@@ -2546,14 +2546,14 @@ sequenceParser.prototype.messageBody = function() {
             switch(la_) {
             case 1:
                 this.state = 281;
-                this.to();
-                this.state = 282;
-                this.match(sequenceParser.DOT);
+                this.func();
                 break;
 
             case 2:
-                this.state = 284;
-                this.func();
+                this.state = 282;
+                this.to();
+                this.state = 283;
+                this.match(sequenceParser.DOT);
                 break;
 
             }
