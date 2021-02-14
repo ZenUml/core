@@ -18,6 +18,15 @@ test('seqDsl should parse a simple method with quoted method name', () => {
   console.log('parsing', t1 - t0);
 })
 
+test('Profiling async message', () => {
+  var t0 = performance.now()
+  for (let i = 0; i < 1000; i++) {
+    let rootContext = seqDsl.RootContext('A->B:m');
+  }
+  var t1 = performance.now()
+  console.log('parsing', t1 - t0);
+})
+
 describe('message - complete', () => {
   test('A.m', () => {
     let message = getMessageContext('A.m');
