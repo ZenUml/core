@@ -146,9 +146,10 @@ signature
  : methodName invocation?
  ;
 
+// Do not allow '(' to be valid.
+// Otherwise 'A.method() {' will be parsed as 'A.method(' + ')' + '{';
 invocation
- : OPAR
- | OPAR parameters? CPAR
+ : OPAR parameters? CPAR
  ;
 
 assignment
