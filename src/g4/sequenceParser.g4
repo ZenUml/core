@@ -67,8 +67,11 @@ width
  : INT
  ;
 
+// [Perf tuning] changed from stat* to stat+ according to
+// https://tomassetti.me/improving-the-performance-of-an-antlr-parser/
+// This change however does not improve the perf.
 block
- : stat*
+ : stat+
  ;
 
 ret
