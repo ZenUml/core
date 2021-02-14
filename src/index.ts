@@ -110,7 +110,7 @@ const Store = () => {
         }
         context.commit('code', payload.code);
         context.commit('cursor', payload.cursor);
-      }, 100)
+      }, 1000)
     },
     // TODO: Enable strict for development?
     strict: false,
