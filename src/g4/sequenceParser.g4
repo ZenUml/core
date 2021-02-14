@@ -7,7 +7,7 @@ options {
 prog
  : EOF                            // An empty string is a valid prog
 // | LT EOF                       // Parser auto recover from this
- | head EOF
+ | head EOF                       // [Perf] Removing this line does not help
  | head? block EOF
  ;
 
@@ -26,10 +26,7 @@ group
  ;
 
 starterExp
- : AT STARTER_LXR OPAR starter CPAR
- | AT STARTER_LXR OPAR CPAR
- | AT STARTER_LXR OPAR
- | AT STARTER_LXR
+ : AT STARTER_LXR (OPAR starter? CPAR)?
  | AT ID
  | AT
  ;
@@ -41,7 +38,6 @@ starter
 participant
  : stereotype? name width? label?
  | stereotype
- | name width?
  ;
 
 stereotype
@@ -67,8 +63,11 @@ width
  : INT
  ;
 
+// [Perf tuning] changed from stat* to stat+ according to
+// https://tomassetti.me/improving-the-performance-of-an-antlr-parser/
+// This change however does not improve the perf.
 block
- : stat*
+ : stat+
  ;
 
 ret
@@ -81,6 +80,7 @@ value
  : (atom | ID | STRING)
  ;
 
+// [Perf] Removing par and opt would improve if/else by about 10%; consider merging loop, par and opt.
 stat
  : alt
  | par
@@ -91,7 +91,6 @@ stat
  // Without 'EVENT_END' the change line char cannot match anything and results error
  // This change line is lexed as EVENT_END because it was in Event_Mode
  | asyncMessage EVENT_END?
- | anonymousBlock
  | ret
  | OTHER {console.log("unknown char: " + $OTHER.text);}
  ;
@@ -106,41 +105,38 @@ opt
  | OPT
  ;
 
-anonymousBlock
- : braceBlock
- ;
-
 creation
  : creationBody (SCOL | braceBlock)?
  ;
 
+// [Perf tuning] By removing alternative rules
+// the performence improves by 1/3 (2.1s -> 1.4s).
+// This means 'a = new' will be treated as error.
+// [Incomplete code] The following incomplete input
+// can be 'correctly'(with correct errors) parsed:
+// new
+// a = new
+// new A(
 creationBody
  : assignment? NEW construct(OPAR parameters? CPAR)?
- | assignment? NEW construct OPAR
- | assignment? NEW construct
- | assignment? NEW
  ;
 
 message
  : messageBody (SCOL | braceBlock)?
  ;
 
+// Order of 'func | (to DOT)' is important. Otherwise A.m will be parsed as to messages
 messageBody
- : assignment? func
+ : assignment? (from ARROW)? func
  | assignment
  ;
-/**
- * Order is impportant below. This allows the follow three status being valid:
- * a. A - participant
- * b. A. - func matched by `to DOT`
- * c. A.m - func matched `to DOT signagure`
- * Also we support chained method, such as m1().m2()
- */
+
+// [Perf tuning] Performance improved 30% after we removed other
+// alternative rules (1.3s -> 1.0s). It would improve another 30%,
+// if we remove the 'to DOT', but that would cause issues for 'A.'.
 func
- : from ARROW to  // A->B
- | (from ARROW)? (to DOT)? signature (DOT signature)*
- | (from ARROW)? to (DOT signature)+ DOT            // A->B.m1.
- | (from ARROW)? to DOT (DOT signature?)*           // A->B..m1
+ : (to DOT)? signature (DOT signature)*
+ | to DOT
  ;
 
 from
@@ -151,21 +147,23 @@ signature
  : methodName invocation?
  ;
 
+// To allow 'A.method(' to be properly parsed.
 invocation
- : OPAR
- | OPAR parameters? CPAR
+ : OPAR parameters? CPAR
+ | OPAR
  ;
 
 assignment
  : (type? assignee ASSIGN)
  ;
 
+// [Perf tuning] The following alternative rules does cause perf issue.
+// See the 'Profiling async message' test.
 asyncMessage
  : source ARROW target COL content
  | source ARROW target COL
  | target COL content
  | source ARROW target
- | source ARROW
  | source MINUS
  ;
 
@@ -219,21 +217,18 @@ alt
 
 ifBlock
  : IF parExpr braceBlock
- | IF parExpr
- | IF
  ;
 
 elseIfBlock
  : ELSE IF parExpr braceBlock
- | ELSE IF parExpr
- | ELSE IF
  ;
 
 elseBlock
  : ELSE braceBlock
- | ELSE
  ;
 
+// [Perf] After removed 'OBRACE' rule, 'A.m {' is parsed as three messages.
+// Note this different from what the ANTLR plugin gives.
 braceBlock
  : OBRACE block? CBRACE
  | OBRACE
@@ -245,6 +240,8 @@ loop
  | WHILE
  ;
 
+// [Perf tuning] Merging expr op expr does not help.
+// Removing `func` and `creation` could improve by 5 ~ 10%, but we cannot do that.
 expr
  : MINUS expr                           #unaryMinusExpr
  | NOT expr                             #notExpr
@@ -260,6 +257,7 @@ expr
  | atom                                 #atomExpr
  ;
 
+// [Perf tuning] Merging below tokens does not help.
 atom
  : (INT | FLOAT)  #numberAtom
  | (TRUE | FALSE) #booleanAtom
@@ -268,6 +266,7 @@ atom
  | NIL            #nilAtom
  ;
 
+// [Perf tuning] Removing alternative rules does not help.
 parExpr
  : OPAR condition CPAR
  | OPAR condition

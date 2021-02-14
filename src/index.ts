@@ -102,18 +102,20 @@ const Store = () => {
       }
     },
     actions: {
+      // Why debounce is here instead of mutation 'code'?
+      // Both code and cursor must be mutated together, especially during typing.
       updateCode: _.debounce(function (context: any, payload: any) {
         if (typeof payload === 'string') {
           throw Error('You are using a old version of vue-sequence. New version requires {code, cursor}.')
         }
         context.commit('code', payload.code);
         context.commit('cursor', payload.cursor);
-      }, 100)
+      }, 1000)
     },
     // TODO: Enable strict for development?
     strict: false,
   }
-}
+};
 /* eslint-disable */
 // @ts-ignore
 const Version = VERSION || ''
