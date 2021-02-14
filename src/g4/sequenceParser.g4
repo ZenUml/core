@@ -7,7 +7,7 @@ options {
 prog
  : EOF                            // An empty string is a valid prog
 // | LT EOF                       // Parser auto recover from this
- | head EOF
+ | head EOF                       // [Perf] Removing this line does not help
  | head? block EOF
  ;
 
