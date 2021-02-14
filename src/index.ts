@@ -46,7 +46,7 @@ const Store = () => {
       },
       centerOf: (state: any) => (entity: any) => {
         return state.lifeLineDimensions.get(entity) &&
-          (state.lifeLineDimensions.get(entity).left + state.lifeLineDimensions.get(entity).width / 2)
+          (state.lifeLineDimensions.get(entity).left + Math.floor(state.lifeLineDimensions.get(entity).width / 2))
       },
       leftOf: (state: any) => (entity: any) => {
         return state.lifeLineDimensions.get(entity) && state.lifeLineDimensions.get(entity).left
