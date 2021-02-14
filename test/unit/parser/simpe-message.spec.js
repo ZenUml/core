@@ -9,7 +9,7 @@ function getMessageContext(code) {
 // Performance base line 1.966 ~ 2.1s on My MBP.
 // 2021-02-14: Improved to 1.4s.
 // 2021-02-14: Improved to 1s.
-test('seqDsl should parse a simple method with quoted method name', () => {
+test('Profiling sync message', () => {
   var t0 = performance.now()
   for (let i = 0; i < 100; i++) {
     let rootContext = seqDsl.RootContext('B."method. {a,b} 1"(1,2)');
@@ -97,9 +97,9 @@ test('seqDsl should parse a simple method with quoted method name', () => {
 test('Simple method: A->B.method()', () => {
     let rootContext = seqDsl.RootContext('A->B.method()');
     expect(seqDsl.RootContext).not.toBeNull()
-    let func = rootContext.block().stat()[0].message().messageBody().func();
-    expect(func.from().getText()).toBe('A');
-    let signatureElement = func.signature()[0];
+    let messageBody = rootContext.block().stat()[0].message().messageBody();
+    expect(messageBody.from().getText()).toBe('A');
+    let signatureElement = messageBody.func().signature()[0];
     expect(signatureElement.methodName().getText()).toBe('method');
 })
 

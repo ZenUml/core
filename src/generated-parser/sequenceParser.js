@@ -46,8 +46,8 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\n\u0014\u0003\u0014\u0003\u0014\u0003\u0014\u0003\u0014\u0005\u0014",
     "\u010a\n\u0014\u0003\u0014\u0005\u0014\u010d\n\u0014\u0003\u0015\u0003",
     "\u0015\u0003\u0015\u0005\u0015\u0112\n\u0015\u0003\u0016\u0005\u0016",
-    "\u0115\n\u0016\u0003\u0016\u0003\u0016\u0005\u0016\u0119\n\u0016\u0003",
-    "\u0017\u0003\u0017\u0003\u0017\u0005\u0017\u011e\n\u0017\u0003\u0017",
+    "\u0115\n\u0016\u0003\u0016\u0003\u0016\u0003\u0016\u0005\u0016\u011a",
+    "\n\u0016\u0003\u0016\u0003\u0016\u0005\u0016\u011e\n\u0016\u0003\u0017",
     "\u0003\u0017\u0003\u0017\u0005\u0017\u0123\n\u0017\u0003\u0017\u0003",
     "\u0017\u0003\u0017\u0007\u0017\u0128\n\u0017\f\u0017\u000e\u0017\u012b",
     "\u000b\u0017\u0003\u0017\u0003\u0017\u0003\u0017\u0005\u0017\u0130\n",
@@ -87,7 +87,7 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u00df\u0003\u0002\u0002\u0002\u001c\u00ef\u0003\u0002\u0002\u0002\u001e",
     "\u00f4\u0003\u0002\u0002\u0002 \u00f9\u0003\u0002\u0002\u0002\"\u00fb",
     "\u0003\u0002\u0002\u0002$\u00fd\u0003\u0002\u0002\u0002&\u0103\u0003",
-    "\u0002\u0002\u0002(\u010e\u0003\u0002\u0002\u0002*\u0118\u0003\u0002",
+    "\u0002\u0002\u0002(\u010e\u0003\u0002\u0002\u0002*\u011d\u0003\u0002",
     "\u0002\u0002,\u012f\u0003\u0002\u0002\u0002.\u0131\u0003\u0002\u0002",
     "\u00020\u0133\u0003\u0002\u0002\u00022\u013d\u0003\u0002\u0002\u0002",
     "4\u0140\u0003\u0002\u0002\u00026\u015b\u0003\u0002\u0002\u00028\u015d",
@@ -210,15 +210,15 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u0005V,\u0002\u0111\u010f\u0003\u0002\u0002\u0002\u0111\u0110\u0003",
     "\u0002\u0002\u0002\u0111\u0112\u0003\u0002\u0002\u0002\u0112)\u0003",
     "\u0002\u0002\u0002\u0113\u0115\u00054\u001b\u0002\u0114\u0113\u0003",
-    "\u0002\u0002\u0002\u0114\u0115\u0003\u0002\u0002\u0002\u0115\u0116\u0003",
-    "\u0002\u0002\u0002\u0116\u0119\u0005,\u0017\u0002\u0117\u0119\u0005",
-    "4\u001b\u0002\u0118\u0114\u0003\u0002\u0002\u0002\u0118\u0117\u0003",
-    "\u0002\u0002\u0002\u0119+\u0003\u0002\u0002\u0002\u011a\u011b\u0005",
-    ".\u0018\u0002\u011b\u011c\u0007\u0006\u0002\u0002\u011c\u011e\u0003",
-    "\u0002\u0002\u0002\u011d\u011a\u0003\u0002\u0002\u0002\u011d\u011e\u0003",
-    "\u0002\u0002\u0002\u011e\u011f\u0003\u0002\u0002\u0002\u011f\u0120\u0005",
+    "\u0002\u0002\u0002\u0114\u0115\u0003\u0002\u0002\u0002\u0115\u0119\u0003",
+    "\u0002\u0002\u0002\u0116\u0117\u0005.\u0018\u0002\u0117\u0118\u0007",
+    "\u0006\u0002\u0002\u0118\u011a\u0003\u0002\u0002\u0002\u0119\u0116\u0003",
+    "\u0002\u0002\u0002\u0119\u011a\u0003\u0002\u0002\u0002\u011a\u011b\u0003",
+    "\u0002\u0002\u0002\u011b\u011e\u0005,\u0017\u0002\u011c\u011e\u0005",
+    "4\u001b\u0002\u011d\u0114\u0003\u0002\u0002\u0002\u011d\u011c\u0003",
+    "\u0002\u0002\u0002\u011e+\u0003\u0002\u0002\u0002\u011f\u0120\u0005",
     "D#\u0002\u0120\u0121\u0007,\u0002\u0002\u0121\u0123\u0003\u0002\u0002",
-    "\u0002\u0122\u011d\u0003\u0002\u0002\u0002\u0122\u0123\u0003\u0002\u0002",
+    "\u0002\u0122\u011f\u0003\u0002\u0002\u0002\u0122\u0123\u0003\u0002\u0002",
     "\u0002\u0123\u0124\u0003\u0002\u0002\u0002\u0124\u0129\u00050\u0019",
     "\u0002\u0125\u0126\u0007,\u0002\u0002\u0126\u0128\u00050\u0019\u0002",
     "\u0127\u0125\u0003\u0002\u0002\u0002\u0128\u012b\u0003\u0002\u0002\u0002",
@@ -332,7 +332,7 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u01e5\u01e3\u0003\u0002\u0002\u0002\u01e5\u01e4\u0003\u0002\u0002\u0002",
     "\u01e6a\u0003\u0002\u0002\u0002=glprvx|\u0080\u0086\u008c\u0091\u0093",
     "\u0099\u009c\u00a1\u00a6\u00aa\u00ad\u00b0\u00c2\u00c7\u00d0\u00d5\u00da",
-    "\u00df\u00e9\u00ef\u00f4\u00f9\u0100\u0103\u0109\u010c\u0111\u0114\u0118",
+    "\u00df\u00e9\u00ef\u00f4\u00f9\u0100\u0103\u0109\u010c\u0111\u0114\u0119",
     "\u011d\u0122\u0129\u012f\u0135\u013a\u013d\u0140\u015b\u016c\u0170\u017b",
     "\u0183\u018c\u0190\u01a0\u01ab\u01b5\u01cc\u01ce\u01d6\u01e1\u01e5"].join("");
 
@@ -2478,6 +2478,14 @@ MessageBodyContext.prototype.assignment = function() {
     return this.getTypedRuleContext(AssignmentContext,0);
 };
 
+MessageBodyContext.prototype.from = function() {
+    return this.getTypedRuleContext(FromContext,0);
+};
+
+MessageBodyContext.prototype.ARROW = function() {
+    return this.getToken(sequenceParser.ARROW, 0);
+};
+
 MessageBodyContext.prototype.enterRule = function(listener) {
     if(listener instanceof sequenceParserListener ) {
         listener.enterMessageBody(this);
@@ -2500,9 +2508,9 @@ sequenceParser.prototype.messageBody = function() {
     var localctx = new MessageBodyContext(this, this._ctx, this.state);
     this.enterRule(localctx, 40, sequenceParser.RULE_messageBody);
     try {
-        this.state = 278;
+        this.state = 283;
         this._errHandler.sync(this);
-        var la_ = this._interp.adaptivePredict(this._input,35,this._ctx);
+        var la_ = this._interp.adaptivePredict(this._input,36,this._ctx);
         switch(la_) {
         case 1:
             this.enterOuterAlt(localctx, 1);
@@ -2514,13 +2522,23 @@ sequenceParser.prototype.messageBody = function() {
                 this.assignment();
 
             }
-            this.state = 276;
+            this.state = 279;
+            this._errHandler.sync(this);
+            var la_ = this._interp.adaptivePredict(this._input,35,this._ctx);
+            if(la_===1) {
+                this.state = 276;
+                this.from();
+                this.state = 277;
+                this.match(sequenceParser.ARROW);
+
+            }
+            this.state = 281;
             this.func();
             break;
 
         case 2:
             this.enterOuterAlt(localctx, 2);
-            this.state = 277;
+            this.state = 282;
             this.assignment();
             break;
 
@@ -2567,6 +2585,10 @@ FuncContext.prototype.signature = function(i) {
     }
 };
 
+FuncContext.prototype.to = function() {
+    return this.getTypedRuleContext(ToContext,0);
+};
+
 FuncContext.prototype.DOT = function(i) {
 	if(i===undefined) {
 		i = null;
@@ -2578,18 +2600,6 @@ FuncContext.prototype.DOT = function(i) {
     }
 };
 
-
-FuncContext.prototype.to = function() {
-    return this.getTypedRuleContext(ToContext,0);
-};
-
-FuncContext.prototype.from = function() {
-    return this.getTypedRuleContext(FromContext,0);
-};
-
-FuncContext.prototype.ARROW = function() {
-    return this.getToken(sequenceParser.ARROW, 0);
-};
 
 FuncContext.prototype.enterRule = function(listener) {
     if(listener instanceof sequenceParserListener ) {
@@ -2623,17 +2633,6 @@ sequenceParser.prototype.func = function() {
             this._errHandler.sync(this);
             var la_ = this._interp.adaptivePredict(this._input,37,this._ctx);
             if(la_===1) {
-                this.state = 283;
-                this._errHandler.sync(this);
-                var la_ = this._interp.adaptivePredict(this._input,36,this._ctx);
-                if(la_===1) {
-                    this.state = 280;
-                    this.from();
-                    this.state = 281;
-                    this.match(sequenceParser.ARROW);
-
-                }
-
                 this.state = 285;
                 this.to();
                 this.state = 286;

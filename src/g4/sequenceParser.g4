@@ -130,7 +130,7 @@ message
  ;
 
 messageBody
- : assignment? func
+ : assignment? (from ARROW)? func
  | assignment
  ;
 
@@ -138,7 +138,7 @@ messageBody
 // alternative rules (1.3s -> 1.0s). It would improve another 30%,
 // if we remove the 'to DOT', but that would cause issues for 'A.'.
 func
- : ((from ARROW)? (to DOT))? signature (DOT signature)*
+ : (to DOT)? signature (DOT signature)*
  | to DOT
  ;
 
