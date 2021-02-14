@@ -127,7 +127,7 @@ message
 
 // Order of 'func | (to DOT)' is important. Otherwise A.m will be parsed as to messages
 messageBody
- : assignment? (from ARROW)? (func | (to DOT))
+ : assignment? (from ARROW)? func
  | assignment
  ;
 
@@ -136,6 +136,7 @@ messageBody
 // if we remove the 'to DOT', but that would cause issues for 'A.'.
 func
  : (to DOT)? signature (DOT signature)*
+ | to DOT
  ;
 
 from
@@ -146,10 +147,10 @@ signature
  : methodName invocation?
  ;
 
-// Do not allow '(' to be valid.
-// Otherwise 'A.method() {' will be parsed as 'A.method(' + ')' + '{';
+// To allow 'A.method(' to be properly parsed.
 invocation
  : OPAR parameters? CPAR
+ | OPAR
  ;
 
 assignment
@@ -228,6 +229,7 @@ elseBlock
 
 braceBlock
  : OBRACE block? CBRACE
+ | OBRACE
  ;
 
 loop
