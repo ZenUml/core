@@ -129,8 +129,9 @@ message
  : messageBody (SCOL | braceBlock)?
  ;
 
+// Order of 'func | (to DOT)' is important. Otherwise A.m will be parsed as to messages
 messageBody
- : assignment? (from ARROW)? ((to DOT) | func)
+ : assignment? (from ARROW)? (func | (to DOT))
  | assignment
  ;
 
