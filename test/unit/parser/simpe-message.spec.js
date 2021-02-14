@@ -19,6 +19,7 @@ test('Profiling sync message', () => {
   console.log('parsing', t1 - t0);
 })
 
+// Perf baseline 100ms
 test('Profiling async message', () => {
   var t0 = performance.now()
   for (let i = 0; i < 1000; i++) {
@@ -30,7 +31,7 @@ test('Profiling async message', () => {
 
 // Perf baseline: 814ms on my MBP.
 // 2021-02-14: Improved to 243ms.
-// 2021-02-14: Improved by 10% by simplifying starterEpx
+// 2021-02-14: Improved to 228ms (10%) by simplifying starterEpx
 test('Profiling prog.head', () => {
   var t0 = performance.now()
   for (let i = 0; i < 100; i++) {
@@ -42,8 +43,9 @@ test('Profiling prog.head', () => {
 
 // Perf re-baseline: 11461 on my MBP.
 // 2021-02-14: Improved to 2499ms.
-// 2021-02-14: Improved to 1454ms (~20%).
+// 2021-02-14: Improved to 1454ms (~20%). Was for removing alternative rule for braceBlock.
 // 2021-02-14: Improved to 1363ms (~8%) by moving (to DOT) to messageBody
+// 2021-02-14: Regressed to 2400 after added alternative rules for braceBlock and invocation
 test('Profiling if/else', () => {
   var t0 = performance.now()
   for (let i = 0; i < 100; i++) {
@@ -112,4 +114,16 @@ test('Simple method: "A".method()', () => {
     expect(func.to().getCode()).toBe('A');
     let signatureElement = func.signature()[0];
     expect(signatureElement.methodName().getCode()).toBe('method');
+})
+
+
+// This test enforce braceBlock has a single 'OBRACE' alternative rule.
+test('method with incomplete brace', () => {
+  let rootContext = seqDsl.RootContext('A.m{');
+  expect(seqDsl.RootContext).not.toBeNull()
+  expect(rootContext.block().stat().length).toBe(1)
+  let func = rootContext.block().stat()[0].message().messageBody().func();
+  expect(func.to().getCode()).toBe('A');
+  let signatureElement = func.signature()[0];
+  expect(signatureElement.methodName().getCode()).toBe('m');
 })

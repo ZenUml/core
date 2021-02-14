@@ -227,6 +227,8 @@ elseBlock
  : ELSE braceBlock
  ;
 
+// [Perf] After removed 'OBRACE' rule, 'A.m {' is parsed as three messages.
+// Note this different from what the ANTLR plugin gives.
 braceBlock
  : OBRACE block? CBRACE
  | OBRACE
