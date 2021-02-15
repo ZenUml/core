@@ -87,7 +87,7 @@ ret
  ;
 
 value
- : (atom | ID | STRING)
+ : (atom | name)
  ;
 
 // [Perf] Removing par and opt would improve if/else by about 10%; consider merging loop, par and opt.
@@ -190,7 +190,7 @@ target
  ;
 
 construct
- : ID | STRING
+ : name
  ;
 
 type
@@ -202,11 +202,11 @@ assignee
  ;
 
 to
- : ID | STRING
+ : name
  ;
 
 methodName
- : ID | STRING
+ : name
  ;
 
 parameters
