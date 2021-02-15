@@ -4,6 +4,7 @@ describe('Starter', () => {
   test.each(
     [
       ['@Starter(A)', 'A'],
+      ['@starter(A)', 'A'],
       ['@Starter("A B")', '"A B"'],
     ]
   )('with ID', (code, starter) => {

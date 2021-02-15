@@ -51,7 +51,7 @@ ELSE : 'else';
 WHILE : 'while' | 'for' | 'foreach' | 'forEach' | 'loop';
 RETURN : 'return';
 NEW: 'new';
-STARTER_LXR: 'Starter';
+STARTER_LXR: 'Starter' | 'starter';
 THEME_LXR: 'Theme';
 PAR : 'par';
 GROUP : 'group';
