@@ -11,6 +11,9 @@ group BusinessService {
   PurchaseService
   InvoiceService
 }
+group BackEndService {
+  A1
+}
 //\`POST /orders\`
 OrderController.create(payload) {
   OrderService.create(payload) {

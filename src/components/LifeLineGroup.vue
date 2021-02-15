@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <label v-if="name">{{name}}</label>
     <div class="lifeline-group">
       <life-line v-for="entity in entities" :key="entity.name" :ref="entity.name" :entity="entity"/>
@@ -29,8 +29,9 @@
 </script>
 
 <style scoped>
-  div {
+  div.container {
     background-color: #eeffee;
+    margin: 0 2px;
   }
   label {
     display: block;
