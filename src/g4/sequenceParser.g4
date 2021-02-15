@@ -32,7 +32,7 @@ starterExp
  ;
 
 starter
- : ID
+ : name
  ;
 
 participant
