@@ -83,6 +83,15 @@ sequenceParserListener.prototype.exitLabel = function(ctx) {
 };
 
 
+// Enter a parse tree produced by sequenceParser#participantType.
+sequenceParserListener.prototype.enterParticipantType = function(ctx) {
+};
+
+// Exit a parse tree produced by sequenceParser#participantType.
+sequenceParserListener.prototype.exitParticipantType = function(ctx) {
+};
+
+
 // Enter a parse tree produced by sequenceParser#name.
 sequenceParserListener.prototype.enterName = function(ctx) {
 };

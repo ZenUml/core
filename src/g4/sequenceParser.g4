@@ -36,7 +36,7 @@ starter
  ;
 
 participant
- : stereotype? name width? label?
+ : stereotype? participantType? name width? label?
  | stereotype
  ;
 
@@ -53,6 +53,16 @@ stereotype
 label
  : AS name
  | AS
+ ;
+
+participantType
+ : ACTOR
+ | BOUNDARY
+ | COLLECTION
+ | CONTROL
+ | DATABASE
+ | ENTITY
+ | QUEUE
  ;
 
 name

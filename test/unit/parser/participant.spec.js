@@ -50,6 +50,23 @@ test('A participant - A 100 as "long name"', () => {
   expectText(participants[0].label().name()).toBe('"long name"')
 })
 
+test('A participant - @actor A', () => {
+  let rootContext = seqDsl.RootContext('@actor A');
+  let participants = rootContext.head().participant();
+  expectText(participants[0].name()).toBe('A')
+  expectText(participants[0].participantType()).toBe('@actor')
+})
+
+test('A participant - <<Repo>> @actor A 100 as label', () => {
+  let rootContext = seqDsl.RootContext('<<Repo>> @actor A 100 as label');
+  let participants = rootContext.head().participant();
+  expectText(participants[0].stereotype()).toBe('<<Repo>>')
+  expectText(participants[0].participantType()).toBe('@actor')
+  expectText(participants[0].name()).toBe('A')
+  expectText(participants[0].width()).toBe('100')
+  expectText(participants[0].label().name()).toBe('label')
+})
+
 function expectText(context) {
   return expect(context.getText())
 }

@@ -57,6 +57,13 @@ PAR : 'par';
 GROUP : 'group';
 OPT : 'opt';
 AS : 'as';
+ACTOR : '@actor' | '@Actor';
+BOUNDARY : '@boundary' | '@Boundary';
+COLLECTION : '@collection' | '@Collection';
+CONTROL : '@control' | '@Control';
+DATABASE : '@database' | '@Database';
+ENTITY : '@entity' | '@Entity';
+QUEUE : '@queue' | '@Queue';
 
 DOT
  : '.'
