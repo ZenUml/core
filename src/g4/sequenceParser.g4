@@ -182,11 +182,11 @@ content
  ;
 
 source
- : ID
+ : name
  ;
 
 target
- : ID | STRING
+ : name
  ;
 
 construct
