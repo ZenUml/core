@@ -82,11 +82,7 @@ block
  ;
 
 ret
- : RETURN value? SCOL?
- ;
-
-value
- : atom
+ : RETURN expr? SCOL?
  ;
 
 // [Perf] Removing par and opt would improve if/else by about 10%; consider merging loop, par and opt.

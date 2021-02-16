@@ -70,14 +70,3 @@ test('Simple method: "A".method()', () => {
     expect(signatureElement.methodName().getTextWithoutQuotes()).toBe('method');
 })
 
-
-// This test enforce braceBlock has a single 'OBRACE' alternative rule.
-test('method with incomplete brace', () => {
-  let rootContext = seqDsl.RootContext('A.m{');
-  expect(seqDsl.RootContext).not.toBeNull()
-  expect(rootContext.block().stat().length).toBe(1)
-  let func = rootContext.block().stat()[0].message().messageBody().func();
-  expect(func.to().getTextWithoutQuotes()).toBe('A');
-  let signatureElement = func.signature()[0];
-  expect(signatureElement.methodName().getTextWithoutQuotes()).toBe('m');
-})
