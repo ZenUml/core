@@ -35,9 +35,6 @@ const Store = () => {
       // in the components. Not sure if this is the best practice.
       firstInvocations: (state: any) => state.firstInvocations,
       cursor: (state: any) => state.cursor,
-      starter: (state: any, getters: any) => {
-        return getters.rootContext.Starter()
-      },
       rootContext: (state: any) => {
         return RootContext(state.code)
       },
