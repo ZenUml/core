@@ -17,7 +17,7 @@
 
   export default {
     name: 'fragment-loop',
-    props: ['starter', 'context', 'comment', 'selfCallIndent', 'fragmentOffset'],
+    props: ['context', 'comment', 'selfCallIndent', 'fragmentOffset'],
     mixins: [fragment],
     computed: {
       from: function() {

@@ -18,7 +18,7 @@ export default {
     },
     boundary: function () {
       // shift 20px the fragment is at the top level (starter is a participant)
-      let min = this.from === 'Starter' ? 20 : this.leftOf(this.leftParticipant)
+      let min = this.from === this.participants.Starter()?.name ? 20 : this.leftOf(this.leftParticipant)
       let max = this.rightOf(this.rightParticipant)
       return {
         min: min,

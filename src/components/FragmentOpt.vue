@@ -16,7 +16,7 @@
 
   export default {
     name: 'fragment-opt',
-    props: ['starter', 'context', 'comment', 'selfCallIndent', 'fragmentOffset'],
+    props: ['context', 'comment', 'selfCallIndent', 'fragmentOffset'],
     mixins: [fragment],
     computed: {
       from: function() {
