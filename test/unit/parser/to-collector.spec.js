@@ -18,8 +18,8 @@ describe('Plain participants', () => {
     'A', 'A\n', 'A\n\r'
   ])('get participant with width and stereotype undefined', (code) => {
     // `A` will be parsed as a participant which matches `participant EOF`
-    let participants = getParticipants(code);
-    expect(participants.Size()).toBe(1)
+    let participants = getParticipants(code, true);
+    expect(participants.Size()).toBe(2)
     expect(participants.Get('A').width).toBeUndefined()
     expect(participants.Get('A').stereotype).toBeUndefined()
   })
@@ -31,10 +31,12 @@ describe('with width', () => {
     ['A 1024\nA 1025', 1024]
   ])('code:%s => width:%s', (code, width) => {
     // `A` will be parsed as a participant which matches `participant EOF`
-    let participants = getParticipants(code);
-    expect(participants.Size()).toBe(1)
-    expect(participants.First().name).toBe('A')
-    expect(participants.First().width).toBe(width)
+    let participants = getParticipants(code, true);
+    expect(participants.Size()).toBe(2)
+    expect(participants.First().name).toBe('Starter')
+    expect(participants.First().width).toBe(undefined)
+    expect(participants.Get('A').name).toBe('A')
+    expect(participants.Get('A').width).toBe(width)
   })
 })
 
