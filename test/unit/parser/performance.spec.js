@@ -48,12 +48,13 @@ test('Profiling prog.head', () => {
 // 2021-02-14: Improved to 1454ms (~20%). Was for removing alternative rule for braceBlock.
 // 2021-02-14: Improved to 1363ms (~8%) by moving (to DOT) to messageBody
 // 2021-02-14: Regressed to 2400 after added alternative rules for braceBlock and invocation
+// 2021-02-16: Re-baseline to 2800 to 3000ms after merging branches.
 test('Profiling if/else', () => {
-  var t0 = performance.now()
+  const t0 = performance.now()
   for (let i = 0; i < 100; i++) {
     let rootContext = seqDsl.RootContext('if(x>1){A.m} else if(y>1){B.m}else{C.m}');
   }
-  var t1 = performance.now()
+  const t1 = performance.now()
   console.log('parsing', t1 - t0);
 })
 

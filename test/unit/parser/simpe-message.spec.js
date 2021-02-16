@@ -27,10 +27,12 @@ describe('message - incomplete', () => {
     let message = getMessageContext('A.')
     expect(message.messageBody().func().to().getText()).toBe('A')
   })
+
+  // This will be parsed as to statements: `A.` and `m(`
   test('A.m(', () => {
     let message = getMessageContext('A.m(');
     let signatureElement = message.messageBody().func().signature()[0];
-    expect(signatureElement.getText()).toBe('m(')
+    expect(signatureElement).toBeUndefined()
   })
 })
 
