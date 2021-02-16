@@ -150,7 +150,7 @@ func
  ;
 
 from
- : ID
+ : name
  ;
 
 signature
@@ -194,7 +194,7 @@ construct
  ;
 
 type
- : ID
+ : name
  ;
 
 assignee

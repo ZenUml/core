@@ -37,7 +37,7 @@
     props: ['context', 'comment', 'selfCallIndent', 'fragmentOffset'],
     mixins: [InteractionMixin],
     computed: {
-      ...mapGetters(['starter', 'participants2', 'distance', 'distance2', 'centerOf', 'cursor', 'onElementClick']),
+      ...mapGetters(['starter', 'participants', 'distance', 'distance2', 'centerOf', 'cursor', 'onElementClick']),
       inheritedFrom: function() {
         return this.context?.Origin()
       },

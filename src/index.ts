@@ -41,7 +41,7 @@ const Store = () => {
       rootContext: (state: any) => {
         return RootContext(state.code)
       },
-      participants2: (state: any, getters: any) => {
+      participants: (state: any, getters: any) => {
         return Participants(getters.rootContext)
       },
       centerOf: (state: any) => (entity: any) => {
