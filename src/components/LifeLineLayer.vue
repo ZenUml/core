@@ -1,6 +1,6 @@
 <template>
   <div class="life-line-layer">
-    <life-line :entity="{name: starter}" class="starter"
+    <life-line :entity="starterParticipant" class="starter"
                :class="{hidden: !isStarterExplicitlyDefined, actor: isStarterAnActor}"/>
     <template v-for="(child, index) in explictGroupAndParticipants">
       <life-line-group :key="index"
@@ -25,6 +25,9 @@
     props: ['context'],
     computed: {
       ...mapGetters(['starter', 'participants2', 'GroupContext', 'ParticipantContext']),
+      starterParticipant() {
+        return this.participants2.Get(this.starter) || {name: this.starter}
+      },
       isStarterAnActor() {
         return this.starter === "User" || this.starter === "Actor";
       },

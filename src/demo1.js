@@ -5,27 +5,21 @@
 // Self-method
 // Nested method
 // Assignment
-export default `<<Controller>> OrderController
-<<BFF>> OrderService
-group BusinessService {
-  PurchaseService
-  InvoiceService
+export default `
+CS as "Client Service"
+AE as "Auth Endpoint"
+SG as Gateway
+group Backend {
+  Lambda
+  OrderService
 }
-group BackEndService {
-  A1
+@Starter(CS)
+CS -> AE: Get Token
+CS -> SG: Request
+SG -> Lambda: Request forwarded
+Lambda -> OrderService: Get Order
+if (!available) {
+  Lambda -> SG: 404
+  SG -> CS: 404
 }
-@Starter("Web Browser")
-//\`POST /orders\`
-OrderController.create(payload) {
-  OrderService.create(payload) {
-    order = new Order(payload)
-    par {
-      a1 {
-        PurchaseService.doIt()
-        new OrderController()
-      }
-      PurchaseService.createPO(order)
-      InvoiceService.createInvoice(order)      
-    }
-  }
-}`
+`
