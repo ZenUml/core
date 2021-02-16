@@ -157,10 +157,9 @@ signature
  : methodName invocation?
  ;
 
-// To allow 'A.method(' to be properly parsed.
+// We have removed the alternative rule with single OPAR as we are improving the editor to always close the brackets.
 invocation
  : OPAR parameters? CPAR
- | OPAR
  ;
 
 assignment
@@ -210,7 +209,7 @@ methodName
  ;
 
 parameters
- : parameter (COMMA parameter)*
+ : parameter (COMMA parameter)* COMMA?
  ;
 
 parameter
