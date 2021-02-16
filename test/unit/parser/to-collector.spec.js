@@ -111,8 +111,10 @@ describe('implicit', () => {
       expect(participants.Get('a:A').width).toBeUndefined()
     })
     test('seqDsl should treat creation as a participant - assignment with type', () => {
-      let participants = getParticipants('A a = new A()');
+      // We need @Starter, otherwise IA becomes a participant declaration
+      let participants = getParticipants('@Starter(X) IA a = new A()', true);
       expect(participants.Size()).toBe(2)
+      expect(participants.Get('X').width).toBeUndefined()
       expect(participants.Get('a:A').width).toBeUndefined()
     })
   })
