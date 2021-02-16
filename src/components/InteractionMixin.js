@@ -5,7 +5,7 @@ export default {
       return this.context?.message()
     },
     providedFrom: function() {
-      return this.context?.message()?.messageBody()?.from()?.getText()
+      return this.context?.message()?.messageBody()?.from()?.getTextWithoutQuotes()
     },
     from: function() {
       return this.providedFrom || this.inheritedFrom

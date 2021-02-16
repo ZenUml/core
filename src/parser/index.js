@@ -53,6 +53,10 @@ antlr4.ParserRuleContext.prototype.getCode = function() {
   return this.parser.getTokenStream().getText(this.getSourceInterval()).replace(/^"(.*)"$/, '$1')
 };
 
+antlr4.ParserRuleContext.prototype.getTextWithoutQuotes = function() {
+  return this.parser.getTokenStream().getText(this.getSourceInterval()).replace(/^"(.*)"$/, '$1')
+};
+
 antlr4.ParserRuleContext.prototype.getComment = function() {
   let tokenIndex = this.start.tokenIndex;
   let channel = sequenceLexer.sequenceLexer.prototype.channelNames.indexOf('COMMENT_CHANNEL');
