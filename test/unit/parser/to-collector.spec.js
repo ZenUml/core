@@ -47,10 +47,10 @@ describe('with interface', () => {
     ['<<A>> X\n<<B>> X', 'A']
   ])('code:%s => width:%s', (code, stereotype) => {
     // `A` will be parsed as a participant which matches `participant EOF`
-    let participants = getParticipants(code);
-    expect(participants.Size()).toBe(1)
-    expect(participants.First().name).toBe('X')
-    expect(participants.First().stereotype).toBe(stereotype)
+    let participants = getParticipants(code, true);
+    expect(participants.Size()).toBe(2)
+    expect(participants.Get('X').name).toBe('X')
+    expect(participants.Get('X').stereotype).toBe(stereotype)
   })
 })
 
