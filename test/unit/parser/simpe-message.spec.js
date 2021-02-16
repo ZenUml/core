@@ -11,6 +11,7 @@ function getMessageContext(code) {
 // 2021-02-14: Improved to 1s.
 // 2021-02-14: Re-baseline to 1.5s after add 'x='
 // 2021-02-16: Re-baseline to 1.618s after inlined 'name' to other rules
+// 2021-02-16: Improved to 1.559 by simplifying 'return'
 test('Profiling sync message', () => {
   var t0 = performance.now()
   for (let i = 0; i < 100; i++) {

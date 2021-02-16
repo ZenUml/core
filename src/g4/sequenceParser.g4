@@ -81,9 +81,7 @@ block
  ;
 
 ret
- : RETURN value SCOL?
- | RETURN value
- | RETURN
+ : RETURN value? SCOL?
  ;
 
 value
