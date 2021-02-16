@@ -22,6 +22,7 @@ describe('MessageLayer', () => {
       .toBe('width: 200px;')
   })
   it('gets participant names', async () => {
-    expect(messageLayerWrapper.vm.participantNames()[0]).toBe('a')
+    expect(messageLayerWrapper.vm.participantNames()[0]).toBe('Starter')
+    expect(messageLayerWrapper.vm.participantNames()[1]).toBe('a')
   })
 })

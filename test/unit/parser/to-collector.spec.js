@@ -91,11 +91,22 @@ describe('without group', () => {
   })
 })
 
-function getParticipants(code) {
+function getParticipants(code, withStarter) {
   let rootContext = seqDsl.RootContext(code)
   const toCollector = new ToCollector()
-  return toCollector.getParticipants(rootContext)
+  return toCollector.getParticipants(rootContext, withStarter)
 }
+
+describe('Add Starter to participants', () => {
+  test('Empty context', () => {
+    let rootContext = seqDsl.RootContext('')
+    const toCollector = new ToCollector()
+    const participants = toCollector.getParticipants(rootContext, true)
+    expect(participants.Size()).toBe(1)
+    expect(participants.Get('Starter').name).toBe('Starter')
+    expect(participants.Get('Starter').isStarter).toBeTruthy()
+  })
+})
 
 describe('implicit', () => {
   describe('from new', () => {

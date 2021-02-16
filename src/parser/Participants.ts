@@ -4,7 +4,7 @@ class Participant {
   private width: number | undefined;
   private groupId: number | string | undefined;
   private explicit: boolean | undefined;
-  private isStarter: boolean | undefined;
+  isStarter: boolean | undefined;
   private label: string | undefined;
 
   constructor(name: string,

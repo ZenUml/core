@@ -76,9 +76,9 @@ module.exports =  {
   RootContext: rootContext,
   GroupContext: sequenceParser.sequenceParser.GroupContext,
   ParticipantContext: sequenceParser.sequenceParser.ParticipantContext,
-  Participants: function(ctx) {
+  Participants: function(ctx, withStarter) {
     const toCollector = new ToCollector();
-    return toCollector.getParticipants(ctx)
+    return toCollector.getParticipants(ctx, withStarter)
   },
   Errors: errors,
   /**

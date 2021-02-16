@@ -2,6 +2,9 @@ import {Participants} from './Participants'
 
 const antlr4 = require('antlr4/index');
 const sequenceParserListener = require('../generated-parser/sequenceParserListener');
+const sequenceParser = require('../generated-parser/sequenceParser')
+const seqParser = sequenceParser.sequenceParser;
+const ProgContext = seqParser.ProgContext;
 
 let participants = undefined;
 let isBlind = false;
@@ -70,8 +73,11 @@ ToCollector.prototype.exitGroup = function () {
 }
 const walker = antlr4.tree.ParseTreeWalker.DEFAULT
 
-ToCollector.prototype.getParticipants = function (context) {
+ToCollector.prototype.getParticipants = function (context, withStarter) {
   participants = new Participants();
+  if(withStarter && context instanceof ProgContext) {
+    participants.Add(context.Starter(), true)
+  }
   walker.walk(this, context)
   return participants;
 }
