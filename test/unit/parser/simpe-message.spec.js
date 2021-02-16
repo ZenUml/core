@@ -8,9 +8,10 @@ function getMessageContext(code) {
 }
 describe('message - complete', () => {
   test('A.m', () => {
-    let message = getMessageContext('A.m');
+    let message = getMessageContext('200=A.m');
     let signatureElement = message.messageBody().func().signature()[0];
-    expect(signatureElement.getText()).toBe('m')
+    expect(signatureElement.getText()).toBe('m');
+    expect(message.messageBody().assignment().assignee().getText()).toBe('200');
   })
 })
 

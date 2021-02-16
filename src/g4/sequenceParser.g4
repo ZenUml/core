@@ -198,7 +198,7 @@ type
  ;
 
 assignee
- : (ID (COMMA ID)*) | STRING
+ : atom | (ID (COMMA ID)*) | STRING
  ;
 
 to
