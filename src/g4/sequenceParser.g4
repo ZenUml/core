@@ -25,6 +25,7 @@ group
  | GROUP name?
  ;
 
+// [Perf] Changing starter to name does not help.
 starterExp
  : AT STARTER_LXR (OPAR starter? CPAR)?
  | AT ID
