@@ -32,7 +32,7 @@ starterExp
  ;
 
 starter
- : name
+ : ID | STRING
  ;
 
 participant
@@ -66,7 +66,7 @@ participantType
  ;
 
 name
- : (ID | STRING)
+ : ID | STRING
  ;
 
 width
@@ -81,13 +81,11 @@ block
  ;
 
 ret
- : RETURN value SCOL?
- | RETURN value
- | RETURN
+ : RETURN value? SCOL?
  ;
 
 value
- : (atom | name)
+ : atom
  ;
 
 // [Perf] Removing par and opt would improve if/else by about 10%; consider merging loop, par and opt.
@@ -150,7 +148,7 @@ func
  ;
 
 from
- : name
+ : ID | STRING
  ;
 
 signature
@@ -181,19 +179,19 @@ content
  ;
 
 source
- : name
+ : ID | STRING
  ;
 
 target
- : name
+ : ID | STRING
  ;
 
 construct
- : name
+ : ID | STRING
  ;
 
 type
- : name
+ : ID | STRING
  ;
 
 assignee
@@ -201,11 +199,11 @@ assignee
  ;
 
 to
- : name
+ : ID | STRING
  ;
 
 methodName
- : name
+ : ID | STRING
  ;
 
 parameters
@@ -213,7 +211,7 @@ parameters
  ;
 
 parameter
- : declaration | ID | atom | expr | creation
+ : declaration | expr
  ;
 
 declaration
