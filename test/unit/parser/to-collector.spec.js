@@ -121,31 +121,31 @@ describe('implicit', () => {
 
   describe('from method call', () => {
     test('get participants', () => {
-      const participants = getParticipants('A.method')
+      const participants = getParticipants('A.method', true)
       expect(participants.Get('A'))
         .toEqual({name: 'A', isStarter: false, stereotype: undefined, width: undefined});
     });
     test('seqDsl should get all participants but ignore parameters - method call', () => {
-      let participants = getParticipants('"b:B".method(x.m)');
-      expect(participants.Size()).toBe(1);
+      let participants = getParticipants('"b:B".method(x.m)', true);
+      expect(participants.Size()).toBe(2);
       expect(participants.Get('b:B').width).toBeUndefined();
     })
     test('seqDsl should get all participants but ignore parameters - creation', () => {
-      let participants = getParticipants('"b:B".method(new X())');
-      expect(participants.Size()).toBe(1)
+      let participants = getParticipants('"b:B".method(new X())', true);
+      expect(participants.Size()).toBe(2)
       expect(participants.Get('b:B').width).toBeUndefined()
     })
 
     test('seqDsl should get all participants including from', () => {
-      let participants = getParticipants('A->B.m');
-      expect(participants.Size()).toBe(2)
+      let participants = getParticipants('A->B.m', true);
+      expect(participants.Size()).toBe(3)
     })
   })
 })
 
 describe('Invalid input', () => {
   test('<<', () => {
-    let participants = getParticipants('<<');
+    let participants = getParticipants('<<', false);
     expect(participants.First().name).toBe('Missing `Participant`')
   })
 })
