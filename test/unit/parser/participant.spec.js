@@ -1,5 +1,17 @@
 let seqDsl = require('../../../src/parser/index');
 
+describe('Declared participant', () => {
+  test.each(
+    [
+      ['A', 'A'],
+      ['"A"', 'A'],
+    ]
+  )('Code %s, first participant %s', (code, p) => {
+    let rootContext = seqDsl.RootContext(code);
+    let participants = rootContext.head().participant();
+    expectText(participants[0]).toBe(p)
+  })
+})
 test('A participant - A', () => {
   let rootContext = seqDsl.RootContext('A');
   let participants = rootContext.head().participant();
@@ -68,5 +80,5 @@ test('A participant - <<Repo>> @actor A 100 as label', () => {
 })
 
 function expectText(context) {
-  return expect(context.getText())
+  return expect(context.getTextWithoutQuotes())
 }

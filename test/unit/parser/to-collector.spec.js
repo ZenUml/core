@@ -3,14 +3,14 @@ let ToCollector = require('../../../src/parser/ToCollector')
 test('smoke test2', () => {
   const code = `
     C
-    <<A>> B 1024
-    @Starter(B)
+    <<A>> "B 1" 1024
+    @Starter("B 1")
     C.m
     D->E:m
     new F
   `
   let participants = getParticipants(code);
-  expect(participants.Get('B')).toEqual({name: 'B', isStarter: false, explicit: true, groupId: undefined, stereotype: 'A', 'width': 1024})
+  expect(participants.Get('B 1')).toEqual({name: 'B 1', isStarter: false, explicit: true, groupId: undefined, stereotype: 'A', 'width': 1024})
 })
 
 describe('Plain participants', () => {
