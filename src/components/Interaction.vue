@@ -67,10 +67,10 @@
         }
       },
       to: function () {
-        return this.func?.to()?.getCode()
+        return this.func?.to()?.getTextWithoutQuotes()
       },
       isSelf: function() {
-        return !this.context?.message().messageBody().func().to() || this.context?.message().messageBody().func().to().getCode() === this.from
+        return !this.context?.message().messageBody().func().to() || this.context?.message().messageBody().func().to().getTextWithoutQuotes() === this.from
       },
       invocation: function () {
         // return 'Message'

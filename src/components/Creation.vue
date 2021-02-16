@@ -71,12 +71,12 @@
       },
       signature: function () {
         const params = this.creation.creationBody().parameters()
-        const text = (params?.parameter()?.length > 0) ? params.getCode() : 'create'
+        const text = (params?.parameter()?.length > 0) ? params.getTextWithoutQuotes() : 'create'
         return '«' + text + '»'
       },
       assignee: function () {
         function safeCodeGetter (context) {
-          return (context && context.getCode()) || ''
+          return (context && context.getTextWithoutQuotes()) || ''
         }
         let assignment = this.creation.creationBody().assignment()
         if (!assignment) return ''
