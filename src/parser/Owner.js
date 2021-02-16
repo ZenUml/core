@@ -26,8 +26,7 @@ const MessageContext = seqParser.MessageContext
  */
 MessageContext.prototype.Owner = function () {
   if (this.messageBody().func()?.to()) {
-    let participant = this.messageBody().func().to().getText();
-    participant = participant.replace(/^"(.*)"$/, '$1');
+    let participant = this.messageBody().func().to().getTextWithoutQuotes();
     return participant;
   }
   return this.parentCtx.Origin();
