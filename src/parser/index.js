@@ -47,7 +47,7 @@ StatContext.prototype.Origin = function() {
 }
 
 ProgContext.prototype.Starter = function () {
-  return this.head()?.starterExp()?.starter()?.getText() || 'Starter'
+  return this.head()?.starterExp()?.starter()?.getText().replace(/^"(.*)"$/, '$1') || 'Starter'
 }
 antlr4.ParserRuleContext.prototype.getCode = function() {
   return this.parser.getTokenStream().getText(this.getSourceInterval()).replace(/^"(.*)"$/, '$1')

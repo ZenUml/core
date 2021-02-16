@@ -14,7 +14,7 @@ group BusinessService {
 group BackEndService {
   A1
 }
-@Starter("OrderController")
+@Starter("Web Browser")
 //\`POST /orders\`
 OrderController.create(payload) {
   OrderService.create(payload) {
