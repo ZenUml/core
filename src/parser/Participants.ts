@@ -30,14 +30,26 @@ export class Participants {
   public Add(name: string): void;
   public Add(name: string, isStarter: boolean): void;
   public Add(name: string,
-             isStarter = false,
+             isStarter?: boolean,
+             stereotype?: string,
+             width?: number,
+             groupId?: number | string,
+             label?: string,
+             explicit?: boolean): void;
+  public Add(name: string,
+             isStarter?: boolean,
              stereotype?: string,
              width?: number,
              groupId?: number | string,
              label?: string,
              explicit?: boolean): void {
     const participant = new Participant(name, isStarter, stereotype, width, groupId, label, explicit);
-    this.participants.set(participant.name, this.Get(name) || participant)
+    if (this.Get(name)?.isStarter && explicit) {
+      participant.isStarter = true;
+      this.participants.set(participant.name, participant)
+    } else {
+      this.participants.set(participant.name, this.Get(name) || participant)
+    }
   }
 
   // Returns an array of participants that are deduced from messages
