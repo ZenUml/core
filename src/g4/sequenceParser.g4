@@ -236,10 +236,10 @@ elseBlock
  ;
 
 // [Perf] After removed 'OBRACE' rule, 'A.m {' is parsed as three messages.
+// We have improved our editors to always add the closing bracket (except for JetBrains IDE plugin).
 // Note this different from what the ANTLR plugin gives.
 braceBlock
  : OBRACE block? CBRACE
- | OBRACE
  ;
 
 loop

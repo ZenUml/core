@@ -49,6 +49,7 @@ test('Profiling prog.head', () => {
 // 2021-02-14: Improved to 1363ms (~8%) by moving (to DOT) to messageBody
 // 2021-02-14: Regressed to 2400 after added alternative rules for braceBlock and invocation
 // 2021-02-16: Re-baseline to 2800 to 3000ms after merging branches.
+// 2021-02-16: Improved to 1694 after removed alternative rule for braceBlock.
 test('Profiling if/else', () => {
   const t0 = performance.now()
   for (let i = 0; i < 100; i++) {
