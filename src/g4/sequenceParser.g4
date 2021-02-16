@@ -212,7 +212,7 @@ parameters
  ;
 
 parameter
- : declaration | ID | atom | expr | creation
+ : declaration | expr
  ;
 
 declaration
