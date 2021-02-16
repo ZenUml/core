@@ -29,9 +29,7 @@ ToCollector.prototype.enterParticipant = onParticipant
 
 let onTo = function (ctx) {
   if (isBlind) return;
-  let participant = ctx.getText();
-  // remove leading and trailing quotes (e.g. "a:A" becomes a:A
-  participant = participant.replace(/^"(.*)"$/, '$1');
+  let participant = ctx.getTextWithoutQuotes();
   participants.Add(participant);
 };
 
@@ -43,9 +41,7 @@ ToCollector.prototype.enterSource = onTo
 ToCollector.prototype.enterTarget = onTo
 
 ToCollector.prototype.enterStarter = function(ctx) {
-  let participant = ctx.getText();
-  // remove leading and trailing quotes (e.g. "a:A" becomes a:A
-  participant = participant.replace(/^"(.*)"$/, '$1');
+  let participant = ctx.getTextWithoutQuotes();
   participants.Add(participant, true)
 }
 
@@ -66,7 +62,7 @@ ToCollector.prototype.exitParameters = function () {
 ToCollector.prototype.enterGroup = function (ctx) {
   // group { A } => groupId = undefined
   // group group1 { A } => groupId = "group1"
-  groupId = ctx.name()?.getText().replace(/^"|"$/g, '');
+  groupId = ctx.name()?.getTextWithoutQuotes();
 }
 
 ToCollector.prototype.exitGroup = function () {

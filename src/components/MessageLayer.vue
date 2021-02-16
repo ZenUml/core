@@ -12,7 +12,7 @@
     name: 'message-layer',
     props: ['context'],
     computed: {
-      ...mapGetters(['participants2', 'starter', 'centerOf', 'rightOf']),
+      ...mapGetters(['participants', 'starter', 'centerOf', 'rightOf']),
       paddingLeft () {
         return this.centerOf(this.starter)
       },
@@ -31,7 +31,7 @@
       ...mapMutations(['onMessageLayerMountedOrUpdated']),
       participantNames() {
         // According to the doc, computed properties are cached.
-        return this.participants2.Names()
+        return this.participants.Names()
       },
       emitFirstInvocations () {
         let firstInvocations = {}

@@ -58,13 +58,13 @@
         return this.distance(this.target, this.source) < 0
       },
       signature: function () {
-        return this.asyncMessage?.content()?.getCode()
+        return this.asyncMessage?.content()?.getTextWithoutQuotes()
       },
       source: function () {
-        return this.asyncMessage?.source()?.getCode() || this.from
+        return this.asyncMessage?.source()?.getTextWithoutQuotes() || this.from
       },
       target: function () {
-        return this.asyncMessage?.target()?.getCode()
+        return this.asyncMessage?.target()?.getTextWithoutQuotes()
       },
       isCurrent: function () {
         const start = this.asyncMessage.start.start

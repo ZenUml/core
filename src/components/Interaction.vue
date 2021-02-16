@@ -37,7 +37,7 @@
     props: ['context', 'comment', 'selfCallIndent', 'fragmentOffset'],
     mixins: [InteractionMixin],
     computed: {
-      ...mapGetters(['starter', 'participants2', 'distance', 'distance2', 'centerOf', 'cursor', 'onElementClick']),
+      ...mapGetters(['starter', 'participants', 'distance', 'distance2', 'centerOf', 'cursor', 'onElementClick']),
       inheritedFrom: function() {
         return this.context?.Origin()
       },
@@ -67,10 +67,10 @@
         }
       },
       to: function () {
-        return this.func?.to()?.getCode()
+        return this.func?.to()?.getTextWithoutQuotes()
       },
       isSelf: function() {
-        return !this.context?.message().messageBody().func().to() || this.context?.message().messageBody().func().to().getCode() === this.from
+        return !this.context?.message().messageBody().func().to() || this.context?.message().messageBody().func().to().getTextWithoutQuotes() === this.from
       },
       invocation: function () {
         // return 'Message'

@@ -3,7 +3,7 @@ let seqDsl = require('../../../src/parser/index');
 function getRootMethodSignature(rootContext) {
     return rootContext.block().stat()[0]
         .message().messageBody().func()
-        .signature().map(s => s.getCode()).join('.');
+        .signature().map(s => s.getTextWithoutQuotes()).join('.');
 }
 
 test('chain method', () => {
@@ -19,7 +19,7 @@ test('chain method call as a parameter', () => {
 test('chain method call as implementation', () => {
     let rootContext = seqDsl.RootContext('B.method() { getCount().toString() }');
     expect(getRootMethodSignature(rootContext)).toBe('method()')
-    expect(rootContext.block().stat()[0].message().braceBlock().block().getCode())
+    expect(rootContext.block().stat()[0].message().braceBlock().block().getTextWithoutQuotes())
         .toBe('getCount().toString()')
 })
 

@@ -5,16 +5,11 @@ describe('Starter', () => {
     [
       ['@Starter(A)', 'A'],
       ['@starter(A)', 'A'],
-      ['@Starter("A B")', '"A B"'],
+      ['@Starter("A B")', 'A B'],
     ]
   )('with ID', (code, starter) => {
     let rootContext = seqDsl.RootContext(code);
-    let actualStarter = rootContext.head().starterExp().starter();
-    expectText(actualStarter).toBe(starter)
+    let actualStarter = rootContext.Starter();
+    expect(actualStarter).toBe(starter)
   })
-
 });
-
-function expectText(context) {
-    return expect(context.getText())
-}

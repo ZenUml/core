@@ -94,8 +94,8 @@ test('seqDsl should parse a simple method with quoted method name', () => {
     let rootContext = seqDsl.RootContext('B."method. {a,b} 1"(1,2)');
     expect(seqDsl.RootContext).not.toBeNull()
     let signatureElement = rootContext.block().stat()[0].message().messageBody().func().signature()[0];
-    expect(signatureElement.methodName().getCode()).toBe('method. {a,b} 1')
-    expect(signatureElement.invocation().getCode()).toBe('(1,2)')
+    expect(signatureElement.methodName().getTextWithoutQuotes()).toBe('method. {a,b} 1')
+    expect(signatureElement.invocation().getTextWithoutQuotes()).toBe('(1,2)')
 })
 
 test('Simple method: A->B.method()', () => {
@@ -111,9 +111,9 @@ test('Simple method: "A".method()', () => {
     let rootContext = seqDsl.RootContext('"A".method()');
     expect(seqDsl.RootContext).not.toBeNull()
     let func = rootContext.block().stat()[0].message().messageBody().func();
-    expect(func.to().getCode()).toBe('A');
+    expect(func.to().getTextWithoutQuotes()).toBe('A');
     let signatureElement = func.signature()[0];
-    expect(signatureElement.methodName().getCode()).toBe('method');
+    expect(signatureElement.methodName().getTextWithoutQuotes()).toBe('method');
 })
 
 
@@ -123,7 +123,7 @@ test('method with incomplete brace', () => {
   expect(seqDsl.RootContext).not.toBeNull()
   expect(rootContext.block().stat().length).toBe(1)
   let func = rootContext.block().stat()[0].message().messageBody().func();
-  expect(func.to().getCode()).toBe('A');
+  expect(func.to().getTextWithoutQuotes()).toBe('A');
   let signatureElement = func.signature()[0];
-  expect(signatureElement.methodName().getCode()).toBe('m');
+  expect(signatureElement.methodName().getTextWithoutQuotes()).toBe('m');
 })

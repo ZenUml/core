@@ -5,7 +5,7 @@ export default {
       return this.context?.message()
     },
     providedFrom: function() {
-      return this.context?.message()?.messageBody()?.from()?.getText()
+      return this.context?.message()?.messageBody()?.from()?.getTextWithoutQuotes()
     },
     from: function() {
       return this.providedFrom || this.inheritedFrom
@@ -18,7 +18,7 @@ export default {
     },
     assignee: function () {
       function safeCodeGetter (context) {
-        return (context && context.getCode()) || ''
+        return (context && context.getTextWithoutQuotes()) || ''
       }
       let assignment = this.message?.messageBody().assignment()
       if (!assignment) return ''
@@ -27,7 +27,7 @@ export default {
       return assignee + (type ? ':' + type : '')
     },
     signature: function () {
-      return this.func?.signature().map(s => s.getCode()).join('.')
+      return this.func?.signature().map(s => s.getTextWithoutQuotes()).join('.')
     },
     translateX: function() {
       if (this.outOfBand) {
