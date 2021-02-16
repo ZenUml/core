@@ -66,4 +66,8 @@ export class Participants {
   Size() {
     return this.participants.size;
   }
+
+  Starter() {
+    return this.First().isStarter? this.First() : undefined;
+  }
 }
