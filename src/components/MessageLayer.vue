@@ -100,7 +100,7 @@
   .interaction.highlight,
   .interaction.hover {
     border-radius: 4px;
-    background-color: #CAE6FE;
+    background-color: rgba(202, 235, 254, .5);
   }
 
   .interaction:hover {
