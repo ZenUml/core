@@ -14,6 +14,7 @@ group BusinessService {
 group BackEndService {
   A1
 }
+@Starter("OrderController")
 //\`POST /orders\`
 OrderController.create(payload) {
   OrderService.create(payload) {
@@ -21,6 +22,7 @@ OrderController.create(payload) {
     par {
       a1 {
         PurchaseService.doIt()
+        new OrderController()
       }
       PurchaseService.createPO(order)
       InvoiceService.createInvoice(order)      
