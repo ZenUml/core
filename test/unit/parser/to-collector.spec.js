@@ -62,35 +62,24 @@ describe('with group', () => {
     ['group "group 2" { A } group "group 3" { A }', 'A', 'group 2'],
   ])('code:%s => participant:%s', (code, participant, groupId) => {
     // `A` will be parsed as a participant which matches `participant EOF`
-    let participants = getParticipants(code);
-    expect(participants.Size()).toBe(1)
-    expect(participants.First().name).toBe(participant)
-    expect(participants.First().groupId).toBe(groupId)
+    let participants = getParticipants(code, true);
+    expect(participants.Size()).toBe(2)
+    expect(participants.Get('A').name).toBe(participant)
+    expect(participants.Get('A').groupId).toBe(groupId)
   })
 })
 
-describe('without group', () => {
+describe('without starter', () => {
   test.each([
-    ['A.method', 'A', undefined],
-    ['@Starter(A)', 'A', undefined],
-  ])('code:%s => participant:%s', (code, participant, groupId) => {
+    ['A.method', 'A', 2],
+    ['@Starter(A)', 'A', 1],
+  ])('code:%s => participant:%s', (code, participant, numberOfParticipants) => {
     // `A` will be parsed as a participant which matches `participant EOF`
-    let participants = getParticipants(code);
-    expect(participants.Size()).toBe(1)
-    expect(participants.First().name).toBe(participant)
-    expect(participants.First().groupId).toBe(groupId)
+    let participants = getParticipants(code, true);
+    expect(participants.Size()).toBe(numberOfParticipants)
+    expect(participants.Get('A').name).toBe(participant)
   })
 
-  test.each([
-    ['A.method', 'A', undefined],
-    ['@Starter(A)', 'A', undefined],
-    ['A @Starter(A)', 'A', undefined],
-  ])('code:%s => participant:%s', (code, participant, groupId) => {
-    // `A` will be parsed as a participant which matches `participant EOF`
-    let participants = getParticipants(code);
-    expect(participants.Size()).toBe(1)
-    expect(participants.Get('A').groupId).toBe(groupId)
-  })
 })
 
 function getParticipants(code, withStarter) {
@@ -113,12 +102,12 @@ describe('Add Starter to participants', () => {
 describe('implicit', () => {
   describe('from new', () => {
     test('from new', () => {
-      let participants = getParticipants('new A()');
+      let participants = getParticipants('new A()', true);
       expect(participants.Get('A')).toEqual( {"isStarter": false, "explicit": undefined, "groupId": undefined, "name": "A", "stereotype": undefined, "width": undefined})
     })
     test('seqDsl should treat creation as a participant - assignment', () => {
-      let participants = getParticipants('a = new A()');
-      expect(participants.Size()).toBe(1)
+      let participants = getParticipants('a = new A()', true);
+      expect(participants.Size()).toBe(2)
       expect(participants.Get('a:A').width).toBeUndefined()
     })
     test('seqDsl should treat creation as a participant - assignment with type', () => {
