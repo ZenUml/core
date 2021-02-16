@@ -17,7 +17,7 @@
 
   export default {
     name: 'statement',
-    props: ['starter', 'context', 'selfCallIndent', 'fragmentOffset'],
+    props: ['context', 'selfCallIndent', 'fragmentOffset'],
     computed: {
       comment: function () {
         return this.context.getComment() ? this.context.getComment() : ''

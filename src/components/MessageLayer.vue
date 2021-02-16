@@ -12,7 +12,10 @@
     name: 'message-layer',
     props: ['context'],
     computed: {
-      ...mapGetters(['participants', 'starter', 'centerOf', 'rightOf']),
+      ...mapGetters(['participants', 'centerOf', 'rightOf']),
+      starter() {
+        return this.participants?.Starter()?.name
+      },
       paddingLeft () {
         return this.centerOf(this.starter)
       },

@@ -24,12 +24,12 @@
     name: 'life-line-layer',
     props: ['context'],
     computed: {
-      ...mapGetters(['starter', 'participants', 'GroupContext', 'ParticipantContext']),
+      ...mapGetters(['participants', 'GroupContext', 'ParticipantContext']),
       starterParticipant() {
-        return this.participants.Get(this.starter) || {name: this.starter}
+        return this.participants.Starter()
       },
       isStarterAnActor() {
-        return this.starter === "User" || this.starter === "Actor";
+        return this.participants.Starter()?.name === "User" || this.participants?.Starter() === "Actor";
       },
       isStarterExplicitlyDefined() {
         return !!this.context?.starterExp()
@@ -40,7 +40,7 @@
       explictGroupAndParticipants() {
         return this.context?.children.filter(c => {
           const isGroup = c instanceof this.GroupContext
-          const isParticipant = (c instanceof this.ParticipantContext) && c.name()?.getText() !== this.starter
+          const isParticipant = (c instanceof this.ParticipantContext) && c.name()?.getText() !== this.participants?.Starter()?.name
           return isGroup || isParticipant
         })
       }
