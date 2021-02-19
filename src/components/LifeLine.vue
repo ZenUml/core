@@ -13,7 +13,6 @@
 
 <script>
   import {mapGetters, mapMutations} from 'vuex'
-  import {ParticipantType} from '../parser/Participants'
 
   export default {
     name: 'life-line',
@@ -21,16 +20,10 @@
     computed: {
       ...mapGetters(['firstInvocations', 'onLifelineMounted']),
       classes() {
-        switch (this.entity.Type()) {
-          case ParticipantType.Actor:
-            return 'actor'
-          case ParticipantType.Database:
-            return 'database'
-          case ParticipantType.Lambda:
-            return 'lambda'
-          case ParticipantType.Undefined:
+        if (this.entity.type) {
+          return ['icon', this.entity.type.toLowerCase()]
         }
-        return undefined
+        return []
       },
       selected () {
         return this.$store.state.selected.includes(this.entity.name)
@@ -96,9 +89,7 @@
     z-index: 100;
   }
 
-  .lifeline.actor .participant,
-  .lifeline.database .participant,
-  .lifeline.lambda .participant
+  .lifeline.icon .participant
   {
     text-align: center;
     border: 0;
@@ -106,30 +97,46 @@
     padding-bottom: 0;
   }
 
-  .lifeline.actor .participant::before,
-  .lifeline.database .participant::before,
-  .lifeline.lambda .participant::before
+  .lifeline.icon .participant::before
   {
     content: '';
     display: block;
     height: 35px;
+    background-size: 35px;
     background-position: center;
     background-repeat: no-repeat;
   }
 
   .lifeline.actor .participant::before {
-    background-size: 50px;
     background-image: url("../assets/actor.svg");
   }
 
   .lifeline.database .participant::before {
-    background-size: 35px;
     background-image: url("../assets/database.svg");
   }
 
+  .lifeline.ec2 .participant::before {
+    background-image: url("../assets/Amazon-EC2.svg");
+  }
+
+  .lifeline.ecs .participant::before {
+    background-image: url("../assets/Amazon-Elastic-Container-Service_light-bg.svg");
+  }
+
+  .lifeline.iam .participant::before {
+    background-image: url("../assets/AWS-Identity-and-Access-Management_IAM.svg");
+  }
+
   .lifeline.lambda .participant::before {
-    background-size: 35px;
-    background-image: url("../assets/AWS-Lambda_Lambda-Function_light-bg.svg");
+    background-image: url("../assets/AWS-Lambda.svg");
+  }
+
+  .lifeline.rds .participant::before {
+    background-image: url("../assets/Amazon-RDS.svg");
+  }
+
+  .lifeline.s3 .participant::before {
+    background-image: url("../assets/Amazon-Simple-Storage-Service-S3_light-bg.svg");
   }
 
 </style>

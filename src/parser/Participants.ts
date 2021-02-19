@@ -1,7 +1,17 @@
 export enum ParticipantType {
   Actor = 1,
+  Boundary,
+  Collection,
+  Control,
   Database,
+  Entity,
+  Queue,
+  EC2,
+  ECS,
+  IAM,
   Lambda,
+  RDS,
+  S3,
   Undefined
 }
 export class Participant {
@@ -34,14 +44,34 @@ export class Participant {
   }
 
   public Type(): ParticipantType {
-    if (this.type?.toLowerCase() === '@actor') {
-      return ParticipantType.Actor;
-    }
-    if (this.type?.toLowerCase() === '@database') {
-      return ParticipantType.Database;
-    }
-    if (this.type?.toLowerCase() === '@lambda') {
-      return ParticipantType.Lambda;
+    switch (this.type?.toLowerCase()) {
+      case '@actor':
+        return ParticipantType.Actor;
+      case '@boundary':
+        return ParticipantType.Boundary;
+      case '@collection':
+        return ParticipantType.Collection;
+      case '@control':
+        return ParticipantType.Control;
+      case '@database':
+        return ParticipantType.Database;
+      case '@entity':
+        return ParticipantType.Entity;
+      case '@queue':
+        return ParticipantType.Queue;
+
+      case '@ec2':
+        return ParticipantType.EC2;
+      case '@ecs':
+        return ParticipantType.ECS;
+      case '@iam':
+        return ParticipantType.IAM;
+      case '@lambda':
+        return ParticipantType.Lambda;
+      case '@rds':
+        return ParticipantType.RDS;
+      case '@s3':
+        return ParticipantType.S3;
     }
     return ParticipantType.Undefined;
   }

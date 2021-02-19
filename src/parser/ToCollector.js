@@ -21,7 +21,7 @@ ToCollector.prototype = Object.create(sequenceParserListener.sequenceParserListe
 let onParticipant = function (ctx) {
   // if(!(ctx?.name())) return;
   if (isBlind) return;
-  const type = ctx?.participantType()?.getTextWithoutQuotes();
+  const type = ctx?.participantType()?.getTextWithoutQuotes().replace('@', '');
   const participant = ctx?.name()?.getTextWithoutQuotes() || 'Missing `Participant`';
   const stereotype = ctx.stereotype()?.name()?.getTextWithoutQuotes();
   const width = (ctx.width && ctx.width()) && Number.parseInt(ctx.width().getText()) || undefined;

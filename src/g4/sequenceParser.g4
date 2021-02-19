@@ -64,7 +64,12 @@ participantType
  | DATABASE
  | ENTITY
  | QUEUE
+ | EC2
+ | ECS
+ | IAM
  | LAMBDA
+ | RDS
+ | S3
  ;
 
 name

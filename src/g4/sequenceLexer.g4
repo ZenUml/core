@@ -64,7 +64,13 @@ CONTROL : '@control' | '@Control';
 DATABASE : '@database' | '@Database';
 ENTITY : '@entity' | '@Entity';
 QUEUE : '@queue' | '@Queue';
+
+EC2: '@EC2' | '@Ec2' | '@ec2';
+ECS: '@ECS' | '@Ecs' | '@ecs';
+IAM: '@IAM' | '@Iam' | '@iam';
 LAMBDA: '@lambda' | '@Lambda';
+RDS: '@RDS' | '@Rds' | '@rds';
+S3: '@S3' | '@s3';
 
 DOT
  : '.'

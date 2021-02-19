@@ -12,7 +12,7 @@ describe('Participants', ()=>{
     const participants = new Participants();
     participants.Add('A', true);
     expect(participants.Starter()).toEqual({name: 'A', isStarter: true, stereotype: undefined, width: undefined});
-    participants.Add('A', false, undefined, undefined, undefined, undefined, undefined, true);
+    participants.Add('A', false, undefined, undefined, undefined, undefined, true);
     expect(participants.Starter()).toEqual({name: 'A', isStarter: true, stereotype: undefined, width: undefined, explicit: true});
   });
 });

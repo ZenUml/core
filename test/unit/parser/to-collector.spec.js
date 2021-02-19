@@ -1,3 +1,5 @@
+import {ParticipantType} from '../../../src/parser/Participants'
+
 let seqDsl = require('../../../src/parser/index');
 let ToCollector = require('../../../src/parser/ToCollector')
 test('smoke test2', () => {
@@ -96,13 +98,13 @@ describe('with label', () => {
 describe('with participantType', () => {
   test.each([
     ['@actor A', 'actor'],
-    ['@Actor A', 'actor'],
+    ['@Actor A', 'Actor'],
     ['@database A', 'database']
   ])('code:%s => participantType:%s', (code, participantType) => {
     let participants = getParticipants(code, true);
     expect(participants.Size()).toBe(2)
     expect(participants.Get('A').name).toBe('A')
-    expect(participants.Get('A').participantType).toBe(participantType)
+    expect(participants.Get('A').type).toBe(participantType)
   })
 })
 
