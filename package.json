@@ -3,10 +3,10 @@
   "version": "2.0.0",
   "private": false,
   "scripts": {
-    "build": "yarn antlr && vue-cli-service build --target lib --name vue-sequence ./src/index.ts",
+    "build": "yarn antlr:clear && yarn antlr && vue-cli-service build --target lib --name vue-sequence ./src/index.ts",
     "test:unit": "yarn antlr && vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "antlr": "yarn antlr:clear && yarn antlr:lexer && yarn antlr:parser",
+    "antlr": "yarn antlr:lexer && yarn antlr:parser",
     "antlr:clear": "rm -rf src/generated-parser/*",
     "antlr:lexer": "java -Duser.dir=$(pwd)/src/g4 -cp $(pwd)/antlr/antlr-4.8-complete.jar org.antlr.v4.Tool -o ./src/generated-parser -Dlanguage=JavaScript sequenceLexer.g4",
     "antlr:parser": "java -Duser.dir=$(pwd)/src/g4 -cp $(pwd)/antlr/antlr-4.8-complete.jar org.antlr.v4.Tool -o ./src/generated-parser -Dlanguage=JavaScript sequenceParser.g4",
