@@ -21,12 +21,14 @@ ToCollector.prototype = Object.create(sequenceParserListener.sequenceParserListe
 let onParticipant = function (ctx) {
   // if(!(ctx?.name())) return;
   if (isBlind) return;
-  let participant = ctx?.name()?.getTextWithoutQuotes() || 'Missing `Participant`';
-  let stereotype = ctx.stereotype()?.name()?.getTextWithoutQuotes();
-  let width = (ctx.width && ctx.width()) && Number.parseInt(ctx.width().getText()) || undefined;
+  const type = ctx?.participantType()?.getTextWithoutQuotes();
+  const participant = ctx?.name()?.getTextWithoutQuotes() || 'Missing `Participant`';
+  const stereotype = ctx.stereotype()?.name()?.getTextWithoutQuotes();
+  const width = (ctx.width && ctx.width()) && Number.parseInt(ctx.width().getText()) || undefined;
   const label = ctx.label && ctx.label()?.name()?.getTextWithoutQuotes();
   const explicit = true;
-  participants.Add(participant, false, stereotype, width, groupId, label, explicit);
+
+  participants.Add(participant, false, stereotype, width, groupId, label, explicit, type);
 };
 ToCollector.prototype.enterParticipant = onParticipant
 

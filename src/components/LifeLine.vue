@@ -1,7 +1,7 @@
 <template>
   <div  :id="entity.name"
         class="lifeline"
-        :class="{actor: entity.type === 'actor'}"
+        :class="{actor: isActor}"
         :style="{'paddingTop': top + 'px'} ">
     <div class="participant" :class="{'selected': selected}" @click="onSelect">
       <label class="interface" v-if="entity.stereotype" >«{{entity.stereotype}}»</label>
@@ -13,12 +13,18 @@
 
 <script>
   import {mapGetters, mapMutations} from 'vuex'
+  import {ParticipantType} from '../parser/Participants'
 
   export default {
     name: 'life-line',
     props: ['entity', 'context'],
     computed: {
       ...mapGetters(['firstInvocations', 'onLifelineMounted']),
+      isActor() {
+        /* eslint-disabled */
+        console.log(this.entity.Type, ParticipantType.Actor)
+        return this.entity.Type() === ParticipantType.Actor
+      },
       selected () {
         return this.$store.state.selected.includes(this.entity.name)
       },

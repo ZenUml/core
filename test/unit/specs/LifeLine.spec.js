@@ -1,6 +1,7 @@
 import {mount, createLocalVue} from "@vue/test-utils";
 import Vuex from 'vuex'
 import {Store} from '@/index'
+import {Participant} from '@/parser/Participants'
 import LifeLine from '@/components/LifeLine'
 const localVue = createLocalVue()
 localVue.use(Vuex)
@@ -15,7 +16,7 @@ describe('select a participant', () => {
         top: 3
       }
     }
-    const propsData = {entity: {name: 'A'}}
+    const propsData = {entity: new Participant('A')}
     let lifelineWrapper = mount(LifeLine, {store, localVue, propsData});
     expect(lifelineWrapper.vm.selected).toBeFalsy()
     expect(lifelineWrapper.find('.selected').exists()).toBeFalsy()

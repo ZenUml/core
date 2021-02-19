@@ -1,4 +1,7 @@
-class Participant {
+export enum ParticipantType {
+  Actor = 1,
+}
+export class Participant {
   name: string;
   private stereotype: string | undefined;
   private width: number | undefined;
@@ -6,6 +9,7 @@ class Participant {
   private explicit: boolean | undefined;
   isStarter: boolean | undefined;
   private label: string | undefined;
+  private type: string | undefined;
 
   constructor(name: string,
               isStarter?: boolean,
@@ -13,7 +17,9 @@ class Participant {
               width?: number,
               groupId?: number | string,
               label?: string,
-              explicit?: boolean) {
+              explicit?: boolean,
+              type?: string
+  ) {
     this.name = name;
     this.stereotype = stereotype;
     this.width = width;
@@ -21,6 +27,14 @@ class Participant {
     this.explicit = explicit;
     this.isStarter = isStarter;
     this.label = label;
+    this.type = type;
+  }
+
+  public Type(): ParticipantType {
+    if (this.type?.toLowerCase() === '@actor') {
+      return ParticipantType.Actor;
+    }
+    return ParticipantType.Actor;
   }
 }
 
@@ -42,8 +56,9 @@ export class Participants {
              width?: number,
              groupId?: number | string,
              label?: string,
-             explicit?: boolean): void {
-    const participant = new Participant(name, isStarter, stereotype, width, groupId, label, explicit);
+             explicit?: boolean,
+             type?: string): void {
+    const participant = new Participant(name, isStarter, stereotype, width, groupId, label, explicit, type);
     if (this.Get(name)?.isStarter && explicit) {
       participant.isStarter = true;
       this.participants.set(participant.name, participant)
@@ -82,7 +97,7 @@ export class Participants {
 
   Starter() {
     const first = this.First();
-    const type = first.name === 'User' || first.name === 'Actor' ? 'actor' : undefined;
-    return first.isStarter? {...first, type} : undefined;
+    // const type = first.name === 'User' || first.name === 'Actor' ? 'actor' : undefined;
+    return first.isStarter? first : undefined;
   }
 }

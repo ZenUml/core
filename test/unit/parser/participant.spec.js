@@ -69,8 +69,8 @@ test('A participant - @actor A', () => {
   expectText(participants[0].participantType()).toBe('@actor')
 })
 
-test('A participant - <<Repo>> @actor A 100 as label', () => {
-  let rootContext = seqDsl.RootContext('<<Repo>> @actor A 100 as label');
+test('A participant -  @actor <<Repo>> A 100 as label', () => {
+  let rootContext = seqDsl.RootContext(' @actor <<Repo>> A 100 as label');
   let participants = rootContext.head().participant();
   expectText(participants[0].stereotype()).toBe('<<Repo>>')
   expectText(participants[0].participantType()).toBe('@actor')

@@ -136,9 +136,9 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u0002\u0002\u009e\u00a0\u0007\u0007\u0002\u0002\u009f\u0093\u0003\u0002",
     "\u0002\u0002\u009f\u009c\u0003\u0002\u0002\u0002\u009f\u009e\u0003\u0002",
     "\u0002\u0002\u00a0\t\u0003\u0002\u0002\u0002\u00a1\u00a2\t\u0002\u0002",
-    "\u0002\u00a2\u000b\u0003\u0002\u0002\u0002\u00a3\u00a5\u0005\u000e\b",
+    "\u0002\u00a2\u000b\u0003\u0002\u0002\u0002\u00a3\u00a5\u0005\u0012\n",
     "\u0002\u00a4\u00a3\u0003\u0002\u0002\u0002\u00a4\u00a5\u0003\u0002\u0002",
-    "\u0002\u00a5\u00a7\u0003\u0002\u0002\u0002\u00a6\u00a8\u0005\u0012\n",
+    "\u0002\u00a5\u00a7\u0003\u0002\u0002\u0002\u00a6\u00a8\u0005\u000e\b",
     "\u0002\u00a7\u00a6\u0003\u0002\u0002\u0002\u00a7\u00a8\u0003\u0002\u0002",
     "\u0002\u00a8\u00a9\u0003\u0002\u0002\u0002\u00a9\u00ab\u0005\u0014\u000b",
     "\u0002\u00aa\u00ac\u0005\u0016\f\u0002\u00ab\u00aa\u0003\u0002\u0002",
@@ -1118,12 +1118,12 @@ ParticipantContext.prototype.name = function() {
     return this.getTypedRuleContext(NameContext,0);
 };
 
-ParticipantContext.prototype.stereotype = function() {
-    return this.getTypedRuleContext(StereotypeContext,0);
-};
-
 ParticipantContext.prototype.participantType = function() {
     return this.getTypedRuleContext(ParticipantTypeContext,0);
+};
+
+ParticipantContext.prototype.stereotype = function() {
+    return this.getTypedRuleContext(StereotypeContext,0);
 };
 
 ParticipantContext.prototype.width = function() {
@@ -1166,17 +1166,17 @@ sequenceParser.prototype.participant = function() {
             this.state = 162;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-            if(_la===sequenceParser.SOPEN || _la===sequenceParser.LT) {
+            if(((((_la - 42)) & ~0x1f) == 0 && ((1 << (_la - 42)) & ((1 << (sequenceParser.ACTOR - 42)) | (1 << (sequenceParser.BOUNDARY - 42)) | (1 << (sequenceParser.COLLECTION - 42)) | (1 << (sequenceParser.CONTROL - 42)) | (1 << (sequenceParser.DATABASE - 42)) | (1 << (sequenceParser.ENTITY - 42)) | (1 << (sequenceParser.QUEUE - 42)))) !== 0)) {
                 this.state = 161;
-                this.stereotype();
+                this.participantType();
             }
 
             this.state = 165;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-            if(((((_la - 42)) & ~0x1f) == 0 && ((1 << (_la - 42)) & ((1 << (sequenceParser.ACTOR - 42)) | (1 << (sequenceParser.BOUNDARY - 42)) | (1 << (sequenceParser.COLLECTION - 42)) | (1 << (sequenceParser.CONTROL - 42)) | (1 << (sequenceParser.DATABASE - 42)) | (1 << (sequenceParser.ENTITY - 42)) | (1 << (sequenceParser.QUEUE - 42)))) !== 0)) {
+            if(_la===sequenceParser.SOPEN || _la===sequenceParser.LT) {
                 this.state = 164;
-                this.participantType();
+                this.stereotype();
             }
 
             this.state = 167;
