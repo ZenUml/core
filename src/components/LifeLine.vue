@@ -92,4 +92,43 @@
   .lifeline>.participant {
     z-index: 100;
   }
+
+  .lifeline.actor .participant,
+  .lifeline.database .participant,
+  .lifeline.lambda .participant
+  {
+    text-align: center;
+    border: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .lifeline.actor .participant::before,
+  .lifeline.database .participant::before,
+  .lifeline.lambda .participant::before
+  {
+    content: '';
+    display: block;
+    height: 35px;
+    background-size: 50px;
+    background-image: url("../assets/actor.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .lifeline.actor .participant::before {
+    background-size: 35px;
+    background-image: url("../assets/database.svg");
+  }
+
+  .lifeline.database .participant::before {
+    background-size: 35px;
+    background-image: url("../assets/database.svg");
+  }
+
+  .lifeline.lambda .participant::before {
+    background-size: 35px;
+    background-image: url("../assets/AWS-Lambda_Lambda-Function_light-bg.svg");
+  }
+
 </style>
