@@ -1,7 +1,7 @@
 <template>
   <div  :id="entity.name"
         class="lifeline"
-        :class="{actor: isActor, database: isDatabase, lambda: isLambda}"
+        :class="classes"
         :style="{'paddingTop': top + 'px'} ">
     <div class="participant" :class="{'selected': selected}" @click="onSelect">
       <label class="interface" v-if="entity.stereotype" >«{{entity.stereotype}}»</label>
@@ -20,14 +20,17 @@
     props: ['entity', 'context'],
     computed: {
       ...mapGetters(['firstInvocations', 'onLifelineMounted']),
-      isActor() {
-        return this.entity.Type() === ParticipantType.Actor
-      },
-      isDatabase() {
-        return this.entity.Type() === ParticipantType.Database
-      },
-      isLambda() {
-        return this.entity.Type() === ParticipantType.Lambda
+      classes() {
+        switch (this.entity.Type()) {
+          case ParticipantType.Actor:
+            return 'actor'
+          case ParticipantType.Database:
+            return 'database'
+          case ParticipantType.Lambda:
+            return 'lambda'
+          case ParticipantType.Undefined:
+        }
+        return undefined
       },
       selected () {
         return this.$store.state.selected.includes(this.entity.name)
@@ -110,15 +113,13 @@
     content: '';
     display: block;
     height: 35px;
-    background-size: 50px;
-    background-image: url("../assets/actor.svg");
     background-position: center;
     background-repeat: no-repeat;
   }
 
   .lifeline.actor .participant::before {
-    background-size: 35px;
-    background-image: url("../assets/database.svg");
+    background-size: 50px;
+    background-image: url("../assets/actor.svg");
   }
 
   .lifeline.database .participant::before {
