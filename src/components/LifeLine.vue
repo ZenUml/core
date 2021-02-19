@@ -3,7 +3,7 @@
         class="lifeline"
         :class="classes"
         :style="{'paddingTop': top + 'px'} ">
-    <div class="participant" :class="{'selected': selected}" @click="onSelect">
+    <div class="participant" :class="{'selected': selected, [entity.participantType]: true}" @click="onSelect">
       <label class="interface" v-if="entity.stereotype" >«{{entity.stereotype}}»</label>
       <label class="name">{{entity.label || entity.name}}</label>
     </div>

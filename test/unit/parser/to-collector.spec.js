@@ -79,7 +79,31 @@ describe('without starter', () => {
     expect(participants.Size()).toBe(numberOfParticipants)
     expect(participants.Get('A').name).toBe(participant)
   })
+})
 
+describe('with label', () => {
+  test.each([
+    ['A as AA', 'AA'],
+    ['A as "AA"', 'AA'],
+  ])('code:%s => label:%s', (code, label) => {
+    let participants = getParticipants(code, true);
+    expect(participants.Size()).toBe(2)
+    expect(participants.Get('A').name).toBe('A')
+    expect(participants.Get('A').label).toBe(label)
+  })
+})
+
+describe('with participantType', () => {
+  test.each([
+    ['@actor A', 'actor'],
+    ['@Actor A', 'actor'],
+    ['@database A', 'database']
+  ])('code:%s => participantType:%s', (code, participantType) => {
+    let participants = getParticipants(code, true);
+    expect(participants.Size()).toBe(2)
+    expect(participants.Get('A').name).toBe('A')
+    expect(participants.Get('A').participantType).toBe(participantType)
+  })
 })
 
 function getParticipants(code, withStarter) {
