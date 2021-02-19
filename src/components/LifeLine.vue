@@ -139,4 +139,16 @@
     background-image: url("../assets/Amazon-Simple-Storage-Service-S3_light-bg.svg");
   }
 
+  .lifeline.boundary .participant::before {
+    background-image: url("../assets/Robustness_Diagram_Boundary.svg");
+  }
+
+  .lifeline.control .participant::before {
+    background-image: url("../assets/Robustness_Diagram_Control.svg");
+  }
+
+  .lifeline.entity .participant::before {
+    background-image: url("../assets/Robustness_Diagram_Entity.svg");
+  }
+
 </style>
