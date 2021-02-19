@@ -71,6 +71,7 @@ export class Participants {
   First() {
     return this.participants.values().next().value
   }
+
   Get(name: string) {
     return this.participants.get(name);
   }
@@ -80,6 +81,8 @@ export class Participants {
   }
 
   Starter() {
-    return this.First().isStarter? this.First() : undefined;
+    const first = this.First();
+    const type = first.name === 'User' || first.name === 'Actor' ? 'actor' : undefined;
+    return first.isStarter? {...first, type} : undefined;
   }
 }

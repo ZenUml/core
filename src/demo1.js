@@ -13,7 +13,7 @@ group "B C" {B C}
 // |col1|col2|
 // |----|----|
 // |val1|val2|
-@Starter("User 1")
+@Starter("User")
 RET ret = A.methodA(a, b) {
   // A comment for self interaction<br>
   // \`POST /order\` <br>

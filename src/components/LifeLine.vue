@@ -1,6 +1,7 @@
 <template>
   <div  :id="entity.name"
         class="lifeline"
+        :class="{actor: entity.type === 'actor'}"
         :style="{'paddingTop': top + 'px'} ">
     <div class="participant" :class="{'selected': selected}" @click="onSelect">
       <label class="interface" v-if="entity.stereotype" >«{{entity.stereotype}}»</label>
