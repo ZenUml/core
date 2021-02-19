@@ -98,6 +98,7 @@ describe('with label', () => {
 describe('with participantType', () => {
   test.each([
     ['@actor A', 'actor'],
+    ['@actor A\nA', 'actor'],
     ['@Actor A', 'Actor'],
     ['@database A', 'database']
   ])('code:%s => participantType:%s', (code, participantType) => {

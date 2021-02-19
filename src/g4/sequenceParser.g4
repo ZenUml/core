@@ -27,9 +27,8 @@ group
 
 // [Perf] Changing starter to name does not help.
 starterExp
- : AT STARTER_LXR (OPAR starter? CPAR)?
- | AT ID
- | AT
+ : STARTER_LXR (OPAR starter? CPAR)?
+ | ANNOTATION
  ;
 
 starter
@@ -39,6 +38,7 @@ starter
 participant
  : participantType? stereotype? name width? label?
  | stereotype
+ | participantType
  ;
 
 stereotype
@@ -57,19 +57,7 @@ label
  ;
 
 participantType
- : ACTOR
- | BOUNDARY
- | COLLECTION
- | CONTROL
- | DATABASE
- | ENTITY
- | QUEUE
- | EC2
- | ECS
- | IAM
- | LAMBDA
- | RDS
- | S3
+ : ANNOTATION
  ;
 
 name

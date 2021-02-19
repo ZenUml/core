@@ -51,26 +51,13 @@ ELSE : 'else';
 WHILE : 'while' | 'for' | 'foreach' | 'forEach' | 'loop';
 RETURN : 'return';
 NEW: 'new';
-STARTER_LXR: 'Starter' | 'starter';
-THEME_LXR: 'Theme';
 PAR : 'par';
 GROUP : 'group';
 OPT : 'opt';
 AS : 'as';
-ACTOR : '@actor' | '@Actor';
-BOUNDARY : '@boundary' | '@Boundary';
-COLLECTION : '@collection' | '@Collection';
-CONTROL : '@control' | '@Control';
-DATABASE : '@database' | '@Database';
-ENTITY : '@entity' | '@Entity';
-QUEUE : '@queue' | '@Queue';
 
-EC2: '@EC2' | '@Ec2' | '@ec2';
-ECS: '@ECS' | '@Ecs' | '@ecs';
-IAM: '@IAM' | '@Iam' | '@iam';
-LAMBDA: '@lambda' | '@Lambda';
-RDS: '@RDS' | '@Rds' | '@rds';
-S3: '@S3' | '@s3';
+STARTER_LXR: '@Starter' | '@starter';
+ANNOTATION: '@' [a-zA-Z_] [a-zA-Z_0-9]*;
 
 DOT
  : '.'
