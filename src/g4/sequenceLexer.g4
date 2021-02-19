@@ -64,6 +64,7 @@ CONTROL : '@control' | '@Control';
 DATABASE : '@database' | '@Database';
 ENTITY : '@entity' | '@Entity';
 QUEUE : '@queue' | '@Queue';
+LAMBDA: '@lambda' | '@Lambda';
 
 DOT
  : '.'

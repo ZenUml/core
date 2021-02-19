@@ -1,7 +1,7 @@
 <template>
   <div  :id="entity.name"
         class="lifeline"
-        :class="{actor: isActor, database: isDatabase}"
+        :class="{actor: isActor, database: isDatabase, lambda: isLambda}"
         :style="{'paddingTop': top + 'px'} ">
     <div class="participant" :class="{'selected': selected}" @click="onSelect">
       <label class="interface" v-if="entity.stereotype" >«{{entity.stereotype}}»</label>
@@ -25,6 +25,9 @@
       },
       isDatabase() {
         return this.entity.Type() === ParticipantType.Database
+      },
+      isLambda() {
+        return this.entity.Type() === ParticipantType.Lambda
       },
       selected () {
         return this.$store.state.selected.includes(this.entity.name)

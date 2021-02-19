@@ -64,6 +64,7 @@ participantType
  | DATABASE
  | ENTITY
  | QUEUE
+ | LAMBDA
  ;
 
 name

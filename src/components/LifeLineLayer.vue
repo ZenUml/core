@@ -81,7 +81,8 @@
   }
 
   .lifeline.actor >>> .participant,
-  .lifeline.database >>> .participant
+  .lifeline.database >>> .participant,
+  .lifeline.lambda >>> .participant
   {
     text-align: center;
     border: 0;
@@ -98,12 +99,23 @@
     background-position: center;
     background-repeat: no-repeat;
   }
+
   .lifeline.database >>> .participant::before {
     content: '';
     display: block;
     height: 35px;
     background-size: 35px;
     background-image: url("../assets/database.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .lifeline.lambda >>> .participant::before {
+    content: '';
+    display: block;
+    height: 35px;
+    background-size: 35px;
+    background-image: url("../assets/AWS-Lambda_Lambda-Function_light-bg.svg");
     background-position: center;
     background-repeat: no-repeat;
   }

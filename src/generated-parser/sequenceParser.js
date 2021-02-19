@@ -6,7 +6,7 @@ var grammarFileName = "sequenceParser.g4";
 
 
 var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
-    "\u0003>\u01df\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004\t",
+    "\u0003?\u01df\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004\t",
     "\u0004\u0004\u0005\t\u0005\u0004\u0006\t\u0006\u0004\u0007\t\u0007\u0004",
     "\b\t\b\u0004\t\t\t\u0004\n\t\n\u0004\u000b\t\u000b\u0004\f\t\f\u0004",
     "\r\t\r\u0004\u000e\t\u000e\u0004\u000f\t\u000f\u0004\u0010\t\u0010\u0004",
@@ -75,8 +75,8 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "/\u0003/\u0003/\u0003/\u0003/\u0005/\u01d9\n/\u00030\u00030\u00050\u01dd",
     "\n0\u00030\u0002\u0003X1\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012\u0014",
     "\u0016\u0018\u001a\u001c\u001e \"$&(*,.02468:<>@BDFHJLNPRTVXZ\\^\u0002",
-    "\n\u0004\u00024477\u0003\u0002,2\u0003\u0002\u0012\u0014\u0003\u0002",
-    "\u0010\u0011\u0003\u0002\f\u000f\u0003\u0002\n\u000b\u0003\u000256\u0003",
+    "\n\u0004\u00025588\u0003\u0002,3\u0003\u0002\u0012\u0014\u0003\u0002",
+    "\u0010\u0011\u0003\u0002\f\u000f\u0003\u0002\n\u000b\u0003\u000267\u0003",
     "\u0002\u001e\u001f\u0002\u020d\u0002j\u0003\u0002\u0002\u0002\u0004",
     "z\u0003\u0002\u0002\u0002\u0006\u0091\u0003\u0002\u0002\u0002\b\u009f",
     "\u0003\u0002\u0002\u0002\n\u00a1\u0003\u0002\u0002\u0002\f\u00b1\u0003",
@@ -132,7 +132,7 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u0002\u0002\u0097\u0098\u0003\u0002\u0002\u0002\u0098\u0099\u0003\u0002",
     "\u0002\u0002\u0099\u009b\u0007\u001b\u0002\u0002\u009a\u0095\u0003\u0002",
     "\u0002\u0002\u009a\u009b\u0003\u0002\u0002\u0002\u009b\u00a0\u0003\u0002",
-    "\u0002\u0002\u009c\u009d\u0007\u0007\u0002\u0002\u009d\u00a0\u00074",
+    "\u0002\u0002\u009c\u009d\u0007\u0007\u0002\u0002\u009d\u00a0\u00075",
     "\u0002\u0002\u009e\u00a0\u0007\u0007\u0002\u0002\u009f\u0093\u0003\u0002",
     "\u0002\u0002\u009f\u009c\u0003\u0002\u0002\u0002\u009f\u009e\u0003\u0002",
     "\u0002\u0002\u00a0\t\u0003\u0002\u0002\u0002\u00a1\u00a2\t\u0002\u0002",
@@ -164,7 +164,7 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u0002\u00c8\u00c7\u0003\u0002\u0002\u0002\u00c9\u0011\u0003\u0002\u0002",
     "\u0002\u00ca\u00cb\t\u0003\u0002\u0002\u00cb\u0013\u0003\u0002\u0002",
     "\u0002\u00cc\u00cd\t\u0002\u0002\u0002\u00cd\u0015\u0003\u0002\u0002",
-    "\u0002\u00ce\u00cf\u00075\u0002\u0002\u00cf\u0017\u0003\u0002\u0002",
+    "\u0002\u00ce\u00cf\u00076\u0002\u0002\u00cf\u0017\u0003\u0002\u0002",
     "\u0002\u00d0\u00d2\u0005\u001c\u000f\u0002\u00d1\u00d0\u0003\u0002\u0002",
     "\u0002\u00d2\u00d3\u0003\u0002\u0002\u0002\u00d3\u00d1\u0003\u0002\u0002",
     "\u0002\u00d3\u00d4\u0003\u0002\u0002\u0002\u00d4\u0019\u0003\u0002\u0002",
@@ -175,10 +175,10 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u001b\u0003\u0002\u0002\u0002\u00dc\u00ea\u0005L\'\u0002\u00dd\u00ea",
     "\u0005\u001e\u0010\u0002\u00de\u00ea\u0005 \u0011\u0002\u00df\u00ea",
     "\u0005V,\u0002\u00e0\u00ea\u0005\"\u0012\u0002\u00e1\u00ea\u0005&\u0014",
-    "\u0002\u00e2\u00e4\u00054\u001b\u0002\u00e3\u00e5\u0007=\u0002\u0002",
+    "\u0002\u00e2\u00e4\u00054\u001b\u0002\u00e3\u00e5\u0007>\u0002\u0002",
     "\u00e4\u00e3\u0003\u0002\u0002\u0002\u00e4\u00e5\u0003\u0002\u0002\u0002",
     "\u00e5\u00ea\u0003\u0002\u0002\u0002\u00e6\u00ea\u0005\u001a\u000e\u0002",
-    "\u00e7\u00e8\u0007;\u0002\u0002\u00e8\u00ea\b\u000f\u0001\u0002\u00e9",
+    "\u00e7\u00e8\u0007<\u0002\u0002\u00e8\u00ea\b\u000f\u0001\u0002\u00e9",
     "\u00dc\u0003\u0002\u0002\u0002\u00e9\u00dd\u0003\u0002\u0002\u0002\u00e9",
     "\u00de\u0003\u0002\u0002\u0002\u00e9\u00df\u0003\u0002\u0002\u0002\u00e9",
     "\u00e0\u0003\u0002\u0002\u0002\u00e9\u00e1\u0003\u0002\u0002\u0002\u00e9",
@@ -211,14 +211,14 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u0112\u0113\u0003\u0002\u0002\u0002\u0113\u0116\u0005*\u0016\u0002",
     "\u0114\u0116\u00052\u001a\u0002\u0115\u010c\u0003\u0002\u0002\u0002",
     "\u0115\u0114\u0003\u0002\u0002\u0002\u0116)\u0003\u0002\u0002\u0002",
-    "\u0117\u0118\u0005B\"\u0002\u0118\u0119\u00073\u0002\u0002\u0119\u011b",
+    "\u0117\u0118\u0005B\"\u0002\u0118\u0119\u00074\u0002\u0002\u0119\u011b",
     "\u0003\u0002\u0002\u0002\u011a\u0117\u0003\u0002\u0002\u0002\u011a\u011b",
     "\u0003\u0002\u0002\u0002\u011b\u011c\u0003\u0002\u0002\u0002\u011c\u0121",
-    "\u0005.\u0018\u0002\u011d\u011e\u00073\u0002\u0002\u011e\u0120\u0005",
+    "\u0005.\u0018\u0002\u011d\u011e\u00074\u0002\u0002\u011e\u0120\u0005",
     ".\u0018\u0002\u011f\u011d\u0003\u0002\u0002\u0002\u0120\u0123\u0003",
     "\u0002\u0002\u0002\u0121\u011f\u0003\u0002\u0002\u0002\u0121\u0122\u0003",
     "\u0002\u0002\u0002\u0122\u0128\u0003\u0002\u0002\u0002\u0123\u0121\u0003",
-    "\u0002\u0002\u0002\u0124\u0125\u0005B\"\u0002\u0125\u0126\u00073\u0002",
+    "\u0002\u0002\u0002\u0124\u0125\u0005B\"\u0002\u0125\u0126\u00074\u0002",
     "\u0002\u0126\u0128\u0003\u0002\u0002\u0002\u0127\u011a\u0003\u0002\u0002",
     "\u0002\u0127\u0124\u0003\u0002\u0002\u0002\u0128+\u0003\u0002\u0002",
     "\u0002\u0129\u012a\t\u0002\u0002\u0002\u012a-\u0003\u0002\u0002\u0002",
@@ -245,16 +245,16 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u0002\u0151\u013b\u0003\u0002\u0002\u0002\u0151\u0141\u0003\u0002\u0002",
     "\u0002\u0151\u0146\u0003\u0002\u0002\u0002\u0151\u014a\u0003\u0002\u0002",
     "\u0002\u0151\u014e\u0003\u0002\u0002\u0002\u01525\u0003\u0002\u0002",
-    "\u0002\u0153\u0154\u0007<\u0002\u0002\u01547\u0003\u0002\u0002\u0002",
+    "\u0002\u0153\u0154\u0007=\u0002\u0002\u01547\u0003\u0002\u0002\u0002",
     "\u0155\u0156\t\u0002\u0002\u0002\u01569\u0003\u0002\u0002\u0002\u0157",
     "\u0158\t\u0002\u0002\u0002\u0158;\u0003\u0002\u0002\u0002\u0159\u015a",
     "\t\u0002\u0002\u0002\u015a=\u0003\u0002\u0002\u0002\u015b\u015c\t\u0002",
     "\u0002\u0002\u015c?\u0003\u0002\u0002\u0002\u015d\u0168\u0005Z.\u0002",
-    "\u015e\u0163\u00074\u0002\u0002\u015f\u0160\u0007\u0018\u0002\u0002",
-    "\u0160\u0162\u00074\u0002\u0002\u0161\u015f\u0003\u0002\u0002\u0002",
+    "\u015e\u0163\u00075\u0002\u0002\u015f\u0160\u0007\u0018\u0002\u0002",
+    "\u0160\u0162\u00075\u0002\u0002\u0161\u015f\u0003\u0002\u0002\u0002",
     "\u0162\u0165\u0003\u0002\u0002\u0002\u0163\u0161\u0003\u0002\u0002\u0002",
     "\u0163\u0164\u0003\u0002\u0002\u0002\u0164\u0168\u0003\u0002\u0002\u0002",
-    "\u0165\u0163\u0003\u0002\u0002\u0002\u0166\u0168\u00077\u0002\u0002",
+    "\u0165\u0163\u0003\u0002\u0002\u0002\u0166\u0168\u00078\u0002\u0002",
     "\u0167\u015d\u0003\u0002\u0002\u0002\u0167\u015e\u0003\u0002\u0002\u0002",
     "\u0167\u0166\u0003\u0002\u0002\u0002\u0168A\u0003\u0002\u0002\u0002",
     "\u0169\u016a\t\u0002\u0002\u0002\u016aC\u0003\u0002\u0002\u0002\u016b",
@@ -268,7 +268,7 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u0002\u0002\u0178\u017b\u0005J&\u0002\u0179\u017b\u0005X-\u0002\u017a",
     "\u0178\u0003\u0002\u0002\u0002\u017a\u0179\u0003\u0002\u0002\u0002\u017b",
     "I\u0003\u0002\u0002\u0002\u017c\u017d\u0005> \u0002\u017d\u017e\u0007",
-    "4\u0002\u0002\u017eK\u0003\u0002\u0002\u0002\u017f\u0183\u0005N(\u0002",
+    "5\u0002\u0002\u017eK\u0003\u0002\u0002\u0002\u017f\u0183\u0005N(\u0002",
     "\u0180\u0182\u0005P)\u0002\u0181\u0180\u0003\u0002\u0002\u0002\u0182",
     "\u0185\u0003\u0002\u0002\u0002\u0183\u0181\u0003\u0002\u0002\u0002\u0183",
     "\u0184\u0003\u0002\u0002\u0002\u0184\u0187\u0003\u0002\u0002\u0002\u0185",
@@ -310,7 +310,7 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u0002\u0002\u01c5\u01c3\u0003\u0002\u0002\u0002\u01c5\u01c6\u0003\u0002",
     "\u0002\u0002\u01c6Y\u0003\u0002\u0002\u0002\u01c7\u01c5\u0003\u0002",
     "\u0002\u0002\u01c8\u01ce\t\b\u0002\u0002\u01c9\u01ce\t\t\u0002\u0002",
-    "\u01ca\u01ce\u00074\u0002\u0002\u01cb\u01ce\u00077\u0002\u0002\u01cc",
+    "\u01ca\u01ce\u00075\u0002\u0002\u01cb\u01ce\u00078\u0002\u0002\u01cc",
     "\u01ce\u0007 \u0002\u0002\u01cd\u01c8\u0003\u0002\u0002\u0002\u01cd",
     "\u01c9\u0003\u0002\u0002\u0002\u01cd\u01ca\u0003\u0002\u0002\u0002\u01cd",
     "\u01cb\u0003\u0002\u0002\u0002\u01cd\u01cc\u0003\u0002\u0002\u0002\u01ce",
@@ -342,7 +342,8 @@ var literalNames = [ null, "':'", "'<<'", "'>>'", "'->'", "'@'", "'||'",
                      "','", "'='", "'('", "')'", "'{'", "'}'", "'true'", 
                      "'false'", "'nil'", "'if'", "'else'", null, "'return'", 
                      "'new'", null, "'Theme'", "'par'", "'group'", "'opt'", 
-                     "'as'", null, null, null, null, null, null, null, "'.'" ];
+                     "'as'", null, null, null, null, null, null, null, null, 
+                     "'.'" ];
 
 var symbolicNames = [ null, "COL", "SOPEN", "SCLOSE", "ARROW", "AT", "OR", 
                       "AND", "EQ", "NEQ", "GT", "LT", "GTEQ", "LTEQ", "PLUS", 
@@ -351,9 +352,9 @@ var symbolicNames = [ null, "COL", "SOPEN", "SCLOSE", "ARROW", "AT", "OR",
                       "TRUE", "FALSE", "NIL", "IF", "ELSE", "WHILE", "RETURN", 
                       "NEW", "STARTER_LXR", "THEME_LXR", "PAR", "GROUP", 
                       "OPT", "AS", "ACTOR", "BOUNDARY", "COLLECTION", "CONTROL", 
-                      "DATABASE", "ENTITY", "QUEUE", "DOT", "ID", "INT", 
-                      "FLOAT", "STRING", "CR", "SPACE", "COMMENT", "OTHER", 
-                      "EVENT_PAYLOAD_LXR", "EVENT_END", "WS" ];
+                      "DATABASE", "ENTITY", "QUEUE", "LAMBDA", "DOT", "ID", 
+                      "INT", "FLOAT", "STRING", "CR", "SPACE", "COMMENT", 
+                      "OTHER", "EVENT_PAYLOAD_LXR", "EVENT_END", "WS" ];
 
 var ruleNames =  [ "prog", "head", "group", "starterExp", "starter", "participant", 
                    "stereotype", "label", "participantType", "name", "width", 
@@ -432,18 +433,19 @@ sequenceParser.CONTROL = 45;
 sequenceParser.DATABASE = 46;
 sequenceParser.ENTITY = 47;
 sequenceParser.QUEUE = 48;
-sequenceParser.DOT = 49;
-sequenceParser.ID = 50;
-sequenceParser.INT = 51;
-sequenceParser.FLOAT = 52;
-sequenceParser.STRING = 53;
-sequenceParser.CR = 54;
-sequenceParser.SPACE = 55;
-sequenceParser.COMMENT = 56;
-sequenceParser.OTHER = 57;
-sequenceParser.EVENT_PAYLOAD_LXR = 58;
-sequenceParser.EVENT_END = 59;
-sequenceParser.WS = 60;
+sequenceParser.LAMBDA = 49;
+sequenceParser.DOT = 50;
+sequenceParser.ID = 51;
+sequenceParser.INT = 52;
+sequenceParser.FLOAT = 53;
+sequenceParser.STRING = 54;
+sequenceParser.CR = 55;
+sequenceParser.SPACE = 56;
+sequenceParser.COMMENT = 57;
+sequenceParser.OTHER = 58;
+sequenceParser.EVENT_PAYLOAD_LXR = 59;
+sequenceParser.EVENT_END = 60;
+sequenceParser.WS = 61;
 
 sequenceParser.RULE_prog = 0;
 sequenceParser.RULE_head = 1;
@@ -687,6 +689,7 @@ sequenceParser.prototype.head = function() {
             		case sequenceParser.DATABASE:
             		case sequenceParser.ENTITY:
             		case sequenceParser.QUEUE:
+            		case sequenceParser.LAMBDA:
             		case sequenceParser.ID:
             		case sequenceParser.STRING:
             		    this.state = 107;
@@ -710,7 +713,7 @@ sequenceParser.prototype.head = function() {
             this.state = 116;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-            while(_la===sequenceParser.SOPEN || _la===sequenceParser.LT || ((((_la - 39)) & ~0x1f) == 0 && ((1 << (_la - 39)) & ((1 << (sequenceParser.GROUP - 39)) | (1 << (sequenceParser.ACTOR - 39)) | (1 << (sequenceParser.BOUNDARY - 39)) | (1 << (sequenceParser.COLLECTION - 39)) | (1 << (sequenceParser.CONTROL - 39)) | (1 << (sequenceParser.DATABASE - 39)) | (1 << (sequenceParser.ENTITY - 39)) | (1 << (sequenceParser.QUEUE - 39)) | (1 << (sequenceParser.ID - 39)) | (1 << (sequenceParser.STRING - 39)))) !== 0)) {
+            while(_la===sequenceParser.SOPEN || _la===sequenceParser.LT || ((((_la - 39)) & ~0x1f) == 0 && ((1 << (_la - 39)) & ((1 << (sequenceParser.GROUP - 39)) | (1 << (sequenceParser.ACTOR - 39)) | (1 << (sequenceParser.BOUNDARY - 39)) | (1 << (sequenceParser.COLLECTION - 39)) | (1 << (sequenceParser.CONTROL - 39)) | (1 << (sequenceParser.DATABASE - 39)) | (1 << (sequenceParser.ENTITY - 39)) | (1 << (sequenceParser.QUEUE - 39)) | (1 << (sequenceParser.LAMBDA - 39)) | (1 << (sequenceParser.ID - 39)) | (1 << (sequenceParser.STRING - 39)))) !== 0)) {
                 this.state = 114;
                 this._errHandler.sync(this);
                 switch(this._input.LA(1)) {
@@ -727,6 +730,7 @@ sequenceParser.prototype.head = function() {
                 case sequenceParser.DATABASE:
                 case sequenceParser.ENTITY:
                 case sequenceParser.QUEUE:
+                case sequenceParser.LAMBDA:
                 case sequenceParser.ID:
                 case sequenceParser.STRING:
                     this.state = 113;
@@ -846,7 +850,7 @@ sequenceParser.prototype.group = function() {
             this.state = 130;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-            while(_la===sequenceParser.SOPEN || _la===sequenceParser.LT || ((((_la - 42)) & ~0x1f) == 0 && ((1 << (_la - 42)) & ((1 << (sequenceParser.ACTOR - 42)) | (1 << (sequenceParser.BOUNDARY - 42)) | (1 << (sequenceParser.COLLECTION - 42)) | (1 << (sequenceParser.CONTROL - 42)) | (1 << (sequenceParser.DATABASE - 42)) | (1 << (sequenceParser.ENTITY - 42)) | (1 << (sequenceParser.QUEUE - 42)) | (1 << (sequenceParser.ID - 42)) | (1 << (sequenceParser.STRING - 42)))) !== 0)) {
+            while(_la===sequenceParser.SOPEN || _la===sequenceParser.LT || ((((_la - 42)) & ~0x1f) == 0 && ((1 << (_la - 42)) & ((1 << (sequenceParser.ACTOR - 42)) | (1 << (sequenceParser.BOUNDARY - 42)) | (1 << (sequenceParser.COLLECTION - 42)) | (1 << (sequenceParser.CONTROL - 42)) | (1 << (sequenceParser.DATABASE - 42)) | (1 << (sequenceParser.ENTITY - 42)) | (1 << (sequenceParser.QUEUE - 42)) | (1 << (sequenceParser.LAMBDA - 42)) | (1 << (sequenceParser.ID - 42)) | (1 << (sequenceParser.STRING - 42)))) !== 0)) {
                 this.state = 127;
                 this.participant();
                 this.state = 132;
@@ -1166,7 +1170,7 @@ sequenceParser.prototype.participant = function() {
             this.state = 162;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-            if(((((_la - 42)) & ~0x1f) == 0 && ((1 << (_la - 42)) & ((1 << (sequenceParser.ACTOR - 42)) | (1 << (sequenceParser.BOUNDARY - 42)) | (1 << (sequenceParser.COLLECTION - 42)) | (1 << (sequenceParser.CONTROL - 42)) | (1 << (sequenceParser.DATABASE - 42)) | (1 << (sequenceParser.ENTITY - 42)) | (1 << (sequenceParser.QUEUE - 42)))) !== 0)) {
+            if(((((_la - 42)) & ~0x1f) == 0 && ((1 << (_la - 42)) & ((1 << (sequenceParser.ACTOR - 42)) | (1 << (sequenceParser.BOUNDARY - 42)) | (1 << (sequenceParser.COLLECTION - 42)) | (1 << (sequenceParser.CONTROL - 42)) | (1 << (sequenceParser.DATABASE - 42)) | (1 << (sequenceParser.ENTITY - 42)) | (1 << (sequenceParser.QUEUE - 42)) | (1 << (sequenceParser.LAMBDA - 42)))) !== 0)) {
                 this.state = 161;
                 this.participantType();
             }
@@ -1479,6 +1483,10 @@ ParticipantTypeContext.prototype.QUEUE = function() {
     return this.getToken(sequenceParser.QUEUE, 0);
 };
 
+ParticipantTypeContext.prototype.LAMBDA = function() {
+    return this.getToken(sequenceParser.LAMBDA, 0);
+};
+
 ParticipantTypeContext.prototype.enterRule = function(listener) {
     if(listener instanceof sequenceParserListener ) {
         listener.enterParticipantType(this);
@@ -1505,7 +1513,7 @@ sequenceParser.prototype.participantType = function() {
         this.enterOuterAlt(localctx, 1);
         this.state = 200;
         _la = this._input.LA(1);
-        if(!(((((_la - 42)) & ~0x1f) == 0 && ((1 << (_la - 42)) & ((1 << (sequenceParser.ACTOR - 42)) | (1 << (sequenceParser.BOUNDARY - 42)) | (1 << (sequenceParser.COLLECTION - 42)) | (1 << (sequenceParser.CONTROL - 42)) | (1 << (sequenceParser.DATABASE - 42)) | (1 << (sequenceParser.ENTITY - 42)) | (1 << (sequenceParser.QUEUE - 42)))) !== 0))) {
+        if(!(((((_la - 42)) & ~0x1f) == 0 && ((1 << (_la - 42)) & ((1 << (sequenceParser.ACTOR - 42)) | (1 << (sequenceParser.BOUNDARY - 42)) | (1 << (sequenceParser.COLLECTION - 42)) | (1 << (sequenceParser.CONTROL - 42)) | (1 << (sequenceParser.DATABASE - 42)) | (1 << (sequenceParser.ENTITY - 42)) | (1 << (sequenceParser.QUEUE - 42)) | (1 << (sequenceParser.LAMBDA - 42)))) !== 0))) {
         this._errHandler.recoverInline(this);
         }
         else {

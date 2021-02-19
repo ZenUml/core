@@ -5,4 +5,4 @@
 // Self-method
 // Nested method
 // Assignment
-export default `@Actor A @Database B`
+export default `@Actor A @Database B @Lambda C`
