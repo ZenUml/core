@@ -14,6 +14,12 @@ const ToCollector = function () {
   return this
 };
 
+function getParticipantType(text) {
+  if(text) {
+    return text.replace('@', '').toLowerCase();
+  }
+}
+
 ToCollector.prototype = Object.create(sequenceParserListener.sequenceParserListener.prototype)
 // Rules:
 // 1. Later declaration win
@@ -25,8 +31,9 @@ let onParticipant = function (ctx) {
   let stereotype = ctx.stereotype()?.name()?.getTextWithoutQuotes();
   let width = (ctx.width && ctx.width()) && Number.parseInt(ctx.width().getText()) || undefined;
   const label = ctx.label && ctx.label()?.name()?.getTextWithoutQuotes();
+  const participantType = getParticipantType(ctx.participantType && ctx.participantType()?.getText());
   const explicit = true;
-  participants.Add(participant, false, stereotype, width, groupId, label, explicit);
+  participants.Add(participant, false, stereotype, width, groupId, label, participantType, explicit);
 };
 ToCollector.prototype.enterParticipant = onParticipant
 

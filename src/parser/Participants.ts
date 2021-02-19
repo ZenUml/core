@@ -6,6 +6,7 @@ class Participant {
   private explicit: boolean | undefined;
   isStarter: boolean | undefined;
   private label: string | undefined;
+  private participantType: string | undefined;
 
   constructor(name: string,
               isStarter?: boolean,
@@ -13,6 +14,7 @@ class Participant {
               width?: number,
               groupId?: number | string,
               label?: string,
+              participantType?: string,
               explicit?: boolean) {
     this.name = name;
     this.stereotype = stereotype;
@@ -21,6 +23,7 @@ class Participant {
     this.explicit = explicit;
     this.isStarter = isStarter;
     this.label = label;
+    this.participantType = participantType;
   }
 }
 
@@ -35,6 +38,7 @@ export class Participants {
              width?: number,
              groupId?: number | string,
              label?: string,
+             participantType?: string,
              explicit?: boolean): void;
   public Add(name: string,
              isStarter?: boolean,
@@ -42,8 +46,9 @@ export class Participants {
              width?: number,
              groupId?: number | string,
              label?: string,
+             participantType?: string,
              explicit?: boolean): void {
-    const participant = new Participant(name, isStarter, stereotype, width, groupId, label, explicit);
+    const participant = new Participant(name, isStarter, stereotype, width, groupId, label, participantType, explicit);
     if (this.Get(name)?.isStarter && explicit) {
       participant.isStarter = true;
       this.participants.set(participant.name, participant)

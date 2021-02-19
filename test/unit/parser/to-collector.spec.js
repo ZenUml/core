@@ -3,14 +3,14 @@ let ToCollector = require('../../../src/parser/ToCollector')
 test('smoke test2', () => {
   const code = `
     C
-    <<A>> "B 1" 1024
+    <<A>> @actor "B 1" 1024
     @Starter("B 1")
     C.m
     D->E:m
     new F
   `
   let participants = getParticipants(code);
-  expect(participants.Get('B 1')).toEqual({name: 'B 1', isStarter: false, explicit: true, groupId: undefined, stereotype: 'A', 'width': 1024})
+  expect(participants.Get('B 1')).toEqual({name: 'B 1', isStarter: false, explicit: true, groupId: undefined, stereotype: 'A', 'width': 1024, participantType: 'actor'})
 })
 
 describe('Plain participants', () => {
@@ -79,7 +79,31 @@ describe('without starter', () => {
     expect(participants.Size()).toBe(numberOfParticipants)
     expect(participants.Get('A').name).toBe(participant)
   })
+})
 
+describe('with label', () => {
+  test.each([
+    ['A as AA', 'AA'],
+    ['A as "AA"', 'AA'],
+  ])('code:%s => label:%s', (code, label) => {
+    let participants = getParticipants(code, true);
+    expect(participants.Size()).toBe(2)
+    expect(participants.Get('A').name).toBe('A')
+    expect(participants.Get('A').label).toBe(label)
+  })
+})
+
+describe('with participantType', () => {
+  test.each([
+    ['@actor A', 'actor'],
+    ['@Actor A', 'actor'],
+    ['@database A', 'database']
+  ])('code:%s => participantType:%s', (code, participantType) => {
+    let participants = getParticipants(code, true);
+    expect(participants.Size()).toBe(2)
+    expect(participants.Get('A').name).toBe('A')
+    expect(participants.Get('A').participantType).toBe(participantType)
+  })
 })
 
 function getParticipants(code, withStarter) {
