@@ -80,7 +80,9 @@
     margin-left: -40px; /* Remove the extra margin created by starter */
   }
 
-  .lifeline.actor >>> .participant {
+  .lifeline.actor >>> .participant,
+  .lifeline.database >>> .participant
+  {
     text-align: center;
     border: 0;
     padding-top: 0;
@@ -93,6 +95,15 @@
     height: 35px;
     background-size: 50px;
     background-image: url("../assets/actor.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .lifeline.database >>> .participant::before {
+    content: '';
+    display: block;
+    height: 35px;
+    background-size: 35px;
+    background-image: url("../assets/database.svg");
     background-position: center;
     background-repeat: no-repeat;
   }

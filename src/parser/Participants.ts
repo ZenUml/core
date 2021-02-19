@@ -1,5 +1,7 @@
 export enum ParticipantType {
   Actor = 1,
+  Database,
+  Undefined
 }
 export class Participant {
   name: string;
@@ -34,7 +36,10 @@ export class Participant {
     if (this.type?.toLowerCase() === '@actor') {
       return ParticipantType.Actor;
     }
-    return ParticipantType.Actor;
+    if (this.type?.toLowerCase() === '@database') {
+      return ParticipantType.Database;
+    }
+    return ParticipantType.Undefined;
   }
 }
 

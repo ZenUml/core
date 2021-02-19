@@ -1,7 +1,7 @@
 <template>
   <div  :id="entity.name"
         class="lifeline"
-        :class="{actor: isActor}"
+        :class="{actor: isActor, database: isDatabase}"
         :style="{'paddingTop': top + 'px'} ">
     <div class="participant" :class="{'selected': selected}" @click="onSelect">
       <label class="interface" v-if="entity.stereotype" >«{{entity.stereotype}}»</label>
@@ -21,9 +21,10 @@
     computed: {
       ...mapGetters(['firstInvocations', 'onLifelineMounted']),
       isActor() {
-        /* eslint-disabled */
-        console.log(this.entity.Type, ParticipantType.Actor)
         return this.entity.Type() === ParticipantType.Actor
+      },
+      isDatabase() {
+        return this.entity.Type() === ParticipantType.Database
       },
       selected () {
         return this.$store.state.selected.includes(this.entity.name)
