@@ -6,6 +6,8 @@
 // Nested method
 // Assignment
 export default `
+@Lambda A
+@Database B
 @Starter(A1)
 A.method() {
   @Return
