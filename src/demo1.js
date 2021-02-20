@@ -9,6 +9,7 @@ export default `
 @Lambda A
 @Database B
 @Starter(A1)
+==Initialise==
 A.method() {
   @Return
   B->C: m
@@ -16,5 +17,6 @@ A.method() {
   B->A: m
   return m
 }
+==Execute==
 B.met()
 `
