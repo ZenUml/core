@@ -58,7 +58,7 @@
         return this.asyncMessage?.source()?.getTextWithoutQuotes() || this.from
       },
       target: function () {
-        return 'Starter'
+        return this.context?.ret()?.getReturnTo()
       },
       isCurrent: function () {
         return false
