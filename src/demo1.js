@@ -9,5 +9,8 @@ export default `
 A.method() {
   @Return
   B->C: m
+  @Reply
+  B->A: m
+  return m
 }
 `
