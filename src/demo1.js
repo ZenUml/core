@@ -8,15 +8,9 @@
 export default `
 @Starter(User)
 A.method() {
-  if(x) {
-    B.method() {
-      return 1  
-    }
-    return 1.1
-  } else if(y) {
-    return 2
+  self() {
+    return 0
   }
-  return 3
 }
 
 B.method()
