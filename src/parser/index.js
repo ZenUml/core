@@ -55,7 +55,7 @@ RetContext.prototype.getReturnTo = function() {
     return blockParent.Starter();
   } else {
     let ctx = blockParent;
-    while (ctx && !(ctx instanceof seqParser.MessageContext)) {
+    while (ctx && !(ctx instanceof seqParser.MessageContext) && !(ctx instanceof seqParser.CreationContext)) {
       if(ctx instanceof ProgContext) {
         return ctx.Starter();
       }
