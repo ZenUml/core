@@ -6,9 +6,13 @@
 // Nested method
 // Assignment
 export default `
+@Starter(User)
 A.method() {
   if(x) {
-    return 1
+    B.method() {
+      return 1  
+    }
+    return 1.1
   } else if(y) {
     return 2
   }

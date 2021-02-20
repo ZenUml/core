@@ -73,6 +73,11 @@ ToCollector.prototype.enterGroup = function (ctx) {
 ToCollector.prototype.exitGroup = function () {
   groupId = undefined;
 }
+
+ToCollector.prototype.enterRet = function (ctx) {
+  participants.Add(ctx.getReturnTo())
+}
+
 const walker = antlr4.tree.ParseTreeWalker.DEFAULT
 
 ToCollector.prototype.getParticipants = function (context, withStarter) {
