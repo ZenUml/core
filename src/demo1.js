@@ -7,8 +7,7 @@
 // Assignment
 export default `
 A.method() {
-  B.method() {
-    return B
-  }
+  @Return
+  B->C: m
 }
 `

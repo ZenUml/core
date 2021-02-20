@@ -57,6 +57,7 @@ OPT : 'opt';
 AS : 'as';
 
 STARTER_LXR: '@Starter' | '@starter';
+ANNOTATION_RET: '@Return' | '@return';
 ANNOTATION: '@' [a-zA-Z_] [a-zA-Z_0-9]*;
 
 DOT

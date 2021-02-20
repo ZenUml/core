@@ -35,7 +35,7 @@
         return this.context.Origin()
       },
       asyncMessage: function () {
-        return this.context?.asyncMessage()
+        return this.context?.ret().asyncMessage()
       },
       interactionWidth: function () {
         if (this.isSelf) {
@@ -52,13 +52,13 @@
         return this.distance(this.target, this.source) < 0
       },
       signature: function () {
-        return this.context?.ret()?.expr()?.getTextWithoutQuotes()
+        return this.asyncMessage?.content()?.getTextWithoutQuotes() || this.context?.ret()?.expr()?.getTextWithoutQuotes()
       },
       source: function () {
-        return this.from
+        return this.asyncMessage?.source()?.getTextWithoutQuotes() || this.from
       },
       target: function () {
-        return this.context?.ret()?.getReturnTo()
+        return this.asyncMessage?.target()?.getTextWithoutQuotes() || this.context?.ret()?.getReturnTo()
       },
       isCurrent: function () {
         return false

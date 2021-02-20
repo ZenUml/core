@@ -77,6 +77,7 @@ block
 
 ret
  : RETURN expr? SCOL?
+ | ANNOTATION_RET asyncMessage EVENT_END?
  ;
 
 // [Perf] Removing par and opt would improve if/else by about 10%; consider merging loop, par and opt.
