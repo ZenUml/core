@@ -5,4 +5,14 @@
 // Self-method
 // Nested method
 // Assignment
-export default `@Boundary A @Entity B @Control C`
+export default `
+A.method() {
+  B.method() {
+    return B
+    if (x) {
+      return C
+    }
+  }
+  return 1
+}
+`
