@@ -18,4 +18,6 @@ A.method() {
   }
   return 3
 }
+
+B.method()
 `

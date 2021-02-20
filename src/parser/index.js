@@ -93,6 +93,7 @@ antlr4.ParserRuleContext.prototype.returnedValue = function() {
 
 module.exports =  {
   RootContext: rootContext,
+  ProgContext: sequenceParser.sequenceParser.ProgContext,
   GroupContext: sequenceParser.sequenceParser.GroupContext,
   ParticipantContext: sequenceParser.sequenceParser.ParticipantContext,
   Participants: function(ctx, withStarter) {
