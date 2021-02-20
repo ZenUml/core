@@ -6,6 +6,7 @@
 // Nested method
 // Assignment
 export default `
+@Starter(A1)
 A.method() {
   @Return
   B->C: m
@@ -13,4 +14,5 @@ A.method() {
   B->A: m
   return m
 }
+B.met()
 `
