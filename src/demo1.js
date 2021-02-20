@@ -7,12 +7,11 @@
 // Assignment
 export default `
 A.method() {
-  B.method() {
-    return B
-    if (x) {
-      return C
-    }
+  if(x) {
+    return 1
+  } else if(y) {
+    return 2
   }
-  return 1
+  return 3
 }
 `

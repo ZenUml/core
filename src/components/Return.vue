@@ -92,8 +92,8 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .interaction.return {
-    height: 0;
-    margin-bottom: -6px; /* Occurrence padding bottom */
+    /*height: 0;*/
+    /*margin-bottom: -6px; !* Occurrence padding bottom *!*/
   }
   .interaction.return >>> .message {
     width: 100%;
