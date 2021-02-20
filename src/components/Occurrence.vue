@@ -19,7 +19,7 @@
 
 <style scoped>
 
-  >>> >.statement-container:last-child .interaction.return:last-of-type {
+  >>> >.statement-container:last-child>.interaction.return:last-of-type {
     transform: translateY(28px);
   }
 
