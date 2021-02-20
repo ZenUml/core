@@ -14,6 +14,7 @@
   import FragmentPar from './FragmentPar.vue'
   import FragmentLoop from './FragmentLoop.vue'
   import FragmentOpt from './FragmentOpt.vue'
+  import Divider from './Divider.vue'
 
   export default {
     name: 'statement',
@@ -31,7 +32,8 @@
           opt: 'FragmentOpt',
           creation: 'Creation',
           message: 'Interaction',
-          asyncMessage: 'InteractionAsync'
+          asyncMessage: 'InteractionAsync',
+          divider: 'Divider'
         }
         let key = Object.keys(dict).find(x => that.context[x]() !== null)
         return dict[key]
@@ -44,7 +46,8 @@
       FragmentAlt,
       FragmentPar,
       FragmentOpt,
-      FragmentLoop
+      FragmentLoop,
+      Divider
     }
   }
 </script>

@@ -79,6 +79,10 @@ ret
  : RETURN expr? SCOL?
  ;
 
+divider
+ : EQ name EQ
+ ;
+
 // [Perf] Removing par and opt would improve if/else by about 10%; consider merging loop, par and opt.
 stat
  : alt
@@ -91,6 +95,7 @@ stat
  // This change line is lexed as EVENT_END because it was in Event_Mode
  | asyncMessage EVENT_END?
  | ret
+ | divider
  | OTHER {console.log("unknown char: " + $OTHER.text);}
  ;
 

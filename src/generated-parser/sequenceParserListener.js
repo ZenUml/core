@@ -128,6 +128,15 @@ sequenceParserListener.prototype.exitRet = function(ctx) {
 };
 
 
+// Enter a parse tree produced by sequenceParser#divider.
+sequenceParserListener.prototype.enterDivider = function(ctx) {
+};
+
+// Exit a parse tree produced by sequenceParser#divider.
+sequenceParserListener.prototype.exitDivider = function(ctx) {
+};
+
+
 // Enter a parse tree produced by sequenceParser#stat.
 sequenceParserListener.prototype.enterStat = function(ctx) {
 };
