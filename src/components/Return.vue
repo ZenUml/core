@@ -43,10 +43,10 @@
           const averageWidthOfChar = 10
           return averageWidthOfChar * (this.signature?.length || 0) + leftOfMessage
         }
-        return Math.abs(this.distance(this.target, this.source)) + 1
+        return Math.abs(this.distance(this.target, this.source)) - 4
       },
       left: function () {
-        return this.rightToLeft ? this.distance(this.target, this.from) : this.distance(this.source, this.from)
+        return this.rightToLeft ? (this.distance(this.target, this.from) + 2): (this.distance(this.source, this.from) + 2)
       },
       rightToLeft: function () {
         return this.distance(this.target, this.source) < 0
@@ -55,7 +55,7 @@
         return this.context?.ret()?.expr()?.getTextWithoutQuotes()
       },
       source: function () {
-        return this.asyncMessage?.source()?.getTextWithoutQuotes() || this.from
+        return this.from
       },
       target: function () {
         return this.context?.ret()?.getReturnTo()
