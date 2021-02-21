@@ -159,15 +159,9 @@ assignment
  : (type? assignee ASSIGN)
  ;
 
-// [Perf tuning] The following alternative rules does cause perf issue.
-// See the 'Profiling async message' test.
 asyncMessage
  : source ARROW target COL content
- | source ARROW target COL
- | target COL content
- | source ARROW target
- | source ARROW
- | source MINUS
+ | source (MINUS | ARROW) target?
  ;
 
 content

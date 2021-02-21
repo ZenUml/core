@@ -12,6 +12,7 @@ let seqDsl = require('../../../src/parser/index');
 // 2021-02-16: Improved to 1.559 by simplifying 'return'
 // 2021-02-16: Improved to 1.321 by simplifying 'parameter'
 // 2021-02-16: Improved to 1.214 after merged branches
+// 2021-02-21: Improved to 824 after moved 'to DOT' to messageBody.
 test('Profiling sync message', () => {
   var t0 = performance.now()
   for (let i = 0; i < 100; i++) {
