@@ -17,6 +17,13 @@
   }
 </script>
 
+<style scoped>
+
+  >>> >.statement-container:last-child>.interaction.return:last-of-type {
+    transform: translateY(28px);
+  }
+
+</style>
 
 <style>
   .occurrence {

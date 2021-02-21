@@ -6,6 +6,7 @@
        :signature="signature"
        :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent, 'self': isSelf, 'hover': hover }"
        :style="{width: interactionWidth + 'px', transform: 'translateX(' + translateX + 'px)'}">
+    <div v-if="isStarterExplicitlyDefined && isRootBlock" class="occurrence source"></div>
     <comment v-if="comment" :comment="comment"/>
     <component v-bind:is="invocation"
              :content="signature"
@@ -26,6 +27,7 @@
   import SelfInvocation from './SelfInvocation'
   // import {GetInheritedFrom} from '../parser'
   import {CodeRange} from '../parser/CodeRange'
+  import {ProgContext} from '../parser/index'
 
   export default {
     name: 'interaction',
@@ -37,7 +39,13 @@
     props: ['context', 'comment', 'selfCallIndent', 'fragmentOffset'],
     mixins: [InteractionMixin],
     computed: {
-      ...mapGetters(['participants', 'distance', 'distance2', 'centerOf', 'cursor', 'onElementClick']),
+      ...mapGetters(['rootContext', 'participants', 'distance', 'distance2', 'centerOf', 'cursor', 'onElementClick']),
+      isStarterExplicitlyDefined() {
+        return !!this.rootContext?.head()?.starterExp()
+      },
+      isRootBlock() {
+        return this.context?.parentCtx?.parentCtx instanceof ProgContext
+      },
       inheritedFrom: function() {
         return this.context?.Origin()
       },
@@ -96,3 +104,10 @@
     }
   }
 </script>
+<style scoped>
+  .occurrence.source {
+    position: absolute;
+    height: calc(100% + 16px);
+    left: -12px;
+  }
+</style>

@@ -46,6 +46,25 @@ StatContext.prototype.Origin = function() {
   }
 }
 
+const RetContext = seqParser.RetContext;
+RetContext.prototype.getReturnTo = function() {
+  const stat = this.parentCtx;
+  const block = stat.parentCtx;
+  const blockParent = block.parentCtx;
+  if(blockParent instanceof ProgContext) {
+    return blockParent.Starter();
+  } else {
+    let ctx = blockParent;
+    while (ctx && !(ctx instanceof seqParser.MessageContext) && !(ctx instanceof seqParser.CreationContext)) {
+      if(ctx instanceof ProgContext) {
+        return ctx.Starter();
+      }
+      ctx = ctx.parentCtx;
+    }
+    return ctx.parentCtx.Origin();
+  }
+}
+
 ProgContext.prototype.Starter = function () {
   return this.head()?.starterExp()?.starter()?.getTextWithoutQuotes() || 'Starter'
 }
@@ -74,6 +93,7 @@ antlr4.ParserRuleContext.prototype.returnedValue = function() {
 
 module.exports =  {
   RootContext: rootContext,
+  ProgContext: sequenceParser.sequenceParser.ProgContext,
   GroupContext: sequenceParser.sequenceParser.GroupContext,
   ParticipantContext: sequenceParser.sequenceParser.ParticipantContext,
   Participants: function(ctx, withStarter) {

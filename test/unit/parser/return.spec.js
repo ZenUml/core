@@ -3,8 +3,10 @@ let seqDsl = require('../../../src/parser/index');
 test('Keyword "return" - in method block', () => {
   let rootContext = seqDsl.RootContext('A.method() { return x1 }');
   expect(seqDsl.RootContext).not.toBeNull()
-  let returnedValue = rootContext.block().stat()[0].message().braceBlock().block().stat()[0].ret().expr();
+  const ret = rootContext.block().stat()[0].message().braceBlock().block().stat()[0].ret()
+  let returnedValue = ret.expr();
   expect(returnedValue.getText()).toBe('x1')
+  expect(ret.getReturnTo()).toBe('Starter')
 })
 
 test('Keyword "return" - in alt block', () => {

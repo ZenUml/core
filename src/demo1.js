@@ -5,12 +5,18 @@
 // Self-method
 // Nested method
 // Assignment
-export default `@Boundary A @Entity B @Control C
-== Init ==
-A.foo {
-    == A1 ==
-    B.bar
+export default `
+@Lambda A
+@Database B
+@Starter(A1)
+==Initialise==
+A.method() {
+  @Return
+  B->C: m
+  @Reply
+  B->A: m
+  return m
 }
-== Run ==
-C.hello
+==Execute==
+B.met()
 `

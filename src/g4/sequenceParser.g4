@@ -77,6 +77,7 @@ block
 
 ret
  : RETURN expr? SCOL?
+ | ANNOTATION_RET asyncMessage EVENT_END?
  ;
 
 divider
