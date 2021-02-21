@@ -25,14 +25,16 @@ describe('message - Owner', () => {
 describe('message - incomplete', () => {
   test('A.', () => {
     let message = getMessageContext('A.')
-    expect(message.messageBody().func().to().getText()).toBe('A')
+    expect(message.messageBody().to().getText()).toBe('A')
   })
 
-  // This will be parsed as to statements: `A.` and `m(`
+  // This will be parsed as to statements: `A.` and `m(`, so the first statement has a null func.
+  // The editor should close the () in most cases. We do not add alternative rules to allow this
+  // to be parsed as one statement, because it cause other issues.
   test('A.m(', () => {
     let message = getMessageContext('A.m(');
-    let signatureElement = message.messageBody().func().signature()[0];
-    expect(signatureElement).toBeUndefined()
+    let signatureElement = message.messageBody().func();
+    expect(signatureElement).toBeNull()
   })
 })
 
@@ -64,9 +66,9 @@ test('Simple method: A->B.method()', () => {
 test('Simple method: "A".method()', () => {
     let rootContext = seqDsl.RootContext('"A".method()');
     expect(seqDsl.RootContext).not.toBeNull()
-    let func = rootContext.block().stat()[0].message().messageBody().func();
-    expect(func.to().getTextWithoutQuotes()).toBe('A');
-    let signatureElement = func.signature()[0];
+    let messageBody = rootContext.block().stat()[0].message().messageBody();
+    expect(messageBody.to().getTextWithoutQuotes()).toBe('A');
+    let signatureElement = messageBody.func().signature()[0];
     expect(signatureElement.methodName().getTextWithoutQuotes()).toBe('method');
 })
 

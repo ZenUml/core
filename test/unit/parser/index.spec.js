@@ -1,8 +1,9 @@
 let seqDsl = require('../../../src/parser/index');
 test('seqDsl should parse the to and method', () => {
     let rootContext = seqDsl.RootContext('"b:B".method()');
-    let func = rootContext.block().stat()[0].message().messageBody().func();
-    expect(func.to().getText()).toBe('"b:B"');
+  const messageBody = rootContext.block().stat()[0].message().messageBody()
+  let func = messageBody.func();
+    expect(messageBody.to().getText()).toBe('"b:B"');
     expect(func.signature()[0].getText()).toBe('method()')
 })
 

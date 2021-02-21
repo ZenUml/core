@@ -25,9 +25,8 @@ const MessageContext = seqParser.MessageContext
  * @return {string}
  */
 MessageContext.prototype.Owner = function () {
-  if (this.messageBody().func()?.to()) {
-    let participant = this.messageBody().func().to().getTextWithoutQuotes();
-    return participant;
+  if (this.messageBody()?.to()) {
+    return this.messageBody().to().getTextWithoutQuotes();
   }
   return this.parentCtx.Origin();
 }

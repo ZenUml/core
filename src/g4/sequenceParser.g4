@@ -132,16 +132,16 @@ message
 
 // Order of 'func | (to DOT)' is important. Otherwise A.m will be parsed as to messages
 messageBody
- : assignment? (from ARROW)? func
+ : assignment? ((from ARROW)? to DOT)? func
  | assignment
+ | to DOT
  ;
 
 // [Perf tuning] Performance improved 30% after we removed other
 // alternative rules (1.3s -> 1.0s). It would improve another 30%,
 // if we remove the 'to DOT', but that would cause issues for 'A.'.
 func
- : (to DOT)? signature (DOT signature)*
- | to DOT
+ : signature (DOT signature)*
  ;
 
 from
@@ -168,6 +168,7 @@ asyncMessage
  | source ARROW target COL
  | target COL content
  | source ARROW target
+ | source ARROW
  | source MINUS
  ;
 

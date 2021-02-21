@@ -75,10 +75,10 @@
         }
       },
       to: function () {
-        return this.func?.to()?.getTextWithoutQuotes()
+        return this.context?.message()?.messageBody()?.to()?.getTextWithoutQuotes()
       },
       isSelf: function() {
-        return !this.context?.message().messageBody().func().to() || this.context?.message().messageBody().func().to().getTextWithoutQuotes() === this.from
+        return !this.context?.message()?.messageBody()?.to() || this.context?.message()?.messageBody()?.to().getTextWithoutQuotes() === this.from
       },
       invocation: function () {
         // return 'Message'
