@@ -35,6 +35,7 @@ test('Profiling async message', () => {
 // Perf baseline: 814ms on my MBP.
 // 2021-02-14: Improved to 243ms.
 // 2021-02-14: Improved to 228ms (10%) by simplifying starterEpx
+// 2021-02-21: Improved to 204 by merging 'AT' into ANNOTATION in lexer.
 test('Profiling prog.head', () => {
   var t0 = performance.now()
   for (let i = 0; i < 100; i++) {

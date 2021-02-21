@@ -18,7 +18,6 @@ ARROW
  : '->'
  ;
 
-AT : '@';
 OR : '||';
 AND : '&&';
 EQ : '==';
@@ -58,7 +57,7 @@ AS : 'as';
 
 STARTER_LXR: '@Starter' | '@starter';
 ANNOTATION_RET: '@Return' | '@return' | '@Reply' | '@reply';
-ANNOTATION: '@' [a-zA-Z_] [a-zA-Z_0-9]*;
+ANNOTATION: '@'[a-zA-Z_0-9]*;
 
 DOT
  : '.'
