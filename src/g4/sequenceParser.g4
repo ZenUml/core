@@ -43,12 +43,8 @@ participant
 
 stereotype
  : SOPEN name SCLOSE
- | SOPEN name
- | SOPEN name GT
- | SOPEN GT         // Some people may write <<>> first then put in the interface name
- | SOPEN SCLOSE
- | SOPEN
- | LT
+ | SOPEN name GT?
+ | (LT | SOPEN) (GT | SCLOSE)?         // Some people may write <<>> first then put in the interface name
  ;
 
 label
