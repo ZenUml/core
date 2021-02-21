@@ -137,9 +137,7 @@ messageBody
  | to DOT
  ;
 
-// [Perf tuning] Performance improved 30% after we removed other
-// alternative rules (1.3s -> 1.0s). It would improve another 30%,
-// if we remove the 'to DOT', but that would cause issues for 'A.'.
+// func is also used in exp as parameter with expr: (to DOT)? func;
 func
  : signature (DOT signature)*
  ;
@@ -257,7 +255,7 @@ expr
  | expr AND expr                        #andExpr
  | expr OR expr                         #orExpr
  | expr PLUS expr                       #plusExpr
- | func                                 #funcExpr
+ | (to DOT)? func                       #funcExpr
  | creation                             #creationExpr
  | atom                                 #atomExpr
  ;
