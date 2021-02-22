@@ -5,7 +5,7 @@
        v-on:mouseout.stop="mouseOut"
        :signature="signature"
        :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent, 'self': isSelf, 'hover': hover }"
-       :style="{width: interactionWidth + 'px', transform: 'translateX(' + translateX + 'px)'}">
+       :style="{width: interactionWidth + 'px', left: left + 'px', transform: 'translateX(' + translateX + 'px)'}">
     <div v-if="isStarterExplicitlyDefined && isRootBlock" class="occurrence source"></div>
     <comment v-if="comment" :comment="comment"/>
     <component v-bind:is="invocation"

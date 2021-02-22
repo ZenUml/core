@@ -29,34 +29,24 @@ export default {
     signature: function () {
       return this.func?.signature().map(s => s.getTextWithoutQuotes()).join('.')
     },
+    left: function() {
+      const indent = this.selfCallIndent || 0
+      return indent * (-1)
+    },
     translateX: function() {
       const indent = this.selfCallIndent || 0
       const fragmentOff = this.fragmentOffset || 0
-      if (this.outOfBand) {
-        if (!this.rightToLeft) {
-          // A    B     C
-          // inh  pro   to
-          const dist = this.distance2(this.origin, this.providedFrom)
-          return dist - indent + fragmentOff
-        } else {
-          // A    B     C
-          // to   pro   inh
-          const dist = this.distance2(this.to, this.origin)
-          return (dist + indent - fragmentOff) * (-1)
-        }
-      } else {
-        if (!this.rightToLeft) {
-          // A    B
-          // inh  to
-          // No self call indent here. It is used only for width.
-          return fragmentOff
-        } else {
-          // A    B
-          // to   inh
-          const dist = this.distance2(this.to, this.origin)
-          return (dist + indent - fragmentOff) * (-1)
-        }
+      // ** Starting point is always the center of 'origin' **
+      // Normal flow
+      if(!this.rightToLeft && !this.outOfBand) {
+        // + indent because we always start from the center of origin
+        // starting point is moved back to the center of origin by 'left'
+        return indent + fragmentOff
       }
+
+      const moveTo = !this.rightToLeft ? this.providedFrom : this.to
+      const dist = this.distance2(this.origin, moveTo)
+      return dist + fragmentOff
     },
     rightToLeft: function () {
       return this.centerOf(this.to) < this.centerOf(this.from)
