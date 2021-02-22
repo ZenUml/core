@@ -218,6 +218,15 @@ sequenceParserListener.prototype.exitFrom = function(ctx) {
 };
 
 
+// Enter a parse tree produced by sequenceParser#to.
+sequenceParserListener.prototype.enterTo = function(ctx) {
+};
+
+// Exit a parse tree produced by sequenceParser#to.
+sequenceParserListener.prototype.exitTo = function(ctx) {
+};
+
+
 // Enter a parse tree produced by sequenceParser#signature.
 sequenceParserListener.prototype.enterSignature = function(ctx) {
 };
@@ -287,15 +296,6 @@ sequenceParserListener.prototype.enterAssignee = function(ctx) {
 
 // Exit a parse tree produced by sequenceParser#assignee.
 sequenceParserListener.prototype.exitAssignee = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#to.
-sequenceParserListener.prototype.enterTo = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#to.
-sequenceParserListener.prototype.exitTo = function(ctx) {
 };
 
 
