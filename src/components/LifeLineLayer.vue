@@ -30,7 +30,7 @@
         return this.participants.Starter()
       },
       isStarterExplicitlyDefined() {
-        return !!this.context?.starterExp()
+        return !!this.context?.starterExp() || (!!this.starterParticipant && (this.starterParticipant.name !== 'Starter'))
       },
       implicitParticipants () {
         return this.participants.ImplicitArray()

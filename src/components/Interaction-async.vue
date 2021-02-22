@@ -55,7 +55,7 @@
       // Change it to use translate according to https://stackoverflow.com/a/53892597/529187.
       translateX: function () {
         const leftOffset = this.rightToLeft ? this.distance(this.target, this.from) : this.distance(this.source, this.from)
-        return leftOffset - this.selfCallIndent + this.fragmentOffset
+        return leftOffset - (this.selfCallIndent || 0) + this.fragmentOffset
       },
       rightToLeft: function () {
         return this.distance(this.target, this.source) < 0

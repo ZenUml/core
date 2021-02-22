@@ -66,7 +66,16 @@ RetContext.prototype.getReturnTo = function() {
 }
 
 ProgContext.prototype.Starter = function () {
-  return this.head()?.starterExp()?.starter()?.getTextWithoutQuotes() || 'Starter'
+  const declaredStarter = this.head()?.starterExp()?.starter()?.getTextWithoutQuotes()
+  let starterFromStartingMessage;
+  const stat = this.block()?.stat();
+  if (stat && stat[0]) {
+    const messageFrom = stat[0].message()?.messageBody()?.from()?.getTextWithoutQuotes()
+    const asyncMessageFrom = stat[0].asyncMessage()?.from()?.getTextWithoutQuotes()
+    starterFromStartingMessage = messageFrom || asyncMessageFrom
+  }
+
+  return declaredStarter || starterFromStartingMessage || 'Starter'
 }
 
 antlr4.ParserRuleContext.prototype.getTextWithoutQuotes = function() {
