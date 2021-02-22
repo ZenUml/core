@@ -10,7 +10,7 @@ describe('Async Message', () => {
     let rootContext = seqDsl.RootContext(code);
     const asyncMessage = rootContext.block().stat()[0].asyncMessage();
     let actualSource = asyncMessage.from();
-    const actualTarget = asyncMessage.target()
+    const actualTarget = asyncMessage.to()
     expectText(actualSource).toBe(source)
     expectText(actualTarget).toBe(target)
   })

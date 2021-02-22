@@ -64,7 +64,7 @@
         return this.asyncMessage?.from()?.getTextWithoutQuotes() || this.from
       },
       target: function () {
-        return this.asyncMessage?.target()?.getTextWithoutQuotes()
+        return this.asyncMessage?.to()?.getTextWithoutQuotes()
       },
       isCurrent: function () {
         const start = this.asyncMessage.start.start

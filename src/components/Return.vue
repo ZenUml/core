@@ -58,7 +58,7 @@
         return this.asyncMessage?.from()?.getTextWithoutQuotes() || this.from
       },
       target: function () {
-        return this.asyncMessage?.target()?.getTextWithoutQuotes() || this.context?.ret()?.getReturnTo()
+        return this.asyncMessage?.to()?.getTextWithoutQuotes() || this.context?.ret()?.getReturnTo()
       },
       isCurrent: function () {
         return false
