@@ -30,20 +30,18 @@ export default {
       return this.func?.signature().map(s => s.getTextWithoutQuotes()).join('.')
     },
     translateX: function() {
+      const indent = this.selfCallIndent || 0
+      const fragmentOff = this.fragmentOffset || 0
       if (this.outOfBand) {
         if (!this.rightToLeft) {
           // A    B     C
           // inh  pro   to
           const dist = this.distance2(this.inheritedFrom, this.providedFrom)
-          const indent = this.selfCallIndent || 0
-          const fragmentOff = this.fragmentOffset || 0
           return dist - indent + fragmentOff
         } else {
           // A    B     C
           // to   pro   inh
           const dist = this.distance2(this.to, this.inheritedFrom)
-          const indent = this.selfCallIndent || 0
-          const fragmentOff = this.fragmentOffset || 0
           return (dist + indent - fragmentOff) * (-1)
         }
       } else {
@@ -51,13 +49,11 @@ export default {
           // A    B
           // inh  to
           // No self call indent here. It is used only for width.
-          return this.fragmentOffset || 0
+          return fragmentOff
         } else {
           // A    B
           // to   inh
           const dist = this.distance2(this.to, this.inheritedFrom)
-          const indent = this.selfCallIndent || 0
-          const fragmentOff = this.fragmentOffset || 0
           return (dist + indent - fragmentOff) * (-1)
         }
       }
