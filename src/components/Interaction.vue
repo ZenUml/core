@@ -25,7 +25,6 @@
   import {mapGetters} from "vuex";
   import InteractionMixin from './InteractionMixin'
   import SelfInvocation from './SelfInvocation'
-  // import {GetInheritedFrom} from '../parser'
   import {CodeRange} from '../parser/CodeRange'
   import {ProgContext} from '../parser/index'
 
