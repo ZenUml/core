@@ -45,7 +45,7 @@
       isRootBlock() {
         return this.context?.parentCtx?.parentCtx instanceof ProgContext
       },
-      inheritedFrom: function() {
+      origin: function() {
         return this.context?.Origin()
       },
       passOnOffset: function() {

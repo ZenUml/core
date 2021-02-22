@@ -8,10 +8,10 @@ export default {
       return this.context?.message()?.messageBody()?.from()?.getTextWithoutQuotes()
     },
     from: function() {
-      return this.providedFrom || this.inheritedFrom
+      return this.providedFrom || this.origin
     },
     outOfBand: function() {
-      return !!this.providedFrom && (this.providedFrom !== this.inheritedFrom)
+      return !!this.providedFrom && (this.providedFrom !== this.origin)
     },
     func: function() {
       return this.message?.messageBody().func()
@@ -36,12 +36,12 @@ export default {
         if (!this.rightToLeft) {
           // A    B     C
           // inh  pro   to
-          const dist = this.distance2(this.inheritedFrom, this.providedFrom)
+          const dist = this.distance2(this.origin, this.providedFrom)
           return dist - indent + fragmentOff
         } else {
           // A    B     C
           // to   pro   inh
-          const dist = this.distance2(this.to, this.inheritedFrom)
+          const dist = this.distance2(this.to, this.origin)
           return (dist + indent - fragmentOff) * (-1)
         }
       } else {
@@ -53,7 +53,7 @@ export default {
         } else {
           // A    B
           // to   inh
-          const dist = this.distance2(this.to, this.inheritedFrom)
+          const dist = this.distance2(this.to, this.origin)
           return (dist + indent - fragmentOff) * (-1)
         }
       }
