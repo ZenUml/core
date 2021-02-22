@@ -53,3 +53,26 @@ assignment
  ;
 ```
 First of all, `from->to` and `source->target` are very similar. Let's first merge them.
+
+
+      if(!this.rightToLeft) {
+        if(this.outOfBand) {
+          // A    B     C
+          // inh  pro   to
+          const dist = this.distance2(this.origin, this.providedFrom)
+          return dist - indent + fragmentOff
+        } else {
+          // A    B
+          // inh  to
+          // No self call indent here. It is used only for width.
+          return fragmentOff
+        }
+      } else {
+        // A    B     C
+        // to   pro   origin
+        // OR
+        // A    B
+        // to   origin
+        const dist = this.distance2(this.to, this.origin)
+        return (dist - indent - fragmentOff) * (-1)
+      }
