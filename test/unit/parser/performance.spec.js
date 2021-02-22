@@ -13,6 +13,7 @@ let seqDsl = require('../../../src/parser/index');
 // 2021-02-16: Improved to 1.321 by simplifying 'parameter'
 // 2021-02-16: Improved to 1.214 after merged branches
 // 2021-02-21: Improved to 824 after moved 'to DOT' to messageBody.
+// 2021-02-21: Improved to 765 after merged 'source->target' to 'from->to'.
 test('Profiling sync message', () => {
   var t0 = performance.now()
   for (let i = 0; i < 100; i++) {
@@ -23,6 +24,7 @@ test('Profiling sync message', () => {
 })
 
 // Perf baseline 100ms
+// 2021-02-21: Re-baselined to 110 after merged 'source->target' to 'from->to'.
 test('Profiling async message', () => {
   var t0 = performance.now()
   for (let i = 0; i < 1000; i++) {
@@ -52,6 +54,7 @@ test('Profiling prog.head', () => {
 // 2021-02-14: Regressed to 2400 after added alternative rules for braceBlock and invocation
 // 2021-02-16: Re-baseline to 2800 to 3000ms after merging branches.
 // 2021-02-16: Improved to 1694 after removed alternative rule for braceBlock.
+// 2021-02-21: Improved to 1560 after merged 'source->target' to 'from->to'.
 test('Profiling if/else', () => {
   const t0 = performance.now()
   for (let i = 0; i < 100; i++) {
