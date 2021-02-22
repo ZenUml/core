@@ -142,6 +142,10 @@ from
  : ID | STRING
  ;
 
+to
+ : ID | STRING
+ ;
+
 signature
  : methodName invocation?
  ;
@@ -174,10 +178,6 @@ type
 
 assignee
  : atom | (ID (COMMA ID)*) | STRING
- ;
-
-to
- : ID | STRING
  ;
 
 methodName
