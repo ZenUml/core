@@ -44,7 +44,7 @@ test('Async message', () => {
   let rootContext = seqDsl.RootContext('A->B:message');
   let block = rootContext.block();
   expect(block.getText()).toBe('A->B:message')
-  expect(block.stat()[0].asyncMessage().source().getText()).toBe('A')
+  expect(block.stat()[0].asyncMessage().from().getText()).toBe('A')
   expect(block.stat()[0].asyncMessage().target().getText()).toBe('B')
   expect(block.stat()[0].asyncMessage().content().getText()).toBe('message')
 })

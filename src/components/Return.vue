@@ -55,7 +55,7 @@
         return this.asyncMessage?.content()?.getTextWithoutQuotes() || this.context?.ret()?.expr()?.getTextWithoutQuotes()
       },
       source: function () {
-        return this.asyncMessage?.source()?.getTextWithoutQuotes() || this.from
+        return this.asyncMessage?.from()?.getTextWithoutQuotes() || this.from
       },
       target: function () {
         return this.asyncMessage?.target()?.getTextWithoutQuotes() || this.context?.ret()?.getReturnTo()

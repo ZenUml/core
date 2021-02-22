@@ -156,16 +156,12 @@ assignment
  ;
 
 asyncMessage
- : source ARROW target COL content
- | source (MINUS | ARROW) target?
+ : from ARROW target COL content
+ | from (MINUS | ARROW) target?
  ;
 
 content
  : EVENT_PAYLOAD_LXR
- ;
-
-source
- : ID | STRING
  ;
 
 target

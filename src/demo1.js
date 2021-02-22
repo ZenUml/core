@@ -47,7 +47,7 @@ RET ret = A.methodA(a, b) {
     self {
       return C
     }
-    C: self
+    C->C: self
     B.alternative() {
       // A comment for creation
       a = new AHasAVerylongnamesoitislong() {
