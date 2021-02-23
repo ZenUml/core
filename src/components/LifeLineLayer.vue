@@ -72,7 +72,9 @@
 <style scoped>
   .life-line-layer {
     display: flex;        /* This is to remove spaces between inline-blocks, not necessary for generated and non-formatted code*/
-    white-space: nowrap;  /* why? */
+    min-width: 500px;     /* This line and the next line make them wide enough when there are ONLY two participants */
+    justify-content: space-evenly;
+    white-space: nowrap;  /* Do not wrap to a new line */
     position: absolute;   /* So that message layer is overlaid. */
     height: 100%;         /* To give height to the line */
   }
