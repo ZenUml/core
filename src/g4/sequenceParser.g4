@@ -159,7 +159,7 @@ assignment
  ;
 
 asyncMessage
- : from ARROW to COL content
+ : (from ARROW)? to COL content
  | from (MINUS | ARROW) to?
  ;
 

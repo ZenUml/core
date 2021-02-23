@@ -25,6 +25,7 @@ test('Profiling sync message', () => {
 
 // Perf baseline 100ms
 // 2021-02-21: Re-baselined to 110 after merged 'source->target' to 'from->to'.
+// 2021-02-23: Re-baselined to 1500(!) after enabled optional (from->). The default message in cloud version has that.
 test('Profiling async message', () => {
   var t0 = performance.now()
   for (let i = 0; i < 1000; i++) {
