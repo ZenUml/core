@@ -62,7 +62,7 @@ describe('Translate X', () => {
   // provided   inherited   to
   it('when left to right', function () {
     Interaction.computed.providedFrom = () => 'A'
-    Interaction.computed.inheritedFrom = () => 'B'
+    Interaction.computed.origin = () => 'B'
     Interaction.computed.to = () => 'C'
     const storeConfig = Store()
     storeConfig.getters.centerOf = () => (participant) => {
@@ -82,7 +82,7 @@ describe('Translate X', () => {
   // to   real     from
   it('when right to left', function () {
     Interaction.computed.providedFrom = () => 'B'
-    Interaction.computed.inheritedFrom = () => 'C'
+    Interaction.computed.origin = () => 'C'
     Interaction.computed.to = () => 'A'
     const storeConfig = Store()
     storeConfig.getters.centerOf = () => (participant) => {

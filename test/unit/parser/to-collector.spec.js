@@ -35,7 +35,7 @@ describe('with width', () => {
     // `A` will be parsed as a participant which matches `participant EOF`
     let participants = getParticipants(code, true);
     expect(participants.Size()).toBe(2)
-    expect(participants.First().name).toBe('Starter')
+    expect(participants.First().name).toBe('_STARTER_')
     expect(participants.First().width).toBe(undefined)
     expect(participants.Get('A').name).toBe('A')
     expect(participants.Get('A').width).toBe(width)
@@ -121,8 +121,8 @@ describe('Add Starter to participants', () => {
     const toCollector = new ToCollector()
     const participants = toCollector.getParticipants(rootContext, true)
     expect(participants.Size()).toBe(1)
-    expect(participants.Get('Starter').name).toBe('Starter')
-    expect(participants.Get('Starter').isStarter).toBeTruthy()
+    expect(participants.Get('_STARTER_').name).toBe('_STARTER_')
+    expect(participants.Get('_STARTER_').isStarter).toBeTruthy()
   })
 })
 
@@ -165,7 +165,7 @@ describe('implicit', () => {
 
     test('seqDsl should get all participants including from', () => {
       let participants = getParticipants('A->B.m', true);
-      expect(participants.Size()).toBe(3)
+      expect(participants.Size()).toBe(2)
     })
   })
 })

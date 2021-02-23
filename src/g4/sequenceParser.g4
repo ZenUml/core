@@ -126,11 +126,10 @@ message
  : messageBody (SCOL | braceBlock)?
  ;
 
-// Order of 'func | (to DOT)' is important. Otherwise A.m will be parsed as to messages
 messageBody
  : assignment? ((from ARROW)? to DOT)? func
  | assignment
- | to DOT
+ | (from ARROW)? to DOT   // A->B. or B.
  ;
 
 // func is also used in exp as parameter with expr: (to DOT)? func;
@@ -139,6 +138,10 @@ func
  ;
 
 from
+ : ID | STRING
+ ;
+
+to
  : ID | STRING
  ;
 
@@ -156,20 +159,12 @@ assignment
  ;
 
 asyncMessage
- : source ARROW target COL content
- | source (MINUS | ARROW) target?
+ : from ARROW to COL content
+ | from (MINUS | ARROW) to?
  ;
 
 content
  : EVENT_PAYLOAD_LXR
- ;
-
-source
- : ID | STRING
- ;
-
-target
- : ID | STRING
  ;
 
 construct
@@ -182,10 +177,6 @@ type
 
 assignee
  : atom | (ID (COMMA ID)*) | STRING
- ;
-
-to
- : ID | STRING
  ;
 
 methodName

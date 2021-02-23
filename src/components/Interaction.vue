@@ -5,8 +5,10 @@
        v-on:mouseout.stop="mouseOut"
        :signature="signature"
        :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent, 'self': isSelf, 'hover': hover }"
-       :style="{width: interactionWidth + 'px', transform: 'translateX(' + translateX + 'px)'}">
-    <div v-if="isStarterExplicitlyDefined && isRootBlock" class="occurrence source"></div>
+       :style="{width: interactionWidth + 'px', left: left + 'px', transform: 'translateX(' + translateX + 'px)'}">
+    <div v-if="showStarter && isRootBlock"
+         :style="{transform: 'translateX(' + translateX * (-1) + 'px)'}"
+         class="occurrence source"></div>
     <comment v-if="comment" :comment="comment"/>
     <component v-bind:is="invocation"
              :content="signature"
@@ -25,7 +27,6 @@
   import {mapGetters} from "vuex";
   import InteractionMixin from './InteractionMixin'
   import SelfInvocation from './SelfInvocation'
-  // import {GetInheritedFrom} from '../parser'
   import {CodeRange} from '../parser/CodeRange'
   import {ProgContext} from '../parser/index'
 
@@ -40,13 +41,13 @@
     mixins: [InteractionMixin],
     computed: {
       ...mapGetters(['rootContext', 'participants', 'distance', 'distance2', 'centerOf', 'cursor', 'onElementClick']),
-      isStarterExplicitlyDefined() {
-        return !!this.rootContext?.head()?.starterExp()
+      showStarter() {
+        return this.participants.Starter().name !== '_STARTER_'
       },
       isRootBlock() {
         return this.context?.parentCtx?.parentCtx instanceof ProgContext
       },
-      inheritedFrom: function() {
+      origin: function() {
         return this.context?.Origin()
       },
       passOnOffset: function() {

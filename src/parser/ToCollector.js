@@ -42,9 +42,6 @@ let onTo = function (ctx) {
 ToCollector.prototype.enterFrom = onTo
 ToCollector.prototype.enterTo = onTo
 
-ToCollector.prototype.enterSource = onTo
-ToCollector.prototype.enterTarget = onTo
-
 ToCollector.prototype.enterStarter = function(ctx) {
   let participant = ctx.getTextWithoutQuotes();
   participants.Add(participant, true)

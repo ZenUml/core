@@ -6,7 +6,7 @@ test('Keyword "return" - in method block', () => {
   const ret = rootContext.block().stat()[0].message().braceBlock().block().stat()[0].ret()
   let returnedValue = ret.expr();
   expect(returnedValue.getText()).toBe('x1')
-  expect(ret.getReturnTo()).toBe('Starter')
+  expect(ret.getReturnTo()).toBe('_STARTER_')
 })
 
 test('Keyword "return" - in alt block', () => {

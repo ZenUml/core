@@ -1,8 +1,11 @@
 <template>
   <div class="life-line-layer">
-    <life-line :entity="starterParticipant"
-               class="starter"
-               :class="{hidden: !isStarterExplicitlyDefined}"/>
+    <life-line
+      v-if="starterOnTheLeft"
+      :entity="starterParticipant"
+      class="starter"
+      :class="{hidden: starterParticipant.name === '_STARTER_'}"
+      />
     <template v-for="(child, index) in explictGroupAndParticipants">
       <life-line-group :key="index"
                        v-if="child instanceof GroupContext"
@@ -29,8 +32,11 @@
       starterParticipant() {
         return this.participants.Starter()
       },
-      isStarterExplicitlyDefined() {
-        return !!this.context?.starterExp()
+      showStarter() {
+        return this.starterParticipant.name !== '_STARTER_'
+      },
+      starterOnTheLeft() {
+        return !this.starterParticipant.explicit
       },
       implicitParticipants () {
         return this.participants.ImplicitArray()
@@ -38,7 +44,7 @@
       explictGroupAndParticipants() {
         return this.context?.children.filter(c => {
           const isGroup = c instanceof this.GroupContext
-          const isParticipant = (c instanceof this.ParticipantContext) && c.name()?.getText() !== this.participants?.Starter()?.name
+          const isParticipant = (c instanceof this.ParticipantContext)
           return isGroup || isParticipant
         })
       }
@@ -66,7 +72,9 @@
 <style scoped>
   .life-line-layer {
     display: flex;        /* This is to remove spaces between inline-blocks, not necessary for generated and non-formatted code*/
-    white-space: nowrap;  /* why? */
+    min-width: 500px;     /* This line and the next line make them wide enough when there are ONLY two participants */
+    justify-content: space-evenly;
+    white-space: nowrap;  /* Do not wrap to a new line */
     position: absolute;   /* So that message layer is overlaid. */
     height: 100%;         /* To give height to the line */
   }

@@ -5,7 +5,7 @@
        v-on:mouseout.stop="mouseOut"
        :signature="signature"
        :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent, 'hover': hover }"
-       :style="{width: interactionWidth + 'px', left: left + (fragmentOffset || 0) + 'px'}">
+       :style="{width: interactionWidth + 'px', transform: 'translateX(' + translateX + 'px)'}">
     <comment v-if="comment" :comment="comment"/>
 <!--    <message :content="signature" :rtl="rightToLeft" type="async"/>-->
     <component v-bind:is="invocation"
@@ -34,7 +34,7 @@
         hover: false
       }
     },
-    props: ['context', 'comment', 'fragmentOffset'],
+    props: ['context', 'comment', 'selfCallIndent', 'fragmentOffset'],
     computed: {
       ...mapGetters(['distance', 'cursor', 'onElementClick']),
       from: function() {
@@ -51,8 +51,11 @@
         }
         return Math.abs(this.distance(this.target, this.source)) + 1
       },
-      left: function () {
-        return this.rightToLeft ? this.distance(this.target, this.from) : this.distance(this.source, this.from)
+      // Both 'left' and 'translateX' can be used to move the element horizontally.
+      // Change it to use translate according to https://stackoverflow.com/a/53892597/529187.
+      translateX: function () {
+        const leftOffset = this.rightToLeft ? this.distance(this.target, this.from) : this.distance(this.source, this.from)
+        return leftOffset - (this.selfCallIndent || 0) + this.fragmentOffset
       },
       rightToLeft: function () {
         return this.distance(this.target, this.source) < 0
@@ -61,10 +64,10 @@
         return this.asyncMessage?.content()?.getTextWithoutQuotes()
       },
       source: function () {
-        return this.asyncMessage?.source()?.getTextWithoutQuotes() || this.from
+        return this.asyncMessage?.from()?.getTextWithoutQuotes() || this.from
       },
       target: function () {
-        return this.asyncMessage?.target()?.getTextWithoutQuotes()
+        return this.asyncMessage?.to()?.getTextWithoutQuotes()
       },
       isCurrent: function () {
         const start = this.asyncMessage.start.start
