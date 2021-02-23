@@ -6,7 +6,9 @@
        :signature="signature"
        :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent, 'self': isSelf, 'hover': hover }"
        :style="{width: interactionWidth + 'px', left: left + 'px', transform: 'translateX(' + translateX + 'px)'}">
-    <div v-if="isStarterExplicitlyDefined && isRootBlock" class="occurrence source"></div>
+    <div v-if="showStarter && isRootBlock"
+         :style="{transform: 'translateX(' + translateX * (-1) + 'px)'}"
+         class="occurrence source"></div>
     <comment v-if="comment" :comment="comment"/>
     <component v-bind:is="invocation"
              :content="signature"
@@ -39,8 +41,8 @@
     mixins: [InteractionMixin],
     computed: {
       ...mapGetters(['rootContext', 'participants', 'distance', 'distance2', 'centerOf', 'cursor', 'onElementClick']),
-      isStarterExplicitlyDefined() {
-        return !!this.rootContext?.head()?.starterExp()
+      showStarter() {
+        return this.participants.Starter().name !== '_STARTER_'
       },
       isRootBlock() {
         return this.context?.parentCtx?.parentCtx instanceof ProgContext

@@ -1,8 +1,11 @@
 <template>
   <div class="life-line-layer">
-    <life-line :entity="starterParticipant"
-               class="starter"
-               :class="{hidden: !isStarterExplicitlyDefined}"/>
+    <life-line
+      v-if="starterOnTheLeft"
+      :entity="starterParticipant"
+      class="starter"
+      :class="{hidden: starterParticipant.name === '_STARTER_'}"
+      />
     <template v-for="(child, index) in explictGroupAndParticipants">
       <life-line-group :key="index"
                        v-if="child instanceof GroupContext"
@@ -29,8 +32,11 @@
       starterParticipant() {
         return this.participants.Starter()
       },
-      isStarterExplicitlyDefined() {
-        return !!this.context?.starterExp() || (!!this.starterParticipant && (this.starterParticipant.name !== 'Starter'))
+      showStarter() {
+        return this.starterParticipant.name !== '_STARTER_'
+      },
+      starterOnTheLeft() {
+        return !this.starterParticipant.explicit
       },
       implicitParticipants () {
         return this.participants.ImplicitArray()
@@ -38,7 +44,7 @@
       explictGroupAndParticipants() {
         return this.context?.children.filter(c => {
           const isGroup = c instanceof this.GroupContext
-          const isParticipant = (c instanceof this.ParticipantContext) && c.name()?.getText() !== this.participants?.Starter()?.name
+          const isParticipant = (c instanceof this.ParticipantContext)
           return isGroup || isParticipant
         })
       }

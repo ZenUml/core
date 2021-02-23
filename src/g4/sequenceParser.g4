@@ -126,11 +126,10 @@ message
  : messageBody (SCOL | braceBlock)?
  ;
 
-// Order of 'func | (to DOT)' is important. Otherwise A.m will be parsed as to messages
 messageBody
  : assignment? ((from ARROW)? to DOT)? func
  | assignment
- | to DOT
+ | (from ARROW)? to DOT   // A->B. or B.
  ;
 
 // func is also used in exp as parameter with expr: (to DOT)? func;

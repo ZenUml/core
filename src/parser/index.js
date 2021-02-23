@@ -75,7 +75,7 @@ ProgContext.prototype.Starter = function () {
     starterFromStartingMessage = messageFrom || asyncMessageFrom
   }
 
-  return declaredStarter || starterFromStartingMessage || 'Starter'
+  return declaredStarter || starterFromStartingMessage || '_STARTER_'
 }
 
 antlr4.ParserRuleContext.prototype.getTextWithoutQuotes = function() {

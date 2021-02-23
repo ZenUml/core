@@ -15,20 +15,20 @@ describe('Get `from` from context', () => {
     let stat = rootContext.block().stat()[0]
 
     expectText(stat).toBe('A->B.m1')
-    expect(stat.Origin()).toBe('Starter')
+    expect(stat.Origin()).toBe('A')
   })
 
   test('Explicit', () => {
     let rootContext = seqDsl.RootContext('A->B.m1');
     let m1 = rootContext.block().stat()[0].message()
     expectText(m1).toBe('A->B.m1')
-    expect(rootContext.block().stat()[0].Origin()).toBe('Starter')
+    expect(rootContext.block().stat()[0].Origin()).toBe('A')
   })
 
   test('Embedded', () => {
     let rootContext = seqDsl.RootContext('A.m1 { B.m2 }');
     const stat1 = rootContext.block().stat()[0];
-    expect(stat1.Origin()).toBe('Starter');
+    expect(stat1.Origin()).toBe('_STARTER_');
     let m1 = stat1.message()
     expectText(m1).toBe('A.m1{B.m2}')
     const stat2 = m1.braceBlock().block().stat()[0]
@@ -41,7 +41,7 @@ describe('Get `from` from context', () => {
     let rootContext = seqDsl.RootContext('A.m1 { B.m2 }');
     const stat1 = rootContext.block().stat()[0]
     let m1 = stat1.message()
-    expect(stat1.Origin()).toBe('Starter');
+    expect(stat1.Origin()).toBe('_STARTER_');
     expectText(m1).toBe('A.m1{B.m2}')
     const stat2 = m1.braceBlock().block().stat()[0]
     expect(stat2.Origin()).toBe('A');
@@ -90,13 +90,13 @@ describe('Get `from` from context', () => {
   test('Embedded in if at root', () => {
     let rootContext = seqDsl.RootContext('if(x) { m1 A.m2 }');
     let alt = rootContext.block().stat()[0].alt()
-    expect(rootContext.block().stat()[0].Origin()).toBe('Starter')
+    expect(rootContext.block().stat()[0].Origin()).toBe('_STARTER_')
     let m1 = alt.ifBlock().braceBlock().block().stat()[0].message();
     expectText(m1).toBe('m1')
-    expect(alt.ifBlock().braceBlock().block().stat()[0].Origin()).toBe('Starter')
+    expect(alt.ifBlock().braceBlock().block().stat()[0].Origin()).toBe('_STARTER_')
     let m2 = alt.ifBlock().braceBlock().block().stat()[1].message();
     expectText(m2).toBe('A.m2')
-    expect(alt.ifBlock().braceBlock().block().stat()[1].Origin()).toBe('Starter')
+    expect(alt.ifBlock().braceBlock().block().stat()[1].Origin()).toBe('_STARTER_')
   })
 
   test('Embedded in Self', () => {
@@ -128,7 +128,7 @@ describe('Get `from` from context', () => {
     let rootContext = seqDsl.RootContext('A.m1');
     let message = rootContext.block().stat()[0].message();
     expectText(message).toBe('A.m1')
-    expect(rootContext.block().stat()[0].Origin()).toBe('Starter')
+    expect(rootContext.block().stat()[0].Origin()).toBe('_STARTER_')
   })
   test('root', () => {
     let rootContext = seqDsl.RootContext('@Starter(X)\nA.m1');

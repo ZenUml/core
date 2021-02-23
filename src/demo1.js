@@ -6,5 +6,6 @@
 // Nested method
 // Assignment
 export default `
-A
+B A
+A->B.m
 `
