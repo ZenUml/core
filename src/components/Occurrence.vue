@@ -20,7 +20,12 @@
 <style scoped>
 
   >>> >.statement-container:last-child>.interaction.return:last-of-type {
-    transform: translateY(28px);
+    height: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-top: 0;
+    border-bottom: 0;
+    transform: translateY(1px);
   }
 
 </style>
