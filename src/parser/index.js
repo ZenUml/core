@@ -81,7 +81,7 @@ ProgContext.prototype.Starter = function () {
     if(children && children[0]) {
       const child = children[0];
       if (child instanceof sequenceParser.sequenceParser.ParticipantContext) {
-        starterFromParticipant = child.name().getTextWithoutQuotes();
+        starterFromParticipant = child.name()?.getTextWithoutQuotes();
       }
       if (child instanceof sequenceParser.sequenceParser.GroupContext) {
         const participants = child.participant();
