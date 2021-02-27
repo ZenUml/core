@@ -16,7 +16,7 @@ console.log('----------', Version)
 console.log('----------', BuildTime)
 import demo1 from './demo1.js'
 import demo2 from './demo2.js'
-const store1 = Store()
+const store1 = Store(50)
 store1.state.code = demo1
 // store1.state.onLifelineMounted = function(vueComp, elm) {
 //   console.log('Callback installed on', vueComp, elm)

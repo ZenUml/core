@@ -7,7 +7,7 @@ import './components/Cosmetic.scss'
 import './components/theme-blue-river.scss'
 import {CodeRange} from './parser/CodeRange'
 
-const Store = () => {
+const Store = (debounce?: number) => {
   // @ts-ignore
   // @ts-ignore
   return {
@@ -107,7 +107,7 @@ const Store = () => {
         }
         context.commit('code', payload.code);
         context.commit('cursor', payload.cursor);
-      }, 1000)
+      }, debounce || 1000)
     },
     // TODO: Enable strict for development?
     strict: false,
