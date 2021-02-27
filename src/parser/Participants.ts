@@ -1,3 +1,4 @@
+import _ from 'lodash';
 export enum ParticipantType {
   Actor = 1,
   Boundary,
@@ -98,12 +99,7 @@ export class Participants {
              explicit?: boolean,
              type?: string): void {
     const participant = new Participant(name, isStarter, stereotype, width, groupId, label, explicit, type);
-    if (this.Get(name)?.isStarter && explicit) {
-      participant.isStarter = true;
-      this.participants.set(participant.name, participant)
-    } else {
-      this.participants.set(participant.name, this.Get(name) || participant)
-    }
+    this.participants.set(name, _.mergeWith({}, this.Get(name), participant, (a, b) => a || b));
   }
 
   // Returns an array of participants that are deduced from messages

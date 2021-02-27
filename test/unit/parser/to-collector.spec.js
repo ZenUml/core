@@ -12,7 +12,7 @@ test('smoke test2', () => {
     new F
   `
   let participants = getParticipants(code);
-  expect(participants.Get('B 1')).toEqual({name: 'B 1', isStarter: false, explicit: true, groupId: undefined, stereotype: 'A', 'width': 1024, 'type': undefined})
+  expect(participants.Get('B 1')).toEqual({name: 'B 1', isStarter: true, explicit: true, groupId: undefined, stereotype: 'A', 'width': 1024, 'type': undefined})
 })
 
 describe('Plain participants', () => {
@@ -21,7 +21,7 @@ describe('Plain participants', () => {
   ])('get participant with width and stereotype undefined', (code) => {
     // `A` will be parsed as a participant which matches `participant EOF`
     let participants = getParticipants(code, true);
-    expect(participants.Size()).toBe(2)
+    expect(participants.Size()).toBe(1)
     expect(participants.Get('A').width).toBeUndefined()
     expect(participants.Get('A').stereotype).toBeUndefined()
   })
@@ -34,9 +34,8 @@ describe('with width', () => {
   ])('code:%s => width:%s', (code, width) => {
     // `A` will be parsed as a participant which matches `participant EOF`
     let participants = getParticipants(code, true);
-    expect(participants.Size()).toBe(2)
-    expect(participants.First().name).toBe('_STARTER_')
-    expect(participants.First().width).toBe(undefined)
+    expect(participants.Size()).toBe(1)
+    expect(participants.First().name).toBe('A')
     expect(participants.Get('A').name).toBe('A')
     expect(participants.Get('A').width).toBe(width)
   })
@@ -50,7 +49,7 @@ describe('with interface', () => {
   ])('code:%s => width:%s', (code, stereotype) => {
     // `A` will be parsed as a participant which matches `participant EOF`
     let participants = getParticipants(code, true);
-    expect(participants.Size()).toBe(2)
+    expect(participants.Size()).toBe(1)
     expect(participants.Get('X').name).toBe('X')
     expect(participants.Get('X').stereotype).toBe(stereotype)
   })
@@ -65,7 +64,7 @@ describe('with group', () => {
   ])('code:%s => participant:%s', (code, participant, groupId) => {
     // `A` will be parsed as a participant which matches `participant EOF`
     let participants = getParticipants(code, true);
-    expect(participants.Size()).toBe(2)
+    expect(participants.Size()).toBe(1)
     expect(participants.Get('A').name).toBe(participant)
     expect(participants.Get('A').groupId).toBe(groupId)
   })
@@ -89,7 +88,7 @@ describe('with label', () => {
     ['A as "AA"', 'AA'],
   ])('code:%s => label:%s', (code, label) => {
     let participants = getParticipants(code, true);
-    expect(participants.Size()).toBe(2)
+    expect(participants.Size()).toBe(1)
     expect(participants.Get('A').name).toBe('A')
     expect(participants.Get('A').label).toBe(label)
   })
@@ -103,7 +102,7 @@ describe('with participantType', () => {
     ['@database A', 'database']
   ])('code:%s => participantType:%s', (code, participantType) => {
     let participants = getParticipants(code, true);
-    expect(participants.Size()).toBe(2)
+    expect(participants.Size()).toBe(1)
     expect(participants.Get('A').name).toBe('A')
     expect(participants.Get('A').type).toBe(participantType)
   })
