@@ -32,6 +32,8 @@
   div.container {
     background-color: #eeffee;
     margin: 0 2px;
+    display: flex;
+    flex-direction: column;
   }
   label {
     display: block;
@@ -41,7 +43,6 @@
 
   .lifeline-group {
     display: flex;
-    height: 100%;
-    /*opacity: 50%;*/
+    flex-grow: 1;
   }
 </style>
