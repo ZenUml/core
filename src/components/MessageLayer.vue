@@ -82,6 +82,7 @@
   .message-layer {
     padding-top: 60px;
     padding-bottom: 40px;
+    min-width: 500px; /* same as min-width of lifeline layer */
   }
 </style>
 <style>
