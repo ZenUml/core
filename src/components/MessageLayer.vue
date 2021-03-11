@@ -19,9 +19,14 @@
       paddingLeft () {
         return this.centerOf(this.starter)
       },
+      /* Message layer width
+      Message layer should have the same or bigger width as the lifeline layer.
+      For simplification, we set them the same.
+       */
       width() {
-        let rearParticipant = this.participantNames().pop();
-        return this.rightOf(rearParticipant) + (this.starter === 'Starter' ? 100 : 40)
+        let rearParticipant = this.participantNames().pop()
+        // 20px for the right margin of the participant
+        return this.rightOf(rearParticipant) + 20
       }
     },
     mounted () {
@@ -82,7 +87,6 @@
   .message-layer {
     padding-top: 60px;
     padding-bottom: 40px;
-    min-width: 500px; /* same as min-width of lifeline layer */
   }
 </style>
 <style>
