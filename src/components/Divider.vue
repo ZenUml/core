@@ -1,8 +1,8 @@
 <template>
-  <div class="fragment divider" :style="{width: width + 'px', transform: 'translateX(' + (-1) * centerOfFrom + 'px)'}">
-    <div class="header">
-      <div class="name"><label>{{name}}</label></div>
-    </div>
+  <div class="divider" :style="{width: width + 'px', transform: 'translateX(' + (-1) * centerOfFrom + 'px)'}">
+    <div class="left"></div>
+    <div class="name">{{name}}</div>
+    <div class="right"></div>
   </div>
 </template>
 
@@ -34,7 +34,15 @@
 </script>
 
 <style scoped>
-  .fragment.divider .header {
-    text-align: center;
-  }
+.divider {
+  display: flex;
+  align-items: center;
+}
+.name {
+  margin: 0 5px;
+}
+.left, .right {
+  height: 1px;
+  flex-grow: 1;
+}
 </style>

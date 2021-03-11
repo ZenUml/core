@@ -13,6 +13,7 @@ Client->Controller.GetOrder(id) {
     =="Not found"==
       MF.load
     =="Not found"==
+      return 0
     }
     =="Not found"==
     return order

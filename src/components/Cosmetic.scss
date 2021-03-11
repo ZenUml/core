@@ -12,15 +12,20 @@
 
   .occurrence {
     border: 2px solid rgba(3, 3, 3, 0.05);
+    background-color: #d3d3d3;
   }
 
   .message {
     display: block;
     border-bottom-color: #808080;
   }
-
-  .occurrence {
-    background-color: #d3d3d3;
+  .divider{
+    .left {
+      background: linear-gradient(to right, #A7A7A1, #818078);
+    }
+    .right {
+      background: linear-gradient(to right, #818078, #A7A7A1);
+    }
   }
 
   .fragment {
