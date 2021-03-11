@@ -6,7 +6,16 @@
 // Nested method
 // Assignment
 export default `
-A->B: 1
-==Divider==
-B->A: 2
-`
+Client->Controller.GetOrder(id) {
+  OrderService.Get(id) {
+    =="Not found"==
+    OrderRepo."load order by id" {
+    =="Not found"==
+      MF.load
+    =="Not found"==
+    }
+    =="Not found"==
+    return order
+  }
+  return response
+}`
