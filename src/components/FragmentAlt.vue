@@ -81,4 +81,8 @@
   .segment:not(:first-child) {
     border-top: 1px dashed;
   }
+
+  .divider {
+    border-bottom-style: dashed;
+  }
 </style>

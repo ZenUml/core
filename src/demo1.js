@@ -8,12 +8,18 @@
 export default `
 Client->Controller.GetOrder(id) {
   OrderService.Get(id) {
-    ===="Not found"====
-    OrderRepo."load order by id" {
-    ====="Not found"=====
-      MF.load
-    ====="Not found"=====
-      return 0
+    if(x) {
+      ===="Not found"====
+      OrderRepo."load order by id" {
+      ====="Not found"=====
+        MF.load
+      ====="Not found"=====
+        return 0
+      }
+    } else {
+    == "do something else" ==
+      Rep.x
+
     }
     =="Not found"==
     return order
