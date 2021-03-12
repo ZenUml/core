@@ -20,11 +20,15 @@
     border-bottom-color: #808080;
   }
   .divider{
+    .name {
+      border: solid 2px;
+      padding: 2px;
+    }
     .left {
-      background: linear-gradient(to right, #A7A7A1, #818078);
+      background: linear-gradient(to right, #A7A7A1, #000);
     }
     .right {
-      background: linear-gradient(to right, #818078, #A7A7A1);
+      background: linear-gradient(to right, #000, #A7A7A1);
     }
   }
 
