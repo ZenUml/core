@@ -22,7 +22,7 @@
   import Comment from './Comment.vue'
   import Message from './Message'
   import Occurrence from './Occurrence'
-  import {CodeRange} from '../parser/CodeRange'
+  import {CodeRange} from '@/parser/CodeRange'
 
   export default {
     name: 'creation',
@@ -59,7 +59,7 @@
       },
       invocationWidth: function () {
         let safeOffset = this.selfCallIndent || 0
-        // why this 8? 1px middle of occurrence, 7px for occurrenceWidth/2
+        // 1px middle of occurrence, 7px for occurrenceWidth/2
         const occurrenceDelta = 8;
         if (this.rightToLeft) {
           return this.centerOf(this.from) - this.rightOf(this.to) + safeOffset - occurrenceDelta
