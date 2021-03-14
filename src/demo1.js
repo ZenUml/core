@@ -7,6 +7,7 @@
 // Assignment
 export default `
 Client->Controller.GetOrder(id) {
+  // \`DELETE orders/id\`
   OrderService.Get(id) {
     if(x) {
       ===="Not found"====
