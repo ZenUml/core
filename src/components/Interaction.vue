@@ -27,8 +27,8 @@
   import {mapGetters} from "vuex";
   import InteractionMixin from './InteractionMixin'
   import SelfInvocation from './SelfInvocation'
-  import {CodeRange} from '../parser/CodeRange'
-  import {ProgContext} from '../parser/index'
+  import {CodeRange} from '@/parser/CodeRange'
+  import {ProgContext} from '@/parser'
 
   export default {
     name: 'interaction',
