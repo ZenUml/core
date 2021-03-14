@@ -14,7 +14,7 @@
     props: ['context', 'selfCallIndent', 'fragmentOffset'],
     computed: {
       statements: function () {
-        return this.context && this.context.stat()
+        return this.context?.stat()
       }
     },
     components: {
