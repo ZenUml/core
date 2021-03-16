@@ -1,11 +1,11 @@
-var antlr4  = require('antlr4/index')
-var sequenceLexer = require('../generated-parser/sequenceLexer')
-var sequenceParser = require('../generated-parser/sequenceParser')
-require('./IsCurrent')
-require('./Owner')
-require('./RetContext')
-var ToCollector = require('./ToCollector')
-var ChildFragmentDetector = require('./ChildFragmentDetecotr')
+const antlr4 = require('antlr4/index');
+const sequenceLexer = require('../generated-parser/sequenceLexer');
+const sequenceParser = require('../generated-parser/sequenceParser');
+const ToCollector = require('./ToCollector');
+const ChildFragmentDetector = require('./ChildFragmentDetecotr');
+require('./IsCurrent');
+require('./Owner');
+require('./RetContext');
 
 const errors = [];
 class SeqErrorListener extends antlr4.error.ErrorListener {
@@ -15,10 +15,10 @@ class SeqErrorListener extends antlr4.error.ErrorListener {
 }
 
 function rootContext(code) {
-  var chars = new antlr4.InputStream(code)
-  var lexer = new sequenceLexer.sequenceLexer(chars)
-  var tokens = new antlr4.CommonTokenStream(lexer)
-  var parser = new sequenceParser.sequenceParser(tokens)
+  const chars = new antlr4.InputStream(code);
+  const lexer = new sequenceLexer.sequenceLexer(chars);
+  const tokens = new antlr4.CommonTokenStream(lexer);
+  const parser = new sequenceParser.sequenceParser(tokens);
   parser.addErrorListener(new SeqErrorListener());
   return parser._syntaxErrors ? null : parser.prog();
 }
