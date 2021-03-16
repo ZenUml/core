@@ -9,6 +9,15 @@ test('Keyword "return" - in method block', () => {
   expect(ret.getReturnTo()).toBe('_STARTER_')
 })
 
+test('defect - not returning to provided from', () => {
+  let rootContext = seqDsl.RootContext('@Starter(M) A->B.method() { return x1 }');
+  expect(seqDsl.RootContext).not.toBeNull()
+  const ret = rootContext.block().stat()[0].message().braceBlock().block().stat()[0].ret()
+  let returnedValue = ret.expr();
+  expect(returnedValue.getText()).toBe('x1')
+  expect(ret.getReturnTo()).toBe('A')
+})
+
 test('Keyword "return" - in alt block', () => {
   let rootContext = seqDsl.RootContext('if(condition) { return y1 }');
   expect(seqDsl.RootContext).not.toBeNull()

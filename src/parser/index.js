@@ -61,6 +61,9 @@ RetContext.prototype.getReturnTo = function() {
       }
       ctx = ctx.parentCtx;
     }
+    if(ctx instanceof seqParser.MessageContext) {
+      return ctx.messageBody()?.from()?.getTextWithoutQuotes() || ctx.parentCtx.Origin();
+    }
     return ctx.parentCtx.Origin();
   }
 }
