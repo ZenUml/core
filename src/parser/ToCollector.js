@@ -72,7 +72,7 @@ ToCollector.prototype.exitGroup = function () {
 }
 
 ToCollector.prototype.enterRet = function (ctx) {
-  participants.Add(ctx.getReturnTo())
+  participants.Add(ctx.ReturnTo())
 }
 
 const walker = antlr4.tree.ParseTreeWalker.DEFAULT

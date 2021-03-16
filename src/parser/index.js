@@ -3,6 +3,7 @@ var sequenceLexer = require('../generated-parser/sequenceLexer')
 var sequenceParser = require('../generated-parser/sequenceParser')
 require('./IsCurrent')
 require('./Owner')
+require('./RetContext')
 var ToCollector = require('./ToCollector')
 var ChildFragmentDetector = require('./ChildFragmentDetecotr')
 
@@ -43,28 +44,6 @@ StatContext.prototype.Origin = function() {
       ctx = ctx.parentCtx;
     }
     return ctx.Origin();
-  }
-}
-
-const RetContext = seqParser.RetContext;
-RetContext.prototype.getReturnTo = function() {
-  const stat = this.parentCtx;
-  const block = stat.parentCtx;
-  const blockParent = block.parentCtx;
-  if(blockParent instanceof ProgContext) {
-    return blockParent.Starter();
-  } else {
-    let ctx = blockParent;
-    while (ctx && !(ctx instanceof seqParser.MessageContext) && !(ctx instanceof seqParser.CreationContext)) {
-      if(ctx instanceof ProgContext) {
-        return ctx.Starter();
-      }
-      ctx = ctx.parentCtx;
-    }
-    if(ctx instanceof seqParser.MessageContext) {
-      return ctx.messageBody()?.from()?.getTextWithoutQuotes() || ctx.parentCtx.Origin();
-    }
-    return ctx.parentCtx.Origin();
   }
 }
 

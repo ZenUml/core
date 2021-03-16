@@ -5,7 +5,7 @@ test('Keyword "return" - in method block', () => {
   const ret = rootContext.block().stat()[0].message().braceBlock().block().stat()[0].ret()
   let returnedValue = ret.expr();
   expect(returnedValue.getText()).toBe('x1')
-  expect(ret.getReturnTo()).toBe('_STARTER_')
+  expect(ret.ReturnTo()).toBe('_STARTER_')
 })
 
 test('defect - not returning to provided from', () => {
@@ -13,7 +13,7 @@ test('defect - not returning to provided from', () => {
   const ret = rootContext.block().stat()[0].message().braceBlock().block().stat()[0].ret()
   let returnedValue = ret.expr();
   expect(returnedValue.getText()).toBe('x1')
-  expect(ret.getReturnTo()).toBe('A')
+  expect(ret.ReturnTo()).toBe('A')
 })
 
 test('Keyword "return" - in alt block', () => {
