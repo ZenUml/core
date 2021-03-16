@@ -1,4 +1,4 @@
-var sequenceParser = require('../generated-parser/sequenceParser')
+const sequenceParser = require('../generated-parser/sequenceParser');
 
 const seqParser = sequenceParser.sequenceParser;
 const RetContext = seqParser.RetContext;
