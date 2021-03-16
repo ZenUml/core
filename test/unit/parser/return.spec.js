@@ -2,7 +2,6 @@ let seqDsl = require('../../../src/parser/index');
 
 test('Keyword "return" - in method block', () => {
   let rootContext = seqDsl.RootContext('A.method() { return x1 }');
-  expect(seqDsl.RootContext).not.toBeNull()
   const ret = rootContext.block().stat()[0].message().braceBlock().block().stat()[0].ret()
   let returnedValue = ret.expr();
   expect(returnedValue.getText()).toBe('x1')
@@ -11,7 +10,6 @@ test('Keyword "return" - in method block', () => {
 
 test('defect - not returning to provided from', () => {
   let rootContext = seqDsl.RootContext('@Starter(M) A->B.method() { return x1 }');
-  expect(seqDsl.RootContext).not.toBeNull()
   const ret = rootContext.block().stat()[0].message().braceBlock().block().stat()[0].ret()
   let returnedValue = ret.expr();
   expect(returnedValue.getText()).toBe('x1')
@@ -20,7 +18,6 @@ test('defect - not returning to provided from', () => {
 
 test('Keyword "return" - in alt block', () => {
   let rootContext = seqDsl.RootContext('if(condition) { return y1 }');
-  expect(seqDsl.RootContext).not.toBeNull()
   let returnedValue = rootContext.block().stat()[0].alt().ifBlock().braceBlock().block().stat()[0].ret().expr();
   expect(returnedValue.getText()).toBe('y1')
 })
