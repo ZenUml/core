@@ -8,7 +8,7 @@
 </template>
 
 <script>
-  import {Participants} from '../parser'
+  import {Participants} from '@/parser'
   import LifeLine from './LifeLine'
 
   export default {
