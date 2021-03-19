@@ -6,7 +6,7 @@
       class="starter"
       :class="{hidden: starterParticipant.name === '_STARTER_'}"
       />
-    <template v-for="(child, index) in explictGroupAndParticipants">
+    <template v-for="(child, index) in explicitGroupAndParticipants">
       <life-line-group :key="index"
                        v-if="child instanceof GroupContext"
                        :context="child" />
@@ -41,7 +41,7 @@
       implicitParticipants () {
         return this.participants.ImplicitArray()
       },
-      explictGroupAndParticipants() {
+      explicitGroupAndParticipants() {
         return this.context?.children.filter(c => {
           const isGroup = c instanceof this.GroupContext
           const isParticipant = (c instanceof this.ParticipantContext)
@@ -83,7 +83,5 @@
     visibility: hidden;
     margin-left: -40px; /* Remove the extra margin created by starter */
   }
-
-
 </style>
 
