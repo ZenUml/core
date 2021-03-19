@@ -20,8 +20,8 @@
   import Comment from './Comment.vue'
   import SelfInvocationAsync from './SelfInvocation-async'
   import Message from './Message'
-  import {mapGetters} from "vuex";
-  import {CodeRange} from '../parser/CodeRange'
+  import {mapGetters} from "vuex"
+  import {CodeRange} from '@/parser/CodeRange'
 
   function isNullOrUndefined(value) {
     return value === null || value === undefined
