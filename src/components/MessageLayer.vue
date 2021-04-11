@@ -17,7 +17,7 @@
         return this.participants?.Starter()?.name
       },
       paddingLeft () {
-        return this.centerOf(this.starter) - 6
+        return this.centerOf(this.starter)
       },
       /* Message layer width
       Message layer should have the same or bigger width as the lifeline layer.

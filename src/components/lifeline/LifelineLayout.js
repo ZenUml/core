@@ -1,9 +1,10 @@
 import pixelWidth from "string-pixel-width";
 const MARGIN = 10
+const MIN_WIDTH = 88
 export function LifelineLayout(participants) {
   const participantsWithLeft = participants.map(p => {
     const textWidth = pixelWidth(p, {size: 16});
-    const innerWidth = Math.max(100, Math.floor(textWidth));
+    const innerWidth = Math.max(MIN_WIDTH, Math.floor(textWidth));
     return {
       name: p,
       innerWidth: innerWidth,
