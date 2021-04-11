@@ -32,10 +32,10 @@
       starterParticipant() {
         return this.participants.Starter()
       },
-      showStarter() {
-        return this.starterParticipant.name !== '_STARTER_'
-      },
       starterOnTheLeft() {
+        // explicit means the participant is declared in the participant section.
+        // If it is explicit, it will be rendered in the explicitParticipant section
+        // see the template for more information.
         return !this.starterParticipant.explicit
       },
       implicitParticipants () {

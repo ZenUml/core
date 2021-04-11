@@ -6,9 +6,9 @@
 // Nested method
 // Assignment
 export default `
-A
+group x {A}
 AHasAVeryLongNameSoItIsLong
-
+@Starter(X)
 A.method() {
   new AHasAVeryLongNameSoItIsLong()
 }
