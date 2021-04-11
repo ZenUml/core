@@ -15,21 +15,31 @@ export function LifelineLayout(participants) {
       name: participant.name,
       innerWidth: participant.innerWidth,
       outerWidth: participant.outerWidth,
-      left: accumulatedLeft
+      left: accumulatedLeft,
+      outerLeft: accumulatedLeft - (MARGIN / 2)
     }
   })
   return {
     ...participantsWithLeft,
     center: (participant) => {
-      return participantsWithLeft.find(p => p.name === participant)?.left
+      const found = participantsWithLeft.find(p => p.name === participant);
+      return found?.left + (found?.outerWidth / 2)
     },
     left: (participant) => {
       const found = participantsWithLeft.find(p => p.name === participant);
-      return found?.left - found?.innerWidth / 2
+      return found?.left + (MARGIN / 2)
     },
     right: (participant) => {
       const found = participantsWithLeft.find(p => p.name === participant);
-      return found?.left + found?.innerWidth / 2
+      return found?.left + found?.innerWidth
+    },
+    outerLeft: (participant) => {
+      const found = participantsWithLeft.find(p => p.name === participant);
+      return found?.left
+    },
+    outerRight: (participant) => {
+      const found = participantsWithLeft.find(p => p.name === participant);
+      return found?.outerLeft + found?.outerWidth
     }
   }
 }

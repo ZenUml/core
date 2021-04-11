@@ -87,7 +87,7 @@
   .message-layer {
     padding-top: 60px;
     padding-bottom: 40px;
-    padding-left: 20px;
+    padding-left: 13px;
   }
 </style>
 <style>

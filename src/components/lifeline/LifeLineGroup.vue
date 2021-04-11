@@ -1,5 +1,5 @@
 <template>
-  <div class="container" :style="{left: left + 'px'}">
+  <div class="container" :style="{left: left + 'px', width: width + 'px'}">
     <label v-if="name">{{name}}</label>
     <div class="lifeline-group">
       <life-line v-for="entity in entities" :key="entity.name" :ref="entity.name" :entity="entity" :groupLeft="left"/>
@@ -8,6 +8,8 @@
 </template>
 
 <script>
+  import {mapGetters} from 'vuex'
+
   import {Participants} from '@/parser'
   import LifeLine from './LifeLine'
 
@@ -15,6 +17,7 @@
     name: 'lifeline-group',
     props: ['context'],
     computed: {
+      ...mapGetters(['lifelineLayout', 'firstInvocations', 'onLifelineMounted']),
       name() {
         return this.context?.name()?.getTextWithoutQuotes()
       },
@@ -22,7 +25,13 @@
         return Participants(this.context).Array()
       },
       left() {
-        return 200;
+        const firstEntity = this.entities[0];
+        return this.lifelineLayout.outerLeft(firstEntity.name);
+      },
+      width() {
+        const firstEntity = this.entities[0];
+        const lastEntity = this.entities[this.entities.length - 1];
+        return this.lifelineLayout.outerRight(lastEntity.name) - this.lifelineLayout.outerLeft(firstEntity.name)
       }
     },
     components: {

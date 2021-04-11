@@ -29,7 +29,7 @@
         return this.$store.state.selected.includes(this.entity.name)
       },
       left() {
-        return this.lifelineLayout.center(this.entity.label || this.entity.name) - (this.groupLeft || 0)
+        return this.lifelineLayout.left(this.entity.label || this.entity.name) - (this.groupLeft || 0)
       },
       top () {
         if (this.firstInvocationIsCreation) {
@@ -59,9 +59,9 @@
     position: absolute;       /* So that we can set arbitrary left to lifeline */
     display: flex;            /* So that .line fill the remaining height */
     height: 100%;             /* TODO: will break in group */
-    transform: translateX(-50%);
     flex-direction: column;
-    margin: 0 20px;
+    /*margin: 0 20px;*/
+    background: red;
   }
 
   .lifeline>.participant>.interface {
