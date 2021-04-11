@@ -70,6 +70,7 @@
 <style scoped>
   /* LifeLineLayer's display is flex, its children don't need display:inline-block */
   .lifeline {
+    position: absolute;       /* So that we can set arbitrary left to lifeline */
     display: flex;            /* So that .line fill the remaining height */
     flex-direction: column;
     margin: 0 20px;
