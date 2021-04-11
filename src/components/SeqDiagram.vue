@@ -1,5 +1,5 @@
 <template>
-  <div class="sequence-diagram" ref="diagram" >
+  <div class="sequence-diagram" ref="diagram" :style="{'padding-left': paddingLeft + 'px'}">
     <life-line-layer :context="rootContext.head()"/>
     <message-layer :context="rootContext.block()"/>
   </div>
@@ -18,7 +18,13 @@
       MessageLayer
     },
     computed: {
-      ...mapGetters(['rootContext', 'generation'])
+      ...mapGetters(['rootContext', 'generation', 'participants', 'lifelineLayout']),
+      starter() {
+        return this.participants?.Starter()?.name
+      },
+      paddingLeft () {
+        return this.lifelineLayout.outerLeft(this.starter) * (-1) + 20
+      },
     },
     methods: {
       toPng() {
