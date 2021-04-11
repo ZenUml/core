@@ -26,12 +26,12 @@
       },
       left() {
         const firstEntity = this.entities[0];
-        return this.lifelineLayout.outerLeft(firstEntity.name);
+        return this.lifelineLayout.outerLeft(firstEntity?.name);
       },
       width() {
         const firstEntity = this.entities[0];
         const lastEntity = this.entities[this.entities.length - 1];
-        return this.lifelineLayout.outerRight(lastEntity.name) - this.lifelineLayout.outerLeft(firstEntity.name)
+        return this.lifelineLayout.outerRight(lastEntity?.name) - this.lifelineLayout.outerLeft(firstEntity?.name)
       }
     },
     components: {
@@ -46,6 +46,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
   }
 
   div.container:nth-child(odd) {
