@@ -58,10 +58,8 @@
   .lifeline {
     position: absolute;       /* So that we can set arbitrary left to lifeline */
     display: flex;            /* So that .line fill the remaining height */
-    height: 100%;             /* TODO: will break in group */
+    height: 100%;             /* Used overflow to hide overlong line */
     flex-direction: column;
-    /*margin: 0 20px;*/
-    background: red;
   }
 
   .lifeline>.participant>.interface {
