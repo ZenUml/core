@@ -12,14 +12,13 @@
 </template>
 
 <script>
-  import {LifelineLayout} from './LifelineLayout'
   import {mapGetters, mapMutations} from 'vuex'
 
   export default {
     name: 'life-line',
     props: ['entity', 'context'],
     computed: {
-      ...mapGetters(['participants', 'firstInvocations', 'onLifelineMounted']),
+      ...mapGetters(['lifelineLayout', 'firstInvocations', 'onLifelineMounted']),
       classes() {
         if (this.entity.type) {
           return ['icon', this.entity.type.toLowerCase()]
@@ -30,11 +29,7 @@
         return this.$store.state.selected.includes(this.entity.name)
       },
       left() {
-        const participantsLabels = this.participants.Array().map(p => p.label || p.name);
-        const currentParticipantLabel = this.entity.label || this.entity.name;
-        const lifelineLayout = LifelineLayout(participantsLabels);
-        console.log(participantsLabels, currentParticipantLabel, lifelineLayout)
-        return lifelineLayout.center(currentParticipantLabel)
+        return this.lifelineLayout.center(this.entity.label || this.entity.name)
       },
       top () {
         if (this.firstInvocationIsCreation) {
@@ -53,23 +48,7 @@
       }
     },
     mounted() {
-      this.onLifelinePositioned({
-        name: this.entity.name,
-        dimensions: {
-          left: this.$el.offsetLeft,
-          width: this.$el.offsetWidth
-        }
-      })
       this.onLifelineMounted(this, this.$vnode.elm);
-    },
-    updated() {
-      this.onLifelinePositioned({
-        name: this.entity.name,
-        dimensions: {
-          left: this.$el.offsetLeft,
-          width: this.$el.offsetWidth
-        }
-      })
     }
   }
 </script>

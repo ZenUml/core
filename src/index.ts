@@ -52,9 +52,8 @@ const Store = (debounce?: number) => {
       leftOf: (state: any, getters: any) => (entity: any) => {
         return getters.lifelineLayout.left(entity)
       },
-      rightOf: (state: any) => (entity: any) => {
-        return state.lifeLineDimensions.get(entity) &&
-          (state.lifeLineDimensions.get(entity).left + state.lifeLineDimensions.get(entity).width)
+      rightOf: (state: any, getters: any) => (entity: any) => {
+        return getters.lifelineLayout.left(entity)
       },
       // deprecated, use distances that returns centerOf(to) - centerOf(from)
       distance: (state: any, getters: any) => (from: any, to: any) => {
@@ -83,10 +82,10 @@ const Store = (debounce?: number) => {
         state.events.push(payload)
       },
       onLifelinePositioned: function(state: any, payload: any) {
-        state.lifeLineDimensions.set(payload.name, payload.dimensions)
+        // state.lifeLineDimensions.set(payload.name, payload.dimensions)
       },
       onLifeLineLayerMountedOrUpdated: function (state: any, payload: any) {
-        state.lifeLineDimensions = payload
+        // state.lifeLineDimensions = payload
       },
       onMessageLayerMountedOrUpdated: function (state: any, payload: any) {
         state.firstInvocations = payload
