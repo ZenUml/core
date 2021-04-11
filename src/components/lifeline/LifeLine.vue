@@ -2,7 +2,7 @@
   <div  :id="entity.name"
         class="lifeline"
         :class="classes"
-        :style="{'paddingTop': top + 'px', left: left + 'px'} ">
+        :style="{'paddingTop': top + 'px', left: left + 'px', transform: 'translateX(-50%)'} ">
     <div class="participant" :class="{'selected': selected, [entity.participantType]: true}" @click="onSelect">
       <label class="interface" v-if="entity.stereotype" >«{{entity.stereotype}}»</label>
       <label class="name">{{entity.label || entity.name}}</label>
@@ -29,7 +29,7 @@
         return this.$store.state.selected.includes(this.entity.name)
       },
       left() {
-        return this.lifelineLayout.left(this.entity.label || this.entity.name) - (this.groupLeft || 0)
+        return this.lifelineLayout.center(this.entity.label || this.entity.name) - (this.groupLeft || 0)
       },
       top () {
         if (this.firstInvocationIsCreation) {
