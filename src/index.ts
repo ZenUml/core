@@ -27,7 +27,6 @@ const Store = (debounce?: number) => {
     getters: {
       GroupContext: () => GroupContext,
       ParticipantContext: () => ParticipantContext,
-      generation: (state: any) => state.generation,
       // We are using getters to avoid hard coding module's name ($store.Store.state)
       // in the components. Not sure if this is the best practice.
       firstInvocations: (state: any) => state.firstInvocations,
