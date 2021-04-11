@@ -81,12 +81,6 @@ const Store = (debounce?: number) => {
       event: function (state: any, payload: any) {
         state.events.push(payload)
       },
-      onLifelinePositioned: function(state: any, payload: any) {
-        // state.lifeLineDimensions.set(payload.name, payload.dimensions)
-      },
-      onLifeLineLayerMountedOrUpdated: function (state: any, payload: any) {
-        // state.lifeLineDimensions = payload
-      },
       onMessageLayerMountedOrUpdated: function (state: any, payload: any) {
         state.firstInvocations = payload
       },

@@ -12,7 +12,7 @@
 </template>
 
 <script>
-  import {mapGetters, mapMutations} from 'vuex'
+  import {mapGetters} from 'vuex'
 
   export default {
     name: 'life-line',
@@ -42,7 +42,6 @@
       }
     },
     methods: {
-      ...mapMutations(['onLifelinePositioned']),
       onSelect() {
         this.$store.commit('onSelect', this.entity.name)
       }
