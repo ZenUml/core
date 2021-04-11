@@ -13,9 +13,6 @@ const Store = (debounce?: number) => {
   // @ts-ignore
   return {
     state: {
-      // 'lifeLineDimensions' is decided by code and browser's behavior.
-      // It cannot be a simple getter (which is a computed value of a state property).
-      lifeLineDimensions: new Map(),
       firstInvocations: {},
       code: '',
       events: [],
