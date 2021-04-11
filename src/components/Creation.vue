@@ -33,7 +33,7 @@
     },
     props: ['context', 'comment', 'selfCallIndent', 'fragmentOffset'],
     computed: {
-      ...mapGetters(['cursor', 'onElementClick', 'distance', 'centerOf', 'rightOf', 'leftOf', 'widthOf']),
+      ...mapGetters(['cursor', 'onElementClick', 'distance', 'centerOf', 'rightOf', 'leftOf']),
       style: function() {
         const ret = {
           width: Math.abs(this.interactionWidth) + 'px'
@@ -113,7 +113,7 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .interaction {
-    border: red solid 4px;
+    border: transparent solid 4px;
   }
 
   .interaction.creation.right-to-left {

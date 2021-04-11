@@ -4,8 +4,9 @@ const MIN_WIDTH = 88
 const MAX_WIDTH = 250
 export function LifelineLayout(participants) {
   const participantsWithLeft = participants.map(p => {
-    const textWidth = pixelWidth(p, {size: 16});
-    const innerWidth = Math.min(MAX_WIDTH, Math.max(MIN_WIDTH, Math.floor(textWidth)));
+    const textWidth = pixelWidth(p, {font: 'helvetica', size: 16});
+    const estimatedWidth = Math.min(MAX_WIDTH, Math.max(MIN_WIDTH, Math.floor(textWidth)));
+    const innerWidth = Math.ceil((estimatedWidth + 10) / 10) * 10;
     return {
       name: p,
       innerWidth: innerWidth,
@@ -17,8 +18,8 @@ export function LifelineLayout(participants) {
       name: participant.name,
       innerWidth: participant.innerWidth,
       outerWidth: participant.outerWidth,
-      left: accumulatedLeft + MARGIN,
-      outerLeft: accumulatedLeft
+      left: participant.innerWidth/2 + accumulatedLeft + MARGIN,
+      outerLeft: participant.innerWidth/2+ accumulatedLeft
     }
   })
   return {
@@ -43,6 +44,10 @@ export function LifelineLayout(participants) {
     outerRight: (participant) => {
       const found = participantsWithLeft.find(p => p.name === participant);
       return found?.left + (found?.innerWidth / 2) + MARGIN
+    },
+    innerWidth: (participant) => {
+      const found = participantsWithLeft.find(p => p.name === participant);
+      return found?.innerWidth
     }
   }
 }

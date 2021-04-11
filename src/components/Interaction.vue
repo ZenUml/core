@@ -107,7 +107,7 @@
 </script>
 <style scoped>
 .interaction {
-  border: red solid 4px;
+  border: transparent solid 4px;
 }
 
 .occurrence.source {
