@@ -53,7 +53,7 @@ const Store = (debounce?: number) => {
         return getters.lifelineLayout.left(entity)
       },
       rightOf: (state: any, getters: any) => (entity: any) => {
-        return getters.lifelineLayout.left(entity)
+        return getters.lifelineLayout.right(entity)
       },
       // deprecated, use distances that returns centerOf(to) - centerOf(from)
       distance: (state: any, getters: any) => (from: any, to: any) => {

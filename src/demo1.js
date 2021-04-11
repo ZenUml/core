@@ -6,10 +6,8 @@
 // Nested method
 // Assignment
 export default `
-P1234567890
-PAbcder.m()
-A.method {
+B A
+new A() {
   new B()
-  B.method()
 }
 `

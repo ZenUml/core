@@ -19,6 +19,7 @@ export function LifelineLayout(participants) {
     }
   })
   return {
+    ...participantsWithLeft,
     center: (participant) => {
       return participantsWithLeft.find(p => p.name === participant)?.left
     },
