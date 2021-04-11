@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import {RootContext, Participants, GroupContext, ParticipantContext} from './parser/index.js'
+import {GroupContext, ParticipantContext, Participants, RootContext} from './parser/index.js'
 
 import SeqDiagram from './components/SeqDiagram.vue'
 
@@ -42,12 +42,12 @@ const Store = (debounce?: number) => {
       participants: (state: any, getters: any) => {
         return Participants(getters.rootContext, true)
       },
-      centerOf: (state: any, getters: any) => (entity: any) => {
+      lifelineLayout: (state: any, getters: any) => {
         const participantsLabels = getters.participants.Array().map((p: { label: any; name: any }) => p.label || p.name);
-        const currentParticipantLabel = entity;
-        const lifelineLayout = LifelineLayout(participantsLabels);
-        console.log(participantsLabels, currentParticipantLabel, lifelineLayout)
-        return lifelineLayout.center(currentParticipantLabel)
+        return LifelineLayout(participantsLabels)
+      },
+      centerOf: (state: any, getters: any) => (entity: any) => {
+        return getters.lifelineLayout.center(entity)
       },
       leftOf: (state: any) => (entity: any) => {
         return state.lifeLineDimensions.get(entity) && state.lifeLineDimensions.get(entity).left
