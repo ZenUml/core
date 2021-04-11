@@ -5,4 +5,10 @@
 // Self-method
 // Nested method
 // Assignment
-export default `@Starter(M) A->B.m{ return x}`
+export default `
+group x {A}
+AHasAVeryLongNameSoItIsLong
+A.method() {
+  new AHasAVeryLongNameSoItIsLong()
+}
+`

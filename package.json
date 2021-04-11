@@ -24,6 +24,7 @@
     "highlight.js": "^10.1.1",
     "lodash": "^4.17.20",
     "marked": "^2.0.0",
+    "string-pixel-width": "^1.10.0",
     "vue": "2.6.12",
     "vue-template-compiler": "2.6.12",
     "vuex": "^3.6.2"

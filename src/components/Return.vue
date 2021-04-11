@@ -20,7 +20,7 @@
   import SelfInvocationAsync from './SelfInvocation-async'
   import Message from './Message'
   import {mapGetters} from "vuex";
-  import {CodeRange} from '../parser/CodeRange'
+  import {CodeRange} from '@/parser/CodeRange'
   export default {
     name: 'return',
     data() {
@@ -91,10 +91,6 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .interaction.return {
-    /*height: 0;*/
-    /*margin-bottom: -6px; !* Occurrence padding bottom *!*/
-  }
   .interaction.return >>> .message {
     width: 100%;
   }

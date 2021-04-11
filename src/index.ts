@@ -1,21 +1,18 @@
 import _ from 'lodash'
-import {RootContext, Participants, GroupContext, ParticipantContext} from './parser/index.js'
+import {GroupContext, ParticipantContext, Participants, RootContext} from './parser/index.js'
 
 import SeqDiagram from './components/SeqDiagram.vue'
 
 import './components/Cosmetic.scss'
 import './components/theme-blue-river.scss'
 import {CodeRange} from './parser/CodeRange'
+import {LifelineLayout} from "@/components/lifeline/LifelineLayout";
 
 const Store = (debounce?: number) => {
   // @ts-ignore
   // @ts-ignore
   return {
     state: {
-      generation: 0,
-      // 'lifeLineDimensions' is decided by code and browser's behavior.
-      // It cannot be a simple getter (which is a computed value of a state property).
-      lifeLineDimensions: new Map(),
       firstInvocations: {},
       code: '',
       events: [],
@@ -30,7 +27,6 @@ const Store = (debounce?: number) => {
     getters: {
       GroupContext: () => GroupContext,
       ParticipantContext: () => ParticipantContext,
-      generation: (state: any) => state.generation,
       // We are using getters to avoid hard coding module's name ($store.Store.state)
       // in the components. Not sure if this is the best practice.
       firstInvocations: (state: any) => state.firstInvocations,
@@ -41,19 +37,18 @@ const Store = (debounce?: number) => {
       participants: (state: any, getters: any) => {
         return Participants(getters.rootContext, true)
       },
-      centerOf: (state: any) => (entity: any) => {
-        return state.lifeLineDimensions.get(entity) &&
-          (state.lifeLineDimensions.get(entity).left + Math.floor(state.lifeLineDimensions.get(entity).width / 2))
+      lifelineLayout: (state: any, getters: any) => {
+        const participantsLabels = getters.participants.Array().map((p: { label: any; name: any }) => p.label || p.name);
+        return LifelineLayout(participantsLabels)
       },
-      leftOf: (state: any) => (entity: any) => {
-        return state.lifeLineDimensions.get(entity) && state.lifeLineDimensions.get(entity).left
+      centerOf: (state: any, getters: any) => (entity: any) => {
+        return getters.lifelineLayout.center(entity)
       },
-      rightOf: (state: any) => (entity: any) => {
-        return state.lifeLineDimensions.get(entity) &&
-          (state.lifeLineDimensions.get(entity).left + state.lifeLineDimensions.get(entity).width)
+      leftOf: (state: any, getters: any) => (entity: any) => {
+        return getters.lifelineLayout.left(entity)
       },
-      widthOf: (state: any) => (entity: any) => {
-        return state.lifeLineDimensions.get(entity) && state.lifeLineDimensions.get(entity).width
+      rightOf: (state: any, getters: any) => (entity: any) => {
+        return getters.lifelineLayout.right(entity)
       },
       // deprecated, use distances that returns centerOf(to) - centerOf(from)
       distance: (state: any, getters: any) => (from: any, to: any) => {
@@ -68,9 +63,6 @@ const Store = (debounce?: number) => {
       onElementClick: (state: any) => state.onElementClick
     },
     mutations: {
-      increaseGeneration: function(state: any) {
-        state.generation++
-      },
       code: function (state: any, payload: any) {
         state.code = payload;
         state.generation++;
@@ -80,12 +72,6 @@ const Store = (debounce?: number) => {
       },
       event: function (state: any, payload: any) {
         state.events.push(payload)
-      },
-      onLifelinePositioned: function(state: any, payload: any) {
-        state.lifeLineDimensions.set(payload.name, payload.dimensions)
-      },
-      onLifeLineLayerMountedOrUpdated: function (state: any, payload: any) {
-        state.lifeLineDimensions = payload
       },
       onMessageLayerMountedOrUpdated: function (state: any, payload: any) {
         state.firstInvocations = payload

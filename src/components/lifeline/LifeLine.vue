@@ -2,23 +2,26 @@
   <div  :id="entity.name"
         class="lifeline"
         :class="classes"
-        :style="{'paddingTop': top + 'px'} ">
+        :style="{'paddingTop': top + 'px', width: width + 'px', left: left + 'px', transform: 'translateX(-50%)'} ">
     <div class="participant" :class="{'selected': selected, [entity.participantType]: true}" @click="onSelect">
       <label class="interface" v-if="entity.stereotype" >«{{entity.stereotype}}»</label>
-      <label class="name">{{entity.label || entity.name}}</label>
+      <label class="name">{{label}}</label>
     </div>
     <div class="line"></div>
   </div>
 </template>
 
 <script>
-  import {mapGetters, mapMutations} from 'vuex'
+  import {mapGetters} from 'vuex'
 
   export default {
     name: 'life-line',
-    props: ['entity', 'context'],
+    props: ['entity', 'context', 'groupLeft'],
     computed: {
-      ...mapGetters(['firstInvocations', 'onLifelineMounted']),
+      ...mapGetters(['lifelineLayout', 'firstInvocations', 'onLifelineMounted']),
+      label() {
+        return this.entity.label || this.entity.name
+      },
       classes() {
         if (this.entity.type) {
           return ['icon', this.entity.type.toLowerCase()]
@@ -27,6 +30,12 @@
       },
       selected () {
         return this.$store.state.selected.includes(this.entity.name)
+      },
+      left() {
+        return this.lifelineLayout.center(this.label) - (this.groupLeft || 0)
+      },
+      width() {
+        return this.lifelineLayout.innerWidth(this.lable)
       },
       top () {
         if (this.firstInvocationIsCreation) {
@@ -39,29 +48,12 @@
       }
     },
     methods: {
-      ...mapMutations(['onLifelinePositioned']),
       onSelect() {
         this.$store.commit('onSelect', this.entity.name)
       }
     },
     mounted() {
-      this.onLifelinePositioned({
-        name: this.entity.name,
-        dimensions: {
-          left: this.$el.offsetLeft,
-          width: this.$el.offsetWidth
-        }
-      })
       this.onLifelineMounted(this, this.$vnode.elm);
-    },
-    updated() {
-      this.onLifelinePositioned({
-        name: this.entity.name,
-        dimensions: {
-          left: this.$el.offsetLeft,
-          width: this.$el.offsetWidth
-        }
-      })
     }
   }
 </script>
@@ -70,9 +62,10 @@
 <style scoped>
   /* LifeLineLayer's display is flex, its children don't need display:inline-block */
   .lifeline {
+    position: absolute;       /* So that we can set arbitrary left to lifeline */
     display: flex;            /* So that .line fill the remaining height */
+    height: 100%;             /* Used overflow to hide overlong line */
     flex-direction: column;
-    margin: 0 20px;
   }
 
   .lifeline>.participant>.interface {
@@ -108,47 +101,47 @@
   }
 
   .lifeline.actor .participant::before {
-    background-image: url("../assets/actor.svg");
+    background-image: url("../../assets/actor.svg");
   }
 
   .lifeline.database .participant::before {
-    background-image: url("../assets/database.svg");
+    background-image: url("../../assets/database.svg");
   }
 
   .lifeline.ec2 .participant::before {
-    background-image: url("../assets/Amazon-EC2.svg");
+    background-image: url("../../assets/Amazon-EC2.svg");
   }
 
   .lifeline.ecs .participant::before {
-    background-image: url("../assets/Amazon-Elastic-Container-Service_light-bg.svg");
+    background-image: url("../../assets/Amazon-Elastic-Container-Service_light-bg.svg");
   }
 
   .lifeline.iam .participant::before {
-    background-image: url("../assets/AWS-Identity-and-Access-Management_IAM.svg");
+    background-image: url("../../assets/AWS-Identity-and-Access-Management_IAM.svg");
   }
 
   .lifeline.lambda .participant::before {
-    background-image: url("../assets/AWS-Lambda.svg");
+    background-image: url("../../assets/AWS-Lambda.svg");
   }
 
   .lifeline.rds .participant::before {
-    background-image: url("../assets/Amazon-RDS.svg");
+    background-image: url("../../assets/Amazon-RDS.svg");
   }
 
   .lifeline.s3 .participant::before {
-    background-image: url("../assets/Amazon-Simple-Storage-Service-S3_light-bg.svg");
+    background-image: url("../../assets/Amazon-Simple-Storage-Service-S3_light-bg.svg");
   }
 
   .lifeline.boundary .participant::before {
-    background-image: url("../assets/Robustness_Diagram_Boundary.svg");
+    background-image: url("../../assets/Robustness_Diagram_Boundary.svg");
   }
 
   .lifeline.control .participant::before {
-    background-image: url("../assets/Robustness_Diagram_Control.svg");
+    background-image: url("../../assets/Robustness_Diagram_Control.svg");
   }
 
   .lifeline.entity .participant::before {
-    background-image: url("../assets/Robustness_Diagram_Entity.svg");
+    background-image: url("../../assets/Robustness_Diagram_Entity.svg");
   }
 
 </style>

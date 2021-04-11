@@ -6,7 +6,7 @@
       class="starter"
       :class="{hidden: starterParticipant.name === '_STARTER_'}"
       />
-    <template v-for="(child, index) in explictGroupAndParticipants">
+    <template v-for="(child, index) in explicitGroupAndParticipants">
       <life-line-group :key="index"
                        v-if="child instanceof GroupContext"
                        :context="child" />
@@ -19,10 +19,10 @@
 </template>
 
 <script>
-  import {mapGetters, mapMutations} from 'vuex'
+  import {mapGetters} from 'vuex'
   import LifeLine from './LifeLine.vue'
   import LifeLineGroup from './LifeLineGroup'
-  import {Participants} from '../parser/index'
+  import {Participants} from '../../parser/index'
 
   export default {
     name: 'life-line-layer',
@@ -32,16 +32,16 @@
       starterParticipant() {
         return this.participants.Starter()
       },
-      showStarter() {
-        return this.starterParticipant.name !== '_STARTER_'
-      },
       starterOnTheLeft() {
+        // explicit means the participant is declared in the participant section.
+        // If it is explicit, it will be rendered in the explicitParticipant section
+        // see the template for more information.
         return !this.starterParticipant.explicit
       },
       implicitParticipants () {
         return this.participants.ImplicitArray()
       },
-      explictGroupAndParticipants() {
+      explicitGroupAndParticipants() {
         return this.context?.children.filter(c => {
           const isGroup = c instanceof this.GroupContext
           const isParticipant = (c instanceof this.ParticipantContext)
@@ -50,16 +50,9 @@
       }
     },
     methods: {
-      ...mapMutations(['increaseGeneration']),
       getParticipantEntity(ctx) {
         return Participants(ctx).First()
       }
-    },
-    updated() {
-      this.increaseGeneration()
-    },
-    mounted() {
-      this.increaseGeneration()
     },
     components: {
       LifeLine,
@@ -68,12 +61,8 @@
   }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .life-line-layer {
-    display: flex;        /* This is to remove spaces between inline-blocks, not necessary for generated and non-formatted code*/
-    min-width: 375px;     /* This line and the next line make them wide enough when there are ONLY two participants */
-    justify-content: space-between; /* makes it easier to calculate the width of the message layer */
     white-space: nowrap;  /* Do not wrap to a new line */
     position: absolute;   /* So that message layer is overlaid. */
     height: 100%;         /* To give height to the line */
@@ -81,9 +70,6 @@
 
   .lifeline.hidden {
     visibility: hidden;
-    margin-left: -40px; /* Remove the extra margin created by starter */
   }
-
-
 </style>
 
