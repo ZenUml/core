@@ -2,8 +2,11 @@
   <div  :id="entity.name"
         class="lifeline"
         :class="classes"
-        :style="{'paddingTop': top + 'px', width: width + 'px', left: left + 'px', transform: 'translateX(-50%)'} ">
-    <div class="participant" :class="{'selected': selected, [entity.participantType]: true}" @click="onSelect">
+        :style="{'paddingTop': top + 'px', left: left + 'px', transform: 'translateX(-50%)'} ">
+    <div class="participant"
+         :class="{'selected': selected, [entity.participantType]: true}"
+         :style="{width: width + 'px'}"
+         @click="onSelect">
       <label class="interface" v-if="entity.stereotype" >«{{entity.stereotype}}»</label>
       <label class="name">{{label}}</label>
     </div>
@@ -35,7 +38,7 @@
         return this.lifelineLayout.center(this.label) - (this.groupLeft || 0)
       },
       width() {
-        return this.lifelineLayout.innerWidth(this.lable)
+        return this.lifelineLayout.innerWidth(this.label)
       },
       top () {
         if (this.firstInvocationIsCreation) {
