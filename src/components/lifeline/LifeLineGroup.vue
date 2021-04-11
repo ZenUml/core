@@ -1,8 +1,8 @@
 <template>
-  <div class="container">
+  <div class="container" :style="{left: left + 'px'}">
     <label v-if="name">{{name}}</label>
     <div class="lifeline-group">
-      <life-line v-for="entity in entities" :key="entity.name" :ref="entity.name" :entity="entity"/>
+      <life-line v-for="entity in entities" :key="entity.name" :ref="entity.name" :entity="entity" :groupLeft="left"/>
     </div>
   </div>
 </template>
@@ -20,6 +20,9 @@
       },
       entities() {
         return Participants(this.context).Array()
+      },
+      left() {
+        return 200;
       }
     },
     components: {
@@ -30,11 +33,20 @@
 
 <style scoped>
   div.container {
-    background-color: #eeffee;
-    margin: 0 2px;
+    position: absolute;
+    height: 100%;
     display: flex;
     flex-direction: column;
   }
+
+  div.container:nth-child(odd) {
+    background-color: #eeffee;
+  }
+
+  div.container:nth-child(even) {
+    background-color: #eeeeee;
+  }
+
   label {
     display: block;
     text-align: center;

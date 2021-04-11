@@ -16,7 +16,7 @@
 
   export default {
     name: 'life-line',
-    props: ['entity', 'context'],
+    props: ['entity', 'context', 'groupLeft'],
     computed: {
       ...mapGetters(['lifelineLayout', 'firstInvocations', 'onLifelineMounted']),
       classes() {
@@ -29,7 +29,7 @@
         return this.$store.state.selected.includes(this.entity.name)
       },
       left() {
-        return this.lifelineLayout.center(this.entity.label || this.entity.name)
+        return this.lifelineLayout.center(this.entity.label || this.entity.name) - (this.groupLeft || 0)
       },
       top () {
         if (this.firstInvocationIsCreation) {
