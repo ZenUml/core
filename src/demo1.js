@@ -8,7 +8,6 @@
 export default `
 group x {A}
 AHasAVeryLongNameSoItIsLong
-@Starter(X)
 A.method() {
   new AHasAVeryLongNameSoItIsLong()
 }
