@@ -81,6 +81,7 @@
     position: absolute;       /* So that we can set arbitrary left to lifeline */
     display: flex;            /* So that .line fill the remaining height */
     height: 100%;             /* TODO: will break in group */
+    transform: translateX(-50%);
     flex-direction: column;
     margin: 0 20px;
   }

@@ -6,6 +6,7 @@ import SeqDiagram from './components/SeqDiagram.vue'
 import './components/Cosmetic.scss'
 import './components/theme-blue-river.scss'
 import {CodeRange} from './parser/CodeRange'
+import {LifelineLayout} from "@/components/lifeline/LifelineLayout";
 
 const Store = (debounce?: number) => {
   // @ts-ignore
@@ -41,9 +42,15 @@ const Store = (debounce?: number) => {
       participants: (state: any, getters: any) => {
         return Participants(getters.rootContext, true)
       },
-      centerOf: (state: any) => (entity: any) => {
-        return state.lifeLineDimensions.get(entity) &&
-          (state.lifeLineDimensions.get(entity).left + Math.floor(state.lifeLineDimensions.get(entity).width / 2))
+      centerOf: (state: any, getters: any) => (entity: any) => {
+        const participantsLabels = getters.participants.Array().map((p: { label: any; name: any }) => p.label || p.name);
+        const currentParticipantLabel = entity;
+        const lifelineLayout = LifelineLayout(participantsLabels);
+        console.log(participantsLabels, currentParticipantLabel, lifelineLayout)
+        return lifelineLayout.center(currentParticipantLabel)
+
+        // return state.lifeLineDimensions.get(entity) &&
+        //   (state.lifeLineDimensions.get(entity).left + Math.floor(state.lifeLineDimensions.get(entity).width / 2))
       },
       leftOf: (state: any) => (entity: any) => {
         return state.lifeLineDimensions.get(entity) && state.lifeLineDimensions.get(entity).left
