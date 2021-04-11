@@ -49,8 +49,8 @@ const Store = (debounce?: number) => {
       centerOf: (state: any, getters: any) => (entity: any) => {
         return getters.lifelineLayout.center(entity)
       },
-      leftOf: (state: any) => (entity: any) => {
-        return state.lifeLineDimensions.get(entity) && state.lifeLineDimensions.get(entity).left
+      leftOf: (state: any, getters: any) => (entity: any) => {
+        return getters.lifelineLayout.left(entity)
       },
       rightOf: (state: any) => (entity: any) => {
         return state.lifeLineDimensions.get(entity) &&

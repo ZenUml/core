@@ -9,6 +9,7 @@ export default `
 P1234567890
 PAbcder.m()
 A.method {
+  new B()
   B.method()
 }
 `
