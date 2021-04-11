@@ -37,10 +37,12 @@ export function LifelineLayout(participants) {
       return found?.left + (found?.innerWidth / 2)
     },
     outerLeft: (participant) => {
-      return this.left(participant) - MARGIN
+      const found = participantsWithLeft.find(p => p.name === participant);
+      return found?.left - (found?.innerWidth / 2) - MARGIN
     },
     outerRight: (participant) => {
-      return this.right(participant) + MARGIN
+      const found = participantsWithLeft.find(p => p.name === participant);
+      return found?.left + (found?.innerWidth / 2) + MARGIN
     }
   }
 }

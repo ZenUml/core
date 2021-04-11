@@ -13,6 +13,12 @@ describe('Lifeline layout', () => {
   it('should know the center, left, etc.', () => {
     const lifelineLayout = LifelineLayout(['AVeryLongLabel', 'AnotherVeryLongLabel']);
     expect(lifelineLayout.center('AVeryLongLabel')).toBe(10)
+    expect(lifelineLayout.left('AVeryLongLabel')).toBe(-49)
+    expect(lifelineLayout.outerLeft('AVeryLongLabel')).toBe(-59)
+    expect(lifelineLayout.outerRight('AVeryLongLabel')).toBe(79)
     expect(lifelineLayout.center('AnotherVeryLongLabel')).toBe(148)
+    expect(lifelineLayout.left('AnotherVeryLongLabel')).toBe(66)
+    expect(lifelineLayout.outerLeft('AnotherVeryLongLabel')).toBe(56)
+    expect(lifelineLayout.outerRight('AnotherVeryLongLabel')).toBe(240)
   })
 })
