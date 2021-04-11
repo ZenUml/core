@@ -6,7 +6,7 @@
 </template>
 
 <script>
-  import LifeLineLayer from './LifeLineLayer.vue'
+  import LifeLineLayer from './lifeline/LifeLineLayer.vue'
   import MessageLayer from './MessageLayer.vue'
   import domtoimage from 'dom-to-image-more'
   import {mapGetters} from 'vuex'

@@ -22,7 +22,7 @@
   import {mapGetters, mapMutations} from 'vuex'
   import LifeLine from './LifeLine.vue'
   import LifeLineGroup from './LifeLineGroup'
-  import {Participants} from '../parser/index'
+  import {Participants} from '../../parser/index'
 
   export default {
     name: 'life-line-layer',

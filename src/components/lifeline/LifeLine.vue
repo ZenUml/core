@@ -108,47 +108,47 @@
   }
 
   .lifeline.actor .participant::before {
-    background-image: url("../assets/actor.svg");
+    background-image: url("../../assets/actor.svg");
   }
 
   .lifeline.database .participant::before {
-    background-image: url("../assets/database.svg");
+    background-image: url("../../assets/database.svg");
   }
 
   .lifeline.ec2 .participant::before {
-    background-image: url("../assets/Amazon-EC2.svg");
+    background-image: url("../../assets/Amazon-EC2.svg");
   }
 
   .lifeline.ecs .participant::before {
-    background-image: url("../assets/Amazon-Elastic-Container-Service_light-bg.svg");
+    background-image: url("../../assets/Amazon-Elastic-Container-Service_light-bg.svg");
   }
 
   .lifeline.iam .participant::before {
-    background-image: url("../assets/AWS-Identity-and-Access-Management_IAM.svg");
+    background-image: url("../../assets/AWS-Identity-and-Access-Management_IAM.svg");
   }
 
   .lifeline.lambda .participant::before {
-    background-image: url("../assets/AWS-Lambda.svg");
+    background-image: url("../../assets/AWS-Lambda.svg");
   }
 
   .lifeline.rds .participant::before {
-    background-image: url("../assets/Amazon-RDS.svg");
+    background-image: url("../../assets/Amazon-RDS.svg");
   }
 
   .lifeline.s3 .participant::before {
-    background-image: url("../assets/Amazon-Simple-Storage-Service-S3_light-bg.svg");
+    background-image: url("../../assets/Amazon-Simple-Storage-Service-S3_light-bg.svg");
   }
 
   .lifeline.boundary .participant::before {
-    background-image: url("../assets/Robustness_Diagram_Boundary.svg");
+    background-image: url("../../assets/Robustness_Diagram_Boundary.svg");
   }
 
   .lifeline.control .participant::before {
-    background-image: url("../assets/Robustness_Diagram_Control.svg");
+    background-image: url("../../assets/Robustness_Diagram_Control.svg");
   }
 
   .lifeline.entity .participant::before {
-    background-image: url("../assets/Robustness_Diagram_Entity.svg");
+    background-image: url("../../assets/Robustness_Diagram_Entity.svg");
   }
 
 </style>
