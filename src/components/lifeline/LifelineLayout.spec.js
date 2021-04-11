@@ -7,6 +7,6 @@ describe('Lifeline layout', () => {
     const centerP1 = lifelineLayout.center('p1')
     expect(centerP1).toBe(0)
     const centerP2 = lifelineLayout.center('pA')
-    expect(centerP2).toBe(37)
+    expect(centerP2).toBe(120)
   })
 })
