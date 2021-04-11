@@ -112,6 +112,10 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .interaction {
+    border: red solid 4px;
+  }
+
   .interaction.creation.right-to-left {
     transform: translateX(-100%);
   }

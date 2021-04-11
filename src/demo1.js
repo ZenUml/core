@@ -6,6 +6,7 @@
 // Nested method
 // Assignment
 export default `
-A
-group "N" {B C}
+A->B.m {
+  new C()
+}
 `

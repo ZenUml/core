@@ -1,5 +1,5 @@
 import pixelWidth from "string-pixel-width";
-const MARGIN = 20
+const MARGIN = 10
 export function LifelineLayout(participants) {
   const participantsWithLeft = participants.map(p => {
     const textWidth = pixelWidth(p, {size: 16});
@@ -7,7 +7,7 @@ export function LifelineLayout(participants) {
     return {
       name: p,
       innerWidth: innerWidth,
-      outerWidth: innerWidth + MARGIN
+      outerWidth: innerWidth + (MARGIN * 2)
     }
   }).map((participant, index, array) => {
     const accumulatedLeft = array.filter((pf, i_f) => i_f < index).map(p => p.outerWidth).reduce((x, y) => x + y, 0)
@@ -15,19 +15,19 @@ export function LifelineLayout(participants) {
       name: participant.name,
       innerWidth: participant.innerWidth,
       outerWidth: participant.outerWidth,
-      left: accumulatedLeft,
-      outerLeft: accumulatedLeft - (MARGIN / 2)
+      left: accumulatedLeft + MARGIN,
+      outerLeft: accumulatedLeft
     }
   })
   return {
     ...participantsWithLeft,
     center: (participant) => {
       const found = participantsWithLeft.find(p => p.name === participant);
-      return found?.left + (found?.outerWidth / 2)
+      return found?.left + (found?.innerWidth / 2)
     },
     left: (participant) => {
       const found = participantsWithLeft.find(p => p.name === participant);
-      return found?.left + (MARGIN / 2)
+      return found?.left
     },
     right: (participant) => {
       const found = participantsWithLeft.find(p => p.name === participant);
@@ -35,7 +35,7 @@ export function LifelineLayout(participants) {
     },
     outerLeft: (participant) => {
       const found = participantsWithLeft.find(p => p.name === participant);
-      return found?.left
+      return found?.outerLeft
     },
     outerRight: (participant) => {
       const found = participantsWithLeft.find(p => p.name === participant);

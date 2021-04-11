@@ -17,7 +17,7 @@
         return this.participants?.Starter()?.name
       },
       paddingLeft () {
-        return this.centerOf(this.starter) - 7
+        return this.centerOf(this.starter) - 6
       },
       /* Message layer width
       Message layer should have the same or bigger width as the lifeline layer.
@@ -145,7 +145,7 @@
   .occurrence {
     position: relative;
     width: 15px;
-    left: calc(100% - 2px);   /* This 100% will only consider the content width of interaction. */
+    left: calc(100% - 3px);   /* This 100% will only consider the content width of interaction. */
     padding: 16px 0;          /* Provide default height for the occurrence bar */
     padding-left: 5px;        /* (OccurrenceWidth-1)/2 - OccurrenceBorderWidth*/
     border-width: 2px;

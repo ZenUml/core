@@ -106,9 +106,13 @@
   }
 </script>
 <style scoped>
-  .occurrence.source {
-    position: absolute;
-    height: calc(100% + 16px);
-    left: -12px;
-  }
+.interaction {
+  border: red solid 4px;
+}
+
+.occurrence.source {
+  position: absolute;
+  height: calc(100% + 16px);
+  left: -12px;
+}
 </style>
