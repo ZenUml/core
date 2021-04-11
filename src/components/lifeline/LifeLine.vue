@@ -2,7 +2,7 @@
   <div  :id="entity.name"
         class="lifeline"
         :class="classes"
-        :style="{'paddingTop': top + 'px'} ">
+        :style="{'paddingTop': top + 'px', left: left + 'px'} ">
     <div class="participant" :class="{'selected': selected, [entity.participantType]: true}" @click="onSelect">
       <label class="interface" v-if="entity.stereotype" >«{{entity.stereotype}}»</label>
       <label class="name">{{entity.label || entity.name}}</label>
@@ -12,13 +12,14 @@
 </template>
 
 <script>
+  import {LifelineLayout} from './LifelineLayout'
   import {mapGetters, mapMutations} from 'vuex'
 
   export default {
     name: 'life-line',
     props: ['entity', 'context'],
     computed: {
-      ...mapGetters(['firstInvocations', 'onLifelineMounted']),
+      ...mapGetters(['participants', 'firstInvocations', 'onLifelineMounted']),
       classes() {
         if (this.entity.type) {
           return ['icon', this.entity.type.toLowerCase()]
@@ -27,6 +28,13 @@
       },
       selected () {
         return this.$store.state.selected.includes(this.entity.name)
+      },
+      left() {
+        const participantsLabels = this.participants.Array().map(p => p.label || p.name);
+        const currentParticipantLabel = this.entity.label || this.entity.name;
+        const lifelineLayout = LifelineLayout(participantsLabels);
+        console.log(participantsLabels, currentParticipantLabel, lifelineLayout)
+        return lifelineLayout.center(currentParticipantLabel)
       },
       top () {
         if (this.firstInvocationIsCreation) {
