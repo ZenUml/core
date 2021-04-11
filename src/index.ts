@@ -13,7 +13,6 @@ const Store = (debounce?: number) => {
   // @ts-ignore
   return {
     state: {
-      generation: 0,
       // 'lifeLineDimensions' is decided by code and browser's behavior.
       // It cannot be a simple getter (which is a computed value of a state property).
       lifeLineDimensions: new Map(),
@@ -68,9 +67,6 @@ const Store = (debounce?: number) => {
       onElementClick: (state: any) => state.onElementClick
     },
     mutations: {
-      increaseGeneration: function(state: any) {
-        state.generation++
-      },
       code: function (state: any, payload: any) {
         state.code = payload;
         state.generation++;

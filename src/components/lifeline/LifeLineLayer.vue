@@ -19,7 +19,7 @@
 </template>
 
 <script>
-  import {mapGetters, mapMutations} from 'vuex'
+  import {mapGetters} from 'vuex'
   import LifeLine from './LifeLine.vue'
   import LifeLineGroup from './LifeLineGroup'
   import {Participants} from '../../parser/index'
@@ -50,16 +50,9 @@
       }
     },
     methods: {
-      ...mapMutations(['increaseGeneration']),
       getParticipantEntity(ctx) {
         return Participants(ctx).First()
       }
-    },
-    updated() {
-      this.increaseGeneration()
-    },
-    mounted() {
-      this.increaseGeneration()
     },
     components: {
       LifeLine,
