@@ -7,5 +7,5 @@
 // Assignment
 export default `
 P1234567890
-PAbcder
+PAbcder.m()
 `
