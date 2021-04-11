@@ -8,4 +8,8 @@
 export default `
 A
 AHasAVeryLongNameSoItIsLong
+
+A.method() {
+  new AHasAVeryLongNameSoItIsLong()
+}
 `

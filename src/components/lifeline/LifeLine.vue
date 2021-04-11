@@ -5,7 +5,7 @@
         :style="{'paddingTop': top + 'px', width: width + 'px', left: left + 'px', transform: 'translateX(-50%)'} ">
     <div class="participant" :class="{'selected': selected, [entity.participantType]: true}" @click="onSelect">
       <label class="interface" v-if="entity.stereotype" >«{{entity.stereotype}}»</label>
-      <label class="name">{{entity.label || entity.name}}</label>
+      <label class="name">{{label}}</label>
     </div>
     <div class="line"></div>
   </div>
@@ -19,6 +19,9 @@
     props: ['entity', 'context', 'groupLeft'],
     computed: {
       ...mapGetters(['lifelineLayout', 'firstInvocations', 'onLifelineMounted']),
+      label() {
+        return this.entity.label || this.entity.name
+      },
       classes() {
         if (this.entity.type) {
           return ['icon', this.entity.type.toLowerCase()]
@@ -29,10 +32,10 @@
         return this.$store.state.selected.includes(this.entity.name)
       },
       left() {
-        return this.lifelineLayout.center(this.entity.label || this.entity.name) - (this.groupLeft || 0)
+        return this.lifelineLayout.center(this.label) - (this.groupLeft || 0)
       },
       width() {
-        return this.lifelineLayout.innerWidth(this.entity.label || this.entity.name)
+        return this.lifelineLayout.innerWidth(this.lable)
       },
       top () {
         if (this.firstInvocationIsCreation) {
