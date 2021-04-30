@@ -2,7 +2,8 @@ import _ from 'lodash'
 import {GroupContext, ParticipantContext, Participants, RootContext} from './parser/index.js'
 
 import SeqDiagram from './components/SeqDiagram.vue'
-
+// @ts-ignore
+import './index.css'
 import './components/Cosmetic.scss'
 import './components/theme-blue-river.scss'
 import {CodeRange} from './parser/CodeRange'
