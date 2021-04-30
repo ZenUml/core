@@ -9,8 +9,6 @@ import {CodeRange} from './parser/CodeRange'
 import {LifelineLayout} from "@/components/lifeline/LifelineLayout";
 
 const Store = (debounce?: number) => {
-  // @ts-ignore
-  // @ts-ignore
   return {
     state: {
       firstInvocations: {},
