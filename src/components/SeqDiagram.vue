@@ -4,7 +4,7 @@
       <life-line-layer :context="rootContext.head()"/>
       <message-layer :context="rootContext.block()"/>
     </div>
-    <div class="footer self-end text-xs text-gray-300 font-thin subpixel-antialiased">ZenUML@{{Version}}</div>
+    <div class="absolute bottom-1 right-1 text-xs text-gray-300 font-thin subpixel-antialiased">ZenUML@{{Version}}</div>
   </div>
 </template>
 
