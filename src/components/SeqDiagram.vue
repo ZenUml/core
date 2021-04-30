@@ -1,7 +1,10 @@
 <template>
-  <div class="sequence-diagram" ref="diagram" :style="{'padding-left': paddingLeft + 'px'}">
-    <life-line-layer :context="rootContext.head()"/>
-    <message-layer :context="rootContext.block()"/>
+  <div class="container mx-auto flex items-stretch">
+    <div class="sequence-diagram" ref="diagram" :style="{'padding-left': paddingLeft + 'px'}">
+      <life-line-layer :context="rootContext.head()"/>
+      <message-layer :context="rootContext.block()"/>
+    </div>
+    <div class="footer self-end text-xs text-gray-300 font-thin subpixel-antialiased">ZenUML@{{Version}}</div>
   </div>
 </template>
 
@@ -18,7 +21,7 @@
       MessageLayer
     },
     computed: {
-      ...mapGetters(['rootContext', 'generation', 'participants', 'lifelineLayout']),
+      ...mapGetters(['Version', 'rootContext', 'generation', 'participants', 'lifelineLayout']),
       starter() {
         return this.participants?.Starter()?.name
       },

@@ -38,6 +38,7 @@
     "@babel/polyfill": "^7.10.1",
     "@babel/preset-env": "^7.13.5",
     "@babel/runtime-corejs2": "^7.12.13",
+    "@tailwindcss/postcss7-compat": "^2.1.2",
     "@types/jest": "^24.0.19",
     "@types/lodash": "^4.14.168",
     "@types/node": "latest",
@@ -51,16 +52,19 @@
     "@vue/cli-service": "^4.5.11",
     "@vue/eslint-config-typescript": "^5.0.2",
     "@vue/test-utils": "^1.1.3",
+    "autoprefixer": "^9",
     "babel-eslint": "^10.1.0",
     "core-js": "^3.8.3",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.6.0",
     "gauge-ts": "0.1.0",
     "node-sass": "^5.0.0",
+    "postcss": "^7",
     "regenerator-runtime": "^0.13.7",
     "sass-loader": "^10.1.0",
     "svg-url-loader": "^6.0.0",
     "taiko": "^1.2.2",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "terser-webpack-plugin": "^3.0.6",
     "typescript": "~3.9.3",
     "webpack": "^4.43.0",
@@ -94,11 +98,6 @@
         }
       }
     ]
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
   },
   "browserslist": [
     "> 1%",

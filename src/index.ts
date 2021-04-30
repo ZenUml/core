@@ -2,15 +2,19 @@ import _ from 'lodash'
 import {GroupContext, ParticipantContext, Participants, RootContext} from './parser/index.js'
 
 import SeqDiagram from './components/SeqDiagram.vue'
-
+// @ts-ignore
+import './index.css'
 import './components/Cosmetic.scss'
 import './components/theme-blue-river.scss'
 import {CodeRange} from './parser/CodeRange'
 import {LifelineLayout} from "@/components/lifeline/LifelineLayout";
 
+// @ts-ignore
+const Version = VERSION || ''
+// @ts-ignore
+const BuildTime = BUILD_TIME || ''
+
 const Store = (debounce?: number) => {
-  // @ts-ignore
-  // @ts-ignore
   return {
     state: {
       firstInvocations: {},
@@ -25,6 +29,8 @@ const Store = (debounce?: number) => {
       }
     },
     getters: {
+      Version: () => Version,
+      BuildTime: () => BuildTime,
       GroupContext: () => GroupContext,
       ParticipantContext: () => ParticipantContext,
       // We are using getters to avoid hard coding module's name ($store.Store.state)
@@ -99,12 +105,6 @@ const Store = (debounce?: number) => {
     strict: false,
   }
 };
-/* eslint-disable */
-// @ts-ignore
-const Version = VERSION || ''
-/* eslint-disable */
-// @ts-ignore
-const BuildTime = BUILD_TIME || ''
 export {
   Version,
   BuildTime,
