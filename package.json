@@ -59,7 +59,7 @@
     "eslint-plugin-vue": "^7.6.0",
     "gauge-ts": "0.1.0",
     "node-sass": "^5.0.0",
-    "postcss": "^7",
+    "postcss": "^8",
     "regenerator-runtime": "^0.13.7",
     "sass-loader": "^10.1.0",
     "svg-url-loader": "^6.0.0",
