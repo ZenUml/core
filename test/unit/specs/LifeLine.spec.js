@@ -1,6 +1,6 @@
 import {mount, createLocalVue} from "@vue/test-utils";
 import Vuex from 'vuex'
-import {Store} from '@'
+import {Store} from '@/index'
 import {Participant} from '@/parser/Participants'
 import LifeLine from '@/components/lifeline/LifeLine'
 const localVue = createLocalVue()
