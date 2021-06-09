@@ -42,7 +42,7 @@
     fill: none;
   }
   .message.self svg.arrow polyline.head {
-    fill: #808080;
+    fill: #000;
   }
 
 </style>

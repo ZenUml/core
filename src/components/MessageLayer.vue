@@ -135,13 +135,6 @@
     width: 40px;
   }
 
-  .message svg.arrow polyline {
-    stroke: #808080;
-    fill: none;
-    stroke-width: 1.5;
-    stroke-linejoin: round;
-  }
-
   .occurrence {
     position: relative;
     width: 15px;

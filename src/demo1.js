@@ -5,25 +5,29 @@
 // Self-method
 // Nested method
 // Assignment
-export default `
-@Starter(x)
-// module has condition:
-// !migration || (migration.required == true && migration.migrated == false)
-AppModule.migrate() {
-  // In the future, we can use this to migrate lite macro to full
-  fullInstalled = Confluence.IsFullAppInstalled()
-  hasMacro = Page.contains("zenuml-graph-macro")
-  if (fullInstalled || !hasMacro) {
-    // key: zenuml-graph-macro-migration
-    Page.setContentProperty("migration", "required: false", lastUpdate)
-  } else {
-    // key: zenuml-graph-macro-migration
-    Page.setContentProperty("migration", "required: true", lastUpdate)
-    Page.replace("zenuml-graph-macro", "zenuml-graph-macro-lite")
-    // key: zenuml-graph-macro-migration
-    Page.setContentProperty("migration", "migrated: true", lastUpdate)
+export default `Client->SGW."Get order by id" {
+  svc.Get(id) {
+    new X()
+    svc->svc: self
+    rep."load order" {
+      =="Start Here"==
+      MF."load order from mainframe"
+      =="End Here"==
+      if(order == null) {
+        @return
+        SGW->Client:404
+      } else if(order > 1) {
+        return order
+      } else {
+        return none
+      }
+
+      while(true) {
+        svc.refresh(data)
+      }
+      processOrder()
+    }
+    return order
   }
-
-}
-
-`
+  return response
+}`

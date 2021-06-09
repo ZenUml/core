@@ -11,41 +11,71 @@
   }
 
   .occurrence {
-    border: 2px solid rgba(3, 3, 3, 0.05);
-    background-color: #d3d3d3;
+    border: 2px solid #000;
+    background-color: #DEDEDE;
+  }
+  .message {
+    .name {
+      padding-bottom: 1px;
+      padding-left: 1px;
+      color: #000;
+    }
+    border-bottom-color: #000;
+    svg {
+      polyline {
+        fill: none;
+        stroke: #000;
+        stroke-width: 2px;
+      }
+    }
   }
 
-  .message {
-    display: block;
-    border-bottom-color: #808080;
-  }
   .divider{
     .name {
-      border: solid 2px;
-      padding: 2px;
+      padding: 2px 6px 2px 6px;
+      border-radius: 4px;
+      margin: 0;
+      border-color: transparent;
+      color: #000;
     }
     .left {
-      background: linear-gradient(to right, #A7A7A1, #000);
+      background: #000;
     }
     .right {
-      background: linear-gradient(to right, #000, #A7A7A1);
+      background: #000;
     }
   }
 
   .fragment {
-    border-style: solid;
-    border-color: #aaa;
-    border-radius: 2px;
-    background: rgba(255, 255, 255, 0.2);
-    opacity: 0.9;
 
+  }
+
+  .fragment {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.30);
+    .fragment.par>.block>.statement-container:not(:first-child), .segment:not(:first-child) {
+      border-top: 1px solid rgba(0, 0, 0, 0.30);
+    }
     .header {
-      .name label {
-        color: #555;
-        font-weight: 700;
+      .name {
+        padding: 4px 4px 4px 6px;
+        background: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.30);
+        label { /* name label */
+          font-weight: 700;
+          background: transparent;
+          padding: 0;
+          color: #000;
+        }
       }
-
-      label.else-if {
+    }
+    label { /* other labels e.g. condition */
+      display: inline-block;
+      padding: 6px 4px 4px 6px;
+      color: #000;
+      &.else-if {
         display: none;
       }
     }
@@ -54,11 +84,21 @@
       border-bottom-color: #555;
     }
   }
-
-  .lifeline .line {
-    border-left-style: dashed;
-    border-left-color: #808080;
+  .lifeline {
+    .participant {
+      font-weight: 400;
+      border: 2px solid #000;
+      background: #FFF;
+      label {
+        color: #000;
+      }
+    }
+    .line {
+      border-left-style: dashed;
+      border-left-color: #000;
+    }
   }
+
 
   .selected {
     border-color: rgba(3, 3, 3, 0.55);
