@@ -13,9 +13,7 @@ const Store = (debounce?: number) => {
   return {
     state: {
       generation: 0,
-      // 'lifeLineDimensions' is decided by code and browser's behavior.
-      // It cannot be a simple getter (which is a computed value of a state property).
-      lifeLineDimensions: new Map(),
+      lifeLineElementMap: new Map(),
       firstInvocations: {},
       code: '',
       events: [],
@@ -42,18 +40,18 @@ const Store = (debounce?: number) => {
         return Participants(getters.rootContext, true)
       },
       centerOf: (state: any) => (entity: any) => {
-        return state.lifeLineDimensions.get(entity) &&
-          (state.lifeLineDimensions.get(entity).left + Math.floor(state.lifeLineDimensions.get(entity).width / 2))
+        return state.lifeLineElementMap.get(entity) &&
+          (state.lifeLineElementMap.get(entity).offsetLeft + Math.floor(state.lifeLineElementMap.get(entity).offsetWidth / 2))
       },
       leftOf: (state: any) => (entity: any) => {
-        return state.lifeLineDimensions.get(entity) && state.lifeLineDimensions.get(entity).left
+        return state.lifeLineElementMap.get(entity) && state.lifeLineElementMap.get(entity).offsetLeft
       },
       rightOf: (state: any) => (entity: any) => {
-        return state.lifeLineDimensions.get(entity) &&
-          (state.lifeLineDimensions.get(entity).left + state.lifeLineDimensions.get(entity).width)
+        return state.lifeLineElementMap.get(entity) &&
+          (state.lifeLineElementMap.get(entity).offsetLeft + state.lifeLineElementMap.get(entity).offsetWidth)
       },
       widthOf: (state: any) => (entity: any) => {
-        return state.lifeLineDimensions.get(entity) && state.lifeLineDimensions.get(entity).width
+        return state.lifeLineElementMap.get(entity) && state.lifeLineElementMap.get(entity).offsetWidth
       },
       // deprecated, use distances that returns centerOf(to) - centerOf(from)
       distance: (state: any, getters: any) => (from: any, to: any) => {
@@ -82,10 +80,7 @@ const Store = (debounce?: number) => {
         state.events.push(payload)
       },
       onLifelinePositioned: function(state: any, payload: any) {
-        state.lifeLineDimensions.set(payload.name, payload.dimensions)
-      },
-      onLifeLineLayerMountedOrUpdated: function (state: any, payload: any) {
-        state.lifeLineDimensions = payload
+        state.lifeLineElementMap.set(payload.name, payload.el)
       },
       onMessageLayerMountedOrUpdated: function (state: any, payload: any) {
         state.firstInvocations = payload

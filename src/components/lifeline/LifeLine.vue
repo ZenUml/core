@@ -47,20 +47,14 @@
     mounted() {
       this.onLifelinePositioned({
         name: this.entity.name,
-        dimensions: {
-          left: this.$el.offsetLeft,
-          width: this.$el.offsetWidth
-        }
+        el: this.$el
       })
       this.onLifelineMounted(this, this.$vnode.elm);
     },
     updated() {
       this.onLifelinePositioned({
         name: this.entity.name,
-        dimensions: {
-          left: this.$el.offsetLeft,
-          width: this.$el.offsetWidth
-        }
+        el: this.$el
       })
     }
   }
