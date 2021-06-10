@@ -8,8 +8,6 @@ import './components/theme-blue-river.scss'
 import {CodeRange} from './parser/CodeRange'
 
 const Store = (debounce?: number) => {
-  // @ts-ignore
-  // @ts-ignore
   return {
     state: {
       generation: 0,
@@ -57,7 +55,6 @@ const Store = (debounce?: number) => {
       distance: (state: any, getters: any) => (from: any, to: any) => {
         return getters.centerOf(from) - getters.centerOf(to)
       },
-      // deprecated: It should return centerOf(to) - centerOf(from)
       distance2: (state: any, getters: any) => (from: any, to: any) => {
         if (!from || !to) return 0
         return getters.centerOf(to) - getters.centerOf(from)
