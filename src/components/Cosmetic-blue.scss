@@ -1,0 +1,96 @@
+$fragmentBorderColor: rgba(4, 46, 110, 0.30);
+$nameBackgroundColor: rgba(4, 46, 110, 0.10);
+$labelTextColor: #032C72;
+$messageLineColor: #032C72;
+$occuranceBorderColor: #032C72;
+$occuranceBackgroundColor: #fff;
+$participantLineColor: #032C72;
+$participantBorderColor: #032C72;
+$participantTextColor: #032C72;
+$participantBackgroundColor: rgba(146, 192, 240, 0.30);
+$dividerBackgroundColor: #E28553;
+$dividerBorderColor: #E28553;
+$dividerTextColor: #E28553;
+
+.theme-blue.sequence-diagram {
+  .divider {
+    .name {
+      padding: 2px 6px 2px 6px;
+      border-radius: 4px;
+      margin: 0px;
+      border-color: $dividerBorderColor;
+      color: $dividerTextColor;
+    }
+    .left {
+      background: $dividerBackgroundColor;
+    }
+    .right {
+      background: $dividerBackgroundColor;
+    }
+  }
+  .lifeline {
+    .participant {
+      font-weight: 400;
+      border: 2px solid $participantBorderColor;
+      background: $participantBackgroundColor;
+      label {
+        text-decoration: underline;
+        color: $participantTextColor;
+      }
+    }
+    .line {
+      border-left-color: $participantLineColor;
+    }
+  }
+  .message {
+    .name {
+      padding-bottom: 1px;
+      color: $messageLineColor;
+    }
+    border-bottom-color: $messageLineColor;
+    svg {
+      polyline {
+        fill: $messageLineColor;
+        stroke: $messageLineColor;
+      }
+    }
+  }
+  .message.self {
+    svg>polyline:not(.head) {
+      fill: none;
+    }
+  }
+  .occurrence {
+    background-color: white;
+    border: 2px solid $occuranceBorderColor;
+    background-color: $occuranceBackgroundColor;
+  }
+  .fragment {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    border: 1px solid $fragmentBorderColor;
+    .fragment.par>.block>.statement-container:not(:first-child), .segment:not(:first-child) {
+      border-top: 1px solid $fragmentBorderColor;
+    }
+    .header {
+      .name {
+        padding: 4px 4px 4px 6px;
+        background: $nameBackgroundColor;
+        label { /* name label */
+          background: transparent;
+          padding: 0px;
+          color: $labelTextColor;
+        }
+      }
+    }
+    label { /* other labels e.g. condition */
+      display: inline-block;
+      padding: 4px 4px 4px 6px;
+      color: $labelTextColor;
+    }
+  }
+  .statement-container {
+    margin-bottom: 8px;
+  }
+}

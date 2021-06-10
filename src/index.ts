@@ -4,6 +4,7 @@ import {RootContext, Participants, GroupContext, ParticipantContext} from './par
 import SeqDiagram from './components/SeqDiagram.vue'
 
 import './components/Cosmetic.scss'
+import './components/Cosmetic-blue.scss'
 import './components/theme-blue-river.scss'
 import {CodeRange} from './parser/CodeRange'
 
