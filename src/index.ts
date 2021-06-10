@@ -5,6 +5,7 @@ import SeqDiagram from './components/SeqDiagram.vue'
 
 import './components/Cosmetic.scss'
 import './components/Cosmetic-blue.scss'
+import './components/Cosmetic-black-white.scss'
 import './components/theme-blue-river.scss'
 import {CodeRange} from './parser/CodeRange'
 

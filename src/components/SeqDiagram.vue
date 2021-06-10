@@ -1,5 +1,5 @@
 <template>
-  <div class="sequence-diagram theme-blue" ref="diagram" >
+  <div class="sequence-diagram theme-bw" ref="diagram" >
     <life-line-layer :context="rootContext.head()"/>
     <message-layer :context="rootContext.block()" :key="generation"/>
   </div>
