@@ -85,7 +85,6 @@ $dividerBorderColor: #000;
 
     .header {
       .name {
-        padding: 4px 4px 4px 6px;
         background: $nameBackgroundColor;
 
         label { /* name label */
@@ -93,11 +92,6 @@ $dividerBorderColor: #000;
           padding: 0px;
         }
       }
-    }
-
-    label { /* other labels e.g. condition */
-      display: inline-block;
-      padding: 4px 4px 4px 6px;
     }
   }
 

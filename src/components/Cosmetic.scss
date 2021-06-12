@@ -70,13 +70,13 @@
           color: #000;
         }
       }
-    }
-    label { /* other labels e.g. condition */
-      display: inline-block;
-      padding: 6px 4px 4px 6px;
-      color: #000;
-      &.else-if {
-        display: none;
+      label { /* other labels e.g. condition */
+        display: inline-block;
+        padding: 6px 4px 4px 6px;
+        color: #000;
+        &.else-if {
+          display: none;
+        }
       }
     }
 

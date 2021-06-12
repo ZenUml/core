@@ -75,7 +75,6 @@ $dividerTextColor: #E28553;
     }
     .header {
       .name {
-        padding: 4px 4px 4px 6px;
         background: $nameBackgroundColor;
         label { /* name label */
           background: transparent;
@@ -83,11 +82,9 @@ $dividerTextColor: #E28553;
           color: $labelTextColor;
         }
       }
-    }
-    label { /* other labels e.g. condition */
-      display: inline-block;
-      padding: 4px 4px 4px 6px;
-      color: $labelTextColor;
+      label { /* other labels e.g. condition */
+        color: $labelTextColor;
+      }
     }
   }
   .statement-container {
