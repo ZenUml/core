@@ -1,5 +1,6 @@
 <template>
   <div class="sequence-diagram" ref="diagram" >
+    <diagram-title :context="rootContext.title()"/>
     <life-line-layer :context="rootContext.head()"/>
     <message-layer :context="rootContext.block()" :key="generation"/>
   </div>
@@ -10,10 +11,12 @@
   import MessageLayer from './MessageLayer.vue'
   import domtoimage from 'dom-to-image-more'
   import {mapGetters} from 'vuex'
+  import DiagramTitle from "@/components/DiagramTitle";
 
   export default {
     name: 'seq-diagram',
     components: {
+      DiagramTitle,
       LifeLineLayer,
       MessageLayer
     },

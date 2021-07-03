@@ -5,7 +5,9 @@
 // Self-method
 // Nested method
 // Assignment
-export default `Client->SGW."Get order by id" {
+export default `
+title client to gateway
+Client->SGW."Get order by id" {
   svc.Get(id) {
     new X()
     svc->svc: self
