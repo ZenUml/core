@@ -3,6 +3,7 @@ const sequenceLexer = require('../generated-parser/sequenceLexer');
 const sequenceParser = require('../generated-parser/sequenceParser');
 const ToCollector = require('./ToCollector');
 const ChildFragmentDetector = require('./ChildFragmentDetecotr');
+require('./TitleContext');
 require('./IsCurrent');
 require('./Owner');
 require('./ProgContext');

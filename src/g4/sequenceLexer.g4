@@ -2,6 +2,10 @@ lexer grammar sequenceLexer;
 channels {
   COMMENT_CHANNEL
 }
+TITLE
+ : 'title' -> pushMode(TITLE_MODE)
+ ;
+
 COL
  : ':' -> pushMode(EVENT)
  ;
@@ -111,3 +115,12 @@ EVENT_END
 WS
 : [ ] -> channel(HIDDEN)
 ;
+
+mode TITLE_MODE;
+TITLE_CONTENT
+ : ~[\r\n]+
+ ;
+
+TITLE_END
+ : [\r\n] -> popMode
+ ;

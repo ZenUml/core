@@ -5,10 +5,14 @@ options {
 }
 
 prog
- : EOF                            // An empty string is a valid prog
+ : title? EOF                            // An empty string is a valid prog
 // | LT EOF                       // Parser auto recover from this
- | head EOF                       // [Perf] Removing this line does not help
- | head? block EOF
+ | title? head EOF                       // [Perf] Removing this line does not help
+ | title? head? block EOF
+ ;
+
+title
+ : TITLE TITLE_CONTENT TITLE_END?
  ;
 
 head

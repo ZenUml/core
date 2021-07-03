@@ -20,6 +20,15 @@ sequenceParserListener.prototype.exitProg = function(ctx) {
 };
 
 
+// Enter a parse tree produced by sequenceParser#title.
+sequenceParserListener.prototype.enterTitle = function(ctx) {
+};
+
+// Exit a parse tree produced by sequenceParser#title.
+sequenceParserListener.prototype.exitTitle = function(ctx) {
+};
+
+
 // Enter a parse tree produced by sequenceParser#head.
 sequenceParserListener.prototype.enterHead = function(ctx) {
 };
