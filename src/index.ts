@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import {RootContext, Participants, GroupContext, ParticipantContext} from './parser/index.js'
 
+import Frame from './components/Frame.vue'
 import SeqDiagram from './components/SeqDiagram.vue'
 
 import './components/Cosmetic.scss'
@@ -117,5 +118,6 @@ export {
   Version,
   BuildTime,
   Store,
-  SeqDiagram
+  SeqDiagram,
+  Frame
 }
