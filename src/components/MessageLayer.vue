@@ -1,5 +1,5 @@
 <template>
-  <div class="message-layer" :style="{'width': width + 'px'}">
+  <div class="message-layer" :style="{'width': totalWidth + 'px'}">
     <block :context="context" :style="{'padding-left': paddingLeft + 'px'}"/>
   </div>
 </template>
@@ -11,6 +11,13 @@
   export default {
     name: 'message-layer',
     props: ['context'],
+    data() {
+      return {
+        left: 0,
+        right: 0,
+        totalWidth: 0
+      }
+    },
     computed: {
       ...mapGetters(['participants', 'centerOf', 'rightOf']),
       starter() {
@@ -19,24 +26,36 @@
       paddingLeft () {
         return this.centerOf(this.starter)
       },
-      /* Message layer width
-      Message layer should have the same or bigger width as the lifeline layer.
-      For simplification, we set them the same.
-       */
-      width() {
-        let rearParticipant = this.participantNames().pop()
-        // 20px for the right margin of the participant
-        return this.rightOf(rearParticipant) + 20
-      }
     },
     mounted () {
       this.emitFirstInvocations()
+      this.updateWidth()
     },
     updated () {
-      this.emitFirstInvocations()
+      // We do not need to call the following two methods here
+      // because mounted will be invoked every time when we change code
+      // this.emitFirstInvocations()
+      // this.updateWidth()
     },
     methods: {
       ...mapMutations(['onMessageLayerMountedOrUpdated']),
+      updateWidth() {
+        let rearParticipant = this.participantNames().pop()
+        // 20px for the right margin of the participant
+        let leftEdge = this.$el.getBoundingClientRect().left
+        let rightEdge = this.rightOf(rearParticipant) + leftEdge + 100
+        function _recurse(node) {
+          const childLeft = node.getBoundingClientRect().right;
+          rightEdge = Math.max(rightEdge, childLeft)
+          if(node.children) {
+            node.children.forEach(function (c) { _recurse(c); })
+          }
+        }
+        this.$el && _recurse(this.$el)
+        this.left = leftEdge
+        this.right = rightEdge
+        this.totalWidth = rightEdge - leftEdge + 20
+      },
       participantNames() {
         // According to the doc, computed properties are cached.
         return this.participants.Names()

@@ -58,9 +58,7 @@
       },
       interactionWidth: function () {
         if (this.context && this.isSelf) {
-          const leftOfMessage = 30
-          const averageWidthOfChar = 10
-          return averageWidthOfChar * (this.assignee?.length + this.signature?.length) + leftOfMessage
+          return 0
         }
 
         const dist = Math.abs(this.distance(this.from, this.to))
