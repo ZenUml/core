@@ -47,7 +47,7 @@
         function _recurse(node) {
           const childLeft = node.getBoundingClientRect().right;
           rightEdge = Math.max(rightEdge, childLeft)
-          if(node.children) {
+          if(node.children && node.children.forEach) {
             node.children.forEach(function (c) { _recurse(c); })
           }
         }

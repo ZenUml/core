@@ -19,7 +19,7 @@ describe('MessageLayer', () => {
     // We do not need to wait until next tick in **test**.
     // await messageLayerWrapper.vm.$nextTick()
     expect(messageLayerWrapper.find('.message-layer').attributes().style)
-      .toBe('width: 120px;')
+      .toBe('width: 220px;')
   })
   it('gets participant names', async () => {
     expect(messageLayerWrapper.vm.participantNames()[0]).toBe('a')
