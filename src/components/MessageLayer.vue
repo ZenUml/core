@@ -43,7 +43,7 @@
         let rearParticipant = this.participantNames().pop()
         // 20px for the right margin of the participant
         let leftEdge = this.$el.getBoundingClientRect().left
-        let rightEdge = this.rightOf(rearParticipant) + leftEdge + 100
+        let rightEdge = this.rightOf(rearParticipant) + leftEdge
         function _recurse(node) {
           const childLeft = node.getBoundingClientRect().right;
           rightEdge = Math.max(rightEdge, childLeft)

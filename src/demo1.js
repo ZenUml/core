@@ -5,34 +5,14 @@
 // Self-method
 // Nested method
 // Assignment
-export default `
-title client to gateway
-Client->SGW."Get order by id" {
-  svc.Get(id) {
-    new X()
-    svc->svc: self
-    rep."load order" {
-      =="Start Here"==
-      MF."load order from mainframe" {
-        MMMMMMMMMMMMMMMMMMMMMMMMMMM()
-      }
+export default `// Sample! Decare the participants (optional)
+BookService BookRepository Receipt Notification
+@Starter(User)
+"{id, dueDate, ...}" = BookService.Borrow(id) {
+  BookRepository.Update(id, onLoan)
 
-      =="End Here"==
-      if(order == null) {
-        @return
-        SGW->Client:404
-      } else if(order > 1) {
-        return order
-      } else {
-        return none
-      }
-
-      while(true) {
-        svc.refresh(data)
-      }
-      processOrder()
-    }
-    return order
-  }
-  return response
+  // Send Event with "Source->Target:Event". "Source->" is optional
+  Notification:BOOK_ON_LOAN event with id, due date, etc.
+  =="Create a Receipt"==
+  new Receipt(id, dueDate)
 }`
