@@ -1,5 +1,5 @@
 <template>
-  <div class="divider" :style="{width: width + 'px', transform: 'translateX(' + ((-1) * centerOfFrom + fragmentOffset) + 'px)'}">
+  <div class="divider" :style="{width: width + 'px', transform: 'translateX(' + ((-1) * centerOfFrom + fragmentOffset + 10) + 'px)'}">
     <div class="left"></div>
     <div class="name">{{name}}</div>
     <div class="right"></div>
@@ -18,7 +18,7 @@
       width() {
         let rearParticipant = this.participants.Names().pop()
         // 20px for the right margin of the participant
-        return this.rightOf(rearParticipant) + 20
+        return this.rightOf(rearParticipant)
       },
       from: function() {
         return this.context.Origin()
