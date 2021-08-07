@@ -54,7 +54,7 @@
         this.$el && _recurse(this.$el)
         this.left = leftEdge
         this.right = rightEdge
-        this.totalWidth = rightEdge - leftEdge + 20
+        this.totalWidth = rightEdge - leftEdge + 10
       },
       participantNames() {
         // According to the doc, computed properties are cached.
