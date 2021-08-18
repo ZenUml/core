@@ -4,6 +4,7 @@ import {RootContext, Participants, GroupContext, ParticipantContext} from './par
 import DiagramFrame from './components/DiagramFrame.vue'
 import SeqDiagram from './components/SeqDiagram.vue'
 
+import './assets/tailwind.css'
 import './components/Cosmetic.scss'
 import './components/Cosmetic-blue.scss'
 import './components/Cosmetic-black-white.scss'
