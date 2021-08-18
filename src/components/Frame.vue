@@ -5,7 +5,7 @@
         <diagram-title :context="rootContext.title()"/>
       </div>
       <div class="right">
-
+        <slot></slot>
       </div>
     </div>
     <seq-diagram/>
