@@ -1,6 +1,13 @@
 <template>
   <div class="frame">
-    <diagram-title :context="rootContext.title()"/>
+    <div class="header flex">
+      <div class="left flex-1">
+        <diagram-title :context="rootContext.title()"/>
+      </div>
+      <div class="right">
+
+      </div>
+    </div>
     <seq-diagram/>
   </div>
 </template>
@@ -23,4 +30,10 @@ export default {
   border: #E6E6E6 1px solid;
   border-radius: 3px;
 }
+.header {
+  border-bottom: #E6E6E6 1px solid;
+  margin-bottom: 4px;
+  padding: 4px;
+}
+
 </style>

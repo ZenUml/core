@@ -5,7 +5,9 @@
 // Self-method
 // Nested method
 // Assignment
-export default `// Sample! Decare the participants (optional)
+export default `
+title Hello World
+// Sample! Decare the participants (optional)
 BookService BookRepository Receipt Notification
 @Starter(User)
 "{id, dueDate, ...}" = BookService.Borrow(id) {
