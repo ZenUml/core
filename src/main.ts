@@ -2,13 +2,13 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 // import log4V from './plugins/Log4V'
 
-import {Frame, SeqDiagram, Store, BuildTime, Version} from './index'
+import {DiagramFrame, SeqDiagram, Store, BuildTime, Version} from './index'
 
 Vue.use(Vuex)
 // Vue.use(log4V)
 
 Vue.component('seq-diagram', SeqDiagram)
-Vue.component('frame', Frame)
+Vue.component('frame', DiagramFrame)
 
 Vue.config.productionTip = false
 

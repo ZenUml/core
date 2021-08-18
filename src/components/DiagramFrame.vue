@@ -16,7 +16,7 @@
 import DiagramTitle from "@/components/DiagramTitle";
 import {mapGetters} from "vuex";
 export default {
-  name: "Frame",
+  name: "DiagramFrame",
   components: {DiagramTitle},
   computed: {
     ...mapGetters(['rootContext'])
