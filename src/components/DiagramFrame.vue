@@ -2,7 +2,7 @@
   <div class="frame">
     <div class="header flex">
       <div class="left flex-1">
-        <diagram-title :context="rootContext?.title()"/>
+        <diagram-title :context="title"/>
       </div>
       <div class="right">
         <slot></slot>
@@ -19,13 +19,14 @@ export default {
   name: "DiagramFrame",
   components: {DiagramTitle},
   computed: {
-    ...mapGetters(['rootContext'])
-  },
-  beforeCreate() {
-    if(!this.rootContext) {
-      console.error('`rootContext` is empty. Please make sure `store` is properly configured.')
+    ...mapGetters(['rootContext']),
+    title() {
+      if(!this.rootContext) {
+        console.error('`rootContext` is empty. Please make sure `store` is properly configured.')
+      }
+      return this.rootContext?.title()
     }
-  }
+  },
 }
 </script>
 

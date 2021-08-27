@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import _, {now} from 'lodash'
 import {RootContext, Participants, GroupContext, ParticipantContext} from './parser/index.js'
 
 import DiagramFrame from './components/DiagramFrame.vue'
@@ -11,7 +11,14 @@ import './components/Cosmetic-black-white.scss'
 import './components/theme-blue-river.scss'
 import {CodeRange} from './parser/CodeRange'
 
+let storeInitiationTime: number = 0
+setTimeout(function () {
+  if(!storeInitiationTime) {
+    console.warn('[vue-sequence] Store is a function and is not initiated in 1 second.')
+  }
+}, 1000)
 const Store = (debounce?: number) => {
+  storeInitiationTime = now()
   return {
     state: {
       generation: 0,
