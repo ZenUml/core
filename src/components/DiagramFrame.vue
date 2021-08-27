@@ -2,7 +2,7 @@
   <div class="frame">
     <div class="header flex">
       <div class="left flex-1">
-        <diagram-title :context="rootContext.title()"/>
+        <diagram-title :context="rootContext?.title()"/>
       </div>
       <div class="right">
         <slot></slot>
@@ -21,6 +21,11 @@ export default {
   computed: {
     ...mapGetters(['rootContext'])
   },
+  beforeCreate() {
+    if(!this.rootContext) {
+      console.error('`rootContext` is empty. Please make sure `store` is properly configured.')
+    }
+  }
 }
 </script>
 
