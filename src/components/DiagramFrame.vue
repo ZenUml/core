@@ -13,11 +13,11 @@
 </template>
 
 <script>
-import DiagramTitle from "@/components/DiagramTitle";
 import {mapGetters} from "vuex";
+import DiagramTitle from "@/components/DiagramTitle";
+import SeqDiagram from "@/components/SeqDiagram";
 export default {
   name: "DiagramFrame",
-  components: {DiagramTitle},
   computed: {
     ...mapGetters(['rootContext']),
     title() {
@@ -26,6 +26,10 @@ export default {
       }
       return this.rootContext?.title()
     }
+  },
+  components: {
+    DiagramTitle,
+    SeqDiagram
   },
 }
 </script>
