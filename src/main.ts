@@ -2,13 +2,10 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 // import log4V from './plugins/Log4V'
 
-import {DiagramFrame, SeqDiagram, Store, BuildTime, Version} from './index'
+import {DiagramFrame, Store, BuildTime, Version} from './index'
 
 Vue.use(Vuex)
 // Vue.use(log4V)
-
-Vue.component('seq-diagram', SeqDiagram)
-Vue.component('frame', DiagramFrame)
 
 Vue.config.productionTip = false
 
@@ -30,7 +27,7 @@ store1.state.code = demo1
  * The previous version used h(App). That was kind of wrong, because when doing that we do not need to
  * define the seq-diagram component here.
  */
-new Vue({el: '#demo1', store: new Vuex.Store(store1), render: h => h('frame') })
+new Vue({el: '#demo1', store: new Vuex.Store(store1), render: h => h(DiagramFrame) })
 const store2 = Store()
 store2.state.code = demo2
-new Vue({el: '#demo2', store: new Vuex.Store(store2), render: h => h('frame') })
+new Vue({el: '#demo2', store: new Vuex.Store(store2), render: h => h(DiagramFrame) })
