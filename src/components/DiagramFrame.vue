@@ -1,11 +1,11 @@
 <template>
   <div class="frame">
     <div class="header flex">
-      <div class="left flex-1">
-        <diagram-title :context="title"/>
+      <div class="left">
+        <slot></slot>
       </div>
       <div class="right">
-        <slot></slot>
+        <diagram-title :context="title"/>
       </div>
     </div>
     <seq-diagram/>
