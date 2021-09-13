@@ -16,6 +16,7 @@
     "test:specs": "gauge run specs"
   },
   "main": "./dist/vue-sequence.umd.min.js",
+  "types": "./types/index.d.ts",
   "dependencies": {
     "@tailwindcss/postcss7-compat": "^2.0.2",
     "@types/assert": "^1.5.4",
