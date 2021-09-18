@@ -1,13 +1,13 @@
 import {createLocalVue, shallowMount} from '@vue/test-utils'
 import Vuex from 'vuex'
 import InteractionAsync from './Interaction-async'
-import {Store} from '../index'
+import {VueSequence} from '../index'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
 
 function renderCode(code) {
-  const storeConfig = Store()
+  const storeConfig = VueSequence.Store()
   storeConfig.state.code = code
 
   const store = new Vuex.Store(storeConfig)
