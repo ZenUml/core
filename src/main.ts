@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 // import log4V from './plugins/Log4V'
 
-import {DiagramFrame, Store, BuildTime, Version} from './index'
+import {VueSequence} from './index'
 
 Vue.use(Vuex)
 // Vue.use(log4V)
@@ -10,11 +10,11 @@ Vue.use(Vuex)
 Vue.config.productionTip = false
 
 /* eslint-disable */
-console.log('----------', Version)
-console.log('----------', BuildTime)
+console.log('----------', VueSequence.Version)
+console.log('----------', VueSequence.BuildTime)
 import demo1 from './demo1.js'
 import demo2 from './demo2.js'
-const store1 = Store(50)
+const store1 = VueSequence.Store(50)
 store1.state.code = demo1
 // store1.state.onLifelineMounted = function(vueComp, elm) {
 //   console.log('Callback installed on', vueComp, elm)
@@ -27,7 +27,7 @@ store1.state.code = demo1
  * The previous version used h(App). That was kind of wrong, because when doing that we do not need to
  * define the seq-diagram component here.
  */
-new Vue({el: '#demo1', store: new Vuex.Store(store1), render: h => h(DiagramFrame) })
-const store2 = Store()
+new Vue({el: '#demo1', store: new Vuex.Store(store1), render: h => h(VueSequence.DiagramFrame) })
+const store2 = VueSequence.Store()
 store2.state.code = demo2
-new Vue({el: '#demo2', store: new Vuex.Store(store2), render: h => h(DiagramFrame) })
+new Vue({el: '#demo2', store: new Vuex.Store(store2), render: h => h(VueSequence.DiagramFrame) })

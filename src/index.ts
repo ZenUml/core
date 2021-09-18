@@ -122,10 +122,11 @@ const Version = VERSION || ''
 /* eslint-disable */
 // @ts-ignore
 const BuildTime = BUILD_TIME || ''
-export {
+const VueSequence = {
   Version,
   BuildTime,
   Store,
   SeqDiagram,
   DiagramFrame
 }
+export { VueSequence }
