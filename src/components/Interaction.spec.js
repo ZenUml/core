@@ -1,7 +1,7 @@
 import {createLocalVue, shallowMount} from '@vue/test-utils'
 import Vuex from 'vuex'
 import Interaction from './Interaction'
-import { Store } from '../index'
+import { VueSequence } from '../index'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
@@ -18,7 +18,7 @@ describe('Highlight current interact based on position of cursor', () => {
     ['A.bc', 4, true],
     ['A.bc', 5, false],
   ])('Interaction: for code: `%s` if cursor is %s then isCurrent will be %s ', (code, cursor, isCurrent) => {
-    const storeConfig = Store()
+    const storeConfig = VueSequence.Store()
     storeConfig.state.cursor = cursor
     const store = new Vuex.Store(storeConfig)
     store.state.code = code
@@ -39,7 +39,7 @@ describe('Interaction width', () => {
     [ 1,  25, 10, 16],
   ])('If selfCallIndent is %s and distance is %s, interactionWidth should be %s', (selfCallIndent, a, b, width) => {
     Interaction.computed.to = () => 'B';
-    const storeConfig = Store()
+    const storeConfig = VueSequence.Store()
     storeConfig.getters.centerOf = () => (participant) => {
       if(participant === 'A') return a
       if(participant === 'B') return b
@@ -64,7 +64,7 @@ describe('Translate X', () => {
     Interaction.computed.providedFrom = () => 'A'
     Interaction.computed.origin = () => 'B'
     Interaction.computed.to = () => 'C'
-    const storeConfig = Store()
+    const storeConfig = VueSequence.Store()
     storeConfig.getters.centerOf = () => (participant) => {
       if(participant === 'A') return 10
       if(participant === 'B') return 25
@@ -84,7 +84,7 @@ describe('Translate X', () => {
     Interaction.computed.providedFrom = () => 'B'
     Interaction.computed.origin = () => 'C'
     Interaction.computed.to = () => 'A'
-    const storeConfig = Store()
+    const storeConfig = VueSequence.Store()
     storeConfig.getters.centerOf = () => (participant) => {
       if(participant === 'A') return 10
       if(participant === 'B') return 25

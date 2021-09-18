@@ -1,11 +1,11 @@
 import {mount, createLocalVue} from "@vue/test-utils";
 import Vuex from 'vuex'
-import {Store} from '@/index'
+import {VueSequence} from '@/index'
 import {Participant} from '@/parser/Participants'
 import LifeLine from '@/components/lifeline/LifeLine'
 const localVue = createLocalVue()
 localVue.use(Vuex)
-const storeConfig = Store()
+const storeConfig = VueSequence.Store()
 storeConfig.state.code = 'abc'
 
 const store = new Vuex.Store(storeConfig)

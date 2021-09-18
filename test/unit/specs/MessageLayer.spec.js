@@ -1,10 +1,10 @@
 import {mount, createLocalVue} from "@vue/test-utils";
 import Vuex from 'vuex'
-import {Store} from '@/index'
+import {VueSequence} from '@/index'
 import MessageLayer from '@/components/MessageLayer'
 const localVue = createLocalVue()
 localVue.use(Vuex)
-const storeConfig = Store()
+const storeConfig = VueSequence.Store()
 storeConfig.state.code = 'a'
 storeConfig.getters.rightOf = function () {
   return (p) => p === 'a' ? 100 : NaN
