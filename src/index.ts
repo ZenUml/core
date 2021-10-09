@@ -36,7 +36,7 @@ const Store = (debounce?: number) => {
     },
     getters: {
       title: (state: any, getters: any) => {
-        return getters.rootContext.title().content()
+        return getters.rootContext?.title()?.content()
       },
       GroupContext: () => GroupContext,
       ParticipantContext: () => ParticipantContext,
