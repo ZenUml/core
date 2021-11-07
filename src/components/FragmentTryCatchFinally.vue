@@ -53,9 +53,6 @@
       blockInTryBlock: function () {
         return this.tcf?.tryBlock()?.braceBlock()?.block()
       },
-      condition: function () {
-        return this.exception(this.tcf?.ifBlock())
-      },
       finallyBlock: function () {
         return this.tcf?.finallyBlock()?.braceBlock()?.block()
       }
