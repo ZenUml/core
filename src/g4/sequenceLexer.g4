@@ -58,6 +58,9 @@ PAR : 'par';
 GROUP : 'group';
 OPT : 'opt';
 AS : 'as';
+TRY: 'try';
+CATCH: 'catch';
+FINALLY: 'finally';
 
 STARTER_LXR: '@Starter' | '@starter';
 ANNOTATION_RET: '@Return' | '@return' | '@Reply' | '@reply';

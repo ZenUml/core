@@ -102,6 +102,7 @@ stat
  | asyncMessage EVENT_END?
  | ret
  | divider
+ | tcf
  | OTHER {console.log("unknown char: " + $OTHER.text);}
  ;
 
@@ -202,6 +203,23 @@ parameter
 
 declaration
  : type ID
+ ;
+
+// try catch finaly
+tcf
+ : tryBlock catchBlock* finallyBlock?
+ ;
+
+tryBlock
+ : TRY braceBlock
+ ;
+
+catchBlock
+ : CATCH invocation? braceBlock
+ ;
+
+finallyBlock
+ : FINALLY braceBlock
  ;
 
 alt

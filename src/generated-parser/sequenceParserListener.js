@@ -344,6 +344,42 @@ sequenceParserListener.prototype.exitDeclaration = function(ctx) {
 };
 
 
+// Enter a parse tree produced by sequenceParser#tcf.
+sequenceParserListener.prototype.enterTcf = function(ctx) {
+};
+
+// Exit a parse tree produced by sequenceParser#tcf.
+sequenceParserListener.prototype.exitTcf = function(ctx) {
+};
+
+
+// Enter a parse tree produced by sequenceParser#tryBlock.
+sequenceParserListener.prototype.enterTryBlock = function(ctx) {
+};
+
+// Exit a parse tree produced by sequenceParser#tryBlock.
+sequenceParserListener.prototype.exitTryBlock = function(ctx) {
+};
+
+
+// Enter a parse tree produced by sequenceParser#catchBlock.
+sequenceParserListener.prototype.enterCatchBlock = function(ctx) {
+};
+
+// Exit a parse tree produced by sequenceParser#catchBlock.
+sequenceParserListener.prototype.exitCatchBlock = function(ctx) {
+};
+
+
+// Enter a parse tree produced by sequenceParser#finallyBlock.
+sequenceParserListener.prototype.enterFinallyBlock = function(ctx) {
+};
+
+// Exit a parse tree produced by sequenceParser#finallyBlock.
+sequenceParserListener.prototype.exitFinallyBlock = function(ctx) {
+};
+
+
 // Enter a parse tree produced by sequenceParser#alt.
 sequenceParserListener.prototype.enterAlt = function(ctx) {
 };

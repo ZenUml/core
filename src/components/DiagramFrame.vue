@@ -9,6 +9,9 @@
       </div>
     </div>
     <seq-diagram/>
+    <div>
+      <a target="_blank" href="https://zenuml.com" class="float-right clearfix text-xs">ZenUML.com</a>
+    </div>
   </div>
 </template>
 

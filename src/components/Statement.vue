@@ -14,6 +14,7 @@
   import FragmentPar from './FragmentPar.vue'
   import FragmentLoop from './FragmentLoop.vue'
   import FragmentOpt from './FragmentOpt.vue'
+  import FragmentTryCatchFinally from "./FragmentTryCatchFinally"
   import Return from './Return.vue'
   import Divider from './Divider.vue'
 
@@ -31,6 +32,7 @@
           alt: 'FragmentAlt',
           par: 'FragmentPar',
           opt: 'FragmentOpt',
+          tcf: 'FragmentTryCatchFinally',
           creation: 'Creation',
           message: 'Interaction',
           asyncMessage: 'InteractionAsync',
@@ -48,6 +50,7 @@
       FragmentAlt,
       FragmentPar,
       FragmentOpt,
+      FragmentTryCatchFinally,
       FragmentLoop,
       Divider,
       Return
