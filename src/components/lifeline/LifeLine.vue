@@ -28,54 +28,54 @@ const iconPath = {
   lambda:     require('../../assets/AWS-Lambda.svg'),
   rds:        require('../../assets/Amazon-RDS.svg'),
   s3:         require('../../assets/Amazon-Simple-Storage-Service-S3_light-bg.svg'),
-  }
-  export default {
-    name: 'life-line',
-    props: ['entity', 'context'],
-    computed: {
-      ...mapGetters(['firstInvocations', 'onLifelineMounted']),
-      icon() {
-        return iconPath[this.entity.type?.toLowerCase()]
-      },
-      classes() {
-        if (this.entity.type) {
-          return ['icon', this.entity.type.toLowerCase()]
-        }
-        return []
-      },
-      selected () {
-        return this.$store.state.selected.includes(this.entity.name)
-      },
-      top () {
-        if (this.firstInvocationIsCreation) {
-          return this.firstInvocations[this.entity.name].top - 3 - this.$el?.offsetTop
-        }
-        return 0
-      },
-      firstInvocationIsCreation () {
-        return this.firstInvocations[this.entity.name] && this.firstInvocations[this.entity.name].type === 'creation'
+}
+export default {
+  name: 'life-line',
+  props: ['entity', 'context'],
+  computed: {
+    ...mapGetters(['firstInvocations', 'onLifelineMounted']),
+    icon() {
+      return iconPath[this.entity.type?.toLowerCase()]
+    },
+    classes() {
+      if (this.entity.type) {
+        return ['icon', this.entity.type.toLowerCase()]
       }
+      return []
     },
-    methods: {
-      ...mapMutations(['onLifelinePositioned']),
-      onSelect() {
-        this.$store.commit('onSelect', this.entity.name)
+    selected() {
+      return this.$store.state.selected.includes(this.entity.name)
+    },
+    top() {
+      if (this.firstInvocationIsCreation) {
+        return this.firstInvocations[this.entity.name].top - 3 - this.$el?.offsetTop
       }
+      return 0
     },
-    mounted() {
-      this.onLifelinePositioned({
-        name: this.entity.name,
-        el: this.$el
-      })
-      this.onLifelineMounted(this, this.$vnode.elm);
-    },
-    updated() {
-      this.onLifelinePositioned({
-        name: this.entity.name,
-        el: this.$el
-      })
+    firstInvocationIsCreation() {
+      return this.firstInvocations[this.entity.name] && this.firstInvocations[this.entity.name].type === 'creation'
     }
+  },
+  methods: {
+    ...mapMutations(['onLifelinePositioned']),
+    onSelect() {
+      this.$store.commit('onSelect', this.entity.name)
+    }
+  },
+  mounted() {
+    this.onLifelinePositioned({
+      name: this.entity.name,
+      el: this.$el
+    })
+    this.onLifelineMounted(this, this.$vnode.elm);
+  },
+  updated() {
+    this.onLifelinePositioned({
+      name: this.entity.name,
+      el: this.$el
+    })
   }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
