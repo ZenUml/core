@@ -6,16 +6,20 @@
 // Nested method
 // Assignment
 export default `
-@Actor A
-@Boundary B
-@Control C
-@Database D1
-@Entity D
-@EC2 E
-@ECS F
-@Lambda G
-@S3 H
-@RDS I
-@IAM J
+@CloudWatch A
+@EFS B
+@LightSail C
+@Sagemaker D1
+@Redshift D
+@ElastiCache E
+@DynamoDB F
+@ElasticBeanTalk G
+@SQS H
+@Kinesis I
+@VPC J
+@EBS K
+@SNS L
+@Glacier M
+@CloudFront N
 A->I: Hello
 `
