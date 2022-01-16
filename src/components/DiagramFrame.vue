@@ -49,6 +49,7 @@
                       <div class="px-4 max-w-7xl mx-auto sm:px-6 lg:max-w-none lg:mx-0 lg:px-0">
                         <div>
                           <h2 class="text-lg leading-6 font-medium text-gray-900">Builtin Icons</h2>
+                          <p class="text-sm text-gray-500">Use <span class="rounded inline-block bg-gray-400 px-1"> <code class="text-xs text-white">@Actor TheParticipant</code> </span> to define the type of the participant.</p>
                           <ul role="list" class="mt-3 grid grid-cols-4 gap-5 sm:gap-6 sm:grid-cols-6 lg:grid-cols-8">
                             <li v-for="type in standardTypes" :key="type" class="col-span-1 flex flex-col shadow-sm rounded-md">
                               <div class="h-12 flex items-center justify-center bg-gray-50 text-white text-sm font-medium rounded-t-md">
