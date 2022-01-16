@@ -22,12 +22,12 @@ const iconPath = {
   boundary:   require('../../assets/Robustness_Diagram_Boundary.svg'),
   control:    require('../../assets/Robustness_Diagram_Control.svg'),
   database:   require('../../assets/database.svg'),
-  ec2:        require('../../assets/Amazon-EC2.svg'),
-  ecs:        require('../../assets/Amazon-Elastic-Container-Service_light-bg.svg'),
-  iam:        require('../../assets/AWS-Identity-and-Access-Management_IAM.svg'),
-  lambda:     require('../../assets/AWS-Lambda.svg'),
-  rds:        require('../../assets/Amazon-RDS.svg'),
-  s3:         require('../../assets/Amazon-Simple-Storage-Service-S3_light-bg.svg'),
+  ec2:        require('../../assets/Architecture-Service-Icons_09172021/Arch_Compute/16/Arch_Amazon-EC2_16.svg'),
+  ecs:        require('../../assets/Architecture-Service-Icons_09172021/Arch_Compute/16/Arch_Amazon-Elastic-Container-Service_16.svg'),
+  iam:        require('../../assets/Architecture-Service-Icons_09172021/Arch_Security-Identity-Compliance/16/Arch_AWS-Identity-and-Access-Management_16.svg'),
+  lambda:     require('../../assets/Architecture-Service-Icons_09172021/Arch_Compute/16/Arch_AWS-Lambda_16.svg'),
+  rds:        require('../../assets/Architecture-Service-Icons_09172021/Arch_Database/16/Arch_Amazon-RDS_16.svg'),
+  s3:         require('../../assets/Architecture-Service-Icons_09172021/Arch_Storage/16/Arch_Amazon-Simple-Storage-Service_16.svg'),
 }
 export default {
   name: 'life-line',
