@@ -14,16 +14,28 @@
 </template>
 
 <script>
-  import {mapGetters, mapMutations} from 'vuex'
+import {mapGetters, mapMutations} from 'vuex'
 
+const iconPath = {
+  actor:      require('../../assets/actor.svg'),
+  entity:     require('../../assets/Robustness_Diagram_Entity.svg'),
+  boundary:   require('../../assets/Robustness_Diagram_Boundary.svg'),
+  control:    require('../../assets/Robustness_Diagram_Control.svg'),
+  database:   require('../../assets/database.svg'),
+  ec2:        require('../../assets/Amazon-EC2.svg'),
+  ecs:        require('../../assets/Amazon-Elastic-Container-Service_light-bg.svg'),
+  iam:        require('../../assets/AWS-Identity-and-Access-Management_IAM.svg'),
+  lambda:     require('../../assets/AWS-Lambda.svg'),
+  rds:        require('../../assets/Amazon-RDS.svg'),
+  s3:         require('../../assets/Amazon-Simple-Storage-Service-S3_light-bg.svg'),
+  }
   export default {
     name: 'life-line',
     props: ['entity', 'context'],
     computed: {
       ...mapGetters(['firstInvocations', 'onLifelineMounted']),
       icon() {
-        return require('../../assets/Amazon-EC2.svg')
-        // return null
+        return iconPath[this.entity.type?.toLowerCase()]
       },
       classes() {
         if (this.entity.type) {
@@ -105,50 +117,6 @@
     background-size: 35px;
     background-position: center;
     background-repeat: no-repeat;
-  }
-
-  .lifeline.actor .participant::before {
-    background-image: url("../../assets/actor.svg");
-  }
-
-  .lifeline.database .participant::before {
-    background-image: url("../../assets/database.svg");
-  }
-
-  .lifeline.ec2 .participant::before {
-    background-image: url("../../assets/Amazon-EC2.svg");
-  }
-
-  .lifeline.ecs .participant::before {
-    background-image: url("../../assets/Amazon-Elastic-Container-Service_light-bg.svg");
-  }
-
-  .lifeline.iam .participant::before {
-    background-image: url("../../assets/AWS-Identity-and-Access-Management_IAM.svg");
-  }
-
-  .lifeline.lambda .participant::before {
-    background-image: url("../../assets/AWS-Lambda.svg");
-  }
-
-  .lifeline.rds .participant::before {
-    background-image: url("../../assets/Amazon-RDS.svg");
-  }
-
-  .lifeline.s3 .participant::before {
-    background-image: url("../../assets/Amazon-Simple-Storage-Service-S3_light-bg.svg");
-  }
-
-  .lifeline.boundary .participant::before {
-    background-image: url("../../assets/Robustness_Diagram_Boundary.svg");
-  }
-
-  .lifeline.control .participant::before {
-    background-image: url("../../assets/Robustness_Diagram_Control.svg");
-  }
-
-  .lifeline.entity .participant::before {
-    background-image: url("../../assets/Robustness_Diagram_Entity.svg");
   }
 
 </style>

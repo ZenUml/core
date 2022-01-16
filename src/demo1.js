@@ -6,21 +6,16 @@
 // Nested method
 // Assignment
 export default `
-Processor.start() {
-  try{
-    while(true) {
-      records = KafkaConsumer.poll(Long.MAX_VALUE);
-      foreach(record) {
-        RecordHandler.handle(record)
-      }
-    }
-  } catch(WakeException) {
-    ErrorService.onError()
-  } catch(Exception) {
-    GeneralError.onError()
-  } finally {
-    KafkaConsumer.close();
-  }
-}
-
+@Actor A
+@Boundary B
+@Control C
+@Database D1
+@Entity D
+@EC2 E
+@ECS F
+@Lambda G
+@S3 H
+@RDS I
+@IAM J
+A->I: Hello
 `
