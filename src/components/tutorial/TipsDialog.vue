@@ -24,35 +24,38 @@
           <div class="relative bg-white pb-32 mt-4 overflow-hidden">
             <div class="relative">
               <div class="lg:mx-auto lg:max-w-7xl lg:px-8">
-                <div class="px-4 max-w-7xl mx-auto sm:px-6 lg:max-w-none lg:mx-0 lg:px-0">
-                  <h2 class="mt-8 mb-4 text-lg leading-6 font-medium text-gray-900">Builtin Icons</h2>
-                  <p class="text-sm text-gray-500">Use <span class="rounded inline-block bg-gray-400 px-1"> <code class="text-xs text-white">@Actor TheParticipant</code> </span> to define the type of the participant.</p>
-                  <IconList :types="standardTypes"/>
-                  <hr class="mt-4">
-                  <IconList :types="awsServices" />
-                  <hr class="mt-4">
-                  <IconList :types="azureServices" />
-                  <hr class="mt-4">
-                  <IconList :types="googleServices" />
-                </div>
-                <div class="px-4 max-w-7xl mx-auto sm:px-6 lg:max-w-none lg:mx-0 lg:px-0">
-                  <h2 class="mt-8 mb-4 text-lg leading-6 font-medium text-gray-900">Declare Participants</h2>
-                  <ul role="list">
-                    <li>1. Use <code>group</code> keyword to group participants. E.g. <pre class="w-1/2 bg-gray-50 text-gray-600 p-2 rounded-lg"><code>A
+                <div class="grid grid-cols-3">
+                  <div>
+                  <div class="px-4 max-w-7xl mx-auto sm:px-6 lg:max-w-none lg:mx-0 lg:px-0">
+                    <h2 class="mt-4 mb-4 text-lg leading-6 font-medium text-gray-900">Declare Participants</h2>
+                    <pre class="text-xs w-11/12 bg-gray-50 text-gray-600 p-2 rounded-lg"><code>// Define a Starter (optional)
+@Starter(A)
+
+// use 'group' keyword
 group GroupName {
   B
   C
-}</code></pre></li>
-                    <li>2. Use <code>stereotype</code> to add meta data participants. E.g. <pre class="w-1/2 bg-gray-50 text-gray-600 p-2 rounded-lg"><code>&lt;&lt;servlet&gt;&gt; ServiceX</code></pre></li>
-                  </ul>
+}
 
-                </div>
-                <div class="px-4 max-w-7xl mx-auto sm:px-6 lg:max-w-none lg:mx-0 lg:px-0">
-                  <h2 class="mt-8 mb-4 text-lg leading-6 font-medium text-gray-900">Fragments</h2>
-                  <pre class="w-1/2 bg-gray-50 text-gray-600 p-2 rounded-lg"><code>// Alt (AKA if/else)
+// use stereotype
+&lt;&lt;servlet&gt;&gt; ServiceX</code></pre>
+
+                  </div>
+                  <div class="px-4 max-w-7xl mx-auto sm:px-6 lg:max-w-none lg:mx-0 lg:px-0">
+                    <h2 class="mt-4 mb-4 text-lg leading-6 font-medium text-gray-900">Divider</h2>
+                    <pre class="text-xs w-1/2 bg-gray-50 text-gray-600 p-2 rounded-lg"><code>A.method()
+==divider name==
+B.method()
+</code></pre>
+                  </div>
+                  </div>
+                  <div class="px-4 max-w-7xl mx-auto sm:px-6 lg:max-w-none lg:mx-0 lg:px-0">
+                    <h2 class="mt-4 mb-4 text-lg leading-6 font-medium text-gray-900">Fragments</h2>
+                    <pre class="text-xs w-11/12 bg-gray-50 text-gray-600 p-2 rounded-lg"><code>// Alt (AKA if/else)
 if(condition) {} else if (condition2) {} else {}
 
-// Loop (loop, for, forEach, while are treated the same)
+// `loop`, `for`, `forEach`, `while`
+// are treated the same
 forEach(records) {}
 
 // Opt
@@ -64,17 +67,10 @@ par {}
 // Try Catch Finally
 try {} catch() {} finally {}
 </code></pre>
-                </div>
-                <div class="px-4 max-w-7xl mx-auto sm:px-6 lg:max-w-none lg:mx-0 lg:px-0">
-                  <h2 class="mt-8 mb-4 text-lg leading-6 font-medium text-gray-900">Divider</h2>
-                  <pre class="w-1/2 bg-gray-50 text-gray-600 p-2 rounded-lg"><code>A.method()
-==divider name==
-B.method()
-</code></pre>
-                </div>
-                <div class="px-4 max-w-7xl mx-auto sm:px-6 lg:max-w-none lg:mx-0 lg:px-0">
-                  <h2 class="mt-8 mb-4 text-lg leading-6 font-medium text-gray-900">Messages</h2>
-                  <pre class="w-1/2 bg-gray-50 text-gray-600 p-2 rounded-lg"><code>//Creation
+                  </div>
+                  <div class="px-4 max-w-7xl mx-auto sm:px-6 lg:max-w-none lg:mx-0 lg:px-0">
+                    <h2 class="mt-4 mb-4 text-lg leading-6 font-medium text-gray-900">Messages</h2>
+                    <pre class="text-xs w-11/12 bg-gray-50 text-gray-600 p-2 rounded-lg"><code>//Creation
 new ParticipantName()
 
 //Sync Message
@@ -92,7 +88,21 @@ A.method() {
 A.method() {
   @return A->B: message
 }</code></pre>
+                  </div>
                 </div>
+                <div class="px-4 max-w-7xl mx-auto sm:px-6 lg:max-w-none lg:mx-0 lg:px-0">
+                  <h2 class="mt-8 mb-4 text-lg leading-6 font-medium text-gray-900">Builtin Icons</h2>
+                  <p class="text-sm text-gray-500">Use <span class="rounded inline-block bg-gray-50 text-gray-600">
+                    <code class="text-xs">@Actor TheParticipant</code> </span> to define the type of the participant.</p>
+                  <IconList :types="standardTypes"/>
+                  <hr class="mt-4">
+                  <IconList :types="awsServices" />
+                  <hr class="mt-4">
+                  <IconList :types="azureServices" />
+                  <hr class="mt-4">
+                  <IconList :types="googleServices" />
+                </div>
+
               </div>
             </div>
           </div>
