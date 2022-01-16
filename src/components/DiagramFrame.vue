@@ -39,11 +39,22 @@
               From: "opacity-100 translate-y-0 sm:scale-100"
               To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           -->
-          <div class="z-40 inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:p-6">
+          <div class="z-40 inline-block align-bottom bg-white rounded-lg px-4 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:p-2">
             <div>
-              <h3 slot="header">ZenUML Help</h3>
+              <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6" slot="header">
+                <h3 class="text-xl leading-6 font-medium text-gray-900 inline-block">
+                  ZenUML Help
+                </h3>
+                <button type="button" @click="showModal = false" class="float-right bg-white rounded-md inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                  <span class="sr-only">Close menu</span>
+                  <!-- Heroicon name: outline/x -->
+                  <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
               <div slot="body">
-                <div class="relative bg-white pb-32 overflow-hidden">
+                <div class="relative bg-white pb-32 mt-4 overflow-hidden">
                   <div class="relative">
                     <div class="lg:mx-auto lg:max-w-7xl lg:px-8">
                       <div class="px-4 max-w-7xl mx-auto sm:px-6 lg:max-w-none lg:mx-0 lg:px-0">
@@ -105,43 +116,10 @@
                       </div>
                     </div>
                   </div>
-                  <div class="mt-24">
-                    <div class="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-2 lg:grid-flow-col-dense lg:gap-24">
-                      <div class="px-4 max-w-xl mx-auto sm:px-6 lg:py-32 lg:max-w-none lg:mx-0 lg:px-0 lg:col-start-2">
-                        <div>
-                          <div>
-            <span class="h-12 w-12 rounded-md flex items-center justify-center bg-indigo-600">
-              <!-- Heroicon name: outline/sparkles -->
-              <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-              </svg>
-            </span>
-                          </div>
-                          <div class="mt-6">
-                            <h2 class="text-3xl font-extrabold tracking-tight text-gray-900">Better understand your customers</h2>
-                            <p class="mt-4 text-lg text-gray-500">Semper curabitur ullamcorper posuere nunc sed. Ornare iaculis bibendum malesuada faucibus lacinia porttitor. Pulvinar laoreet sagittis viverra duis. In venenatis sem arcu pretium pharetra at. Lectus viverra dui tellus ornare pharetra.</p>
-                            <div class="mt-6">
-                              <a href="#" class="inline-flex px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700"> Get started </a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mt-12 sm:mt-16 lg:mt-0 lg:col-start-1">
-                        <div class="pr-4 -ml-48 sm:pr-6 md:-ml-16 lg:px-0 lg:m-0 lg:relative lg:h-full">
-                          <img class="w-full rounded-xl shadow-xl ring-1 ring-black ring-opacity-5 lg:absolute lg:right-0 lg:h-full lg:w-auto lg:max-w-none" src="https://tailwindui.com/img/component-images/inbox-app-screenshot-2.jpg" alt="Customer profile user interface" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
 
               </div>
               <span slot="footer">by ZenUML</span>
-            </div>
-            <div class="mt-5 sm:mt-6">
-              <button @click="showModal = false" type="button" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm">
-                Go back to dashboard
-              </button>
             </div>
           </div>
         </div>
