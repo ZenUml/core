@@ -6,7 +6,7 @@
 // Nested method
 // Assignment
 export default `
-@GoogleVPC A
+@Cognito A
 @CloudLoadBalancing B
 @CloudCDN C
 @CloudInterConnect D1
