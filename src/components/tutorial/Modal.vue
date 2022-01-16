@@ -2,7 +2,7 @@
   <transition name="modal">
     <div class="modal-mask">
       <div class="modal-wrapper">
-        <div class="modal-container">
+        <div class="modal-container w-11/12">
 
           <div class="modal-header">
             <slot name="header">
@@ -55,7 +55,6 @@ export default {
 }
 
 .modal-container {
-  width: 300px;
   margin: 0px auto;
   padding: 20px 30px;
   background-color: #fff;
