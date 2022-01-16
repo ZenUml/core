@@ -27,8 +27,8 @@
                             <div class="h-12 flex items-center justify-center bg-gray-50 text-white text-sm font-medium rounded-t-md">
                               <img v-if="!!icon" :src="icon(type)" class="object-contain h-8 w-8 m-auto" :alt="`icon for ${type}`">
                             </div>
-                            <div class="flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-b-md truncate">
-                              <div class="px-2 py-2 text-sm truncate">
+                            <div class="flex items-center justify-center border-t border-r border-b border-gray-200 bg-white rounded-b-md truncate">
+                              <div class="px-2 py-2 text-xs truncate">
                                 <span class="text-gray-900 font-medium hover:text-gray-600">@{{type}}</span>
                               </div>
                             </div>
