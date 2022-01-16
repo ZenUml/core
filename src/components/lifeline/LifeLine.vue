@@ -55,7 +55,24 @@ const iconPath = {
   azuredevops: require('../../assets/Azure_Public_Service_Icons/Icons/DevOps/10261-icon-service-Azure-DevOps.svg'),
   azurebackup: require('../../assets/Azure_Public_Service_Icons/Icons/Azure Stack/10108-icon-service-Infrastructure-Backup.svg'),
   logicapps: require('../../assets/Azure_Public_Service_Icons/Icons/Integration/10201-icon-service-Logic-Apps.svg'),
-
+  // GCP services
+  googlevpc: require('../../assets/google-cloud-icons/virtual_private_cloud/virtual_private_cloud.svg'),
+  cloudloadbalancing: require('../../assets/google-cloud-icons/cloud_load_balancing/cloud_load_balancing.svg'),
+  cloudcdn: require('../../assets/google-cloud-icons/cloud_cdn/cloud_cdn.svg'),
+  cloudinterconnect: require('../../assets/google-cloud-icons/cloud_interconnect/cloud_interconnect.svg'),
+  clouddns: require('../../assets/google-cloud-icons/cloud_dns/cloud_dns.svg'),
+  cloudstorage: require('../../assets/google-cloud-icons/cloud_storage/cloud_storage.svg'),
+  cloudsql: require('../../assets/google-cloud-icons/cloud_sql/cloud_sql.svg'),
+  bigtable: require('../../assets/google-cloud-icons/bigtable/bigtable.svg'),
+  bigquery: require('../../assets/google-cloud-icons/bigquery/bigquery.svg'),
+  dataproc: require('../../assets/google-cloud-icons/dataproc/dataproc.svg'),
+  datalab: require('../../assets/google-cloud-icons/datalab/datalab.svg'),
+  pubsub: require('../../assets/google-cloud-icons/pubsub/pubsub.svg'),
+  visionapi: require('../../assets/google-cloud-icons/cloud_vision_api/cloud_vision_api.svg'),
+  googleiam: require('../../assets/google-cloud-icons/identity_and_access_management/identity_and_access_management.svg'),
+  securityscanner: require('../../assets/google-cloud-icons/cloud_security_scanner/cloud_security_scanner.svg'),
+  googlesecurity: require('../../assets/google-cloud-icons/security/security.svg'),
+  stackdriver: require('../../assets/google-cloud-icons/stackdriver/stackdriver.svg'),
 }
 export default {
   name: 'life-line',

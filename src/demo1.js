@@ -6,20 +6,22 @@
 // Nested method
 // Assignment
 export default `
-@AzureActiveDirectory A
-@AzureCDN B
-@AzureDataFactory C
-@AzureSQL D1
-@AzureFunction D
-@CosmosDB E
-@AzureDevOps F
-@AzureBackup G
-@LogicApps H
-@Kinesis I
-@VPC J
-@EBS K
-@SNS L
-@Glacier M
-@CloudFront N
+@GoogleVPC A
+@CloudLoadBalancing B
+@CloudCDN C
+@CloudInterConnect D1
+@CloudDNS D
+@CloudStorage E
+@CloudSQL F
+@Bigtable G
+@BigQuery H
+@DataProc I
+@DataLab J
+@PubSub K
+@VisionApi L
+@GoogleIAM M
+@SecurityScanner N
+@GoogleSecurity O
+@StackDriver P
 A->I: Hello
 `
