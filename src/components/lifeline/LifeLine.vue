@@ -145,7 +145,7 @@ export default {
   }
 
   .lifeline>.participant {
-    z-index: 100;
+    z-index: 10;
   }
 
   .lifeline.icon .participant

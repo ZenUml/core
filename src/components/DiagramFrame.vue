@@ -8,12 +8,11 @@
         <diagram-title :context="title"/>
       </div>
     </div>
-    <seq-diagram/>
     <div>
       <a target="_blank" href="https://zenuml.com" class="float-right clearfix text-xs">ZenUML.com</a>
       <button id="show-modal" @click="showModal=true">Show Modal</button>
       <!-- This example requires Tailwind CSS v2.0+ -->
-      <div v-show="showModal" class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+      <div v-show="showModal" class="fixed z-40 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <!--
             Background overlay, show/hide based on modal state.
@@ -40,32 +39,67 @@
               From: "opacity-100 translate-y-0 sm:scale-100"
               To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           -->
-          <div class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:p-6">
+          <div class="z-40 inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:p-6">
             <div>
               <h3 slot="header">ZenUML Help</h3>
               <div slot="body">
                 <div class="relative bg-white pb-32 overflow-hidden">
                   <div class="relative">
                     <div class="lg:mx-auto lg:max-w-7xl lg:px-8">
-                      <div class="px-4 max-w-xl mx-auto sm:px-6 lg:max-w-none lg:mx-0 lg:px-0">
+                      <div class="px-4 max-w-7xl mx-auto sm:px-6 lg:max-w-none lg:mx-0 lg:px-0">
                         <div>
-                          <div>
-                            <div>
-                              <ul role="list" class="mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-4 lg:grid-cols-8">
-                                <li v-for="type in types" :key="type" class="col-span-1 flex flex-col shadow-sm rounded-md">
-                                  <div class="h-12 flex items-center justify-center bg-gray-50 text-white text-sm font-medium rounded-t-md">
-                                    <img v-if="!!icon" :src="icon(type)" class="object-contain h-8 w-8 m-auto" :alt="`icon for ${type}`">
-                                  </div>
-                                  <div class="flex items-center justify-center border-t border-r border-b border-gray-200 bg-white rounded-b-md truncate">
-                                    <div class="px-2 py-2 text-xs truncate">
-                                      <span class="text-gray-900 font-medium hover:text-gray-600">@{{type}}</span>
-                                    </div>
-                                  </div>
-                                </li>
-
-                              </ul>
-                            </div>
-                          </div>
+                          <h2 class="text-lg leading-6 font-medium text-gray-900">Builtin Icons</h2>
+                          <ul role="list" class="mt-3 grid grid-cols-4 gap-5 sm:gap-6 sm:grid-cols-6 lg:grid-cols-8">
+                            <li v-for="type in standardTypes" :key="type" class="col-span-1 flex flex-col shadow-sm rounded-md">
+                              <div class="h-12 flex items-center justify-center bg-gray-50 text-white text-sm font-medium rounded-t-md">
+                                <img v-if="!!icon" :src="icon(type)" class="object-contain h-8 w-8 m-auto" :alt="`icon for ${type}`">
+                              </div>
+                              <div class="flex items-center justify-center border-t border-r border-b border-gray-200 bg-white rounded-b-md">
+                                <div class="px-2 py-2 text-xs">
+                                  <span class="text-gray-900 font-medium hover:text-gray-600">@{{type}}</span>
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                          <hr class="mt-4">
+                          <ul role="list" class="mt-3 grid grid-cols-4 gap-5 sm:gap-6 sm:grid-cols-6 lg:grid-cols-8">
+                            <li v-for="type in awsServices" :key="type" class="col-span-1 flex flex-col shadow-sm rounded-md">
+                              <div class="h-12 flex items-center justify-center bg-gray-50 text-white text-sm font-medium rounded-t-md">
+                                <img v-if="!!icon" :src="icon(type)" class="object-contain h-8 w-8 m-auto" :alt="`icon for ${type}`">
+                              </div>
+                              <div class="flex items-center justify-center border-t border-r border-b border-gray-200 bg-white rounded-b-md">
+                                <div class="px-2 py-2 text-xs">
+                                  <span class="text-gray-900 font-medium hover:text-gray-600">@{{type}}</span>
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                          <hr class="mt-4">
+                          <ul role="list" class="mt-3 grid grid-cols-4 gap-5 sm:gap-6 sm:grid-cols-6 lg:grid-cols-8">
+                            <li v-for="type in azureServices" :key="type" class="col-span-1 flex flex-col shadow-sm rounded-md">
+                              <div class="h-12 flex items-center justify-center bg-gray-50 text-white text-sm font-medium rounded-t-md">
+                                <img v-if="!!icon" :src="icon(type)" class="object-contain h-8 w-8 m-auto" :alt="`icon for ${type}`">
+                              </div>
+                              <div class="flex items-center justify-center border-t border-r border-b border-gray-200 bg-white rounded-b-md">
+                                <div class="px-2 py-2 text-xs">
+                                  <span class="text-gray-900 font-medium hover:text-gray-600">@{{type}}</span>
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                          <hr class="mt-4">
+                          <ul role="list" class="mt-3 grid grid-cols-4 gap-5 sm:gap-6 sm:grid-cols-6 lg:grid-cols-8">
+                            <li v-for="type in googleServices" :key="type" class="col-span-1 flex flex-col shadow-sm rounded-md">
+                              <div class="h-12 flex items-center justify-center bg-gray-50 text-white text-sm font-medium rounded-t-md">
+                                <img v-if="!!icon" :src="icon(type)" class="object-contain h-8 w-8 m-auto" :alt="`icon for ${type}`">
+                              </div>
+                              <div class="flex items-center justify-center border-t border-r border-b border-gray-200 bg-white rounded-b-md">
+                                <div class="px-2 py-2 text-xs">
+                                  <span class="text-gray-900 font-medium hover:text-gray-600">@{{type}}</span>
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
                         </div>
                       </div>
                     </div>
@@ -112,6 +146,7 @@
         </div>
       </div>
     </div>
+    <seq-diagram/>
   </div>
 </template>
 
@@ -191,16 +226,27 @@ export default {
   },
   computed: {
     ...mapGetters(['rootContext']),
-    types() {
-      return ['Actor', 'Boundary', 'Control', 'Database', 'Entity',
+    standardTypes() {
+      return [
+        'Actor', 'Boundary', 'Control', 'Database', 'Entity',
+      ]
+    },
+    awsServices() {
+      return [
         'CloudWatch', 'CloudFront', 'Cognito', 'DynamoDB', 'EBS', 'EC2', 'ECS',
         'EFS', 'ElastiCache', 'ElasticBeantalk', 'ElasticFileSystem', 'Glacier',
         'IAM', 'Kinesis', 'Lambda', 'LightSail', 'RDS', 'Redshift', 'S3', 'SNS',
         'SQS', 'Sagemaker', 'VPC',
-
+      ]
+    },
+    azureServices() {
+      return [
         'AzureActiveDirectory', 'AzureBackup', 'AzureCDN', 'AzureDataFactory',
         'AzureDevOps', 'AzureFunction', 'AzureSQL', 'CosmosDB', 'LogicApps', 'VirtualMachine',
-
+      ]
+    },
+    googleServices() {
+      return [
         'BigTable', 'BigQuery', 'CloudCDN', 'CloudDNS', 'CloudInterconnect', 'CloudLoadBalancing',
         'CloudSQL', 'CloudStorage', 'DataLab', 'DataProc', 'GoogleIAM', 'GoogleSecurity',
         'GoogleVPC', 'PubSub', 'SecurityScanner', 'StackDriver', 'VisionAPI'
