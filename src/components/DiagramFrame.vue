@@ -103,6 +103,52 @@ group GroupName {
                         </ul>
 
                       </div>
+                      <div class="px-4 max-w-7xl mx-auto sm:px-6 lg:max-w-none lg:mx-0 lg:px-0">
+                        <h2 class="mt-8 mb-4 text-lg leading-6 font-medium text-gray-900">Fragments</h2>
+                        <pre class="w-1/2 bg-gray-50 text-gray-600 p-2 rounded-lg"><code>// Alt (AKA if/else)
+if(condition) {} else if (condition2) {} else {}
+
+// Loop (loop, for, forEach, while are treated the same)
+forEach(records) {}
+
+// Opt
+opt {}
+
+// Par
+par {}
+
+// Try Catch Finally
+try {} catch() {} finally {}
+</code></pre>
+                      </div>
+                      <div class="px-4 max-w-7xl mx-auto sm:px-6 lg:max-w-none lg:mx-0 lg:px-0">
+                        <h2 class="mt-8 mb-4 text-lg leading-6 font-medium text-gray-900">Divider</h2>
+                        <pre class="w-1/2 bg-gray-50 text-gray-600 p-2 rounded-lg"><code>A.method()
+==divider name==
+B.method()
+</code></pre>
+                      </div>
+                      <div class="px-4 max-w-7xl mx-auto sm:px-6 lg:max-w-none lg:mx-0 lg:px-0">
+                        <h2 class="mt-8 mb-4 text-lg leading-6 font-medium text-gray-900">Messages</h2>
+                        <pre class="w-1/2 bg-gray-50 text-gray-600 p-2 rounded-lg"><code>//Creation
+new ParticipantName()
+
+//Sync Message
+A.method
+A->B.method
+
+//Async Message
+A->B: async message
+
+//Reply Message, three styles
+x = A.method
+A.method() {
+  return x
+}
+A.method() {
+  @return A->B: message
+}</code></pre>
+                      </div>
                     </div>
                   </div>
                 </div>
