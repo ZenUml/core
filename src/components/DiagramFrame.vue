@@ -37,61 +37,71 @@
                   <div class="relative">
                     <div class="lg:mx-auto lg:max-w-7xl lg:px-8">
                       <div class="px-4 max-w-7xl mx-auto sm:px-6 lg:max-w-none lg:mx-0 lg:px-0">
-                        <div>
-                          <h2 class="text-lg leading-6 font-medium text-gray-900">Builtin Icons</h2>
-                          <p class="text-sm text-gray-500">Use <span class="rounded inline-block bg-gray-400 px-1"> <code class="text-xs text-white">@Actor TheParticipant</code> </span> to define the type of the participant.</p>
-                          <ul role="list" class="mt-3 grid grid-cols-4 gap-5 sm:gap-6 sm:grid-cols-6 lg:grid-cols-8">
-                            <li v-for="type in standardTypes" :key="type" class="col-span-1 flex flex-col shadow-sm rounded-md">
-                              <div class="h-12 flex items-center justify-center bg-gray-50 text-white text-sm font-medium rounded-t-md">
-                                <img v-if="!!icon" :src="icon(type)" class="object-contain h-8 w-8 m-auto" :alt="`icon for ${type}`">
+                        <h2 class="mt-8 mb-4 text-lg leading-6 font-medium text-gray-900">Builtin Icons</h2>
+                        <p class="text-sm text-gray-500">Use <span class="rounded inline-block bg-gray-400 px-1"> <code class="text-xs text-white">@Actor TheParticipant</code> </span> to define the type of the participant.</p>
+                        <ul role="list" class="mt-3 grid grid-cols-4 gap-5 sm:gap-6 sm:grid-cols-6 lg:grid-cols-8">
+                          <li v-for="type in standardTypes" :key="type" class="col-span-1 flex flex-col shadow-sm rounded-md">
+                            <div class="h-12 flex items-center justify-center bg-gray-50 text-white text-sm font-medium rounded-t-md">
+                              <img v-if="!!icon" :src="icon(type)" class="object-contain h-8 w-8 m-auto" :alt="`icon for ${type}`">
+                            </div>
+                            <div class="flex items-center justify-center border-t border-r border-b border-gray-200 bg-white rounded-b-md">
+                              <div class="px-2 py-2 text-xs">
+                                <span class="text-gray-900 font-medium hover:text-gray-600">@{{type}}</span>
                               </div>
-                              <div class="flex items-center justify-center border-t border-r border-b border-gray-200 bg-white rounded-b-md">
-                                <div class="px-2 py-2 text-xs">
-                                  <span class="text-gray-900 font-medium hover:text-gray-600">@{{type}}</span>
-                                </div>
+                            </div>
+                          </li>
+                        </ul>
+                        <hr class="mt-4">
+                        <ul role="list" class="mt-3 grid grid-cols-4 gap-5 sm:gap-6 sm:grid-cols-6 lg:grid-cols-8">
+                          <li v-for="type in awsServices" :key="type" class="col-span-1 flex flex-col shadow-sm rounded-md">
+                            <div class="h-12 flex items-center justify-center bg-gray-50 text-white text-sm font-medium rounded-t-md">
+                              <img v-if="!!icon" :src="icon(type)" class="object-contain h-8 w-8 m-auto" :alt="`icon for ${type}`">
+                            </div>
+                            <div class="flex items-center justify-center border-t border-r border-b border-gray-200 bg-white rounded-b-md">
+                              <div class="px-2 py-2 text-xs">
+                                <span class="text-gray-900 font-medium hover:text-gray-600">@{{type}}</span>
                               </div>
-                            </li>
-                          </ul>
-                          <hr class="mt-4">
-                          <ul role="list" class="mt-3 grid grid-cols-4 gap-5 sm:gap-6 sm:grid-cols-6 lg:grid-cols-8">
-                            <li v-for="type in awsServices" :key="type" class="col-span-1 flex flex-col shadow-sm rounded-md">
-                              <div class="h-12 flex items-center justify-center bg-gray-50 text-white text-sm font-medium rounded-t-md">
-                                <img v-if="!!icon" :src="icon(type)" class="object-contain h-8 w-8 m-auto" :alt="`icon for ${type}`">
+                            </div>
+                          </li>
+                        </ul>
+                        <hr class="mt-4">
+                        <ul role="list" class="mt-3 grid grid-cols-4 gap-5 sm:gap-6 sm:grid-cols-6 lg:grid-cols-8">
+                          <li v-for="type in azureServices" :key="type" class="col-span-1 flex flex-col shadow-sm rounded-md">
+                            <div class="h-12 flex items-center justify-center bg-gray-50 text-white text-sm font-medium rounded-t-md">
+                              <img v-if="!!icon" :src="icon(type)" class="object-contain h-8 w-8 m-auto" :alt="`icon for ${type}`">
+                            </div>
+                            <div class="flex items-center justify-center border-t border-r border-b border-gray-200 bg-white rounded-b-md">
+                              <div class="px-2 py-2 text-xs">
+                                <span class="text-gray-900 font-medium hover:text-gray-600">@{{type}}</span>
                               </div>
-                              <div class="flex items-center justify-center border-t border-r border-b border-gray-200 bg-white rounded-b-md">
-                                <div class="px-2 py-2 text-xs">
-                                  <span class="text-gray-900 font-medium hover:text-gray-600">@{{type}}</span>
-                                </div>
+                            </div>
+                          </li>
+                        </ul>
+                        <hr class="mt-4">
+                        <ul role="list" class="mt-3 grid grid-cols-4 gap-5 sm:gap-6 sm:grid-cols-6 lg:grid-cols-8">
+                          <li v-for="type in googleServices" :key="type" class="col-span-1 flex flex-col shadow-sm rounded-md">
+                            <div class="h-12 flex items-center justify-center bg-gray-50 text-white text-sm font-medium rounded-t-md">
+                              <img v-if="!!icon" :src="icon(type)" class="object-contain h-8 w-8 m-auto" :alt="`icon for ${type}`">
+                            </div>
+                            <div class="flex items-center justify-center border-t border-r border-b border-gray-200 bg-white rounded-b-md">
+                              <div class="px-2 py-2 text-xs">
+                                <span class="text-gray-900 font-medium hover:text-gray-600">@{{type}}</span>
                               </div>
-                            </li>
-                          </ul>
-                          <hr class="mt-4">
-                          <ul role="list" class="mt-3 grid grid-cols-4 gap-5 sm:gap-6 sm:grid-cols-6 lg:grid-cols-8">
-                            <li v-for="type in azureServices" :key="type" class="col-span-1 flex flex-col shadow-sm rounded-md">
-                              <div class="h-12 flex items-center justify-center bg-gray-50 text-white text-sm font-medium rounded-t-md">
-                                <img v-if="!!icon" :src="icon(type)" class="object-contain h-8 w-8 m-auto" :alt="`icon for ${type}`">
-                              </div>
-                              <div class="flex items-center justify-center border-t border-r border-b border-gray-200 bg-white rounded-b-md">
-                                <div class="px-2 py-2 text-xs">
-                                  <span class="text-gray-900 font-medium hover:text-gray-600">@{{type}}</span>
-                                </div>
-                              </div>
-                            </li>
-                          </ul>
-                          <hr class="mt-4">
-                          <ul role="list" class="mt-3 grid grid-cols-4 gap-5 sm:gap-6 sm:grid-cols-6 lg:grid-cols-8">
-                            <li v-for="type in googleServices" :key="type" class="col-span-1 flex flex-col shadow-sm rounded-md">
-                              <div class="h-12 flex items-center justify-center bg-gray-50 text-white text-sm font-medium rounded-t-md">
-                                <img v-if="!!icon" :src="icon(type)" class="object-contain h-8 w-8 m-auto" :alt="`icon for ${type}`">
-                              </div>
-                              <div class="flex items-center justify-center border-t border-r border-b border-gray-200 bg-white rounded-b-md">
-                                <div class="px-2 py-2 text-xs">
-                                  <span class="text-gray-900 font-medium hover:text-gray-600">@{{type}}</span>
-                                </div>
-                              </div>
-                            </li>
-                          </ul>
-                        </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="px-4 max-w-7xl mx-auto sm:px-6 lg:max-w-none lg:mx-0 lg:px-0">
+                        <h2 class="mt-8 mb-4 text-lg leading-6 font-medium text-gray-900">Declare Participants</h2>
+                        <ul role="list">
+                          <li>1. Use <code>group</code> keyword to group participants. E.g. <pre class="w-1/2 bg-gray-50 text-gray-600 p-2 rounded-lg"><code>A
+group GroupName {
+  B
+  C
+}</code></pre></li>
+                          <li>2. Use <code>stereotype</code> to add meta data participants. E.g. <pre class="w-1/2 bg-gray-50 text-gray-600 p-2 rounded-lg"><code>&lt;&lt;servlet&gt;&gt; ServiceX</code></pre></li>
+                        </ul>
+
                       </div>
                     </div>
                   </div>
