@@ -6,15 +6,15 @@
 // Nested method
 // Assignment
 export default `
-@CloudWatch A
-@EFS B
-@LightSail C
-@Sagemaker D1
-@Redshift D
-@ElastiCache E
-@DynamoDB F
-@ElasticBeanTalk G
-@SQS H
+@AzureActiveDirectory A
+@AzureCDN B
+@AzureDataFactory C
+@AzureSQL D1
+@AzureFunction D
+@CosmosDB E
+@AzureDevOps F
+@AzureBackup G
+@LogicApps H
 @Kinesis I
 @VPC J
 @EBS K
