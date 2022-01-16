@@ -3,9 +3,11 @@
         class="lifeline"
         :class="classes"
         :style="{'paddingTop': top + 'px'} ">
-    <div class="participant" :class="{'selected': selected, [entity.participantType]: true}" @click="onSelect">
-      <label class="interface" v-if="entity.stereotype" >«{{entity.stereotype}}»</label>
-      <label class="name">{{entity.label || entity.name}}</label>
+    <div class="participant flex flex-col justify-center object-contain border-2"
+         :class="{'selected': selected, [entity.participantType]: true, 'border-none': !!icon, 'border-solid': !icon}" @click="onSelect">
+      <img v-if="!!icon" :src="icon" class="object-contain h-8 w-8 m-auto" :alt="`icon for ${entity.name}`">
+      <label class="interface m-auto" v-if="entity.stereotype" >«{{entity.stereotype}}»</label>
+      <label class="name m-auto">{{entity.label || entity.name}}</label>
     </div>
     <div class="line"></div>
   </div>
@@ -19,6 +21,10 @@
     props: ['entity', 'context'],
     computed: {
       ...mapGetters(['firstInvocations', 'onLifelineMounted']),
+      icon() {
+        return require('../../assets/Amazon-EC2.svg')
+        // return null
+      },
       classes() {
         if (this.entity.type) {
           return ['icon', this.entity.type.toLowerCase()]
