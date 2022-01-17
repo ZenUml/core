@@ -13,4 +13,6 @@ group "G" {@EC2 D @ECS E F}
 new C
 new A
 new B
+D.m
+E.m
 `

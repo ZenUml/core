@@ -32,7 +32,7 @@
           timeout = setTimeout(later, wait);
           if (callNow) func.apply(context, args);
         };
-      };
+      }
       function updateCode(c) {
         document.getElementsByClassName('sequence-diagram')[0].__vue__.$store.dispatch('updateCode', {code:c})
       }
