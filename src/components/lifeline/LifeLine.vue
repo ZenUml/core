@@ -156,14 +156,4 @@ export default {
     padding-bottom: 0;
   }
 
-  .lifeline.icon .participant::before
-  {
-    content: '';
-    display: block;
-    height: 35px;
-    background-size: 35px;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-
 </style>
