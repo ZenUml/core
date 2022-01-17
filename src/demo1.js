@@ -14,6 +14,9 @@ group "B C" {@EC2 B @ECS C}
 // |----|----|
 // |val1|val2|
 @Starter("User")
+new C
+new A
+new B
 RET ret = A.methodA(a, b) {
   // A comment for self interaction<br>
   // \`POST /order\` <br>
@@ -56,7 +59,7 @@ RET ret = A.methodA(a, b) {
         // Right to left
         C.method() {
           // Further right to left
-          "b:B".method()        
+          "b:B".method()
         }
         self()
       }
