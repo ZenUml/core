@@ -6,21 +6,10 @@
 // Nested method
 // Assignment
 export default `
-Processor.start() {
-  try{
-    while(true) {
-      records = KafkaConsumer.poll(Long.MAX_VALUE);
-      foreach(record) {
-        RecordHandler.handle(record)
-      }
-    }
-  } catch(WakeException) {
-    ErrorService.onError()
-  } catch(Exception) {
-    GeneralError.onError()
-  } finally {
-    KafkaConsumer.close();
-  }
-}
-
+@Cognito A
+@CloudLoadBalancing B
+@CloudCDN C
+@CloudInterConnect D1
+@CloudDNS D
+@CloudStorage E
 `

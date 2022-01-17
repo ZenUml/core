@@ -31,7 +31,7 @@ $dividerTextColor: #E28553;
   .lifeline {
     .participant {
       font-weight: 400;
-      border: 2px solid $participantBorderColor;
+      border: $participantBorderColor;
       background: $participantBackgroundColor;
       label {
         text-decoration: underline;

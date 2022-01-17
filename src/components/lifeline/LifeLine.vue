@@ -3,61 +3,126 @@
         class="lifeline"
         :class="classes"
         :style="{'paddingTop': top + 'px'} ">
-    <div class="participant" :class="{'selected': selected, [entity.participantType]: true}" @click="onSelect">
-      <label class="interface" v-if="entity.stereotype" >«{{entity.stereotype}}»</label>
-      <label class="name">{{entity.label || entity.name}}</label>
+    <div class="participant flex flex-col justify-center object-contain border-2"
+         :class="{'selected': selected, [entity.participantType]: true, 'border-none': !!icon, 'border-solid': !icon}" @click="onSelect">
+      <img v-if="!!icon" :src="icon" class="object-contain h-8 w-8 m-auto" :alt="`icon for ${entity.name}`">
+      <label class="interface m-auto" v-if="entity.stereotype" >«{{entity.stereotype}}»</label>
+      <label class="name m-auto">{{entity.label || entity.name}}</label>
     </div>
     <div class="line"></div>
   </div>
 </template>
 
 <script>
-  import {mapGetters, mapMutations} from 'vuex'
+import {mapGetters, mapMutations} from 'vuex'
 
-  export default {
-    name: 'life-line',
-    props: ['entity', 'context'],
-    computed: {
-      ...mapGetters(['firstInvocations', 'onLifelineMounted']),
-      classes() {
-        if (this.entity.type) {
-          return ['icon', this.entity.type.toLowerCase()]
-        }
-        return []
-      },
-      selected () {
-        return this.$store.state.selected.includes(this.entity.name)
-      },
-      top () {
-        if (this.firstInvocationIsCreation) {
-          return this.firstInvocations[this.entity.name].top - 3 - this.$el?.offsetTop
-        }
-        return 0
-      },
-      firstInvocationIsCreation () {
-        return this.firstInvocations[this.entity.name] && this.firstInvocations[this.entity.name].type === 'creation'
+const iconPath = {
+  actor:      require('../../assets/actor.svg'),
+  boundary:   require('../../assets/Robustness_Diagram_Boundary.svg'),
+  control:    require('../../assets/Robustness_Diagram_Control.svg'),
+  database:   require('../../assets/database.svg'),
+  entity:     require('../../assets/Robustness_Diagram_Entity.svg'),
+  // AWS service
+  cloudwatch:             require('../../assets/Architecture-Service-Icons_09172021/Arch_Management-Governance/16/Arch_Amazon-CloudWatch_16.svg'),
+  cloudfront:             require('../../assets/Architecture-Service-Icons_09172021/Arch_Networking-Content-Delivery/16/Arch_Amazon-CloudFront_16.svg'),
+  cognito:                require('../../assets/Architecture-Service-Icons_09172021/Arch_Security-Identity-Compliance/16/Arch_Amazon-Cognito_16.svg'),
+  dynamodb:               require('../../assets/Architecture-Service-Icons_09172021/Arch_Database/16/Arch_Amazon-DynamoDB_16.svg'),
+  ebs:                    require('../../assets/Architecture-Service-Icons_09172021/Arch_Storage/16/Arch_Amazon-Elastic-Block-Store_16.svg'),
+  ec2:                    require('../../assets/Architecture-Service-Icons_09172021/Arch_Compute/16/Arch_Amazon-EC2_16.svg'),
+  ecs:                    require('../../assets/Architecture-Service-Icons_09172021/Arch_Compute/16/Arch_Amazon-Elastic-Container-Service_16.svg'),
+  efs:                    require('../../assets/Architecture-Service-Icons_09172021/Arch_Storage/16/Arch_Amazon-Elastic-File-System_16.svg'),
+  elasticache:            require('../../assets/Architecture-Service-Icons_09172021/Arch_Database/16/Arch_Amazon-ElastiCache_16.svg'),
+  elasticbeantalk:        require('../../assets/Architecture-Service-Icons_09172021/Arch_Compute/16/Arch_AWS-Elastic-Beanstalk_16.svg'),
+  elasticfilesystem:      require('../../assets/Architecture-Service-Icons_09172021/Arch_Storage/16/Arch_Amazon-Elastic-File-System_16.svg'),
+  glacier:                require('../../assets/Architecture-Service-Icons_09172021/Arch_Storage/16/Arch_Amazon-Simple-Storage-Service-Glacier_16.svg'),
+  iam:                    require('../../assets/Architecture-Service-Icons_09172021/Arch_Security-Identity-Compliance/16/Arch_AWS-Identity-and-Access-Management_16.svg'),
+  kinesis:                require('../../assets/Architecture-Service-Icons_09172021/Arch_Analytics/Arch_16/Arch_Amazon-Kinesis_16.svg'),
+  lambda:                 require('../../assets/Architecture-Service-Icons_09172021/Arch_Compute/16/Arch_AWS-Lambda_16.svg'),
+  lightsail:              require('../../assets/Architecture-Service-Icons_09172021/Arch_Compute/16/Arch_Amazon-Lightsail_16.svg'),
+  rds:                    require('../../assets/Architecture-Service-Icons_09172021/Arch_Database/16/Arch_Amazon-RDS_16.svg'),
+  redshift:               require('../../assets/Architecture-Service-Icons_09172021/Arch_Analytics/Arch_16/Arch_Amazon-Redshift_16.svg'),
+  s3:                     require('../../assets/Architecture-Service-Icons_09172021/Arch_Storage/16/Arch_Amazon-Simple-Storage-Service_16.svg'),
+  sns:                    require('../../assets/Architecture-Service-Icons_09172021/Arch_App-Integration/Arch_16/Arch_Amazon-Simple-Notification-Service_16.svg'),
+  sqs:                    require('../../assets/Architecture-Service-Icons_09172021/Arch_App-Integration/Arch_16/Arch_Amazon-Simple-Queue-Service_16.svg'),
+  sagemaker:              require('../../assets/Architecture-Service-Icons_09172021/Arch_Machine-Learning/16/Arch_Amazon-SageMaker_16.svg'),
+  vpc:                    require('../../assets/Architecture-Service-Icons_09172021/Arch_Networking-Content-Delivery/16/Arch_Amazon-Virtual-Private-Cloud_16.svg'),
+  // Azure services
+  azureactivedirectory:   require('../../assets/Azure_Public_Service_Icons/Icons/Identity/10221-icon-service-Azure-Active-Directory.svg'),
+  azurebackup:            require('../../assets/Azure_Public_Service_Icons/Icons/Azure Stack/10108-icon-service-Infrastructure-Backup.svg'),
+  azurecdn:               require('../../assets/Azure_Public_Service_Icons/Icons/App Services/00056-icon-service-CDN-Profiles.svg'),
+  azuredatafactory:       require('../../assets/Azure_Public_Service_Icons/Icons/Databases/10126-icon-service-Data-Factory.svg'),
+  azuredevops:            require('../../assets/Azure_Public_Service_Icons/Icons/DevOps/10261-icon-service-Azure-DevOps.svg'),
+  azurefunction:          require('../../assets/Azure_Public_Service_Icons/Icons/Compute/10029-icon-service-Function-Apps.svg'),
+  azuresql:               require('../../assets/Azure_Public_Service_Icons/Icons/Databases/02390-icon-service-Azure-SQL.svg'),
+  cosmosdb:               require('../../assets/Azure_Public_Service_Icons/Icons/Databases/10121-icon-service-Azure-Cosmos-DB.svg'),
+  logicapps:              require('../../assets/Azure_Public_Service_Icons/Icons/Integration/10201-icon-service-Logic-Apps.svg'),
+  virtualmachine:         require('../../assets/Azure_Public_Service_Icons/Icons/Compute/10021-icon-service-Virtual-Machine.svg'),
+  // GCP services
+  bigtable:               require('../../assets/google-cloud-icons/bigtable/bigtable.svg'),
+  bigquery:               require('../../assets/google-cloud-icons/bigquery/bigquery.svg'),
+  cloudcdn:               require('../../assets/google-cloud-icons/cloud_cdn/cloud_cdn.svg'),
+  clouddns:               require('../../assets/google-cloud-icons/cloud_dns/cloud_dns.svg'),
+  cloudinterconnect:      require('../../assets/google-cloud-icons/cloud_interconnect/cloud_interconnect.svg'),
+  cloudloadbalancing:     require('../../assets/google-cloud-icons/cloud_load_balancing/cloud_load_balancing.svg'),
+  cloudsql:               require('../../assets/google-cloud-icons/cloud_sql/cloud_sql.svg'),
+  cloudstorage:           require('../../assets/google-cloud-icons/cloud_storage/cloud_storage.svg'),
+  datalab:                require('../../assets/google-cloud-icons/datalab/datalab.svg'),
+  dataproc:               require('../../assets/google-cloud-icons/dataproc/dataproc.svg'),
+  googleiam:              require('../../assets/google-cloud-icons/identity_and_access_management/identity_and_access_management.svg'),
+  googlesecurity:         require('../../assets/google-cloud-icons/security/security.svg'),
+  googlevpc:              require('../../assets/google-cloud-icons/virtual_private_cloud/virtual_private_cloud.svg'),
+  pubsub:                 require('../../assets/google-cloud-icons/pubsub/pubsub.svg'),
+  securityscanner:        require('../../assets/google-cloud-icons/cloud_security_scanner/cloud_security_scanner.svg'),
+  stackdriver:            require('../../assets/google-cloud-icons/stackdriver/stackdriver.svg'),
+  visionapi:              require('../../assets/google-cloud-icons/cloud_vision_api/cloud_vision_api.svg'),
+}
+export default {
+  name: 'life-line',
+  props: ['entity', 'context'],
+  computed: {
+    ...mapGetters(['firstInvocations', 'onLifelineMounted']),
+    icon() {
+      return iconPath[this.entity.type?.toLowerCase()]
+    },
+    classes() {
+      if (this.entity.type) {
+        return ['icon', this.entity.type.toLowerCase()]
       }
+      return []
     },
-    methods: {
-      ...mapMutations(['onLifelinePositioned']),
-      onSelect() {
-        this.$store.commit('onSelect', this.entity.name)
+    selected() {
+      return this.$store.state.selected.includes(this.entity.name)
+    },
+    top() {
+      if (this.firstInvocationIsCreation) {
+        return this.firstInvocations[this.entity.name].top - 3 - this.$el?.offsetTop
       }
+      return 0
     },
-    mounted() {
-      this.onLifelinePositioned({
-        name: this.entity.name,
-        el: this.$el
-      })
-      this.onLifelineMounted(this, this.$vnode.elm);
-    },
-    updated() {
-      this.onLifelinePositioned({
-        name: this.entity.name,
-        el: this.$el
-      })
+    firstInvocationIsCreation() {
+      return this.firstInvocations[this.entity.name] && this.firstInvocations[this.entity.name].type === 'creation'
     }
+  },
+  methods: {
+    ...mapMutations(['onLifelinePositioned']),
+    onSelect() {
+      this.$store.commit('onSelect', this.entity.name)
+    }
+  },
+  mounted() {
+    this.onLifelinePositioned({
+      name: this.entity.name,
+      el: this.$el
+    })
+    this.onLifelineMounted(this, this.$vnode.elm);
+  },
+  updated() {
+    this.onLifelinePositioned({
+      name: this.entity.name,
+      el: this.$el
+    })
   }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -80,7 +145,7 @@
   }
 
   .lifeline>.participant {
-    z-index: 100;
+    z-index: 10;
   }
 
   .lifeline.icon .participant
@@ -89,60 +154,6 @@
     border: 0;
     padding-top: 0;
     padding-bottom: 0;
-  }
-
-  .lifeline.icon .participant::before
-  {
-    content: '';
-    display: block;
-    height: 35px;
-    background-size: 35px;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-
-  .lifeline.actor .participant::before {
-    background-image: url("../../assets/actor.svg");
-  }
-
-  .lifeline.database .participant::before {
-    background-image: url("../../assets/database.svg");
-  }
-
-  .lifeline.ec2 .participant::before {
-    background-image: url("../../assets/Amazon-EC2.svg");
-  }
-
-  .lifeline.ecs .participant::before {
-    background-image: url("../../assets/Amazon-Elastic-Container-Service_light-bg.svg");
-  }
-
-  .lifeline.iam .participant::before {
-    background-image: url("../../assets/AWS-Identity-and-Access-Management_IAM.svg");
-  }
-
-  .lifeline.lambda .participant::before {
-    background-image: url("../../assets/AWS-Lambda.svg");
-  }
-
-  .lifeline.rds .participant::before {
-    background-image: url("../../assets/Amazon-RDS.svg");
-  }
-
-  .lifeline.s3 .participant::before {
-    background-image: url("../../assets/Amazon-Simple-Storage-Service-S3_light-bg.svg");
-  }
-
-  .lifeline.boundary .participant::before {
-    background-image: url("../../assets/Robustness_Diagram_Boundary.svg");
-  }
-
-  .lifeline.control .participant::before {
-    background-image: url("../../assets/Robustness_Diagram_Control.svg");
-  }
-
-  .lifeline.entity .participant::before {
-    background-image: url("../../assets/Robustness_Diagram_Entity.svg");
   }
 
 </style>

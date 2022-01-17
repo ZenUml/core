@@ -32,7 +32,7 @@ $dividerBorderColor: #000;
   .lifeline {
     .participant {
       font-weight: 400;
-      border: 2px solid $participantBorderColor;
+      border: $participantBorderColor;
       background: $participantBackgroundColor;
       box-shadow: 2px 2px 0px $participantBorderColor;
 

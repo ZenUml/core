@@ -6,10 +6,6 @@
   /* Limit the size when exporting to images */
   display: inline-block;
 
-  .participant {
-    border: 2px solid rgba(3, 3, 3, 0.05);
-  }
-
   .occurrence {
     border: 2px solid #000;
     background-color: #DEDEDE;
@@ -87,7 +83,7 @@
   .lifeline {
     .participant {
       font-weight: 400;
-      border: 2px solid #000;
+      border-color: #000;
       background: #FFF;
       label {
         color: #000;
