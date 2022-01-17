@@ -31,6 +31,9 @@
                     <pre class="text-xs w-11/12 bg-gray-50 text-gray-600 p-2 rounded-lg"><code>// Define a Starter (optional)
 @Starter(A)
 
+// show icons
+@EC2 A
+
 // use 'group' keyword
 group GroupName {
   B
