@@ -5,12 +5,4 @@
 // Self-method
 // Nested method
 // Assignment
-export default `
-@Cognito A
-@CloudLoadBalancing B
-@CloudCDN C
-@CloudInterConnect D1
-@CloudDNS D
-@CloudStorage E
-new F()
-`
+export default `new B()`
