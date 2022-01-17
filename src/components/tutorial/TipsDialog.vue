@@ -31,13 +31,13 @@
                     <pre class="text-xs w-full bg-gray-50 text-gray-600 p-2 rounded-lg"><code>// Define a Starter (optional)
 @Starter(A)
 
-// show icons
+// Show icons
 @EC2 A
 
-// use 'group' keyword
+// Use 'group' keyword
 group GroupName {  B  C }
 
-// use stereotype
+// Use stereotype
 &lt;&lt;servlet&gt;&gt; ServiceX</code></pre>
 
                   </div>
@@ -52,7 +52,7 @@ B.method()
                   <div class="px-4 w-full mx-auto lg:max-w-none lg:mx-0">
                     <h2 class="mt-4 mb-4 text-lg leading-6 font-medium text-gray-900">Fragments</h2>
                     <pre class="text-xs w-full bg-gray-50 text-gray-600 p-2 rounded-lg"><code>// Alt (AKA if/else)
-if(condition) {}
+if(condition1) {}
 else if (condition2) {}
 else {}
 
