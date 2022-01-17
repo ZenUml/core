@@ -24,7 +24,7 @@
           <div class="relative bg-white pb-32 mt-4 overflow-hidden">
             <div class="relative">
               <div class="lg:mx-auto lg:max-w-11/12 lg:px-8">
-                <div class="grid lg:grid-cols-3 grid-cols-2">
+                <div class="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1">
                   <div>
                   <div class="px-4 max-w-full mx-auto sm:px-6 lg:max-w-none lg:mx-0">
                     <h2 class="mt-4 mb-4 text-lg leading-6 font-medium text-gray-900">Declare Participants</h2>
