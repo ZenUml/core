@@ -12,16 +12,4 @@ export default `
 @CloudInterConnect D1
 @CloudDNS D
 @CloudStorage E
-@CloudSQL F
-@Bigtable G
-@BigQuery H
-@DataProc I
-@DataLab J
-@PubSub K
-@VisionApi L
-@GoogleIAM M
-@SecurityScanner N
-@GoogleSecurity O
-@StackDriver P
-A->I: Hello
 `
