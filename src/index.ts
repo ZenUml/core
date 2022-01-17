@@ -21,6 +21,7 @@ const Store = (debounce?: number) => {
   storeInitiationTime = now()
   return {
     state: {
+      showTips: true,
       generation: 0,
       lifeLineElementMap: new Map(),
       firstInvocations: {},
