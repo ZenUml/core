@@ -4,7 +4,7 @@
       v-if="starterOnTheLeft"
       :entity="starterParticipant"
       class="starter"
-      :class="{hidden: starterParticipant.name === '_STARTER_'}"
+      :class="{invisible: invisibleStarter, 'w-0': invisibleStarter}"
       />
     <template v-for="(child, index) in explicitGroupAndParticipants">
       <life-line-group :key="index"
@@ -29,11 +29,11 @@
     props: ['context'],
     computed: {
       ...mapGetters(['participants', 'GroupContext', 'ParticipantContext']),
+      invisibleStarter() {
+        return this.starterParticipant.name === '_STARTER_'
+      },
       starterParticipant() {
         return this.participants.Starter()
-      },
-      showStarter() {
-        return this.starterParticipant.name !== '_STARTER_'
       },
       starterOnTheLeft() {
         return !this.starterParticipant.explicit
@@ -77,11 +77,6 @@
     white-space: nowrap;  /* Do not wrap to a new line */
     position: absolute;   /* So that message layer is overlaid. */
     height: 100%;         /* To give height to the line */
-  }
-
-  .lifeline.hidden {
-    visibility: hidden;
-    margin-left: -40px; /* Remove the extra margin created by starter */
   }
 </style>
 

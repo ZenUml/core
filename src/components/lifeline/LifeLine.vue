@@ -3,11 +3,14 @@
         class="lifeline"
         :class="classes"
         :style="{'paddingTop': top + 'px'} ">
-    <div class="participant flex flex-col justify-center object-contain border-2"
-         :class="{'selected': selected, [entity.participantType]: true, 'border-none': !!icon, 'border-solid': !icon}" @click="onSelect">
-      <img v-if="!!icon" :src="icon" class="object-contain h-8 w-8 m-auto" :alt="`icon for ${entity.name}`">
-      <label class="interface m-auto" v-if="entity.stereotype" >«{{entity.stereotype}}»</label>
-      <label class="name m-auto">{{entity.label || entity.name}}</label>
+    <div class="relative participant flex flex-col justify-center"
+         :class="{'selected': selected, 'border-transparent': !!icon}" @click="onSelect">
+      <img v-if="!!icon" :src="icon" class="absolute left-1/2 transform -translate-x-1/2 -translate-y-full h-8" :alt="`icon for ${entity.name}`">
+      <!-- Put in a div to give it a fixed height, because stereotype is dynamic. -->
+      <div class="h-5 flex flex-col justify-center">
+        <label class="interface" v-if="entity.stereotype">«{{ entity.stereotype }}»</label>
+        <label class="name">{{ entity.label || entity.name }}</label>
+      </div>
     </div>
     <div class="line"></div>
   </div>
@@ -146,14 +149,6 @@ export default {
 
   .lifeline>.participant {
     z-index: 10;
-  }
-
-  .lifeline.icon .participant
-  {
-    text-align: center;
-    border: 0;
-    padding-top: 0;
-    padding-bottom: 0;
   }
 
 </style>

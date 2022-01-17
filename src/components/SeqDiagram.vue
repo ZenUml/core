@@ -1,5 +1,6 @@
 <template>
-  <div class="sequence-diagram" ref="diagram" >
+  <!-- p-8 to give space for icons -->
+  <div class="sequence-diagram p-8" ref="diagram" >
     <life-line-layer :context="rootContext.head()"/>
     <message-layer :context="rootContext.block()" :key="generation"/>
   </div>
@@ -49,6 +50,7 @@
 
   /* .participant is shared by MessageLayer and LifeLineLayer */
   .participant {
+    border-width: 2px; /* don't put it in cosmetic or theme css */
     padding: 8px 4px;
     min-width: 88px;
     max-width: 250px;

@@ -7,7 +7,7 @@
   display: inline-block;
 
   .occurrence {
-    border: 2px solid #000;
+    border-color: #000;
     background-color: #DEDEDE;
   }
   .message {
@@ -50,7 +50,7 @@
     margin-top: 8px;
     margin-bottom: 8px;
     border-radius: 4px;
-    border: 1px solid rgba(0, 0, 0, 0.30);
+    border-color: rgba(0, 0, 0, 0.30);
     .fragment.par>.block>.statement-container:not(:first-child), .segment:not(:first-child) {
       border-top: 1px solid rgba(0, 0, 0, 0.30);
     }
@@ -148,7 +148,7 @@
       border-collapse: collapse;
       border-spacing: 0;
       empty-cells: show;
-      border: 1px solid #cbcbcb;
+      border-color: #cbcbcb;
 
       td, th {
         padding: 0.5em;

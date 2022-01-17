@@ -32,7 +32,7 @@ $dividerBorderColor: #000;
   .lifeline {
     .participant {
       font-weight: 400;
-      border: $participantBorderColor;
+      border-color: $participantBorderColor;
       background: $participantBackgroundColor;
       box-shadow: 2px 2px 0px $participantBorderColor;
 
@@ -68,16 +68,15 @@ $dividerBorderColor: #000;
   }
 
   .occurrence {
-    background-color: white;
-    border: 2px solid $occuranceBorderColor;
+    border-color: $occuranceBorderColor;
     background-color: $occuranceBackgroundColor;
   }
 
   .fragment {
     margin-top: 8px;
     margin-bottom: 8px;
-    border-radius: 0px;
-    border: 1px solid $fragmentBorderColor;
+    border-radius: 0;
+    border-color: $fragmentBorderColor;
 
     .fragment.par > .block > .statement-container:not(:first-child), .segment:not(:first-child) {
       border-top: 1px solid $fragmentBorderColor;

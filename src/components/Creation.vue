@@ -8,10 +8,10 @@
        :style="style">
     <comment v-if="comment" :comment="comment" />
     <message class="invocation" :content="signature" :rtl="rightToLeft" :style="{width: invocationWidth + 'px'}" type="creation"/>
-    <div class="participant place-holder">
-      <!--This line is to set the height of the place-holder-->
-      <label class="name">{{to}}</label>
-    </div>
+    <div class="participant invisible place-holder">
+      <!--This line is to set the height of the place-holder, see Lifeline-->
+      <div class="h-5" />
+      </div>
     <occurrence :context="creation" :participant="to"/>
     <message class="return" v-if="assignee" :content="assignee" :rtl="!rightToLeft" type="return"/>
   </div>
@@ -117,8 +117,7 @@
   }
 
   .participant.place-holder {
-    visibility: hidden;
-    margin-top: -20px;
+    margin-top: -19px;
     white-space: nowrap;
   }
 
