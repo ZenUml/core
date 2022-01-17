@@ -1,10 +1,11 @@
 <template>
   <div class="life-line-layer">
     <life-line
+      :style="{'margin-left': invisibleStarter ? '-40px!important': '0'}"
       v-if="starterOnTheLeft"
       :entity="starterParticipant"
       class="starter"
-      :class="{invisible: invisibleStarter, 'w-0': invisibleStarter}"
+      :class="{invisible: invisibleStarter}"
       />
     <template v-for="(child, index) in explicitGroupAndParticipants">
       <life-line-group :key="index"
