@@ -109,9 +109,7 @@ A.method() {
               </div>
             </div>
           </div>
-
         </div>
-        <span slot="footer">by ZenUML</span>
       </div>
     </div>
   </div>
