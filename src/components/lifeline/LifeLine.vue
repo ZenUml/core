@@ -1,9 +1,9 @@
 <template>
   <div  :id="entity.name"
-        class="lifeline"
+        class="lifeline flex flex-col mx-2"
         :class="classes"
         :style="{'paddingTop': top + 'px'} ">
-    <div class="relative participant flex flex-col justify-center"
+    <div class="relative participant flex flex-col justify-center z-10"
          :class="{'selected': selected, 'border-transparent': !!icon}" @click="onSelect">
       <img v-if="!!icon" :src="icon" class="absolute left-1/2 transform -translate-x-1/2 -translate-y-full h-8" :alt="`icon for ${entity.name}`">
       <!-- Put in a div to give it a fixed height, because stereotype is dynamic. -->
@@ -12,7 +12,7 @@
         <label class="name">{{ entity.label || entity.name }}</label>
       </div>
     </div>
-    <div class="line"></div>
+    <div class="line w0 mx-auto h-full w-px"></div>
   </div>
 </template>
 
@@ -130,25 +130,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  /* LifeLineLayer's display is flex, its children don't need display:inline-block */
-  .lifeline {
-    display: flex;            /* So that .line fill the remaining height */
-    flex-direction: column;
-    margin: 0 20px;
-  }
-
-  .lifeline>.participant>.interface {
-    display: block;
-  }
 
   .lifeline .line {
-    flex: 1;                /* To fill the remaining height */
-    margin-left: 50%;
-    border-left-width: 1px;
-  }
-
-  .lifeline>.participant {
-    z-index: 10;
+    background: linear-gradient(to bottom, transparent 50%, #223049 50%);
+    background-size: 1px 20px;
   }
 
 </style>

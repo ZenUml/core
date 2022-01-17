@@ -32,14 +32,18 @@
           timeout = setTimeout(later, wait);
           if (callNow) func.apply(context, args);
         };
-      };
+      }
       function updateCode(c) {
         document.getElementsByClassName('sequence-diagram')[0].__vue__.$store.dispatch('updateCode', {code:c})
       }
     </script>
-    <textarea cols="30" rows="20" oninput="updateCode(this.value)"></textarea>
+    <div class="grid grid-cols-5">
+      <textarea class="col-span-1 m-1 border-2" cols="30" rows="20" oninput="updateCode(this.value)"></textarea>
+      <div class="col-span-4">
+        <div id="demo1" class="col-span-4 theme-blue"></div>
+      </div>
+    </div>
     <div id="diagram">
-      <div id="demo1" class="theme-blue"></div>
       <div id="demo2"></div>
     </div>
     <!-- built files will be auto injected -->

@@ -1,7 +1,9 @@
 <template>
-  <div class="container">
-    <label v-if="name">{{name}}</label>
-    <div class="lifeline-group">
+  <div class="container flex flex-col">
+    <div class="-mt-8 border-2 border-b-0 h-14">
+      <label class="block text-center font-semibold mb-8 border-b-2" v-if="name">{{name}}</label>
+    </div>
+    <div class="lifeline-group flex flex-grow border-2 border-t-0">
       <life-line v-for="entity in entities" :key="entity.name" :ref="entity.name" :entity="entity"/>
     </div>
   </div>
@@ -29,20 +31,4 @@
 </script>
 
 <style scoped>
-  div.container {
-    background-color: #eeffee;
-    margin: 0 2px;
-    display: flex;
-    flex-direction: column;
-  }
-  label {
-    display: block;
-    text-align: center;
-    font-weight: bold;
-  }
-
-  .lifeline-group {
-    display: flex;
-    flex-grow: 1;
-  }
 </style>

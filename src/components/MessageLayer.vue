@@ -24,7 +24,7 @@
         return this.participants?.Starter()?.name
       },
       paddingLeft () {
-        return this.centerOf(this.starter)
+        return this.centerOf(this.starter) - 1
       },
     },
     mounted () {
