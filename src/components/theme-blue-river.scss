@@ -54,7 +54,7 @@ $fragment-condition-label-background: #65BF73;
     }
     .occurrence {
       background: $occurrence-background;
-      border: 1px solid $occurrence-border;
+      border-color: $occurrence-border;
       box-shadow: 4px 4px 0 $occurrence-box-shadow;
     }
     .fragment {

@@ -49,6 +49,7 @@
 
   /* .participant is shared by MessageLayer and LifeLineLayer */
   .participant {
+    border-width: 2px; /* don't put it in cosmetic or theme css */
     padding: 8px 4px;
     min-width: 88px;
     max-width: 250px;

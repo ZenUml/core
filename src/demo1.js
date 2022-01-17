@@ -12,4 +12,5 @@ export default `
 @CloudInterConnect D1
 @CloudDNS D
 @CloudStorage E
+new F()
 `

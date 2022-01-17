@@ -3,8 +3,8 @@
         class="lifeline"
         :class="classes"
         :style="{'paddingTop': top + 'px'} ">
-    <div class="participant flex flex-col justify-center object-contain border-2"
-         :class="{'selected': selected, [entity.participantType]: true, 'border-none': !!icon, 'border-solid': !icon}" @click="onSelect">
+    <div class="participant flex flex-col justify-center object-contain"
+         :class="{'selected': selected, [entity.participantType]: true, 'border-transparent': !!icon, 'border-solid': !icon}" @click="onSelect">
       <img v-if="!!icon" :src="icon" class="object-contain h-8 w-8 m-auto" :alt="`icon for ${entity.name}`">
       <label class="interface m-auto" v-if="entity.stereotype" >«{{entity.stereotype}}»</label>
       <label class="name m-auto">{{entity.label || entity.name}}</label>
@@ -151,7 +151,6 @@ export default {
   .lifeline.icon .participant
   {
     text-align: center;
-    border: 0;
     padding-top: 0;
     padding-bottom: 0;
   }
