@@ -1,6 +1,6 @@
 <template>
 
-  <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+  <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block">
     <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
 
     <!-- This element is to trick the browser into centering the modal contents. -->
@@ -23,39 +23,38 @@
         <div slot="body">
           <div class="relative bg-white pb-32 mt-4 overflow-hidden">
             <div class="relative">
-              <div class="lg:mx-auto lg:max-w-7xl lg:px-8">
-                <div class="grid grid-cols-3">
+              <div class="lg:mx-auto lg:max-w-11/12 lg:px-8">
+                <div class="grid lg:grid-cols-3 grid-cols-2">
                   <div>
-                  <div class="px-4 max-w-7xl mx-auto sm:px-6 lg:max-w-none lg:mx-0 lg:px-0">
+                  <div class="px-4 max-w-full mx-auto sm:px-6 lg:max-w-none lg:mx-0">
                     <h2 class="mt-4 mb-4 text-lg leading-6 font-medium text-gray-900">Declare Participants</h2>
-                    <pre class="text-xs w-11/12 bg-gray-50 text-gray-600 p-2 rounded-lg"><code>// Define a Starter (optional)
+                    <pre class="text-xs w-full bg-gray-50 text-gray-600 p-2 rounded-lg"><code>// Define a Starter (optional)
 @Starter(A)
 
 // show icons
 @EC2 A
 
 // use 'group' keyword
-group GroupName {
-  B
-  C
-}
+group GroupName {  B  C }
 
 // use stereotype
 &lt;&lt;servlet&gt;&gt; ServiceX</code></pre>
 
                   </div>
-                  <div class="px-4 max-w-7xl mx-auto sm:px-6 lg:max-w-none lg:mx-0 lg:px-0">
+                  <div class="px-4 max-w-7xl mx-auto sm:px-6 lg:max-w-none lg:mx-0">
                     <h2 class="mt-4 mb-4 text-lg leading-6 font-medium text-gray-900">Divider</h2>
-                    <pre class="text-xs w-1/2 bg-gray-50 text-gray-600 p-2 rounded-lg"><code>A.method()
+                    <pre class="text-xs w-full bg-gray-50 text-gray-600 p-2 rounded-lg"><code>A.method()
 ==divider name==
 B.method()
 </code></pre>
                   </div>
                   </div>
-                  <div class="px-4 max-w-7xl mx-auto sm:px-6 lg:max-w-none lg:mx-0 lg:px-0">
+                  <div class="px-4 w-full mx-auto lg:max-w-none lg:mx-0">
                     <h2 class="mt-4 mb-4 text-lg leading-6 font-medium text-gray-900">Fragments</h2>
-                    <pre class="text-xs w-11/12 bg-gray-50 text-gray-600 p-2 rounded-lg"><code>// Alt (AKA if/else)
-if(condition) {} else if (condition2) {} else {}
+                    <pre class="text-xs w-full bg-gray-50 text-gray-600 p-2 rounded-lg"><code>// Alt (AKA if/else)
+if(condition) {}
+else if (condition2) {}
+else {}
 
 // `loop`, `for`, `forEach`, `while`
 // are treated the same
@@ -71,9 +70,9 @@ par {}
 try {} catch() {} finally {}
 </code></pre>
                   </div>
-                  <div class="px-4 max-w-7xl mx-auto sm:px-6 lg:max-w-none lg:mx-0 lg:px-0">
+                  <div class="px-4 w-full mx-auto lg:max-w-none lg:mx-0">
                     <h2 class="mt-4 mb-4 text-lg leading-6 font-medium text-gray-900">Messages</h2>
-                    <pre class="text-xs w-11/12 bg-gray-50 text-gray-600 p-2 rounded-lg"><code>//Creation
+                    <pre class="text-xs w-full bg-gray-50 text-gray-600 p-2 rounded-lg"><code>//Creation
 new ParticipantName()
 
 //Sync Message
@@ -93,7 +92,7 @@ A.method() {
 }</code></pre>
                   </div>
                 </div>
-                <div class="px-4 max-w-7xl mx-auto sm:px-6 lg:max-w-none lg:mx-0 lg:px-0">
+                <div class="px-4 max-w-7xl mx-auto sm:px-6 lg:max-w-none lg:mx-0">
                   <h2 class="mt-8 mb-4 text-lg leading-6 font-medium text-gray-900">Builtin Icons</h2>
                   <p class="text-sm text-gray-500">Use <span class="rounded inline-block bg-gray-50 text-gray-600">
                     <code class="text-xs">@Actor TheParticipant</code> </span> to define the type of the participant.</p>
