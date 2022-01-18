@@ -151,7 +151,10 @@ export default {
   },
   methods: {
     closeTipsDialog() {
-      this.$store.state.showTips = false;
+      this.$store.state.showTips = false
+      this.$gtag.event('close', {
+        'event_category': 'help', 'event_label': 'tips dialog'
+      })
     }
   }
 }
