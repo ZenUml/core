@@ -5,7 +5,6 @@ import Vuex from 'vuex'
 import {VueSequence} from './index'
 
 Vue.use(Vuex)
-// Vue.use(log4V)
 
 Vue.config.productionTip = false
 
@@ -14,6 +13,13 @@ console.log('----------', VueSequence.Version)
 console.log('----------', VueSequence.BuildTime)
 import demo1 from './demo1.js'
 import demo2 from './demo2.js'
+import VueGtag from "vue-gtag";
+Vue.use(VueGtag, {
+  config: {
+    id: 'UA-1234567-1'
+  }
+})
+
 const store1 = VueSequence.Store(50)
 store1.state.code = demo1
 // store1.state.onLifelineMounted = function(vueComp, elm) {

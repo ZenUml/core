@@ -1,6 +1,3 @@
-import Vue from "vue";
-import VueGtag from 'vue-gtag'
-
 import _, {now} from 'lodash'
 import {RootContext, Participants, GroupContext, ParticipantContext} from './parser/index.js'
 
@@ -13,12 +10,6 @@ import './components/Cosmetic-blue.scss'
 import './components/Cosmetic-black-white.scss'
 import './components/theme-blue-river.scss'
 import {CodeRange} from './parser/CodeRange'
-
-Vue.use(VueGtag, {
-  config: {
-    id: 'UA-1234567-1'
-  }
-})
 
 let storeInitiationTime: number = 0
 setTimeout(function () {
