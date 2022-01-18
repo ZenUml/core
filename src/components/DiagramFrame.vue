@@ -44,6 +44,9 @@ export default {
   methods: {
     showTipsDialog() {
       this.$store.state.showTips = true;
+      this.$gtag.event('view', {
+        'event_category': 'help', 'event_label': 'tips dialog'
+      })
     }
   },
   components: {
