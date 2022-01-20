@@ -131,7 +131,7 @@ const Store = (debounce?: number) => {
           throw Error('You are using a old version of vue-sequence. New version requires {code, cursor}.')
         }
         commit('code', payload.code);
-        commit('cursor', payload.cursor);
+        // commit('cursor', payload.cursor);
         commit('setPosCal',new PositionCalculator(getters.participants.Names()))
       }, debounce || 1000),
       positionParticipant: ({getters, commit}: any, payload: any) => {

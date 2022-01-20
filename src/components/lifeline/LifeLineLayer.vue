@@ -57,10 +57,10 @@
       }
     },
     updated() {
-      this.increaseGeneration()
+      // this.increaseGeneration()
     },
     mounted() {
-      this.increaseGeneration()
+      // this.increaseGeneration()
     },
     components: {
       LifeLine,

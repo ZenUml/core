@@ -65,7 +65,7 @@
         this.participantNames().forEach(name => {
           firstInvocations[name] = this.firstInvocation(name)
         })
-        this.onMessageLayerMountedOrUpdated(firstInvocations);
+        // this.onMessageLayerMountedOrUpdated(firstInvocations);
       },
       firstInvocation (entity) {
         let messageLayerRect = this.$el.getBoundingClientRect()

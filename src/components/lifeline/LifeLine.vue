@@ -113,17 +113,17 @@ export default {
     }
   },
   mounted() {
-    this.onLifelinePositioned({
-      name: this.entity.name,
-      el: this.$el
-    })
-    this.onLifelineMounted(this, this.$vnode.elm);
+    // this.onLifelinePositioned({
+    //   name: this.entity.name,
+    //   el: this.$el
+    // })
+    // this.onLifelineMounted(this, this.$vnode.elm);
   },
   updated() {
-    this.onLifelinePositioned({
-      name: this.entity.name,
-      el: this.$el
-    })
+    // this.onLifelinePositioned({
+    //   name: this.entity.name,
+    //   el: this.$el
+    // })
   }
 }
 </script>
