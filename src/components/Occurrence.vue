@@ -24,7 +24,7 @@
       this.offset = this.$el.getBoundingClientRect()
       this.center = this.offset.left + this.offset.width / 2
       // update $store.participantPositions with the center of this occurrence
-      this.$store.commit('updateParticipantPosition', {
+      this.$store.dispatch('positionParticipant', {
         participant: this.participant,
         position: this.center,
       })

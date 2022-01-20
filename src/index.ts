@@ -22,7 +22,7 @@ const Store = (debounce?: number) => {
   storeInitiationTime = now()
   return {
     state: {
-      positionCalculator: new PositionCalculator(),
+      positionCalculator: null,
       participantPositions: new Map(),
       showTips: false,
       generation: 0,
@@ -39,6 +39,12 @@ const Store = (debounce?: number) => {
       }
     },
     getters: {
+      positionCalculator: (state: any, getters: any) => {
+        if (!state.positionCalculator && getters.participants && getters.participants.length) {
+          state.positionCalculator = new PositionCalculator(getters.participants)
+        }
+        return state.positionCalculator
+      },
       title: (state: any, getters: any) => {
         return getters.rootContext?.title()?.content()
       },
@@ -81,12 +87,9 @@ const Store = (debounce?: number) => {
       onElementClick: (state: any) => state.onElementClick
     },
     mutations: {
-      // update participantPositions only when new position is bigger than old one
-      updateParticipantPosition (state: any, payload: any) {
-        let obj = {}
-        // @ts-ignore
-        obj[payload.participant] = payload.position
-        state.positionCalculator.on(obj)
+      // set positionCalculator
+      setPositionCalculator (state: any, positionCalculator: any) {
+        state.positionCalculator = positionCalculator
       },
       increaseGeneration: function(state: any) {
         state.generation++
@@ -124,7 +127,16 @@ const Store = (debounce?: number) => {
         }
         context.commit('code', payload.code);
         context.commit('cursor', payload.cursor);
-      }, debounce || 1000)
+      }, debounce || 1000),
+      positionParticipant: ({getters, commit}: any, payload: any) => {
+        if (!getters.positionCalculator && getters.participants && getters.participants.Names().length) {
+          commit('setPositionCalculator',new PositionCalculator(getters.participants.Names()))
+        }
+        getters.positionCalculator?.on({
+          [payload.participant]: payload.position
+        })
+      },
+
     },
     // TODO: Enable strict for development?
     strict: false,

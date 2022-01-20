@@ -4,13 +4,23 @@ export default class PositionCalculator {
   DEFAULT_GAP = 50;
 
   constructor(orderedParticipants) {
-    this._orderedParticipants = orderedParticipants || [];
+    // if orderedParticipant is null or empty or not an array, throw error
+
+    if (!orderedParticipants || !orderedParticipants.length) {
+      throw new Error('orderedParticipants is null or empty');
+    }
+
+    this._orderedParticipants = orderedParticipants;
   }
 
   getRightMostPositionedParticipant(before = null) {
     // if before is not null, get the position of the participant with name 'before'
     let end = this._orderedParticipants.length;
-    if (before && this._orderedParticipants.includes(before)) {
+    if (before) {
+      // if before is not in the orderedParticipants array, throw error
+      if (!this._orderedParticipants.includes(before)) {
+        throw new Error(`${before} is not in the orderedParticipants array`);
+      }
       end = this._orderedParticipants.indexOf(before);
     }
     // iterate from end to the beginning and find the first one that is not undefined

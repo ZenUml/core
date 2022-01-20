@@ -2,18 +2,12 @@ import PositionCalculator from "../../../src/utils/position.calculator";
 
 // A.m B.m
 describe('Define order of participants', () => {
-  it('no pre declared participants', () => {
-    const positionCalculator = new PositionCalculator()
-    positionCalculator.on({
-      A: 1,
-    })
-    expect(positionCalculator.getRightMostPositionedParticipant('B')).toBe('A')
-    expect(positionCalculator.getPosition('A')).toEqual(1)
-    positionCalculator.on({
-      B: 1,
-    })
-    expect(positionCalculator.getPosition('B')).toEqual(51)
-  })
+  // expect exception if no orderParticipants is defined
+  it('should throw an exception if no orderParticipants is defined', () => {
+    expect(() => {
+      new PositionCalculator();
+    }).toThrow();
+  });
 
   it('get right most participant', () => {
     const orderedParticipants = ['A', 'B', 'C']
