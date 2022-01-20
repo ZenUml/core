@@ -10,6 +10,7 @@ import './components/Cosmetic-blue.scss'
 import './components/Cosmetic-black-white.scss'
 import './components/theme-blue-river.scss'
 import {CodeRange} from './parser/CodeRange'
+import PositionCalculator from './utils/position.calculator'
 
 let storeInitiationTime: number = 0
 setTimeout(function () {
@@ -21,6 +22,7 @@ const Store = (debounce?: number) => {
   storeInitiationTime = now()
   return {
     state: {
+      positionCalculator: new PositionCalculator(),
       participantPositions: new Map(),
       showTips: false,
       generation: 0,
@@ -81,10 +83,10 @@ const Store = (debounce?: number) => {
     mutations: {
       // update participantPositions only when new position is bigger than old one
       updateParticipantPosition (state: any, payload: any) {
-        const participantPosition = state.participantPositions.get(payload.participant);
-        if (!participantPosition || participantPosition < payload.position) {
-          state.participantPositions.set(payload.participant, payload.position)
-        }
+        let obj = {}
+        // @ts-ignore
+        obj[payload.participant] = payload.position
+        state.positionCalculator.on(obj)
       },
       increaseGeneration: function(state: any) {
         state.generation++
