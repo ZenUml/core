@@ -22,7 +22,7 @@ const Store = (debounce?: number) => {
   storeInitiationTime = now()
   return {
     state: {
-      positionCalculator: null,
+      posCal: null,
       participantPositions: new Map(),
       showTips: false,
       generation: 0,
@@ -39,11 +39,11 @@ const Store = (debounce?: number) => {
       }
     },
     getters: {
-      positionCalculator: (state: any, getters: any) => {
-        if (!state.positionCalculator && getters.participants && getters.participants.length) {
-          state.positionCalculator = new PositionCalculator(getters.participants)
+      posCal: (state: any, getters: any) => {
+        if (!state.posCal && getters.participants && getters.participants.length) {
+          state.posCal = new PositionCalculator(getters.participants)
         }
-        return state.positionCalculator
+        return state.posCal
       },
       title: (state: any, getters: any) => {
         return getters.rootContext?.title()?.content()
@@ -62,18 +62,23 @@ const Store = (debounce?: number) => {
         return Participants(getters.rootContext, true)
       },
       centerOf: (state: any) => (entity: any) => {
-        return state.lifeLineElementMap.get(entity) &&
-          (state.lifeLineElementMap.get(entity).offsetLeft + Math.floor(state.lifeLineElementMap.get(entity).offsetWidth / 2))
+        return state.posCal.getPosition(entity)
+        // return state.lifeLineElementMap.get(entity) &&
+        //   (state.lifeLineElementMap.get(entity).offsetLeft + Math.floor(state.lifeLineElementMap.get(entity).offsetWidth / 2))
       },
       leftOf: (state: any) => (entity: any) => {
-        return state.lifeLineElementMap.get(entity) && state.lifeLineElementMap.get(entity).offsetLeft
+        return state.posCal.getPosition(entity) - 10
+        // return state.lifeLineElementMap.get(entity) && state.lifeLineElementMap.get(entity).offsetLeft
       },
       rightOf: (state: any) => (entity: any) => {
-        return state.lifeLineElementMap.get(entity) &&
-          (state.lifeLineElementMap.get(entity).offsetLeft + state.lifeLineElementMap.get(entity).offsetWidth)
+        return state.posCal.getPosition(entity) + 10
+
+        // return state.lifeLineElementMap.get(entity) &&
+        //   (state.lifeLineElementMap.get(entity).offsetLeft + state.lifeLineElementMap.get(entity).offsetWidth)
       },
       widthOf: (state: any) => (entity: any) => {
-        return state.lifeLineElementMap.get(entity) && state.lifeLineElementMap.get(entity).offsetWidth
+        return 20
+        // return state.lifeLineElementMap.get(entity) && state.lifeLineElementMap.get(entity).offsetWidth
       },
       // deprecated, use distances that returns centerOf(to) - centerOf(from)
       distance: (state: any, getters: any) => (from: any, to: any) => {
@@ -87,9 +92,9 @@ const Store = (debounce?: number) => {
       onElementClick: (state: any) => state.onElementClick
     },
     mutations: {
-      // set positionCalculator
-      setPositionCalculator (state: any, positionCalculator: any) {
-        state.positionCalculator = positionCalculator
+      // set posCal
+      setPosCal (state: any, posCal: any) {
+        state.posCal = posCal
       },
       increaseGeneration: function(state: any) {
         state.generation++
@@ -127,10 +132,10 @@ const Store = (debounce?: number) => {
         }
         commit('code', payload.code);
         commit('cursor', payload.cursor);
-        commit('setPositionCalculator',new PositionCalculator(getters.participants.Names()))
+        commit('setPosCal',new PositionCalculator(getters.participants.Names()))
       }, debounce || 1000),
       positionParticipant: ({getters, commit}: any, payload: any) => {
-        getters.positionCalculator?.on({
+        getters.posCal?.on({
           [payload.participant]: payload.position
         })
       },
