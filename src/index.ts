@@ -121,17 +121,15 @@ const Store = (debounce?: number) => {
     actions: {
       // Why debounce is here instead of mutation 'code'?
       // Both code and cursor must be mutated together, especially during typing.
-      updateCode: _.debounce(function (context: any, payload: any) {
+      updateCode: _.debounce(function ({commit, getters}: any, payload: any) {
         if (typeof payload === 'string') {
           throw Error('You are using a old version of vue-sequence. New version requires {code, cursor}.')
         }
-        context.commit('code', payload.code);
-        context.commit('cursor', payload.cursor);
+        commit('code', payload.code);
+        commit('cursor', payload.cursor);
+        commit('setPositionCalculator',new PositionCalculator(getters.participants.Names()))
       }, debounce || 1000),
       positionParticipant: ({getters, commit}: any, payload: any) => {
-        if (!getters.positionCalculator && getters.participants && getters.participants.Names().length) {
-          commit('setPositionCalculator',new PositionCalculator(getters.participants.Names()))
-        }
         getters.positionCalculator?.on({
           [payload.participant]: payload.position
         })
