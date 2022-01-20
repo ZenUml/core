@@ -1,5 +1,5 @@
 <template>
-  <div class="occurrence">
+  <div class="occurrence" :data-belongs-to="participant" :data-x-offset="center">
     <block v-if="this.context.braceBlock()"
            :context="context.braceBlock().block()"
            :selfCallIndent="selfCallIndent"
@@ -10,9 +10,24 @@
 <script type="text/babel">
   export default {
     name: 'occurrence',
-    props: ['context', 'selfCallIndent'],
+    props: ['context', 'selfCallIndent', 'participant'],
+    data: function () {
+      return {
+        center: 0,
+      }
+    },
     beforeCreate: function () {
       this.$options.components.Block = require('./Block.vue').default
+    },
+    mounted() {
+      // get the offset position of the element
+      this.offset = this.$el.getBoundingClientRect()
+      this.center = this.offset.left + this.offset.width / 2
+      // update $store.participantPositions with the center of this occurrence
+      this.$store.commit('updateParticipantPosition', {
+        participant: this.participant,
+        position: this.center,
+      })
     }
   }
 </script>

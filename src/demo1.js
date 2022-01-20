@@ -9,5 +9,5 @@ export default `
 A.method() {
   B.method()
 }
-
+B.method()
 `

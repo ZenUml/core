@@ -21,6 +21,7 @@ const Store = (debounce?: number) => {
   storeInitiationTime = now()
   return {
     state: {
+      participantPositions: new Map(),
       showTips: false,
       generation: 0,
       lifeLineElementMap: new Map(),
@@ -78,6 +79,13 @@ const Store = (debounce?: number) => {
       onElementClick: (state: any) => state.onElementClick
     },
     mutations: {
+      // update participantPositions only when new position is bigger than old one
+      updateParticipantPosition (state: any, payload: any) {
+        const participantPosition = state.participantPositions.get(payload.participant);
+        if (!participantPosition || participantPosition < payload.position) {
+          state.participantPositions.set(payload.participant, payload.position)
+        }
+      },
       increaseGeneration: function(state: any) {
         state.generation++
       },
