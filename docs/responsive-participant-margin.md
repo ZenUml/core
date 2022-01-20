@@ -15,3 +15,9 @@ width of the message label. We only need to compare the scrollWidth and the widt
 Instead of rendering message layer based on lifeline's position, we render
 the lifelines based on message occurrence's positions.
 
+There is a problem of this strategy. If we pre-declare the order of the participants,
+ for example, `B A A.method()`, we have to render B on the left of A.
+
+So maybe, we could implement it in two rounds. First, we define the order of participants.
+Then we calculate the position of the lifelines based on the order.
+
