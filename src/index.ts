@@ -61,22 +61,22 @@ const Store = (debounce?: number) => {
       participants: (state: any, getters: any) => {
         return Participants(getters.rootContext, true)
       },
-      centerOf: (state: any) => (entity: any) => {
-        return state.posCal.getPosition(entity)
+      centerOf: (state: any, getters: any) => (entity: any) => {
+        return getters.posCal?.getPosition(entity) || 0
         // return state.lifeLineElementMap.get(entity) &&
         //   (state.lifeLineElementMap.get(entity).offsetLeft + Math.floor(state.lifeLineElementMap.get(entity).offsetWidth / 2))
       },
-      leftOf: (state: any) => (entity: any) => {
-        return state.posCal.getPosition(entity) - 10
+      leftOf: (state: any, getters: any) => (entity: any) => {
+        return getters.posCal?.getPosition(entity) - 10
         // return state.lifeLineElementMap.get(entity) && state.lifeLineElementMap.get(entity).offsetLeft
       },
-      rightOf: (state: any) => (entity: any) => {
-        return state.posCal.getPosition(entity) + 10
+      rightOf: (state: any, getters: any) => (entity: any) => {
+        return getters.posCal?.getPosition(entity) + 10
 
         // return state.lifeLineElementMap.get(entity) &&
         //   (state.lifeLineElementMap.get(entity).offsetLeft + state.lifeLineElementMap.get(entity).offsetWidth)
       },
-      widthOf: (state: any) => (entity: any) => {
+      widthOf: (state: any, getters: any) => (entity: any) => {
         return 20
         // return state.lifeLineElementMap.get(entity) && state.lifeLineElementMap.get(entity).offsetWidth
       },
