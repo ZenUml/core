@@ -7,5 +7,4 @@
 // Assignment
 export default `
 A.m
-A.m1
 `

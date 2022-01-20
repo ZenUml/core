@@ -1,5 +1,5 @@
 <template>
-  <div class="occurrence" :data-belongs-to="participant" :data-x-offset="center">
+  <div class="occurrence" :data-belongs-to="participant" :data-x-offset="center" :data-debug-center-of="computedCenter">
     <block v-if="this.context.braceBlock()"
            :context="context.braceBlock().block()"
            :selfCallIndent="selfCallIndent"
@@ -8,6 +8,8 @@
 </template>
 
 <script type="text/babel">
+import {mapGetters} from 'vuex'
+
   export default {
     name: 'occurrence',
     props: ['context', 'selfCallIndent', 'participant'],
@@ -16,18 +18,34 @@
         center: 0,
       }
     },
+    computed: {
+      ...mapGetters['centerOf'],
+      computedCenter: function () {
+        try {
+          return this.centerOf(this.participant)
+        } catch (e) {
+          return 0
+        }
+      },
+    },
     beforeCreate: function () {
       this.$options.components.Block = require('./Block.vue').default
     },
     mounted() {
-      // get the offset position of the element
-      this.offset = this.$el.getBoundingClientRect()
-      this.center = this.offset.left + this.offset.width / 2
-      // update $store.participantPositions with the center of this occurrence
-      this.$store.dispatch('positionParticipant', {
-        participant: this.participant,
-        position: this.center,
-      })
+      // if computed property through error, this.$el will be comment, like <!-- -->.
+      try {
+        // get the offset position of the element
+        this.offset = this.$el.getBoundingClientRect()
+        this.center = this.offset.left + this.offset.width / 2
+        // update $store.participantPositions with the center of this occurrence
+        this.$store.dispatch('positionParticipant', {
+          participant: this.participant,
+          position: this.center,
+        })
+
+      } catch (e) {
+        console.error(e)
+      }
     }
   }
 </script>
