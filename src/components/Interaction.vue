@@ -1,11 +1,11 @@
 <template>
-  <div class="interaction sync"
+  <div class="interaction sync inline-block"
        v-on:click.stop="onClick"
        v-on:mouseover.stop="mouseOver"
        v-on:mouseout.stop="mouseOut"
        :signature="signature"
        :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent, 'self': isSelf, 'hover': hover }"
-       :style="{width: interactionWidth + 'px', left: left + 'px', transform: 'translateX(' + translateX + 'px)'}">
+       :style="{left: left + 'px', transform: 'translateX(' + translateX + 'px)'}">
     <div v-if="showStarter && isRootBlock"
          :style="{transform: 'translateX(' + translateX * (-1) + 'px)'}"
          class="occurrence source"></div>
