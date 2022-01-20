@@ -13,17 +13,17 @@
 <script>
   Vue.use(Vuex);
   const VueSequence = window['vue-sequence'].VueSequence;
-  const store = VueSequence.Store();
-  store.state.code = `
+  const store = new Vuex.Store(VueSequence.Store());
+  store.dispatch('updateCode',{ code: `
   @EC2 BookService
   @DynamoDB BookRepository
-  BookService.saveBook() {
+  BookService.saveBook(1) {
     BookRepository.storeBook()
   }
-  `
+  `});
   new Vue({
     el: '#app',
-    store: new Vuex.Store(store),
+    store,
     render: h => h(VueSequence.DiagramFrame)
   });
 </script>
