@@ -8,7 +8,7 @@
 </template>
 
 <script type="text/babel">
-import {mapGetters} from 'vuex'
+import {mapState, mapGetters} from 'vuex'
 
   export default {
     name: 'occurrence',
@@ -19,11 +19,13 @@ import {mapGetters} from 'vuex'
       }
     },
     computed: {
-      ...mapGetters['centerOf'],
+      ...mapGetters(['centerOf', 'code']),
+      ...mapState(['code']),
       computedCenter: function () {
         try {
           return this.centerOf(this.participant)
         } catch (e) {
+          console.error(e)
           return 0
         }
       },
@@ -31,7 +33,8 @@ import {mapGetters} from 'vuex'
     beforeCreate: function () {
       this.$options.components.Block = require('./Block.vue').default
     },
-    mounted() {
+    mounted: function () {
+      console.debug('Occurrence mounted', this.participant)
       // if computed property through error, this.$el will be comment, like <!-- -->.
       try {
         // get the offset position of the element
@@ -46,7 +49,7 @@ import {mapGetters} from 'vuex'
       } catch (e) {
         console.error(e)
       }
-    }
+    },
   }
 </script>
 

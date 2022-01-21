@@ -22,6 +22,7 @@ const Store = (debounce?: number) => {
   storeInitiationTime = now()
   return {
     state: {
+      messageLayerLeft: 0,
       posCal: null,
       participantPositions: new Map(),
       showTips: false,
@@ -39,6 +40,7 @@ const Store = (debounce?: number) => {
       }
     },
     getters: {
+      messageLayerLeft: (state: any) => state.messageLayerLeft,
       posCal: (state: any, getters: any) => {
         if (!state.posCal && getters.participants && getters.participants.length) {
           state.posCal = new PositionCalculator(getters.participants)
@@ -92,6 +94,9 @@ const Store = (debounce?: number) => {
       onElementClick: (state: any) => state.onElementClick
     },
     mutations: {
+      setMessageLayerLeft(state: any, left: number) {
+        state.messageLayerLeft = left
+      },
       // set posCal
       setPosCal (state: any, posCal: any) {
         state.posCal = posCal

@@ -28,6 +28,11 @@
       },
     },
     mounted () {
+      console.debug('MessageLayer mounted')
+      let leftEdge = this.$el.getBoundingClientRect().left
+      // set messageLayerLeft in store
+      this.$store.commit('setMessageLayerLeft', leftEdge)
+      console.log('MessageLayer leftEdge', leftEdge)
       this.emitFirstInvocations()
       this.updateWidth()
     },
