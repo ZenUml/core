@@ -21,3 +21,9 @@ There is a problem of this strategy. If we pre-declare the order of the particip
 So maybe, we could implement it in two rounds. First, we define the order of participants.
 Then we calculate the position of the lifelines based on the order.
 
+Note that `mounted` is only called when we "mount" the element,
+not when we "move" or "relayout" the element.
+
+When we change the code, it may NOT trigger mounted. It may not even
+trigger the update of Occurrence.
+
