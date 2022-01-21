@@ -95,7 +95,6 @@ const Store = (debounce?: number) => {
         if (typeof payload === 'string') {
           throw Error('You are using a old version of vue-sequence. New version requires {code, cursor}.')
         }
-        commit('clearParticipantPositions')
         commit('code', payload.code);
         // commit('cursor', payload.cursor);
         commit('setPosCal',new PositionCalculator(getters.participants.Names()))
