@@ -27,3 +27,7 @@ not when we "move" or "relayout" the element.
 When we change the code, it may NOT trigger mounted. It may not even
 trigger the update of Occurrence.
 
+We cannot just clear the stored positions, because we will have no other chance
+to refresh the positions again. So another option is to refresh the positions
+when we after mounted and/or updated MessageLayer.
+
