@@ -104,11 +104,11 @@ const Store = (debounce?: number) => {
         // This actions shows how business logic is in action instead of mutation.
         const old = getters.posCal.getPosition(payload.participant)
         // skip if old position is same as new position
-        if (old === payload.position) return
+        if (old !== undefined && old === payload.position) return
         getters.posCal?.on({
           [payload.participant]: payload.position
         })
-        commit('participantPositionsTracker')
+        commit('participantPositionsTracker', payload)
       },
     },
     // TODO: Enable strict for development?

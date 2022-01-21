@@ -45,27 +45,26 @@ import {mapGetters, mapMutations, mapState} from 'vuex'
       // print out occurrence position recursively.
       const that = this
       function _recurse(node) {
+        if(node.attributes && node.attributes['data-el-type']?.nodeValue === 'occurrence') {
+          const participant = node.attributes['data-belongs-to'].nodeValue;
+          console.debug('Occurrence found for', participant)
+          try {
+            // get the offset position of the element
+            const offset = node.getBoundingClientRect()
+            const center = offset.left + offset.width / 2
+            // update $store.participantPositions with the center of this occurrence
+            that.$store.dispatch('positionParticipant', {
+              participant: participant,
+              position: center - that.messageLayerLeft,
+            })
+
+          } catch (e) {
+            console.error(e)
+          }
+
+        }
         if (node.children && node.children.length > 0) {
           node.children.forEach(_recurse)
-        } else {
-          if(node.attributes && node.attributes['data-el-type']?.nodeValue === 'occurrence') {
-            const participant = node.attributes['data-belongs-to'].nodeValue;
-            console.debug('Occurrence found for', participant)
-            try {
-              // get the offset position of the element
-              const offset = node.getBoundingClientRect()
-              const center = offset.left + offset.width / 2
-              // update $store.participantPositions with the center of this occurrence
-              that.$store.dispatch('positionParticipant', {
-                participant: participant,
-                position: center - that.messageLayerLeft,
-              })
-
-            } catch (e) {
-              console.error(e)
-            }
-
-          }
         }
       }
       _recurse(this.$el)
