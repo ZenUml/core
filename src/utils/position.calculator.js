@@ -40,7 +40,7 @@ export default class PositionCalculator {
     for (const paramKey in param) {
       // if _orderedParticipants does not contain paramKey, add it
       if (!this._orderedParticipants.includes(paramKey)) {
-        this._orderedParticipants.push(paramKey);
+        throw new Error(`${paramKey} is not in the orderedParticipants array`);
       }
       const rightMostPositionedParticipant = this.getRightMostPositionedParticipant(paramKey);
       if (rightMostPositionedParticipant) {
