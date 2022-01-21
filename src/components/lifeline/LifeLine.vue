@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import {mapGetters, mapMutations, mapState} from 'vuex'
+import {mapGetters, mapState} from 'vuex'
 
 const iconPath = {
   actor:      require('../../assets/actor.svg'),
@@ -119,23 +119,13 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['onLifelinePositioned']),
     onSelect() {
       this.$store.commit('onSelect', this.entity.name)
     }
   },
   mounted() {
-    // // get horizontal center of the $el
-    // const offset = this.$el.getBoundingClientRect()
-    // const center = offset.left + offset.width / 2
-    // console.log('lifeline mounted', this.entity.name, center)
-    // this.translateX = center - this.expectedPos
   },
   updated() {
-    // this.onLifelinePositioned({
-    //   name: this.entity.name,
-    //   el: this.$el
-    // })
   }
 }
 </script>

@@ -57,10 +57,8 @@
       }
     },
     updated() {
-      // this.increaseGeneration()
     },
     mounted() {
-      // this.increaseGeneration()
     },
     components: {
       LifeLine,
