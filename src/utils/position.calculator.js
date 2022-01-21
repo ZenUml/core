@@ -42,6 +42,10 @@ export default class PositionCalculator {
       if (!this._orderedParticipants.includes(paramKey)) {
         throw new Error(`${paramKey} is not in the orderedParticipants array`);
       }
+      // position is smaller than stored position ignore it
+      if (this.result[paramKey] !== undefined && param[paramKey] < this.result[paramKey]) {
+        continue;
+      }
       const rightMostPositionedParticipant = this.getRightMostPositionedParticipant(paramKey);
       if (rightMostPositionedParticipant) {
         if (param[paramKey] <= this.getPosition(rightMostPositionedParticipant)) {
