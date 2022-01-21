@@ -11,8 +11,6 @@ Vue.use(Vuex)
 Vue.config.productionTip = false
 
 /* eslint-disable */
-console.log('----------', VueSequence.Version)
-console.log('----------', VueSequence.BuildTime)
 Vue.use(VueGtag, {
   config: {
     id: 'UA-1234567-1'

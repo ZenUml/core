@@ -46,11 +46,9 @@ export default class PositionCalculator {
       if (rightMostPositionedParticipant) {
         if (param[paramKey] <= this.getPosition(rightMostPositionedParticipant)) {
           this.result[paramKey] = this.getPosition(rightMostPositionedParticipant) + this.DEFAULT_GAP;
-          console.log('applying 1', param)
           return
         }
       }
-      console.log('applying 2', param)
       this.result[paramKey] = param[paramKey]
     }
   }
