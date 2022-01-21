@@ -10,6 +10,11 @@ export default `A.m1 {
     B.m2
     if(y) {
       C.m3
+    } else {
+      D.m4
+      while(true) {
+        E.m5
+      }
     }
   }
 }`

@@ -1,7 +1,7 @@
 export default class PositionCalculator {
   _orderedParticipants;
   result = new Map();
-  DEFAULT_GAP = 50;
+  DEFAULT_GAP = 100;
 
   constructor(orderedParticipants) {
     // if orderedParticipant is null or empty or not an array, throw error
