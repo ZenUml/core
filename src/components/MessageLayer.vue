@@ -1,8 +1,6 @@
 <template>
   <div class="message-layer" :style="{'width': totalWidth + 'px'}">
-    <ul class="absolute -mt-24 flex w-screen">
-      <li v-for="p in positions" :key="p.key">{{p}}</li>
-    </ul>
+
     <block :context="context" :style="{'padding-left': paddingLeft + 'px'}"/>
   </div>
 </template>
@@ -23,15 +21,9 @@ import {mapGetters, mapMutations, mapState} from 'vuex'
     },
     computed: {
       ...mapGetters(['messageLayerLeft', 'participants', 'centerOf', 'rightOf',
-        'participantPositions']),
-      ...mapState(['participantPositionsTracker']),
-      positions() {
-        // If you have a computed property, but not using in the template, it will not
-        // trigger reactivity.
-        // If we do not use the tracker, it does not trigger reactivity either, because
-        // Map is not reactive.
-        return this.participantPositionsTracker && Array.from(this.participantPositions)
-      },
+        ]),
+      ...mapState([]),
+
       starter() {
         return this.participants?.Starter()?.name
       },
