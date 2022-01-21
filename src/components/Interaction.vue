@@ -6,6 +6,7 @@
        :signature="signature"
        :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent, 'self': isSelf, 'hover': hover }"
        :style="{width: interactionWidth > 0 ? interactionWidth + 'px' : 'auto', left: left + 'px', transform: 'translateX(' + translateX + 'px)'}">
+    {{participantPositionsTracker}}
     <div v-if="showStarter && isRootBlock"
          :style="{transform: 'translateX(' + translateX * (-1) + 'px)'}"
          class="occurrence source"></div>
@@ -24,7 +25,7 @@
   import Comment from './Comment.vue'
   import Occurrence from './Occurrence.vue'
   import Message from './Message'
-  import {mapGetters} from "vuex";
+  import {mapGetters, mapState} from "vuex";
   import InteractionMixin from './InteractionMixin'
   import SelfInvocation from './SelfInvocation'
   import {CodeRange} from '@/parser/CodeRange'
@@ -40,7 +41,9 @@
     props: ['context', 'comment', 'selfCallIndent', 'fragmentOffset'],
     mixins: [InteractionMixin],
     computed: {
+      // add tracker to the mapGetters
       ...mapGetters(['rootContext', 'participants', 'distance', 'distance2', 'centerOf', 'cursor', 'onElementClick']),
+      ...mapState(['participantPositionsTracker']),
       showStarter() {
         return this.participants.Starter().name !== '_STARTER_'
       },
@@ -57,7 +60,8 @@
         return this.isSelf ? (this.selfCallIndent || 0) + 6 : 0
       },
       interactionWidth: function () {
-        console.log('interactionWidth recalculated', this.from, this.to, this.distance(this.from, this.to))
+        // We have to add tracker here to enable reactivity. Not quite sure why.
+        console.log('interactionWidth recalculated', this.from, this.to, this.distance(this.from, this.to), this.participantPositionsTracker)
         if (this.context && this.isSelf) {
           return 0
         }
