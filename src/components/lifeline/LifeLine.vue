@@ -94,7 +94,7 @@ export default {
       return []
     },
     selected() {
-      return this.$store.state.selected.includes(this.entity.name)
+      return true
     },
     top() {
       if (this.firstInvocationIsCreation) {

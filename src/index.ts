@@ -25,19 +25,7 @@ const Store = (debounce?: number) => {
       messageLayerLeft: 0,
       posCal: null,
       participantPositions: new Map(),
-      showTips: false,
-      generation: 0,
-      lifeLineElementMap: new Map(),
-      firstInvocations: {},
       code: '',
-      events: [],
-      selected: [],
-      cursor: undefined,
-      // To be overridden by extensions
-      onLifelineMounted: () => {},
-      onElementClick: (codeRange: CodeRange) => {
-        console.log('Element clicked', codeRange)
-      }
     },
     getters: {
       messageLayerLeft: (state: any) => state.messageLayerLeft,
@@ -52,11 +40,8 @@ const Store = (debounce?: number) => {
       },
       GroupContext: () => GroupContext,
       ParticipantContext: () => ParticipantContext,
-      generation: (state: any) => state.generation,
-      // We are using getters to avoid hard coding module's name ($store.Store.state)
-      // in the components. Not sure if this is the best practice.
-      firstInvocations: (state: any) => state.firstInvocations,
-      cursor: (state: any) => state.cursor,
+      firstInvocations: (state: any) => 0,
+      cursor: (state: any) => 0,
       rootContext: (state: any) => {
         return RootContext(state.code)
       },
@@ -65,22 +50,15 @@ const Store = (debounce?: number) => {
       },
       centerOf: (state: any, getters: any) => (entity: any) => {
         return getters.posCal?.getPosition(entity) || 0
-        // return state.lifeLineElementMap.get(entity) &&
-        //   (state.lifeLineElementMap.get(entity).offsetLeft + Math.floor(state.lifeLineElementMap.get(entity).offsetWidth / 2))
       },
       leftOf: (state: any, getters: any) => (entity: any) => {
         return getters.posCal?.getPosition(entity) - 10
-        // return state.lifeLineElementMap.get(entity) && state.lifeLineElementMap.get(entity).offsetLeft
       },
       rightOf: (state: any, getters: any) => (entity: any) => {
         return getters.posCal?.getPosition(entity) + 10
-
-        // return state.lifeLineElementMap.get(entity) &&
-        //   (state.lifeLineElementMap.get(entity).offsetLeft + state.lifeLineElementMap.get(entity).offsetWidth)
       },
       widthOf: (state: any, getters: any) => (entity: any) => {
         return 20
-        // return state.lifeLineElementMap.get(entity) && state.lifeLineElementMap.get(entity).offsetWidth
       },
       // deprecated, use distances that returns centerOf(to) - centerOf(from)
       distance: (state: any, getters: any) => (from: any, to: any) => {
@@ -90,8 +68,6 @@ const Store = (debounce?: number) => {
         if (!from || !to) return 0
         return getters.centerOf(to) - getters.centerOf(from)
       },
-      onLifelineMounted: (state: any) => state.onLifelineMounted,
-      onElementClick: (state: any) => state.onElementClick
     },
     mutations: {
       setMessageLayerLeft(state: any, left: number) {
@@ -101,32 +77,10 @@ const Store = (debounce?: number) => {
       setPosCal (state: any, posCal: any) {
         state.posCal = posCal
       },
-      increaseGeneration: function(state: any) {
-        state.generation++
-      },
       code: function (state: any, payload: any) {
         state.code = payload;
         state.generation++;
       },
-      cursor: function (state: any, payload: any) {
-        state.cursor = payload;
-      },
-      event: function (state: any, payload: any) {
-        state.events.push(payload)
-      },
-      onLifelinePositioned: function(state: any, payload: any) {
-        state.lifeLineElementMap.set(payload.name, payload.el)
-      },
-      onMessageLayerMountedOrUpdated: function (state: any, payload: any) {
-        state.firstInvocations = payload
-      },
-      onSelect: function (state: any, payload: any) {
-        if (state.selected.includes(payload)) {
-          state.selected = state.selected.filter((p: any) => p !== payload)
-        } else {
-          state.selected.push(payload)
-        }
-      }
     },
     actions: {
       // Why debounce is here instead of mutation 'code'?
@@ -144,7 +98,6 @@ const Store = (debounce?: number) => {
           [payload.participant]: payload.position
         })
       },
-
     },
     // TODO: Enable strict for development?
     strict: false,

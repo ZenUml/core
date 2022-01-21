@@ -19,7 +19,7 @@ import {mapState, mapGetters} from 'vuex'
       }
     },
     computed: {
-      ...mapGetters(['centerOf', 'code']),
+      ...mapGetters(['centerOf', 'messageLayerLeft']),
       ...mapState(['code']),
       computedCenter: function () {
         try {
@@ -43,7 +43,7 @@ import {mapState, mapGetters} from 'vuex'
         // update $store.participantPositions with the center of this occurrence
         this.$store.dispatch('positionParticipant', {
           participant: this.participant,
-          position: this.center,
+          position: this.center - this.messageLayerLeft,
         })
 
       } catch (e) {
