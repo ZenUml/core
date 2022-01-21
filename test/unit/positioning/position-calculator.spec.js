@@ -91,4 +91,15 @@ describe('Define order of participants', () => {
     })
     expect(positionCalculator.getPosition('B')).toEqual(150)
   })
+
+  // A.longMethodName
+  // B.short
+  it('produces a result (to be used in store)', () => {
+    const orderedParticipants = ['A', 'B']
+    const positionCalculator = new PositionCalculator(orderedParticipants);
+    positionCalculator.on({
+      A: 100
+    })
+    expect(positionCalculator.result.get('A')).toEqual(100)
+  })
 })
