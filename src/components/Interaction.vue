@@ -57,6 +57,7 @@
         return this.isSelf ? (this.selfCallIndent || 0) + 6 : 0
       },
       interactionWidth: function () {
+        console.log('interactionWidth recalculated', this.from, this.to, this.distance(this.from, this.to))
         if (this.context && this.isSelf) {
           return 0
         }
@@ -94,6 +95,10 @@
       mouseOut() {
         this.hover = false
       }
+    },
+    updated() {
+      // When we update code (e.g. from A.m to A.m1) this interaction gets updated.
+      console.log('Interaction updated')
     },
     components: {
       Message,

@@ -25,9 +25,13 @@ const Store = (debounce?: number) => {
       messageLayerLeft: 0,
       posCal: null,
       participantPositions: new Map(),
+      // Map is not observable. See https://github.com/vuejs/vue/issues/2410
+      participantPositionsTracker: 0,
       code: '',
     },
     getters: {
+      // get participantPositions
+      participantPositions: (state: any) => state.participantPositions,
       messageLayerLeft: (state: any) => state.messageLayerLeft,
       posCal: (state: any, getters: any) => {
         if (!state.posCal && getters.participants && getters.participants.length) {
@@ -79,6 +83,10 @@ const Store = (debounce?: number) => {
       },
       // set participantPositions
       setParticipantPositions (state: any, payload: any) {
+        // update the tracker if saved position is different from payload
+        if (state.participantPositions.get(payload.participant) !== payload.position) {
+          state.participantPositionsTracker++
+        }
         state.participantPositions.set(payload.participant, payload.position)
       },
       code: function (state: any, payload: any) {

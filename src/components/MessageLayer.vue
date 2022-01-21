@@ -1,11 +1,14 @@
 <template>
   <div class="message-layer" :style="{'width': totalWidth + 'px'}">
+    <ul class="absolute -mt-24 flex w-screen">
+      <li v-for="p in positions" :key="p.key">{{p}}</li>
+    </ul>
     <block :context="context" :style="{'padding-left': paddingLeft + 'px'}"/>
   </div>
 </template>
 
 <script>
-  import {mapGetters, mapMutations} from 'vuex'
+import {mapGetters, mapMutations, mapState} from 'vuex'
   import Block from './Block'
 
   export default {
@@ -19,7 +22,16 @@
       }
     },
     computed: {
-      ...mapGetters(['participants', 'centerOf', 'rightOf']),
+      ...mapGetters(['messageLayerLeft', 'participants', 'centerOf', 'rightOf',
+        'participantPositions']),
+      ...mapState(['participantPositionsTracker']),
+      positions() {
+        // If you have a computed property, but not using in the template, it will not
+        // trigger reactivity.
+        // If we do not use the tracker, it does not trigger reactivity either, because
+        // Map is not reactive.
+        return this.participantPositionsTracker && Array.from(this.participantPositions)
+      },
       starter() {
         return this.participants?.Starter()?.name
       },
@@ -37,6 +49,34 @@
       this.updateWidth()
     },
     updated () {
+      console.log('MessageLayer updated')
+      // print out occurrence position recursively.
+      const that = this
+      function _recurse(node) {
+        if (node.children && node.children.length > 0) {
+          node.children.forEach(_recurse)
+        } else {
+          if(node.attributes && node.attributes['data-el-type']?.nodeValue === 'occurrence') {
+            const participant = node.attributes['data-belongs-to'].nodeValue;
+            console.debug('Occurrence found for', participant)
+            try {
+              // get the offset position of the element
+              const offset = node.getBoundingClientRect()
+              const center = offset.left + offset.width / 2
+              // update $store.participantPositions with the center of this occurrence
+              that.$store.dispatch('positionParticipant', {
+                participant: participant,
+                position: center - that.messageLayerLeft,
+              })
+
+            } catch (e) {
+              console.error(e)
+            }
+
+          }
+        }
+      }
+      _recurse(this.$el)
       // We do not need to call the following two methods here
       // because mounted will be invoked every time when we change code
       // this.emitFirstInvocations()
