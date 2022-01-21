@@ -48,7 +48,7 @@ export default class PositionCalculator {
       }
       const rightMostPositionedParticipant = this.getRightMostPositionedParticipant(paramKey);
       if (rightMostPositionedParticipant) {
-        if (param[paramKey] <= this.getPosition(rightMostPositionedParticipant)) {
+        if (param[paramKey] <= this.getPosition(rightMostPositionedParticipant) + this.DEFAULT_GAP) {
           this.result.set(paramKey, this.getPosition(rightMostPositionedParticipant) + this.DEFAULT_GAP);
           return
         }

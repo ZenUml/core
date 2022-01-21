@@ -34,6 +34,19 @@ describe('Define order of participants', () => {
     expect(positionCalculator.getPosition('B')).toEqual(200)
   })
 
+  it('Minimum gap is 50', () => {
+    const orderedParticipants = ['A', 'B']
+    const positionCalculator = new PositionCalculator(orderedParticipants);
+    positionCalculator.on({
+      A: 100
+    })
+    expect(positionCalculator.getPosition('A')).toEqual(100)
+    positionCalculator.on({
+      B: 101
+    })
+    expect(positionCalculator.getPosition('B')).toEqual(150)
+  })
+
   it('Push a single participant to the right', () => {
     const orderedParticipants = ['A', 'B']
     const positionCalculator = new PositionCalculator(orderedParticipants);
