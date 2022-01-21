@@ -77,9 +77,12 @@ const Store = (debounce?: number) => {
       setPosCal (state: any, posCal: any) {
         state.posCal = posCal
       },
+      // set participantPositions
+      setParticipantPositions (state: any, payload: any) {
+        state.participantPositions.set(payload.participant, payload.position)
+      },
       code: function (state: any, payload: any) {
         state.code = payload;
-        state.generation++;
       },
     },
     actions: {
@@ -96,6 +99,11 @@ const Store = (debounce?: number) => {
       positionParticipant: ({getters, commit}: any, payload: any) => {
         getters.posCal?.on({
           [payload.participant]: payload.position
+        })
+        // set participant position
+        commit('setParticipantPositions', {
+          participant: payload.participant,
+          position: getters.posCal.getPosition(payload.participant)
         })
       },
     },
