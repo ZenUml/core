@@ -1,8 +1,8 @@
 <template>
   <div  :id="entity.name"
-        class="lifeline absolute mx-2"
+        class="lifeline absolute mx-2 transform -translate-x-1/2 h-full"
         :class="classes"
-        :style="{'paddingTop': top + 'px', left: expectedPos + 'px', transform: 'translateX(-50%)', height: '100%'} ">
+        :style="{'paddingTop': top + 'px', left: expectedPos + 'px'} ">
     <div class="relative participant flex flex-col justify-center z-10"
          :class="{'selected': selected, 'border-transparent': !!icon}" @click="onSelect">
       <img v-if="!!icon" :src="icon" class="absolute left-1/2 transform -translate-x-1/2 -translate-y-full h-8" :alt="`icon for ${entity.name}`">

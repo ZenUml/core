@@ -55,7 +55,7 @@ import {mapGetters, mapMutations, mapState} from 'vuex'
             // update $store.participantPositions with the center of this occurrence
             that.$store.dispatch('positionParticipant', {
               participant: participant,
-              position: center - that.messageLayerLeft,
+              position: Math.floor(center - that.messageLayerLeft),
             })
 
           } catch (e) {
