@@ -2,7 +2,7 @@
   <div  :id="entity.name"
         class="lifeline absolute mx-2"
         :class="classes"
-        :style="{'paddingTop': top + 'px', left: expectedPos + 'px', transform: 'translateX(-50%)'} ">
+        :style="{'paddingTop': top + 'px', left: expectedPos + 'px', transform: 'translateX(-50%)', height: '100%'} ">
     <div class="relative participant flex flex-col justify-center z-10"
          :class="{'selected': selected, 'border-transparent': !!icon}" @click="onSelect">
       <img v-if="!!icon" :src="icon" class="absolute left-1/2 transform -translate-x-1/2 -translate-y-full h-8" :alt="`icon for ${entity.name}`">
@@ -94,7 +94,7 @@ export default {
 
     expectedPos() {
       console.log('expectedPos calculated', this.participantPositionsTracker)
-      return this.posCal.getPosition(this.entity.name)
+      return this.posCal.getPosition(this.entity.name) - 8
     },
     icon() {
       return iconPath[this.entity.type?.toLowerCase()]
