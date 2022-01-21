@@ -1,13 +1,14 @@
 <template>
   <div  :id="entity.name"
-        class="lifeline flex flex-col mx-2"
+        class="lifeline absolute mx-2"
         :class="classes"
-        :style="{'paddingTop': top + 'px'} ">
+        :style="{'paddingTop': top + 'px', left: expectedPos + 'px', transform: 'translateX(-50%)'} ">
     <div class="relative participant flex flex-col justify-center z-10"
          :class="{'selected': selected, 'border-transparent': !!icon}" @click="onSelect">
       <img v-if="!!icon" :src="icon" class="absolute left-1/2 transform -translate-x-1/2 -translate-y-full h-8" :alt="`icon for ${entity.name}`">
       <!-- Put in a div to give it a fixed height, because stereotype is dynamic. -->
       <div class="h-5 flex flex-col justify-center">
+        {{expectedPos}}
         <label class="interface" v-if="entity.stereotype">«{{ entity.stereotype }}»</label>
         <label class="name">{{ entity.label || entity.name }}</label>
       </div>
@@ -17,7 +18,7 @@
 </template>
 
 <script>
-import {mapGetters, mapMutations} from 'vuex'
+import {mapGetters, mapMutations, mapState} from 'vuex'
 
 const iconPath = {
   actor:      require('../../assets/actor.svg'),
@@ -82,8 +83,19 @@ const iconPath = {
 export default {
   name: 'life-line',
   props: ['entity', 'context'],
+  data: () => {
+    return {
+      translateX: 0
+    }
+  },
   computed: {
-    ...mapGetters(['firstInvocations', 'onLifelineMounted']),
+    ...mapGetters(['firstInvocations', 'onLifelineMounted', 'posCal']),
+    ...mapState(['participantPositionsTracker']),
+
+    expectedPos() {
+      console.log('expectedPos calculated', this.participantPositionsTracker)
+      return this.posCal.getPosition(this.entity.name)
+    },
     icon() {
       return iconPath[this.entity.type?.toLowerCase()]
     },
@@ -113,11 +125,11 @@ export default {
     }
   },
   mounted() {
-    // this.onLifelinePositioned({
-    //   name: this.entity.name,
-    //   el: this.$el
-    // })
-    // this.onLifelineMounted(this, this.$vnode.elm);
+    // // get horizontal center of the $el
+    // const offset = this.$el.getBoundingClientRect()
+    // const center = offset.left + offset.width / 2
+    // console.log('lifeline mounted', this.entity.name, center)
+    // this.translateX = center - this.expectedPos
   },
   updated() {
     // this.onLifelinePositioned({

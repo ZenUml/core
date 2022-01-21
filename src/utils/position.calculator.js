@@ -5,7 +5,6 @@ export default class PositionCalculator {
 
   constructor(orderedParticipants) {
     // if orderedParticipant is null or empty or not an array, throw error
-
     if (!orderedParticipants || !orderedParticipants.length) {
       throw new Error('orderedParticipants is null or empty');
     }

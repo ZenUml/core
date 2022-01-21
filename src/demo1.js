@@ -7,13 +7,13 @@
 // Assignment
 export default `A.m1 {
   if(x) {
-    B.m2
+    B.m200000000000000000000
     if(y) {
       C.m3
     } else {
       D.m4
       while(true) {
-        E.m5
+        E.m512345678
       }
     }
   }

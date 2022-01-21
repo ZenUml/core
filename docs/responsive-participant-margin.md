@@ -31,3 +31,6 @@ We cannot just clear the stored positions, because we will have no other chance
 to refresh the positions again. So another option is to refresh the positions
 when we after mounted and/or updated MessageLayer.
 
+It looks promising now. The current challenge is to render lifelines
+according to the positions of participants. A particularly interesting part
+is participant group. We may need to render it on a different layer.
