@@ -1,7 +1,7 @@
 <template>
   <!-- pb-8 is to offset pt-8 in SeqDiagram component -->
   <div class="frame relative pb-8">
-    <ul class="absolute -mt-24 flex w-screen">
+    <ul class="absolute flex w-screen">
       <li v-for="p in positions" :key="p.key">{{p}}</li>
     </ul>
     <div class="header flex">
