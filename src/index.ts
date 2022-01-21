@@ -24,14 +24,13 @@ const Store = (debounce?: number) => {
     state: {
       messageLayerLeft: 0,
       posCal: null,
-      participantPositions: new Map(),
       // Map is not observable. See https://github.com/vuejs/vue/issues/2410
       participantPositionsTracker: 0,
       code: '',
     },
     getters: {
       // get participantPositions
-      participantPositions: (state: any) => state.participantPositions,
+      participantPositions: (state: any) => state.posCal.result,
       messageLayerLeft: (state: any) => state.messageLayerLeft,
       posCal: (state: any, getters: any) => {
         if (!state.posCal && getters.participants && getters.participants.length) {
@@ -74,9 +73,9 @@ const Store = (debounce?: number) => {
       },
     },
     mutations: {
-      // clear participantPositions
-      clearParticipantPositions: (state: any) => {
-        state.participantPositions = new Map()
+      // increase participantPositionsTracker
+      participantPositionsTracker: (state: any) => {
+        state.participantPositionsTracker++
       },
       setMessageLayerLeft(state: any, left: number) {
         state.messageLayerLeft = left
@@ -84,14 +83,6 @@ const Store = (debounce?: number) => {
       // set posCal
       setPosCal (state: any, posCal: any) {
         state.posCal = posCal
-      },
-      // set participantPositions
-      setParticipantPositions (state: any, payload: any) {
-        // update the tracker if saved position is different from payload
-        if (state.participantPositions.get(payload.participant) !== payload.position) {
-          state.participantPositionsTracker++
-        }
-        state.participantPositions.set(payload.participant, payload.position)
       },
       code: function (state: any, payload: any) {
         state.code = payload;
@@ -110,14 +101,14 @@ const Store = (debounce?: number) => {
         commit('setPosCal',new PositionCalculator(getters.participants.Names()))
       }, debounce || 1000),
       positionParticipant: ({getters, commit}: any, payload: any) => {
+        // This actions shows how business logic is in action instead of mutation.
+        const old = getters.posCal.getPosition(payload.participant)
+        // skip if old position is same as new position
+        if (old === payload.position) return
         getters.posCal?.on({
           [payload.participant]: payload.position
         })
-        // set participant position
-        commit('setParticipantPositions', {
-          participant: payload.participant,
-          position: getters.posCal.getPosition(payload.participant)
-        })
+        commit('participantPositionsTracker')
       },
     },
     // TODO: Enable strict for development?
