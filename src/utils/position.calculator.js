@@ -9,7 +9,6 @@ export default class PositionCalculator {
     if (!orderedParticipants || !orderedParticipants.length) {
       throw new Error('orderedParticipants is null or empty');
     }
-    console.log('orderedParticipants', orderedParticipants);
     this._orderedParticipants = orderedParticipants;
   }
 
