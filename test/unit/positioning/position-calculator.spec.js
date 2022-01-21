@@ -60,6 +60,23 @@ describe('Define order of participants', () => {
     expect(positionCalculator.getPosition('A')).toEqual(100)
   })
 
+  it('When pushing one to the right, push all siblings on the right', () => {
+    const orderedParticipants = ['A', 'B']
+    const positionCalculator = new PositionCalculator(orderedParticipants);
+    positionCalculator.on({
+      A: 100,
+      B: 200
+    })
+    expect(positionCalculator.getPosition('A')).toEqual(100)
+    expect(positionCalculator.getPosition('B')).toEqual(200)
+    positionCalculator.on({
+      A: 150
+    })
+    expect(positionCalculator.getPosition('A')).toEqual(150)
+    expect(positionCalculator.getPosition('B')).toEqual(250)
+  })
+
+
   // A.longMethodName
   // B.short
   it('given order A, B, but events say differently', () => {

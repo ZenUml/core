@@ -53,6 +53,13 @@ export default class PositionCalculator {
           return
         }
       }
+      if (this.result[paramKey] !== undefined && param[paramKey] > this.result[paramKey]) {
+        const offset = param[paramKey] - this.result[paramKey];
+        const index = this._orderedParticipants.indexOf(paramKey);
+        for (let i = index + 1; i < this._orderedParticipants.length; i++) {
+          this.result[this._orderedParticipants[i]] += offset;
+        }
+      }
       this.result[paramKey] = param[paramKey]
     }
   }
