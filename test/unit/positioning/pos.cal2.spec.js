@@ -15,15 +15,22 @@ class PosCal2 {
     // filter participants index < index
     const participantsBefore = this._participants.filter((p, i) => i <= index);
     // sum all gaps
-    return participantsBefore.reduce((sum, p, i) => {
-      if (i === 0) {
-        return sum + Math.max(p.gap, (p.width / 2) + (this.MARGIN / 2), this.MINI_GAP);
-      }
-      // get previous participant
-      const prevParticipant = participantsBefore[i - 1];
-
-      return sum + Math.max(p.gap, ((prevParticipant.width/2) + (p.width /2) + this.MARGIN), this.MINI_GAP);
+    return participantsBefore.reduce((sum, participant, i) => {
+      const prev = participantsBefore[i - 1];
+      return sum + this.calculateGap(participant, prev);
     }, 0)
+  }
+
+  calculateGap(participant, prev) {
+    return Math.max(participant.gap, this.half(prev) + this.half(participant), this.MINI_GAP);
+  }
+
+  half(participant) {
+    if (participant) {
+      // get previous participant
+      return (participant.width / 2) + (this.MARGIN / 2);
+    }
+    return 0;
   }
 }
 
@@ -49,10 +56,12 @@ describe('cal', () => {
     const posCal2 = new PosCal2([
       {participant: 'A', gap:10, width: 200 },
       {participant: 'B', gap:10, width: 200 },
+      {participant: 'C', gap:10, width: 200 },
     ]);
 
     expect(posCal2.getPosition('A')).toBe(110)
     expect(posCal2.getPosition('B')).toBe(330)
+    expect(posCal2.getPosition('C')).toBe(550)
   })
 
   // A: 100, B: 200, C: 350
