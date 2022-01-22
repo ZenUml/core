@@ -3,6 +3,7 @@
 // delta {a: {g: 110, w: 120} =>
 class PosCal2 {
   _participants;
+  MINI_GAP = 100;
   constructor(participants) {
     this._participants = participants;
   }
@@ -15,12 +16,12 @@ class PosCal2 {
     // sum all gaps
     return participantsBefore.reduce((sum, p, i) => {
       if (i === 0) {
-        return sum + Math.max(p.gap, (p.width / 2));
+        return sum + Math.max(p.gap, (p.width / 2), this.MINI_GAP);
       }
       // get previous participant
       const prevParticipant = participantsBefore[i - 1];
 
-      return sum + Math.max(p.gap, ((prevParticipant.width/2) + (p.width /2)))
+      return sum + Math.max(p.gap, ((prevParticipant.width/2) + (p.width /2)), this.MINI_GAP);
     }, 0)
   }
 }
@@ -43,7 +44,7 @@ describe('cal', () => {
     expect(posCal2.getPosition('C')).toBe(350)
   })
   // A: 100, B: 200, C: 350
-  it('produce position of participant', () => {
+  it('produce position of participant - consdier width', () => {
     const posCal2 = new PosCal2([
       {participant: 'A', gap:10, width: 200 },
       {participant: 'B', gap:10, width: 200 },
@@ -51,5 +52,16 @@ describe('cal', () => {
 
     expect(posCal2.getPosition('A')).toBe(100)
     expect(posCal2.getPosition('B')).toBe(300)
+  })
+
+  // A: 100, B: 200, C: 350
+  it('produce position of participant - ensure MINI_GAP', () => {
+    const posCal2 = new PosCal2([
+      {participant: 'A', gap:10, width: 20 },
+      {participant: 'B', gap:10, width: 20 },
+    ]);
+
+    expect(posCal2.getPosition('A')).toBe(100)
+    expect(posCal2.getPosition('B')).toBe(200)
   })
 })
