@@ -34,3 +34,10 @@ when we after mounted and/or updated MessageLayer.
 It looks promising now. The current challenge is to render lifelines
 according to the positions of participants. A particularly interesting part
 is participant group. We may need to render it on a different layer.
+
+Strategy B relies on the browser's behavior on 'width: auto'. So we need
+to know when we should set it as auto. Pre-assign positions is in conflict
+of this approach, unless we could tell whether it is pre-assigned or not.
+
+What if we always set interaction width to auto first and then update according
+to calculated positions?

@@ -68,6 +68,7 @@ import {mapGetters, mapMutations, mapState} from 'vuex'
         }
       }
       _recurse(this.$el)
+      this.$store.commit('setPositioned', true)
       // We do not need to call the following two methods here
       // because mounted will be invoked every time when we change code
       // this.emitFirstInvocations()

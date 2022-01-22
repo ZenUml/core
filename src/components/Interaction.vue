@@ -5,7 +5,7 @@
        v-on:mouseout.stop="mouseOut"
        :signature="signature"
        :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent, 'self': isSelf, 'hover': hover }"
-       :style="{width: interactionWidth > 0 ? interactionWidth + 'px' : 'auto', left: left + 'px', transform: 'translateX(' + translateX + 'px)'}">
+       :style="{width: positioned ? interactionWidth + 'px' : 'auto', left: left + 'px', transform: 'translateX(' + translateX + 'px)'}">
     {{participantPositionsTracker}}
     <div v-if="showStarter && isRootBlock"
          :style="{transform: 'translateX(' + translateX * (-1) + 'px)'}"
@@ -43,7 +43,7 @@
     computed: {
       // add tracker to the mapGetters
       ...mapGetters(['rootContext', 'participants', 'distance', 'distance2', 'centerOf', 'cursor', 'onElementClick']),
-      ...mapState(['participantPositionsTracker']),
+      ...mapState(['participantPositionsTracker', 'positioned']),
       showStarter() {
         return this.participants.Starter().name !== '_STARTER_'
       },

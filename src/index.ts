@@ -10,6 +10,7 @@ import './components/Cosmetic-blue.scss'
 import './components/Cosmetic-black-white.scss'
 import './components/theme-blue-river.scss'
 import {CodeRange} from './parser/CodeRange'
+// @ts-ignore
 import PositionCalculator from './utils/position.calculator'
 
 let storeInitiationTime: number = 0
@@ -26,6 +27,8 @@ const Store = (debounce?: number) => {
       posCal: null,
       // Map is not observable. See https://github.com/vuejs/vue/issues/2410
       participantPositionsTracker: 0,
+      // TODO: it may be able to replace the tracker
+      positioned: false,
       code: '',
     },
     getters: {
@@ -73,6 +76,10 @@ const Store = (debounce?: number) => {
       },
     },
     mutations: {
+      // set positioned
+      setPositioned: (state: any, value: any) => {
+        state.positioned = value
+      },
       // increase participantPositionsTracker
       participantPositionsTracker: (state: any) => {
         state.participantPositionsTracker++
@@ -95,6 +102,7 @@ const Store = (debounce?: number) => {
         if (typeof payload === 'string') {
           throw Error('You are using a old version of vue-sequence. New version requires {code, cursor}.')
         }
+        commit('setPositioned', false)
         commit('code', payload.code);
         // commit('cursor', payload.cursor);
         commit('setPosCal',new PositionCalculator(getters.participants.Names()))

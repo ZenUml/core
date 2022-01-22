@@ -94,7 +94,7 @@ export default {
 
     expectedPos() {
       console.log('expectedPos calculated', this.participantPositionsTracker)
-      return this.posCal.getPosition(this.entity.name) - 8
+      return this.posCal?.getPosition(this.entity.name) - 8
     },
     icon() {
       return iconPath[this.entity.type?.toLowerCase()]
