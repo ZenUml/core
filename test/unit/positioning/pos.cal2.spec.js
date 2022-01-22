@@ -13,7 +13,15 @@ class PosCal2 {
     // filter participants index < index
     const participantsBefore = this._participants.filter((p, i) => i <= index);
     // sum all gaps
-    return participantsBefore.reduce((sum, p) => sum + p.gap, 0)
+    return participantsBefore.reduce((sum, p, i) => {
+      if (i === 0) {
+        return sum + Math.max(p.gap, (p.width / 2));
+      }
+      // get previous participant
+      const prevParticipant = participantsBefore[i - 1];
+
+      return sum + Math.max(p.gap, ((prevParticipant.width/2) + (p.width /2)))
+    }, 0)
   }
 }
 
@@ -25,13 +33,23 @@ describe('cal', () => {
 
   it('produce position of participant', () => {
     const posCal2 = new PosCal2([
-      {participant: 'A', gap:100, width: 250 },
-      {participant: 'B', gap:100, width: 120 },
-      {participant: 'C', gap:150, width: 200}
+      {participant: 'A', gap:100, width: 10 },
+      {participant: 'B', gap:100, width: 10 },
+      {participant: 'C', gap:150, width: 10}
     ]);
 
     expect(posCal2.getPosition('A')).toBe(100)
     expect(posCal2.getPosition('B')).toBe(200)
     expect(posCal2.getPosition('C')).toBe(350)
+  })
+  // A: 100, B: 200, C: 350
+  it('produce position of participant', () => {
+    const posCal2 = new PosCal2([
+      {participant: 'A', gap:10, width: 200 },
+      {participant: 'B', gap:10, width: 200 },
+    ]);
+
+    expect(posCal2.getPosition('A')).toBe(100)
+    expect(posCal2.getPosition('B')).toBe(300)
   })
 })
