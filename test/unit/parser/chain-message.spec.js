@@ -2,8 +2,7 @@ let seqDsl = require('../../../src/parser/index');
 
 function getRootMethodSignature(rootContext) {
     return rootContext.block().stat()[0]
-        .message().messageBody().func()
-        .signature().map(s => s.getTextWithoutQuotes()).join('.');
+        .message().SignatureText();
 }
 
 test('chain method', () => {

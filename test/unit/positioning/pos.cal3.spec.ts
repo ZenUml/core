@@ -29,7 +29,7 @@ class MessageCollector extends sequenceParserListener.sequenceParserListener {
   enterMessage (ctx: any) {
     console.log('enterMessage: from', ctx.parentCtx?.Origin());
     console.log('enterMessage: to', ctx.Owner());
-    console.log('enterMessage: content', ctx.messageBody().func().signature().map((s: any) => s.getTextWithoutQuotes()).join('.'));
+    console.log('enterMessage: content', ctx.SignatureText());
   }
 }
 
