@@ -11,7 +11,7 @@ interface IPosition {
 // An ownable message can be assigned to a `target` participant.
 interface IOwnableMessage {
   from: string;
-  content: string;
+  signature: string;
 }
 
 interface ICoordinate {
@@ -22,53 +22,48 @@ interface ICoordinate {
 
 interface ICoordinates extends Array<ICoordinate>{}
 
-class MessageCollector extends sequenceParserListener.sequenceParserListener {
+class MessageWalker extends sequenceParserListener.sequenceParserListener {
+  ownableMessages: Array<IOwnableMessage> = [];
   constructor() {
     super();
   }
-  enterMessage (ctx: any) {
-    console.log('enterMessage: from', ctx.parentCtx?.Origin());
-    console.log('enterMessage: to', ctx.Owner());
-    console.log('enterMessage: content', ctx.SignatureText());
+  enterMessage (ctx: any): void {
+    const from = ctx.parentCtx?.Origin();
+    const signature = ctx.SignatureText();
+    this.ownableMessages.push({from, signature});
+  }
+  result(): Array<IOwnableMessage> {
+    return this.ownableMessages;
   }
 }
 
 class PosCal3 {
+  private rootContext: any;
   constructor(rootContext: any) {
+    this.rootContext = rootContext;
+  }
+
+  getOwnableMessages() {
     const walker = antlr4.tree.ParseTreeWalker.DEFAULT
-    const listener = new MessageCollector();
-    walker.walk(listener, rootContext);
+
+    const listener = new MessageWalker();
+    walker.walk(listener, this.rootContext);
+    return listener.result();
   }
 
   getCoordinates(): ICoordinates {
-    return [{
-      participant: 'A',
-      position: {
-        center: 0,
-        top: 0
-      },
-      meta: [{
-        from: '_STARTER_',
-        content: 'm'
-      }]
-    }];
+    const walker = antlr4.tree.ParseTreeWalker.DEFAULT
+    const listener = new MessageWalker();
+    walker.walk(listener, this.rootContext);
+
+    return listener.coordinates;
   }
 }
 
 describe('PosCal3', () => {
   it('should return the correct position', () => {
     let rootContext = seqDsl.RootContext('A.m');
-    const pos = new PosCal3(rootContext);
-    expect(pos.getCoordinates()).toEqual([{
-      participant: 'A',
-      position: {
-        center: 0,
-        top: 0
-      },
-      meta: [{
-        from: '_STARTER_',
-        content: 'm'
-      }]
-    }]);
+    let ownableMessages = new PosCal3(rootContext).getOwnableMessages();
+    expect(ownableMessages).toEqual([{from: '_STARTER_', signature: 'm'}]);
   });
 })
