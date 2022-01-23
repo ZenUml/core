@@ -6,11 +6,11 @@ function getMessageContext(code) {
   let message = rootContext.block().stat()[0].message();
   return message;
 }
+
 describe('message - complete', () => {
   test('A.m', () => {
     let message = getMessageContext('200=A.m');
-    let signatureElement = message.messageBody().func().signature()[0];
-    expect(signatureElement.getText()).toBe('m');
+    expect(message.SignatureText()).toBe('m');
     expect(message.messageBody().assignment().assignee().getText()).toBe('200');
   })
 })
@@ -30,7 +30,7 @@ describe('message - incomplete', () => {
 
   // This will be parsed as to statements: `A.` and `m(`, so the first statement has a null func.
   // The editor should close the () in most cases. We do not add alternative rules to allow this
-  // to be parsed as one statement, because it cause other issues.
+  // to be parsed as one statement, because it causes other issues.
   test('A.m(', () => {
     let message = getMessageContext('A.m(');
     let signatureElement = message.messageBody().func();
@@ -41,34 +41,32 @@ describe('message - incomplete', () => {
 test('seqDsl should parse a simple method with a method call as parameter', () => {
     let rootContext = seqDsl.RootContext('B.method(getCount(1))');
     expect(seqDsl.RootContext).not.toBeNull()
-    let signatureElement = rootContext.block().stat()[0].message().messageBody().func().signature()[0];
-    expect(signatureElement.getText()).toBe('method(getCount(1))')
-    expect(signatureElement.invocation().getText()).toBe('(getCount(1))')
+    let signatureText = rootContext.block().stat()[0].message().SignatureText();
+    expect(signatureText).toBe('method(getCount(1))')
 })
 
 test('seqDsl should parse a simple method with quoted method name', () => {
     let rootContext = seqDsl.RootContext('B."method. {a,b} 1"(1,2)');
     expect(seqDsl.RootContext).not.toBeNull()
-    let signatureElement = rootContext.block().stat()[0].message().messageBody().func().signature()[0];
-    expect(signatureElement.methodName().getTextWithoutQuotes()).toBe('method. {a,b} 1')
-    expect(signatureElement.invocation().getTextWithoutQuotes()).toBe('(1,2)')
+    let signatureElement = rootContext.block().stat()[0].message().SignatureText();
+    expect(signatureElement).toBe('"method. {a,b} 1"(1,2)')
 })
 
 test('Simple method: A->B.method()', () => {
     let rootContext = seqDsl.RootContext('A->B.method()');
     expect(seqDsl.RootContext).not.toBeNull()
-    let messageBody = rootContext.block().stat()[0].message().messageBody();
+  const message = rootContext.block().stat()[0].message();
+  let messageBody = message.messageBody();
     expect(messageBody.from().getText()).toBe('A');
-    let signatureElement = messageBody.func().signature()[0];
-    expect(signatureElement.methodName().getText()).toBe('method');
+    expect(message.SignatureText()).toBe('method()');
 })
 
 test('Simple method: "A".method()', () => {
     let rootContext = seqDsl.RootContext('"A".method()');
     expect(seqDsl.RootContext).not.toBeNull()
-    let messageBody = rootContext.block().stat()[0].message().messageBody();
+  const message = rootContext.block().stat()[0].message();
+  let messageBody = message.messageBody();
     expect(messageBody.to().getTextWithoutQuotes()).toBe('A');
-    let signatureElement = messageBody.func().signature()[0];
-    expect(signatureElement.methodName().getTextWithoutQuotes()).toBe('method');
+    expect(message.SignatureText()).toBe('method()');
 })
 
