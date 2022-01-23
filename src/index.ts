@@ -26,6 +26,11 @@ const Store = (debounce?: number) => {
   return {
     state: {
       code: '',
+      coordinates: [
+        {participant: 'A', gap:200, width: 10 },
+        {participant: 'B', gap:100, width: 10 },
+        {participant: 'C', gap:150, width: 10}
+      ]
     },
     getters: {
       title: (state: any, getters: any) => {
@@ -42,11 +47,7 @@ const Store = (debounce?: number) => {
         return Participants(getters.rootContext, true)
       },
       centerOf: (state: any, getters: any) => (entity: any) => {
-        return new PosCal2([
-          {participant: 'A', gap:100, width: 10 },
-          {participant: 'B', gap:100, width: 10 },
-          {participant: 'C', gap:150, width: 10}
-        ]).getPosition(entity)
+        return new PosCal2(state.coordinates).getPosition(entity)
       },
       leftOf: (state: any, getters: any) => (entity: any) => {
         return getters.posCal?.getPosition(entity) - 10
