@@ -27,7 +27,7 @@ export default {
       return assignee + (type ? ':' + type : '')
     },
     signature: function () {
-      return this.func?.signature().map(s => s.getTextWithoutQuotes()).join('.')
+      return this.message?.SignatureText()
     },
     left: function() {
       const indent = this.selfCallIndent || 0

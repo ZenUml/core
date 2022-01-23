@@ -6,4 +6,4 @@
 // Nested method
 // Assignment
 export default `
-A.m`
+A.m1.m2`
