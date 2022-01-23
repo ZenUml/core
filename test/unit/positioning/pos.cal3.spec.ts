@@ -1,4 +1,7 @@
+const antlr4 = require('antlr4/index');
+
 let seqDsl = require('../../../src/parser/index');
+const sequenceParserListener = require('../../../src/generated-parser/sequenceParserListener');
 
 interface IPosition {
   center: number;
@@ -19,9 +22,22 @@ interface ICoordinate {
 
 interface ICoordinates extends Array<ICoordinate>{}
 
+class MessageCollector extends sequenceParserListener.sequenceParserListener {
+  constructor() {
+    super();
+  }
+  enterMessage (ctx: any) {
+    console.log('enterMessage: from', ctx.parentCtx?.Origin());
+    console.log('enterMessage: to', ctx.Owner());
+    console.log('enterMessage: content', ctx.messageBody().func().signature().map((s: any) => s.getTextWithoutQuotes()).join('.'));
+  }
+}
+
 class PosCal3 {
   constructor(rootContext: any) {
-
+    const walker = antlr4.tree.ParseTreeWalker.DEFAULT
+    const listener = new MessageCollector();
+    walker.walk(listener, rootContext);
   }
 
   getCoordinates(): ICoordinates {
