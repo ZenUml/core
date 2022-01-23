@@ -33,66 +33,12 @@ import {mapGetters, mapMutations, mapState} from 'vuex'
     },
     mounted () {
       console.debug('MessageLayer mounted')
-      let leftEdge = this.$el.getBoundingClientRect().left
-      // set messageLayerLeft in store
-      this.$store.commit('setMessageLayerLeft', leftEdge)
-      console.log('MessageLayer leftEdge', leftEdge)
       this.emitFirstInvocations()
-      this.updateWidth()
     },
     updated () {
-      console.log('MessageLayer updated')
-      // print out occurrence position recursively.
-      const that = this
-      function _recurse(node) {
-        if(node.attributes && node.attributes['data-el-type']?.nodeValue === 'occurrence') {
-          const participant = node.attributes['data-belongs-to'].nodeValue;
-          console.debug('Occurrence found for', participant)
-          try {
-            // get the offset position of the element
-            const offset = node.getBoundingClientRect()
-            const center = offset.left + offset.width / 2
-            // update $store.participantPositions with the center of this occurrence
-            that.$store.dispatch('positionParticipant', {
-              participant: participant,
-              position: Math.floor(center - that.messageLayerLeft),
-            })
-
-          } catch (e) {
-            console.error(e)
-          }
-
-        }
-        if (node.children && node.children.length > 0) {
-          node.children.forEach(_recurse)
-        }
-      }
-      _recurse(this.$el)
-      this.$store.commit('setPositioned', true)
-      // We do not need to call the following two methods here
-      // because mounted will be invoked every time when we change code
-      // this.emitFirstInvocations()
-      // this.updateWidth()
     },
     methods: {
       ...mapMutations(['onMessageLayerMountedOrUpdated']),
-      updateWidth() {
-        let rearParticipant = this.participantNames().pop()
-        // 20px for the right margin of the participant
-        let leftEdge = this.$el.getBoundingClientRect().left
-        let rightEdge = this.rightOf(rearParticipant) + leftEdge
-        function _recurse(node) {
-          const childLeft = node.getBoundingClientRect().right;
-          rightEdge = Math.max(rightEdge, childLeft)
-          if(node.children && node.children.forEach) {
-            node.children.forEach(function (c) { _recurse(c); })
-          }
-        }
-        this.$el && _recurse(this.$el)
-        this.left = leftEdge
-        this.right = rightEdge
-        this.totalWidth = rightEdge - leftEdge + 10
-      },
       participantNames() {
         // According to the doc, computed properties are cached.
         return this.participants.Names()

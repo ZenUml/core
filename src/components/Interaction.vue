@@ -5,7 +5,7 @@
        v-on:mouseout.stop="mouseOut"
        :signature="signature"
        :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent, 'self': isSelf, 'hover': hover }"
-       :style="{width: positioned ? interactionWidth + 'px' : 'auto', left: left + 'px', transform: 'translateX(' + translateX + 'px)'}">
+       :style="{width: interactionWidth + 'px', left: left + 'px', transform: 'translateX(' + translateX + 'px)'}">
     {{participantPositionsTracker}}
     <div v-if="showStarter && isRootBlock"
          :style="{transform: 'translateX(' + translateX * (-1) + 'px)'}"
