@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-// import log4V from './plugins/Log4V'
+import log4V from './plugins/Log4V'
 import {VueSequence} from './index'
 import demo1 from './demo1.js'
 import demo2 from './demo2.js'
 import VueGtag from "vue-gtag";
 
 Vue.use(Vuex)
-
+// Vue.use(log4V)
 Vue.config.productionTip = false
 
 /* eslint-disable */

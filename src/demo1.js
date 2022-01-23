@@ -5,5 +5,6 @@
 // Self-method
 // Nested method
 // Assignment
-export default `
-A.m`
+export default `A.method() {
+  B.methodsdfsdfsdfsdfsdfsdfjkkkkk
+}`

@@ -1,6 +1,6 @@
 <template>
   <div class="message" :class="{ 'right-to-left':rtl }" :style="{'border-bottom-style': borderStyle}">
-    <div class="name px-5">{{content}}</div>
+    <div class="name px-5" ref="name-div"><span ref="name-span">{{content}}</span></div>
     <point :fill="fill" :rtl="rtl"/>
   </div>
 </template>
@@ -14,7 +14,44 @@
   // An object creation Message (messageSort equals createMessage) has a dashed line with an open arrow head.
   export default {
     name: 'message',
-    props: ['content', 'rtl', 'type'],
+    props: ['content', 'rtl', 'type', 'participant'],
+    data: function () {
+      return {
+        c: null,
+      }
+    },
+    mounted() {
+      this.adjustMessageWidth()
+    },
+    updated() {
+      this.adjustMessageWidth()
+    },
+    methods: {
+      adjustMessageWidth() {
+        if(!this.$refs['name-div'] || !this.$refs['name-span']) {
+          return
+        }
+        function getPaddingInPx(padding) {
+          if(padding.endsWith('px')) {
+            return parseInt(padding.substring(0, padding.length - 2))
+          }
+          return 0
+        }
+        const nameDivScrollWidth = this.$refs['name-div'].scrollWidth
+        const nameSpanOffsetWidth = this.$refs['name-span'].offsetWidth
+        const nameDivPaddingLeft = getPaddingInPx(getComputedStyle(this.$refs['name-div']).paddingLeft)
+        const nameDivPaddingRight = getPaddingInPx(getComputedStyle(this.$refs['name-div']).paddingRight)
+
+        if(Math.abs(nameDivScrollWidth
+          - nameDivPaddingLeft - nameDivPaddingRight
+          - nameSpanOffsetWidth) > 5) {
+          this.$store.dispatch('updateCoordinates', {
+            participant: this.participant,
+            gap: nameSpanOffsetWidth + nameDivPaddingLeft + nameDivPaddingRight
+          })
+        }
+      }
+    },
     computed: {
       borderStyle () {
         switch (this.type) {

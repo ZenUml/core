@@ -27,12 +27,17 @@ const Store = (debounce?: number) => {
     state: {
       code: '',
       coordinates: [
-        {participant: 'A', gap:200, width: 10 },
+        {participant: '_STARTER_', gap:0, width: 10 },
+        {participant: 'A', gap:100, width: 10 },
         {participant: 'B', gap:100, width: 10 },
         {participant: 'C', gap:150, width: 10}
       ]
     },
     getters: {
+      // get coordinates
+      coordinates: (state: any) => {
+        return state.coordinates
+      },
       title: (state: any, getters: any) => {
         return getters.rootContext?.title()?.content()
       },
@@ -71,6 +76,9 @@ const Store = (debounce?: number) => {
       code: function (state: any, payload: any) {
         state.code = payload;
       },
+      mutateCoordinates: function (state: any, payload: any) {
+        state.coordinates = payload;
+      }
     },
     actions: {
       // Why debounce is here instead of mutation 'code'?
@@ -80,14 +88,26 @@ const Store = (debounce?: number) => {
           throw Error('You are using a old version of vue-sequence. New version requires {code, cursor}.')
         }
         commit('code', payload.code);
-        // construct updateParticipants
-        console.log(getters.participants, getters.participants.Names());
-        let unpositionedParticipants = getters.participants.Names().map((name: string) => ({
-         participant: name,
-         position: 0,
-         width: 0
-        }))
-      }, debounce || 1000)
+        // // construct updateParticipants
+        // let unpositionedParticipants = getters.participants.Names().map((name: string) => ({
+        //   participant: name,
+        //   gap: 0,
+        //   width: 0
+        // }))
+        // // reset coordinates
+        // commit('mutateCoordinates', unpositionedParticipants)
+      }, debounce || 1000),
+      updateCoordinates: ({commit, getters}: any, payload: any) => {
+        let coordinates = getters.coordinates;
+        // find the participant in coordinates by name in payload.participant and replace gap with gap in payload
+        const updatedCoordinates = coordinates.map((coordinate: any) => {
+          if (coordinate.participant === payload.participant) {
+            coordinate.gap = payload.gap
+          }
+          return coordinate
+        });
+        commit('mutateCoordinates', updatedCoordinates)
+      }
     },
     // TODO: Enable strict for development?
     strict: false,

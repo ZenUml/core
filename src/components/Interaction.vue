@@ -15,6 +15,7 @@
              :content="signature"
              :assignee="assignee"
              :rtl="rightToLeft"
+             :participant="isSelf? from : to"
              type="sync"></component>
     <occurrence :context="message" :participant="isSelf? from : to" :selfCallIndent="passOnOffset"/>
     <message class="return" v-if="assignee && !isSelf" :content="assignee" :rtl="!rightToLeft" type="return"/>
