@@ -41,3 +41,12 @@ of this approach, unless we could tell whether it is pre-assigned or not.
 
 What if we always set interaction width to auto first and then update according
 to calculated positions?
+
+One of the most tricky part is when a message is removed. To make sure we know
+the gap between two participants, we need to know the width of message. However,
+if the message is removed, we need to clear the gap we saved because of this message.
+This is particularly trick because we may not receive a message for it. Vue may not
+destroy the message but just trigger an update and render a different message on it.
+
+In the new try, we will try to generate the positions based on antlr root context
+and two width providers - message width provider and participant width provider.
