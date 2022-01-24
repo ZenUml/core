@@ -20,8 +20,7 @@ import {mapGetters, mapMutations, mapState} from 'vuex'
       }
     },
     computed: {
-      ...mapGetters(['messageLayerLeft', 'participants', 'centerOf', 'rightOf',
-        ]),
+      ...mapGetters(['participants', 'centerOf', 'rightOf']),
       ...mapState([]),
 
       starter() {
@@ -34,30 +33,14 @@ import {mapGetters, mapMutations, mapState} from 'vuex'
     mounted () {
       console.debug('MessageLayer mounted')
       this.emitFirstInvocations()
-      this.updateWidth()
     },
     updated () {
       console.log('MessageLayer updated')
+      this.emitFirstInvocations()
     },
     methods: {
       ...mapMutations(['onMessageLayerMountedOrUpdated']),
-      updateWidth() {
-        let rearParticipant = this.participantNames().pop()
-        // 20px for the right margin of the participant
-        let leftEdge = this.$el.getBoundingClientRect().left
-        let rightEdge = this.rightOf(rearParticipant) + leftEdge
-        function _recurse(node) {
-          const childLeft = node.getBoundingClientRect().right;
-          rightEdge = Math.max(rightEdge, childLeft)
-          if(node.children && node.children.forEach) {
-            node.children.forEach(function (c) { _recurse(c); })
-          }
-        }
-        this.$el && _recurse(this.$el)
-        this.left = leftEdge
-        this.right = rightEdge
-        this.totalWidth = rightEdge - leftEdge + 10
-      },
+
       participantNames() {
         // According to the doc, computed properties are cached.
         return this.participants.Names()
@@ -67,7 +50,7 @@ import {mapGetters, mapMutations, mapState} from 'vuex'
         this.participantNames().forEach(name => {
           firstInvocations[name] = this.firstInvocation(name)
         })
-        // this.onMessageLayerMountedOrUpdated(firstInvocations);
+        this.onMessageLayerMountedOrUpdated(firstInvocations);
       },
       firstInvocation (entity) {
         let messageLayerRect = this.$el.getBoundingClientRect()

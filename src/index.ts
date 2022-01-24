@@ -27,6 +27,7 @@ const Store = (debounce?: number) => {
   return {
     state: {
       code: '',
+      firstInvocations: {},
     },
     getters: {
       title: (state: any, getters: any) => {
@@ -34,7 +35,7 @@ const Store = (debounce?: number) => {
       },
       GroupContext: () => GroupContext,
       ParticipantContext: () => ParticipantContext,
-      firstInvocations: (state: any) => 0,
+      firstInvocations: (state: any) => state.firstInvocations,
       cursor: (state: any) => 0,
       rootContext: (state: any) => {
         return RootContext(state.code)
@@ -68,6 +69,9 @@ const Store = (debounce?: number) => {
     mutations: {
       code: function (state: any, payload: any) {
         state.code = payload;
+      },
+      onMessageLayerMountedOrUpdated: function (state: any, payload: any) {
+        state.firstInvocations = payload
       },
     },
     actions: {

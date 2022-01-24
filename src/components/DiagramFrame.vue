@@ -36,7 +36,7 @@ export default {
   name: "DiagramFrame",
   computed: {
     ...mapState(['showTips']),
-    ...mapGetters(['rootContext', 'participantPositions']),
+    ...mapGetters(['rootContext']),
     positions() {
       return 'undefined'
     },
