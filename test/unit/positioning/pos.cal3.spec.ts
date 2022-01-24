@@ -1,56 +1,10 @@
+import {IOwnedMessages} from "../../../src/positioning/OwnableMessage";
+import {ICoordinates, ICoordinates2, TextType, width, WidthFunc} from "../../../src/positioning/Coordinate";
+
 const antlr4 = require('antlr4/index');
 
 let seqDsl = require('../../../src/parser/index');
 const sequenceParserListener = require('../../../src/generated-parser/sequenceParserListener');
-
-interface IPosition {
-  center: number;
-  top: number;
-}
-
-// An ownable message can be assigned to a `target` participant.
-interface IOwnableMessage {
-  from: string;
-  signature: string;
-}
-
-interface IOwnedMessages {
-  owner: string;
-  ownableMessages: Array<IOwnableMessage>;
-}
-
-interface ICoordinate {
-  participant: string;
-  position: IPosition;
-  meta: Array<IOwnableMessage>
-}
-
-interface ICoordinate2 {
-  participant: string;
-  gap: number;
-  width: number;
-}
-
-interface ICoordinates extends Array<ICoordinate>{}
-interface ICoordinates2 extends Array<ICoordinate2>{}
-
-enum TextType {
-  MessageContent,
-  ParticipantName,
-}
-
-interface WidthFunc {
-  (text: string, type: TextType): number;
-}
-let width: WidthFunc = (text, type) => {
-  if (type === TextType.MessageContent) {
-    return text.length * 2;
-  } else if (type === TextType.ParticipantName) {
-    return text.length * 4;
-  } else {
-    throw new Error('Unknown text type');
-  }
-};
 
 class MessageWalker extends sequenceParserListener.sequenceParserListener {
   private ownedMessagesList : Array<IOwnedMessages> = [];
