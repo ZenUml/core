@@ -1,5 +1,4 @@
 import {TextType, WidthFunc} from "../../../src/positioning/Coordinate";
-import {PosCal2} from "../../../src/positioning/PosCal2";
 import {PosCal3} from "../../../src/positioning/posCal3";
 
 let seqDsl = require('../../../src/parser/index');
@@ -18,36 +17,31 @@ export let stubWidthProvider: WidthFunc = (text, type) => {
 
 describe('PosCal3', () => {
   it('should return the correct position', () => {
-    let rootContext = seqDsl.RootContext('A.m');
-    const posCal3 = new PosCal3();
-    let ownableMessages = posCal3.getOwnedMessagesList(rootContext);
-    expect(ownableMessages).toEqual([
-      {owner: '_STARTER_', ownableMessages: []},
-      {owner: 'A', ownableMessages: [ {from: '_STARTER_', signature: 'm'}]}
-    ]);
-    let coordinates2 = posCal3.getCoordinates2(rootContext, stubWidthProvider);
-    expect(coordinates2).toEqual([
-      {participant: '_STARTER_', gap: 0, width: 0},
-      {participant: 'A', gap: 150, width: 200}
-    ]);
-    const posCal2 = new PosCal2(coordinates2);
-    expect(posCal2.getPosition('A')).toEqual(250);
+    assertParticipantOwnsMessageSignature('A.m', 'A', 'm');
+    assertParticipantHasGapAndWidth('A.m', 'A', 150, 200);
   });
 
   it('should return the correct position - for long method name', () => {
-    let rootContext = seqDsl.RootContext('A.long');
-    const posCal3 = new PosCal3();
-    let ownableMessages = posCal3.getOwnedMessagesList(rootContext);
-    expect(ownableMessages).toEqual([
-      {owner: '_STARTER_', ownableMessages: []},
-      {owner: 'A', ownableMessages: [ {from: '_STARTER_', signature: 'long'}]}
-    ]);
-    let coordinates2 = posCal3.getCoordinates2(rootContext, stubWidthProvider);
-    expect(coordinates2).toEqual([
-      {participant: '_STARTER_', gap: 0, width: 0},
-      {participant: 'A', gap: 500, width: 200}
-    ]);
-    const posCal2 = new PosCal2(coordinates2);
-    expect(posCal2.getPosition('A')).toEqual(600);
+    assertParticipantOwnsMessageSignature('A.long', 'A', 'long');
+    assertParticipantHasGapAndWidth('A.long', 'A', 500, 200);
   });
 })
+
+function assertParticipantOwnsMessageSignature(code: string, participant: string, signature: string) {
+  let rootContext = seqDsl.RootContext(code);
+  const posCal3 = new PosCal3();
+  let ownableMessages = posCal3.getOwnedMessagesList(rootContext);
+
+  const message = ownableMessages?.find(m => m.owner === participant)?.ownableMessages?.find(m => m.signature === signature);
+  expect(message).toBeDefined();
+}
+
+function assertParticipantHasGapAndWidth(code: string, participant: string, gap: number, width: number) {
+  let rootContext = seqDsl.RootContext(code);
+  const posCal3 = new PosCal3();
+  let coordinates2 = posCal3.getCoordinates2(rootContext, stubWidthProvider);
+
+  const coordinate2 = coordinates2.find(c => c.participant === participant);
+  expect(coordinate2?.gap).toEqual(gap);
+  expect(coordinate2?.width).toEqual(width);
+}
