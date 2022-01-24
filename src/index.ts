@@ -27,7 +27,6 @@ const Store = (debounce?: number) => {
   return {
     state: {
       messageLayerLeft: 0,
-      positioned: false,
       code: '',
     },
     getters: {
@@ -77,10 +76,6 @@ const Store = (debounce?: number) => {
       },
     },
     mutations: {
-      // set positioned
-      setPositioned: (state: any, value: any) => {
-        state.positioned = value
-      },
       setMessageLayerLeft(state: any, left: number) {
         state.messageLayerLeft = left
       },
