@@ -1,44 +1,30 @@
-import {TextType, WidthFunc} from "../../../src/positioning/Coordinate";
+import {WidthFunc} from "../../../src/positioning/Coordinate";
 import {PosCal3} from "../../../src/positioning/posCal3";
 
 let seqDsl = require('../../../src/parser/index');
 
-export let stubWidthProvider: WidthFunc = (text, type) => {
-  switch (text) {
-    case 'm':
-    case 'm1':
-      return 100;
-    case 'm2':
-      return 200;
-    case 'm3':
-      return 300;
-    case 'm4':
-      return 400;
-    case 'A':
-      return 500;
-    case 'B':
-      return 600;
-  }
-  return 0;
+export let stubWidthProvider: WidthFunc = (text, _) => {
+  return parseInt(text.substring(1));
 };
 
 describe('PosCal3', () => {
   it('should return the correct position', () => {
-    assertParticipantOwnsMessageSignature('A.m', 'A', 'm');
-    assertParticipantHasGapAndWidth('A.m', 'A', 100, 500);
+    assertParticipantOwnsMessageSignature('A500.m100', 'A500', 'm100');
+    assertParticipantHasGapAndWidth('A500.m100', 'A500', 100, 500);
   });
 
   it('should return the correct position - for long method name', () => {
-    assertParticipantOwnsMessageSignature('A.m4', 'A', 'm4');
-    assertParticipantHasGapAndWidth('A.m4', 'A', 400, 500);
+    assertParticipantOwnsMessageSignature('A500.m400', 'A500', 'm400');
+    assertParticipantHasGapAndWidth('A500.m400', 'A500', 400, 500);
   });
 
   // A.m1 B.m2
   // B.m2 should be ignored, because it is not from 'A' (the previous participant)
   it('should return the correct position - for long method name', () => {
-    assertParticipantOwnsMessageSignature('A.m1 B.m2', 'A', 'm1');
-    assertParticipantHasGapAndWidth('A.m1 B.m2', 'A', 100, 500);
-    assertParticipantHasGapAndWidth('A.m1 B.m2', 'B', 0, 600);
+    assertParticipantOwnsMessageSignature('A500.m100 B600.m200', 'A500', 'm100');
+    assertParticipantOwnsMessageSignature('A500.m100 B600.m200', 'B600', 'm200');
+    assertParticipantHasGapAndWidth('A500.m100 B600.m200', 'A500', 100, 500);
+    assertParticipantHasGapAndWidth('A500.m100 B600.m200', 'B600', 0, 600);
   });
 })
 
