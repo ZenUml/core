@@ -89,12 +89,12 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['firstInvocations', 'onLifelineMounted', 'posCal']),
+    ...mapGetters(['firstInvocations', 'onLifelineMounted', 'posCal', 'centerOf']),
     ...mapState(['participantPositionsTracker']),
 
     expectedPos() {
       console.log('expectedPos calculated', this.participantPositionsTracker)
-      return this.posCal?.getPosition(this.entity.name) - 8
+      return this.centerOf(this.entity.name) - 8
     },
     icon() {
       return iconPath[this.entity.type?.toLowerCase()]

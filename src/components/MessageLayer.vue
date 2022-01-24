@@ -42,37 +42,6 @@ import {mapGetters, mapMutations, mapState} from 'vuex'
     },
     updated () {
       console.log('MessageLayer updated')
-      // print out occurrence position recursively.
-      const that = this
-      function _recurse(node) {
-        if(node.attributes && node.attributes['data-el-type']?.nodeValue === 'occurrence') {
-          const participant = node.attributes['data-belongs-to'].nodeValue;
-          console.debug('Occurrence found for', participant)
-          try {
-            // get the offset position of the element
-            const offset = node.getBoundingClientRect()
-            const center = offset.left + offset.width / 2
-            // update $store.participantPositions with the center of this occurrence
-            that.$store.dispatch('positionParticipant', {
-              participant: participant,
-              position: Math.floor(center - that.messageLayerLeft),
-            })
-
-          } catch (e) {
-            console.error(e)
-          }
-
-        }
-        if (node.children && node.children.length > 0) {
-          node.children.forEach(_recurse)
-        }
-      }
-      _recurse(this.$el)
-      this.$store.commit('setPositioned', true)
-      // We do not need to call the following two methods here
-      // because mounted will be invoked every time when we change code
-      // this.emitFirstInvocations()
-      // this.updateWidth()
     },
     methods: {
       ...mapMutations(['onMessageLayerMountedOrUpdated']),

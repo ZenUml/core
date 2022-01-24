@@ -6,6 +6,6 @@ const seqParser = sequenceParser.sequenceParser;
 const MessageContext = seqParser.MessageContext;
 
 MessageContext.prototype.SignatureText = function () {
-  return this.messageBody().func().signature().map((s: any) => s.getTextWithoutQuotes()).join('.');
+  return this.messageBody()?.func()?.signature()?.map((s: any) => s?.getTextWithoutQuotes()).join('.');
 }
 

@@ -12,6 +12,9 @@ import './components/theme-blue-river.scss'
 import {CodeRange} from './parser/CodeRange'
 // @ts-ignore
 import PositionCalculator from './utils/position.calculator'
+import {PosCal3} from "@/positioning/PosCal3";
+import WidthProviderOnBrowser from "@/positioning/WidthProviderFunc";
+import {PosCal2} from "@/positioning/PosCal2";
 
 let storeInitiationTime: number = 0
 setTimeout(function () {
@@ -55,13 +58,15 @@ const Store = (debounce?: number) => {
         return Participants(getters.rootContext, true)
       },
       centerOf: (state: any, getters: any) => (entity: any) => {
-        return getters.posCal?.getPosition(entity) || 0
+        const coordinates2 = new PosCal3().getCoordinates2(getters.rootContext, WidthProviderOnBrowser);
+        const posCal2 = new PosCal2(coordinates2);
+        return posCal2.getPosition(entity) || 0
       },
       leftOf: (state: any, getters: any) => (entity: any) => {
-        return getters.posCal?.getPosition(entity) - 10
+        return getters.centerOf(entity) - 10
       },
       rightOf: (state: any, getters: any) => (entity: any) => {
-        return getters.posCal?.getPosition(entity) + 10
+        return getters.centerOf(entity) + 10
       },
       widthOf: (state: any, getters: any) => (entity: any) => {
         return 20
