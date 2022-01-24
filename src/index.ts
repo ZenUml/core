@@ -26,13 +26,9 @@ const Store = (debounce?: number) => {
   storeInitiationTime = now()
   return {
     state: {
-      messageLayerLeft: 0,
       code: '',
     },
     getters: {
-      // get participantPositions
-      messageLayerLeft: (state: any) => state.messageLayerLeft,
-
       title: (state: any, getters: any) => {
         return getters.rootContext?.title()?.content()
       },
@@ -70,10 +66,6 @@ const Store = (debounce?: number) => {
       },
     },
     mutations: {
-      setMessageLayerLeft(state: any, left: number) {
-        state.messageLayerLeft = left
-      },
-
       code: function (state: any, payload: any) {
         state.code = payload;
       },
