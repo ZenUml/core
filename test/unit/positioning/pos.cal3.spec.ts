@@ -44,21 +44,17 @@ interface WidthFunc {
 }
 let width: WidthFunc = (text, type) => {
   if (type === TextType.MessageContent) {
-    return text.length * 8;
+    return text.length * 2;
   } else if (type === TextType.ParticipantName) {
-    return text.length * 8;
+    return text.length * 4;
   } else {
     throw new Error('Unknown text type');
   }
 };
 
 class MessageWalker extends sequenceParserListener.sequenceParserListener {
-  ownableMessages: Array<IOwnableMessage> = [];
   private ownedMessagesList : Array<IOwnedMessages> = [];
 
-  constructor() {
-    super();
-  }
   enterMessage (ctx: any): void {
     const from = ctx?.parentCtx?.Origin();
     const owner = ctx?.Owner();
@@ -94,9 +90,15 @@ class PosCal3 {
 
   // [{participant: a, gap:100, width: 250 }, {p: b, g:100, w: 120 }, {p: c, g: 150, w: 200}]
   getCoordinates2(widthProvider: WidthFunc): ICoordinates2 {
-    return [
-      {participant: 'A', gap: 100, width: 250},
-    ];
+    const ownedMessagesList = this.getOwnedMessagesList();
+    // map ownedMessagesList to [{participant: a, gap:100, width: 250 }, {p: b, g:100, w: 120 }, {p: c, g: 150, w: 200}]
+    const coordinates2 = ownedMessagesList.map(p => {
+      const participant = p.owner;
+      const gap = widthProvider(p.ownableMessages[0].signature, TextType.MessageContent);
+      const width = widthProvider(participant, TextType.ParticipantName);
+      return {participant: participant, gap: gap, width: width};
+    });
+    return coordinates2;
   }
 
   getCoordinates(): ICoordinates {
@@ -114,5 +116,7 @@ describe('PosCal3', () => {
     const posCal3 = new PosCal3(rootContext);
     let ownableMessages = posCal3.getOwnedMessagesList();
     expect(ownableMessages).toEqual([ {owner: 'A', ownableMessages: [ {from: '_STARTER_', signature: 'm'}]}]);
+    let coordinates2 = posCal3.getCoordinates2(width);
+    expect(coordinates2).toEqual([{participant: 'A', gap: 2, width: 4}]);
   });
 })
