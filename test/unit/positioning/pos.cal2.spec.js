@@ -1,4 +1,6 @@
 // max(MIN_GAP, old_g, new_g, w/2 + left-part-w/2 + MARGIN)
+import {PosCal2} from "@/positioning/PosCal2";
+
 describe('cal', () => {
   // it('should accept a gap', () => {
   //   new PosCal2()
