@@ -6,6 +6,7 @@ let seqDsl = require('../../../src/parser/index');
 
 export let stubWidthProvider: WidthFunc = (text, type) => {
   if (!text || text.length === 0 || text === '_STARTER_') return 0;
+  if (text.includes('long')) return 500;
   if (type === TextType.MessageContent) {
     return 150;
   } else if (type === TextType.ParticipantName) {
@@ -18,18 +19,35 @@ export let stubWidthProvider: WidthFunc = (text, type) => {
 describe('PosCal3', () => {
   it('should return the correct position', () => {
     let rootContext = seqDsl.RootContext('A.m');
-    const posCal3 = new PosCal3(rootContext);
-    let ownableMessages = posCal3.getOwnedMessagesList();
+    const posCal3 = new PosCal3();
+    let ownableMessages = posCal3.getOwnedMessagesList(rootContext);
     expect(ownableMessages).toEqual([
       {owner: '_STARTER_', ownableMessages: []},
       {owner: 'A', ownableMessages: [ {from: '_STARTER_', signature: 'm'}]}
     ]);
-    let coordinates2 = posCal3.getCoordinates2(stubWidthProvider);
+    let coordinates2 = posCal3.getCoordinates2(rootContext, stubWidthProvider);
     expect(coordinates2).toEqual([
       {participant: '_STARTER_', gap: 0, width: 0},
       {participant: 'A', gap: 150, width: 200}
     ]);
     const posCal2 = new PosCal2(coordinates2);
     expect(posCal2.getPosition('A')).toEqual(250);
+  });
+
+  it('should return the correct position - for long method name', () => {
+    let rootContext = seqDsl.RootContext('A.long');
+    const posCal3 = new PosCal3();
+    let ownableMessages = posCal3.getOwnedMessagesList(rootContext);
+    expect(ownableMessages).toEqual([
+      {owner: '_STARTER_', ownableMessages: []},
+      {owner: 'A', ownableMessages: [ {from: '_STARTER_', signature: 'long'}]}
+    ]);
+    let coordinates2 = posCal3.getCoordinates2(rootContext, stubWidthProvider);
+    expect(coordinates2).toEqual([
+      {participant: '_STARTER_', gap: 0, width: 0},
+      {participant: 'A', gap: 500, width: 200}
+    ]);
+    const posCal2 = new PosCal2(coordinates2);
+    expect(posCal2.getPosition('A')).toEqual(600);
   });
 })
