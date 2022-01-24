@@ -30,12 +30,3 @@ export interface WidthFunc {
   (text: string, type: TextType): number;
 }
 
-export let width: WidthFunc = (text, type) => {
-  if (type === TextType.MessageContent) {
-    return text.length * 2;
-  } else if (type === TextType.ParticipantName) {
-    return text.length * 4;
-  } else {
-    throw new Error('Unknown text type');
-  }
-};

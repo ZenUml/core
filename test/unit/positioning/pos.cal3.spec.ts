@@ -1,8 +1,18 @@
-import {width} from "../../../src/positioning/Coordinate";
+import {TextType, WidthFunc} from "../../../src/positioning/Coordinate";
 import {PosCal2} from "../../../src/positioning/PosCal2";
 import {PosCal3} from "../../../src/positioning/posCal3";
 
 let seqDsl = require('../../../src/parser/index');
+
+export let stubWidthProvider: WidthFunc = (text, type) => {
+  if (type === TextType.MessageContent) {
+    return 150;
+  } else if (type === TextType.ParticipantName) {
+    return 200;
+  } else {
+    throw new Error('Unknown text type');
+  }
+};
 
 describe('PosCal3', () => {
   it('should return the correct position', () => {
@@ -10,9 +20,9 @@ describe('PosCal3', () => {
     const posCal3 = new PosCal3(rootContext);
     let ownableMessages = posCal3.getOwnedMessagesList();
     expect(ownableMessages).toEqual([ {owner: 'A', ownableMessages: [ {from: '_STARTER_', signature: 'm'}]}]);
-    let coordinates2 = posCal3.getCoordinates2(width);
-    expect(coordinates2).toEqual([{participant: 'A', gap: 2, width: 4}]);
+    let coordinates2 = posCal3.getCoordinates2(stubWidthProvider);
+    expect(coordinates2).toEqual([{participant: 'A', gap: 150, width: 200}]);
     const posCal2 = new PosCal2(coordinates2);
-    expect(posCal2.getPosition('A')).toEqual(100);
+    expect(posCal2.getPosition('A')).toEqual(150);
   });
 })
