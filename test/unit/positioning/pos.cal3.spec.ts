@@ -1,5 +1,6 @@
 import {IOwnedMessages} from "../../../src/positioning/OwnableMessage";
-import {ICoordinates, ICoordinates2, TextType, width, WidthFunc} from "../../../src/positioning/Coordinate";
+import {ICoordinates2, TextType, width, WidthFunc} from "../../../src/positioning/Coordinate";
+import {PosCal2} from "../../../src/positioning/posCal2";
 
 const antlr4 = require('antlr4/index');
 
@@ -46,21 +47,12 @@ class PosCal3 {
   getCoordinates2(widthProvider: WidthFunc): ICoordinates2 {
     const ownedMessagesList = this.getOwnedMessagesList();
     // map ownedMessagesList to [{participant: a, gap:100, width: 250 }, {p: b, g:100, w: 120 }, {p: c, g: 150, w: 200}]
-    const coordinates2 = ownedMessagesList.map(p => {
+    return ownedMessagesList.map(p => {
       const participant = p.owner;
       const gap = widthProvider(p.ownableMessages[0].signature, TextType.MessageContent);
       const width = widthProvider(participant, TextType.ParticipantName);
       return {participant: participant, gap: gap, width: width};
     });
-    return coordinates2;
-  }
-
-  getCoordinates(): ICoordinates {
-    const walker = antlr4.tree.ParseTreeWalker.DEFAULT
-    const listener = new MessageWalker();
-    walker.walk(listener, this.rootContext);
-
-    return listener.coordinates;
   }
 }
 
@@ -72,5 +64,7 @@ describe('PosCal3', () => {
     expect(ownableMessages).toEqual([ {owner: 'A', ownableMessages: [ {from: '_STARTER_', signature: 'm'}]}]);
     let coordinates2 = posCal3.getCoordinates2(width);
     expect(coordinates2).toEqual([{participant: 'A', gap: 2, width: 4}]);
+    const posCal2 = new PosCal2(coordinates2);
+    expect(posCal2.getPosition('A')).toEqual(100);
   });
 })
