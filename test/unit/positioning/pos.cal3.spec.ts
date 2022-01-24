@@ -4,26 +4,41 @@ import {PosCal3} from "../../../src/positioning/posCal3";
 let seqDsl = require('../../../src/parser/index');
 
 export let stubWidthProvider: WidthFunc = (text, type) => {
-  if (!text || text.length === 0 || text === '_STARTER_') return 0;
-  if (text.includes('long')) return 500;
-  if (type === TextType.MessageContent) {
-    return 150;
-  } else if (type === TextType.ParticipantName) {
-    return 200;
-  } else {
-    throw new Error('Unknown text type');
+  switch (text) {
+    case 'm':
+    case 'm1':
+      return 100;
+    case 'm2':
+      return 200;
+    case 'm3':
+      return 300;
+    case 'm4':
+      return 400;
+    case 'A':
+      return 500;
+    case 'B':
+      return 600;
   }
+  return 0;
 };
 
 describe('PosCal3', () => {
   it('should return the correct position', () => {
     assertParticipantOwnsMessageSignature('A.m', 'A', 'm');
-    assertParticipantHasGapAndWidth('A.m', 'A', 150, 200);
+    assertParticipantHasGapAndWidth('A.m', 'A', 100, 500);
   });
 
   it('should return the correct position - for long method name', () => {
-    assertParticipantOwnsMessageSignature('A.long', 'A', 'long');
-    assertParticipantHasGapAndWidth('A.long', 'A', 500, 200);
+    assertParticipantOwnsMessageSignature('A.m4', 'A', 'm4');
+    assertParticipantHasGapAndWidth('A.m4', 'A', 400, 500);
+  });
+
+  // A.m1 B.m2
+  // B.m2 should be ignored, because it is not from 'A' (the previous participant)
+  it('should return the correct position - for long method name', () => {
+    assertParticipantOwnsMessageSignature('A.m1 B.m2', 'A', 'm1');
+    assertParticipantHasGapAndWidth('A.m1 B.m2', 'A', 100, 500);
+    assertParticipantHasGapAndWidth('A.m1 B.m2', 'B', 0, 600);
   });
 })
 

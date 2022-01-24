@@ -39,9 +39,22 @@ export class PosCal3 {
     // map ownedMessagesList to [{participant: a, gap:100, width: 250 }, {p: b, g:100, w: 120 }, {p: c, g: 150, w: 200}]
     return ownedMessagesList.map((p: IOwnedMessages) => {
       const participant = p.owner;
-      const gap = widthProvider(p.ownableMessages[0]?.signature, TextType.MessageContent);
+      const gap = PosCal3.getGap(widthProvider, p, ctx);
       const width = widthProvider(participant, TextType.ParticipantName);
       return {participant: participant, gap: gap, width: width};
     });
+  }
+
+  private static getGap(widthProvider: WidthFunc, p: IOwnedMessages, ctx: any) {
+    const participants = PosCal3.getAllParticipants(ctx);
+    const participantIndex = participants.indexOf(p.owner);
+    const previousParticipant = participants[participantIndex - 1];
+    // find ownable message that is from previous participant
+    const contributingMessages = p.ownableMessages.filter(o => o.from === previousParticipant);
+    const gaps = contributingMessages.map((m: any) => {
+      return widthProvider(m.signature, TextType.MessageContent);
+    });
+    // return the max gap from gaps
+    return Math.max(...gaps, 0);
   }
 }
