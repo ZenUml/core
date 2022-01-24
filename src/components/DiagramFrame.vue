@@ -35,14 +35,10 @@ import TipsDialog from "@/components/tutorial/TipsDialog";
 export default {
   name: "DiagramFrame",
   computed: {
-    ...mapState(['showTips', 'participantPositionsTracker']),
+    ...mapState(['showTips']),
     ...mapGetters(['rootContext', 'participantPositions']),
     positions() {
-      // If you have a computed property, but not using in the template, it will not
-      // trigger reactivity.
-      // If we do not use the tracker, it does not trigger reactivity either, because
-      // Map is not reactive.
-      return this.participantPositionsTracker && Array.from(this.participantPositions)
+      return 'undefined'
     },
     title() {
       if(!this.rootContext) {

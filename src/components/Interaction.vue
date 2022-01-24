@@ -5,8 +5,7 @@
        v-on:mouseout.stop="mouseOut"
        :signature="signature"
        :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent, 'self': isSelf, 'hover': hover }"
-       :style="{width: positioned ? interactionWidth + 'px' : 'auto', left: left + 'px', transform: 'translateX(' + translateX + 'px)'}">
-    {{participantPositionsTracker}}
+       :style="{width: interactionWidth + 'px', left: left + 'px', transform: 'translateX(' + translateX + 'px)'}">
     <div v-if="showStarter && isRootBlock"
          :style="{transform: 'translateX(' + translateX * (-1) + 'px)'}"
          class="occurrence source"></div>
@@ -25,7 +24,7 @@
   import Comment from './Comment.vue'
   import Occurrence from './Occurrence.vue'
   import Message from './Message'
-  import {mapGetters, mapState} from "vuex";
+  import {mapGetters} from "vuex";
   import InteractionMixin from './InteractionMixin'
   import SelfInvocation from './SelfInvocation'
   import {CodeRange} from '@/parser/CodeRange'
@@ -43,7 +42,6 @@
     computed: {
       // add tracker to the mapGetters
       ...mapGetters(['rootContext', 'participants', 'distance', 'distance2', 'centerOf', 'cursor', 'onElementClick']),
-      ...mapState(['participantPositionsTracker', 'positioned']),
       showStarter() {
         return this.participants.Starter().name !== '_STARTER_'
       },
@@ -60,8 +58,6 @@
         return this.isSelf ? (this.selfCallIndent || 0) + 6 : 0
       },
       interactionWidth: function () {
-        // We have to add tracker here to enable reactivity. Not quite sure why.
-        console.log('interactionWidth recalculated', this.from, this.to, this.distance(this.from, this.to), this.participantPositionsTracker)
         if (this.context && this.isSelf) {
           return 0
         }

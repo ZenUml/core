@@ -1,10 +1,9 @@
 import {Depth, Participants} from '../parser'
-import {mapGetters, mapState} from 'vuex'
+import {mapGetters} from 'vuex'
 
 export default {
   computed: {
     ...mapGetters(['participants', 'leftOf', 'rightOf', 'centerOf']),
-    ...mapState(['participantPositionsTracker']),
     localParticipants: function() {
       // [A, B, C, D] the order may not be the same as appeared on the Lifeline layer
       return [this.from, ...Participants(this.context).ImplicitArray().map(p => p.name)]
@@ -18,7 +17,6 @@ export default {
       return allParticipants.reverse().find(p => this.localParticipants.includes(p))
     },
     boundary: function () {
-      console.log('boundary recalculated', this.leftParticipant, this.rightParticipant, this.participantPositionsTracker)
       // shift 20px the fragment is at the top level (starter is a participant)
       let min = this.from === this.participants.Starter()?.name ? 20 : this.leftOf(this.leftParticipant)
       let max = this.rightOf(this.rightParticipant)
@@ -32,7 +30,6 @@ export default {
       return Depth(this.context)
     },
     centerOfFrom: function () {
-      console.log('centerOfFrom recalculated', this.from, this.participantPositionsTracker)
       return this.centerOf(this.from)
     },
     offsetX: function () {

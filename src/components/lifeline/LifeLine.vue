@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import {mapGetters, mapState} from 'vuex'
+import {mapGetters} from 'vuex'
 
 const iconPath = {
   actor:      require('../../assets/actor.svg'),
@@ -89,11 +89,9 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['firstInvocations', 'onLifelineMounted', 'posCal', 'centerOf']),
-    ...mapState(['participantPositionsTracker']),
+    ...mapGetters(['firstInvocations', 'onLifelineMounted', 'centerOf']),
 
     expectedPos() {
-      console.log('expectedPos calculated', this.participantPositionsTracker)
       return this.centerOf(this.entity.name) - 8
     },
     icon() {

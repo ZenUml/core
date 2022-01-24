@@ -27,10 +27,6 @@ const Store = (debounce?: number) => {
   return {
     state: {
       messageLayerLeft: 0,
-      posCal: null,
-      // Map is not observable. See https://github.com/vuejs/vue/issues/2410
-      participantPositionsTracker: 0,
-      // TODO: it may be able to replace the tracker
       positioned: false,
       code: '',
     },
@@ -85,10 +81,6 @@ const Store = (debounce?: number) => {
       setPositioned: (state: any, value: any) => {
         state.positioned = value
       },
-      // increase participantPositionsTracker
-      participantPositionsTracker: (state: any) => {
-        state.participantPositionsTracker++
-      },
       setMessageLayerLeft(state: any, left: number) {
         state.messageLayerLeft = left
       },
@@ -120,7 +112,6 @@ const Store = (debounce?: number) => {
         getters.posCal?.on({
           [payload.participant]: payload.position
         })
-        commit('participantPositionsTracker', payload)
       },
     },
     // TODO: Enable strict for development?
