@@ -31,14 +31,8 @@ const Store = (debounce?: number) => {
     },
     getters: {
       // get participantPositions
-      participantPositions: (state: any) => state.posCal.result,
       messageLayerLeft: (state: any) => state.messageLayerLeft,
-      posCal: (state: any, getters: any) => {
-        if (!state.posCal && getters.participants && getters.participants.length) {
-          state.posCal = new PositionCalculator(getters.participants)
-        }
-        return state.posCal
-      },
+
       title: (state: any, getters: any) => {
         return getters.rootContext?.title()?.content()
       },
@@ -79,10 +73,7 @@ const Store = (debounce?: number) => {
       setMessageLayerLeft(state: any, left: number) {
         state.messageLayerLeft = left
       },
-      // set posCal
-      setPosCal (state: any, posCal: any) {
-        state.posCal = posCal
-      },
+
       code: function (state: any, payload: any) {
         state.code = payload;
       },
@@ -94,20 +85,8 @@ const Store = (debounce?: number) => {
         if (typeof payload === 'string') {
           throw Error('You are using a old version of vue-sequence. New version requires {code, cursor}.')
         }
-        commit('setPositioned', false)
         commit('code', payload.code);
-        // commit('cursor', payload.cursor);
-        commit('setPosCal',new PositionCalculator(getters.participants.Names()))
       }, debounce || 1000),
-      positionParticipant: ({getters, commit}: any, payload: any) => {
-        // This actions shows how business logic is in action instead of mutation.
-        const old = getters.posCal.getPosition(payload.participant)
-        // skip if old position is same as new position
-        if (old !== undefined && old === payload.position) return
-        getters.posCal?.on({
-          [payload.participant]: payload.position
-        })
-      },
     },
     // TODO: Enable strict for development?
     strict: false,
