@@ -6,5 +6,5 @@
 // Nested method
 // Assignment
 export default `
-new A
+new B123456789012345678901234567890(long, method, parameters)
 `

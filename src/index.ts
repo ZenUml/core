@@ -28,6 +28,8 @@ const Store = (debounce?: number) => {
     state: {
       code: '',
       firstInvocations: {},
+      messageForWidth: '',
+      participantForWidth: '',
     },
     getters: {
       title: (state: any, getters: any) => {

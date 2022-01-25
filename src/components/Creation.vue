@@ -1,3 +1,4 @@
+<!--TODO: this can be implemented without globally calculated width!-->
 <template>
   <div class="interaction creation sync"
        v-on:click.stop="onClick"
@@ -7,11 +8,18 @@
        :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent, 'hover': hover }"
        :style="style">
     <comment v-if="comment" :comment="comment" />
-    <message class="invocation" :content="signature" :rtl="rightToLeft" :style="{width: invocationWidth + 'px'}" type="creation"/>
-    <div class="participant invisible place-holder">
-      <!--This line is to set the height of the place-holder, see Lifeline-->
-      <div class="h-5" />
+    <!-- h-10 to push occurrence down -->
+    <div class="message-container h-10">
+      <!-- TODO: replace the following with a participant component. -->
+      <div ref="participantPlaceHolder"
+           class="participant absolute right-0 flex flex-col justify-center">
+        <!-- Put in a div to give it a fixed height, because stereotype is dynamic. -->
+        <div class="h-5 flex flex-col justify-center">
+          <label class="name">{{ to }}</label>
+        </div>
       </div>
+      <message ref="messageEl" class="invocation" :content="signature" :rtl="rightToLeft" type="creation"/>
+    </div>
     <occurrence :context="creation" :participant="to"/>
     <message class="return" v-if="assignee" :content="assignee" :rtl="!rightToLeft" type="return"/>
   </div>
@@ -57,15 +65,6 @@
         }
         return Math.abs(distance) - safeOffset
       },
-      invocationWidth: function () {
-        let safeOffset = this.selfCallIndent || 0
-        // 1px middle of occurrence, 7px for occurrenceWidth/2
-        const occurrenceDelta = 8;
-        if (this.rightToLeft) {
-          return this.centerOf(this.from) - this.rightOf(this.to) + safeOffset - occurrenceDelta
-        }
-        return this.leftOf(this.to) - this.centerOf(this.from) - safeOffset - occurrenceDelta
-      },
       rightToLeft: function () {
         return this.distance(this.to, this.from) < 0
       },
@@ -91,7 +90,18 @@
         return this.creation.isCurrent(this.cursor)
       }
     },
+    mounted() {
+      this.layoutMessageContainer()
+    },
+    updated() {
+      this.layoutMessageContainer()
+    },
     methods: {
+      layoutMessageContainer() {
+        const halfWidthOfPlaceholder = this.$refs['participantPlaceHolder'].offsetWidth / 2;
+        this.$refs['participantPlaceHolder'].style.marginRight = (-1) * (halfWidthOfPlaceholder + 6) + 'px'
+        this.$refs['messageEl'].$el.style.width = `calc(100% - ${halfWidthOfPlaceholder}px`
+      },
       onClick() {
         this.onElementClick(CodeRange.from(this.context))
       },

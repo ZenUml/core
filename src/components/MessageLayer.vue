@@ -1,5 +1,5 @@
 <template>
-  <div class="message-layer" :style="{'width': totalWidth + 'px'}">
+  <div class="message-layer">
 
     <block :context="context" :style="{'padding-left': paddingLeft + 'px'}"/>
   </div>
