@@ -1,5 +1,5 @@
 import {Participants} from "@/parser/index";
-import {MessageWalker} from "./MessageWalker";
+import {MessageContextListener} from "./MessageContextListener";
 import {ICoordinates2, TextType, WidthFunc} from "./Coordinate";
 import {IOwnedMessages} from "@/positioning/OwnableMessage";
 
@@ -23,7 +23,7 @@ export class PosCal3 {
   private static visitAllMessages(ctx: any) {
     const walker = antlr4.tree.ParseTreeWalker.DEFAULT
 
-    const listener = new MessageWalker();
+    const listener = new MessageContextListener();
     walker.walk(listener, ctx);
     return listener.result();
   }

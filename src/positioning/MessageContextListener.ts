@@ -2,7 +2,7 @@ import {IOwnedMessages} from "./OwnableMessage";
 
 const sequenceParserListener = require('@/generated-parser/sequenceParserListener');
 
-export class MessageWalker extends sequenceParserListener.sequenceParserListener {
+export class MessageContextListener extends sequenceParserListener.sequenceParserListener {
   private ownedMessagesList: Array<IOwnedMessages> = [];
 
   enterMessage = this._addOwnedMessage;
