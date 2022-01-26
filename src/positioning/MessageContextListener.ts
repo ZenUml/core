@@ -6,7 +6,7 @@ export class MessageContextListener extends sequenceParserListener.sequenceParse
   private ownedMessagesList: Array<IOwnedMessages> = [];
 
   enterMessage = this._addOwnedMessage;
-
+  enterAsyncMessage = this._addOwnedMessage;
   enterCreation = this._addOwnedMessage;
 
   private _addOwnedMessage(ctx: any) {

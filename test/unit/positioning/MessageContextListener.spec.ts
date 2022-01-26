@@ -7,6 +7,7 @@ describe('MessageListener', () => {
     const code = `
     A.method
     new B
+    C->D: message
     `
     let rootContext = seqDsl.RootContext(code);
     const walker = antlr4.tree.ParseTreeWalker.DEFAULT
@@ -18,5 +19,7 @@ describe('MessageListener', () => {
     expect(ownedMessagesList[0].owner).toBe('A');
     // expect second item's owner is B
     expect(ownedMessagesList[1].owner).toBe('B');
+    // expect third item's owner is D
+    expect(ownedMessagesList[2].owner).toBe('D');
   })
 })
