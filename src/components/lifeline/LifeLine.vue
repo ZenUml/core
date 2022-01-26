@@ -22,7 +22,6 @@ export default {
   },
   computed: {
     ...mapGetters(['firstInvocations', 'onLifelineMounted', 'centerOf']),
-
     expectedPos() {
       return this.centerOf(this.entity.name) - 8
     },
@@ -36,6 +35,11 @@ export default {
       return this.firstInvocations[this.entity.name] && this.firstInvocations[this.entity.name].type === 'creation'
     }
   },
+  methods: {
+    onSelect() {
+      this.$store.commit('onSelect', this.entity.name)
+    }
+  }
 }
 </script>
 

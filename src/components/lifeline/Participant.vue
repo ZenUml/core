@@ -79,12 +79,11 @@ export default {
       type: Object,
       required: true
     },
-    selected: {
-      type: Boolean,
-      default: false
-    },
   },
   computed: {
+    selected () {
+      return this.$store.state.selected.includes(this.entity.name)
+    },
     stereotype () {
       return this.entity.stereotype
     },
@@ -94,7 +93,7 @@ export default {
   },
   methods: {
     onSelect () {
-      this.$emit('select', this.entity);
+      this.$store.commit('onSelect', this.entity.name)
     }
   }
 }

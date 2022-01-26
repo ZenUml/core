@@ -27,6 +27,7 @@ const Store = (debounce?: number) => {
   return {
     state: {
       code: '',
+      selected: [],
       cursor: null,
       firstInvocations: {},
       messageForWidth: '',
@@ -76,6 +77,13 @@ const Store = (debounce?: number) => {
       onMessageLayerMountedOrUpdated: function (state: any, payload: any) {
         state.firstInvocations = payload
       },
+      onSelect: function (state: any, payload: any) {
+        if (state.selected.includes(payload)) {
+          state.selected = state.selected.filter((p: any) => p !== payload)
+        } else {
+          state.selected.push(payload)
+        }
+      }
     },
     actions: {
       // Why debounce is here instead of mutation 'code'?
