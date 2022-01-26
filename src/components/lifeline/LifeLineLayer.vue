@@ -1,5 +1,5 @@
 <template>
-  <div class="life-line-layer">
+  <div class="life-line-layer w-full">
     <life-line
       :style="{'margin-left': invisibleStarter ? '-40px!important': '0'}"
       v-if="starterOnTheLeft"
