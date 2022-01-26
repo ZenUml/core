@@ -1,5 +1,4 @@
-const antlr4 = require('antlr4/index');
-let seqDsl = require('../../../src/parser/index');
+import {Fixture} from "./fixture/Fixture";
 
 /**
  * message -> messageBody -> func -> signature (DOT signature)*
@@ -7,8 +6,7 @@ let seqDsl = require('../../../src/parser/index');
  */
 describe('Message', () => {
   it('produces signatureText', () => {
-    let rootContext = seqDsl.RootContext('A.m1.m2');
-    let message = rootContext.block().stat()[0].message();
+    let message = Fixture.firstStatement('A.m1.m2').message();
     expect(message.SignatureText()).toBe('m1.m2');
   })
 })

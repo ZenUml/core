@@ -1,10 +1,7 @@
-let seqDsl = require('../../../src/parser/index');
+const {Fixture} = require("./fixture/Fixture");
 
 test('Empty `opt`', () => {
-    let rootContext = seqDsl.RootContext('opt {}');
-
-
-    let opt = rootContext.block().stat()[0].opt();
+    let opt = Fixture.firstStatement('opt {}').opt();
     expectText(opt).toBe('opt{}')
     let braceBlock = opt.braceBlock();
     expectText(braceBlock).toBe('{}')
