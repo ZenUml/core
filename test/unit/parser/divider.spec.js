@@ -1,8 +1,7 @@
-let seqDsl = require('../../../src/parser/index');
+const {Fixture} = require("./fixture/Fixture");
 
 test('Divider', () => {
-    let rootContext = seqDsl.RootContext('==A==');
-    let divider = rootContext.block().stat()[0].divider();
+    let divider = Fixture.firstStatement('==A==').divider();
     expectText(divider.name()).toBe('A')
 })
 
