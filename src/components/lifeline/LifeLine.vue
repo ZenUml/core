@@ -1,7 +1,6 @@
 <template>
   <div  :id="entity.name"
         class="lifeline absolute mx-2 transform -translate-x-1/2 h-full"
-        :class="classes"
         :style="{'paddingTop': top + 'px', left: expectedPos + 'px'} ">
     <participant :entity="entity"/>
     <div class="line w0 mx-auto h-full w-px"></div>

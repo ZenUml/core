@@ -8,5 +8,6 @@
 export default `
 @EC2 <<service>> Service
 new B123456789012345678901234567890(long, method, parameters)
+new Service
 Service.do()
 `

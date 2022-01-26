@@ -12,7 +12,7 @@
     <div class="message-container h-10">
       <!-- TODO: replace the following with a participant component. -->
       <div ref="participantPlaceHolder"
-           class="participant absolute right-0 flex flex-col justify-center">
+           class="participant invisible absolute right-0 flex flex-col justify-center">
         <!-- Put in a div to give it a fixed height, because stereotype is dynamic. -->
         <div class="h-5 flex flex-col justify-center">
           <label class="name">{{ to }}</label>
