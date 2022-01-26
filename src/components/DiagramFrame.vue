@@ -1,9 +1,6 @@
 <template>
   <!-- pb-8 is to offset pt-8 in SeqDiagram component -->
   <div class="frame relative pb-8">
-    <ul class="absolute flex w-screen">
-      <li v-for="p in positions" :key="p.key">{{p}}</li>
-    </ul>
     <div class="header flex">
       <div class="left">
         <slot></slot>
@@ -39,9 +36,6 @@ export default {
   computed: {
     ...mapState(['showTips']),
     ...mapGetters(['rootContext']),
-    positions() {
-      return 'undefined'
-    },
     title() {
       if(!this.rootContext) {
         console.error('`rootContext` is empty. Please make sure `store` is properly configured.')
