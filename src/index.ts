@@ -27,6 +27,7 @@ const Store = (debounce?: number) => {
   return {
     state: {
       code: '',
+      cursor: null,
       firstInvocations: {},
       messageForWidth: '',
       participantForWidth: '',
@@ -38,7 +39,7 @@ const Store = (debounce?: number) => {
       GroupContext: () => GroupContext,
       ParticipantContext: () => ParticipantContext,
       firstInvocations: (state: any) => state.firstInvocations,
-      cursor: (state: any) => 0,
+      cursor: (state: any) => state.cursor,
       rootContext: (state: any) => {
         return RootContext(state.code)
       },
