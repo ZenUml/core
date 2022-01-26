@@ -5,7 +5,11 @@ const sequenceParserListener = require('@/generated-parser/sequenceParserListene
 export class MessageWalker extends sequenceParserListener.sequenceParserListener {
   private ownedMessagesList: Array<IOwnedMessages> = [];
 
-  enterMessage(ctx: any): void {
+  enterMessage = this._addOwnedMessage;
+
+  enterCreation = this._addOwnedMessage;
+
+  private _addOwnedMessage(ctx: any) {
     const from = ctx?.parentCtx?.Origin();
     const owner = ctx?.Owner();
     const signature = ctx?.SignatureText();
@@ -18,11 +22,6 @@ export class MessageWalker extends sequenceParserListener.sequenceParserListener
     }
   }
 
-  enterCreation(ctx: any): void {
-    console.log(ctx.parentCtx.Origin())
-    console.log(ctx.Owner())
-    console.log(ctx.SignatureText())
-  }
   result(): Array<IOwnedMessages> {
     return this.ownedMessagesList;
   }
