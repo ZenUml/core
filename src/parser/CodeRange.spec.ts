@@ -1,15 +1,9 @@
-let seqDsl = require('./index');
+import {Fixture} from "../../test/unit/parser/fixture/Fixture";
 import {CodeRange} from "@/parser/CodeRange";
-
-function getMessageContext(code: string) {
-  let rootContext = seqDsl.RootContext(code);
-  expect(seqDsl.RootContext).not.toBeNull();
-  return rootContext.block().stat()[0].message();
-}
 
 describe('CodeRange', () => {
   it('should have an start and an end', () => {
-    const message = getMessageContext('A.m');
+    const message = Fixture.firstStatement('A.m').message();
     const codeRange = CodeRange.from(message);
     expect(codeRange.start.line).toBe(1);
     expect(codeRange.start.col).toBe(0);
@@ -19,7 +13,7 @@ describe('CodeRange', () => {
   });
 
   it('should have an start and an end', () => {
-    const m1 = getMessageContext('A.m1{\n B.m2}');
+    const m1 = Fixture.firstStatement('A.m1{\n B.m2}').message();
     const codeRange1 = CodeRange.from(m1);
     expect(codeRange1.start.line).toBe(1);
     expect(codeRange1.start.col).toBe(0);
