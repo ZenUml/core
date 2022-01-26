@@ -16,31 +16,33 @@ interface IParticipantModel {
 }
 
 class ParticipantListener extends sequenceParserListener.sequenceParserListener {
+  private participants: IParticipantModel[] = [];
+  enterParticipant(ctx: any) {
+    const name = ctx?.name()?.getTextWithoutQuotes() || 'Missing `Participant` name';
 
+    this.participants.push({type: SingleOrGroup.SINGLE, name});
+  }
   result(): IParticipantModel[] {
-    return [
-      {
-        type: SingleOrGroup.SINGLE,
-        name: 'A'
-      },
-      {
-        type: SingleOrGroup.GROUP,
-        children: [
-          {
-            type: SingleOrGroup.SINGLE,
-            name: 'B'
-          },
-          {
-            type: SingleOrGroup.SINGLE,
-            name: 'C'
-          }
-        ]
-      }
-    ]
+    return this.participants;
   }
 }
 
 describe('participant group', () => {
+  it('prints participants', () => {
+    const code = 'A'
+    const rootContext = seqDsl.RootContext(code);
+    const listener = new ParticipantListener();
+    const walker = antlr4.tree.ParseTreeWalker.DEFAULT
+    walker.walk(listener, rootContext)
+    expect(listener.result()).toEqual([
+      {
+        type: SingleOrGroup.SINGLE,
+        name: 'A'
+      },
+    ])
+    console.log(JSON.stringify(listener.result()))
+  })
+
   // it should print out a tree: root { A { B C } }
   it('prints participants', () => {
     const code = 'A group { B C }'
