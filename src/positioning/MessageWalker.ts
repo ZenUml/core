@@ -1,5 +1,5 @@
 import {IOwnedMessages} from "./OwnableMessage";
-import {Participants} from "@/parser";
+
 const sequenceParserListener = require('@/generated-parser/sequenceParserListener');
 
 export class MessageWalker extends sequenceParserListener.sequenceParserListener {
