@@ -17,10 +17,32 @@ interface IParticipantModel {
 
 class ParticipantListener extends sequenceParserListener.sequenceParserListener {
   private participants: IParticipantModel[] = [];
+  private inGroup: boolean = false;
+
   enterParticipant(ctx: any) {
     const name = ctx?.name()?.getTextWithoutQuotes() || 'Missing `Participant` name';
-    this.participants.push({type: SingleOrGroup.SINGLE, name});
+    // if inGroup, push it to the children of the current group; otherwise, push it to the root
+    const participant = {
+      type: SingleOrGroup.SINGLE,
+      name
+    };
+    if (this.inGroup) {
+      this.participants[this.participants.length - 1]?.children?.push(participant);
+    } else {
+      this.participants.push(participant);
+    }
   }
+
+  enterGroup(ctx: any) {
+    this.inGroup = true;
+    const name = ctx?.name()?.getTextWithoutQuotes();
+    this.participants.push({type: SingleOrGroup.GROUP, name, children: []});
+  }
+
+  exitGroup(ctx: any) {
+    this.inGroup = false;
+  }
+
   result(): IParticipantModel[] {
     return this.participants;
   }
@@ -45,6 +67,6 @@ describe('participant group', () => {
     const listener = new ParticipantListener();
     const walker = antlr4.tree.ParseTreeWalker.DEFAULT
     walker.walk(listener, rootContext)
-    console.log(JSON.stringify(listener.result()))
+    expect(listener.result()).toEqual([{"type":0,"name":"A"},{"type":1,"children":[{"type":0,"name":"B"},{"type":0,"name":"C"}]}])
   })
 })
