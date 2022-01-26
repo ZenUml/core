@@ -1,5 +1,6 @@
+import {Fixture} from "./fixture/Fixture";
+
 let seqDsl = require('../../../src/parser/index');
-const sequenceParser = require('../../../src/generated-parser/sequenceParser')
 
 
 // This spec shows how we get `from` from the context.
@@ -11,23 +12,20 @@ const sequenceParser = require('../../../src/generated-parser/sequenceParser')
 
 describe('Get `from` from context', () => {
   test('Origin', () => {
-    let rootContext = seqDsl.RootContext('A->B.m1');
-    let stat = rootContext.block().stat()[0]
+    let stat = Fixture.firstStatement('A->B.m1')
 
     expectText(stat).toBe('A->B.m1')
     expect(stat.Origin()).toBe('A')
   })
 
   test('Explicit', () => {
-    let rootContext = seqDsl.RootContext('A->B.m1');
-    let m1 = rootContext.block().stat()[0].message()
+    let m1 = Fixture.firstStatement('A->B.m1').message()
     expectText(m1).toBe('A->B.m1')
-    expect(rootContext.block().stat()[0].Origin()).toBe('A')
+    expect(Fixture.firstStatement('A->B.m1').Origin()).toBe('A')
   })
 
   test('Embedded', () => {
-    let rootContext = seqDsl.RootContext('A.m1 { \n==x==\n B.m2 }');
-    const stat1 = rootContext.block().stat()[0];
+    const stat1 = Fixture.firstStatement('A.m1 { \n==x==\n B.m2 }');
     expect(stat1.Origin()).toBe('_STARTER_');
     let m1 = stat1.message()
     // expectText(m1).toBe('A.m1{B.m2}')
@@ -38,8 +36,7 @@ describe('Get `from` from context', () => {
   })
 
   test('Embedded', () => {
-    let rootContext = seqDsl.RootContext('A.m1 { B.m2 }');
-    const stat1 = rootContext.block().stat()[0]
+    const stat1 = Fixture.firstStatement('A.m1 { B.m2 }')
     let m1 = stat1.message()
     expect(stat1.Origin()).toBe('_STARTER_');
     expectText(m1).toBe('A.m1{B.m2}')
@@ -50,8 +47,7 @@ describe('Get `from` from context', () => {
   })
 
   test('Embedded', () => {
-    let rootContext = seqDsl.RootContext('"A".m1 { B.m2 }');
-    let m1 = rootContext.block().stat()[0].message()
+    let m1 = Fixture.firstStatement('"A".m1 { B.m2 }').message()
     expectText(m1).toBe('"A".m1{B.m2}')
     let m2 = m1.braceBlock().block().stat()[0].message();
     expectText(m2).toBe('B.m2')
@@ -59,8 +55,7 @@ describe('Get `from` from context', () => {
   })
 
   test('Embedded Self', () => {
-    let rootContext = seqDsl.RootContext('A.m1 { m2 }');
-    let m1 = rootContext.block().stat()[0].message()
+    let m1 = Fixture.firstStatement('A.m1 { m2 }').message()
     expectText(m1).toBe('A.m1{m2}')
     let m2 = m1.braceBlock().block().stat()[0].message();
     expectText(m2).toBe('m2')
@@ -68,8 +63,7 @@ describe('Get `from` from context', () => {
   })
 
   test('Embedded creation', () => {
-    let rootContext = seqDsl.RootContext('new A { m2 }');
-    let creation = rootContext.block().stat()[0].creation()
+    let creation = Fixture.firstStatement('new A { m2 }').creation()
     expectText(creation).toBe('newA{m2}')
     let m2 = creation.braceBlock().block().stat()[0].message();
     expectText(m2).toBe('m2')
@@ -77,8 +71,7 @@ describe('Get `from` from context', () => {
   })
 
   test('Embedded in if', () => {
-    let rootContext = seqDsl.RootContext('A.m1 { if(x) { m2 }}');
-    let m1 = rootContext.block().stat()[0].message()
+    let m1 = Fixture.firstStatement('A.m1 { if(x) { m2 }}').message()
     expectText(m1).toBe('A.m1{if(x){m2}}')
     let alt = m1.braceBlock().block().stat()[0].alt()
     expect(m1.braceBlock().block().stat()[0].Origin()).toBe('A')
@@ -88,9 +81,8 @@ describe('Get `from` from context', () => {
   })
 
   test('Embedded in if at root', () => {
-    let rootContext = seqDsl.RootContext('if(x) { m1 A.m2 }');
-    let alt = rootContext.block().stat()[0].alt()
-    expect(rootContext.block().stat()[0].Origin()).toBe('_STARTER_')
+    let alt = Fixture.firstStatement('if(x) { m1 A.m2 }').alt()
+    expect(Fixture.firstStatement('Fixture.firstStatement(\'A->B.m1\')').Origin()).toBe('_STARTER_')
     let m1 = alt.ifBlock().braceBlock().block().stat()[0].message();
     expectText(m1).toBe('m1')
     expect(alt.ifBlock().braceBlock().block().stat()[0].Origin()).toBe('_STARTER_')
@@ -100,8 +92,7 @@ describe('Get `from` from context', () => {
   })
 
   test('Embedded in Self', () => {
-    let rootContext = seqDsl.RootContext('A.m1 { m2 {m3} }');
-    let m1 = rootContext.block().stat()[0].message()
+    let m1 = Fixture.firstStatement('A.m1 { m2 {m3} }').message()
     expectText(m1).toBe('A.m1{m2{m3}}')
     let m2 = m1.braceBlock().block().stat()[0].message();
     expectText(m2).toBe('m2{m3}')
@@ -112,8 +103,7 @@ describe('Get `from` from context', () => {
   })
 
   test('Embedded in Self', () => {
-    let rootContext = seqDsl.RootContext('@Starter(X) m1 { m2 {m3} }');
-    let m1 = rootContext.block().stat()[0].message()
+    let m1 = Fixture.firstStatement('@Starter(X) m1 { m2 {m3} }').message()
     expectText(m1).toBe('m1{m2{m3}}')
     let m2 = m1.braceBlock().block().stat()[0].message();
     expectText(m2).toBe('m2{m3}')
@@ -125,16 +115,13 @@ describe('Get `from` from context', () => {
   })
 
   test('root', () => {
-    let rootContext = seqDsl.RootContext('A.m1');
-    let message = rootContext.block().stat()[0].message();
-    expectText(message).toBe('A.m1')
-    expect(rootContext.block().stat()[0].Origin()).toBe('_STARTER_')
+    expectText(Fixture.firstStatement('A.m1').message()).toBe('A.m1')
+    expect(Fixture.firstStatement('A.m1').Origin()).toBe('_STARTER_')
   })
   test('root', () => {
-    let rootContext = seqDsl.RootContext('@Starter(X)\nA.m1');
-    let message = rootContext.block().stat()[0].message();
+    let message = Fixture.firstStatement('@Starter(X)\nA.m1').message();
     expectText(message).toBe('A.m1')
-    expect(rootContext.block().stat()[0].Origin()).toBe('X')
+    expect(Fixture.firstStatement('@Starter(X)\nA.m1').Origin()).toBe('X')
   })
 })
 
