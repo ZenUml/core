@@ -1,7 +1,7 @@
 let seqDsl = require('../../../src/parser/index');
+const {Fixture} = require("./fixture/Fixture");
 test('seqDsl should parse the to and method', () => {
-    let rootContext = seqDsl.RootContext('"b:B".method()');
-  const messageBody = rootContext.block().stat()[0].message().messageBody()
+  const messageBody = Fixture.firstStatement('"b:B".method()').message().messageBody()
   let func = messageBody.func();
     expect(messageBody.to().getText()).toBe('"b:B"');
     expect(func.signature()[0].getText()).toBe('method()')
