@@ -17,11 +17,12 @@ export interface IParticipantModel {
 }
 
 export class ParticipantListener extends sequenceParserListener.sequenceParserListener {
-  private participants: IParticipantModel[] = [];
-  private currentArray: IParticipantModel[] = this.participants;
+  private explicitParticipants: IParticipantModel[] = [];
+  private starter: string = '';
+  private implicitParticipants: IParticipantModel[] = [];
+  private currentArray: IParticipantModel[] = this.explicitParticipants;
   private inGroup: boolean = false;
   private left: string = '';
-  private starter: string = '';
   // constructor
   constructor() {
     super();
@@ -39,25 +40,37 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
   }
 
   enterGroup(ctx: any) {
-    this.inGroup = true;
     const name = ctx?.name()?.getTextWithoutQuotes();
     const group = ParticipantListener._groupFactory(name, this.left);
-    this.participants.push(group);
+    this.explicitParticipants.push(group);
     this.currentArray = group.children;
   }
 
   exitGroup(ctx: any) {
-    this.inGroup = false;
-    this.currentArray = this.participants;
+    this.currentArray = this.explicitParticipants;
   }
 
+  enterFrom(ctx: any) {
+    const name = ctx?.getTextWithoutQuotes()
+    if(name === this.starter) {
+      return;
+    }
+    const participant = ParticipantListener._singleFactory(name, this.left);
+    this.implicitParticipants.push(participant);
+    this.left = name;
+  }
+
+  enterTo = this.enterFrom
+
   result(): IParticipantModel[] {
-    return this.participants;
+    return this.explicitParticipants;
   }
 
   flatten(): IParticipantModel[] {
-    const flattenedParticipants = this._flattenCollectedParticipants();
-    return this._handleStarter(flattenedParticipants);
+    const flattenedParticipants = this._flattenExplicitParticipants();
+    const result = this._handleStarter(flattenedParticipants);
+    result.push(...this.implicitParticipants);
+    return result;
   }
 
   private _handleStarter(flattenedParticipants: IParticipantModel[]) {
@@ -74,10 +87,10 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
     return this.starter && flattenedParticipants.find(p => p.name === this.starter);
   }
 
-  private _flattenCollectedParticipants() {
+  private _flattenExplicitParticipants() {
     // flatten the participants array
     const flattenedParticipants: IParticipantModel[] = [];
-    this.participants.forEach(participant => {
+    this.explicitParticipants.forEach(participant => {
       let items = participant.type === SingleOrGroup.SINGLE ? [participant] : participant.children;
       flattenedParticipants.push(...items);
     });

@@ -46,8 +46,39 @@ describe('Participants.Order', () => {
     walker.walk(listener, rootContext)
     const flattened = listener.flatten();
     console.log(flattened);
-    // expect(flattened.map(p => {
-    //   p.name
-    // })).toEqual(['_STARTER_', 'A', 'B', 'C']);
+    expect(flattened).toEqual([
+      { name: '_STARTER_', type: 0, left: '', children: [] },
+      { name: 'A', type: 0, left: '_STARTER_', children: [] },
+      { name: 'B', type: 0, left: 'A', children: [] },
+      { name: 'C', type: 0, left: 'B', children: [] }
+    ]);
+  })
+
+  it('should return the order of participants', () => {
+    const rootContext = seqDsl.RootContext('A B @Starter(C) C.m');
+    const listener = new ParticipantListener();
+    const walker = antlr4.tree.ParseTreeWalker.DEFAULT
+    walker.walk(listener, rootContext)
+    const flattened = listener.flatten();
+    console.log(flattened);
+    expect(flattened).toEqual([
+      { name: 'C', type: 0, left: '', children: [] },
+      { name: 'A', type: 0, left: 'C', children: [] },
+      { name: 'B', type: 0, left: 'A', children: [] }
+    ]);
+  })
+
+  it('should return the order of participants', () => {
+    const rootContext = seqDsl.RootContext('A B @Starter(B) C.m');
+    const listener = new ParticipantListener();
+    const walker = antlr4.tree.ParseTreeWalker.DEFAULT
+    walker.walk(listener, rootContext)
+    const flattened = listener.flatten();
+    console.log(flattened);
+    expect(flattened).toEqual([
+      { name: 'A', type: 0, left: '', children: [] },
+      { name: 'B', type: 0, left: 'A', children: [] },
+      { name: 'C', type: 0, left: 'B', children: [] }
+    ]);
   })
 })
