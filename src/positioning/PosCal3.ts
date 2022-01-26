@@ -34,6 +34,7 @@ export class PosCal3 {
   }
 
 // [{participant: a, gap:100, width: 250 }, {p: b, g:100, w: 120 }, {p: c, g: 150, w: 200}]
+  private static MINI_GAP = 100;
   getCoordinates2(ctx: any, widthProvider: WidthFunc): ICoordinates2 {
     const ownedMessagesList = this.getOwnedMessagesList(ctx);
     // map ownedMessagesList to [{participant: a, gap:100, width: 250 }, {p: b, g:100, w: 120 }, {p: c, g: 150, w: 200}]
@@ -55,6 +56,6 @@ export class PosCal3 {
       return widthProvider(m.signature, TextType.MessageContent);
     });
     // return the max gap from gaps
-    return Math.max(...gaps, 0);
+    return Math.max(...gaps, this.MINI_GAP);
   }
 }
