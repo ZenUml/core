@@ -29,7 +29,25 @@
  * the participants back in the flow and a fixed flow decided by itself.
  */
 
+/**
+ * Examples:
+ * A B C.m                => _STARTER_(invisible), A, B, C
+ * A B @Starter(C) C.m    => C, A, B
+ * A B @Starter(B) C.m    => A, B, C
+ */
+
+import {antlr4, ParticipantListener, seqDsl, SingleOrGroup} from "@/positioning/ParticipantListener";
+
 describe('Participants.Order', () => {
   it('should return the order of participants', () => {
+    const rootContext = seqDsl.RootContext('A B C.m');
+    const listener = new ParticipantListener();
+    const walker = antlr4.tree.ParseTreeWalker.DEFAULT
+    walker.walk(listener, rootContext)
+    const flattened = listener.flatten();
+    console.log(flattened);
+    // expect(flattened.map(p => {
+    //   p.name
+    // })).toEqual(['_STARTER_', 'A', 'B', 'C']);
   })
 })
