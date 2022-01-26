@@ -18,6 +18,11 @@ export class MessageWalker extends sequenceParserListener.sequenceParserListener
     }
   }
 
+  enterCreation(ctx: any): void {
+    console.log(ctx.parentCtx.Origin())
+    console.log(ctx.Owner())
+    console.log(ctx.SignatureText())
+  }
   result(): Array<IOwnedMessages> {
     return this.ownedMessagesList;
   }

@@ -69,9 +69,7 @@
         return this.distance(this.to, this.from) < 0
       },
       signature: function () {
-        const params = this.creation.creationBody().parameters()
-        const text = (params?.parameter()?.length > 0) ? params.getTextWithoutQuotes() : 'create'
-        return '«' + text + '»'
+        return this.creation.SignatureText()
       },
       assignee: function () {
         function safeCodeGetter (context) {
