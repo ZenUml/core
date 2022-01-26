@@ -19,7 +19,6 @@ class ParticipantListener extends sequenceParserListener.sequenceParserListener 
   private participants: IParticipantModel[] = [];
   enterParticipant(ctx: any) {
     const name = ctx?.name()?.getTextWithoutQuotes() || 'Missing `Participant` name';
-
     this.participants.push({type: SingleOrGroup.SINGLE, name});
   }
   result(): IParticipantModel[] {
@@ -28,19 +27,15 @@ class ParticipantListener extends sequenceParserListener.sequenceParserListener 
 }
 
 describe('participant group', () => {
-  it('prints participants', () => {
-    const code = 'A'
+  it.each([
+    ['A', 'A'],
+    ['@EC2', 'Missing `Participant` name'],
+  ])('Code `%s` produces one single participant with name `%s`', (code, name) => {
     const rootContext = seqDsl.RootContext(code);
     const listener = new ParticipantListener();
     const walker = antlr4.tree.ParseTreeWalker.DEFAULT
     walker.walk(listener, rootContext)
-    expect(listener.result()).toEqual([
-      {
-        type: SingleOrGroup.SINGLE,
-        name: 'A'
-      },
-    ])
-    console.log(JSON.stringify(listener.result()))
+    expect(listener.result()).toEqual([{ type: SingleOrGroup.SINGLE, name: name }])
   })
 
   // it should print out a tree: root { A { B C } }
