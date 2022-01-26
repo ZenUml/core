@@ -8,6 +8,16 @@ function Participants2(code: string) {
   return listener.result();
 }
 
+function FlattenedParticipants(code: string) {
+  const rootContext = seqDsl.RootContext(code);
+  const listener = new ParticipantListener();
+  const walker = antlr4.tree.ParseTreeWalker.DEFAULT
+  walker.walk(listener, rootContext)
+  return listener.flatten();
+}
+
+
+
 describe('participant group', () => {
   it.each([
     ['A', 'A'],
@@ -35,5 +45,15 @@ describe('participant group', () => {
         ], name: undefined, left: "A"
       }];
     expect(Participants2(code)).toEqual(expected)
+  })
+
+  it('get flatten participants', () => {
+    const code = 'A group { B C }';
+    const expected = [{"type": 0, "name": "A", "left": ""},
+      {"type": 0, "name": "B", "left": "A"},
+      {"type": 0, "name": "C", "left": "B"}
+    ];
+
+    expect(FlattenedParticipants(code)).toEqual(expected)
   })
 })

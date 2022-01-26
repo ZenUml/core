@@ -8,7 +8,7 @@ test('seqDsl should parse the to and method', () => {
 })
 
 test('seqDsl should get all participants', () => {
-    let rootContext = seqDsl.RootContext('A 100\r\nC.method()\r\nnew B()');
+    let rootContext = seqDsl.RootContext('A\r\n @Starter(C)\r\nC.method()\r\nnew B()');
 
     let participants = seqDsl.Participants(rootContext);
     expect(participants.Names().length).toBe(3)

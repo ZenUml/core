@@ -7,7 +7,7 @@ export enum SingleOrGroup {
   GROUP
 }
 
-interface IParticipantModel {
+export interface IParticipantModel {
   type: SingleOrGroup;
   name?: string;
   children?: IParticipantModel[];
@@ -18,6 +18,12 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
   private participants: IParticipantModel[] = [];
   private inGroup: boolean = false;
   private left: string = '';
+
+  // constructor
+  constructor() {
+    super();
+    
+  }
 
   enterParticipant(ctx: any) {
     const name = ctx?.name()?.getTextWithoutQuotes() || 'Missing `Participant` name';
@@ -47,5 +53,20 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
 
   result(): IParticipantModel[] {
     return this.participants;
+  }
+
+  flatten(): IParticipantModel[] {
+    // flatten the participants array
+    const flattenedParticipants: IParticipantModel[] = [];
+    this.participants.forEach(participant => {
+      if (participant.type === SingleOrGroup.SINGLE) {
+        flattenedParticipants.push(participant);
+      } else {
+        participant?.children?.forEach(child => {
+          flattenedParticipants.push(child);
+        });
+      }
+    });
+    return flattenedParticipants;
   }
 }
