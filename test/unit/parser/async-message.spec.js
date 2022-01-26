@@ -1,4 +1,5 @@
 let seqDsl = require('../../../src/parser/index');
+const {Fixture} = require("./fixture/Fixture");
 
 describe('Async Message', () => {
   test.each(
@@ -7,8 +8,7 @@ describe('Async Message', () => {
       ['"A B"->"C D":m', '"A B"', '"C D"'],
     ]
   )('with ID', (code, source, target) => {
-    let rootContext = seqDsl.RootContext(code);
-    const asyncMessage = rootContext.block().stat()[0].asyncMessage();
+    const asyncMessage = Fixture.firstStatement(code).asyncMessage();
     let actualSource = asyncMessage.from();
     const actualTarget = asyncMessage.to()
     expectText(actualSource).toBe(source)
