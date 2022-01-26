@@ -47,15 +47,26 @@ export class PosCal3 {
   }
 
   private static getGap(widthProvider: WidthFunc, p: IOwnedMessages, ctx: any) {
-    const participants = PosCal3.getAllParticipants(ctx);
-    const participantIndex = participants.indexOf(p.owner);
-    const previousParticipant = participants[participantIndex - 1];
-    // find ownable message that is from previous participant
-    const contributingMessages = p.ownableMessages.filter(o => o.from === previousParticipant);
+    const contributingMessages = this.getMessagesFromLeftNeighbour(ctx, p);
     const gaps = contributingMessages.map((m: any) => {
       return widthProvider(m.signature, TextType.MessageContent);
     });
     // return the max gap from gaps
     return Math.max(...gaps, this.MINI_GAP);
+  }
+
+  // An owned message always has 'from';
+  // root messages has 'from' as _STARTER_;
+  // 'from' can be itself; special case: @Starter(A) A.method(), from === A
+  private static getMessagesFromLeftNeighbour(ctx: any, p: IOwnedMessages) {
+    const leftNeighbour = PosCal3.leftNeighbour(ctx, p.owner);
+    return p.ownableMessages.filter(o => o.from === leftNeighbour);
+  }
+
+  private static leftNeighbour(ctx: any, me: string) {
+    const participants = PosCal3.getAllParticipants(ctx);
+    const participantIndex = participants.indexOf(me);
+    // if participantIndex === 0, it does NOT throw an error and previousParticipant is undefined
+    return participants[participantIndex - 1];
   }
 }

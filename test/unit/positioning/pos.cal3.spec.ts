@@ -10,6 +10,7 @@ export let stubWidthProvider: WidthFunc = (text, _) => {
 describe('PosCal3', () => {
   it('should return default positions for declared participants', () => {
     assertParticipantHasGapAndWidth('A500', 'A500', 100, 500);
+    assertParticipantHasGapAndWidth('@Starter(A500) A500.m100', 'A500', 100, 500);
   })
   it('should return the correct position', () => {
     assertParticipantOwnsMessageSignature('A500.m100', 'A500', 'm100');
