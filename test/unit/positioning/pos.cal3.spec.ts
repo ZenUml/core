@@ -10,16 +10,17 @@ export let stubWidthProvider: WidthFunc = (text, _) => {
 describe('PosCal3', () => {
   it('should return default positions for declared participants', () => {
     assertParticipantHasGapAndWidth('A500', 'A500', 100, 500);
+    // A self-call does not contribute to gap
     assertParticipantHasGapAndWidth('@Starter(A500) A500.m100', 'A500', 100, 500);
   })
   it('should return the correct position', () => {
     assertParticipantOwnsMessageSignature('A500.m100', 'A500', 'm100');
-    assertParticipantHasGapAndWidth('A500.m100', 'A500', 100, 500);
+    assertParticipantHasGapAndWidth('A500.m100', 'A500', 110, 500);
   });
 
   it('should return the correct position - for long method name', () => {
     assertParticipantOwnsMessageSignature('A500.m400', 'A500', 'm400');
-    assertParticipantHasGapAndWidth('A500.m400', 'A500', 400, 500);
+    assertParticipantHasGapAndWidth('A500.m400', 'A500', 410, 500);
   });
 
   // A.m1 B.m2
@@ -27,7 +28,7 @@ describe('PosCal3', () => {
   it('should return the correct position - for long method name', () => {
     assertParticipantOwnsMessageSignature('A500.m100 B600.m200', 'A500', 'm100');
     assertParticipantOwnsMessageSignature('A500.m100 B600.m200', 'B600', 'm200');
-    assertParticipantHasGapAndWidth('A500.m100 B600.m200', 'A500', 100, 500);
+    assertParticipantHasGapAndWidth('A500.m100 B600.m200', 'A500', 110, 500);
     assertParticipantHasGapAndWidth('A500.m100 B600.m200', 'B600', 100, 600);
   });
 })
