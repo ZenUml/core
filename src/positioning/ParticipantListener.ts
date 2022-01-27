@@ -1,5 +1,3 @@
-import {result} from "lodash";
-
 export const antlr4 = require('antlr4/index');
 export let seqDsl = require('../parser/index');
 const sequenceParserListener = require('@/generated-parser/sequenceParserListener');
@@ -21,12 +19,6 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
   private starter: string = '';
   private implicitParticipants: IParticipantModel[] = [];
   private currentArray: IParticipantModel[] = this.explicitParticipants;
-  private inGroup: boolean = false;
-  private left: string = '';
-  // constructor
-  constructor() {
-    super();
-  }
 
   enterStarter(ctx: any) {
     this.starter = ctx.getTextWithoutQuotes();
@@ -34,14 +26,13 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
 
   enterParticipant(ctx: any) {
     const name = ctx?.name()?.getTextWithoutQuotes() || 'Missing `Participant` name';
-    const participant = ParticipantListener._singleFactory(name, this.left);
+    const participant = ParticipantListener._singleFactory(name);
     this.currentArray.push(participant);
-    this.left = name;
   }
 
   enterGroup(ctx: any) {
     const name = ctx?.name()?.getTextWithoutQuotes();
-    const group = ParticipantListener._groupFactory(name, this.left);
+    const group = ParticipantListener._groupFactory(name);
     this.explicitParticipants.push(group);
     this.currentArray = group.children;
   }
@@ -55,9 +46,8 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
     if(name === this.starter) {
       return;
     }
-    const participant = ParticipantListener._singleFactory(name, this.left);
+    const participant = ParticipantListener._singleFactory(name);
     this.implicitParticipants.push(participant);
-    this.left = name;
   }
 
   enterTo = this.enterFrom
@@ -67,25 +57,36 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
   }
 
   flatten(): IParticipantModel[] {
-    const flattenedParticipants = this._flattenExplicitParticipants();
-    const result = this._handleStarter(flattenedParticipants);
-    result.push(...this.implicitParticipants);
-    return result;
-  }
-
-  private _handleStarter(flattenedParticipants: IParticipantModel[]) {
-    let result = flattenedParticipants;
-    if (!this._starterIsExplicitlyPositioned(flattenedParticipants)) {
-      this.starter = this.starter || '_STARTER_';
-      flattenedParticipants[0].left = this.starter
-      result = [ParticipantListener._singleFactory(this.starter, ''), ...flattenedParticipants]
+    let result2 = [...this._flattenExplicitParticipants(), ...this.implicitParticipants];
+    if (!this._isStarterExplicitlyPositioned()) {
+      result2.unshift(this._getStarter());
     }
-    return result;
+    result2 = this._dedup(result2);
+    ParticipantListener._assignLeft(result2);
+    return result2;
   }
 
-  private _starterIsExplicitlyPositioned(flattenedParticipants: IParticipantModel[]) {
-    return this.starter && flattenedParticipants.find(p => p.name === this.starter);
+  private _isStarterExplicitlyPositioned() {
+    return this.starter && this._flattenExplicitParticipants().find(p => p.name === this.starter);
   }
+
+  private _getStarter() {
+    return ParticipantListener._singleFactory(this.starter || '_STARTER_');
+  }
+
+  private static _assignLeft(array: IParticipantModel[]) {
+    array.reduce((pre: IParticipantModel, curr: IParticipantModel) => {
+      curr.left = pre.name || ''
+      return curr;
+    });
+  }
+
+  private _dedup(array: IParticipantModel[]) {
+    return array.filter((p, index) => {
+      return array.findIndex(p1 => { return p1.name === p.name }) === index;
+    })
+  }
+
 
   private _flattenExplicitParticipants() {
     // flatten the participants array
@@ -97,11 +98,11 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
     return flattenedParticipants;
   }
 
-  private static _singleFactory(name: string, left: string) {
-    return {name: name, type: SingleOrGroup.SINGLE, left, children: []};
+  private static _singleFactory(name: string): IParticipantModel {
+    return {name: name, type: SingleOrGroup.SINGLE, children: [], left: ''};
   }
 
-  private static _groupFactory(name: string, left: string) {
-    return {type: SingleOrGroup.GROUP, name, children: [], left};
+  private static _groupFactory(name: string): IParticipantModel {
+    return {type: SingleOrGroup.GROUP, name, children: [], left: ''};
   }
 }

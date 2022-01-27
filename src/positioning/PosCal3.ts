@@ -1,3 +1,4 @@
+import {OrderedParticipants} from "@/positioning/OrderedParticipants";
 import {Participants} from "@/parser/index";
 import {MessageContextListener} from "./MessageContextListener";
 import {ICoordinates2, TextType, WidthFunc} from "./Coordinate";
@@ -65,9 +66,7 @@ export class PosCal3 {
   }
 
   private static leftNeighbour(ctx: any, me: string) {
-    const participants = PosCal3.getAllParticipants(ctx);
-    const participantIndex = participants.indexOf(me);
-    // if participantIndex === 0, it does NOT throw an error and previousParticipant is undefined
-    return participants[participantIndex - 1];
+    const orderedParticipants = OrderedParticipants(ctx);
+    return orderedParticipants?.find(p => p.name === me)?.left;
   }
 }

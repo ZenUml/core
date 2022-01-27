@@ -36,39 +36,46 @@
  * A B @Starter(B) C.m    => A, B, C
  */
 
-import {antlr4, ParticipantListener, seqDsl} from "@/positioning/ParticipantListener";
+import {seqDsl} from "@/positioning/ParticipantListener";
+import {OrderedParticipants} from "../../../../src/positioning/OrderedParticipants";
 
 function getFlattenedParticipants(code: string) {
   const rootContext = seqDsl.RootContext(code);
-  const listener = new ParticipantListener();
-  const walker = antlr4.tree.ParseTreeWalker.DEFAULT
-  walker.walk(listener, rootContext)
-  return listener.flatten();
+  return OrderedParticipants(rootContext);
 }
 
 describe('Participants.Order', () => {
   it('should return the order of participants', () => {
     expect(getFlattenedParticipants('A B C.m')).toEqual([
-      { name: '_STARTER_', type: 0, left: '', children: [] },
-      { name: 'A', type: 0, left: '_STARTER_', children: [] },
-      { name: 'B', type: 0, left: 'A', children: [] },
-      { name: 'C', type: 0, left: 'B', children: [] }
+      {name: '_STARTER_', type: 0, left: '', children: []},
+      {name: 'A', type: 0, left: '_STARTER_', children: []},
+      {name: 'B', type: 0, left: 'A', children: []},
+      {name: 'C', type: 0, left: 'B', children: []}
     ]);
   })
 
   it('should return the order of participants', () => {
     expect(getFlattenedParticipants('A B @Starter(C) C.m')).toEqual([
-      { name: 'C', type: 0, left: '', children: [] },
-      { name: 'A', type: 0, left: 'C', children: [] },
-      { name: 'B', type: 0, left: 'A', children: [] }
+      {name: 'C', type: 0, left: '', children: []},
+      {name: 'A', type: 0, left: 'C', children: []},
+      {name: 'B', type: 0, left: 'A', children: []}
     ]);
   })
 
   it('should return the order of participants', () => {
-    expect(getFlattenedParticipants('A B @Starter(B) C.m')).toEqual([
-      { name: 'A', type: 0, left: '', children: [] },
-      { name: 'B', type: 0, left: 'A', children: [] },
-      { name: 'C', type: 0, left: 'B', children: [] }
+    const flattenedParticipants = getFlattenedParticipants('A B @Starter(B) A.m C.m');
+    console.log(flattenedParticipants);
+    expect(flattenedParticipants).toEqual([
+      {name: 'A', type: 0, left: '', children: []},
+      {name: 'B', type: 0, left: 'A', children: []},
+      {name: 'C', type: 0, left: 'B', children: []}
+    ]);
+  })
+
+  it('should return the order of participants', () => {
+    expect(getFlattenedParticipants('A.m')).toEqual([
+      { "children": [], "left": "", "name": "_STARTER_", "type": 0 },
+      { "children": [], "left": "_STARTER_", "name": "A", "type": 0 }
     ]);
   })
 })
