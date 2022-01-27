@@ -1,3 +1,6 @@
+import LogRocket from 'logrocket';
+import createPlugin from 'logrocket-vuex';
+
 import Vue from 'vue'
 import Vuex from 'vuex'
 // import log4V from './plugins/Log4V'
@@ -5,6 +8,18 @@ import {VueSequence} from './index'
 import demo1 from './demo1.js'
 import demo2 from './demo2.js'
 import VueGtag from "vue-gtag";
+
+LogRocket.init('ixkm5m/mylogrocket');
+const logrocketPlugin = createPlugin(LogRocket);
+
+// This is an example script - don't forget to change it!
+LogRocket.identify('THE_USER_ID_IN_YOUR_APP_1', {
+  name: 'James Morrison1',
+  email: 'jamesmorrison1@example.com',
+
+  // Add your own custom user variables here, ie:
+  subscriptionType: 'pro'
+});
 
 Vue.use(Vuex)
 
@@ -20,7 +35,10 @@ Vue.use(VueGtag, {
 // store1.state.onLifelineMounted = function(vueComp, elm) {
 //   console.log('Callback installed on', vueComp, elm)
 // }
-const store1 = new Vuex.Store(VueSequence.Store(50));
+const storeConfig = VueSequence.Store(50);
+// @ts-ignore
+storeConfig.plugins = [logrocketPlugin];
+const store1 = new Vuex.Store(storeConfig);
 store1.dispatch('updateCode', {
   code: demo1
 })
