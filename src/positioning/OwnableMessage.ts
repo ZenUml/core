@@ -1,4 +1,4 @@
-enum OwnableMessageType {
+export enum OwnableMessageType {
   SyncMessage = 0,
   AsyncMessage = 1,
   CreationMessage = 2,
