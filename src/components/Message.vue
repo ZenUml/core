@@ -1,6 +1,6 @@
 <template>
   <div class="message" :class="{ 'right-to-left':rtl }" :style="{'border-bottom-style': borderStyle}">
-    <div class="name px-5">{{content}}</div>
+    <div class="name inline-block px-5">{{content}}</div>
     <point :fill="fill" :rtl="rtl"/>
   </div>
 </template>

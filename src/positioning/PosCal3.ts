@@ -49,7 +49,8 @@ export class PosCal3 {
   private static getGap(widthProvider: WidthFunc, p: IOwnedMessages, ctx: any) {
     const contributingMessages = this.getMessagesFromLeftNeighbour(ctx, p);
     const gaps = contributingMessages.map((m: any) => {
-      return widthProvider(m.signature, TextType.MessageContent);
+      // 10px for the arrow head
+      return widthProvider(m.signature, TextType.MessageContent) + 10;
     });
     // return the max gap from gaps
     return Math.max(...gaps, this.MINI_GAP);
