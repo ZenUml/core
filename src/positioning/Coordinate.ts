@@ -14,6 +14,7 @@ export interface ICoordinate2 {
   participant: string;
   messageWidth: number;
   participantWidth: number;
+  gap?: number;
 }
 
 interface ICoordinate {

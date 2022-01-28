@@ -5,12 +5,12 @@ import {ICoordinate2, ICoordinates2, TextType, WidthFunc} from "@/positioning/Co
 import {MessagesGroupedByParticipant} from "@/positioning/MessageContextListener";
 import {OrderedParticipants} from "@/positioning/OrderedParticipants";
 import {IParticipantModel} from "@/positioning/ParticipantListener";
-import {OwnableMessage, OwnableMessageType} from "@/positioning/OwnableMessage";
+import {IOwnedMessages, OwnableMessage} from "@/positioning/OwnableMessage";
 
 export class PosCal2 {
   private _participants: Array<ICoordinate2>;
-  MINI_GAP = 100;
-  MARGIN = 20;
+  private static MINI_GAP = 100;
+  private static MARGIN = 20;
 
   constructor(ctx: any, widthProvider: WidthFunc) {
     this._participants = PosCal2.getMessageWidthAndParticipantWidth(ctx, widthProvider);
@@ -21,17 +21,17 @@ export class PosCal2 {
     const first = this._participants[0];
     return this._participants.slice(1, index+1)
       .reduce(({sum, pre}, cur) => {
-      sum = sum + this.calculateGap(cur, pre);
+      sum = sum + PosCal2.calculateGap(cur, pre);
 
       return {sum, pre: cur};
-    }, {sum: this.half(first), pre: first}).sum;
+    }, {sum: PosCal2.half(first), pre: first}).sum;
   }
 
-  calculateGap(participant: ICoordinate2, prev: ICoordinate2): number {
+  static calculateGap(participant: ICoordinate2, prev: ICoordinate2): number {
     return Math.max(participant.messageWidth, this.half(prev) + this.half(participant), this.MINI_GAP);
   }
 
-  half(participant: ICoordinate2): number {
+  static half(participant: ICoordinate2): number {
     if (participant.participant === '_STARTER_') {
       return 0;
     }
@@ -47,20 +47,28 @@ export class PosCal2 {
 
     return participantModels.map((p: IParticipantModel) => {
       const participant = p.name;
-      const leftNeighbour = p.left;
-      const myMessage = ownedMessagesList.find(p1 => p1.owner === p.name);
-      const contributingMessages = myMessage?.ownableMessages?.filter(o => o.from === leftNeighbour) || [];
-      const participantWidth = Math.max(widthProvider(participant || '', TextType.ParticipantName), PosCal2.MIN_PARTICIPANT_WIDTH);
-      const messageWidth = contributingMessages.reduce((acc, m: OwnableMessage) => {
-        let mw = widthProvider(m.signature || '', TextType.MessageContent) + 10;
-        // if ownableMessage is creation add participantWidth/2
-        if(m.type === OwnableMessageType.CreationMessage) {
-          mw += participantWidth / 2;
-        }
-        return Math.max(acc, mw);
-      }, this.MIN_MESSAGE_WIDTH);
+      const participantWidth = this._getParticipantWidth(widthProvider, participant);
+      const messageWidth = this._getMessageWidth(p, ownedMessagesList, widthProvider);
       return {participant, messageWidth, participantWidth} as ICoordinate2;
     });
   }
 
+  private static _getMessageWidth(p: IParticipantModel, ownedMessagesList: Array<IOwnedMessages>, widthProvider: WidthFunc) {
+    const leftNeighbour = p.left;
+    const myMessage = ownedMessagesList.find(p1 => p1.owner === p.name);
+    const contributingMessages = myMessage?.ownableMessages?.filter(o => o.from === leftNeighbour) || [];
+    return contributingMessages.reduce((acc, m: OwnableMessage) => {
+      let mw = widthProvider(m.signature || '', TextType.MessageContent) + 10;
+      // TODO: Following logic needs to add back
+      // // if ownableMessage is creation add participantWidth/2
+      // if(m.type === OwnableMessageType.CreationMessage) {
+      //   mw += participantWidth / 2;
+      // }
+      return Math.max(acc, mw);
+    }, this.MIN_MESSAGE_WIDTH);
+  }
+
+  private static _getParticipantWidth(widthProvider: WidthFunc, participant: string | undefined) {
+    return Math.max(widthProvider(participant || '', TextType.ParticipantName), PosCal2.MIN_PARTICIPANT_WIDTH);
+  }
 }
