@@ -36,15 +36,15 @@ export class PosCal3 {
   }
 
 // [{participant: a, gap:100, width: 250 }, {p: b, g:100, w: 120 }, {p: c, g: 150, w: 200}]
-  private static MINI_GAP = 100;
+  private static MIN_MESSAGE_WIDTH = 100;
   getGapsAndWidth(ctx: any, widthProvider: WidthFunc): ICoordinates2 {
     const ownedMessagesList = this.getOwnedMessagesList(ctx);
     // map ownedMessagesList to [{participant: a, gap:100, width: 250 }, {p: b, g:100, w: 120 }, {p: c, g: 150, w: 200}]
     return ownedMessagesList.map((p: IOwnedMessages) => {
       const participant = p.owner;
-      const gap = PosCal3.getMessageWidth(widthProvider, p, ctx);
+      const messageWidth = PosCal3.getMessageWidth(widthProvider, p, ctx);
       const width = widthProvider(participant, TextType.ParticipantName);
-      return {participant: participant, messageWidth: gap, participantWidth: width};
+      return {participant: participant, messageWidth: messageWidth, participantWidth: width};
     });
   }
 
@@ -54,8 +54,8 @@ export class PosCal3 {
       // 10px for the arrow head
       return widthProvider(m.signature, TextType.MessageContent) + 10;
     });
-    // return the max gap from gaps
-    return Math.max(...messageWidth, this.MINI_GAP);
+    // return the max width for messages
+    return Math.max(...messageWidth, this.MIN_MESSAGE_WIDTH);
   }
 
   // An owned message always has 'from';
