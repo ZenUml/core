@@ -2,12 +2,12 @@
   <!-- pr-24 to give space for the right most participant.
   TODO: we may need to consider the width of self message on right most participant. -->
   <div class="message-layer pr-24">
-    <block :context="context" :style="{'padding-left': paddingLeft + 'px'}"/>
+    <block :context="context" :style="{'padding-left': 0 + 'px'}"/>
   </div>
 </template>
 
 <script>
-import {mapGetters, mapMutations, mapState} from 'vuex'
+import {mapGetters, mapMutations} from 'vuex'
   import Block from './Block'
 
   export default {
@@ -21,15 +21,7 @@ import {mapGetters, mapMutations, mapState} from 'vuex'
       }
     },
     computed: {
-      ...mapGetters(['participants', 'centerOf', 'rightOf']),
-      ...mapState([]),
-
-      starter() {
-        return this.participants?.Starter()?.name
-      },
-      paddingLeft () {
-        return this.centerOf(this.starter) - 1
-      },
+      ...mapGetters(['participants']),
     },
     mounted () {
       console.debug('MessageLayer mounted')
