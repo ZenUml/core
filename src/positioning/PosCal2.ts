@@ -18,12 +18,13 @@ export class PosCal2 {
 
   getPosition(participantName: string|undefined): number {
     const index = this._participants.findIndex(p => p.participant === participantName);
+    const first = this._participants[0];
     return this._participants.slice(1, index+1)
       .reduce(({sum, pre}, cur) => {
       sum = sum + this.calculateGap(cur, pre);
 
       return {sum, pre: cur};
-    }, {sum: 0, pre: this._participants[0]}).sum;
+    }, {sum: this.half(first), pre: first}).sum;
   }
 
   calculateGap(participant: ICoordinate2, prev: ICoordinate2): number {
@@ -43,6 +44,7 @@ export class PosCal2 {
   }
 
   private static MIN_MESSAGE_WIDTH = 100;
+  private static MIN_PARTICIPANT_WIDTH = 100;
   static getMessageWidthAndParticipantWidth(ctx: any, widthProvider: WidthFunc): ICoordinates2 {
     let ownedMessagesList = PosCal2.getAllMessages(ctx);
     const participantModels = OrderedParticipants(ctx);
@@ -55,7 +57,7 @@ export class PosCal2 {
       const messageWidth = contributingMessages.reduce((acc, m: OwnableMessage) => {
         return Math.max(acc, widthProvider(m.signature || '', TextType.MessageContent) + 10);
       }, this.MIN_MESSAGE_WIDTH);
-      const participantWidth = widthProvider(participant || '', TextType.ParticipantName);
+      const participantWidth = Math.max(widthProvider(participant || '', TextType.ParticipantName), PosCal2.MIN_PARTICIPANT_WIDTH);
       return {participant, messageWidth, participantWidth} as ICoordinate2;
     });
   }
