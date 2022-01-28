@@ -65,6 +65,21 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
 
   enterTo = this.enterFrom
 
+  enterCreation(ctx: any) {
+    const name = ctx?.Owner();
+    if(name === this.starter) {
+      return;
+    }
+    // if explicitParticipants includes name, skip
+    if(this.explicitParticipants.some(p => p.name === name)) {
+      return;
+    }
+    const key = ParticipantListener._getKey(ctx);
+
+    const participant = ParticipantListener._singleFactory(key, name);
+    this.implicitParticipants.push(participant);
+  }
+
   result(): IParticipantModel[] {
     ParticipantListener._assignLeft(this.explicitParticipants)
     if(this._isStarterExplicitlyPositioned()) {

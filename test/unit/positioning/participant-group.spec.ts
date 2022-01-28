@@ -8,8 +8,6 @@ function Participants2(code: string) {
   return listener.result();
 }
 
-
-
 function FlattenedParticipants(code: string) {
   const rootContext = seqDsl.RootContext(code);
   const listener = new ParticipantListener();

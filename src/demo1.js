@@ -6,7 +6,5 @@
 // Nested method
 // Assignment
 export default `
-A.m
-B.m
-C.m
+new A
 `

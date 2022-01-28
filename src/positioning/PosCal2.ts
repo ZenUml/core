@@ -5,7 +5,7 @@ import {ICoordinate2, ICoordinates2, TextType, WidthFunc} from "@/positioning/Co
 import {MessageContextListener} from "@/positioning/MessageContextListener";
 import {OrderedParticipants} from "@/positioning/OrderedParticipants";
 import {antlr4, IParticipantModel} from "@/positioning/ParticipantListener";
-import {OwnableMessage} from "@/positioning/OwnableMessage";
+import {OwnableMessage, OwnableMessageType} from "@/positioning/OwnableMessage";
 
 export class PosCal2 {
   private _participants: Array<ICoordinate2>;
@@ -57,10 +57,15 @@ export class PosCal2 {
       const leftNeighbour = p.left;
       const myMessage = ownedMessagesList.find(p1 => p1.owner === p.name);
       const contributingMessages = myMessage?.ownableMessages?.filter(o => o.from === leftNeighbour) || [];
-      const messageWidth = contributingMessages.reduce((acc, m: OwnableMessage) => {
-        return Math.max(acc, widthProvider(m.signature || '', TextType.MessageContent) + 10);
-      }, this.MIN_MESSAGE_WIDTH);
       const participantWidth = Math.max(widthProvider(participant || '', TextType.ParticipantName), PosCal2.MIN_PARTICIPANT_WIDTH);
+      const messageWidth = contributingMessages.reduce((acc, m: OwnableMessage) => {
+        let mw = widthProvider(m.signature || '', TextType.MessageContent) + 10;
+        // if ownableMessage is creation add participantWidth/2
+        if(m.type === OwnableMessageType.CreationMessage) {
+          mw += participantWidth / 2;
+        }
+        return Math.max(acc, mw);
+      }, this.MIN_MESSAGE_WIDTH);
       return {participant, messageWidth, participantWidth} as ICoordinate2;
     });
   }
