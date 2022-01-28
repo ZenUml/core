@@ -38,7 +38,7 @@ describe('PosCal3', () => {
 function assertParticipantOwnsMessageSignature(code: string, participant: string, signature: string) {
   let rootContext = seqDsl.RootContext(code);
   const posCal3 = new PosCal3();
-  let ownableMessages = posCal3.getOwnedMessagesList(rootContext);
+  let ownableMessages = PosCal3.getOwnedMessagesList(rootContext);
 
   const message = ownableMessages?.find(m => m.owner === participant)?.ownableMessages?.find(m => m.signature === signature);
   expect(message).toBeDefined();
@@ -47,7 +47,7 @@ function assertParticipantOwnsMessageSignature(code: string, participant: string
 function assertParticipantHasGapAndWidth(code: string, participant: string, gap: number, width: number) {
   let rootContext = seqDsl.RootContext(code);
   const posCal3 = new PosCal3();
-  let coordinates2 = posCal3.getGapsAndWidth(rootContext, stubWidthProvider);
+  let coordinates2 = PosCal3.getGapsAndWidth(rootContext, stubWidthProvider);
 
   const coordinate2 = coordinates2.find(c => c.participant === participant);
   expect(coordinate2?.messageWidth).toEqual(gap);

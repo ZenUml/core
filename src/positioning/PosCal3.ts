@@ -8,11 +8,11 @@ const antlr4 = require('antlr4/index');
 export class PosCal3 {
 
   // [participant: [from, signature]]
-  getOwnedMessagesList(ctx: any): Array<IOwnedMessages> {
+  static getOwnedMessagesList(ctx: any): Array<IOwnedMessages> {
     const ownedMessagesList = PosCal3.visitAllMessages(ctx);
     const participants = PosCal3.getAllParticipants(ctx);
     return participants.map((participant: string) => {
-      return this.getOwnedMessages(ownedMessagesList, participant);
+      return PosCal3.getOwnedMessages(ownedMessagesList, participant);
     });
   }
 
@@ -30,16 +30,14 @@ export class PosCal3 {
     return listener.result();
   }
 
-  private getOwnedMessages(ownedMessagesList: Array<IOwnedMessages>, participant: string) {
+  private static getOwnedMessages(ownedMessagesList: Array<IOwnedMessages>, participant: string) {
     const ownedMessages = ownedMessagesList.find(o => o.owner === participant);
     return ownedMessages || {owner: participant, ownableMessages: []};
   }
 
-// [{participant: a, gap:100, width: 250 }, {p: b, g:100, w: 120 }, {p: c, g: 150, w: 200}]
   private static MIN_MESSAGE_WIDTH = 100;
-  getGapsAndWidth(ctx: any, widthProvider: WidthFunc): ICoordinates2 {
-    const ownedMessagesList = this.getOwnedMessagesList(ctx);
-    // map ownedMessagesList to [{participant: a, gap:100, width: 250 }, {p: b, g:100, w: 120 }, {p: c, g: 150, w: 200}]
+  static getGapsAndWidth(ctx: any, widthProvider: WidthFunc): ICoordinates2 {
+    const ownedMessagesList = PosCal3.getOwnedMessagesList(ctx);
     return ownedMessagesList.map((p: IOwnedMessages) => {
       const participant = p.owner;
       const messageWidth = PosCal3.getMessageWidth(widthProvider, p, ctx);
