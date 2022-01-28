@@ -17,15 +17,13 @@ export class PosCal2 {
   }
 
   getPosition(participantName: string|undefined): number {
-    // get index of participant by participantName
     const index = this._participants.findIndex(p => p.participant === participantName);
-    // filter participants index < index
-    const participantsBefore = this._participants.filter((p, i) => i <= index);
-    // sum all gaps
-    return participantsBefore.reduce((sum, participant, i) => {
-      const prev = participantsBefore[i - 1];
-      return sum + this.calculateGap(participant, prev);
-    }, 0)
+    return this._participants.slice(1, index+1)
+      .reduce(({sum, pre}, cur) => {
+      sum = sum + this.calculateGap(cur, pre);
+
+      return {sum, pre: cur};
+    }, {sum: 0, pre: this._participants[0]}).sum;
   }
 
   calculateGap(participant: ICoordinate2, prev: ICoordinate2): number {
@@ -33,10 +31,7 @@ export class PosCal2 {
   }
 
   half(participant: ICoordinate2): number {
-    if (participant) {
-      return (participant.participantWidth / 2) + (this.MARGIN / 2);
-    }
-    return 0;
+    return participant ? (participant.participantWidth / 2) + (this.MARGIN / 2) : 0;
   }
 
   private static getAllMessages(ctx: any) {
