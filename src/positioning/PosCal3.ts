@@ -10,7 +10,7 @@ export class PosCal3 {
 
   // [participant: [from, signature]]
   static getOwnedMessagesList(ctx: any): Array<IOwnedMessages> {
-    const ownedMessagesList = PosCal3.visitAllMessages(ctx);
+    const ownedMessagesList = PosCal3.getAllMessages(ctx);
     const participants = PosCal3.getAllParticipants(ctx);
     return participants.map((participant: string) => {
       return PosCal3.getOwnedMessages(ownedMessagesList, participant);
@@ -23,7 +23,7 @@ export class PosCal3 {
     });
   }
 
-  private static visitAllMessages(ctx: any) {
+  private static getAllMessages(ctx: any) {
     const walker = antlr4.tree.ParseTreeWalker.DEFAULT
 
     const listener = new MessageContextListener();
@@ -38,12 +38,11 @@ export class PosCal3 {
 
   private static MIN_MESSAGE_WIDTH = 100;
   static getGapsAndWidth(ctx: any, widthProvider: WidthFunc): ICoordinates2 {
-    let ownedMessagesList = PosCal3.visitAllMessages(ctx);
-    const participants = PosCal3.getAllParticipants(ctx);
-    ownedMessagesList = participants.map((participant: string) => {
-      return PosCal3.getOwnedMessages(ownedMessagesList, participant);
-    });
+    let ownedMessagesList = PosCal3.getAllMessages(ctx);
     const participantModels = OrderedParticipants(ctx);
+    ownedMessagesList = participantModels.map((participant: IParticipantModel) => {
+      return PosCal3.getOwnedMessages(ownedMessagesList, participant.name || '');
+    });
     return ownedMessagesList.map((p: IOwnedMessages) => {
       const participant = p.owner;
       const messageWidth = PosCal3.getMessageWidth(widthProvider, p, participantModels);
