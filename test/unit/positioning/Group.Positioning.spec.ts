@@ -41,7 +41,7 @@ function getGroupCoordinates(participants: IParticipantModel[], absolutePos: (na
 
 function CoordinateCalc(rootContext: any) {
   let participants = Participants2(rootContext);
-  const posCal2 = new PosCal2([], rootContext, stubWidthProvider);
+  const posCal2 = new PosCal2(rootContext, stubWidthProvider);
   function absolutePos(name: (string | undefined)) {
     return posCal2.getPosition(name);
   }

@@ -48,8 +48,7 @@ const Store = (debounce?: number) => {
         return Participants(getters.rootContext, true)
       },
       centerOf: (state: any, getters: any) => (entity: any) => {
-        const coordinates2 = new PosCal3().getGapsAndWidth(getters.rootContext, WidthProviderOnBrowser);
-        const posCal2 = new PosCal2(coordinates2);
+        const posCal2 = new PosCal2(getters.rootContext, WidthProviderOnBrowser);
         return posCal2.getPosition(entity) || 0
       },
       leftOf: (state: any, getters: any) => (entity: any) => {
