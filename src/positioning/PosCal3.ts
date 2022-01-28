@@ -45,14 +45,15 @@ export class PosCal3 {
     });
     return ownedMessagesList.map((p: IOwnedMessages) => {
       const participant = p.owner;
-      const messageWidth = PosCal3.getMessageWidth(widthProvider, p, participantModels);
+      const leftNeighbour = participantModels?.find(p1 => p1.name === p.owner)?.left;
+      const messageWidth = PosCal3.getMessageWidth(widthProvider, p, leftNeighbour);
       const width = widthProvider(participant, TextType.ParticipantName);
       return {participant: participant, messageWidth: messageWidth, participantWidth: width};
     });
   }
 
-  private static getMessageWidth(widthProvider: WidthFunc, p: IOwnedMessages, participantModels: IParticipantModel[]) {
-    const contributingMessages = this.getMessagesFromLeftNeighbour(p, participantModels);
+  private static getMessageWidth(widthProvider: WidthFunc, p: IOwnedMessages, leftNeighbour: string | undefined) {
+    const contributingMessages = p.ownableMessages.filter(o => o.from === leftNeighbour);
     const messageWidth = contributingMessages.map((m: any) => {
       // 10px for the arrow head
       return widthProvider(m.signature, TextType.MessageContent) + 10;
@@ -64,8 +65,4 @@ export class PosCal3 {
   // An owned message always has 'from';
   // root messages has 'from' as _STARTER_;
   // 'from' can be itself; special case: @Starter(A) A.method(), from === A
-  private static getMessagesFromLeftNeighbour(p: IOwnedMessages, participantModels: IParticipantModel[]) {
-    const leftNeighbour = participantModels?.find(p1 => p1.name === p.owner)?.left;
-    return p.ownableMessages.filter(o => o.from === leftNeighbour);
-  }
 }
