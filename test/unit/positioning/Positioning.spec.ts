@@ -55,6 +55,15 @@ describe('Group Positioning', () => {
     console.log('key', `${rootContext.start.start}-${rootContext.stop.stop}`);
   })
 
+  it('position simple message', () => {
+    let rootContext = seqDsl.RootContext('A100.m100');
+    let groupCoordinates = CoordinateCalc(rootContext);
+    const expected = [
+      { key: '0-3', name: 'A100', left: 180 },
+    ]
+    expect(groupCoordinates). toEqual(expected);
+  })
+
   it('position starter', () => {
     let rootContext = seqDsl.RootContext('A100 @Starter(A100)');
     let groupCoordinates = CoordinateCalc(rootContext);

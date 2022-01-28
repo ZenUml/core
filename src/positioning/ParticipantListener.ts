@@ -53,6 +53,10 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
     if(name === this.starter) {
       return;
     }
+    // if explicitParticipants includes name, skip
+    if(this.explicitParticipants.some(p => p.name === name)) {
+      return;
+    }
     const key = ParticipantListener._getKey(ctx);
 
     const participant = ParticipantListener._singleFactory(key, name);
@@ -63,7 +67,7 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
 
   result(): IParticipantModel[] {
     ParticipantListener._assignLeft(this.explicitParticipants)
-    return this.explicitParticipants;
+    return [...this.explicitParticipants, ...this.implicitParticipants];
   }
 
   flatten(): IParticipantModel[] {
@@ -88,7 +92,7 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
     array.reduce((pre: IParticipantModel, curr: IParticipantModel) => {
       curr.left = pre.name || ''
       return curr;
-    });
+    }, ParticipantListener._singleFactory('0-0', ''));
   }
 
   private _dedup(array: IParticipantModel[]) {
