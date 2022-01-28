@@ -20,45 +20,38 @@ function Participants2(rootContext: any) {
 
 
 function getGroupCoordinates(participants: IParticipantModel[], coordinates2: ICoordinates2) {
-  let inGroup = false;
-  let groupLeft = 0;
-  let result = [];
+  let result = [] as any;
+  const posCal2 = new PosCal2(coordinates2);
+
+  function _processSingleParticipantWithRelativeLeft(participant: IParticipantModel, relativeLeft: number) {
+    let left = posCal2.getPosition(participant.name || '') || 0
+    result.push({
+      key: participant.key,
+      name: participant.name,
+      left: left - relativeLeft
+    })
+  }
+
+  function _processGroup(participant: IParticipantModel) {
+    let firstChild = participant.children[0];
+    let left = posCal2.getPosition(firstChild.name || '') || 0
+    result.push({
+      key: participant.key,
+      name: participant.name,
+      left: left
+    })
+    for (let j = 0; j < participant.children.length; j++) {
+      _processSingleParticipantWithRelativeLeft(participant.children[j], left);
+    }
+  }
+
   for (let i = 0; i < participants.length; i++) {
     const participant = participants[i];
     if (participant.type === SingleOrGroup.SINGLE) {
-      if(!inGroup) {
-        const posCal2 = new PosCal2(coordinates2);
-        let left = posCal2.getPosition(participant.name || '') || 0
-
-        result.push({
-          key: participant.key,
-          name: participant.name,
-          left: left
-        })
-      }
+      _processSingleParticipantWithRelativeLeft(participant, 0);
     }
     if (participant.type === SingleOrGroup.GROUP) {
-      const posCal2 = new PosCal2(coordinates2);
-      let firstChild = participant.children[0];
-      let left = posCal2.getPosition(firstChild.name || '') || 0
-      result.push({
-        key: participant.key,
-        name: participant.name,
-        left: left
-      })
-      inGroup = true;
-      groupLeft = left;
-
-      for(let j = 0; j < participant.children.length; j++) {
-        const child = participant.children[j];
-        const posCal2 = new PosCal2(coordinates2);
-        let left = posCal2.getPosition(child.name || '') || 0
-        result.push({
-          key: child.key,
-          name: child.name,
-          left: left - groupLeft
-        })
-      }
+      _processGroup(participant);
     }
   }
   return result;
