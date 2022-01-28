@@ -1,43 +1,37 @@
 // max(MIN_GAP, old_g, new_g, w/2 + left-part-w/2 + MARGIN)
 import {PosCal2} from "@/positioning/PosCal2";
+import {seqDsl} from "../../../src/positioning/ParticipantListener";
+import {stubWidthProvider} from "./pos.cal3.spec";
 
 describe('cal', () => {
-  // it('should accept a gap', () => {
-  //   new PosCal2()
-  // })
 
-  it('produce position of participant', () => {
-    const posCal2 = new PosCal2([
-      {participant: 'A', gap:100, width: 10 },
-      {participant: 'B', gap:100, width: 10 },
-      {participant: 'C', gap:150, width: 10}
-    ]);
+  it('produce position of participant - only declared participants', () => {
+    let rootContext = seqDsl.RootContext('A100 group {B100} C100');
 
-    expect(posCal2.getPosition('A')).toBe(100)
-    expect(posCal2.getPosition('B')).toBe(200)
-    expect(posCal2.getPosition('C')).toBe(350)
-  })
-  // A: 100, B: 200, C: 350
-  it('produce position of participant - consider width and margin', () => {
-    const posCal2 = new PosCal2([
-      {participant: 'A', gap:10, width: 200 },
-      {participant: 'B', gap:10, width: 200 },
-      {participant: 'C', gap:10, width: 200 },
-    ]);
+    const posCal2 = new PosCal2([], rootContext, stubWidthProvider);
 
-    expect(posCal2.getPosition('A')).toBe(110)
-    expect(posCal2.getPosition('B')).toBe(330)
-    expect(posCal2.getPosition('C')).toBe(550)
+    expect(posCal2.getPosition('A100')).toBe(200)
+    expect(posCal2.getPosition('B100')).toBe(320)
+    expect(posCal2.getPosition('C100')).toBe(440)
   })
 
-  // A: 100, B: 200, C: 350
   it('produce position of participant - ensure MINI_GAP', () => {
-    const posCal2 = new PosCal2([
-      {participant: 'A', gap:10, width: 20 },
-      {participant: 'B', gap:10, width: 20 },
-    ]);
+    let rootContext = seqDsl.RootContext('A1 group {B1} C1');
 
-    expect(posCal2.getPosition('A')).toBe(100)
-    expect(posCal2.getPosition('B')).toBe(200)
+    const posCal2 = new PosCal2([], rootContext, stubWidthProvider);
+
+    expect(posCal2.getPosition('A1')).toBe(200)
+    expect(posCal2.getPosition('B1')).toBe(300)
+    expect(posCal2.getPosition('C1')).toBe(400)
+  })
+
+  it('produce position of participant - wide method', () => {
+    let rootContext = seqDsl.RootContext('A1 group {B1} C1 A1.m800');
+
+    const posCal2 = new PosCal2([], rootContext, stubWidthProvider);
+
+    expect(posCal2.getPosition('A1')).toBe(910)
+    expect(posCal2.getPosition('B1')).toBe(1010)
+    expect(posCal2.getPosition('C1')).toBe(1110)
   })
 })
