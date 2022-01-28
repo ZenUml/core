@@ -8,6 +8,7 @@ export enum SingleOrGroup {
 }
 
 export interface IParticipantModel {
+  key: string;
   type: SingleOrGroup;
   name?: string;
   children: IParticipantModel[];
@@ -26,13 +27,19 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
 
   enterParticipant(ctx: any) {
     const name = ctx?.name()?.getTextWithoutQuotes() || 'Missing `Participant` name';
-    const participant = ParticipantListener._singleFactory(name);
+    const key = ParticipantListener._getKey(ctx);
+    const participant = ParticipantListener._singleFactory(key, name);
     this.currentArray.push(participant);
+  }
+
+  private static _getKey(ctx: any) {
+    return `${ctx.start.start}-${ctx.stop.stop}`;
   }
 
   enterGroup(ctx: any) {
     const name = ctx?.name()?.getTextWithoutQuotes();
-    const group = ParticipantListener._groupFactory(name);
+    const key = ParticipantListener._getKey(ctx);
+    const group = ParticipantListener._groupFactory(key, name);
     this.explicitParticipants.push(group);
     this.currentArray = group.children;
   }
@@ -46,13 +53,16 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
     if(name === this.starter) {
       return;
     }
-    const participant = ParticipantListener._singleFactory(name);
+    const key = ParticipantListener._getKey(ctx);
+
+    const participant = ParticipantListener._singleFactory(key, name);
     this.implicitParticipants.push(participant);
   }
 
   enterTo = this.enterFrom
 
   result(): IParticipantModel[] {
+    ParticipantListener._assignLeft(this.explicitParticipants)
     return this.explicitParticipants;
   }
 
@@ -71,7 +81,7 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
   }
 
   private _getStarter() {
-    return ParticipantListener._singleFactory(this.starter || '_STARTER_');
+    return ParticipantListener._singleFactory('0-0', this.starter || '_STARTER_');
   }
 
   private static _assignLeft(array: IParticipantModel[]) {
@@ -98,11 +108,11 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
     return flattenedParticipants;
   }
 
-  private static _singleFactory(name: string): IParticipantModel {
-    return {name: name, type: SingleOrGroup.SINGLE, children: [], left: ''};
+  private static _singleFactory(key: string, name: string): IParticipantModel {
+    return {key, name: name, type: SingleOrGroup.SINGLE, children: [], left: ''};
   }
 
-  private static _groupFactory(name: string): IParticipantModel {
-    return {type: SingleOrGroup.GROUP, name, children: [], left: ''};
+  private static _groupFactory(key: string, name: string): IParticipantModel {
+    return {key, name, type: SingleOrGroup.GROUP, children: [], left: ''};
   }
 }
