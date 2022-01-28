@@ -32,6 +32,9 @@ export class PosCal2 {
   }
 
   half(participant: ICoordinate2): number {
+    if (participant.participant === '_STARTER_') {
+      return 0;
+    }
     return participant ? (participant.participantWidth / 2) + (this.MARGIN / 2) : 0;
   }
 

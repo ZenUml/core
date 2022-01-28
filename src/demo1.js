@@ -6,7 +6,7 @@
 // Nested method
 // Assignment
 export default `
-A
-@Starter(A)
-
+A.m
+B.m
+C.m
 `
