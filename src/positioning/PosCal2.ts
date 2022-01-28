@@ -46,8 +46,8 @@ export class PosCal2 {
     const participantModels = OrderedParticipants(ctx);
 
     return participantModels.map((p: IParticipantModel) => {
-      const participant = p.name;
-      const participantWidth = this._getParticipantWidth(widthProvider, participant);
+      const name = p.name;
+      const participantWidth = this._getParticipantWidth(widthProvider, name);
       return {p, participantWidth};
     }).map(({p, participantWidth}) => {
       const messageWidth = this._getMessageWidth(p, ownedMessagesList, widthProvider);
@@ -56,18 +56,19 @@ export class PosCal2 {
   }
 
   private static _getMessageWidth(p: IParticipantModel, ownedMessagesList: Array<IOwnedMessages>, widthProvider: WidthFunc) {
-    const leftNeighbour = p.left;
-    const myMessage = ownedMessagesList.find(p1 => p1.owner === p.name);
-    const contributingMessages = myMessage?.ownableMessages?.filter(o => o.from === leftNeighbour) || [];
-    return contributingMessages.reduce((acc, m: OwnableMessage) => {
-      let mw = widthProvider(m.signature || '', TextType.MessageContent) + 10;
-      // TODO: Following logic needs to add back
-      // // if ownableMessage is creation add participantWidth/2
-      // if(m.type === OwnableMessageType.CreationMessage) {
-      //   mw += participantWidth / 2;
-      // }
-      return Math.max(acc, mw);
-    }, this.MIN_MESSAGE_WIDTH);
+    return ownedMessagesList
+      .filter(p1 => p1.owner === p.name)
+      .flatMap((p2: IOwnedMessages) => p2.ownableMessages)
+      .filter(o => o.from === p.left)
+      .reduce((maxWidth, m: OwnableMessage) => {
+        let mw = widthProvider(m.signature || '', TextType.MessageContent) + 10;
+        // TODO: Following logic needs to add back
+        // // if ownableMessage is creation add participantWidth/2
+        // if(m.type === OwnableMessageType.CreationMessage) {
+        //   mw += participantWidth / 2;
+        // }
+        return Math.max(maxWidth, mw);
+      }, this.MIN_MESSAGE_WIDTH)
   }
 
   private static _getParticipantWidth(widthProvider: WidthFunc, participant: string | undefined) {

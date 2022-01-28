@@ -24,6 +24,7 @@
       ]
     },
     "lib": [
+      "es2019",
       "es2016",
       "dom",
       "dom.iterable",
