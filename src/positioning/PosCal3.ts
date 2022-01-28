@@ -38,10 +38,15 @@ export class PosCal3 {
 
   private static MIN_MESSAGE_WIDTH = 100;
   static getGapsAndWidth(ctx: any, widthProvider: WidthFunc): ICoordinates2 {
-    const ownedMessagesList = PosCal3.getOwnedMessagesList(ctx);
+    let ownedMessagesList = PosCal3.visitAllMessages(ctx);
+    const participants = PosCal3.getAllParticipants(ctx);
+    ownedMessagesList = participants.map((participant: string) => {
+      return PosCal3.getOwnedMessages(ownedMessagesList, participant);
+    });
+    const participantModels = OrderedParticipants(ctx);
     return ownedMessagesList.map((p: IOwnedMessages) => {
       const participant = p.owner;
-      const messageWidth = PosCal3.getMessageWidth(widthProvider, p, OrderedParticipants(ctx));
+      const messageWidth = PosCal3.getMessageWidth(widthProvider, p, participantModels);
       const width = widthProvider(participant, TextType.ParticipantName);
       return {participant: participant, messageWidth: messageWidth, participantWidth: width};
     });
