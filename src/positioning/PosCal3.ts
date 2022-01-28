@@ -36,7 +36,7 @@ export class PosCal3 {
 
 // [{participant: a, gap:100, width: 250 }, {p: b, g:100, w: 120 }, {p: c, g: 150, w: 200}]
   private static MINI_GAP = 100;
-  getCoordinates2(ctx: any, widthProvider: WidthFunc): ICoordinates2 {
+  getGapsAndWidth(ctx: any, widthProvider: WidthFunc): ICoordinates2 {
     const ownedMessagesList = this.getOwnedMessagesList(ctx);
     // map ownedMessagesList to [{participant: a, gap:100, width: 250 }, {p: b, g:100, w: 120 }, {p: c, g: 150, w: 200}]
     return ownedMessagesList.map((p: IOwnedMessages) => {

@@ -12,7 +12,7 @@ export class PosCal2 {
     this._participants = participants;
   }
 
-  getPosition(participantName: string): number {
+  getPosition(participantName: string|undefined): number {
     // get index of participant by participantName
     const index = this._participants.findIndex(p => p.participant === participantName);
     // filter participants index < index

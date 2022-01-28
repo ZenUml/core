@@ -19,13 +19,12 @@ function Participants2(rootContext: any) {
 }
 
 
-function getGroupCoordinates(participants: IParticipantModel[], coordinates2: ICoordinates2) {
+function getGroupCoordinates(participants: IParticipantModel[], absolutePos: (name: (string | undefined)) => number) {
   let result = [] as any;
-  const posCal2 = new PosCal2(coordinates2);
 
   function _getLeft(participant: IParticipantModel) {
     let positionProvider = participant.type === SingleOrGroup.GROUP ? participant.children[0] : participant;
-    return posCal2.getPosition(positionProvider.name || '') || 0;
+    return absolutePos(positionProvider.name);
   }
 
   function _processItem(participant: IParticipantModel, relativeLeft: number = 0) {
@@ -45,9 +44,12 @@ function getGroupCoordinates(participants: IParticipantModel[], coordinates2: IC
 function CoordinateCalc(rootContext: any) {
   let participants = Participants2(rootContext);
   const posCal3 = new PosCal3();
-  let coordinates2 = posCal3.getCoordinates2(rootContext, stubWidthProvider);
-
-  return getGroupCoordinates(participants, coordinates2);
+  let gapsAndWidth = posCal3.getGapsAndWidth(rootContext, stubWidthProvider);
+  const posCal2 = new PosCal2(gapsAndWidth);
+  function absolutePos(name: (string | undefined)) {
+    return posCal2.getPosition(name);
+  }
+  return getGroupCoordinates(participants, absolutePos);
 }
 
 describe('Group Positioning', () => {

@@ -48,7 +48,7 @@ const Store = (debounce?: number) => {
         return Participants(getters.rootContext, true)
       },
       centerOf: (state: any, getters: any) => (entity: any) => {
-        const coordinates2 = new PosCal3().getCoordinates2(getters.rootContext, WidthProviderOnBrowser);
+        const coordinates2 = new PosCal3().getGapsAndWidth(getters.rootContext, WidthProviderOnBrowser);
         const posCal2 = new PosCal2(coordinates2);
         return posCal2.getPosition(entity) || 0
       },
