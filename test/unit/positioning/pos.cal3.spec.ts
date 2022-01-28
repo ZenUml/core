@@ -50,6 +50,6 @@ function assertParticipantHasGapAndWidth(code: string, participant: string, gap:
   let coordinates2 = posCal3.getGapsAndWidth(rootContext, stubWidthProvider);
 
   const coordinate2 = coordinates2.find(c => c.participant === participant);
-  expect(coordinate2?.gap).toEqual(gap);
+  expect(coordinate2?.messageWidth).toEqual(gap);
   expect(coordinate2?.width).toEqual(width);
 }

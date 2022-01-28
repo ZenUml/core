@@ -27,7 +27,7 @@ export class PosCal2 {
   }
 
   calculateGap(participant: ICoordinate2, prev: ICoordinate2): number {
-    return Math.max(participant.gap, this.half(prev) + this.half(participant), this.MINI_GAP);
+    return Math.max(participant.messageWidth, this.half(prev) + this.half(participant), this.MINI_GAP);
   }
 
   half(participant: ICoordinate2): number {

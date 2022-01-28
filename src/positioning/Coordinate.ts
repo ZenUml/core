@@ -12,7 +12,7 @@ export interface Coordinate {
 
 export interface ICoordinate2 {
   participant: string;
-  gap: number;
+  messageWidth: number;
   width: number;
 }
 

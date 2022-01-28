@@ -42,20 +42,20 @@ export class PosCal3 {
     // map ownedMessagesList to [{participant: a, gap:100, width: 250 }, {p: b, g:100, w: 120 }, {p: c, g: 150, w: 200}]
     return ownedMessagesList.map((p: IOwnedMessages) => {
       const participant = p.owner;
-      const gap = PosCal3.getGap(widthProvider, p, ctx);
+      const gap = PosCal3.getMessageWidth(widthProvider, p, ctx);
       const width = widthProvider(participant, TextType.ParticipantName);
-      return {participant: participant, gap: gap, width: width};
+      return {participant: participant, messageWidth: gap, width: width};
     });
   }
 
-  private static getGap(widthProvider: WidthFunc, p: IOwnedMessages, ctx: any) {
+  private static getMessageWidth(widthProvider: WidthFunc, p: IOwnedMessages, ctx: any) {
     const contributingMessages = this.getMessagesFromLeftNeighbour(ctx, p);
-    const gaps = contributingMessages.map((m: any) => {
+    const messageWidth = contributingMessages.map((m: any) => {
       // 10px for the arrow head
       return widthProvider(m.signature, TextType.MessageContent) + 10;
     });
     // return the max gap from gaps
-    return Math.max(...gaps, this.MINI_GAP);
+    return Math.max(...messageWidth, this.MINI_GAP);
   }
 
   // An owned message always has 'from';
