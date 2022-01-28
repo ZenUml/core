@@ -4,7 +4,9 @@ import {PosCal3} from "../../../src/positioning/posCal3";
 let seqDsl = require('../../../src/parser/index');
 
 export let stubWidthProvider: WidthFunc = (text, _) => {
-  return parseInt(text.substring(1));
+  const number = parseInt(text.substring(1) || '0');
+
+  return isNaN(number) ? 0 : number;
 };
 
 describe('PosCal3', () => {

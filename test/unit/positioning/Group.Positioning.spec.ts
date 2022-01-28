@@ -63,10 +63,10 @@ describe('Group Positioning', () => {
     let rootContext = seqDsl.RootContext('A100 group {B100} C100');
     let groupCoordinates = CoordinateCalc(rootContext);
     const expected = [
-      { key: '0-3', name: 'A100', left: 100 },
-      { key: '5-16', name: undefined, left: 220 },
+      { key: '0-3', name: 'A100', left: 200 },
+      { key: '5-16', name: undefined, left: 320 },
       { key: '12-15', name: 'B100', left: 0 },
-      { key: '18-21', name: 'C100', left: 340 }
+      { key: '18-21', name: 'C100', left: 440 }
     ]
     expect(groupCoordinates).toEqual(expected);
   })

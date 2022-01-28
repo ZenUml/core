@@ -1,5 +1,4 @@
 import {OrderedParticipants} from "@/positioning/OrderedParticipants";
-import {Participants} from "@/parser/index";
 import {MessageContextListener} from "./MessageContextListener";
 import {ICoordinates2, TextType, WidthFunc} from "./Coordinate";
 import {IOwnedMessages} from "@/positioning/OwnableMessage";
@@ -18,7 +17,9 @@ export class PosCal3 {
   }
 
   private static getAllParticipants(ctx: any) {
-    return Participants(ctx, true).Names();
+    return OrderedParticipants(ctx).map((participant: any) => {
+      return participant.name;
+    });
   }
 
   private static visitAllMessages(ctx: any) {
