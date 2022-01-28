@@ -10,7 +10,7 @@ export class PosCal2 {
   MARGIN = 20;
 
   constructor(ctx: any, widthProvider: WidthFunc) {
-    this._participants = PosCal3.getGapsAndWidth(ctx, widthProvider);
+    this._participants = PosCal3.getMessageWidthAndParticipantWidth(ctx, widthProvider);
   }
 
   getPosition(participantName: string|undefined): number {

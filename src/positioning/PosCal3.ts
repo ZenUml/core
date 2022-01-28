@@ -1,6 +1,6 @@
 import {OrderedParticipants} from "@/positioning/OrderedParticipants";
 import {MessageContextListener} from "./MessageContextListener";
-import {ICoordinates2, TextType, WidthFunc} from "./Coordinate";
+import {ICoordinate2, ICoordinates2, TextType, WidthFunc} from "./Coordinate";
 import {IOwnedMessages} from "@/positioning/OwnableMessage";
 import {IParticipantModel} from "@/positioning/ParticipantListener";
 
@@ -37,29 +37,31 @@ export class PosCal3 {
   }
 
   private static MIN_MESSAGE_WIDTH = 100;
-  static getGapsAndWidth(ctx: any, widthProvider: WidthFunc): ICoordinates2 {
+  static getMessageWidthAndParticipantWidth(ctx: any, widthProvider: WidthFunc): ICoordinates2 {
     let ownedMessagesList = PosCal3.getAllMessages(ctx);
     const participantModels = OrderedParticipants(ctx);
     ownedMessagesList = participantModels.map((participant: IParticipantModel) => {
       return PosCal3.getOwnedMessages(ownedMessagesList, participant.name || '');
     });
-    return ownedMessagesList.map((p: IOwnedMessages) => {
-      const participant = p.owner;
-      const leftNeighbour = participantModels?.find(p1 => p1.name === p.owner)?.left;
-      const messageWidth = PosCal3.getMessageWidth(widthProvider, p, leftNeighbour);
-      const width = widthProvider(participant, TextType.ParticipantName);
-      return {participant: participant, messageWidth: messageWidth, participantWidth: width};
+
+    return participantModels.map((p: IParticipantModel) => {
+      const participant = p.name;
+      const leftNeighbour = p.left;
+      const myMessage = ownedMessagesList.find(p1 => p1.owner === p.name);
+      const messageWidth = PosCal3.getMessageWidth(widthProvider, myMessage, leftNeighbour);
+      const participantWidth = widthProvider(participant || '', TextType.ParticipantName);
+      return {participant, messageWidth, participantWidth} as ICoordinate2;
     });
   }
 
-  private static getMessageWidth(widthProvider: WidthFunc, p: IOwnedMessages, leftNeighbour: string | undefined) {
-    const contributingMessages = p.ownableMessages.filter(o => o.from === leftNeighbour);
-    const messageWidth = contributingMessages.map((m: any) => {
+  private static getMessageWidth(widthProvider: WidthFunc, p: IOwnedMessages | undefined, leftNeighbour: string | undefined) {
+    const contributingMessages = p?.ownableMessages.filter(o => o.from === leftNeighbour);
+    const messageWidth = contributingMessages?.map((m: any) => {
       // 10px for the arrow head
       return widthProvider(m.signature, TextType.MessageContent) + 10;
     });
     // return the max width for messages
-    return Math.max(...messageWidth, this.MIN_MESSAGE_WIDTH);
+    return Math.max(...messageWidth || [], this.MIN_MESSAGE_WIDTH);
   }
 
   // An owned message always has 'from';

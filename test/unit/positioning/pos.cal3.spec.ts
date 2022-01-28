@@ -47,7 +47,7 @@ function assertParticipantOwnsMessageSignature(code: string, participant: string
 function assertParticipantHasGapAndWidth(code: string, participant: string, gap: number, width: number) {
   let rootContext = seqDsl.RootContext(code);
   const posCal3 = new PosCal3();
-  let coordinates2 = PosCal3.getGapsAndWidth(rootContext, stubWidthProvider);
+  let coordinates2 = PosCal3.getMessageWidthAndParticipantWidth(rootContext, stubWidthProvider);
 
   const coordinate2 = coordinates2.find(c => c.participant === participant);
   expect(coordinate2?.messageWidth).toEqual(gap);
