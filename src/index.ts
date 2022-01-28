@@ -12,7 +12,6 @@ import './components/theme-blue-river.scss'
 import {CodeRange} from './parser/CodeRange'
 // @ts-ignore
 import PositionCalculator from './utils/position.calculator'
-import {PosCal3} from "@/positioning/PosCal3";
 import WidthProviderOnBrowser from "@/positioning/WidthProviderFunc";
 import {PosCal2} from "@/positioning/PosCal2";
 

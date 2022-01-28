@@ -1,4 +1,3 @@
-import {stubWidthProvider} from "./pos.cal3.spec";
 import {
   antlr4,
   IParticipantModel,
@@ -6,6 +5,7 @@ import {
   SingleOrGroup
 } from "../../../src/positioning/ParticipantListener";
 import {PosCal2} from "../../../src/positioning/PosCal2";
+import {stubWidthProvider} from "../parser/fixture/Fixture";
 
 let seqDsl = require('../../../src/parser/index');
 

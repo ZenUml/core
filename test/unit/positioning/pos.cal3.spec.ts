@@ -1,13 +1,7 @@
-import {WidthFunc} from "../../../src/positioning/Coordinate";
-import {PosCal3} from "../../../src/positioning/posCal3";
+import {PosCal2} from "../../../src/positioning/posCal2";
+import {stubWidthProvider} from "../parser/fixture/Fixture";
 
 let seqDsl = require('../../../src/parser/index');
-
-export let stubWidthProvider: WidthFunc = (text, _) => {
-  const number = parseInt(text.substring(1) || '0');
-
-  return isNaN(number) ? 0 : number;
-};
 
 describe('PosCal3', () => {
   it('should return default positions for declared participants', () => {
@@ -33,7 +27,7 @@ describe('PosCal3', () => {
 
 function assertParticipantHasMessageWidthAndParticipantWidth(code: string, participant: string, messageWidth: number, participantWidth: number) {
   let rootContext = seqDsl.RootContext(code);
-  let coordinates2 = PosCal3.getMessageWidthAndParticipantWidth(rootContext, stubWidthProvider);
+  let coordinates2 = PosCal2.getMessageWidthAndParticipantWidth(rootContext, stubWidthProvider);
 
   const coordinate2 = coordinates2.find(c => c.participant === participant);
   expect(coordinate2?.messageWidth).toEqual(messageWidth);

@@ -1,7 +1,7 @@
 // max(MIN_GAP, old_g, new_g, w/2 + left-part-w/2 + MARGIN)
 import {PosCal2} from "@/positioning/PosCal2";
 import {seqDsl} from "../../../src/positioning/ParticipantListener";
-import {stubWidthProvider} from "./pos.cal3.spec";
+import {stubWidthProvider} from "../parser/fixture/Fixture";
 
 describe('cal', () => {
 
