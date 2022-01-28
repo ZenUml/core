@@ -2,6 +2,7 @@ import {OrderedParticipants} from "@/positioning/OrderedParticipants";
 import {MessageContextListener} from "./MessageContextListener";
 import {ICoordinates2, TextType, WidthFunc} from "./Coordinate";
 import {IOwnedMessages} from "@/positioning/OwnableMessage";
+import {IParticipantModel} from "@/positioning/ParticipantListener";
 
 const antlr4 = require('antlr4/index');
 
@@ -60,12 +61,7 @@ export class PosCal3 {
   // root messages has 'from' as _STARTER_;
   // 'from' can be itself; special case: @Starter(A) A.method(), from === A
   private static getMessagesFromLeftNeighbour(ctx: any, p: IOwnedMessages) {
-    const leftNeighbour = PosCal3.leftNeighbour(ctx, p.owner);
+    const leftNeighbour = OrderedParticipants(ctx)?.find(p1 => p1.name === p.owner)?.left;
     return p.ownableMessages.filter(o => o.from === leftNeighbour);
-  }
-
-  private static leftNeighbour(ctx: any, me: string) {
-    const orderedParticipants = OrderedParticipants(ctx);
-    return orderedParticipants?.find(p => p.name === me)?.left;
   }
 }
