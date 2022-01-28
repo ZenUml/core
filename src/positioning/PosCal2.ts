@@ -1,15 +1,21 @@
 // a, b, c, MIN_GAP=100, MARGIN
 // [{participant: a, gap:100, width: 250 }, {p: b, g:100, w: 120 }, {p: c, g: 150, w: 200}]
 // delta {a: {g: 110, w: 120} =>
-import {ICoordinate2} from "@/positioning/Coordinate";
+import {ICoordinate2, WidthFunc} from "@/positioning/Coordinate";
+import {PosCal3} from "@/positioning/PosCal3";
 
 export class PosCal2 {
   private _participants: Array<ICoordinate2>;
   MINI_GAP = 100;
   MARGIN = 20;
 
-  constructor(participants: Array<ICoordinate2>) {
-    this._participants = participants;
+  constructor(participants: Array<ICoordinate2>, ctx: any, widthProvider: WidthFunc) {
+    if(participants && participants.length > 0) {
+      this._participants = participants;
+    } else {
+      const posCal3 = new PosCal3();
+      this._participants = posCal3.getGapsAndWidth(ctx, widthProvider);
+    }
   }
 
   getPosition(participantName: string|undefined): number {

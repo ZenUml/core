@@ -1,4 +1,3 @@
-import {PosCal3} from "../../../src/positioning/PosCal3";
 import {stubWidthProvider} from "./pos.cal3.spec";
 import {
   antlr4,
@@ -6,7 +5,6 @@ import {
   ParticipantListener,
   SingleOrGroup
 } from "../../../src/positioning/ParticipantListener";
-import {ICoordinates2} from "../../../src/positioning/Coordinate";
 import {PosCal2} from "../../../src/positioning/PosCal2";
 
 let seqDsl = require('../../../src/parser/index');
@@ -43,9 +41,7 @@ function getGroupCoordinates(participants: IParticipantModel[], absolutePos: (na
 
 function CoordinateCalc(rootContext: any) {
   let participants = Participants2(rootContext);
-  const posCal3 = new PosCal3();
-  let gapsAndWidth = posCal3.getGapsAndWidth(rootContext, stubWidthProvider);
-  const posCal2 = new PosCal2(gapsAndWidth);
+  const posCal2 = new PosCal2([], rootContext, stubWidthProvider);
   function absolutePos(name: (string | undefined)) {
     return posCal2.getPosition(name);
   }
