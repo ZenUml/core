@@ -24,7 +24,10 @@ describe('participant group', () => {
     ['@EC2', '0-3', 'Missing `Participant` name', ''],
   ])('Code `%s` produces one single participant with name `%s`', (code, key, name, left) => {
     const participants2 = Participants2(code);
-    expect(participants2).toEqual([{key, type: SingleOrGroup.SINGLE, name, left, "children":[] }])
+    expect(participants2).toEqual([
+      {key: '0-0',  type: SingleOrGroup.SINGLE, name: '_STARTER_',  left: '', "children":[] },
+      {key,         type: SingleOrGroup.SINGLE, name,               left, "children":[] }
+    ])
   })
 
   it.each([
@@ -38,7 +41,10 @@ describe('participant group', () => {
   // it should print out a tree: root { A { B C } }
   it('prints participants', () => {
     const code = 'A group { B C }';
-    const expected = [{"key": "0-0", "name": "A", "type": 0, "children": [], "left": ""}, {
+    const expected = [
+      {"key": "0-0", "name": "_STARTER_", "type": 0, "children": [], "left": ""},
+      {"key": "0-0", "name": "A", "type": 0, "children": [], "left": ""},
+      {
       "key": "2-14",
       "type": 1,
       "children": [
