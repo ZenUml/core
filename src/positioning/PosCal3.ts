@@ -1,32 +1,12 @@
 import {OrderedParticipants} from "@/positioning/OrderedParticipants";
 import {MessageContextListener} from "./MessageContextListener";
 import {ICoordinate2, ICoordinates2, TextType, WidthFunc} from "./Coordinate";
-import {IOwnedMessages, OwnableMessage} from "@/positioning/OwnableMessage";
+import {OwnableMessage} from "@/positioning/OwnableMessage";
 import {IParticipantModel} from "@/positioning/ParticipantListener";
 
 const antlr4 = require('antlr4/index');
 
 export class PosCal3 {
-
-  // [participant: [from, signature]]
-  static getOwnedMessagesList(ctx: any): Array<IOwnedMessages> {
-    const ownedMessagesList = PosCal3.getAllMessages(ctx);
-    const participants = PosCal3.getAllParticipants(ctx);
-    return participants.map((participant: string) => {
-      return PosCal3.getOwnedMessages(ownedMessagesList, participant);
-    });
-  }
-
-  private static getOwnedMessages(ownedMessagesList: Array<IOwnedMessages>, participant: string) {
-    const ownedMessages = ownedMessagesList.find(o => o.owner === participant);
-    return ownedMessages || {owner: participant, ownableMessages: []};
-  }
-
-  private static getAllParticipants(ctx: any) {
-    return OrderedParticipants(ctx).map((participant: any) => {
-      return participant.name;
-    });
-  }
 
   private static getAllMessages(ctx: any) {
     const walker = antlr4.tree.ParseTreeWalker.DEFAULT
