@@ -48,8 +48,10 @@ export class PosCal2 {
     return participantModels.map((p: IParticipantModel) => {
       const participant = p.name;
       const participantWidth = this._getParticipantWidth(widthProvider, participant);
+      return {p, participantWidth};
+    }).map(({p, participantWidth}) => {
       const messageWidth = this._getMessageWidth(p, ownedMessagesList, widthProvider);
-      return {participant, messageWidth, participantWidth} as ICoordinate2;
+      return {participant: p.name, messageWidth, participantWidth: participantWidth} as ICoordinate2;
     });
   }
 
