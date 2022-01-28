@@ -1,6 +1,6 @@
 import {IOwnedMessages, OwnableMessageType} from "./OwnableMessage";
 import {Message} from "gauge-ts/dist/gen/messages_pb";
-import MessageType = Message.MessageType;
+import {antlr4} from "@/positioning/ParticipantListener";
 
 const sequenceParserListener = require('@/generated-parser/sequenceParserListener');
 
@@ -28,4 +28,13 @@ export class MessageContextListener extends sequenceParserListener.sequenceParse
   result(): Array<IOwnedMessages> {
     return this.ownedMessagesList;
   }
+}
+
+// Returns all messages grouped by owner participant
+export function MessagesGroupedByParticipant(ctx: any) {
+  const walker = antlr4.tree.ParseTreeWalker.DEFAULT
+
+  const listener = new MessageContextListener();
+  walker.walk(listener, ctx);
+  return listener.result();
 }

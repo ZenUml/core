@@ -2,9 +2,9 @@
 // [{participant: a, gap:100, width: 250 }, {p: b, g:100, w: 120 }, {p: c, g: 150, w: 200}]
 // delta {a: {g: 110, w: 120} =>
 import {ICoordinate2, ICoordinates2, TextType, WidthFunc} from "@/positioning/Coordinate";
-import {MessageContextListener} from "@/positioning/MessageContextListener";
+import {MessagesGroupedByParticipant} from "@/positioning/MessageContextListener";
 import {OrderedParticipants} from "@/positioning/OrderedParticipants";
-import {antlr4, IParticipantModel} from "@/positioning/ParticipantListener";
+import {IParticipantModel} from "@/positioning/ParticipantListener";
 import {OwnableMessage, OwnableMessageType} from "@/positioning/OwnableMessage";
 
 export class PosCal2 {
@@ -38,18 +38,11 @@ export class PosCal2 {
     return participant ? (participant.participantWidth / 2) + (this.MARGIN / 2) : 0;
   }
 
-  private static getAllMessages(ctx: any) {
-    const walker = antlr4.tree.ParseTreeWalker.DEFAULT
-
-    const listener = new MessageContextListener();
-    walker.walk(listener, ctx);
-    return listener.result();
-  }
 
   private static MIN_MESSAGE_WIDTH = 100;
   private static MIN_PARTICIPANT_WIDTH = 100;
   static getMessageWidthAndParticipantWidth(ctx: any, widthProvider: WidthFunc): ICoordinates2 {
-    let ownedMessagesList = PosCal2.getAllMessages(ctx);
+    let ownedMessagesList = MessagesGroupedByParticipant(ctx);
     const participantModels = OrderedParticipants(ctx);
 
     return participantModels.map((p: IParticipantModel) => {
