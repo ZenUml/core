@@ -44,7 +44,7 @@ export class PosCal3 {
       const participant = p.owner;
       const gap = PosCal3.getMessageWidth(widthProvider, p, ctx);
       const width = widthProvider(participant, TextType.ParticipantName);
-      return {participant: participant, messageWidth: gap, width: width};
+      return {participant: participant, messageWidth: gap, participantWidth: width};
     });
   }
 

@@ -98,7 +98,7 @@
       layoutMessageContainer() {
         const halfWidthOfPlaceholder = this.$refs['participantPlaceHolder'].offsetWidth / 2;
         this.$refs['participantPlaceHolder'].style.marginRight = (-1) * (halfWidthOfPlaceholder + 6) + 'px'
-        this.$refs['messageEl'].$el.style.width = `calc(100% - ${halfWidthOfPlaceholder}px`
+        this.$refs['messageEl'].$el.style.participantWidth = `calc(100% - ${halfWidthOfPlaceholder}px`
       },
       onClick() {
         this.onElementClick(CodeRange.from(this.context))

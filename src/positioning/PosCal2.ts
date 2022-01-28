@@ -33,7 +33,7 @@ export class PosCal2 {
   half(participant: ICoordinate2): number {
     if (participant) {
       // get previous participant
-      return (participant.width / 2) + (this.MARGIN / 2);
+      return (participant.participantWidth / 2) + (this.MARGIN / 2);
     }
     return 0;
   }
