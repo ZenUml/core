@@ -29,7 +29,6 @@ export class PosCal2 {
   private static MINI_GAP = 100;
   private static MARGIN = 20;
   private static ARROW_HEAD_WIDTH = 10;
-  private static MIN_MESSAGE_WIDTH = 100;
   private static MIN_PARTICIPANT_WIDTH = 100;
 
   constructor(ctx: any, widthProvider: WidthFunc) {
@@ -120,7 +119,6 @@ export class PosCal2 {
   }
 
   private static _getParticipantWidth(widthProvider: WidthFunc, participant: string | undefined) {
-    if (participant === '_STARTER_') return 0;
     return Math.max(widthProvider(participant || '', TextType.ParticipantName), PosCal2.MIN_PARTICIPANT_WIDTH);
   }
 }
