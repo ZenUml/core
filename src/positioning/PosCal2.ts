@@ -11,6 +11,7 @@ export class PosCal2 {
   private _participants: Array<ICoordinate2>;
   private static MINI_GAP = 100;
   private static MARGIN = 20;
+  private static ARROW_HEAD_WIDTH = 10;
 
   constructor(ctx: any, widthProvider: WidthFunc) {
     this._participants = PosCal2.getMessageWidthAndParticipantWidth(ctx, widthProvider);
@@ -38,7 +39,6 @@ export class PosCal2 {
     return participant ? (participant.participantWidth / 2) + (this.MARGIN / 2) : 0;
   }
 
-
   private static MIN_MESSAGE_WIDTH = 100;
   private static MIN_PARTICIPANT_WIDTH = 100;
   static getMessageWidthAndParticipantWidth(ctx: any, widthProvider: WidthFunc): ICoordinates2 {
@@ -56,19 +56,32 @@ export class PosCal2 {
   }
 
   private static _getMessageWidth(p: IParticipantModel, ownedMessagesList: Array<IOwnedMessages>, widthProvider: WidthFunc) {
-    return ownedMessagesList
-      .filter(p1 => p1.owner === p.name)
-      .flatMap((p2: IOwnedMessages) => p2.ownableMessages)
-      .filter(o => o.from === p.left)
-      .reduce((maxWidth, m: OwnableMessage) => {
-        let mw = widthProvider(m.signature || '', TextType.MessageContent) + 10;
-        // TODO: Following logic needs to add back
-        // // if ownableMessage is creation add participantWidth/2
-        // if(m.type === OwnableMessageType.CreationMessage) {
-        //   mw += participantWidth / 2;
-        // }
-        return Math.max(maxWidth, mw);
-      }, this.MIN_MESSAGE_WIDTH)
+    const ownedBy = (p: IParticipantModel) => {
+      return (p1: {owner: string}) => p1.owner === p.name
+    };
+
+    function toOwnableMessages (p2: IOwnedMessages) { return p2.ownableMessages; }
+
+    function fromLeftOf(p: IParticipantModel) {
+      return (o: {from: string}) => o.from === p.left;
+    }
+
+    function getSignature (m: {signature: string}) { return m.signature || ''}
+
+    function getWidth(widthProvider: WidthFunc) {
+      return (s: string) => {
+        return widthProvider(s, TextType.MessageContent);
+      };
+    }
+
+    return Math.max(...ownedMessagesList
+        .filter(ownedBy(p))
+        .flatMap(toOwnableMessages)
+        .filter(fromLeftOf(p))
+        .map(getSignature)
+        .map(getWidth(widthProvider))
+        .map(w => w + PosCal2.ARROW_HEAD_WIDTH)
+      , PosCal2.MIN_MESSAGE_WIDTH);
   }
 
   private static _getParticipantWidth(widthProvider: WidthFunc, participant: string | undefined) {
