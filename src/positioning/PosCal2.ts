@@ -8,10 +8,12 @@ import {IParticipantModel} from "@/positioning/ParticipantListener";
 import {IOwnedMessages, OwnableMessage} from "@/positioning/OwnableMessage";
 
 export class PosCal2 {
-  private _participants: Array<ICoordinate2>;
+  private readonly _participants: Array<ICoordinate2>;
   private static MINI_GAP = 100;
   private static MARGIN = 20;
   private static ARROW_HEAD_WIDTH = 10;
+  private static MIN_MESSAGE_WIDTH = 100;
+  private static MIN_PARTICIPANT_WIDTH = 100;
 
   constructor(ctx: any, widthProvider: WidthFunc) {
     this._participants = PosCal2.getMessageWidthAndParticipantWidth(ctx, widthProvider);
@@ -19,15 +21,14 @@ export class PosCal2 {
 
   getPosition(participantName: string|undefined): number {
     const index = this._participants.findIndex(p => p.participant === participantName);
-
     const first = this._participants[0];
-    return this._participants.slice(1, index+1)
+    return this._participants.slice(1, index + 1)
+      .map(p => p.gap || 0)
       .reduce((sum, cur) => {
-        return sum + (cur.gap || 0);
-    }, ((first.gap || 0) / 2));
+        return sum + cur;
+      }, (first.gap || 0) / 2);
   }
-  private static MIN_MESSAGE_WIDTH = 100;
-  private static MIN_PARTICIPANT_WIDTH = 100;
+
   static getMessageWidthAndParticipantWidth(ctx: any, widthProvider: WidthFunc): ICoordinates2 {
     let ownedMessagesList = MessagesGroupedByParticipant(ctx);
     const participantModels = OrderedParticipants(ctx);
