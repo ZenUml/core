@@ -1,5 +1,5 @@
 <template>
-  <div class="life-line-layer w-full">
+  <div class="life-line-layer">
     <life-line
       :style="{'margin-left': invisibleStarter ? '-40px!important': '0'}"
       v-if="starterOnTheLeft"
@@ -29,7 +29,7 @@
     name: 'life-line-layer',
     props: ['context'],
     computed: {
-      ...mapGetters(['participants', 'GroupContext', 'ParticipantContext']),
+      ...mapGetters(['participants', 'GroupContext', 'ParticipantContext', 'centerOf']),
       invisibleStarter() {
         return this.starterParticipant.name === '_STARTER_'
       },
