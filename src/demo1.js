@@ -6,7 +6,7 @@
 // Nested method
 // Assignment
 export default `
-A group g {B C} D
+A group g {@EC2 B @S3 C} group g {D} E
 
 A.method
 B.method

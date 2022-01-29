@@ -1,10 +1,13 @@
 <template>
-  <div class="container relative flex flex-col" v-if="entities.length > 0" :style="{left: `${left}px`, width: `${right-left}px`}">
-    <div class="-mt-8 border-2 border-b-0 h-14">
-      <label class="block text-center font-semibold mb-8 border-b-2" v-if="name">{{name}}</label>
-    </div>
-    <div class="lifeline-group  h-full shadow shadow-slate-500/50">
-      <life-line v-for="entity in entities" :key="entity.name" :ref="entity.name" :entity="entity" :group-left="left"/>
+  <!-- pb-2 to show the shadow -->
+  <div class="container absolute -mt-7 flex flex-col h-full pb-2" v-if="entities.length > 0" :style="{left: `${left}px`, width: `${right-left}px`}">
+    <div class="shadow shadow shadow-slate-500/50 flex-grow">
+      <div class="h-14">
+        <label class="block text-center font-semibold" v-if="name">{{ name }}</label>
+      </div>
+      <div class="lifeline-group">
+        <life-line v-for="entity in entities" :key="entity.name" :ref="entity.name" :entity="entity" :group-left="left"/>
+      </div>
     </div>
   </div>
 </template>
