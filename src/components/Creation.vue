@@ -12,7 +12,7 @@
     <div class="message-container h-10">
       <!-- TODO: replace the following with a participant component. -->
       <div ref="participantPlaceHolder"
-           class="participant invisible absolute right-0 flex flex-col justify-center">
+           class="participant absolute right-0 flex flex-col justify-center">
         <!-- Put in a div to give it a fixed height, because stereotype is dynamic. -->
         <div class="h-5 flex flex-col justify-center">
           <label class="name">{{ to }}</label>
@@ -98,7 +98,7 @@
       layoutMessageContainer() {
         const halfWidthOfPlaceholder = this.$refs['participantPlaceHolder'].offsetWidth / 2;
         this.$refs['participantPlaceHolder'].style.marginRight = (-1) * (halfWidthOfPlaceholder + 6) + 'px'
-        this.$refs['messageEl'].$el.style.participantWidth = `calc(100% - ${halfWidthOfPlaceholder}px`
+        this.$refs['messageEl'].$el.style.width = `calc(100% - ${halfWidthOfPlaceholder - 6}px`
       },
       onClick() {
         this.onElementClick(CodeRange.from(this.context))
