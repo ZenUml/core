@@ -69,25 +69,20 @@ export class PosCal2 {
     }
 
     return participantModels.map((p: IParticipantModel) => {
-      const name = p.name;
-      const participantWidth = this._getParticipantWidth(widthProvider, name);
-      return {p, participantWidth};
-    }).map(({p, participantWidth}) => {
       const contributingMessages = getContributingMessages(p);
-      return {p, participantWidth, contributingMessages};
-    }).map(({p, participantWidth, contributingMessages}) => {
-        const messageWidth = this._getMessageWidth(contributingMessages, widthProvider);
-        return {p, participant: p.name, messageWidth, participantWidth: participantWidth};
-      })
-      .map(({p, participant, messageWidth, participantWidth}) => {
+      return {p, contributingMessages};
+    }).map(({p, contributingMessages}) => {
+      const messageWidth = this._getMessageWidth(contributingMessages, widthProvider);
+      return {p, messageWidth};
+    }).map(({p, messageWidth}) => {
 
         const halfLeft = this.half(widthProvider, p.left);
         const halfSelf = this.half(widthProvider, p.name);
 
         const leftIsVisible = p.left && p.left !== '_STARTER_';
         const participantGap = ((leftIsVisible && halfLeft) || 0) + halfSelf;
-        let gap =Math.max(messageWidth, participantGap)
-        return {participant, gap} as ICoordinate2;
+        let gap = Math.max(messageWidth, participantGap)
+        return {participant: p.name, gap} as ICoordinate2;
       });
   }
 
