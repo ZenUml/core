@@ -23,17 +23,11 @@ export class PosCal2 {
     const first = this._participants[0];
     return this._participants.slice(1, index+1)
       .reduce(({sum, pre}, cur) => {
-        console.log(`${cur.gap} vs ${PosCal2.calculateGap(cur, pre)}`)
       sum = sum + (cur.gap || 0);
 
       return {sum, pre: cur};
     }, {sum: PosCal2.half(first), pre: first}).sum;
   }
-
-  static calculateGap(participant: ICoordinate2, prev: ICoordinate2): number {
-    return Math.max(participant.messageWidth, this.half(prev) + this.half(participant), this.MINI_GAP);
-  }
-
   static half(participant: ICoordinate2): number {
     if (participant.participant === '_STARTER_') {
       return 0;
