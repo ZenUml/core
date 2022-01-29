@@ -10,7 +10,7 @@ export default function WidthProviderOnBrowser(text: string, type: TextType): nu
     newDiv.style.display = 'inline';
     // newDiv.style.zIndex = '-9999';
     newDiv.style.whiteSpace = 'nowrap';
-    // newDiv.style.visibility = 'hidden';
+    newDiv.style.visibility = 'hidden';
     newDiv.style.position = 'absolute';
     newDiv.style.top = '0';
     newDiv.style.left = '0';
