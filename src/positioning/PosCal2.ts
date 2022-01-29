@@ -45,25 +45,31 @@ export class PosCal2 {
     let ownedMessagesList = MessagesGroupedByParticipant(ctx);
     const participantModels = OrderedParticipants(ctx);
 
+    function getContributingMessages(p: IParticipantModel) {
+      const ownedBy = (p: IParticipantModel) => {
+        return (p1: { owner: string }) => p1.owner === p.name
+      };
+
+      function toOwnableMessages(p2: IOwnedMessages) {
+        return p2.ownableMessages;
+      }
+
+      function fromLeftOf(p: IParticipantModel) {
+        return (o: { from: string }) => o.from === p.left;
+      }
+
+      return ownedMessagesList
+        .filter(ownedBy(p))
+        .flatMap(toOwnableMessages)
+        .filter(fromLeftOf(p));
+    }
+
     return participantModels.map((p: IParticipantModel) => {
       const name = p.name;
       const participantWidth = this._getParticipantWidth(widthProvider, name);
       return {p, participantWidth};
     }).map(({p, participantWidth}) => {
-      let ownableMessages = [] as OwnableMessage[];
-      const ownedBy = (p: IParticipantModel) => {
-        return (p1: {owner: string}) => p1.owner === p.name
-      };
-
-      function toOwnableMessages (p2: IOwnedMessages) { return p2.ownableMessages; }
-      function fromLeftOf(p: IParticipantModel) {
-        return (o: {from: string}) => o.from === p.left;
-      }
-
-      const contributingMessages = ownedMessagesList
-        .filter(ownedBy(p))
-        .flatMap(toOwnableMessages)
-        .filter(fromLeftOf(p));
+      const contributingMessages = getContributingMessages(p);
       return {p, participantWidth, contributingMessages};
     }).map(({p, participantWidth, contributingMessages}) => {
         const messageWidth = this._getMessageWidth(contributingMessages, widthProvider);
