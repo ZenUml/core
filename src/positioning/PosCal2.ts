@@ -77,9 +77,8 @@ export class PosCal2 {
         const participantGap = (leftWidth)
                               + (this._getParticipantWidth(widthProvider, p.name || '') / 2);
         let gap =Math.max(messageWidth, participantGap + this.MARGIN, this.MINI_GAP)
-        return {p, participant, messageWidth, participantWidth, gap} as ICoordinate2;
-      })
-      ;
+        return {participant, participantWidth, gap} as ICoordinate2;
+      });
   }
 
   private static _getMessageWidth(contributingMessages: OwnableMessage[], widthProvider: WidthFunc) {

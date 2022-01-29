@@ -5,12 +5,12 @@ let seqDsl = require('../../../src/parser/index');
 
 describe('PosCal3', () => {
   it('should return default positions for declared participants', () => {
-    assertParticipantHasMessageWidthAndParticipantWidth('A500', 'A500', 100, 500);
+    assertParticipantHasMessageWidthAndParticipantWidth('A500', 'A500', 270, 500);
     // A self-call does not contribute to gap
-    assertParticipantHasMessageWidthAndParticipantWidth('@Starter(A500) A500.m100', 'A500', 100, 500);
+    assertParticipantHasMessageWidthAndParticipantWidth('@Starter(A500) A500.m100', 'A500', 270, 500);
   })
   it('should return the correct position', () => {
-    assertParticipantHasMessageWidthAndParticipantWidth('A500.m100', 'A500', 110, 500);
+    assertParticipantHasMessageWidthAndParticipantWidth('A500.m100', 'A500', 270, 500);
   });
 
   it('should return the correct position - for long method name', () => {
@@ -20,16 +20,16 @@ describe('PosCal3', () => {
   // A.m1 B.m2
   // B.m2 should be ignored, because it is not from 'A' (the previous participant)
   it('should return the correct position - for long method name', () => {
-    assertParticipantHasMessageWidthAndParticipantWidth('A500.m100 B600.m200', 'A500', 110, 500);
-    assertParticipantHasMessageWidthAndParticipantWidth('A500.m100 B600.m200', 'B600', 100, 600);
+    assertParticipantHasMessageWidthAndParticipantWidth('A500.m100 B600.m200', 'A500', 270, 500);
+    assertParticipantHasMessageWidthAndParticipantWidth('A500.m100 B600.m200', 'B600', 570, 600);
   });
 })
 
-function assertParticipantHasMessageWidthAndParticipantWidth(code: string, participant: string, messageWidth: number, participantWidth: number) {
+function assertParticipantHasMessageWidthAndParticipantWidth(code: string, participant: string, gap: number, participantWidth: number) {
   let rootContext = seqDsl.RootContext(code);
   let coordinates2 = PosCal2.getMessageWidthAndParticipantWidth(rootContext, stubWidthProvider);
 
   const coordinate2 = coordinates2.find(c => c.participant === participant);
-  expect(coordinate2?.messageWidth).toEqual(messageWidth);
+  expect(coordinate2?.gap).toEqual(gap);
   expect(coordinate2?.participantWidth).toEqual(participantWidth);
 }
