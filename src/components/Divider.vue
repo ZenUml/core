@@ -13,12 +13,12 @@
     name: 'divider',
     props: ['context', 'fragmentOffset'],
     computed: {
-      ...mapGetters(['participants', 'centerOf', 'rightOf']),
+      ...mapGetters(['participants', 'centerOf']),
       /* Dividers have the same width as the lifeline layer */
       width() {
         let rearParticipant = this.participants.Names().pop()
         // 20px for the right margin of the participant
-        return this.rightOf(rearParticipant)
+        return this.centerOf(rearParticipant) + 10
       },
       from: function() {
         return this.context.Origin()

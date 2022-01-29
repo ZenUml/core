@@ -6,7 +6,7 @@ const localVue = createLocalVue()
 localVue.use(Vuex)
 const storeConfig = VueSequence.Store()
 storeConfig.state.code = 'a'
-storeConfig.getters.rightOf = function () {
+storeConfig.getters.centerOf = function () {
   return (p) => p === 'a' ? 100 : NaN
 }
 

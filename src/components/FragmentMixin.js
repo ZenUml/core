@@ -3,7 +3,7 @@ import {mapGetters} from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters(['participants', 'rightOf', 'centerOf']),
+    ...mapGetters(['participants', 'centerOf']),
     localParticipants: function() {
       // [A, B, C, D] the order may not be the same as appeared on the Lifeline layer
       return [this.from, ...Participants(this.context).ImplicitArray().map(p => p.name)]

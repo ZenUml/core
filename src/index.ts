@@ -55,9 +55,6 @@ const Store = (debounce?: number) => {
           return 0
         }
       },
-      rightOf: (state: any, getters: any) => (entity: any) => {
-        return getters.centerOf(entity) + 10
-      },
       // deprecated, use distances that returns centerOf(to) - centerOf(from)
       distance: (state: any, getters: any) => (from: any, to: any) => {
         return getters.centerOf(from) - getters.centerOf(to)
