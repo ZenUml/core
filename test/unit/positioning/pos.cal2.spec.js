@@ -3,16 +3,16 @@ import {PosCal2} from "@/positioning/PosCal2";
 import {seqDsl} from "../../../src/positioning/ParticipantListener";
 import {stubWidthProvider} from "../parser/fixture/Fixture";
 
-describe('cal', () => {
+describe('get absolute position of a participant', () => {
 
-  it('produce position of participant - only declared participants', () => {
-    let rootContext = seqDsl.RootContext('A100 group {B100} C100');
-
+  it('wide participant label and error scenario', () => {
+    let rootContext = seqDsl.RootContext('A200 group {B300} C400');
     const posCal2 = new PosCal2(rootContext, stubWidthProvider);
 
-    expect(posCal2.getPosition('A100')).toBe(70)
-    expect(posCal2.getPosition('B100')).toBe(190)
-    expect(posCal2.getPosition('C100')).toBe(310)
+    expect(() => posCal2.getPosition('NotExist')).toThrow('Participant NotExist not found');
+    expect(posCal2.getPosition('A200')).toBe(120)
+    expect(posCal2.getPosition('B300')).toBe(390)
+    expect(posCal2.getPosition('C400')).toBe(760)
   })
 
   it('produce position of participant - ensure MINI_GAP', () => {

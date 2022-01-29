@@ -5,7 +5,7 @@ import {ICoordinate2, ICoordinates2, TextType, WidthFunc} from "@/positioning/Co
 import {MessagesGroupedByParticipant} from "@/positioning/MessageContextListener";
 import {OrderedParticipants} from "@/positioning/OrderedParticipants";
 import {IParticipantModel} from "@/positioning/ParticipantListener";
-import {IOwnedMessages, OwnableMessage} from "@/positioning/OwnableMessage";
+import {IOwnedMessages, OwnableMessage, OwnableMessageType} from "@/positioning/OwnableMessage";
 
 declare global {
   interface Array<T> {
@@ -36,6 +36,9 @@ export class PosCal2 {
   }
 
   getPosition(participantName: string|undefined): number {
+    if(this._participants.findIndex(p => p.participant === participantName) === -1) {
+      throw Error(`Participant ${participantName} not found`);
+    }
     return this._participants
       .until(p => p.participant === participantName)
       // .slice(1)
@@ -69,14 +72,14 @@ export class PosCal2 {
     }
 
     return participantModels.map((p: IParticipantModel) => {
-      const contributingMessages = getContributingMessages(p);
-      return {p, contributingMessages};
-    }).map(({p, contributingMessages}) => {
-      const messageWidth = this._getMessageWidth(contributingMessages, widthProvider);
-      return {p, messageWidth};
-    }).map(({p, messageWidth}) => {
       const halfLeft = this.half(widthProvider, p.left);
       const halfSelf = this.half(widthProvider, p.name);
+      return {p, halfLeft, halfSelf};
+    }).map(({p, halfLeft, halfSelf}) => {
+      const contributingMessages = getContributingMessages(p);
+      return {p, contributingMessages, halfLeft, halfSelf};
+    }).map(({p, contributingMessages, halfLeft, halfSelf}) => {
+      const messageWidth = this._getMessageWidth(contributingMessages, widthProvider, halfSelf);
       return {p, messageWidth, halfLeft, halfSelf};
     }).map(({p, messageWidth, halfLeft, halfSelf}) => {
         const leftIsVisible = p.left && p.left !== '_STARTER_';
@@ -98,12 +101,17 @@ export class PosCal2 {
     return this._getParticipantWidth(widthProvider, participant) / 2 + this.MARGIN / 2;
   }
 
-  private static _getMessageWidth(contributingMessages: OwnableMessage[], widthProvider: WidthFunc) {
-    function getSignature (m: {signature: string}) { return m.signature || ''}
+  private static _getMessageWidth(contributingMessages: OwnableMessage[], widthProvider: WidthFunc, halfSelf: number) {
+    function getSignature (m: {signature: string, type: OwnableMessageType}) { return {sig: m.signature || '', type: m.type}; }
 
     function getWidth(widthProvider: WidthFunc) {
-      return (s: string) => {
-        return widthProvider(s, TextType.MessageContent);
+      return (item: any) => {
+        let messageWidth = widthProvider(item.sig, TextType.MessageContent);
+        // hack for creation message
+        if (item.type === OwnableMessageType.CreationMessage) {
+          messageWidth += halfSelf;
+        }
+        return messageWidth;
       };
     }
 
