@@ -2,7 +2,7 @@
   <!-- pr-24 to give space for the right most participant.
   TODO: we may need to consider the width of self message on right most participant. -->
   <div class="message-layer pr-24">
-    <block :context="context" :style="{'padding-left': 0 + 'px'}"/>
+    <block :context="context" :style="{'padding-left': 9 + 'px'}"/>
   </div>
 </template>
 

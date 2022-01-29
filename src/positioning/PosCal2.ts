@@ -29,9 +29,6 @@ export class PosCal2 {
     }, {sum: PosCal2.half(first), pre: first}).sum;
   }
   static half(participant: ICoordinate2): number {
-    if (participant.participant === '_STARTER_') {
-      return 0;
-    }
     return participant ? (participant.participantWidth / 2) + (this.MARGIN / 2) : 0;
   }
 

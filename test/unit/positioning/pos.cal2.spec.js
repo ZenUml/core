@@ -10,9 +10,9 @@ describe('cal', () => {
 
     const posCal2 = new PosCal2(rootContext, stubWidthProvider);
 
-    expect(posCal2.getPosition('A100')).toBe(100)
-    expect(posCal2.getPosition('B100')).toBe(220)
-    expect(posCal2.getPosition('C100')).toBe(340)
+    expect(posCal2.getPosition('A100')).toBe(110)
+    expect(posCal2.getPosition('B100')).toBe(230)
+    expect(posCal2.getPosition('C100')).toBe(350)
   })
 
   it('produce position of participant - ensure MINI_GAP', () => {
@@ -20,9 +20,9 @@ describe('cal', () => {
 
     const posCal2 = new PosCal2(rootContext, stubWidthProvider);
 
-    expect(posCal2.getPosition('A1')).toBe(100)
-    expect(posCal2.getPosition('B1')).toBe(220)
-    expect(posCal2.getPosition('C1')).toBe(340)
+    expect(posCal2.getPosition('A1')).toBe(110)
+    expect(posCal2.getPosition('B1')).toBe(230)
+    expect(posCal2.getPosition('C1')).toBe(350)
   })
 
   it('produce position of participant - wide method', () => {
@@ -30,8 +30,8 @@ describe('cal', () => {
 
     const posCal2 = new PosCal2(rootContext, stubWidthProvider);
 
-    expect(posCal2.getPosition('A1')).toBe(810)
-    expect(posCal2.getPosition('B1')).toBe(930)
-    expect(posCal2.getPosition('C1')).toBe(1050)
+    expect(posCal2.getPosition('A1')).toBe(820)
+    expect(posCal2.getPosition('B1')).toBe(940)
+    expect(posCal2.getPosition('C1')).toBe(1060)
   })
 })
