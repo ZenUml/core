@@ -15,6 +15,7 @@ group "B C" {@EC2 B @ECS C}
 // |----|----|
 // |val1|val2|
 @Starter("User")
+new B
 RET ret = A.methodA(a, b) {
   // A comment for self interaction<br>
   // \`POST /order\` <br>

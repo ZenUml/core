@@ -1,6 +1,6 @@
 <!--TODO: this can be implemented without globally calculated width!-->
 <template>
-  <div class="interaction creation sync"
+  <div class="interaction creation sync text-center"
        v-on:click.stop="onClick"
        v-on:mouseover.stop="mouseOver"
        v-on:mouseout.stop="mouseOut"
@@ -12,7 +12,7 @@
     <div class="message-container h-10">
       <!-- TODO: replace the following with a participant component. -->
       <div ref="participantPlaceHolder"
-           class="participant absolute right-0 flex flex-col justify-center">
+           class="participant absolute invisible right-0 flex flex-col justify-center">
         <!-- Put in a div to give it a fixed height, because stereotype is dynamic. -->
         <div class="h-5 flex flex-col justify-center">
           <label class="name">{{ to }}</label>
