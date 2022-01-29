@@ -50,22 +50,28 @@ export class PosCal2 {
       const participantWidth = this._getParticipantWidth(widthProvider, name);
       return {p, participantWidth};
     }).map(({p, participantWidth}) => {
-      const messageWidth = this._getMessageWidth(p, ownedMessagesList, widthProvider);
-      return {participant: p.name, messageWidth, participantWidth: participantWidth} as ICoordinate2;
-    });
+      let ownableMessages = [] as OwnableMessage[];
+      const ownedBy = (p: IParticipantModel) => {
+        return (p1: {owner: string}) => p1.owner === p.name
+      };
+
+      function toOwnableMessages (p2: IOwnedMessages) { return p2.ownableMessages; }
+      function fromLeftOf(p: IParticipantModel) {
+        return (o: {from: string}) => o.from === p.left;
+      }
+
+      const contributingMessages = ownedMessagesList
+        .filter(ownedBy(p))
+        .flatMap(toOwnableMessages)
+        .filter(fromLeftOf(p));
+      return {p, participantWidth, contributingMessages};
+    }).map(({p, participantWidth, contributingMessages}) => {
+        const messageWidth = this._getMessageWidth(contributingMessages, widthProvider);
+        return {participant: p.name, messageWidth, participantWidth: participantWidth} as ICoordinate2;
+      });
   }
 
-  private static _getMessageWidth(p: IParticipantModel, ownedMessagesList: Array<IOwnedMessages>, widthProvider: WidthFunc) {
-    const ownedBy = (p: IParticipantModel) => {
-      return (p1: {owner: string}) => p1.owner === p.name
-    };
-
-    function toOwnableMessages (p2: IOwnedMessages) { return p2.ownableMessages; }
-
-    function fromLeftOf(p: IParticipantModel) {
-      return (o: {from: string}) => o.from === p.left;
-    }
-
+  private static _getMessageWidth(contributingMessages: OwnableMessage[], widthProvider: WidthFunc) {
     function getSignature (m: {signature: string}) { return m.signature || ''}
 
     function getWidth(widthProvider: WidthFunc) {
@@ -74,10 +80,7 @@ export class PosCal2 {
       };
     }
 
-    return Math.max(...ownedMessagesList
-        .filter(ownedBy(p))
-        .flatMap(toOwnableMessages)
-        .filter(fromLeftOf(p))
+    return Math.max(...contributingMessages
         .map(getSignature)
         .map(getWidth(widthProvider))
         .map(w => w + PosCal2.ARROW_HEAD_WIDTH)
