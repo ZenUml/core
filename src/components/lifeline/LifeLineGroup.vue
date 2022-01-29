@@ -20,7 +20,7 @@
     name: 'lifeline-group',
     props: ['context'],
     computed: {
-      ...mapGetters(['centerOf', 'groupCoordinates', 'centerOf']),
+      ...mapGetters(['centerOf']),
       name() {
         return this.context?.name()?.getTextWithoutQuotes()
       },
