@@ -37,7 +37,6 @@ export class PosCal2 {
   }
 
   getPosition(participantName: string|undefined): number {
-    const first = this._participants[0];
     return this._participants
       .until(p => p.participant === participantName)
       // .slice(1)
@@ -89,7 +88,7 @@ export class PosCal2 {
         const leftIsVisible = p.left && p.left !== '_STARTER_';
         const participantGap = ((leftIsVisible && halfLeft) || 0) + halfSelf;
         let gap =Math.max(messageWidth, participantGap)
-        return {participant, participantWidth, gap} as ICoordinate2;
+        return {participant, gap} as ICoordinate2;
       });
   }
 

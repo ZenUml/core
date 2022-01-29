@@ -12,8 +12,7 @@ export interface Coordinate {
 
 export interface ICoordinate2 {
   participant: string;
-  participantWidth: number;
-  gap?: number;
+  gap: number;
 }
 
 interface ICoordinate {
