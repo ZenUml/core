@@ -98,8 +98,6 @@
       }
     },
     updated() {
-      // When we update code (e.g. from A.m to A.m1) this interaction gets updated.
-      console.log('Interaction updated')
     },
     components: {
       Message,

@@ -28,6 +28,5 @@ export default function WidthProviderOnBrowser(text: string, type: TextType): nu
 
   hiddenDiv.innerHTML = text;
   const scrollWidth = hiddenDiv.scrollWidth;
-  console.log(text, scrollWidth);
   return scrollWidth;
 }

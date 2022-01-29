@@ -24,11 +24,9 @@ import {mapGetters, mapMutations} from 'vuex'
       ...mapGetters(['participants']),
     },
     mounted () {
-      console.debug('MessageLayer mounted')
       this.emitFirstInvocations()
     },
     updated () {
-      console.log('MessageLayer updated')
       this.emitFirstInvocations()
     },
     methods: {
