@@ -1,5 +1,5 @@
 <template>
-  <div class="container relative flex flex-col" :style="{left: `${left}px`, width: `${right-left}px`}">
+  <div class="container relative flex flex-col" v-if="entities.length > 0" :style="{left: `${left}px`, width: `${right-left}px`}">
     <div class="-mt-8 border-2 border-b-0 h-14">
       <label class="block text-center font-semibold mb-8 border-b-2" v-if="name">{{name}}</label>
     </div>
