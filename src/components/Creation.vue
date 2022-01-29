@@ -41,7 +41,7 @@
     },
     props: ['context', 'comment', 'selfCallIndent', 'fragmentOffset'],
     computed: {
-      ...mapGetters(['cursor', 'onElementClick', 'distance', 'centerOf', 'rightOf', 'leftOf', 'widthOf']),
+      ...mapGetters(['cursor', 'onElementClick', 'distance']),
       style: function() {
         const ret = {
           width: Math.abs(this.interactionWidth) + 'px'
