@@ -96,6 +96,7 @@
     },
     methods: {
       layoutMessageContainer() {
+        if (!this.$refs.participantPlaceHolder || !this.$refs.messageEl) return
         const halfWidthOfPlaceholder = this.$refs['participantPlaceHolder'].offsetWidth / 2;
         this.$refs['participantPlaceHolder'].style.marginRight = (-1) * (halfWidthOfPlaceholder + 6) + 'px'
         this.$refs['messageEl'].$el.style.width = `calc(100% - ${halfWidthOfPlaceholder - 6}px`
@@ -129,7 +130,7 @@
     white-space: nowrap;
   }
 
-  .creation.right-to-left > .message.invocation {
+  .creation.right-to-left > .message-container > .message.invocation {
     /* 3 = (15:occurrenceWidth - 1) / 2 - 5:InteractionBorderWidth
     We can also set right: 3px; but we will also need to reset left: auto */
     left: -2px;
