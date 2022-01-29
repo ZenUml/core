@@ -15,17 +15,24 @@ describe('get absolute position of a participant', () => {
     expect(posCal2.getPosition('C400')).toBe(760)
   })
 
-  it('produce position of participant - ensure MINI_GAP', () => {
-    let rootContext = seqDsl.RootContext('A1 group {B1} C1');
+  it.each(
+    [
+      ['A1 B1',         10, 70, 190],
+      ['A1 group {B1}', 10, 70, 190], // group does not change absolute positions
+    ]
+  )('Use MINI_GAP (100) for %s', (code, posStarter, posA1, posB1) => {
+    let rootContext = seqDsl.RootContext(code);
 
     const posCal2 = new PosCal2(rootContext, stubWidthProvider);
 
-    expect(posCal2.getPosition('A1')).toBe(70)
-    expect(posCal2.getPosition('B1')).toBe(190)
-    expect(posCal2.getPosition('C1')).toBe(310)
+    expect(posCal2.getPosition('_STARTER_')).toBe(posStarter)
+    // margin for _STARTER_ + half MINI_GAP
+    expect(posCal2.getPosition('A1')).toBe(posA1)
+    // margin + half MINI_GAP + position of A1
+    expect(posCal2.getPosition('B1')).toBe(posB1)
   })
 
-  it('produce position of participant - wide method', () => {
+  it('wide method', () => {
     let rootContext = seqDsl.RootContext('A1 group {B1} C1 A1.m800');
 
     const posCal2 = new PosCal2(rootContext, stubWidthProvider);
