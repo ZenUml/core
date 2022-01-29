@@ -75,10 +75,10 @@ export class PosCal2 {
       const messageWidth = this._getMessageWidth(contributingMessages, widthProvider);
       return {p, messageWidth};
     }).map(({p, messageWidth}) => {
-
-        const halfLeft = this.half(widthProvider, p.left);
-        const halfSelf = this.half(widthProvider, p.name);
-
+      const halfLeft = this.half(widthProvider, p.left);
+      const halfSelf = this.half(widthProvider, p.name);
+      return {p, messageWidth, halfLeft, halfSelf};
+    }).map(({p, messageWidth, halfLeft, halfSelf}) => {
         const leftIsVisible = p.left && p.left !== '_STARTER_';
         const participantGap = ((leftIsVisible && halfLeft) || 0) + halfSelf;
         let gap = Math.max(messageWidth, participantGap)
