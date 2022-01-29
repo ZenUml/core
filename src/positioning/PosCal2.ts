@@ -22,16 +22,10 @@ export class PosCal2 {
 
     const first = this._participants[0];
     return this._participants.slice(1, index+1)
-      .reduce(({sum, pre}, cur) => {
-      sum = sum + (cur.gap || 0);
-
-      return {sum, pre: cur};
-    }, {sum: PosCal2.half(first), pre: first}).sum;
+      .reduce((sum, cur) => {
+        return sum + (cur.gap || 0);
+    }, ((first.gap || 0) / 2));
   }
-  static half(participant: ICoordinate2): number {
-    return participant ? (participant.participantWidth / 2) + (this.MARGIN / 2) : 0;
-  }
-
   private static MIN_MESSAGE_WIDTH = 100;
   private static MIN_PARTICIPANT_WIDTH = 100;
   static getMessageWidthAndParticipantWidth(ctx: any, widthProvider: WidthFunc): ICoordinates2 {
@@ -74,6 +68,9 @@ export class PosCal2 {
         const participantGap = (leftWidth)
                               + (this._getParticipantWidth(widthProvider, p.name || '') / 2);
         let gap =Math.max(messageWidth, participantGap + this.MARGIN, this.MINI_GAP)
+        if (p.name === '_STARTER_') {
+          gap = this.MARGIN;
+        }
         return {participant, participantWidth, gap} as ICoordinate2;
       });
   }

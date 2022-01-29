@@ -30,6 +30,7 @@ describe('cal', () => {
 
     const posCal2 = new PosCal2(rootContext, stubWidthProvider);
 
+    expect(posCal2.getPosition('_STARTER_')).toBe(10)
     expect(posCal2.getPosition('A1')).toBe(820)
     expect(posCal2.getPosition('B1')).toBe(940)
     expect(posCal2.getPosition('C1')).toBe(1060)
