@@ -11,6 +11,7 @@
          class="occurrence source"></div>
     <comment v-if="comment" :comment="comment"/>
     <component v-bind:is="invocation"
+               class="text-center"
              :content="signature"
              :assignee="assignee"
              :rtl="rightToLeft"
