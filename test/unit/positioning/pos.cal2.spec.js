@@ -33,13 +33,20 @@ describe('get absolute position of a participant', () => {
   })
 
   it('wide method', () => {
-    let rootContext = seqDsl.RootContext('A1 group {B1} C1 A1.m800');
-
+    let rootContext = seqDsl.RootContext('A1.m800');
     const posCal2 = new PosCal2(rootContext, stubWidthProvider);
-
     expect(posCal2.getPosition('_STARTER_')).toBe(10)
     expect(posCal2.getPosition('A1')).toBe(820)
-    expect(posCal2.getPosition('B1')).toBe(940)
-    expect(posCal2.getPosition('C1')).toBe(1060)
+  })
+
+  it.each([
+    ['new A1',    'A1',   80],
+    ['new A200', 'A200',  130],
+  ])('creation method: %s', (code, name, pos) => {
+    let rootContext = seqDsl.RootContext(code);
+    const posCal2 = new PosCal2(rootContext, stubWidthProvider);
+    expect(posCal2.getPosition('_STARTER_')).toBe(10)
+    // half participant width + Starter Position + margin
+    expect(posCal2.getPosition(name)).toBe(pos)
   })
 })
