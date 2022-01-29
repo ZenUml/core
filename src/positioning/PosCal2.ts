@@ -83,16 +83,26 @@ export class PosCal2 {
       })
       .map(({p, participant, messageWidth, participantWidth}) => {
 
-        const halfLeft = ((p.left && p.left !== '_STARTER_') && Math.max((this._getParticipantWidth(widthProvider, p.left) / 2 + this.MARGIN / 2), this.MINI_GAP / 2 )) || 0;
-        const halfSelf = Math.max(this._getParticipantWidth(widthProvider, p.name || '') / 2 + this.MARGIN / 2, this.MINI_GAP /2 );
-        const participantGap = halfLeft + halfSelf;
-        let gap =Math.max(messageWidth, participantGap)
-        if (p.name === '_STARTER_') {
-          gap = this.MARGIN / 2;
-        }
+        const halfLeft = this.half(widthProvider, p.left);
+        const halfSelf = this.half(widthProvider, p.name);
 
+        const leftIsVisible = p.left && p.left !== '_STARTER_';
+        const participantGap = ((leftIsVisible && halfLeft) || 0) + halfSelf;
+        let gap =Math.max(messageWidth, participantGap)
         return {participant, participantWidth, gap} as ICoordinate2;
       });
+  }
+
+  private static half(widthProvider: WidthFunc, participantName: string | undefined) {
+    if (participantName === '_STARTER_') {
+      return this.MARGIN/2;
+    }
+    const halfLeftParticipantWidth = this.halfWithMargin(widthProvider, participantName);
+    return Math.max(halfLeftParticipantWidth, this.MINI_GAP / 2);
+  }
+
+  private static halfWithMargin(widthProvider: WidthFunc, participant: string | undefined) {
+    return this._getParticipantWidth(widthProvider, participant) / 2 + this.MARGIN / 2;
   }
 
   private static _getMessageWidth(contributingMessages: OwnableMessage[], widthProvider: WidthFunc) {
