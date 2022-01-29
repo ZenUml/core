@@ -19,10 +19,15 @@ export class PosCal2 {
 
   getPosition(participantName: string|undefined): number {
     const index = this._participants.findIndex(p => p.participant === participantName);
+
     const first = this._participants[0];
     return this._participants.slice(1, index+1)
       .reduce(({sum, pre}, cur) => {
-      sum = sum + PosCal2.calculateGap(cur, pre);
+        console.log(`${cur.gap} vs ${PosCal2.calculateGap(cur, pre)}`)
+        if (cur.gap !== PosCal2.calculateGap(cur, pre)) {
+          throw new Error(`gap is not correct: ${cur.gap} vs ${PosCal2.calculateGap(cur, pre)}`);
+        }
+      sum = sum + (cur.gap || 0);
 
       return {sum, pre: cur};
     }, {sum: PosCal2.half(first), pre: first}).sum;
@@ -73,8 +78,17 @@ export class PosCal2 {
       return {p, participantWidth, contributingMessages};
     }).map(({p, participantWidth, contributingMessages}) => {
         const messageWidth = this._getMessageWidth(contributingMessages, widthProvider);
-        return {participant: p.name, messageWidth, participantWidth: participantWidth} as ICoordinate2;
-      });
+        return {p, participant: p.name, messageWidth, participantWidth: participantWidth};
+      })
+      .map(({p, participant, messageWidth, participantWidth}) => {
+
+        const leftWidth = (p.left && (this._getParticipantWidth(widthProvider, p.left) / 2)) || 0;
+        const participantGap = (p.left === '_STARTER_' ? 0 : leftWidth)
+                              + (this._getParticipantWidth(widthProvider, p.name || '') / 2);
+        let gap =Math.max(messageWidth, participantGap + this.MARGIN, this.MINI_GAP)
+        return {p, participant, messageWidth, participantWidth, gap} as ICoordinate2;
+      })
+      ;
   }
 
   private static _getMessageWidth(contributingMessages: OwnableMessage[], widthProvider: WidthFunc) {
