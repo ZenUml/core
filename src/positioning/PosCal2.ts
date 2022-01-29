@@ -82,11 +82,15 @@ export class PosCal2 {
       const messageWidth = this._getMessageWidth(contributingMessages, widthProvider, halfSelf);
       return {p, messageWidth, halfLeft, halfSelf};
     }).map(({p, messageWidth, halfLeft, halfSelf}) => {
-        const leftIsVisible = p.left && p.left !== '_STARTER_';
+        const leftIsVisible = this.leftIsVisible(p);
         const participantGap = ((leftIsVisible && halfLeft) || 0) + halfSelf;
         let gap = Math.max(messageWidth, participantGap)
         return {participant: p.name, gap} as ICoordinate2;
       });
+  }
+
+  private static leftIsVisible(p: IParticipantModel) {
+    return p.left && p.left !== '_STARTER_';
   }
 
   private static half(widthProvider: WidthFunc, participantName: string | undefined) {
