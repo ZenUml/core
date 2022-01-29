@@ -3,7 +3,7 @@ import {mapGetters} from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters(['participants', 'leftOf', 'rightOf', 'centerOf']),
+    ...mapGetters(['participants', 'rightOf', 'centerOf']),
     localParticipants: function() {
       // [A, B, C, D] the order may not be the same as appeared on the Lifeline layer
       return [this.from, ...Participants(this.context).ImplicitArray().map(p => p.name)]
@@ -18,8 +18,9 @@ export default {
     },
     boundary: function () {
       // shift 20px the fragment is at the top level (starter is a participant)
-      let min = this.from === this.participants.Starter()?.name ? 20 : this.leftOf(this.leftParticipant)
-      let max = this.rightOf(this.rightParticipant)
+      const isFromStarter = this.from === this.participants.Starter()?.name;
+      let min = isFromStarter ? 20 : (this.centerOf(this.leftParticipant) - 10);
+      let max = this.centerOf(this.rightParticipant) + 10
       return {
         min: min,
         max: max,
