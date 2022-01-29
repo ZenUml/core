@@ -1,43 +1,10 @@
-import {
-  antlr4,
-  IParticipantModel,
-  ParticipantListener,
-  SingleOrGroup
-} from "../../../src/positioning/ParticipantListener";
 import {PosCal2} from "../../../src/positioning/PosCal2";
 import {stubWidthProvider} from "../parser/fixture/Fixture";
+import {GroupCoordinates} from "../../../src/positioning/GroupCoordinates";
+import {Participants2} from "../../../src/positioning/Participants2";
 
 let seqDsl = require('../../../src/parser/index');
 
-function Participants2(rootContext: any) {
-  const listener = new ParticipantListener();
-  const walker = antlr4.tree.ParseTreeWalker.DEFAULT
-  walker.walk(listener, rootContext)
-  return listener.result();
-}
-
-
-function getGroupCoordinates(participants: IParticipantModel[], absolutePos: (name: (string | undefined)) => number) {
-  let result = [] as any;
-
-  function _getLeft(participant: IParticipantModel) {
-    let positionProvider = participant.type === SingleOrGroup.GROUP ? participant.children[0] : participant;
-    return absolutePos(positionProvider.name);
-  }
-
-  function _processItem(participant: IParticipantModel, relativeLeft: number = 0) {
-    let left = _getLeft(participant);
-    result.push({key: participant.key, name: participant.name, left: left - relativeLeft})
-    for (const item of participant.children) {
-      _processItem(item, left);
-    }
-  }
-
-  for (const participant of participants) {
-    _processItem(participant);
-  }
-  return result;
-}
 
 function CoordinateCalc(rootContext: any) {
   let participants = Participants2(rootContext);
@@ -45,7 +12,7 @@ function CoordinateCalc(rootContext: any) {
   function absolutePos(name: (string | undefined)) {
     return posCal2.getPosition(name);
   }
-  return getGroupCoordinates(participants, absolutePos);
+  return GroupCoordinates(participants, absolutePos);
 }
 
 describe('Group Positioning', () => {

@@ -14,7 +14,7 @@ import Participant from "@/components/lifeline/Participant";
 export default {
   name: 'life-line',
   components: {Participant},
-  props: ['entity', 'context'],
+  props: ['entity', 'context', 'groupLeft'],
   data: () => {
     return {
       translateX: 0
@@ -23,7 +23,7 @@ export default {
   computed: {
     ...mapGetters(['firstInvocations', 'onLifelineMounted', 'centerOf']),
     expectedPos() {
-      return this.centerOf(this.entity.name) - 8
+      return this.centerOf(this.entity.name) - 8 - (this.groupLeft || 0)
     },
     top() {
       if (this.firstInvocationIsCreation) {

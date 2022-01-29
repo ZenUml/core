@@ -6,5 +6,9 @@
 // Nested method
 // Assignment
 export default `
-new A
+A group {B C} D
+
+A.method
+B.method
+D.m
 `
