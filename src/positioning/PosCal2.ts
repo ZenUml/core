@@ -7,6 +7,23 @@ import {OrderedParticipants} from "@/positioning/OrderedParticipants";
 import {IParticipantModel} from "@/positioning/ParticipantListener";
 import {IOwnedMessages, OwnableMessage} from "@/positioning/OwnableMessage";
 
+declare global {
+  interface Array<T> {
+    until(predicate: (value: T, index: number, array: T[]) => boolean): T[];
+  }
+}
+
+Array.prototype['until'] = function (predicate: (value: any, index: number, array: any[]) => boolean): any[] {
+  let result: any[] = [];
+  for (let i = 0; i < this.length; i++) {
+    result.push(this[i]);
+    if (predicate(this[i], i, this)) {
+      break;
+    }
+  }
+  return result;
+};
+
 export class PosCal2 {
   private readonly _participants: Array<ICoordinate2>;
   private static MINI_GAP = 100;
@@ -20,13 +37,14 @@ export class PosCal2 {
   }
 
   getPosition(participantName: string|undefined): number {
-    const index = this._participants.findIndex(p => p.participant === participantName);
     const first = this._participants[0];
-    return this._participants.slice(1, index + 1)
+    return this._participants
+      .until(p => p.participant === participantName)
+      // .slice(1)
       .map(p => p.gap || 0)
       .reduce((sum, cur) => {
         return sum + cur;
-      }, (first.gap || 0) / 2);
+      }, 0);
   }
 
   static getMessageWidthAndParticipantWidth(ctx: any, widthProvider: WidthFunc): ICoordinates2 {
@@ -65,13 +83,14 @@ export class PosCal2 {
       })
       .map(({p, participant, messageWidth, participantWidth}) => {
 
-        const leftWidth = (p.left && (this._getParticipantWidth(widthProvider, p.left) / 2)) || 0;
-        const participantGap = (leftWidth)
-                              + (this._getParticipantWidth(widthProvider, p.name || '') / 2);
-        let gap =Math.max(messageWidth, participantGap + this.MARGIN, this.MINI_GAP)
+        const halfLeft = ((p.left && p.left !== '_STARTER_') && Math.max((this._getParticipantWidth(widthProvider, p.left) / 2 + this.MARGIN / 2), this.MINI_GAP / 2 )) || 0;
+        const halfSelf = Math.max(this._getParticipantWidth(widthProvider, p.name || '') / 2 + this.MARGIN / 2, this.MINI_GAP /2 );
+        const participantGap = halfLeft + halfSelf;
+        let gap =Math.max(messageWidth, participantGap)
         if (p.name === '_STARTER_') {
-          gap = this.MARGIN;
+          gap = this.MARGIN / 2;
         }
+
         return {participant, participantWidth, gap} as ICoordinate2;
       });
   }
@@ -88,8 +107,7 @@ export class PosCal2 {
     return Math.max(...contributingMessages
         .map(getSignature)
         .map(getWidth(widthProvider))
-        .map(w => w + PosCal2.ARROW_HEAD_WIDTH)
-      , PosCal2.MIN_MESSAGE_WIDTH);
+        .map(w => w + PosCal2.ARROW_HEAD_WIDTH), 0);
   }
 
   private static _getParticipantWidth(widthProvider: WidthFunc, participant: string | undefined) {
