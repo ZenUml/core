@@ -43,5 +43,6 @@ describe('Creation', () => {
     let creationWrapper = mountCreationWithCode('A.m{B.m{new A}}', Fixture.firstGrandChild);
     expect(creationWrapper.vm.hover).toBe(false)
     expect(creationWrapper.vm.rightToLeft).toBeTruthy()
+    expect(creationWrapper.vm.interactionWidth).toBe(120)
   })
 })
