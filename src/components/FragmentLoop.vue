@@ -5,9 +5,7 @@
       <div class="name"><label>Loop</label></div>
       <label class="condition">[{{condition}}]</label>
     </div>
-    <block :fragment-offset="0"
-           :style="{paddingLeft: `${offsetX}px`}"
-
+    <block :style="{paddingLeft: `${offsetX}px`}"
            :context="blockInLoop"
            :selfCallIndent="selfCallIndent"
     ></block>

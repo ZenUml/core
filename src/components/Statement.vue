@@ -1,7 +1,6 @@
 <template>
   <component v-bind:is="subStatement"
              :context="context"
-             :fragment-offset="0"
              :comment="comment"
              :selfCallIndent="selfCallIndent"></component>
 </template>
