@@ -5,9 +5,7 @@ module.exports = {
   ],
   globals: {
     'ts-jest': {
-      diagnostics: {
-        warnOnly: true
-      }
+      diagnostics: false
     },
     VERSION: '1.2.3',
     BUILD_TIME: 'Just now'

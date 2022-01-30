@@ -26,8 +26,8 @@ describe('Creation', () => {
   let creationWrapper = mountCreationWithCode('new A', Fixture.firstStatement);
 
   it('data , props and computed properties', async () => {
-    expect((creationWrapper.vm).hover).toBe(false)
-    // expect(creationWrapper.vm.from).toBe('_STARTER_')
+    expect(creationWrapper.vm.hover).toBe(false)
+    expect(creationWrapper.vm.from).toBe('_STARTER_')
     // expect(creationWrapper.vm.distance).toStrictEqual(expect.any(Function))
     // expect(creationWrapper.vm.interactionWidth).toBe(70)
     // expect(creationWrapper.vm.rightToLeft).toBeFalsy()
