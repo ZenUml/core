@@ -18,8 +18,7 @@ function mountCreationWithCode(code: string, contextLocator: Function) {
     context: creationContext
   }
 
-  let creationWrapper = mount(Creation, {store, localVue, propsData})
-  return creationWrapper;
+  return mount(Creation, {store, localVue, propsData});
 }
 
 describe('Creation', () => {
@@ -28,8 +27,8 @@ describe('Creation', () => {
   it('data , props and computed properties', async () => {
     expect(creationWrapper.vm.hover).toBe(false)
     expect(creationWrapper.vm.from).toBe('_STARTER_')
-    // expect(creationWrapper.vm.distance).toStrictEqual(expect.any(Function))
-    // expect(creationWrapper.vm.interactionWidth).toBe(70)
-    // expect(creationWrapper.vm.rightToLeft).toBeFalsy()
+    expect(creationWrapper.vm.distance).toStrictEqual(expect.any(Function))
+    expect(creationWrapper.vm.interactionWidth).toBe(70)
+    expect(creationWrapper.vm.rightToLeft).toBeFalsy()
   })
 })
