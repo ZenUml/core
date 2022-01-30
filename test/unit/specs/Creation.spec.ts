@@ -15,7 +15,8 @@ function mountCreationWithCode(code: string, contextLocator: Function) {
 
   let creationContext = contextLocator(code);
   const propsData = {
-    context: creationContext
+    context: creationContext,
+    fragmentOffset: 100,
   }
 
   return mount(Creation, {store, localVue, propsData});
@@ -44,5 +45,19 @@ describe('Creation', () => {
     expect(creationWrapper.vm.hover).toBe(false)
     expect(creationWrapper.vm.rightToLeft).toBeTruthy()
     expect(creationWrapper.vm.interactionWidth).toBe(120)
+  })
+
+  it('right to left within alt fragment', async () => {
+    function contextLocator(code: string) {
+      return Fixture.firstGrandChild(code).alt().ifBlock().braceBlock().block().stat()[0]
+    }
+    let creationWrapper = mountCreationWithCode('A.m{B.m{if(x){new A}}}', contextLocator);
+    expect(creationWrapper.vm.hover).toBe(false)
+    expect(creationWrapper.vm.rightToLeft).toBeTruthy()
+    expect(creationWrapper.vm.interactionWidth).toBe(120)
+    expect(creationWrapper.vm.style).toStrictEqual({
+      "transform": "translateX(calc(-100% + 100px))",
+      "width": "120px"
+    })
   })
 })

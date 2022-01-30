@@ -13,7 +13,6 @@ export class Fixture {
   }
 
   static firstGrandChild(code: string) {
-    let rootContext = seqDsl.RootContext(code);
     return Fixture.firstChild(code).children[0].braceBlock().block().stat()[0];
   }
 
