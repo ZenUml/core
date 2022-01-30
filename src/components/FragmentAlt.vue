@@ -9,7 +9,8 @@
       </div>
 <!-- fragment-offset set as offsetX - 1 for fragment border     -->
       <block v-if="blockInIfBlock"
-             :fragment-offset="offsetX - 1"
+             :fragment-offset="0"
+             :style="{paddingLeft: `${offsetX}px`}"
              :context="blockInIfBlock"
              :selfCallIndent="selfCallIndent"
       ></block>
@@ -20,8 +21,10 @@
           <label class="else-if">else if</label>
           <label class="condition">[{{conditionFromIfElseBlock(elseIfBlock)}}]</label>
         </div>
-        <block :fragment-offset="offsetX - 1"
+        <block :fragment-offset="0"
+               :style="{paddingLeft: `${offsetX}px`}"
                :context="blockInElseIfBlock(elseIfBlock)"
+
                :selfCallIndent="selfCallIndent"
                :key="index+2000"></block>
       </div>
@@ -29,7 +32,8 @@
     <template v-if="elseBlock">
       <div class="segment">
         <div class="header"><label>[else]</label></div>
-        <block :fragment-offset="offsetX - 1"
+        <block :fragment-offset="0"
+               :style="{paddingLeft: `${offsetX}px`}"
                :context="elseBlock"
                :selfCallIndent="selfCallIndent"
         ></block>

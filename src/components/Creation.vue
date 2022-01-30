@@ -73,9 +73,9 @@
           width: this.interactionWidth + 'px'
         } as Style;
         if (!this.rightToLeft) {
-          ret.transform = 'translateX(' + this.fragmentOffset + 'px)'
+          ret.transform = 'translateX(' + 0 + 'px)'
         } else {
-          ret.transform = 'translateX(calc(-100% + ' + this.fragmentOffset + 'px))'
+          ret.transform = 'translateX(calc(-100% + ' + 0 + 'px))'
         }
         return ret
       },

@@ -35,7 +35,7 @@ export default {
     },
     translateX: function() {
       const indent = this.selfCallIndent || 0
-      const fragmentOff = this.fragmentOffset || 0
+      const fragmentOff = 0 || 0
       // ** Starting point is always the center of 'origin' **
       // Normal flow
       if(!this.rightToLeft && !this.outOfBand) {

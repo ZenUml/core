@@ -4,7 +4,8 @@
     <div class="header">
       <div class="name"><label>Opt</label></div>
     </div>
-    <block :fragmentOffset="offsetX - 1"
+    <block :fragmentOffset="0"
+           :style="{paddingLeft: `${offsetX}px`}"
            :context="opt.braceBlock().block()"
            :selfCallIndent="selfCallIndent"
     ></block>

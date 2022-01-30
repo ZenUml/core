@@ -40,7 +40,7 @@ export default {
     fragmentStyle: function () {
       return {
         transform: 'translateX(' + (this.offsetX * (-1) + this.fragmentOffset) + 'px)',
-        width: (this.boundary.width + 20 * this.depth + 50) + 'px'
+        width: (this.boundary.width + 20 * this.depth + 50) + 'px',
       }
     }
   }
