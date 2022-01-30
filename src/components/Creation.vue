@@ -74,6 +74,8 @@
         } as Style;
         if (!this.rightToLeft) {
           ret.transform = 'translateX(' + this.fragmentOffset + 'px)'
+        } else {
+          ret.transform = 'translateX(calc(-100% + ' + this.fragmentOffset + 'px))'
         }
         return ret
       },

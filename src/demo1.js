@@ -8,6 +8,8 @@
 export default `
 B A
 A.m {
-  new B
+  if(x) {
+    new B
+  }
 }
 `
