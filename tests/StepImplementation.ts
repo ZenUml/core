@@ -1,8 +1,20 @@
-
-import { Step, Table, BeforeSuite, AfterSuite } from "gauge-ts";
-import { strictEqual } from 'assert';
-import { checkBox, click, closeBrowser, evaluate, goto, into, link, openBrowser, press, text, textBox, toLeftOf, write } from 'taiko';
-import assert = require("assert");
+import {AfterSuite, BeforeSuite, Step, Table} from "gauge-ts";
+import * as assert from 'assert';
+import {
+  checkBox,
+  click,
+  closeBrowser,
+  evaluate,
+  goto,
+  into,
+  link,
+  openBrowser,
+  press,
+  text,
+  textBox,
+  toLeftOf,
+  write
+} from 'taiko';
 
 export default class StepImplementation {
     @BeforeSuite()
@@ -13,7 +25,7 @@ export default class StepImplementation {
     @AfterSuite()
     public async afterSuite() {
         await closeBrowser();
-    };
+    }
 
     @Step("Open todo application")
     public async openTodo() {
