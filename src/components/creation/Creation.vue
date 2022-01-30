@@ -28,9 +28,9 @@
 <script type="text/babel" lang="ts">
   import Vue from "vue";
   import {mapGetters} from 'vuex'
-  import Comment from './Comment.vue'
-  import Message from './Message.vue'
-  import Occurrence from './Occurrence.vue'
+  import Comment from '../Comment.vue'
+  import Message from '../Message.vue'
+  import Occurrence from '../Occurrence.vue'
   import {CodeRange} from '@/parser/CodeRange'
 
   interface Style {

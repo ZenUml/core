@@ -1,7 +1,7 @@
 import {createLocalVue, mount} from "@vue/test-utils";
 import Vuex from 'vuex'
 import {VueSequence} from '@/index'
-import Creation from '@/components/Creation.vue'
+import Creation from '@/components/creation/Creation.vue'
 import {Fixture} from "../parser/fixture/Fixture";
 
 const localVue = createLocalVue()

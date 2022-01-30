@@ -6,7 +6,7 @@
 </template>
 
 <script>
-  import Creation from './Creation.vue'
+  import Creation from './creation/Creation.vue'
   import Interaction from './Interaction.vue'
   import InteractionAsync from './Interaction-async.vue'
   import FragmentAlt from './FragmentAlt.vue'
