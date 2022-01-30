@@ -70,7 +70,7 @@
       ...mapGetters(['cursor', 'onElementClick', 'distance']),
       style(): Style {
         const ret = {
-          width: Math.abs(this.interactionWidth) + 'px'
+          width: this.interactionWidth + 'px'
         } as Style;
         if (!this.rightToLeft) {
           ret.transform = 'translateX(' + this.fragmentOffset + 'px)'
@@ -86,12 +86,9 @@
         return this.context.creation()
       },
       interactionWidth(): number{
-        let distance = this.distance(this.to, this.from)
+        let distance = Math.abs(this.distance(this.to, this.from))
         let safeOffset = this.selfCallIndent || 0
-        if(this.rightToLeft) {
-          return Math.abs(distance) + safeOffset
-        }
-        return Math.abs(distance) - safeOffset
+        return distance + (this.rightToLeft ? safeOffset : (-safeOffset));
       },
       rightToLeft: function () {
         return this.distance(this.to, this.from) < 0

@@ -11,6 +11,7 @@ A.m {
   if(x) {
     self() {
       new B
+      new C
     }
   }
 }
