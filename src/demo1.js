@@ -9,7 +9,9 @@ export default `
 B A
 A.m {
   if(x) {
-    new B
+    self() {
+      new B
+    }
   }
 }
 `

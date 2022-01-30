@@ -68,7 +68,7 @@
     props: ['context', 'comment', 'selfCallIndent', 'fragmentOffset'],
     computed: {
       ...mapGetters(['cursor', 'onElementClick', 'distance']),
-      style(): any {
+      style(): Style {
         const ret = {
           width: Math.abs(this.interactionWidth) + 'px'
         } as Style;
@@ -79,7 +79,7 @@
         }
         return ret
       },
-      from(): any {
+      from(): string {
         return this.context.Origin()
       },
       creation(): any {
@@ -109,10 +109,10 @@
         const type = safeCodeGetter(assignment.type())
         return assignee + (type ? ':' + type : '')
       },
-      to: function () {
+      to(): string {
         return this.creation.Owner()
       },
-      isCurrent: function () {
+      isCurrent(): boolean {
         return this.creation.isCurrent(this.cursor)
       }
     },
