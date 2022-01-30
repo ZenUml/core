@@ -22,13 +22,14 @@ function mountCreationWithCode(code: string, contextLocator: Function) {
 }
 
 describe('Creation', () => {
-  /**
-   * Known limitations:
-   * 1. `IA a = new A()` cannot be the first statement in the file. `IA` will be recognised as a Participant.
-   */
-  let creationWrapper = mountCreationWithCode('a = new A', Fixture.firstStatement);
 
   it('data , props and computed properties', async () => {
+    /**
+     * Known limitations:
+     * 1. `IA a = new A()` cannot be the first statement in the file. `IA` will be recognised as a Participant.
+     */
+    let creationWrapper = mountCreationWithCode('a = new A', Fixture.firstStatement);
+
     expect(creationWrapper.vm.hover).toBe(false)
     expect(creationWrapper.vm.from).toBe('_STARTER_')
     expect(creationWrapper.vm.signature).toBe('«create»')
@@ -36,5 +37,11 @@ describe('Creation', () => {
     expect(creationWrapper.vm.distance).toStrictEqual(expect.any(Function))
     expect(creationWrapper.vm.interactionWidth).toBe(70)
     expect(creationWrapper.vm.rightToLeft).toBeFalsy()
+  })
+
+  it('right to left', async () => {
+    let creationWrapper = mountCreationWithCode('A.m{B.m{new A}}', Fixture.firstGrandChild);
+    expect(creationWrapper.vm.hover).toBe(false)
+    expect(creationWrapper.vm.rightToLeft).toBeTruthy()
   })
 })
