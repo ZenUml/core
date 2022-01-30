@@ -1,7 +1,7 @@
 <template>
   <component v-bind:is="subStatement"
              :context="context"
-             :fragment-offset="fragmentOffset || 0"
+             :fragment-offset="0"
              :comment="comment"
              :selfCallIndent="selfCallIndent"></component>
 </template>
@@ -20,7 +20,7 @@
 
   export default {
     name: 'statement',
-    props: ['context', 'selfCallIndent', 'fragmentOffset'],
+    props: ['context', 'selfCallIndent'],
     computed: {
       comment: function () {
         return this.context.getComment() ? this.context.getComment() : ''

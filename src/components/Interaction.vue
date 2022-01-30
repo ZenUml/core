@@ -38,7 +38,7 @@
         hover: false
       }
     },
-    props: ['context', 'comment', 'selfCallIndent', 'fragmentOffset'],
+    props: ['context', 'comment', 'selfCallIndent'],
     mixins: [InteractionMixin],
     computed: {
       // add tracker to the mapGetters

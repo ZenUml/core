@@ -47,7 +47,7 @@
 
   export default {
     name: 'fragment-alt',
-    props: ['context', 'comment', 'selfCallIndent', 'fragmentOffset'],
+    props: ['context', 'comment', 'selfCallIndent'],
     mixins: [fragment],
     computed: {
       from: function() {

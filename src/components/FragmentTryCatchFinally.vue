@@ -46,7 +46,7 @@
 
   export default {
     name: 'fragment-tcf',
-    props: ['context', 'comment', 'selfCallIndent', 'fragmentOffset'],
+    props: ['context', 'comment', 'selfCallIndent'],
     mixins: [fragment],
     computed: {
       from: function() {

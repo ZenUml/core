@@ -4,8 +4,7 @@
     <div class="header">
       <div class="name"><label>Opt</label></div>
     </div>
-    <block :fragmentOffset="0"
-           :style="{paddingLeft: `${offsetX}px`}"
+    <block :style="{paddingLeft: `${offsetX}px`}"
            :context="opt.braceBlock().block()"
            :selfCallIndent="selfCallIndent"
     ></block>
@@ -17,7 +16,7 @@
 
   export default {
     name: 'fragment-opt',
-    props: ['context', 'comment', 'selfCallIndent', 'fragmentOffset'],
+    props: ['context', 'comment', 'selfCallIndent'],
     mixins: [fragment],
     computed: {
       from: function() {

@@ -5,7 +5,7 @@
        v-on:mouseout.stop="mouseOut"
        :signature="signature"
        :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent, 'hover': hover }"
-       :style="{width: interactionWidth + 'px', left: left + (fragmentOffset || 0) + 'px'}">
+       :style="{width: interactionWidth + 'px', left: left + 'px'}">
     <comment v-if="comment" :comment="comment"/>
 <!--    <message :content="signature" :rtl="rightToLeft" type="async"/>-->
     <component v-bind:is="invocation"
@@ -28,7 +28,7 @@
         hover: false
       }
     },
-    props: ['context', 'comment', 'fragmentOffset'],
+    props: ['context', 'comment'],
     computed: {
       ...mapGetters(['distance', 'cursor', 'onElementClick']),
       from: function() {

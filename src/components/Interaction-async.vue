@@ -34,7 +34,7 @@
         hover: false
       }
     },
-    props: ['context', 'comment', 'selfCallIndent', 'fragmentOffset'],
+    props: ['context', 'comment', 'selfCallIndent'],
     computed: {
       ...mapGetters(['distance', 'cursor', 'onElementClick']),
       from: function() {

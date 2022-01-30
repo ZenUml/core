@@ -11,7 +11,7 @@
 
   export default {
     name: 'block',
-    props: ['context', 'selfCallIndent', 'fragmentOffset'],
+    props: ['context', 'selfCallIndent'],
     computed: {
       statements: function () {
         return this.context?.stat()
