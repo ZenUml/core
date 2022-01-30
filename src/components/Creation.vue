@@ -25,14 +25,40 @@
   </div>
 </template>
 
-<script type="text/babel">
+<script type="text/babel" lang="ts">
+  import Vue from "vue";
   import {mapGetters} from 'vuex'
   import Comment from './Comment.vue'
-  import Message from './Message'
-  import Occurrence from './Occurrence'
+  import Message from './Message.vue'
+  import Occurrence from './Occurrence.vue'
   import {CodeRange} from '@/parser/CodeRange'
 
-  export default {
+  interface Style {
+    width: string;
+    transform: string;
+  }
+
+  // Add below code sample to your component
+  declare module 'vue/types/vue' {
+
+    interface Vue {
+      hover: boolean;
+      interactionWidth: number;
+      style: Style;
+      creation: {
+        SignatureText: () => string;
+        creationBody: () => {assignment: () => {
+          assignee: () => string;
+          type: () => string;
+          }};
+        Owner: () => string;
+        isCurrent: (cursor: number) => boolean;
+      }
+      layoutMessageContainer: () => void;
+    }
+  }
+
+  export default Vue.extend({
     name: 'creation',
     data() {
       return {
@@ -42,22 +68,22 @@
     props: ['context', 'comment', 'selfCallIndent', 'fragmentOffset'],
     computed: {
       ...mapGetters(['cursor', 'onElementClick', 'distance']),
-      style: function() {
+      style(): any {
         const ret = {
           width: Math.abs(this.interactionWidth) + 'px'
-        }
+        } as Style;
         if (!this.rightToLeft) {
           ret.transform = 'translateX(' + this.fragmentOffset + 'px)'
         }
         return ret
       },
-      from: function() {
+      from(): any {
         return this.context.Origin()
       },
-      creation: function () {
+      creation(): any {
         return this.context.creation()
       },
-      interactionWidth: function () {
+      interactionWidth(): number{
         let distance = this.distance(this.to, this.from)
         let safeOffset = this.selfCallIndent || 0
         if(this.rightToLeft) {
@@ -68,11 +94,11 @@
       rightToLeft: function () {
         return this.distance(this.to, this.from) < 0
       },
-      signature: function () {
-        return this.creation.SignatureText()
+      signature(): string {
+        return this.creation.SignatureText() as string
       },
       assignee: function () {
-        function safeCodeGetter (context) {
+        function safeCodeGetter (context: any) {
           return (context && context.getTextWithoutQuotes()) || ''
         }
         let assignment = this.creation.creationBody().assignment()
@@ -97,9 +123,10 @@
     methods: {
       layoutMessageContainer() {
         if (!this.$refs.participantPlaceHolder || !this.$refs.messageEl) return
-        const halfWidthOfPlaceholder = this.$refs['participantPlaceHolder'].offsetWidth / 2;
-        this.$refs['participantPlaceHolder'].style.marginRight = (-1) * (halfWidthOfPlaceholder + 6) + 'px'
-        this.$refs['messageEl'].$el.style.width = `calc(100% - ${halfWidthOfPlaceholder - 6}px`
+        const halfWidthOfPlaceholder = (this.$refs['participantPlaceHolder'] as HTMLElement).offsetWidth / 2;
+        const placeHolderStyle = (this.$refs['participantPlaceHolder'] as HTMLElement).style;
+        placeHolderStyle.marginRight = (-1) * (halfWidthOfPlaceholder + 6) + 'px';
+        ((this.$refs['messageEl'] as Vue).$el as HTMLElement).style.width = `calc(100% - ${halfWidthOfPlaceholder - 6}px`;
       },
       onClick() {
         this.onElementClick(CodeRange.from(this.context))
@@ -116,7 +143,7 @@
       Occurrence,
       Message
     }
-  }
+  })
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
