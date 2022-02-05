@@ -1,4 +1,4 @@
-import {PosCal2} from "../../../src/positioning/PosCal2";
+import {Coordinates} from "../../../src/positioning/Coordinates";
 import {stubWidthProvider} from "../parser/fixture/Fixture";
 
 let seqDsl = require('../../../src/parser/index');
@@ -28,7 +28,7 @@ describe('PosCal3', () => {
 
 function assertParticipantHasMessageWidthAndParticipantWidth(code: string, participant: string, gap: number, participantWidth: number) {
   let rootContext = seqDsl.RootContext(code);
-  let coordinates2 = PosCal2.getMessageWidthAndParticipantWidth(rootContext, stubWidthProvider);
+  let coordinates2 = Coordinates.getMessageWidthAndParticipantWidth(rootContext, stubWidthProvider);
 
   const coordinate2 = coordinates2.find(c => c.participant === participant);
   expect(coordinate2?.gap).toEqual(gap);

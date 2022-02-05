@@ -13,7 +13,7 @@ import {CodeRange} from './parser/CodeRange'
 // @ts-ignore
 import PositionCalculator from './utils/position.calculator'
 import WidthProviderOnBrowser from "@/positioning/WidthProviderFunc";
-import {PosCal2} from "@/positioning/PosCal2";
+import {Coordinates} from "@/positioning/Coordinates";
 
 let storeInitiationTime: number = 0
 setTimeout(function () {
@@ -49,8 +49,8 @@ const Store = (debounce?: number) => {
       },
       centerOf: (state: any, getters: any) => (entity: any) => {
         try {
-          const posCal2 = new PosCal2(getters.rootContext, getters.widthProvider);
-          return posCal2.getPosition(entity) || 0
+          const coordinates = new Coordinates(getters.rootContext, getters.widthProvider);
+          return coordinates.getPosition(entity) || 0
         } catch (e) {
           console.error(e)
           return 0

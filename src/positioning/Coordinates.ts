@@ -24,7 +24,7 @@ Array.prototype['until'] = function (predicate: (value: any, index: number, arra
   return result;
 };
 
-export class PosCal2 {
+export class Coordinates {
   private readonly _participants: Array<ICoordinate2>;
   private static MINI_GAP = 100;
   private static MARGIN = 20;
@@ -32,7 +32,7 @@ export class PosCal2 {
   private static MIN_PARTICIPANT_WIDTH = 100;
 
   constructor(ctx: any, widthProvider: WidthFunc) {
-    this._participants = PosCal2.getMessageWidthAndParticipantWidth(ctx, widthProvider);
+    this._participants = Coordinates.getMessageWidthAndParticipantWidth(ctx, widthProvider);
   }
 
   getPosition(participantName: string|undefined): number {
@@ -122,10 +122,10 @@ export class PosCal2 {
     return Math.max(...contributingMessages
         .map(getSignature)
         .map(getWidth(widthProvider))
-        .map(w => w + PosCal2.ARROW_HEAD_WIDTH), 0);
+        .map(w => w + Coordinates.ARROW_HEAD_WIDTH), 0);
   }
 
   private static _getParticipantWidth(widthProvider: WidthFunc, participant: string | undefined) {
-    return Math.max(widthProvider(participant || '', TextType.ParticipantName), PosCal2.MIN_PARTICIPANT_WIDTH);
+    return Math.max(widthProvider(participant || '', TextType.ParticipantName), Coordinates.MIN_PARTICIPANT_WIDTH);
   }
 }

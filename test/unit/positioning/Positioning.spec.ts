@@ -1,4 +1,4 @@
-import {PosCal2} from "../../../src/positioning/PosCal2";
+import {Coordinates} from "../../../src/positioning/Coordinates";
 import {stubWidthProvider} from "../parser/fixture/Fixture";
 import {GroupCoordinates} from "../../../src/positioning/GroupCoordinates";
 import {Participants2} from "../../../src/positioning/Participants2";
@@ -8,9 +8,9 @@ let seqDsl = require('../../../src/parser/index');
 
 function CoordinateCalc(rootContext: any) {
   let participants = Participants2(rootContext);
-  const posCal2 = new PosCal2(rootContext, stubWidthProvider);
+  const coordinates = new Coordinates(rootContext, stubWidthProvider);
   function absolutePos(name: (string | undefined)) {
-    return posCal2.getPosition(name);
+    return coordinates.getPosition(name);
   }
   return GroupCoordinates(participants, absolutePos);
 }
