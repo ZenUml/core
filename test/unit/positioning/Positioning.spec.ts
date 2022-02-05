@@ -16,11 +16,6 @@ function CoordinateCalc(rootContext: any) {
 }
 
 describe('Group Positioning', () => {
-  it('gives participant a natural key', () => {
-    // get rootContext
-    let rootContext = seqDsl.RootContext('rootContext');
-    console.log('key', `${rootContext.start.start}-${rootContext.stop.stop}`);
-  })
 
   it('position simple message', () => {
     let rootContext = seqDsl.RootContext('A100.m100');
