@@ -1,4 +1,4 @@
-import {PosCal2} from "../../../src/positioning/posCal2";
+import {PosCal2} from "../../../src/positioning/PosCal2";
 import {stubWidthProvider} from "../parser/fixture/Fixture";
 
 let seqDsl = require('../../../src/parser/index');
