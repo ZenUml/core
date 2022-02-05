@@ -1,28 +1,9 @@
-// a, b, c, MIN_GAP=100, MARGIN
-// [{participant: a, gap:100, width: 250 }, {p: b, g:100, w: 120 }, {p: c, g: 150, w: 200}]
-// delta {a: {g: 110, w: 120} =>
 import {IParticipantGap, IParticipantGaps, TextType, WidthFunc} from "@/positioning/Coordinate";
 import {MessagesGroupedByParticipant} from "@/positioning/MessageContextListener";
 import {OrderedParticipants} from "@/positioning/OrderedParticipants";
 import {IParticipantModel} from "@/positioning/ParticipantListener";
 import {IOwnedMessages, OwnableMessage, OwnableMessageType} from "@/positioning/OwnableMessage";
-
-declare global {
-  interface Array<T> {
-    until(predicate: (value: T, index: number, array: T[]) => boolean): T[];
-  }
-}
-
-Array.prototype['until'] = function (predicate: (value: any, index: number, array: any[]) => boolean): any[] {
-  let result: any[] = [];
-  for (let i = 0; i < this.length; i++) {
-    result.push(this[i]);
-    if (predicate(this[i], i, this)) {
-      break;
-    }
-  }
-  return result;
-};
+import '../utils/ArrayUntil';
 
 export class Coordinates {
   private readonly _participants: Array<IParticipantGap>;
