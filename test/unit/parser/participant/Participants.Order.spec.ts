@@ -47,18 +47,18 @@ function getFlattenedParticipants(code: string) {
 describe('Participants.Order', () => {
   it('should return the order of participants', () => {
     expect(getFlattenedParticipants('A B C.m')).toEqual([
-      {"key": "0-0", name: '_STARTER_', type: 0, left: '', children: []},
-      {"key": "0-0", name: 'A', type: 0, left: '_STARTER_', children: []},
-      {"key": "2-2", name: 'B', type: 0, left: 'A', children: []},
-      {"key": "4-4", name: 'C', type: 0, left: 'B', children: []}
+      {name: '_STARTER_', type: 0, left: '', children: []},
+      {name: 'A', type: 0, left: '_STARTER_', children: []},
+      {name: 'B', type: 0, left: 'A', children: []},
+      {name: 'C', type: 0, left: 'B', children: []}
     ]);
   })
 
   it('should return the order of participants', () => {
     expect(getFlattenedParticipants('A B @Starter(C) C.m')).toEqual([
-      {"key": "0-0", name: 'C', type: 0, left: '', children: []},
-      {"key": "0-0", name: 'A', type: 0, left: 'C', children: []},
-      {"key": "2-2", name: 'B', type: 0, left: 'A', children: []}
+      {name: 'C', type: 0, left: '', children: []},
+      {name: 'A', type: 0, left: 'C', children: []},
+      {name: 'B', type: 0, left: 'A', children: []}
     ]);
   })
 
@@ -66,16 +66,16 @@ describe('Participants.Order', () => {
     const flattenedParticipants = getFlattenedParticipants('A B @Starter(B) A.m C.m');
     console.log(flattenedParticipants);
     expect(flattenedParticipants).toEqual([
-      {"key": "0-0", name: 'A', type: 0, left: '', children: []},
-      {"key": "2-2", name: 'B', type: 0, left: 'A', children: []},
-      {"key": "20-20", name: 'C', type: 0, left: 'B', children: []}
+      {name: 'A', type: 0, left: '', children: []},
+      {name: 'B', type: 0, left: 'A', children: []},
+      {name: 'C', type: 0, left: 'B', children: []}
     ]);
   })
 
   it('should return the order of participants', () => {
     expect(getFlattenedParticipants('A.m')).toEqual([
-      {"key": "0-0", "children": [], "left": "", "name": "_STARTER_", "type": 0 },
-      { "key": "0-0", "children": [], "left": "_STARTER_", "name": "A", "type": 0 }
+      {"children": [], "left": "", "name": "_STARTER_", "type": 0 },
+      {"children": [], "left": "_STARTER_", "name": "A", "type": 0 }
     ]);
   })
 })

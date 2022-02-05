@@ -23,8 +23,8 @@ describe('participant group', () => {
   ])('Code `%s` produces one single participant with name `%s`', (code, key, name, left) => {
     const participants2 = Participants2(code);
     expect(participants2).toEqual([
-      {key: '0-0',  type: SingleOrGroup.SINGLE, name: '_STARTER_',  left: '', "children":[] },
-      {key,         type: SingleOrGroup.SINGLE, name,               left, "children":[] }
+      {type: SingleOrGroup.SINGLE, name: '_STARTER_',  left: '', "children":[] },
+      {type: SingleOrGroup.SINGLE, name,               left, "children":[] }
     ])
   })
 
@@ -40,14 +40,13 @@ describe('participant group', () => {
   it('prints participants', () => {
     const code = 'A group { B C }';
     const expected = [
-      {"key": "0-0", "name": "_STARTER_", "type": 0, "children": [], "left": ""},
-      {"key": "0-0", "name": "A", "type": 0, "children": [], "left": ""},
+      {"name": "_STARTER_", "type": 0, "children": [], "left": ""},
+      {"name": "A", "type": 0, "children": [], "left": ""},
       {
-      "key": "2-14",
       "type": 1,
       "children": [
-        {"key": "10-10", "name": "B", "type": 0, "children": [], "left": ""},
-        {"key": "12-12", "name": "C", "type": 0, "children": [], "left": ""}],
+        {"name": "B", "type": 0, "children": [], "left": ""},
+        {"name": "C", "type": 0, "children": [], "left": ""}],
       "left": "A",
       "name": undefined,
     }];
@@ -58,10 +57,10 @@ describe('participant group', () => {
   it('get flatten participants', () => {
     const code = 'A group { B C }';
     const expected = [
-      {"key": "0-0",   "type": 0, "name": "_STARTER_", "left": "", "children":[]},
-      {"key": "0-0",   "type": 0, "name": "A", "left": "_STARTER_", "children":[]},
-      {"key": "10-10", "type": 0, "name": "B", "left": "A", "children":[]},
-      {"key": "12-12", "type": 0, "name": "C", "left": "B", "children":[]}
+      {"type": 0, "name": "_STARTER_", "left": "", "children":[]},
+      {"type": 0, "name": "A", "left": "_STARTER_", "children":[]},
+      {"type": 0, "name": "B", "left": "A", "children":[]},
+      {"type": 0, "name": "C", "left": "B", "children":[]}
     ];
 
     expect(FlattenedParticipants(code)).toEqual(expected)
@@ -70,10 +69,10 @@ describe('participant group', () => {
   it('get flatten participants', () => {
     const code = 'A group { B C } @Starter(D)';
     const expected = [
-      {"key": "0-0",   "type": 0, "name": "D", "left": "", "children":[]},
-      {"key": "0-0",   "type": 0, "name": "A", "left": "D", children:[]},
-      {"key": "10-10", "type": 0, "name": "B", "left": "A", children:[]},
-      {"key": "12-12", "type": 0, "name": "C", "left": "B", children:[]}
+      {"type": 0, "name": "D", "left": "", "children":[]},
+      {"type": 0, "name": "A", "left": "D", children:[]},
+      {"type": 0, "name": "B", "left": "A", children:[]},
+      {"type": 0, "name": "C", "left": "B", children:[]}
     ];
     expect(FlattenedParticipants(code)).toEqual(expected)
   })
@@ -81,9 +80,9 @@ describe('participant group', () => {
   it('get flatten participants', () => {
     const code = 'A group { B C } @Starter(C)';
     const expected = [
-      {"key": "0-0", "type": 0, "name": "A", "left": "", children:[]},
-      {"key": "10-10", "type": 0, "name": "B", "left": "A", children:[]},
-      {"key": "12-12", "type": 0, "name": "C", "left": "B", children:[]}
+      {"type": 0, "name": "A", "left": "", children:[]},
+      {"type": 0, "name": "B", "left": "A", children:[]},
+      {"type": 0, "name": "C", "left": "B", children:[]}
     ];
     expect(FlattenedParticipants(code)).toEqual(expected)
   })

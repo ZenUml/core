@@ -8,7 +8,6 @@ export enum SingleOrGroup {
 }
 
 export interface IParticipantModel {
-  key: string;
   type: SingleOrGroup;
   name?: string;
   children: IParticipantModel[];
@@ -27,19 +26,13 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
 
   enterParticipant(ctx: any) {
     const name = ctx?.name()?.getTextWithoutQuotes() || 'Missing `Participant` name';
-    const key = ParticipantListener._getKey(ctx);
-    const participant = ParticipantListener._singleFactory(key, name);
+    const participant = ParticipantListener._singleFactory(name);
     this.currentArray.push(participant);
-  }
-
-  private static _getKey(ctx: any) {
-    return `${ctx.start.start}-${ctx.stop.stop}`;
   }
 
   enterGroup(ctx: any) {
     const name = ctx?.name()?.getTextWithoutQuotes();
-    const key = ParticipantListener._getKey(ctx);
-    const group = ParticipantListener._groupFactory(key, name);
+    const group = ParticipantListener._groupFactory(name);
     this.explicitParticipants.push(group);
     this.currentArray = group.children;
   }
@@ -57,9 +50,7 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
     if(this.explicitParticipants.some(p => p.name === name)) {
       return;
     }
-    const key = ParticipantListener._getKey(ctx);
-
-    const participant = ParticipantListener._singleFactory(key, name);
+    const participant = ParticipantListener._singleFactory(name);
     this.implicitParticipants.push(participant);
   }
 
@@ -74,9 +65,7 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
     if(this.explicitParticipants.some(p => p.name === name)) {
       return;
     }
-    const key = ParticipantListener._getKey(ctx);
-
-    const participant = ParticipantListener._singleFactory(key, name);
+    const participant = ParticipantListener._singleFactory(name);
     this.implicitParticipants.push(participant);
   }
 
@@ -104,14 +93,14 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
   }
 
   private _getStarter() {
-    return ParticipantListener._singleFactory('0-0', this.starter || '_STARTER_');
+    return ParticipantListener._singleFactory(this.starter || '_STARTER_');
   }
 
   private static _assignLeft(array: IParticipantModel[]) {
     array.reduce((pre: IParticipantModel, curr: IParticipantModel) => {
       curr.left = pre.name || ''
       return curr;
-    }, ParticipantListener._singleFactory('0-0', ''));
+    }, ParticipantListener._singleFactory(''));
   }
 
   private _dedup(array: IParticipantModel[]) {
@@ -131,11 +120,11 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
     return flattenedParticipants;
   }
 
-  private static _singleFactory(key: string, name: string): IParticipantModel {
-    return {key, name: name, type: SingleOrGroup.SINGLE, children: [], left: ''};
+  private static _singleFactory(name: string): IParticipantModel {
+    return {name: name, type: SingleOrGroup.SINGLE, children: [], left: ''};
   }
 
-  private static _groupFactory(key: string, name: string): IParticipantModel {
-    return {key, name, type: SingleOrGroup.GROUP, children: [], left: ''};
+  private static _groupFactory(name: string): IParticipantModel {
+    return {name, type: SingleOrGroup.GROUP, children: [], left: ''};
   }
 }
