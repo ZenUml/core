@@ -21,5 +21,6 @@ describe('MessageListener', () => {
     expect(ownedMessagesList[1].owner).toBe('B');
     // expect third item's owner is D
     expect(ownedMessagesList[2].owner).toBe('D');
+    expect(ownedMessagesList[2].ownableMessages[0].from).toBe('C');
   })
 })

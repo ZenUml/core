@@ -19,7 +19,7 @@ export class Fixture {
 }
 
 export let stubWidthProvider: WidthFunc = (text, _) => {
-  const number = parseInt(text.substring(1) || '0');
+  const number = parseInt(text.trim().substring(1) || '0');
 
   return isNaN(number) ? 0 : number;
 };

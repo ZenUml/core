@@ -39,6 +39,15 @@ describe('get absolute position of a participant', () => {
     expect(posCal2.getPosition('A1')).toBe(820)
   })
 
+  it('reproduce issue', () => {
+    let rootContext = seqDsl.RootContext('A1->B1: m800\r\nB1->C1: m900');
+    const posCal2 = new PosCal2(rootContext, stubWidthProvider);
+    expect(posCal2.getPosition('_STARTER_')).toBe(10)
+    expect(posCal2.getPosition('A1')).toBe(70)
+    expect(posCal2.getPosition('B1')).toBe(880)
+    expect(posCal2.getPosition('C1')).toBe(1790)
+  })
+
   it.each([
     ['new A1',    'A1',   80],
     ['new A200', 'A200',  130],

@@ -12,7 +12,12 @@ export class MessageContextListener extends sequenceParserListener.sequenceParse
   enterCreation = (ctx: any) => this._addOwnedMessage(OwnableMessageType.CreationMessage)(ctx);
 
   private _addOwnedMessage = (type: OwnableMessageType) => (ctx: any) => {
-    const from = ctx?.parentCtx?.Origin();
+    let from;
+    if(ctx.from && ctx.from()) {
+      from = ctx.from().getText();
+    } else {
+      from = ctx?.parentCtx?.Origin();
+    }
     const owner = ctx?.Owner();
     const signature = ctx?.SignatureText();
     // if there is an entry for owner in ownedMessagesList, add ownableMessage to ownableMessages, otherwise create new entry
