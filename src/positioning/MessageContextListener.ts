@@ -1,5 +1,4 @@
 import {IOwnedMessages, OwnableMessageType} from "./OwnableMessage";
-import {Message} from "gauge-ts/dist/gen/messages_pb";
 import {antlr4} from "@/positioning/ParticipantListener";
 
 const sequenceParserListener = require('@/generated-parser/sequenceParserListener');
