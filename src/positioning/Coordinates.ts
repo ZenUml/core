@@ -1,5 +1,5 @@
 
-import {MARGIN, MINI_GAP, MIN_PARTICIPANT_WIDTH} from "@/positioning/Constants";
+import {MARGIN, MINI_GAP, MIN_PARTICIPANT_WIDTH, ARROW_HEAD_WIDTH} from "@/positioning/Constants";
 import {IParticipantGap, IParticipantGaps, TextType, WidthFunc} from "@/positioning/Coordinate";
 import {MessagesGroupedByParticipant} from "@/positioning/MessageContextListener";
 import {LeftMessagesGroupedByParticipant} from "@/positioning/LeftMessagesBuilder";
@@ -10,7 +10,6 @@ import '../utils/ArrayUntil';
 
 export class Coordinates {
   private readonly _participants: Array<IParticipantGap>;
-  private static ARROW_HEAD_WIDTH = 10;
 
   constructor(ctx: any, widthProvider: WidthFunc) {
     this._participants = Coordinates.getParticipantGaps(ctx, widthProvider);
@@ -30,7 +29,6 @@ export class Coordinates {
   }
 
   static getParticipantGaps(ctx: any, widthProvider: WidthFunc): IParticipantGaps {
-    let ownedMessagesList = MessagesGroupedByParticipant(ctx);
     const participantModels = OrderedParticipants(ctx);
     const participantIndex = {} as any;
     participantModels.forEach((v: any, i:number) => participantIndex[v.name] = i)
@@ -43,22 +41,23 @@ export class Coordinates {
         .flatMap(v => v.leftMessages);
     }
 
-    return participantModels.map((p: IParticipantModel) => {
+    let lastPosition = 0;
+    for(let i=0; i < participantModels.length; i++) {
+      const p = participantModels[i];
       const halfLeft = this.half(widthProvider, p.left);
       const halfSelf = this.half(widthProvider, p.name);
-      return {p, halfLeft, halfSelf};
-    }).map(({p, halfLeft, halfSelf}) => {
       const contributingMessages = getContributingMessages(p);
-      return {p, contributingMessages, halfLeft, halfSelf};
-    }).map(({p, contributingMessages, halfLeft, halfSelf}) => {
-      const messageWidth = this._getMessageWidth(contributingMessages, widthProvider, halfSelf);
-      return {p, messageWidth, halfLeft, halfSelf};
-    }).map(({p, messageWidth, halfLeft, halfSelf}) => {
-        const leftIsVisible = this.leftIsVisible(p);
-        const participantGap = ((leftIsVisible && halfLeft) || 0) + halfSelf;
-        let gap = Math.max(messageWidth, participantGap)
-        return {participant: p.name, gap} as IParticipantGap;
-      });
+      const messageWidth = this._getMessageWidth(contributingMessages, widthProvider, halfSelf, participantModels, p, i);
+      const leftIsVisible = this.leftIsVisible(p);
+      const participantGap = ((leftIsVisible && halfLeft) || 0) + halfSelf;
+      let gap = Math.max(messageWidth, participantGap);
+      
+      (p as any).gap = gap;
+      (p as any).position = lastPosition + gap;
+      lastPosition = (p as any).position;
+    }
+
+    return participantModels.map(p => ({participant: p.name, gap: (p as any).gap} as IParticipantGap));
   }
 
   private static leftIsVisible(p: IParticipantModel) {
@@ -77,8 +76,8 @@ export class Coordinates {
     return this._getParticipantWidth(widthProvider, participant) / 2 + MARGIN / 2;
   }
 
-  private static _getMessageWidth(contributingMessages: LeftMessage[], widthProvider: WidthFunc, halfSelf: number) {
-    function getSignature (m: {signature: string, type: MessageType}) { return {sig: m.signature || '', type: m.type}; }
+  private static _getMessageWidth(contributingMessages: LeftMessage[], widthProvider: WidthFunc, halfSelf: number, participantModels: Array<IParticipantModel>, p: IParticipantModel, i: number) {
+    function getSignature (m: {signature: string, type: MessageType, leftParticipant: string}) { return {sig: m.signature || '', type: m.type, leftParticipant: m.leftParticipant}; }
 
     function getWidth(widthProvider: WidthFunc) {
       return (item: any) => {
@@ -87,6 +86,11 @@ export class Coordinates {
         if (item.type === MessageType.CreationMessage) {
           messageWidth += halfSelf;
         }
+
+        if(p.left && item.leftParticipant !== p.left) {
+          const leftParticipant = participantModels.find(v => v.name === item.leftParticipant);
+          messageWidth -= ((participantModels[i - 1] as any).position - (leftParticipant as any).position);
+        }
         return messageWidth;
       };
     }
@@ -94,7 +98,7 @@ export class Coordinates {
     return Math.max(...contributingMessages
         .map(getSignature)
         .map(getWidth(widthProvider))
-        .map(w => w + Coordinates.ARROW_HEAD_WIDTH), 0);
+        .map(w => w + ARROW_HEAD_WIDTH), 0);
   }
 
   private static _getParticipantWidth(widthProvider: WidthFunc, participant: string | undefined) {
