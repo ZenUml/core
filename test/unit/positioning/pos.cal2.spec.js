@@ -1,4 +1,5 @@
 // max(MIN_GAP, old_g, new_g, w/2 + left-part-w/2 + MARGIN)
+import {ARROW_HEAD_WIDTH, MARGIN, MINI_GAP, MIN_PARTICIPANT_WIDTH} from "@/positioning/Constants";
 import {PosCal2} from "@/positioning/PosCal2";
 import {seqDsl} from "../../../src/positioning/ParticipantListener";
 import {stubWidthProvider} from "../parser/fixture/Fixture";
@@ -57,5 +58,24 @@ describe('get absolute position of a participant', () => {
     expect(posCal2.getPosition('_STARTER_')).toBe(10)
     // half participant width + Starter Position + margin
     expect(posCal2.getPosition(name)).toBe(pos)
+  })
+
+
+  it('non-adjacent long message', () => {
+    const messageLength = 800;
+    let rootContext = seqDsl.RootContext(`A1->B1: m1\nB1->C1: m1\nA1->C1: m${messageLength}`);
+    const posCal2 = new PosCal2(rootContext, stubWidthProvider);
+    
+    let position = MARGIN/2;
+    expect(posCal2.getPosition('_STARTER_')).toBe(position);
+
+    position += MIN_PARTICIPANT_WIDTH/2 + MARGIN/2;
+    expect(posCal2.getPosition('A1')).toBe(position); //70
+
+    position += MIN_PARTICIPANT_WIDTH/2 + MARGIN/2 + MIN_PARTICIPANT_WIDTH/2 + MARGIN/2;
+    expect(posCal2.getPosition('B1')).toBe(position); //190
+
+    position += MIN_PARTICIPANT_WIDTH/2 + MARGIN/2 + messageLength;
+    expect(posCal2.getPosition('C1')).toBe(1000);
   })
 })

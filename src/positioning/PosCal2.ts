@@ -1,6 +1,7 @@
 // a, b, c, MIN_GAP=100, MARGIN
 // [{participant: a, gap:100, width: 250 }, {p: b, g:100, w: 120 }, {p: c, g: 150, w: 200}]
 // delta {a: {g: 110, w: 120} =>
+import {ARROW_HEAD_WIDTH, MARGIN, MINI_GAP, MIN_PARTICIPANT_WIDTH} from "@/positioning/Constants";
 import {ICoordinate2, ICoordinates2, TextType, WidthFunc} from "@/positioning/Coordinate";
 import {MessagesGroupedByParticipant} from "@/positioning/MessageContextListener";
 import {OrderedParticipants} from "@/positioning/OrderedParticipants";
@@ -26,10 +27,6 @@ Array.prototype['until'] = function (predicate: (value: any, index: number, arra
 
 export class PosCal2 {
   private readonly _participants: Array<ICoordinate2>;
-  private static MINI_GAP = 100;
-  private static MARGIN = 20;
-  private static ARROW_HEAD_WIDTH = 10;
-  private static MIN_PARTICIPANT_WIDTH = 100;
 
   constructor(ctx: any, widthProvider: WidthFunc) {
     this._participants = PosCal2.getMessageWidthAndParticipantWidth(ctx, widthProvider);
@@ -50,6 +47,7 @@ export class PosCal2 {
 
   static getMessageWidthAndParticipantWidth(ctx: any, widthProvider: WidthFunc): ICoordinates2 {
     let ownedMessagesList = MessagesGroupedByParticipant(ctx);
+
     const participantModels = OrderedParticipants(ctx);
 
     function getContributingMessages(p: IParticipantModel) {
@@ -61,14 +59,9 @@ export class PosCal2 {
         return p2.ownableMessages;
       }
 
-      function fromLeftOf(p: IParticipantModel) {
-        return (o: { from: string }) => o.from === p.left;
-      }
-
       return ownedMessagesList
         .filter(ownedBy(p))
-        .flatMap(toOwnableMessages)
-        .filter(fromLeftOf(p));
+        .flatMap(toOwnableMessages);
     }
 
     return participantModels.map((p: IParticipantModel) => {
@@ -95,14 +88,14 @@ export class PosCal2 {
 
   private static half(widthProvider: WidthFunc, participantName: string | undefined) {
     if (participantName === '_STARTER_') {
-      return this.MARGIN/2;
+      return MARGIN/2;
     }
     const halfLeftParticipantWidth = this.halfWithMargin(widthProvider, participantName);
-    return Math.max(halfLeftParticipantWidth, this.MINI_GAP / 2);
+    return Math.max(halfLeftParticipantWidth, MINI_GAP / 2);
   }
 
   private static halfWithMargin(widthProvider: WidthFunc, participant: string | undefined) {
-    return this._getParticipantWidth(widthProvider, participant) / 2 + this.MARGIN / 2;
+    return this._getParticipantWidth(widthProvider, participant) / 2 + MARGIN / 2;
   }
 
   private static _getMessageWidth(contributingMessages: OwnableMessage[], widthProvider: WidthFunc, halfSelf: number) {
@@ -122,10 +115,10 @@ export class PosCal2 {
     return Math.max(...contributingMessages
         .map(getSignature)
         .map(getWidth(widthProvider))
-        .map(w => w + PosCal2.ARROW_HEAD_WIDTH), 0);
+        .map(w => w + ARROW_HEAD_WIDTH), 0);
   }
 
   private static _getParticipantWidth(widthProvider: WidthFunc, participant: string | undefined) {
-    return Math.max(widthProvider(participant || '', TextType.ParticipantName), PosCal2.MIN_PARTICIPANT_WIDTH);
+    return Math.max(widthProvider(participant || '', TextType.ParticipantName), MIN_PARTICIPANT_WIDTH);
   }
 }

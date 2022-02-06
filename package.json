@@ -5,6 +5,7 @@
   "scripts": {
     "build": "yarn antlr:clear && yarn antlr && vue-cli-service build --target lib --name vue-sequence ./src/index.ts",
     "test:unit": "yarn antlr && vue-cli-service test:unit",
+    "test:unit:watch": "yarn antlr && vue-cli-service test:unit --watch",
     "lint": "vue-cli-service lint",
     "antlr": "yarn antlr:lexer && yarn antlr:parser",
     "antlr:clear": "rm -rf src/generated-parser/*",
