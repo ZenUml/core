@@ -3,10 +3,10 @@
 // delta {a: {g: 110, w: 120} =>
 import {ARROW_HEAD_WIDTH, MARGIN, MINI_GAP, MIN_PARTICIPANT_WIDTH} from "@/positioning/Constants";
 import {ICoordinate2, ICoordinates2, TextType, WidthFunc} from "@/positioning/Coordinate";
-import {MessagesGroupedByParticipant} from "@/positioning/MessageContextListener";
+import {LeftMessagesGroupedByParticipant} from "@/positioning/LeftMessagesBuilder";
 import {OrderedParticipants} from "@/positioning/OrderedParticipants";
 import {IParticipantModel} from "@/positioning/ParticipantListener";
-import {IOwnedMessages, OwnableMessage, OwnableMessageType} from "@/positioning/OwnableMessage";
+import {LeftMessage, MessageType} from "@/positioning/LeftMessage";
 
 declare global {
   interface Array<T> {
@@ -46,22 +46,16 @@ export class PosCal2 {
   }
 
   static getMessageWidthAndParticipantWidth(ctx: any, widthProvider: WidthFunc): ICoordinates2 {
-    let ownedMessagesList = MessagesGroupedByParticipant(ctx);
-
     const participantModels = OrderedParticipants(ctx);
+    const participantIndex = {} as any;
+    participantModels.forEach((v: any, i:number) => participantIndex[v.name] = i)
+    
+    const participants = LeftMessagesGroupedByParticipant(ctx, (p1, p2) => participantIndex[p1] < participantIndex[p2]);
 
     function getContributingMessages(p: IParticipantModel) {
-      const ownedBy = (p: IParticipantModel) => {
-        return (p1: { owner: string }) => p1.owner === p.name
-      };
-
-      function toOwnableMessages(p2: IOwnedMessages) {
-        return p2.ownableMessages;
-      }
-
-      return ownedMessagesList
-        .filter(ownedBy(p))
-        .flatMap(toOwnableMessages);
+      return participants
+        .filter(v => v.participant === p.name)
+        .flatMap(v => v.leftMessages);
     }
 
     return participantModels.map((p: IParticipantModel) => {
@@ -98,14 +92,14 @@ export class PosCal2 {
     return this._getParticipantWidth(widthProvider, participant) / 2 + MARGIN / 2;
   }
 
-  private static _getMessageWidth(contributingMessages: OwnableMessage[], widthProvider: WidthFunc, halfSelf: number) {
-    function getSignature (m: {signature: string, type: OwnableMessageType}) { return {sig: m.signature || '', type: m.type}; }
+  private static _getMessageWidth(contributingMessages: LeftMessage[], widthProvider: WidthFunc, halfSelf: number) {
+    function getSignature (m: {signature: string, type: MessageType}) { return {sig: m.signature || '', type: m.type}; }
 
     function getWidth(widthProvider: WidthFunc) {
       return (item: any) => {
         let messageWidth = widthProvider(item.sig, TextType.MessageContent);
         // hack for creation message
-        if (item.type === OwnableMessageType.CreationMessage) {
+        if (item.type === MessageType.CreationMessage) {
           messageWidth += halfSelf;
         }
         return messageWidth;

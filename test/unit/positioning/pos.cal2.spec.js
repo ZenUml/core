@@ -78,4 +78,22 @@ describe('get absolute position of a participant', () => {
     position += MIN_PARTICIPANT_WIDTH/2 + MARGIN/2 + messageLength;
     expect(posCal2.getPosition('C1')).toBe(1000);
   })
+
+  it('backwards long message', () => {
+    const messageLength = 800;
+    let rootContext = seqDsl.RootContext(`A1->B1: m1\nB1->C1: m1\nC1->A1: m${messageLength}`);
+    const posCal2 = new PosCal2(rootContext, stubWidthProvider);
+    
+    let position = MARGIN/2;
+    expect(posCal2.getPosition('_STARTER_')).toBe(position);
+
+    position += MIN_PARTICIPANT_WIDTH/2 + MARGIN/2;
+    expect(posCal2.getPosition('A1')).toBe(position); //70
+
+    position += MIN_PARTICIPANT_WIDTH/2 + MARGIN/2 + MIN_PARTICIPANT_WIDTH/2 + MARGIN/2;
+    expect(posCal2.getPosition('B1')).toBe(position); //190
+
+    position += MIN_PARTICIPANT_WIDTH/2 + MARGIN/2 + messageLength;
+    expect(posCal2.getPosition('C1')).toBe(1000);
+  })
 })
