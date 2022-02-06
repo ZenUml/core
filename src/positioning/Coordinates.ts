@@ -1,35 +1,19 @@
-// a, b, c, MIN_GAP=100, MARGIN
-// [{participant: a, gap:100, width: 250 }, {p: b, g:100, w: 120 }, {p: c, g: 150, w: 200}]
-// delta {a: {g: 110, w: 120} =>
-import {ARROW_HEAD_WIDTH, MARGIN, MINI_GAP, MIN_PARTICIPANT_WIDTH} from "@/positioning/Constants";
-import {ICoordinate2, ICoordinates2, TextType, WidthFunc} from "@/positioning/Coordinate";
+
+import {MARGIN, MINI_GAP, MIN_PARTICIPANT_WIDTH} from "@/positioning/Constants";
+import {IParticipantGap, IParticipantGaps, TextType, WidthFunc} from "@/positioning/Coordinate";
+import {MessagesGroupedByParticipant} from "@/positioning/MessageContextListener";
 import {LeftMessagesGroupedByParticipant} from "@/positioning/LeftMessagesBuilder";
 import {OrderedParticipants} from "@/positioning/OrderedParticipants";
 import {IParticipantModel} from "@/positioning/ParticipantListener";
 import {LeftMessage, MessageType} from "@/positioning/LeftMessage";
+import '../utils/ArrayUntil';
 
-declare global {
-  interface Array<T> {
-    until(predicate: (value: T, index: number, array: T[]) => boolean): T[];
-  }
-}
-
-Array.prototype['until'] = function (predicate: (value: any, index: number, array: any[]) => boolean): any[] {
-  let result: any[] = [];
-  for (let i = 0; i < this.length; i++) {
-    result.push(this[i]);
-    if (predicate(this[i], i, this)) {
-      break;
-    }
-  }
-  return result;
-};
-
-export class PosCal2 {
-  private readonly _participants: Array<ICoordinate2>;
+export class Coordinates {
+  private readonly _participants: Array<IParticipantGap>;
+  private static ARROW_HEAD_WIDTH = 10;
 
   constructor(ctx: any, widthProvider: WidthFunc) {
-    this._participants = PosCal2.getMessageWidthAndParticipantWidth(ctx, widthProvider);
+    this._participants = Coordinates.getParticipantGaps(ctx, widthProvider);
   }
 
   getPosition(participantName: string|undefined): number {
@@ -45,7 +29,8 @@ export class PosCal2 {
       }, 0);
   }
 
-  static getMessageWidthAndParticipantWidth(ctx: any, widthProvider: WidthFunc): ICoordinates2 {
+  static getParticipantGaps(ctx: any, widthProvider: WidthFunc): IParticipantGaps {
+    let ownedMessagesList = MessagesGroupedByParticipant(ctx);
     const participantModels = OrderedParticipants(ctx);
     const participantIndex = {} as any;
     participantModels.forEach((v: any, i:number) => participantIndex[v.name] = i)
@@ -72,7 +57,7 @@ export class PosCal2 {
         const leftIsVisible = this.leftIsVisible(p);
         const participantGap = ((leftIsVisible && halfLeft) || 0) + halfSelf;
         let gap = Math.max(messageWidth, participantGap)
-        return {participant: p.name, gap} as ICoordinate2;
+        return {participant: p.name, gap} as IParticipantGap;
       });
   }
 
@@ -109,7 +94,7 @@ export class PosCal2 {
     return Math.max(...contributingMessages
         .map(getSignature)
         .map(getWidth(widthProvider))
-        .map(w => w + ARROW_HEAD_WIDTH), 0);
+        .map(w => w + Coordinates.ARROW_HEAD_WIDTH), 0);
   }
 
   private static _getParticipantWidth(widthProvider: WidthFunc, participant: string | undefined) {
