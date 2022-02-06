@@ -79,21 +79,21 @@ describe('get absolute position of a participant', () => {
     expect(coordinates.getPosition('C1')).toBe(positionC);
   })
 
-  // it('backwards long message', () => {
-  //   const messageLength = 800;
-  //   let rootContext = seqDsl.RootContext(`A1->B1: m1\nB1->C1: m1\nC1->A1: m${messageLength}`);
-  //   const coordinates = new Coordinates(rootContext, stubWidthProvider);
+  it('backwards long message', () => {
+    const messageLength = 800;
+    let rootContext = seqDsl.RootContext(`A1->B1: m1\nB1->C1: m1\nC1->A1: m${messageLength}`);
+    const coordinates = new Coordinates(rootContext, stubWidthProvider);
     
-  //   let position = MARGIN/2;
-  //   expect(coordinates.getPosition('_STARTER_')).toBe(position);
+    let positionStarter = MARGIN/2;
+    expect(coordinates.getPosition('_STARTER_')).toBe(positionStarter);
 
-  //   position += MIN_PARTICIPANT_WIDTH/2 + MARGIN/2;
-  //   expect(coordinates.getPosition('A1')).toBe(position); //70
+    const positionA = positionStarter + MIN_PARTICIPANT_WIDTH/2 + MARGIN/2;
+    expect(coordinates.getPosition('A1')).toBe(positionA); //70
 
-  //   position += MIN_PARTICIPANT_WIDTH/2 + MARGIN/2 + MIN_PARTICIPANT_WIDTH/2 + MARGIN/2;
-  //   expect(coordinates.getPosition('B1')).toBe(position); //190
+    const positionB = positionA + MIN_PARTICIPANT_WIDTH/2 + MARGIN/2 + MIN_PARTICIPANT_WIDTH/2 + MARGIN/2;
+    expect(coordinates.getPosition('B1')).toBe(positionB); //190
 
-  //   position += MIN_PARTICIPANT_WIDTH/2 + MARGIN/2 + messageLength;
-  //   expect(coordinates.getPosition('C1')).toBe(1000);
-  // })
+    const positionC = positionB + (messageLength - (positionB - positionA)) + ARROW_HEAD_WIDTH;
+    expect(coordinates.getPosition('C1')).toBe(positionC);
+  })
 })
