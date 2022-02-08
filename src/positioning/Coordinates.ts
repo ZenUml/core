@@ -10,12 +10,14 @@ import '../utils/ArrayUntil';
 
 export class Coordinates {
   private readonly _participants: Array<IParticipantGap>;
+  private static m: Array<Array<number>> = [];
 
   constructor(ctx: any, widthProvider: WidthFunc) {
     this._participants = Coordinates.getParticipantGaps(ctx, widthProvider);
   }
 
   getPosition(participantName: string|undefined): number {
+    console.log(Coordinates.m);
     if(this._participants.findIndex(p => p.participant === participantName) === -1) {
       throw Error(`Participant ${participantName} not found`);
     }
@@ -29,10 +31,41 @@ export class Coordinates {
   }
 
   static getParticipantGaps(ctx: any, widthProvider: WidthFunc): IParticipantGaps {
+
+    let p = (i: number, j: number) => {
+      return Coordinates.m[i][j];
+    }
+    let r = (i: number, j: number): number => {
+      if (j === i) {
+        return 0;
+      } else if(j - i === 1) {
+        let temp = [];
+        for(let k = 0; k <= i; k++) {
+          temp.push(p(k, j) - r(k, i));
+        }
+        return Math.max(...temp)
+      } else {
+        let sum = 0;
+        for(let l = i; l < j; l++) {
+          sum += r(l, l + 1);
+        }
+        return sum;
+      }
+    }
+
     const participantModels = OrderedParticipants(ctx);
+    for (let i = 0; i < participantModels.length; i++) {
+      Coordinates.m[i] = [];
+      for (let j = 0; j < participantModels.length; j++) {
+        Coordinates.m[i][j] = i < j ? MINI_GAP : 0;
+        if(participantModels[i].name === '_STARTER_') {
+          Coordinates.m[i][j] = 0;
+        }
+      }
+    }
     const participantIndex = {} as any;
     participantModels.forEach((v: any, i:number) => participantIndex[v.name] = i)
-    
+
     const participants = LeftMessagesGroupedByParticipant(ctx, (p1, p2) => participantIndex[p1] < participantIndex[p2]);
 
     function getContributingMessages(p: IParticipantModel) {
@@ -47,13 +80,14 @@ export class Coordinates {
       const halfLeft = this.half(widthProvider, p.left);
       const halfSelf = this.half(widthProvider, p.name);
       const contributingMessages = getContributingMessages(p);
-      const messageWidth = this._getMessageWidth(contributingMessages, widthProvider, halfSelf, participantModels, p, i);
       const leftIsVisible = this.leftIsVisible(p);
       const participantGap = ((leftIsVisible && halfLeft) || 0) + halfSelf;
+      const messageWidth = this._getMessageWidth(contributingMessages, widthProvider, halfSelf, participantModels, p, i, participantGap);
       let gap = Math.max(messageWidth, participantGap);
-      
-      (p as any).gap = gap;
-      (p as any).position = lastPosition + gap;
+      let gap2 = Math.max(r(i-1, i), participantGap);
+      console.log(gap, gap2, participantGap);
+      (p as any).gap = gap2;
+      (p as any).position = lastPosition + gap2;
       lastPosition = (p as any).position;
     }
 
@@ -76,7 +110,7 @@ export class Coordinates {
     return this._getParticipantWidth(widthProvider, participant) / 2 + MARGIN / 2;
   }
 
-  private static _getMessageWidth(contributingMessages: LeftMessage[], widthProvider: WidthFunc, halfSelf: number, participantModels: Array<IParticipantModel>, p: IParticipantModel, i: number) {
+  private static _getMessageWidth(contributingMessages: LeftMessage[], widthProvider: WidthFunc, halfSelf: number, participantModels: Array<IParticipantModel>, p: IParticipantModel, i: number, participantGap: number) {
     function getSignature (m: {signature: string, type: MessageType, leftParticipant: string}) { return {sig: m.signature || '', type: m.type, leftParticipant: m.leftParticipant}; }
 
     function getWidth(widthProvider: WidthFunc) {
@@ -86,6 +120,9 @@ export class Coordinates {
         if (item.type === MessageType.CreationMessage) {
           messageWidth += halfSelf;
         }
+        const leftIndex = participantModels.findIndex(v => v.name === item.leftParticipant);
+        console.log('m', Coordinates.m);
+        Coordinates.m[leftIndex][i] = Math.max(messageWidth + ARROW_HEAD_WIDTH, participantGap);
 
         if(p.left && item.leftParticipant !== p.left) {
           const leftParticipant = participantModels.find(v => v.name === item.leftParticipant);
