@@ -82,10 +82,8 @@ export class Coordinates {
       const contributingMessages = getContributingMessages(p);
       const leftIsVisible = this.leftIsVisible(p);
       const participantGap = ((leftIsVisible && halfLeft) || 0) + halfSelf;
-      const messageWidth = this._getMessageWidth(contributingMessages, widthProvider, halfSelf, participantModels, p, i, participantGap);
-      let gap = Math.max(messageWidth, participantGap);
+      this._getMessageWidth(contributingMessages, widthProvider, halfSelf, participantModels, i, participantGap);
       let gap2 = Math.max(r(i-1, i), participantGap);
-      console.log(gap, gap2, participantGap);
       (p as any).gap = gap2;
       (p as any).position = lastPosition + gap2;
       lastPosition = (p as any).position;
@@ -110,7 +108,7 @@ export class Coordinates {
     return this._getParticipantWidth(widthProvider, participant) / 2 + MARGIN / 2;
   }
 
-  private static _getMessageWidth(contributingMessages: LeftMessage[], widthProvider: WidthFunc, halfSelf: number, participantModels: Array<IParticipantModel>, p: IParticipantModel, i: number, participantGap: number) {
+  private static _getMessageWidth(contributingMessages: LeftMessage[], widthProvider: WidthFunc, halfSelf: number, participantModels: Array<IParticipantModel>, i: number, participantGap: number) {
     function getSignature (m: {signature: string, type: MessageType, leftParticipant: string}) { return {sig: m.signature || '', type: m.type, leftParticipant: m.leftParticipant}; }
 
     function getWidth(widthProvider: WidthFunc) {
@@ -121,21 +119,11 @@ export class Coordinates {
           messageWidth += halfSelf;
         }
         const leftIndex = participantModels.findIndex(v => v.name === item.leftParticipant);
-        console.log('m', Coordinates.m);
         Coordinates.m[leftIndex][i] = Math.max(messageWidth + ARROW_HEAD_WIDTH, participantGap);
-
-        if(p.left && item.leftParticipant !== p.left) {
-          const leftParticipant = participantModels.find(v => v.name === item.leftParticipant);
-          messageWidth -= ((participantModels[i - 1] as any).position - (leftParticipant as any).position);
-        }
-        return messageWidth;
       };
     }
 
-    return Math.max(...contributingMessages
-        .map(getSignature)
-        .map(getWidth(widthProvider))
-        .map(w => w + ARROW_HEAD_WIDTH), 0);
+    [...contributingMessages].map(getSignature).forEach(getWidth(widthProvider))
   }
 
   private static _getParticipantWidth(widthProvider: WidthFunc, participant: string | undefined) {
