@@ -10,7 +10,7 @@ export function GroupCoordinates(participants: IParticipantModel[], absolutePos:
 
   function _processItem(participant: IParticipantModel, relativeLeft: number = 0) {
     let left = _getLeft(participant);
-    result.push({key: (participant as any).key, name: participant.name, left: left - relativeLeft})
+    result.push({name: participant.name, left: left - relativeLeft})
     for (const item of participant.children) {
       _processItem(item, left);
     }

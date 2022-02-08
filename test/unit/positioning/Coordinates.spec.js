@@ -6,6 +6,12 @@ import {stubWidthProvider} from "../parser/fixture/Fixture";
 
 describe('get absolute position of a participant', () => {
 
+  it('One wide participant', () => {
+    let rootContext = seqDsl.RootContext('A300');
+    const coordinates = new Coordinates(rootContext, stubWidthProvider);
+    expect(coordinates.getPosition('A300')).toBe(170)
+  })
+
   it('wide participant label and error scenario', () => {
     let rootContext = seqDsl.RootContext('A200 group {B300} C400');
     const coordinates = new Coordinates(rootContext, stubWidthProvider);
@@ -65,7 +71,7 @@ describe('get absolute position of a participant', () => {
     const messageLength = 800;
     let rootContext = seqDsl.RootContext(`A1->B1: m1\nB1->C1: m1\nA1->C1: m${messageLength}`);
     const coordinates = new Coordinates(rootContext, stubWidthProvider);
-    
+
     const positionStarter = MARGIN/2;
     expect(coordinates.getPosition('_STARTER_')).toBe(positionStarter);
 
@@ -83,7 +89,7 @@ describe('get absolute position of a participant', () => {
     const messageLength = 800;
     let rootContext = seqDsl.RootContext(`A1->B1: m1\nB1->C1: m1\nC1->A1: m${messageLength}`);
     const coordinates = new Coordinates(rootContext, stubWidthProvider);
-    
+
     let positionStarter = MARGIN/2;
     expect(coordinates.getPosition('_STARTER_')).toBe(positionStarter);
 
