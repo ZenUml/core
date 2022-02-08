@@ -12,6 +12,27 @@ export class Coordinates {
   private readonly _participants: Array<IParticipantGap>;
   private static m: Array<Array<number>> = [];
 
+  static p = (i: number, j: number) => {
+    return Coordinates.m[i][j];
+  }
+  static r = (i: number, j: number): number => {
+    if (j === i) {
+      return 0;
+    } else if(j - i === 1) {
+      let temp = [];
+      for(let k = 0; k <= i; k++) {
+        temp.push(Coordinates.p(k, j) - Coordinates.r(k, i));
+      }
+      return Math.max(...temp)
+    } else {
+      let sum = 0;
+      for(let l = i; l < j; l++) {
+        sum += Coordinates.r(l, l + 1);
+      }
+      return sum;
+    }
+  }
+
   constructor(ctx: any, widthProvider: WidthFunc) {
     this._participants = Coordinates.getParticipantGaps(ctx, widthProvider);
   }
@@ -32,26 +53,6 @@ export class Coordinates {
 
   static getParticipantGaps(ctx: any, widthProvider: WidthFunc): IParticipantGaps {
 
-    let p = (i: number, j: number) => {
-      return Coordinates.m[i][j];
-    }
-    let r = (i: number, j: number): number => {
-      if (j === i) {
-        return 0;
-      } else if(j - i === 1) {
-        let temp = [];
-        for(let k = 0; k <= i; k++) {
-          temp.push(p(k, j) - r(k, i));
-        }
-        return Math.max(...temp)
-      } else {
-        let sum = 0;
-        for(let l = i; l < j; l++) {
-          sum += r(l, l + 1);
-        }
-        return sum;
-      }
-    }
 
     const participantModels = OrderedParticipants(ctx);
     for (let i = 0; i < participantModels.length; i++) {
@@ -83,7 +84,7 @@ export class Coordinates {
       const leftIsVisible = this.leftIsVisible(p);
       const participantGap = ((leftIsVisible && halfLeft) || 0) + halfSelf;
       this._getMessageWidth(contributingMessages, widthProvider, halfSelf, participantModels, i, participantGap);
-      let gap2 = Math.max(r(i-1, i), participantGap);
+      let gap2 = Math.max(Coordinates.r(i-1, i), participantGap);
       (p as any).gap = gap2;
       (p as any).position = lastPosition + gap2;
       lastPosition = (p as any).position;
