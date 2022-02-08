@@ -14,6 +14,18 @@ export class Coordinates {
   private static ctx: any;
   private static widthProvider: WidthFunc;
 
+  /**
+   * There is a line segment. There are n points (P1, P2, ... Pn) on this line segment.
+   * We know some constraint - the minimum distance between k (k < n) points. For example, m_d(P2, P3), m_d(Pi, Pj).
+   * Design a solution to find the positions of P1 ~ Pn, so that their distances satisfy
+   * the constraint AND keep the length of the line segment minimum.
+   *
+   * For example, for one line segment, there are 4 points P1 ~ P4.
+   * m_d(P1, P2) = 100, m_d(P2, P4) = 800.
+   * One solution would be P1 = 0, P2 = 100, P3 = 100, P4 = 900.
+   * A better solution would be P1 = 0, P2 = 100, P3 = 500, P4 = 900. (put P3 at the middle)
+   * A even better solution would be P1 = 0, P2 = 300, P3 = 600, P4 = 900. (evenly distribute P2 and P3)
+   */
   static p = (i: number, j: number) => {
     return Coordinates.m[i][j];
   }
@@ -57,10 +69,7 @@ export class Coordinates {
       Coordinates.m[i] = [];
       for (let j = 0; j < participantModels.length; j++) {
         const p = participantModels[j];
-        const halfLeft = this.half(widthProvider, p.left);
-        const halfSelf = this.half(widthProvider, p.name);
-        const leftIsVisible = this.leftIsVisible(p);
-        const participantGap = ((leftIsVisible && halfLeft) || 0) + halfSelf;
+        const participantGap = this.getParticipantGap(widthProvider, p);
         if (j - i == 1) {
           Coordinates.m[i][j] = participantGap;
         } else {
@@ -83,13 +92,21 @@ export class Coordinates {
       const p = participantModels[i];
       const halfLeft = this.half(widthProvider, p.left);
       const halfSelf = this.half(widthProvider, p.name);
-      const contributingMessages = getContributingMessages(p);
       const leftIsVisible = this.leftIsVisible(p);
       const participantGap = ((leftIsVisible && halfLeft) || 0) + halfSelf;
+      const contributingMessages = getContributingMessages(p);
       this._getMessageWidth(contributingMessages, widthProvider, halfSelf, participantModels, i, participantGap);
     }
 
     return participantModels.map(p => ({participant: p.name, gap: (p as any).gap} as IParticipantGap));
+  }
+
+  private static getParticipantGap(widthProvider: WidthFunc, p: IParticipantModel) {
+    const halfLeft = this.half(widthProvider, p.left);
+    const halfSelf = this.half(widthProvider, p.name);
+    const leftIsVisible = this.leftIsVisible(p);
+    const participantGap = ((leftIsVisible && halfLeft) || 0) + halfSelf;
+    return participantGap;
   }
 
   private static leftIsVisible(p: IParticipantModel) {
