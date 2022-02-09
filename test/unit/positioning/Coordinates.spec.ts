@@ -66,30 +66,16 @@ describe('get absolute position of a participant', () => {
   })
 
 
-  it('non-adjacent long message', () => {
+  it.each([
+    ['A1->B1: m1\nB1->C1: m1\nA1->C1: m800'],
+    ['A1->B1: m1\nB1->C1: m1\nC1->A1: m800'], // backwards
+    ['A1->B1: m1\nB1->C1: m1\nB1->C1: m1\nC1->A1: m800'], // repeating message B1->C1:m1
+  ])('non-adjacent long message', (code: string) => {
     const messageLength = 800;
-    let rootContext = seqDsl.RootContext(`A1->B1: m1\nB1->C1: m1\nA1->C1: m${messageLength}`);
+    let rootContext = seqDsl.RootContext(code);
     const coordinates = new Coordinates(rootContext, stubWidthProvider);
 
     const positionStarter = MARGIN/2;
-    expect(coordinates.getPosition('_STARTER_')).toBe(positionStarter);
-
-    const positionA = positionStarter + MIN_PARTICIPANT_WIDTH/2 + MARGIN/2;
-    expect(coordinates.getPosition('A1')).toBe(positionA); //70
-
-    const positionB = positionA + MIN_PARTICIPANT_WIDTH/2 + MARGIN/2 + MIN_PARTICIPANT_WIDTH/2 + MARGIN/2;
-    expect(coordinates.getPosition('B1')).toBe(positionB); //190
-
-    const positionC = positionB + (messageLength - (positionB - positionA)) + ARROW_HEAD_WIDTH;
-    expect(coordinates.getPosition('C1')).toBe(positionC);
-  })
-
-  it('backwards long message', () => {
-    const messageLength = 800;
-    let rootContext = seqDsl.RootContext(`A1->B1: m1\nB1->C1: m1\nC1->A1: m${messageLength}`);
-    const coordinates = new Coordinates(rootContext, stubWidthProvider);
-
-    let positionStarter = MARGIN/2;
     expect(coordinates.getPosition('_STARTER_')).toBe(positionStarter);
 
     const positionA = positionStarter + MIN_PARTICIPANT_WIDTH/2 + MARGIN/2;
