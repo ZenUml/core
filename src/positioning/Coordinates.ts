@@ -1,5 +1,5 @@
-import {MARGIN, MINI_GAP, MIN_PARTICIPANT_WIDTH, ARROW_HEAD_WIDTH} from "@/positioning/Constants";
-import {IParticipantGap, IParticipantGaps, TextType, WidthFunc} from "@/positioning/Coordinate";
+import {ARROW_HEAD_WIDTH, MARGIN, MIN_PARTICIPANT_WIDTH, MINI_GAP} from "@/positioning/Constants";
+import {TextType, WidthFunc} from "@/positioning/Coordinate";
 import {LeftMessagesGroupedByParticipant} from "@/positioning/LeftMessagesBuilder";
 import {OrderedParticipants} from "@/positioning/OrderedParticipants";
 import {IParticipantModel} from "@/positioning/ParticipantListener";
@@ -55,10 +55,7 @@ export class Coordinates {
 
     for(let i=0; i < participantModels.length; i++) {
       const p = participantModels[i];
-      const halfLeft = this.half(widthProvider, p.left);
       const halfSelf = this.half(widthProvider, p.name);
-      const leftIsVisible = this.leftIsVisible(p);
-      const participantGap = ((leftIsVisible && halfLeft) || 0) + halfSelf;
       const contributingMessages = getContributingMessages(p);
       this._getMessageWidth(contributingMessages, widthProvider, halfSelf, participantModels, i);
     }
@@ -68,8 +65,7 @@ export class Coordinates {
     const halfLeft = this.half(widthProvider, p.left);
     const halfSelf = this.half(widthProvider, p.name);
     const leftIsVisible = this.leftIsVisible(p);
-    const participantGap = ((leftIsVisible && halfLeft) || 0) + halfSelf;
-    return participantGap;
+    return ((leftIsVisible && halfLeft) || 0) + halfSelf;
   }
 
   private static leftIsVisible(p: IParticipantModel) {
