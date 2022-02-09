@@ -47,18 +47,18 @@ function getFlattenedParticipants(code: string) {
 describe('Participants.Order', () => {
   it('should return the order of participants', () => {
     expect(getFlattenedParticipants('A B C.m')).toEqual([
-      {name: '_STARTER_', type: 0, left: '', children: []},
-      {name: 'A', type: 0, left: '_STARTER_', children: []},
-      {name: 'B', type: 0, left: 'A', children: []},
-      {name: 'C', type: 0, left: 'B', children: []}
+      {name: '_STARTER_', left: ''},
+      {name: 'A', left: '_STARTER_'},
+      {name: 'B', left: 'A'},
+      {name: 'C', left: 'B'}
     ]);
   })
 
   it('should return the order of participants', () => {
     expect(getFlattenedParticipants('A B @Starter(C) C.m')).toEqual([
-      {name: 'C', type: 0, left: '', children: []},
-      {name: 'A', type: 0, left: 'C', children: []},
-      {name: 'B', type: 0, left: 'A', children: []}
+      {name: 'C', left: ''},
+      {name: 'A', left: 'C'},
+      {name: 'B', left: 'A'}
     ]);
   })
 
@@ -66,16 +66,16 @@ describe('Participants.Order', () => {
     const flattenedParticipants = getFlattenedParticipants('A B @Starter(B) A.m C.m');
     console.log(flattenedParticipants);
     expect(flattenedParticipants).toEqual([
-      {name: 'A', type: 0, left: '', children: []},
-      {name: 'B', type: 0, left: 'A', children: []},
-      {name: 'C', type: 0, left: 'B', children: []}
+      {name: 'A', left: ''},
+      {name: 'B', left: 'A'},
+      {name: 'C', left: 'B'}
     ]);
   })
 
   it('should return the order of participants', () => {
     expect(getFlattenedParticipants('A.m')).toEqual([
-      {"children": [], "left": "", "name": "_STARTER_", "type": 0 },
-      {"children": [], "left": "_STARTER_", "name": "A", "type": 0 }
+      {"left": "", "name": "_STARTER_"},
+      {"left": "_STARTER_", "name": "A"}
     ]);
   })
 })

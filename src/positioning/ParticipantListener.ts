@@ -2,15 +2,8 @@ export const antlr4 = require('antlr4/index');
 export let seqDsl = require('../parser/index');
 const sequenceParserListener = require('@/generated-parser/sequenceParserListener');
 
-export enum SingleOrGroup {
-  SINGLE,
-  GROUP
-}
-
 export interface IParticipantModel {
-  type: SingleOrGroup;
   name?: string;
-  children: IParticipantModel[];
   left: string;
 }
 
@@ -18,7 +11,6 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
   private explicitParticipants: IParticipantModel[] = [];
   private starter: string = '';
   private implicitParticipants: IParticipantModel[] = [];
-  private currentArray: IParticipantModel[] = this.explicitParticipants;
 
   enterStarter(ctx: any) {
     this.starter = ctx.getTextWithoutQuotes();
@@ -26,19 +18,8 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
 
   enterParticipant(ctx: any) {
     const name = ctx?.name()?.getTextWithoutQuotes() || 'Missing `Participant` name';
-    const participant = ParticipantListener._singleFactory(name);
-    this.currentArray.push(participant);
-  }
-
-  enterGroup(ctx: any) {
-    const name = ctx?.name()?.getTextWithoutQuotes();
-    const group = ParticipantListener._groupFactory(name);
-    this.explicitParticipants.push(group);
-    this.currentArray = group.children;
-  }
-
-  exitGroup(ctx: any) {
-    this.currentArray = this.explicitParticipants;
+    const participant = {name, left: ''};
+    this.explicitParticipants.push(participant);
   }
 
   enterFrom(ctx: any) {
@@ -50,7 +31,7 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
     if(this.explicitParticipants.some(p => p.name === name)) {
       return;
     }
-    const participant = ParticipantListener._singleFactory(name);
+    const participant = {name, left: ''};
     this.implicitParticipants.push(participant);
   }
 
@@ -65,57 +46,31 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
     if(this.explicitParticipants.some(p => p.name === name)) {
       return;
     }
-    const participant = ParticipantListener._singleFactory(name);
+    const participant = {name, left: ''};
     this.implicitParticipants.push(participant);
   }
 
-  flatten(): IParticipantModel[] {
-    let result2 = [...this._flattenExplicitParticipants(), ...this.implicitParticipants];
+  result(): IParticipantModel[] {
+    let result = [...this.explicitParticipants, ...this.implicitParticipants];
     if (!this._isStarterExplicitlyPositioned()) {
-      result2.unshift(this._getStarter());
+      result.unshift(this._getStarter());
     }
-    result2 = this._dedup(result2);
-    ParticipantListener._assignLeft(result2);
-    return result2;
+    ParticipantListener._assignLeft(result);
+    return result;
   }
 
   private _isStarterExplicitlyPositioned() {
-    return this.starter && this._flattenExplicitParticipants().find(p => p.name === this.starter);
+    return this.starter && this.explicitParticipants.find(p => p.name === this.starter);
   }
 
   private _getStarter() {
-    return ParticipantListener._singleFactory(this.starter || '_STARTER_');
+    return {name: this.starter || '_STARTER_', left: ''};
   }
 
   private static _assignLeft(array: IParticipantModel[]) {
     array.reduce((pre: IParticipantModel, curr: IParticipantModel) => {
       curr.left = pre.name || ''
       return curr;
-    }, ParticipantListener._singleFactory(''));
-  }
-
-  private _dedup(array: IParticipantModel[]) {
-    return array.filter((p, index) => {
-      return array.findIndex(p1 => { return p1.name === p.name }) === index;
-    })
-  }
-
-
-  private _flattenExplicitParticipants() {
-    // flatten the participants array
-    const flattenedParticipants: IParticipantModel[] = [];
-    this.explicitParticipants.forEach(participant => {
-      let items = participant.type === SingleOrGroup.SINGLE ? [participant] : participant.children;
-      flattenedParticipants.push(...items);
-    });
-    return flattenedParticipants;
-  }
-
-  private static _singleFactory(name: string): IParticipantModel {
-    return {name: name, type: SingleOrGroup.SINGLE, children: [], left: ''};
-  }
-
-  private static _groupFactory(name: string): IParticipantModel {
-    return {name, type: SingleOrGroup.GROUP, children: [], left: ''};
+    }, {name: '', left: ''});
   }
 }
