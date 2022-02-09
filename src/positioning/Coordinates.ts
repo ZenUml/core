@@ -62,20 +62,17 @@ export class Coordinates {
   }
 
   private withParticipantGaps(participantModels: IParticipantModel[]) {
-    for (let i = 0; i < participantModels.length; i++) {
-      this.m[i] = [];
-      for (let j = 0; j < participantModels.length; j++) {
-        const p = participantModels[j];
-        const participantGap = Coordinates.getParticipantGap(this.widthProvider, p);
-        this.m[i][j] = (j - i === 1) ? participantGap : 0;
-      }
-    }
+    this.m = participantModels.map((_, i) => {
+      return participantModels.map((v, j) => {
+        return (j - i === 1) ? this.getParticipantGap(v) : 0;
+      });
+    });
   }
 
-  private static getParticipantGap(widthProvider: WidthFunc, p: IParticipantModel) {
-    const halfLeft = this.half(widthProvider, p.left);
-    const halfSelf = this.half(widthProvider, p.name);
-    const leftIsVisible = this.leftIsVisible(p);
+  private getParticipantGap(p: IParticipantModel) {
+    const halfLeft = Coordinates.half(this.widthProvider, p.left);
+    const halfSelf = Coordinates.half(this.widthProvider, p.name);
+    const leftIsVisible = Coordinates.leftIsVisible(p);
     return ((leftIsVisible && halfLeft) || 0) + halfSelf;
   }
 
