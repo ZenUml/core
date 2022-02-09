@@ -8,18 +8,20 @@ import {OwnableMessage, OwnableMessageType} from "@/positioning/OwnableMessage";
 
 export class Coordinates {
   private m: Array<Array<number>> = [];
-  private readonly ctx: any;
   private readonly widthProvider: WidthFunc;
+  private readonly participantModels: IParticipantModel[];
+  private readonly ownableMessages: OwnableMessage[];
 
   constructor(ctx: any, widthProvider: WidthFunc) {
-    this.ctx = ctx;
+    this.participantModels = OrderedParticipants(ctx);
+    this.ownableMessages = this.getAllMessages(ctx);
+
     this.widthProvider = widthProvider;
     this.walkThrough();
   }
 
   getPosition(participantName: string|undefined): number {
-    const participantModels = OrderedParticipants(this.ctx);
-    const pIndex = participantModels.findIndex(p => p.name === participantName);
+    const pIndex = this.participantModels.findIndex(p => p.name === participantName);
     if(pIndex === -1) {
       throw Error(`Participant ${participantName} not found`);
     }
@@ -27,10 +29,8 @@ export class Coordinates {
   }
 
   walkThrough() {
-    const participantModels = OrderedParticipants(this.ctx);
-    this.withParticipantGaps(participantModels);
-    const ownableMessages = this.getAllMessages();
-    this.withMessageGaps(ownableMessages, participantModels);
+    this.withParticipantGaps(this.participantModels);
+    this.withMessageGaps(this.ownableMessages, this.participantModels);
   }
 
   private withMessageGaps(ownableMessages: OwnableMessage[], participantModels: IParticipantModel[]) {
@@ -54,10 +54,10 @@ export class Coordinates {
     return messageWidth;
   }
 
-  private getAllMessages() {
+  private getAllMessages(ctx: any) {
     const walker = antlr4.tree.ParseTreeWalker.DEFAULT
     const messageContextListener = new MessageContextListener();
-    walker.walk(messageContextListener, this.ctx);
+    walker.walk(messageContextListener, ctx);
     return messageContextListener.flatResult();
   }
 
