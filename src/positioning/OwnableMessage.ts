@@ -10,8 +10,3 @@ export interface OwnableMessage {
   signature: string;
   type: OwnableMessageType;
 }
-
-export interface IOwnedMessages {
-  owner: string;
-  ownableMessages: Array<OwnableMessage>;
-}

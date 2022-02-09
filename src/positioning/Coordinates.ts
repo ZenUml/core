@@ -1,9 +1,9 @@
 import {ARROW_HEAD_WIDTH, MARGIN, MIN_PARTICIPANT_WIDTH, MINI_GAP} from "@/positioning/Constants";
 import {TextType, WidthFunc} from "@/positioning/Coordinate";
 import {OrderedParticipants} from "@/positioning/OrderedParticipants";
-import {antlr4, IParticipantModel} from "@/positioning/ParticipantListener";
+import {IParticipantModel} from "@/positioning/ParticipantListener";
 import {final_pos} from "@/positioning/MatrixBasedAlgorithm";
-import {MessageContextListener} from "@/positioning/MessageContextListener";
+import {AllMessages} from "@/positioning/MessageContextListener";
 import {OwnableMessage, OwnableMessageType} from "@/positioning/OwnableMessage";
 
 export class Coordinates {
@@ -14,7 +14,7 @@ export class Coordinates {
 
   constructor(ctx: any, widthProvider: WidthFunc) {
     this.participantModels = OrderedParticipants(ctx);
-    this.ownableMessages = this.getAllMessages(ctx);
+    this.ownableMessages = AllMessages(ctx);
 
     this.widthProvider = widthProvider;
     this.walkThrough();
@@ -53,14 +53,6 @@ export class Coordinates {
     }
     return messageWidth;
   }
-
-  private getAllMessages(ctx: any) {
-    const walker = antlr4.tree.ParseTreeWalker.DEFAULT
-    const messageContextListener = new MessageContextListener();
-    walker.walk(messageContextListener, ctx);
-    return messageContextListener.flatResult();
-  }
-
   private withParticipantGaps(participantModels: IParticipantModel[]) {
     this.m = participantModels.map((_, i) => {
       return participantModels.map((v, j) => {
