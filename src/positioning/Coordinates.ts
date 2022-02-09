@@ -8,26 +8,26 @@ import '../utils/ArrayUntil';
 import {final_pos} from "@/positioning/MatrixBasedAlgorithm";
 
 export class Coordinates {
-  private readonly _participants: Array<IParticipantGap>;
   private static m: Array<Array<number>> = [];
   private static ctx: any;
   private static widthProvider: WidthFunc;
 
   constructor(ctx: any, widthProvider: WidthFunc) {
-    this._participants = Coordinates.getParticipantGaps(ctx, widthProvider);
+    Coordinates.walkThrough(ctx, widthProvider);
     Coordinates.ctx = ctx;
     Coordinates.widthProvider = widthProvider;
   }
 
   getPosition(participantName: string|undefined): number {
-    const pIndex = this._participants.findIndex(p => p.participant === participantName);
+    const participantModels = OrderedParticipants(Coordinates.ctx);
+    const pIndex = participantModels.findIndex(p => p.name === participantName);
     if(pIndex === -1) {
       throw Error(`Participant ${participantName} not found`);
     }
     return final_pos(pIndex, Coordinates.m) + ARROW_HEAD_WIDTH;
   }
 
-  static getParticipantGaps(ctx: any, widthProvider: WidthFunc): IParticipantGaps {
+  static walkThrough(ctx: any, widthProvider: WidthFunc) {
 
     const participantModels = OrderedParticipants(ctx);
     for (let i = 0; i < participantModels.length; i++) {
@@ -62,8 +62,6 @@ export class Coordinates {
       const contributingMessages = getContributingMessages(p);
       this._getMessageWidth(contributingMessages, widthProvider, halfSelf, participantModels, i, participantGap);
     }
-
-    return participantModels.map(p => ({participant: p.name, gap: (p as any).gap} as IParticipantGap));
   }
 
   private static getParticipantGap(widthProvider: WidthFunc, p: IParticipantModel) {
