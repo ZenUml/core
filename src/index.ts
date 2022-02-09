@@ -27,11 +27,8 @@ const Store = (debounce?: number) => {
       selected: [],
       cursor: null,
       firstInvocations: {},
-      messageForWidth: '',
-      participantForWidth: '',
     },
     getters: {
-      widthProvider: (state: any) => WidthProviderOnBrowser,
       title: (state: any, getters: any) => {
         return getters.rootContext?.title()?.content()
       },
@@ -47,7 +44,7 @@ const Store = (debounce?: number) => {
       },
       centerOf: (state: any, getters: any) => (entity: any) => {
         try {
-          const coordinates = new Coordinates(getters.rootContext, getters.widthProvider);
+          const coordinates = new Coordinates(getters.rootContext, WidthProviderOnBrowser);
           return coordinates.getPosition(entity) || 0
         } catch (e) {
           console.error(e)
