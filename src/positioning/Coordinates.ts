@@ -2,7 +2,6 @@ import {ARROW_HEAD_WIDTH, MARGIN, MIN_PARTICIPANT_WIDTH, MINI_GAP} from "@/posit
 import {TextType, WidthFunc} from "@/positioning/Coordinate";
 import {OrderedParticipants} from "@/positioning/OrderedParticipants";
 import {antlr4, IParticipantModel} from "@/positioning/ParticipantListener";
-import '../utils/ArrayUntil';
 import {final_pos} from "@/positioning/MatrixBasedAlgorithm";
 import {MessageContextListener} from "@/positioning/MessageContextListener";
 import {OwnableMessage, OwnableMessageType} from "@/positioning/OwnableMessage";
