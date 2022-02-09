@@ -60,7 +60,7 @@ export class Coordinates {
       const leftIsVisible = this.leftIsVisible(p);
       const participantGap = ((leftIsVisible && halfLeft) || 0) + halfSelf;
       const contributingMessages = getContributingMessages(p);
-      this._getMessageWidth(contributingMessages, widthProvider, halfSelf, participantModels, i, participantGap);
+      this._getMessageWidth(contributingMessages, widthProvider, halfSelf, participantModels, i);
     }
   }
 
@@ -88,7 +88,9 @@ export class Coordinates {
     return this._getParticipantWidth(widthProvider, participant) / 2 + MARGIN / 2;
   }
 
-  private static _getMessageWidth(contributingMessages: LeftMessage[], widthProvider: WidthFunc, halfSelf: number, participantModels: Array<IParticipantModel>, i: number, participantGap: number) {
+  private static _getMessageWidth(contributingMessages: LeftMessage[],
+                                  widthProvider: WidthFunc, halfSelf: number,
+                                  participantModels: Array<IParticipantModel>, i: number) {
     function getSignature (m: {signature: string, type: MessageType, leftParticipant: string}) { return {sig: m.signature || '', type: m.type, leftParticipant: m.leftParticipant}; }
 
     function getWidth(widthProvider: WidthFunc) {
@@ -99,11 +101,11 @@ export class Coordinates {
           messageWidth += halfSelf;
         }
         const leftIndex = participantModels.findIndex(v => v.name === item.leftParticipant);
-        Coordinates.m[leftIndex][i] = Math.max(messageWidth + ARROW_HEAD_WIDTH, participantGap);
+        Coordinates.m[leftIndex][i] = Math.max(messageWidth + ARROW_HEAD_WIDTH, Coordinates.m[leftIndex][i]);
       };
     }
 
-    [...contributingMessages].map(getSignature).forEach(getWidth(widthProvider))
+    contributingMessages.map(getSignature).forEach(getWidth(widthProvider))
   }
 
   private static _getParticipantWidth(widthProvider: WidthFunc, participant: string | undefined) {
