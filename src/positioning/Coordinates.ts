@@ -55,9 +55,8 @@ export class Coordinates {
 
     for(let i=0; i < participantModels.length; i++) {
       const p = participantModels[i];
-      const halfSelf = this.half(widthProvider, p.name);
       const contributingMessages = getContributingMessages(p);
-      this._getMessageWidth(contributingMessages, widthProvider, halfSelf, participantModels, i);
+      this._getMessageWidth(contributingMessages, widthProvider, participantModels, i);
     }
   }
 
@@ -85,8 +84,9 @@ export class Coordinates {
   }
 
   private static _getMessageWidth(contributingMessages: LeftMessage[],
-                                  widthProvider: WidthFunc, halfSelf: number,
+                                  widthProvider: WidthFunc,
                                   participantModels: Array<IParticipantModel>, i: number) {
+    const halfSelf = this.half(widthProvider, participantModels[i].name);
     function getSignature (m: {signature: string, type: MessageType, leftParticipant: string}) { return {sig: m.signature || '', type: m.type, leftParticipant: m.leftParticipant}; }
 
     function getWidth(widthProvider: WidthFunc) {
