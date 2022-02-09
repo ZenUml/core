@@ -9,13 +9,13 @@ import {OwnableMessage, OwnableMessageType} from "@/positioning/OwnableMessage";
 
 export class Coordinates {
   private m: Array<Array<number>> = [];
-  private ctx: any;
-  private static widthProvider: WidthFunc;
+  private readonly ctx: any;
+  private readonly widthProvider: WidthFunc;
 
   constructor(ctx: any, widthProvider: WidthFunc) {
-    this.walkThrough(ctx, widthProvider);
     this.ctx = ctx;
-    Coordinates.widthProvider = widthProvider;
+    this.widthProvider = widthProvider;
+    this.walkThrough();
   }
 
   getPosition(participantName: string|undefined): number {
@@ -27,14 +27,14 @@ export class Coordinates {
     return final_pos(pIndex, this.m) + ARROW_HEAD_WIDTH;
   }
 
-  walkThrough(ctx: any, widthProvider: WidthFunc) {
+  walkThrough() {
 
-    const participantModels = OrderedParticipants(ctx);
+    const participantModels = OrderedParticipants(this.ctx);
     for (let i = 0; i < participantModels.length; i++) {
       this.m[i] = [];
       for (let j = 0; j < participantModels.length; j++) {
         const p = participantModels[j];
-        const participantGap = Coordinates.getParticipantGap(widthProvider, p);
+        const participantGap = Coordinates.getParticipantGap(this.widthProvider, p);
         if (j - i == 1) {
           this.m[i][j] = participantGap;
         } else {
@@ -45,14 +45,14 @@ export class Coordinates {
 
     const walker = antlr4.tree.ParseTreeWalker.DEFAULT
     const messageContextListener = new MessageContextListener();
-    walker.walk(messageContextListener, ctx);
+    walker.walk(messageContextListener, this.ctx);
     const ownableMessages = messageContextListener.flatResult();
     ownableMessages.forEach((m) => {
       const indexFrom = participantModels.findIndex(p => p.name === m.from);
       const indexTo = participantModels.findIndex(p => p.name === m.to);
       let leftIndex = Math.min(indexFrom, indexTo);
       let rightIndex = Math.max(indexFrom, indexTo);
-      const halfSelf = Coordinates.half(widthProvider, participantModels[indexTo].name);
+      const halfSelf = Coordinates.half(this.widthProvider, participantModels[indexTo].name);
       const that = this;
       function getWidth(widthProvider: WidthFunc) {
         return (item: OwnableMessage) => {
@@ -64,7 +64,7 @@ export class Coordinates {
           that.m[leftIndex][rightIndex] = Math.max(messageWidth + ARROW_HEAD_WIDTH, that.m[leftIndex][rightIndex]);
         };
       }
-      getWidth(widthProvider)(m);
+      getWidth(this.widthProvider)(m);
     })
 
   }
