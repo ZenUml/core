@@ -18,9 +18,9 @@ function FlattenedParticipants(code: string) {
 
 describe('participant group', () => {
   it.each([
-    ['A', '0-0', 'A', ''],
-    ['@EC2', '0-3', 'Missing `Participant` name', ''],
-  ])('Code `%s` produces one single participant with name `%s`', (code, key, name, left) => {
+    ['A', 'A', ''],
+    ['@EC2', 'Missing `Participant` name', ''],
+  ])('Code `%s` produces one single participant with name `%s`', (code, name, left) => {
     const participants2 = Participants2(code);
     expect(participants2).toEqual([
       {type: SingleOrGroup.SINGLE, name: '_STARTER_',  left: '', "children":[] },
