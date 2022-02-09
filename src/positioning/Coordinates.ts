@@ -1,51 +1,17 @@
-
 import {MARGIN, MINI_GAP, MIN_PARTICIPANT_WIDTH, ARROW_HEAD_WIDTH} from "@/positioning/Constants";
 import {IParticipantGap, IParticipantGaps, TextType, WidthFunc} from "@/positioning/Coordinate";
-import {MessagesGroupedByParticipant} from "@/positioning/MessageContextListener";
 import {LeftMessagesGroupedByParticipant} from "@/positioning/LeftMessagesBuilder";
 import {OrderedParticipants} from "@/positioning/OrderedParticipants";
 import {IParticipantModel} from "@/positioning/ParticipantListener";
 import {LeftMessage, MessageType} from "@/positioning/LeftMessage";
 import '../utils/ArrayUntil';
+import {final_pos} from "@/positioning/MatrixBasedAlgorithm";
 
 export class Coordinates {
   private readonly _participants: Array<IParticipantGap>;
   private static m: Array<Array<number>> = [];
   private static ctx: any;
   private static widthProvider: WidthFunc;
-
-  /**
-   * There is a line segment. There are n points (P1, P2, ... Pn) on this line segment.
-   * We know some constraint - the minimum distance between k (k < n) points. For example, m_d(P2, P3), m_d(Pi, Pj).
-   * Design a solution to find the positions of P1 ~ Pn, so that their distances satisfy
-   * the constraint AND keep the length of the line segment minimum.
-   *
-   * For example, for one line segment, there are 4 points P1 ~ P4.
-   * m_d(P1, P2) = 100, m_d(P2, P4) = 800.
-   * One solution would be P1 = 0, P2 = 100, P3 = 100, P4 = 900.
-   * A better solution would be P1 = 0, P2 = 100, P3 = 500, P4 = 900. (put P3 at the middle)
-   * A even better solution would be P1 = 0, P2 = 300, P3 = 600, P4 = 900. (evenly distribute P2 and P3)
-   */
-  static p = (i: number, j: number) => {
-    return Coordinates.m[i][j];
-  }
-  static r = (i: number, j: number): number => {
-    if (j === i) {
-      return 0;
-    } else if(j - i === 1) {
-      let temp = [];
-      for(let k = 0; k <= i; k++) {
-        temp.push(Coordinates.p(k, j) - Coordinates.r(k, i));
-      }
-      return Math.max(...temp)
-    } else {
-      let sum = 0;
-      for(let l = i; l < j; l++) {
-        sum += Coordinates.r(l, l + 1);
-      }
-      return sum;
-    }
-  }
 
   constructor(ctx: any, widthProvider: WidthFunc) {
     this._participants = Coordinates.getParticipantGaps(ctx, widthProvider);
@@ -58,11 +24,10 @@ export class Coordinates {
     if(pIndex === -1) {
       throw Error(`Participant ${participantName} not found`);
     }
-    return Coordinates.r(0, pIndex) + ARROW_HEAD_WIDTH;
+    return final_pos(pIndex, Coordinates.m) + ARROW_HEAD_WIDTH;
   }
 
   static getParticipantGaps(ctx: any, widthProvider: WidthFunc): IParticipantGaps {
-
 
     const participantModels = OrderedParticipants(ctx);
     for (let i = 0; i < participantModels.length; i++) {
