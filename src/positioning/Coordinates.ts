@@ -29,43 +29,42 @@ export class Coordinates {
   walkThrough() {
 
     const participantModels = OrderedParticipants(this.ctx);
+    this.withParticipantGaps(participantModels);
+    const ownableMessages = this.getAllMessages();
+    ownableMessages.forEach((message) => {
+      const indexFrom = participantModels.findIndex(p => p.name === message.from);
+      const indexTo = participantModels.findIndex(p => p.name === message.to);
+      let leftIndex = Math.min(indexFrom, indexTo);
+      let rightIndex = Math.max(indexFrom, indexTo);
+      const halfSelf = Coordinates.half(this.widthProvider, message.to);
+      const that = this;
+      let messageWidth = this.widthProvider(message.signature, TextType.MessageContent);
+      // hack for creation message
+      if (message.type === OwnableMessageType.CreationMessage) {
+        messageWidth += halfSelf;
+      }
+      that.m[leftIndex][rightIndex] = Math.max(messageWidth + ARROW_HEAD_WIDTH, that.m[leftIndex][rightIndex]);
+    })
+
+  }
+
+  private getAllMessages() {
+    const walker = antlr4.tree.ParseTreeWalker.DEFAULT
+    const messageContextListener = new MessageContextListener();
+    walker.walk(messageContextListener, this.ctx);
+    const ownableMessages = messageContextListener.flatResult();
+    return ownableMessages;
+  }
+
+  private withParticipantGaps(participantModels: IParticipantModel[]) {
     for (let i = 0; i < participantModels.length; i++) {
       this.m[i] = [];
       for (let j = 0; j < participantModels.length; j++) {
         const p = participantModels[j];
         const participantGap = Coordinates.getParticipantGap(this.widthProvider, p);
-        if (j - i == 1) {
-          this.m[i][j] = participantGap;
-        } else {
-          this.m[i][j] = 0;
-        }
+        this.m[i][j] = (j - i === 1) ? participantGap : 0;
       }
     }
-
-    const walker = antlr4.tree.ParseTreeWalker.DEFAULT
-    const messageContextListener = new MessageContextListener();
-    walker.walk(messageContextListener, this.ctx);
-    const ownableMessages = messageContextListener.flatResult();
-    ownableMessages.forEach((m) => {
-      const indexFrom = participantModels.findIndex(p => p.name === m.from);
-      const indexTo = participantModels.findIndex(p => p.name === m.to);
-      let leftIndex = Math.min(indexFrom, indexTo);
-      let rightIndex = Math.max(indexFrom, indexTo);
-      const halfSelf = Coordinates.half(this.widthProvider, participantModels[indexTo].name);
-      const that = this;
-      function getWidth(widthProvider: WidthFunc) {
-        return (item: OwnableMessage) => {
-          let messageWidth = widthProvider(item.signature, TextType.MessageContent);
-          // hack for creation message
-          if (item.type === OwnableMessageType.CreationMessage) {
-            messageWidth += halfSelf;
-          }
-          that.m[leftIndex][rightIndex] = Math.max(messageWidth + ARROW_HEAD_WIDTH, that.m[leftIndex][rightIndex]);
-        };
-      }
-      getWidth(this.widthProvider)(m);
-    })
-
   }
 
   private static getParticipantGap(widthProvider: WidthFunc, p: IParticipantModel) {
