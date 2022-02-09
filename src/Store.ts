@@ -20,20 +20,20 @@ const Store = (debounce?: number) => {
       firstInvocations: {},
     },
     getters: {
-      title: (state: any, getters: any) => {
-        return getters.rootContext?.title()?.content()
-      },
-      GroupContext: () => GroupContext,
-      ParticipantContext: () => ParticipantContext,
-      firstInvocations: (state: any) => state.firstInvocations,
-      cursor: (state: any) => state.cursor,
       rootContext: (state: any) => {
         return RootContext(state.code)
+      },
+      title: (state: any, getters: any) => {
+        return getters.rootContext?.title()?.content()
       },
       participants: (state: any, getters: any) => {
         return Participants(getters.rootContext, true)
       },
       centerOf: (state: any, getters: any) => (entity: any) => {
+        if (!entity) {
+          console.error('[vue-sequence] centerOf: entity is undefined');
+          return 0
+        }
         try {
           const coordinates = new Coordinates(getters.rootContext, WidthProviderOnBrowser);
           return coordinates.getPosition(entity) || 0
@@ -42,6 +42,10 @@ const Store = (debounce?: number) => {
           return 0
         }
       },
+      GroupContext: () => GroupContext,
+      ParticipantContext: () => ParticipantContext,
+      firstInvocations: (state: any) => state.firstInvocations,
+      cursor: (state: any) => state.cursor,
       // deprecated, use distances that returns centerOf(to) - centerOf(from)
       distance: (state: any, getters: any) => (from: any, to: any) => {
         return getters.centerOf(from) - getters.centerOf(to)
