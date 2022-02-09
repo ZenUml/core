@@ -69,15 +69,6 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
     this.implicitParticipants.push(participant);
   }
 
-  result(): IParticipantModel[] {
-    ParticipantListener._assignLeft(this.explicitParticipants)
-    if(this._isStarterExplicitlyPositioned()) {
-      return [...this.explicitParticipants, ...this.implicitParticipants];
-    } else {
-      return [this._getStarter(), ...this.explicitParticipants, ...this.implicitParticipants];
-    }
-  }
-
   flatten(): IParticipantModel[] {
     let result2 = [...this._flattenExplicitParticipants(), ...this.implicitParticipants];
     if (!this._isStarterExplicitlyPositioned()) {
