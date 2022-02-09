@@ -1,18 +1,27 @@
-export let final_distance = (i: number, j: number, minDistanceMatrix: Array<Array<number>>): number => {
-  if (j === i) {
-    return 0;
-  } else if(j - i === 1) {
-    let temp = [];
-    for(let k = 0; k <= i; k++) {
-      temp.push(minDistanceMatrix[k][j] - final_distance(k, i, minDistanceMatrix));
-    }
-    return Math.max(...temp)
+function range(to: number, from = 0 ) {
+  return Array(to - from).fill(0).map((_, idx) => idx + from);
+}
+
+function neighbourGap(right: number, minDistanceMatrix: Array<Array<number>>) {
+  return Math.max(
+    ...range(right, 0)
+      .map((l, _) => {
+        return minDistanceMatrix[l][right] - final_distance(l, right - 1, minDistanceMatrix);
+      }));
+}
+
+function totalGap(right: number, left: number, minDistanceMatrix: Array<Array<number>>) {
+  return range(right, left)
+    .reduce((acc, l) => {
+      return acc + final_distance(l, l + 1, minDistanceMatrix);
+    }, 0);
+}
+
+export let final_distance = (left: number, right: number, minDistanceMatrix: Array<Array<number>>): number => {
+  if(right - left === 1) {
+    return neighbourGap(right, minDistanceMatrix);
   } else {
-    let sum = 0;
-    for(let l = i; l < j; l++) {
-      sum += final_distance(l, l + 1, minDistanceMatrix);
-    }
-    return sum;
+    return totalGap(right, left, minDistanceMatrix);
   }
 }
 
