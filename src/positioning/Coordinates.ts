@@ -1,11 +1,11 @@
 import {ARROW_HEAD_WIDTH, MARGIN, MIN_PARTICIPANT_WIDTH, MINI_GAP} from "@/positioning/Constants";
 import {TextType, WidthFunc} from "@/positioning/Coordinate";
-import {LeftMessagesGroupedByParticipant} from "@/positioning/LeftMessagesBuilder";
 import {OrderedParticipants} from "@/positioning/OrderedParticipants";
-import {IParticipantModel} from "@/positioning/ParticipantListener";
-import {LeftMessage, MessageType} from "@/positioning/LeftMessage";
+import {antlr4, IParticipantModel} from "@/positioning/ParticipantListener";
 import '../utils/ArrayUntil';
 import {final_pos} from "@/positioning/MatrixBasedAlgorithm";
+import {MessageContextListener} from "@/positioning/MessageContextListener";
+import {OwnableMessage, OwnableMessageType} from "@/positioning/OwnableMessage";
 
 export class Coordinates {
   private static m: Array<Array<number>> = [];
@@ -42,22 +42,30 @@ export class Coordinates {
         }
       }
     }
-    const participantIndex = {} as any;
-    participantModels.forEach((v: any, i:number) => participantIndex[v.name] = i)
 
-    const participants = LeftMessagesGroupedByParticipant(ctx, (p1, p2) => participantIndex[p1] < participantIndex[p2]);
+    const walker = antlr4.tree.ParseTreeWalker.DEFAULT
+    const messageContextListener = new MessageContextListener();
+    walker.walk(messageContextListener, ctx);
+    const ownableMessages = messageContextListener.flatResult();
+    ownableMessages.forEach((m) => {
+      const indexFrom = participantModels.findIndex(p => p.name === m.from);
+      const indexTo = participantModels.findIndex(p => p.name === m.to);
+      let leftIndex = Math.min(indexFrom, indexTo);
+      let rightIndex = Math.max(indexFrom, indexTo);
+      const halfSelf = this.half(widthProvider, participantModels[indexTo].name);
+      function getWidth(widthProvider: WidthFunc) {
+        return (item: OwnableMessage) => {
+          let messageWidth = widthProvider(item.signature, TextType.MessageContent);
+          // hack for creation message
+          if (item.type === OwnableMessageType.CreationMessage) {
+            messageWidth += halfSelf;
+          }
+          Coordinates.m[leftIndex][rightIndex] = Math.max(messageWidth + ARROW_HEAD_WIDTH, Coordinates.m[leftIndex][rightIndex]);
+        };
+      }
+      getWidth(widthProvider)(m);
+    })
 
-    function getContributingMessages(p: IParticipantModel) {
-      return participants
-        .filter(v => v.participant === p.name)
-        .flatMap(v => v.leftMessages);
-    }
-
-    for(let i=0; i < participantModels.length; i++) {
-      const p = participantModels[i];
-      const contributingMessages = getContributingMessages(p);
-      this._getMessageWidth(contributingMessages, widthProvider, participantModels, i);
-    }
   }
 
   private static getParticipantGap(widthProvider: WidthFunc, p: IParticipantModel) {
@@ -81,27 +89,6 @@ export class Coordinates {
 
   private static halfWithMargin(widthProvider: WidthFunc, participant: string | undefined) {
     return this._getParticipantWidth(widthProvider, participant) / 2 + MARGIN / 2;
-  }
-
-  private static _getMessageWidth(contributingMessages: LeftMessage[],
-                                  widthProvider: WidthFunc,
-                                  participantModels: Array<IParticipantModel>, i: number) {
-    const halfSelf = this.half(widthProvider, participantModels[i].name);
-    function getSignature (m: {signature: string, type: MessageType, leftParticipant: string}) { return {sig: m.signature || '', type: m.type, leftParticipant: m.leftParticipant}; }
-
-    function getWidth(widthProvider: WidthFunc) {
-      return (item: any) => {
-        let messageWidth = widthProvider(item.sig, TextType.MessageContent);
-        // hack for creation message
-        if (item.type === MessageType.CreationMessage) {
-          messageWidth += halfSelf;
-        }
-        const leftIndex = participantModels.findIndex(v => v.name === item.leftParticipant);
-        Coordinates.m[leftIndex][i] = Math.max(messageWidth + ARROW_HEAD_WIDTH, Coordinates.m[leftIndex][i]);
-      };
-    }
-
-    contributingMessages.map(getSignature).forEach(getWidth(widthProvider))
   }
 
   private static _getParticipantWidth(widthProvider: WidthFunc, participant: string | undefined) {

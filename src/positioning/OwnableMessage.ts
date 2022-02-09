@@ -6,6 +6,7 @@ export enum OwnableMessageType {
 
 export interface OwnableMessage {
   from: string;
+  to: string;
   signature: string;
   type: OwnableMessageType;
 }

@@ -1,4 +1,4 @@
-import {IOwnedMessages, OwnableMessageType} from "./OwnableMessage";
+import {IOwnedMessages, OwnableMessage, OwnableMessageType} from "./OwnableMessage";
 import {antlr4} from "@/positioning/ParticipantListener";
 
 const sequenceParserListener = require('@/generated-parser/sequenceParserListener');
@@ -22,15 +22,21 @@ export class MessageContextListener extends sequenceParserListener.sequenceParse
     // if there is an entry for owner in ownedMessagesList, add ownableMessage to ownableMessages, otherwise create new entry
     const ownerAndTheirMessages = this.ownedMessagesList.find(p => p.owner === owner);
     if (ownerAndTheirMessages) {
-      ownerAndTheirMessages.ownableMessages.push({from: from, signature: signature, type});
+      ownerAndTheirMessages.ownableMessages.push({from: from, signature: signature, type, to: owner});
     } else {
-      this.ownedMessagesList.push({owner: owner, ownableMessages: [{from: from, signature: signature, type}]});
+      this.ownedMessagesList.push({owner: owner, ownableMessages: [{from: from, signature: signature, type, to: owner}]});
     }
 
   }
 
   result(): Array<IOwnedMessages> {
     return this.ownedMessagesList;
+  }
+
+  flatResult() {
+    return this.ownedMessagesList.reduce((acc, curr) => {
+      return acc.concat(curr.ownableMessages);
+    }, [] as Array<OwnableMessage>);
   }
 }
 
