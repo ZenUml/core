@@ -27,33 +27,38 @@ export class Coordinates {
   }
 
   walkThrough() {
-
     const participantModels = OrderedParticipants(this.ctx);
     this.withParticipantGaps(participantModels);
     const ownableMessages = this.getAllMessages();
+    this.withMessageGaps(ownableMessages, participantModels);
+  }
+
+  private withMessageGaps(ownableMessages: OwnableMessage[], participantModels: IParticipantModel[]) {
     ownableMessages.forEach((message) => {
       const indexFrom = participantModels.findIndex(p => p.name === message.from);
       const indexTo = participantModels.findIndex(p => p.name === message.to);
       let leftIndex = Math.min(indexFrom, indexTo);
       let rightIndex = Math.max(indexFrom, indexTo);
-      const halfSelf = Coordinates.half(this.widthProvider, message.to);
-      const that = this;
-      let messageWidth = this.widthProvider(message.signature, TextType.MessageContent);
-      // hack for creation message
-      if (message.type === OwnableMessageType.CreationMessage) {
-        messageWidth += halfSelf;
-      }
-      that.m[leftIndex][rightIndex] = Math.max(messageWidth + ARROW_HEAD_WIDTH, that.m[leftIndex][rightIndex]);
+      let messageWidth = this.getMessageWidth(message);
+      this.m[leftIndex][rightIndex] = Math.max(messageWidth + ARROW_HEAD_WIDTH, this.m[leftIndex][rightIndex]);
     })
+  }
 
+  private getMessageWidth(message: OwnableMessage) {
+    const halfSelf = Coordinates.half(this.widthProvider, message.to);
+    let messageWidth = this.widthProvider(message.signature, TextType.MessageContent);
+    // hack for creation message
+    if (message.type === OwnableMessageType.CreationMessage) {
+      messageWidth += halfSelf;
+    }
+    return messageWidth;
   }
 
   private getAllMessages() {
     const walker = antlr4.tree.ParseTreeWalker.DEFAULT
     const messageContextListener = new MessageContextListener();
     walker.walk(messageContextListener, this.ctx);
-    const ownableMessages = messageContextListener.flatResult();
-    return ownableMessages;
+    return messageContextListener.flatResult();
   }
 
   private withParticipantGaps(participantModels: IParticipantModel[]) {
