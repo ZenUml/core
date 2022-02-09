@@ -46,13 +46,12 @@ describe('get absolute position of a participant', () => {
     expect(coordinates.getPosition('A1')).toBe(820)
   })
 
-  it('reproduce issue', () => {
-    let rootContext = seqDsl.RootContext('A1->B1: m800\r\nB1->C1: m900');
+  it('should not duplicate participants', () => {
+    let rootContext = seqDsl.RootContext('A1.a1 A1.a1 B1.a1');
     const coordinates = new Coordinates(rootContext, stubWidthProvider);
     expect(coordinates.getPosition('_STARTER_')).toBe(10)
     expect(coordinates.getPosition('A1')).toBe(70)
-    expect(coordinates.getPosition('B1')).toBe(880)
-    expect(coordinates.getPosition('C1')).toBe(1790)
+    expect(coordinates.getPosition('B1')).toBe(190)
   })
 
   it.each([

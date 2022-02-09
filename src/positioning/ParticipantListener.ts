@@ -55,6 +55,7 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
     if (!this._isStarterExplicitlyPositioned()) {
       result.unshift(this._getStarter());
     }
+    result = this._dedup(result);
     ParticipantListener._assignLeft(result);
     return result;
   }
@@ -65,6 +66,12 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
 
   private _getStarter() {
     return {name: this.starter || '_STARTER_', left: ''};
+  }
+
+  private _dedup(array: IParticipantModel[]) {
+    return array.filter((p, index) => {
+      return array.findIndex(p1 => { return p1.name === p.name }) === index;
+    })
   }
 
   private static _assignLeft(array: IParticipantModel[]) {
