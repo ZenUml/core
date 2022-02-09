@@ -10,8 +10,6 @@ import './components/Cosmetic-blue.scss'
 import './components/Cosmetic-black-white.scss'
 import './components/theme-blue-river.scss'
 import {CodeRange} from './parser/CodeRange'
-// @ts-ignore
-import PositionCalculator from './utils/position.calculator'
 import WidthProviderOnBrowser from "@/positioning/WidthProviderFunc";
 import {Coordinates} from "@/positioning/Coordinates";
 
