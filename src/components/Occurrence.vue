@@ -47,6 +47,7 @@ import {mapState, mapGetters} from 'vuex'
   }
 
   >>> >.statement-container:last-child>.interaction.return:last-of-type>.message {
+    bottom: -17px; /* Move the absolutely positioned return message to the bottom. -17 to offset the padding of Occurrence. */
     position: absolute;
   }
 
