@@ -4,8 +4,7 @@
        v-on:click.stop="onClick"
        v-on:mouseover.stop="mouseOver"
        v-on:mouseout.stop="mouseOut"
-       :data-key="context.Key()"
-       :signature="signature"
+       :data-signature="signature"
        :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent, 'hover': hover }"
        :style="style">
     <comment v-if="comment" :comment="comment" />
@@ -19,7 +18,11 @@
           <label class="name">{{ to }}</label>
         </div>
       </div>
-      <message ref="messageEl" class="invocation" :content="signature" :rtl="rightToLeft" type="creation"/>
+      <message ref="messageEl"
+               :data-key="key"
+               :data-to="to"
+               data-type="creation"
+               class="invocation" :content="signature" :rtl="rightToLeft" type="creation"/>
     </div>
     <occurrence :context="creation" :participant="to"/>
     <message class="return" v-if="assignee" :content="assignee" :rtl="!rightToLeft" type="return"/>
