@@ -60,6 +60,7 @@
     min-height: 1em;
   }
 
+  .creation > .message-container > .message,
   .sync > .message {
     /* (OccurrenceWidth-1)/2 - InteractionBorderWidth*/
     left: 2px;

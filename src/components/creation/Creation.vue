@@ -132,7 +132,7 @@
         const halfWidthOfPlaceholder = (this.$refs['participantPlaceHolder'] as HTMLElement).offsetWidth / 2;
         const placeHolderStyle = (this.$refs['participantPlaceHolder'] as HTMLElement).style;
         placeHolderStyle.marginRight = (-1) * (halfWidthOfPlaceholder + 6) + 'px';
-        ((this.$refs['messageEl'] as Vue).$el as HTMLElement).style.width = `calc(100% - ${halfWidthOfPlaceholder - 6}px`;
+        ((this.$refs['messageEl'] as Vue).$el as HTMLElement).style.width = `calc(100% - ${halfWidthOfPlaceholder - 4}px`;
       },
       onClick() {
         this.onElementClick(CodeRange.from(this.context))
