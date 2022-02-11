@@ -8,11 +8,11 @@ CreationContext.prototype.From = function () {
   return this.parentCtx?.Origin();
 }
 
+MessageContext.prototype.ProvidedFrom = function() {
+  return this.messageBody()?.from()?.getTextWithoutQuotes();
+}
 MessageContext.prototype.From = function () {
-  if (this.messageBody()?.from()) {
-    return this.messageBody().from().getTextWithoutQuotes();
-  }
-  return this.parentCtx.Origin();
+  return this.ProvidedFrom() || this.parentCtx.Origin();
 }
 
 AsyncMessageContext.prototype.From = function () {

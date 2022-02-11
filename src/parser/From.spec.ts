@@ -14,3 +14,10 @@ describe('From', () => {
     expect(Fixture.firstChild('A.method { new B }').creation().From())      .toBe('A');
   })
 })
+
+describe('ProvidedFrom for MessageContext Only', () => {
+  it('should parse ProvidedFrom for a Message', () => {
+    expect(Fixture.firstStatement('A.method').message().ProvidedFrom())             .toBe(undefined);
+    expect(Fixture.firstStatement('A->B.method').message().ProvidedFrom())          .toBe('A');
+  })
+})
