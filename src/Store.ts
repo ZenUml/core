@@ -18,7 +18,6 @@ const Store = (debounce?: number) => {
       code: '',
       selected: [],
       cursor: null,
-      firstInvocations: {},
       onElementClick: (codeRange: CodeRange) => {
         console.log('Element clicked', codeRange)
       }
@@ -50,7 +49,6 @@ const Store = (debounce?: number) => {
       },
       GroupContext: () => GroupContext,
       ParticipantContext: () => ParticipantContext,
-      firstInvocations: (state: any) => state.firstInvocations,
       cursor: (state: any) => state.cursor,
       // deprecated, use distances that returns centerOf(to) - centerOf(from)
       distance: (state: any, getters: any) => (from: any, to: any) => {
@@ -65,9 +63,6 @@ const Store = (debounce?: number) => {
     mutations: {
       code: function (state: any, payload: any) {
         state.code = payload;
-      },
-      onMessageLayerMountedOrUpdated: function (state: any, payload: any) {
-        state.firstInvocations = payload
       },
       onSelect: function (state: any, payload: any) {
         if (state.selected.includes(payload)) {

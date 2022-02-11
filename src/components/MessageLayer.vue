@@ -30,12 +30,6 @@ import {mapGetters, mapMutations} from 'vuex'
         return 0;
       }
     },
-    mounted () {
-      this.emitFirstInvocations()
-    },
-    updated () {
-      this.emitFirstInvocations()
-    },
     methods: {
       ...mapMutations(['onMessageLayerMountedOrUpdated']),
 
@@ -43,40 +37,6 @@ import {mapGetters, mapMutations} from 'vuex'
         // According to the doc, computed properties are cached.
         return this.participants.Names()
       },
-      emitFirstInvocations () {
-        let firstInvocations = {}
-        this.participantNames().forEach(name => {
-          firstInvocations[name] = this.firstInvocation(name)
-        })
-        this.onMessageLayerMountedOrUpdated(firstInvocations);
-      },
-      firstInvocation (entity) {
-        let messageLayerRect = this.$el.getBoundingClientRect()
-
-        function _loop (comp) {
-          let tagName = comp.$options.name
-          if (tagName === 'message' || tagName === 'self-invocation') {
-            let parent = comp.$parent
-            if ((parent.to || parent.source || parent.target) === entity) {
-              let invocationRect = comp.$el.getBoundingClientRect()
-              return {
-                type: comp.$parent.$options.name,
-                top: invocationRect.y - messageLayerRect.y
-              }
-            }
-          }
-
-          for (let child of comp.$children) {
-            let result = _loop(child)
-            if (result) {
-              return result
-            }
-          }
-          return null
-        }
-        // 'this' is the MessageLayer
-        return _loop(this)
-      }
     },
     components: {
       Block
