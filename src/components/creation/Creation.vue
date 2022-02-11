@@ -4,6 +4,7 @@
        v-on:click.stop="onClick"
        v-on:mouseover.stop="mouseOver"
        v-on:mouseout.stop="mouseOut"
+       :data-key="context.Key()"
        :signature="signature"
        :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent, 'hover': hover }"
        :style="style">
@@ -68,6 +69,9 @@
     props: ['context', 'comment', 'selfCallIndent'],
     computed: {
       ...mapGetters(['cursor', 'onElementClick', 'distance']),
+      key(): string {
+        return this.context.Key();
+      },
       style(): Style {
         const ret = {
           width: this.interactionWidth + 'px'
