@@ -5,12 +5,14 @@ import {IParticipantModel} from "@/positioning/ParticipantListener";
 import {final_pos} from "@/positioning/MatrixBasedAlgorithm";
 import {AllMessages} from "@/positioning/MessageContextListener";
 import {OwnableMessage, OwnableMessageType} from "@/positioning/OwnableMessage";
+import {memoize} from "lodash";
 
 export class Coordinates {
   private m: Array<Array<number>> = [];
   private readonly widthProvider: WidthFunc;
   private readonly participantModels: IParticipantModel[];
   private readonly ownableMessages: OwnableMessage[];
+  private readonly finalPos: Function = memoize(final_pos);
 
   constructor(ctx: any, widthProvider: WidthFunc) {
     this.participantModels = OrderedParticipants(ctx);
@@ -25,7 +27,7 @@ export class Coordinates {
     if(pIndex === -1) {
       throw Error(`Participant ${participantName} not found`);
     }
-    return final_pos(pIndex, this.m) + ARROW_HEAD_WIDTH;
+    return this.finalPos(pIndex, this.m) + ARROW_HEAD_WIDTH;
   }
 
   walkThrough() {

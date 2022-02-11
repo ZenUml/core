@@ -29,14 +29,16 @@ const Store = (debounce?: number) => {
       participants: (state: any, getters: any) => {
         return Participants(getters.rootContext, true)
       },
+      coordinates: (state: any, getters: any) => {
+        return new Coordinates(getters.rootContext, WidthProviderOnBrowser)
+      },
       centerOf: (state: any, getters: any) => (entity: any) => {
         if (!entity) {
           console.error('[vue-sequence] centerOf: entity is undefined');
           return 0
         }
         try {
-          const coordinates = new Coordinates(getters.rootContext, WidthProviderOnBrowser);
-          return coordinates.getPosition(entity) || 0
+          return getters.coordinates.getPosition(entity) || 0
         } catch (e) {
           console.error(e)
           return 0
