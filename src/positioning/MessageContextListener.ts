@@ -13,7 +13,9 @@ export class MessageContextListener extends sequenceParserListener.sequenceParse
   private _addOwnedMessage = (type: OwnableMessageType) => (ctx: any) => {
     let from;
     if(ctx.from && ctx.from()) {
-      from = ctx.from().getText();
+      from = ctx.from().getTextWithoutQuotes();
+    } else if (ctx.messageBody && ctx.messageBody()?.from()){
+      from = ctx.messageBody()?.from().getTextWithoutQuotes();
     } else {
       from = ctx?.parentCtx?.Origin();
     }
