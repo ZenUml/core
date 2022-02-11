@@ -1,9 +1,6 @@
 import {Fixture} from "./fixture/Fixture";
 
-let seqDsl = require('../../../src/parser/index');
-
-
-// This spec shows how we get `from` from the context.
+// This spec shows how we get `Origin` from the context.
 // A.m1() { B.m2() } => m1 is from `Starter`, m2 is from `A'
 // We need the `from` in calculation in:
 // 1. Interaction: for interactionWidth, translateX

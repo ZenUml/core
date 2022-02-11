@@ -10,6 +10,7 @@ require('./ProgContext');
 require('./RetContext');
 require('./StatContext');
 require('./SignatureText')
+require('./From')
 
 const errors = [];
 class SeqErrorListener extends antlr4.error.ErrorListener {

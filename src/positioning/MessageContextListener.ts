@@ -11,14 +11,7 @@ export class MessageContextListener extends sequenceParserListener.sequenceParse
   enterCreation = (ctx: any) => this._addOwnedMessage(OwnableMessageType.CreationMessage)(ctx);
 
   private _addOwnedMessage = (type: OwnableMessageType) => (ctx: any) => {
-    let from;
-    if(ctx.from && ctx.from()) {
-      from = ctx.from().getTextWithoutQuotes();
-    } else if (ctx.messageBody && ctx.messageBody()?.from()){
-      from = ctx.messageBody()?.from().getTextWithoutQuotes();
-    } else {
-      from = ctx?.parentCtx?.Origin();
-    }
+    let from = ctx.From();
     const owner = ctx?.Owner();
     const signature = ctx?.SignatureText();
     this.ownableMessages.push({from: from, signature: signature, type, to: owner});
