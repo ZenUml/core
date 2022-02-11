@@ -25,7 +25,7 @@ export class Coordinates {
     if(pIndex === -1) {
       throw Error(`Participant ${participantName} not found`);
     }
-    return final_pos(pIndex, this.m) + ARROW_HEAD_WIDTH;
+    return this.getParticipantGap(this.participantModels[0]) + final_pos(pIndex, this.m) + ARROW_HEAD_WIDTH;
   }
 
   walkThrough() {
@@ -64,14 +64,10 @@ export class Coordinates {
   private getParticipantGap(p: IParticipantModel) {
     const halfLeft = Coordinates.half(this.widthProvider, p.left);
     const halfSelf = Coordinates.half(this.widthProvider, p.name);
-    const leftIsVisible = Coordinates.leftIsVisible(p);
-    return ((leftIsVisible && halfLeft) || 0) + halfSelf;
+    const leftIsVisible = p.left && p.left !== '_STARTER_';
+    const selfIsVisible = p.name && p.name !== '_STARTER_';
+    return ((leftIsVisible && halfLeft) || 0) + ((selfIsVisible && halfSelf) || 0);
   }
-
-  private static leftIsVisible(p: IParticipantModel) {
-    return p.left && p.left !== '_STARTER_';
-  }
-
   private static half(widthProvider: WidthFunc, participantName: string | undefined) {
     if (participantName === '_STARTER_') {
       return MARGIN/2;

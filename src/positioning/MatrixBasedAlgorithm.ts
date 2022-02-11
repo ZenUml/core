@@ -31,7 +31,7 @@ let final_distance = (left: number, right: number, minDistanceMatrix: Array<Arra
   }
 }
 
-let distance = memoize(final_distance, resolver());
+export let distance = memoize(final_distance, resolver());
 
 export let final_pos = (i: number, minDistanceMatrix: Array<number>[]): number => {
   return distance(0, i, minDistanceMatrix);
