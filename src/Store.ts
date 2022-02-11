@@ -3,6 +3,7 @@ import {RootContext, Participants, GroupContext, ParticipantContext} from './par
 
 import WidthProviderOnBrowser from "@/positioning/WidthProviderFunc";
 import {Coordinates} from "@/positioning/Coordinates";
+import {CodeRange} from "@/parser/CodeRange";
 
 let storeInitiationTime: number = 0
 setTimeout(function () {
@@ -18,6 +19,9 @@ const Store = (debounce?: number) => {
       selected: [],
       cursor: null,
       firstInvocations: {},
+      onElementClick: (codeRange: CodeRange) => {
+        console.log('Element clicked', codeRange)
+      }
     },
     getters: {
       rootContext: (state: any) => {
@@ -56,6 +60,7 @@ const Store = (debounce?: number) => {
         if (!from || !to) return 0
         return getters.centerOf(to) - getters.centerOf(from)
       },
+      onElementClick: (state: any) => state.onElementClick
     },
     mutations: {
       code: function (state: any, payload: any) {
@@ -70,7 +75,10 @@ const Store = (debounce?: number) => {
         } else {
           state.selected.push(payload)
         }
-      }
+      },
+      cursor: function (state: any, payload: any) {
+        state.cursor = payload;
+      },
     },
     actions: {
       // Why debounce is here instead of mutation 'code'?
