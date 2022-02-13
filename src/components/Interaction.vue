@@ -56,9 +56,6 @@
       outOfBand: function() {
         return !!this.providedFrom && (this.providedFrom !== this.origin)
       },
-      func: function() {
-        return this.message?.messageBody().func()
-      },
       assignee: function () {
         function safeCodeGetter (context) {
           return (context && context.getTextWithoutQuotes()) || ''
@@ -107,7 +104,7 @@
         return this.context?.Origin()
       },
       passOnOffset: function() {
-        // selfCallIndent is introduced for sync self interaction. Each time we enters a self sync interaction the selfCallIndent
+        // selfCallIndent is introduced for sync self interaction. Each time we enter a self sync interaction the selfCallIndent
         // increases by 6px (half of the width of an execution bar). However, we set the selfCallIndent back to 0 when
         // it enters a non-self sync interaction.
         return this.isSelf ? (this.selfCallIndent || 0) + 6 : 0
@@ -117,17 +114,8 @@
           return 0
         }
 
-        const dist = Math.abs(this.distance(this.from, this.to))
-        if (this.outOfBand) {
-          return dist
-        }
-        let safeOffset = this.selfCallIndent || 0
-        if (!this.rightToLeft) {
-          // Interaction width = dist
-          return dist - safeOffset
-        } else {
-          return dist + safeOffset
-        }
+        let safeOffset = this.outOfBand ? 0: (this.selfCallIndent || 0)
+        return Math.abs(this.distance2(this.from, this.to) - safeOffset)
       },
       to: function () {
         return this.context?.message()?.messageBody()?.to()?.getTextWithoutQuotes()
