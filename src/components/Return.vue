@@ -1,10 +1,8 @@
 <template>
   <div class="interaction return"
        v-on:click.stop="onClick"
-       v-on:mouseover.stop="mouseOver"
-       v-on:mouseout.stop="mouseOut"
        :signature="signature"
-       :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent, 'hover': hover }"
+       :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent }"
        :style="{width: interactionWidth + 'px', left: left + 'px'}">
     <comment v-if="comment" :comment="comment"/>
 <!--    <message :content="signature" :rtl="rightToLeft" type="async"/>-->
@@ -23,11 +21,6 @@
   import {CodeRange} from '@/parser/CodeRange'
   export default {
     name: 'return',
-    data() {
-      return {
-        hover: false
-      }
-    },
     props: ['context', 'comment'],
     computed: {
       ...mapGetters(['distance', 'cursor', 'onElementClick']),
@@ -74,12 +67,6 @@
       onClick() {
         this.onElementClick(CodeRange.from(this.context))
       },
-      mouseOver() {
-        this.hover = true
-      },
-      mouseOut() {
-        this.hover = false
-      }
     },
     components: {
       Comment,
