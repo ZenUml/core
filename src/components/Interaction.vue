@@ -5,7 +5,7 @@
        v-on:mouseout.stop="mouseOut"
        :data-to="to"
        data-type="interaction"
-       :signature="signature"
+       :data-signature="signature"
        :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent, 'self': isSelf, 'hover': hover }"
        :style="{width: interactionWidth + 'px', left: left + 'px', transform: 'translateX(' + translateX + 'px)'}">
     <div v-if="showStarter && isRootBlock"
