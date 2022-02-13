@@ -6,7 +6,7 @@
        :data-to="to"
        data-type="interaction"
        :data-signature="signature"
-       :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent, 'self': isSelf, 'hover': hover }"
+       :class="{ 'highlight': isCurrent, 'self': isSelf, 'hover': hover }"
        :style="{width: interactionWidth + 'px', left: left + 'px', transform: 'translateX(' + translateX + 'px)'}">
     <div v-if="showStarter && isRootBlock"
          :style="{transform: 'translateX(' + translateX * (-1) + 'px)'}"
