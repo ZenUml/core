@@ -22,19 +22,15 @@
   import Message from './Message'
   import {mapGetters} from "vuex"
   import {CodeRange} from '@/parser/CodeRange'
-
+  import Hoverable from '@/components/mixin/hoverable/Hoverable'
   function isNullOrUndefined(value) {
     return value === null || value === undefined
   }
 
   export default {
     name: 'interaction-async',
-    data() {
-      return {
-        hover: false
-      }
-    },
     props: ['context', 'comment', 'selfCallIndent'],
+    mixins: [Hoverable],
     computed: {
       ...mapGetters(['distance', 'cursor', 'onElementClick']),
       from: function() {
@@ -86,12 +82,6 @@
       onClick() {
         this.onElementClick(CodeRange.from(this.context))
       },
-      mouseOver() {
-        this.hover = true
-      },
-      mouseOut() {
-        this.hover = false
-      }
     },
     components: {
       Comment,
