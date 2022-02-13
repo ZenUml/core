@@ -2,7 +2,7 @@ import {ARROW_HEAD_WIDTH, MARGIN, MIN_PARTICIPANT_WIDTH, MINI_GAP} from "@/posit
 import {TextType, WidthFunc} from "@/positioning/Coordinate";
 import {OrderedParticipants} from "@/positioning/OrderedParticipants";
 import {IParticipantModel} from "@/positioning/ParticipantListener";
-import {final_pos} from "@/positioning/MatrixBasedAlgorithm";
+import {find_optimal} from "@/positioning/david/DavidEisenstat";
 import {AllMessages} from "@/positioning/MessageContextListener";
 import {OwnableMessage, OwnableMessageType} from "@/positioning/OwnableMessage";
 
@@ -25,7 +25,7 @@ export class Coordinates {
     if(pIndex === -1) {
       throw Error(`Participant ${participantName} not found`);
     }
-    return this.getParticipantGap(this.participantModels[0]) + final_pos(pIndex, this.m) + ARROW_HEAD_WIDTH;
+    return this.getParticipantGap(this.participantModels[0]) + find_optimal(this.m)[pIndex] + ARROW_HEAD_WIDTH;
   }
 
   walkThrough() {
