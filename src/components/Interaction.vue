@@ -3,6 +3,8 @@
        v-on:click.stop="onClick"
        v-on:mouseover.stop="mouseOver"
        v-on:mouseout.stop="mouseOut"
+       :data-to="to"
+       data-type="interaction"
        :signature="signature"
        :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent, 'self': isSelf, 'hover': hover }"
        :style="{width: interactionWidth + 'px', left: left + 'px', transform: 'translateX(' + translateX + 'px)'}">
