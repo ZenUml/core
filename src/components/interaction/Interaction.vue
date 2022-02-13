@@ -6,7 +6,7 @@
        :data-to="to"
        data-type="interaction"
        :data-signature="signature"
-       :class="{ 'highlight': isCurrent, 'self': isSelf, 'hover': hover }"
+       :class="{'right-to-left': rightToLeft, 'highlight': isCurrent, 'self': isSelf, 'hover': hover }"
        :style="{width: interactionWidth + 'px', left: left + 'px', transform: 'translateX(' + translateX + 'px)'}">
     <div v-if="showStarter && isRootBlock"
          :style="{transform: 'translateX(' + translateX * (-1) + 'px)'}"
@@ -24,11 +24,11 @@
 </template>
 
 <script type="text/babel">
-  import Comment from './Comment.vue'
-  import Occurrence from './Occurrence.vue'
-  import Message from './Message'
+  import Comment from '../Comment.vue'
+  import Occurrence from '../Occurrence.vue'
+  import Message from '../Message'
   import {mapGetters} from "vuex";
-  import SelfInvocation from './SelfInvocation'
+  import SelfInvocation from '../SelfInvocation'
   import {CodeRange} from '@/parser/CodeRange'
   import {ProgContext} from '@/parser'
   import Hoverable  from '@/components/mixin/hoverable/Hoverable'
