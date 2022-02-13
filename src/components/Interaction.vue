@@ -42,8 +42,7 @@
     props: ['context', 'comment', 'selfCallIndent'],
     computed: {
       // add tracker to the mapGetters
-      ...mapGetters(['rootContext', 'participants', 'distance', 'distance2', 'centerOf', 'cursor', 'onElementClick']),
-
+      ...mapGetters(['participants', 'distance2', 'cursor', 'onElementClick']),
       message: function () {
         return this.context?.message()
       },
@@ -89,7 +88,7 @@
         return dist + fragmentOff
       },
       rightToLeft: function () {
-        return this.centerOf(this.to) < this.centerOf(this.from)
+        return this.distance2(this.from, this.to) < 0
       },
       isCurrent: function () {
         return this.message?.isCurrent(this.cursor);
