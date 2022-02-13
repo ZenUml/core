@@ -31,6 +31,7 @@
   import SelfInvocation from './SelfInvocation'
   import {CodeRange} from '@/parser/CodeRange'
   import {ProgContext} from '@/parser'
+  import Hoverable  from '@/components/mixin/hoverable/Hoverable'
 
   export default {
     name: 'interaction',
@@ -40,6 +41,7 @@
       }
     },
     props: ['context', 'comment', 'selfCallIndent'],
+    mixins: [Hoverable],
     computed: {
       // add tracker to the mapGetters
       ...mapGetters(['participants', 'distance2', 'cursor', 'onElementClick']),
@@ -131,14 +133,6 @@
       onClick() {
         this.onElementClick(CodeRange.from(this.context))
       },
-      mouseOver() {
-        this.hover = true
-      },
-      mouseOut() {
-        this.hover = false
-      }
-    },
-    updated() {
     },
     components: {
       Message,
