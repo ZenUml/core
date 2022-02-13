@@ -16,8 +16,7 @@ title
  ;
 
 head
- : (group | participant)+
- | (group | participant)* starterExp
+ : (group | participant)* starterExp?
  ;
 
 // The following order is important.
