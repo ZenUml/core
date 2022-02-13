@@ -8,5 +8,5 @@
 export default `
 A.method(1121212)
 B.method {
- new A1(x)
+ new A(x)
 }`

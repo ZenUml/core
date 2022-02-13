@@ -1,4 +1,3 @@
-<!--TODO: this can be implemented without globally calculated width!-->
 <template>
   <div class="interaction creation sync text-center"
        v-on:click.stop="onClick"
@@ -19,7 +18,6 @@
         </div>
       </div>
       <message ref="messageEl"
-               :data-key="key"
                :data-to="to"
                data-type="creation"
                class="invocation" :content="signature" :rtl="rightToLeft" type="creation"/>
@@ -72,9 +70,6 @@
     props: ['context', 'comment', 'selfCallIndent'],
     computed: {
       ...mapGetters(['cursor', 'onElementClick', 'distance']),
-      key(): string {
-        return this.context.Key();
-      },
       style(): Style {
         const ret = {
           width: this.interactionWidth + 'px'
