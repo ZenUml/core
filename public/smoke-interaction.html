@@ -16,8 +16,15 @@
     <div id="diagram">
     </div>
     <script>
+      // on documentready
       document.addEventListener("DOMContentLoaded", function(event) {
-        window.store2.state.code = 'A.m'
+        window.store2.state.code = `A.method() {
+  B.method() {
+    BSelf
+    A.method()
+  }
+  ASelf
+}`
       });
 
     </script>

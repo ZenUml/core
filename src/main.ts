@@ -32,7 +32,10 @@ store1.dispatch('updateCode', {
  * The previous version used h(App). That was kind of wrong, because when doing that we do not need to
  * define the seq-diagram component here.
  */
-new Vue({el: '#demo1', store: store1, render: h => h(VueSequence.DiagramFrame) })
+if (document.getElementById('demo1')) {
+  new Vue({el: '#demo1', store: store1, render: h => h(VueSequence.DiagramFrame) })
+}
 const store2 = VueSequence.Store()
-store2.state.code = demo2
-new Vue({el: '#demo2', store: new Vuex.Store(store2), render: h => h(VueSequence.DiagramFrame) })
+// @ts-ignore
+window.store2 = store2
+new Vue({el: '#diagram', store: new Vuex.Store(store2), render: h => h(VueSequence.DiagramFrame) })
