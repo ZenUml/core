@@ -10,7 +10,7 @@ describe('Smoke test', function () {
       })
   });
 
-  it.only('interaction', function () {
+  it('interaction', function () {
     cy.visit('http://localhost:8080/')
       .then(() => {
         cy.document().toMatchImageSnapshot({

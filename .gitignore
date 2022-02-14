@@ -1,6 +1,7 @@
 cypress/videos/**/*
 cypress/screenshots/**/*
 cypress/integration/__image_snapshots__/*.diff.png
+cypress/integration/__image_snapshots__/*.actual.png
 coverage
 
 # Gauge - metadata dir
