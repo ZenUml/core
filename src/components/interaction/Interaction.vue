@@ -35,11 +35,6 @@
 
   export default {
     name: 'interaction',
-    data() {
-      return {
-        hover: false
-      }
-    },
     props: ['context', 'comment', 'selfCallIndent'],
     mixins: [Hoverable],
     computed: {
