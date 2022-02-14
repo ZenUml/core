@@ -1,6 +1,6 @@
 <template>
   <!-- py-8 to give space for icons -->
-  <div class="sequence-diagram py-8" ref="diagram" >
+  <div class="sequence-diagram py-8 ml-8" ref="diagram" >
     <life-line-layer :context="rootContext.head()"/>
     <message-layer :context="rootContext.block()" :key="generation"/>
   </div>
