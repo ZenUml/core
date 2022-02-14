@@ -11,10 +11,10 @@ describe('Smoke test', function () {
   });
 
   it('interaction', function () {
-    cy.visit('http://localhost:8080/')
+    cy.visit('http://localhost:8080/smokeInteraction')
       .then(() => {
         cy.document().toMatchImageSnapshot({
-          imageConfig: {"threshold": 0.001}, capture: "fullPage"
+          imageConfig: {"threshold": 0.001}, capture: "viewport"
         });
       })
   });

@@ -7,10 +7,8 @@
        data-type="interaction"
        :data-signature="signature"
        :class="{'highlight': isCurrent, 'self': isSelf, 'hover': hover }"
-       :style="{width: interactionWidth + 'px', left: left + 'px', transform: 'translateX(' + translateX + 'px)'}">
-    <div v-if="showStarter && isRootBlock"
-         :style="{transform: 'translateX(' + translateX * (-1) + 'px)'}"
-         class="occurrence source"></div>
+       :style="{width: interactionWidth + 'px', transform: 'translateX(' + translateX + 'px)'}">
+    <div v-if="(showStarter && isRootBlock) || outOfBand" class="occurrence source"></div>
     <comment v-if="comment" :comment="comment"/>
     <component v-bind:is="invocation"
                class="text-center"
@@ -65,24 +63,18 @@
       signature: function () {
         return this.message?.SignatureText()
       },
-      left: function() {
-        const indent = this.selfCallIndent || 0
-        return indent * (-1)
-      },
       translateX: function() {
-        const indent = this.selfCallIndent || 0
         const fragmentOff = 0 || 0
         // ** Starting point is always the center of 'origin' **
         // Normal flow
         if(!this.rightToLeft && !this.outOfBand) {
-          // + indent because we always start from the center of origin
-          // starting point is moved back to the center of origin by 'left'
-          return indent + fragmentOff
+          return fragmentOff
         }
 
         const moveTo = !this.rightToLeft ? this.providedFrom : this.to
         const dist = this.distance2(this.origin, moveTo)
-        return dist + fragmentOff
+        const indent = this.selfCallIndent || 0
+        return dist + fragmentOff - indent
       },
       rightToLeft: function () {
         return this.distance2(this.from, this.to) < 0
@@ -106,10 +98,6 @@
         return this.isSelf ? (this.selfCallIndent || 0) + 6 : 0
       },
       interactionWidth: function () {
-        if (this.context && this.isSelf) {
-          return 0
-        }
-
         let safeOffset = this.outOfBand ? 0: (this.selfCallIndent || 0)
         return Math.abs(this.distance2(this.from, this.to) - safeOffset)
       },
@@ -138,7 +126,7 @@
   }
 </script>
 <style scoped>
-  .occurrence.source {
+  .interaction .occurrence.source {
     position: absolute;
     height: calc(100% + 16px);
     left: -12px;
