@@ -1,5 +1,5 @@
 <template>
-  <div class="occurrence" data-el-type="occurrence" :data-belongs-to="participant" :data-x-offset="center" :data-debug-center-of="computedCenter">
+  <div class="occurrence" :class="{'right-to-left': rtl}" data-el-type="occurrence" :data-belongs-to="participant" :data-x-offset="center" :data-debug-center-of="computedCenter">
     <block v-if="this.context.braceBlock()"
            :context="context.braceBlock().block()"
            :selfCallIndent="selfCallIndent"
@@ -12,7 +12,7 @@ import {mapState, mapGetters} from 'vuex'
 
   export default {
     name: 'occurrence',
-    props: ['context', 'selfCallIndent', 'participant'],
+    props: ['context', 'selfCallIndent', 'participant', 'rtl'],
     data: function () {
       return {
         center: 0,
@@ -51,6 +51,9 @@ import {mapState, mapGetters} from 'vuex'
     position: absolute;
   }
 
+  .right-to-left.occurrence {
+    left: -12px;
+  }
 </style>
 
 <style>

@@ -167,9 +167,4 @@
      */
     margin-left: auto;
   }
-
-  .right-to-left > .occurrence {
-    left: -8px;
-  }
-
 </style>
