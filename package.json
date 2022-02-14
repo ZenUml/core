@@ -23,7 +23,7 @@
     "@types/assert": "^1.5.4",
     "antlr4": "~4.8.0",
     "autoprefixer": "^9",
-    "dom-to-image-more": "^2.8.0",
+    "dom-to-image-more": "^2.9.5",
     "highlight.js": "^10.1.1",
     "lodash": "^4.17.20",
     "marked": "^2.0.0",

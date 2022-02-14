@@ -33,6 +33,6 @@ store1.dispatch('updateCode', {
  * define the seq-diagram component here.
  */
 new Vue({el: '#demo1', store: store1, render: h => h(VueSequence.DiagramFrame) })
-// const store2 = VueSequence.Store()
-// store2.state.code = demo2
-// new Vue({el: '#demo2', store: new Vuex.Store(store2), render: h => h(VueSequence.DiagramFrame) })
+const store2 = VueSequence.Store()
+store2.state.code = demo2
+new Vue({el: '#demo2', store: new Vuex.Store(store2), render: h => h(VueSequence.DiagramFrame) })
