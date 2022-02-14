@@ -117,7 +117,7 @@
         return this.context?.message()?.messageBody()?.to()?.getTextWithoutQuotes()
       },
       isSelf: function() {
-        return !this.context?.message()?.messageBody()?.to() || this.context?.message()?.messageBody()?.to().getTextWithoutQuotes() === this.from
+        return !this.message?.messageBody()?.to() || this.context?.message()?.messageBody()?.to().getTextWithoutQuotes() === this.from
       },
       invocation: function () {
         // return 'Message'
