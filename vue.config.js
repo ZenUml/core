@@ -1,4 +1,16 @@
 module.exports = {
+  pages: {
+    index: {
+      entry: 'src/main.ts',
+      template: 'public/index.html',
+      filename: 'index.html'
+    },
+    smoke: {
+      entry: 'src/main.ts',
+      template: 'public/smoke-1.html',
+      filename: 'smoke.html'
+    }
+  },
   chainWebpack: config =>{
     // A workaround that allows npm link or yarn link
     // https://cli.vuejs.org/guide/troubleshooting.html#symbolic-links-in-node-modules
