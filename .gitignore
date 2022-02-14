@@ -1,3 +1,5 @@
+cypress/videos/**/*
+cypress/screenshots/**/*
 coverage
 
 # Gauge - metadata dir
