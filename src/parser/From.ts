@@ -2,10 +2,14 @@ const sequenceParser = require('../generated-parser/sequenceParser')
 
 const seqParser = sequenceParser.sequenceParser;
 const CreationContext = seqParser.CreationContext;
+const StatContext = seqParser.StatContext;
 const MessageContext = seqParser.MessageContext
 const AsyncMessageContext = seqParser.AsyncMessageContext
 CreationContext.prototype.From = function () {
-  return this.parentCtx?.Origin();
+  if (this.parentCtx instanceof StatContext) {
+    return this.parentCtx?.Origin()
+  }
+  return undefined;
 }
 
 MessageContext.prototype.ProvidedFrom = function() {
