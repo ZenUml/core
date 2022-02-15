@@ -132,7 +132,7 @@
 <style scoped>
   .interaction .occurrence.source {
     position: absolute;
-    height: calc(100% + 4px);
+    height: calc(100% + 14px);
     left: -12px;
   }
 

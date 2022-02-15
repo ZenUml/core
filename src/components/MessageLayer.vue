@@ -23,7 +23,7 @@ import {mapGetters, mapMutations} from 'vuex'
     computed: {
       ...mapGetters(['participants', 'centerOf']),
       paddingLeft() {
-        if (this.participants.Array().length > 1) {
+        if (this.participants.Array().length >= 1) {
           const first = this.participants.Array().slice(0)[0].name;
           return this.centerOf(first) - 1;
         }

@@ -1,8 +1,8 @@
 <template>
   <div class="message self">
-    <svg class="arrow" width="44" height="34">
-      <polyline points="0,2 28,2 28,25 14,25"></polyline>
-      <polyline class="head" points="18,19 8,25 18,31"></polyline>
+    <svg class="arrow" width="44" height="24">
+      <polyline points="0,2 28,2 28,15 14,15"></polyline>
+      <polyline class="head" points="18,9 8,15 18,21"></polyline>
       <!--TODO: What is the below line used for?-->
       <!--<polyline class="closed" points="28,32 28,18"></polyline>-->
     </svg>
@@ -20,7 +20,7 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .message.self {
-    height: 34px; /* Same height as svg */
+    height: 24px; /* Same height as svg */
   }
 
   .sync > .message.self {
