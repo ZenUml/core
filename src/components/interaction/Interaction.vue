@@ -8,7 +8,10 @@
        :data-signature="signature"
        :class="{'highlight': isCurrent, 'self': isSelf, 'hover': hover }"
        :style="{width: interactionWidth + 'px', transform: 'translateX(' + translateX + 'px)'}">
-    <div v-if="(showStarter && isRootBlock) || outOfBand" class="occurrence source" :class="{'right-to-left': rightToLeft}"></div>
+    <div v-if="(showStarter && isRootBlock) || outOfBand"
+         class="occurrence source"
+         :class="{'right-to-left': rightToLeft}">
+    </div>
     <comment v-if="comment" :comment="comment"/>
     <component v-bind:is="invocation"
                class="text-center"
@@ -16,7 +19,7 @@
              :assignee="assignee"
              :rtl="rightToLeft"
              type="sync"></component>
-    <occurrence :context="message" :participant="isSelf? from : to" :selfCallIndent="passOnOffset" :rtl="rightToLeft"/>
+    <occurrence :context="message" :participant="to" :selfCallIndent="passOnOffset" :rtl="rightToLeft"/>
     <message class="return" v-if="assignee && !isSelf" :content="assignee" :rtl="!rightToLeft" type="return"/>
   </div>
 </template>
