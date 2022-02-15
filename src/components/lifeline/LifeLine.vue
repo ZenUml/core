@@ -39,7 +39,6 @@ export default {
       this.$store.commit('onSelect', this.entity.name)
     },
     setTop() {
-      // TODO: Know limitation - if lifeline is within a group, top is too big
       const firstMessage = this.$root.$el.querySelector(`[data-to="${this.entity.name}"]`);
       if (firstMessage && firstMessage.attributes['data-type'].value === 'creation') {
         const rootY = this.$root.$el.getBoundingClientRect().y
