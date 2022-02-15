@@ -14,6 +14,12 @@
       body {
         margin: 0; /* mostly for demo on mobile */
       }
+
+      .CodeMirror {
+        /* Set height, width, borders, and global font properties here */
+        font-family: monospace;
+        height: 800px;
+      }
     </style>
   </head>
   <body>
@@ -27,7 +33,7 @@
     </script>
     <div class="grid grid-cols-6">
       <div class="col-span-2">
-        <textarea id="text" class="col-span-1 m-1 border-2" cols="30" rows="20" oninput="updateCode(this.value)"></textarea>
+        <textarea id="text" class="col-span-1 m-1 border-2" cols="30" rows="200" oninput="updateCode(this.value)"></textarea>
       </div>
       <div class="col-span-4">
         <div id="demo1" class="col-span-4 theme-blue"></div>
