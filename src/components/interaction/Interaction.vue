@@ -8,7 +8,7 @@
        :data-signature="signature"
        :class="{'highlight': isCurrent, 'self': isSelf, 'hover': hover }"
        :style="{width: interactionWidth + 'px', transform: 'translateX(' + translateX + 'px)'}">
-    <div v-if="(showStarter && isRootBlock) || outOfBand" class="occurrence source"></div>
+    <div v-if="(showStarter && isRootBlock) || outOfBand" class="occurrence source" :class="{'right-to-left': rightToLeft}"></div>
     <comment v-if="comment" :comment="comment"/>
     <component v-bind:is="invocation"
                class="text-center"
@@ -132,7 +132,12 @@
 <style scoped>
   .interaction .occurrence.source {
     position: absolute;
-    height: calc(100% + 16px);
+    height: calc(100% + 14px);
     left: -12px;
+  }
+
+  .interaction .occurrence.source.right-to-left {
+    left: unset;
+    right: -13px;
   }
 </style>
