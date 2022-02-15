@@ -4,8 +4,8 @@
        v-on:mouseover.stop="mouseOver"
        v-on:mouseout.stop="mouseOut"
        :data-signature="signature"
-       :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent, 'hover': hover }"
-       :style="style">
+       :class="{ 'right-to-left':rightToLeft, '-translate-x-full': rightToLeft, 'highlight': isCurrent, 'hover': hover }"
+       :style="{width: interactionWidth + 'px'}">
     <comment v-if="comment" :comment="comment" />
     <!-- h-10 to push occurrence down -->
     <div class="message-container h-10">
@@ -46,7 +46,6 @@
     interface Vue {
       hover: boolean;
       interactionWidth: number;
-      style: Style;
       creation: {
         SignatureText: () => string;
         creationBody: () => {assignment: () => {
@@ -70,17 +69,6 @@
     props: ['context', 'comment', 'selfCallIndent'],
     computed: {
       ...mapGetters(['cursor', 'onElementClick', 'distance']),
-      style(): Style {
-        const ret = {
-          width: this.interactionWidth + 'px'
-        } as Style;
-        if (!this.rightToLeft) {
-          ret.transform = 'translateX(' + 0 + 'px)'
-        } else {
-          ret.transform = 'translateX(calc(-100% + ' + 0 + 'px))'
-        }
-        return ret
-      },
       from(): string {
         return this.context.Origin()
       },
