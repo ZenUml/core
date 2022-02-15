@@ -1,7 +1,7 @@
 <template>
   <!-- pr-24 to give space for the right most participant.
   TODO: we may need to consider the width of self message on right most participant. -->
-  <div class="message-layer pr-24">
+  <div class="message-layer pt-24 pb-1 pr-24">
     <block :context="context" :style="{'padding-left': paddingLeft + 'px'}"/>
   </div>
 </template>
@@ -44,13 +44,6 @@ import {mapGetters, mapMutations} from 'vuex'
   }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-  .message-layer {
-    padding-top: 60px;
-    padding-bottom: 40px;
-  }
-</style>
 <style>
   /* Avoid moving interaction to the left or right with margins.
   We can always assume that an interaction's border is the lifeline.

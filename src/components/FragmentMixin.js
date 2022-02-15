@@ -39,7 +39,7 @@ export default {
     },
     fragmentStyle: function () {
       return {
-        transform: 'translateX(' + (this.offsetX * (-1)) + 'px)',
+        transform: 'translateX(' + ((this.offsetX + 1) * (-1)) + 'px)',
         width: (this.boundary.width + 20 * this.depth + 50) + 'px',
       }
     }
