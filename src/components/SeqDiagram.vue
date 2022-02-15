@@ -1,6 +1,6 @@
 <template>
   <!-- py-8 to give space for icons; overflow-hidden to hide bottom of lifelines in group -->
-  <div class="sequence-diagram overflow-hidden py-8" :style="{width: `${width}px`}" ref="diagram" >
+  <div class="sequence-diagram overflow-visible py-8" :style="{width: `${width}px`}" ref="diagram" >
     <life-line-layer :context="rootContext.head()"/>
     <message-layer :context="rootContext.block()"/>
   </div>
