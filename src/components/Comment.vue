@@ -1,5 +1,5 @@
 <template>
-  <div class="comments" v-html="markedComment"></div>
+  <div class="comments text-left" v-html="markedComment"></div>
 </template>
 
 <script type="text/babel">
