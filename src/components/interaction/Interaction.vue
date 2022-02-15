@@ -98,14 +98,18 @@
         return this.isSelf ? (this.selfCallIndent || 0) + 6 : 0
       },
       interactionWidth: function () {
+        if (this.context && this.isSelf) {
+          return 0
+        }
+
         let safeOffset = this.outOfBand ? 0: (this.selfCallIndent || 0)
         return Math.abs(this.distance2(this.from, this.to) - safeOffset)
       },
       to: function () {
-        return this.context?.message()?.messageBody()?.to()?.getTextWithoutQuotes()
+        return this.context?.message()?.Owner()
       },
       isSelf: function() {
-        return !this.message?.messageBody()?.to() || this.context?.message()?.messageBody()?.to().getTextWithoutQuotes() === this.from
+        return this.to === this.from
       },
       invocation: function () {
         // return 'Message'

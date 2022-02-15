@@ -20,6 +20,7 @@ describe('get absolute position of a participant', () => {
     expect(coordinates.getPosition('A200')).toBe(120)
     expect(coordinates.getPosition('B300')).toBe(390)
     expect(coordinates.getPosition('C400')).toBe(760)
+    expect(coordinates.getWidth()).toBe(970)
   })
 
   it.each(

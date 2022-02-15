@@ -19,11 +19,9 @@
       MessageLayer
     },
     computed: {
-      ...mapGetters(['rootContext', 'centerOf', 'participants']),
+      ...mapGetters(['rootContext', 'coordinates']),
       width() {
-        const first = this.participants.Array().slice(0)[0].name;
-        const last = this.participants.Array().slice(0).pop().name;
-        return this.centerOf(last) - this.centerOf(first) + 200
+        return this.coordinates.getWidth() + 100;
       },
     },
     methods: {

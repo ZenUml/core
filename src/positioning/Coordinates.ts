@@ -83,4 +83,9 @@ export class Coordinates {
   private static _getParticipantWidth(widthProvider: WidthFunc, participant: string | undefined) {
     return Math.max(widthProvider(participant || '', TextType.ParticipantName), MIN_PARTICIPANT_WIDTH);
   }
+
+  getWidth() {
+    const lastParticipant = this.participantModels[this.participantModels.length - 1].name;
+    return this.getPosition(lastParticipant) + Coordinates.halfWithMargin(this.widthProvider, lastParticipant);
+  }
 }
