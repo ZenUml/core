@@ -5,5 +5,10 @@
 // Self-method
 // Nested method
 // Assignment
-export default `@Starter(A)
-A.mmmmmm`
+export default `
+@EC2 A group {@EC2 B C} D
+new A
+new B
+new C
+new D
+`
