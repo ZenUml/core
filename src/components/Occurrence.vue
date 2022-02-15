@@ -30,10 +30,8 @@ import {mapState, mapGetters} from 'vuex'
         }
       },
     },
-    beforeCreate: function () {
-      this.$options.components.Block = require('./Block.vue').default
-    },
-    mounted: function () {
+    components: {
+      Block: () => import('./Block')
     },
   }
 </script>
