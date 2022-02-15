@@ -55,9 +55,5 @@ describe('Creation', () => {
     expect(creationWrapper.vm.hover).toBe(false)
     expect(creationWrapper.vm.rightToLeft).toBeTruthy()
     expect(creationWrapper.vm.interactionWidth).toBe(120)
-    expect(creationWrapper.vm.style).toStrictEqual({
-      "transform": "translateX(calc(-100% + 0px))",
-      "width": "120px"
-    })
   })
 })
