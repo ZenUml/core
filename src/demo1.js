@@ -5,80 +5,40 @@
 // Self-method
 // Nested method
 // Assignment
-export default `
-@Lambda <<A>> A
-// comments at the beginning should be ignored
-group "B C" {@EC2 B @ECS C}
-"C 2" "B 1"
-// This is comment
-//
-// |col1|col2|
-// |----|----|
-// |val1|val2|
-@Starter("User")
-new B
-RET ret = A.methodA(a, b) {
-  // A comment for self interaction<br>
-  // \`POST /order\` <br>
-  // [X](http://x.x)
-  RET ret2 = selfMethod() {
-    // A sync interaction after a self interaction
-    B.method() {
-      A.method()
-      return B
-    }
-    "B 1"->"C 2".syncMethod(from, abitrary, source, B)
+export default `@Actor Modeler as "建模人员"
+DM as "数据管理"
+CS as "计算服务"
+// RM as "资源管理"
+SS as "存储服务"
+
+
+@Starter(Modeler)
+// 获取数据集剖析报告
+
+if (DM.DSReportIsSaved(DatasetID) == true) {
+  DM.getDSAnalysisReport(DatasetID) {
+    // 获取剖析报告文件地址
+    url = DM.getDSReportFileUrl(DatasetID)
+    report = SS.readFile(url)
+    return report
   }
-  // A comment for creation
-  b = new B()
-  "b:B".method()
-  // A comment for async self
-  B->B: Self Async
-  // A comment for async message
-  B->C: Async Message
-  par {
-    A.method
-    B.method
+} else {
+  DM.submitDSAnalysisTask() {
+    // publisher: 异步事件(MQ)
+    DM -> CS: DSAnalysisTaskSubmittedEvent
   }
-  // A comment for alt
-  if (X) {
-    new X() {
-      return smallX
-    }
-    return X
-    A->B: message
-    self {
-      return C
-    }
-    C: self
-    B.alternative() {
-      // A comment for creation
-      a = new AHasAVerylongnamesoitislong() {
-        // A comment for creation
-        b = new B()
-        // Right to left
-        C.method() {
-          // Further right to left
-          "b:B".method()
-        }
-        self()
-      }
-    }
-  } else if (Y) {
-    C.method()
-    par {
-      A.method
-      B.method
-    }
-  } else {
-    D.method() {
-      return D
-    }
-    // A comment for loop
-    forEach(Z) {
-      Z.method() {
-        return Z
-      }
+  // subscriber
+  CS -> CS.eventHandler(event) {
+    new Job() {
+      data = SS.loadData()
+      report = Job.analyzeData(data)
+      return report
     }
   }
+
+  // publisher: 异步事件(MQ)
+  CS -> DM: DSAnalysisTaskCompletedEvent
+  // subscriber
+  report = DM -> DM.eventHandler(event)
+  @return DM->Modeler: report
 }`

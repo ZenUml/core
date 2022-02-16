@@ -66,7 +66,7 @@
   }
 
   .creation > .message-container > .message,
-  .async > .message:not(.right-to-left),
+  .async > .message,
   .sync > .message {
     /* (OccurrenceWidth-1)/2 - InteractionBorderWidth*/
     left: 2px;
