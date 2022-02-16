@@ -45,7 +45,7 @@
           const averageWidthOfChar = 10
           return averageWidthOfChar * (this.signature?.length || 0) + leftOfMessage
         }
-        return Math.abs(this.distance(this.target, this.source)) + 1
+        return Math.abs(this.distance(this.target, this.source))
       },
       // Both 'left' and 'translateX' can be used to move the element horizontally.
       // Change it to use translate according to https://stackoverflow.com/a/53892597/529187.
