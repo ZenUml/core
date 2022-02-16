@@ -5,7 +5,9 @@ const antlr4 = require('antlr4/index');
 describe('MessageListener', () => {
   it('can handle Message and Creation', () => {
     const code = `
-    A.method
+    A.method {
+      B->C.method
+    }
     new B
     C->D: message
     `
@@ -14,13 +16,33 @@ describe('MessageListener', () => {
 
     const messageContextListener = new MessageContextListener();
     walker.walk(messageContextListener, rootContext);
-    const ownedMessagesList = messageContextListener.result();
-    // expect first item's owner is A
-    expect(ownedMessagesList[0].owner).toBe('A');
-    // expect second item's owner is B
-    expect(ownedMessagesList[1].owner).toBe('B');
-    // expect third item's owner is D
-    expect(ownedMessagesList[2].owner).toBe('D');
-    expect(ownedMessagesList[2].ownableMessages[0].from).toBe('C');
+
+    expect(messageContextListener.result()).toStrictEqual(
+      [
+        {
+          "from": "_STARTER_",
+          "signature": "method",
+          "to": "A",
+          "type": 0
+        },
+        {
+          "from": "B",
+          "signature": "method",
+          "to": "C",
+          "type": 0
+        },
+        {
+          "from": "_STARTER_",
+          "signature": "«create»",
+          "to": "B",
+          "type": 2
+        },
+        {
+          "from": "C",
+          "signature": " message",
+          "to": "D",
+          "type": 1
+        }
+      ]);
   })
 })

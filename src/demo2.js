@@ -1,2 +1,4 @@
 // Alt
-export default ``
+export default `
+A.m
+`

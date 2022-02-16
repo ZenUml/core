@@ -1,6 +1,6 @@
 <template>
   <!-- pb-8 is to offset pt-8 in SeqDiagram component -->
-  <div class="frame relative pb-8">
+  <div class="frame relative pb-8 ml-1">
     <div class="header flex">
       <div class="left">
         <slot></slot>

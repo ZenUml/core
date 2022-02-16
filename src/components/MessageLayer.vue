@@ -1,7 +1,7 @@
 <template>
   <!-- pr-24 to give space for the right most participant.
   TODO: we may need to consider the width of self message on right most participant. -->
-  <div class="message-layer pr-24">
+  <div class="message-layer pt-24 pb-1 pr-24">
     <block :context="context" :style="{'padding-left': paddingLeft + 'px'}"/>
   </div>
 </template>
@@ -23,18 +23,12 @@ import {mapGetters, mapMutations} from 'vuex'
     computed: {
       ...mapGetters(['participants', 'centerOf']),
       paddingLeft() {
-        if (this.participants.Array().length > 1) {
+        if (this.participants.Array().length >= 1) {
           const first = this.participants.Array().slice(0)[0].name;
           return this.centerOf(first) - 1;
         }
         return 0;
       }
-    },
-    mounted () {
-      this.emitFirstInvocations()
-    },
-    updated () {
-      this.emitFirstInvocations()
     },
     methods: {
       ...mapMutations(['onMessageLayerMountedOrUpdated']),
@@ -43,40 +37,6 @@ import {mapGetters, mapMutations} from 'vuex'
         // According to the doc, computed properties are cached.
         return this.participants.Names()
       },
-      emitFirstInvocations () {
-        let firstInvocations = {}
-        this.participantNames().forEach(name => {
-          firstInvocations[name] = this.firstInvocation(name)
-        })
-        this.onMessageLayerMountedOrUpdated(firstInvocations);
-      },
-      firstInvocation (entity) {
-        let messageLayerRect = this.$el.getBoundingClientRect()
-
-        function _loop (comp) {
-          let tagName = comp.$options.name
-          if (tagName === 'message' || tagName === 'self-invocation') {
-            let parent = comp.$parent
-            if ((parent.to || parent.source || parent.target) === entity) {
-              let invocationRect = comp.$el.getBoundingClientRect()
-              return {
-                type: comp.$parent.$options.name,
-                top: invocationRect.y - messageLayerRect.y
-              }
-            }
-          }
-
-          for (let child of comp.$children) {
-            let result = _loop(child)
-            if (result) {
-              return result
-            }
-          }
-          return null
-        }
-        // 'this' is the MessageLayer
-        return _loop(this)
-      }
     },
     components: {
       Block
@@ -84,13 +44,6 @@ import {mapGetters, mapMutations} from 'vuex'
   }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-  .message-layer {
-    padding-top: 60px;
-    padding-bottom: 40px;
-  }
-</style>
 <style>
   /* Avoid moving interaction to the left or right with margins.
   We can always assume that an interaction's border is the lifeline.
@@ -101,12 +54,6 @@ import {mapGetters, mapMutations} from 'vuex'
     margin-top: 5px;     /* To create some margin for cosmetic only */
     /*Keep dashed here otherwise no space is given to the border*/
     border: 5px dashed transparent;
-  }
-
-  .interaction.highlight,
-  .interaction.hover {
-    border-radius: 4px;
-    background-color: rgba(202, 235, 254, .5);
   }
 
   .interaction:hover {

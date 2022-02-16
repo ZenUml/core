@@ -1,5 +1,5 @@
 <template>
-  <div class="occurrence" data-el-type="occurrence" :data-belongs-to="participant" :data-x-offset="center" :data-debug-center-of="computedCenter">
+  <div class="occurrence" :class="{'right-to-left': rtl}" data-el-type="occurrence" :data-belongs-to="participant" :data-x-offset="center" :data-debug-center-of="computedCenter">
     <block v-if="this.context.braceBlock()"
            :context="context.braceBlock().block()"
            :selfCallIndent="selfCallIndent"
@@ -12,7 +12,7 @@ import {mapState, mapGetters} from 'vuex'
 
   export default {
     name: 'occurrence',
-    props: ['context', 'selfCallIndent', 'participant'],
+    props: ['context', 'selfCallIndent', 'participant', 'rtl'],
     data: function () {
       return {
         center: 0,
@@ -30,10 +30,8 @@ import {mapState, mapGetters} from 'vuex'
         }
       },
     },
-    beforeCreate: function () {
-      this.$options.components.Block = require('./Block.vue').default
-    },
-    mounted: function () {
+    components: {
+      Block: () => import('./Block')
     },
   }
 </script>
@@ -47,9 +45,13 @@ import {mapState, mapGetters} from 'vuex'
   }
 
   >>> >.statement-container:last-child>.interaction.return:last-of-type>.message {
+    bottom: -17px; /* Move the absolutely positioned return message to the bottom. -17 to offset the padding of Occurrence. */
     position: absolute;
   }
 
+  .right-to-left.occurrence {
+    left: -12px;
+  }
 </style>
 
 <style>

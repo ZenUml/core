@@ -1,41 +1,41 @@
-import {IOwnedMessages, OwnableMessageType} from "./OwnableMessage";
+import {OwnableMessage, OwnableMessageType} from "./OwnableMessage";
 import {antlr4} from "@/positioning/ParticipantListener";
 
 const sequenceParserListener = require('@/generated-parser/sequenceParserListener');
 
 export class MessageContextListener extends sequenceParserListener.sequenceParserListener {
-  private ownedMessagesList: Array<IOwnedMessages> = [];
+  private isBlind = false;
+  private ownableMessages: Array<OwnableMessage> = [];
 
   enterMessage = (ctx: any) => this._addOwnedMessage(OwnableMessageType.SyncMessage)(ctx);
   enterAsyncMessage = (ctx: any) => this._addOwnedMessage(OwnableMessageType.AsyncMessage)(ctx);
   enterCreation = (ctx: any) => this._addOwnedMessage(OwnableMessageType.CreationMessage)(ctx);
 
   private _addOwnedMessage = (type: OwnableMessageType) => (ctx: any) => {
-    let from;
-    if(ctx.from && ctx.from()) {
-      from = ctx.from().getText();
-    } else {
-      from = ctx?.parentCtx?.Origin();
+    if (this.isBlind) {
+      return;
     }
+    let from = ctx.From();
     const owner = ctx?.Owner();
     const signature = ctx?.SignatureText();
-    // if there is an entry for owner in ownedMessagesList, add ownableMessage to ownableMessages, otherwise create new entry
-    const ownerAndTheirMessages = this.ownedMessagesList.find(p => p.owner === owner);
-    if (ownerAndTheirMessages) {
-      ownerAndTheirMessages.ownableMessages.push({from: from, signature: signature, type});
-    } else {
-      this.ownedMessagesList.push({owner: owner, ownableMessages: [{from: from, signature: signature, type}]});
-    }
-
+    this.ownableMessages.push({from: from, signature: signature, type, to: owner});
   }
 
-  result(): Array<IOwnedMessages> {
-    return this.ownedMessagesList;
+  enterParameters() {
+    this.isBlind = false;
+  }
+
+  exitParameters() {
+    this.isBlind = false;
+  }
+
+  result() {
+    return this.ownableMessages;
   }
 }
 
 // Returns all messages grouped by owner participant
-export function MessagesGroupedByParticipant(ctx: any) {
+export function AllMessages(ctx: any) {
   const walker = antlr4.tree.ParseTreeWalker.DEFAULT
 
   const listener = new MessageContextListener();

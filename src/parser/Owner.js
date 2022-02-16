@@ -19,10 +19,12 @@ CreationContext.prototype.Owner = function () {
 }
 
 MessageContext.prototype.Owner = function () {
-  if (this.messageBody()?.to()) {
-    return this.messageBody().to().getTextWithoutQuotes();
+  // Note: It may still be a self message if it has a `to` and `to === from`.
+  const isImpliedSelf = !this.messageBody()?.to();
+  if (isImpliedSelf) {
+    return this.parentCtx.Origin();
   }
-  return this.parentCtx.Origin();
+  return this.messageBody().to().getTextWithoutQuotes();
 }
 
 AsyncMessageContext.prototype.Owner = function () {

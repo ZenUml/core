@@ -4,5 +4,5 @@ export function OrderedParticipants(rootContext: any) {
   const listener = new ParticipantListener();
   const walker = antlr4.tree.ParseTreeWalker.DEFAULT
   walker.walk(listener, rootContext)
-  return listener.flatten();
+  return listener.result();
 }
