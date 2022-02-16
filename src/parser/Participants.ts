@@ -103,12 +103,14 @@ export class Participants {
   }
 
   // Returns an array of participants that are deduced from messages
-  // It does not included the Starter.
+  // It does not include the Starter.
   ImplicitArray() {
     return this.Array()
       .filter(p => !p.explicit && !p.isStarter)
   }
 
+  // Items in entries are in the order of entry insertion:
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
   private Array() {
     return Array.from(this.participants.entries())
       .map(entry => entry[1]);

@@ -1,14 +1,14 @@
 let seqDsl = require('../../../src/parser/index');
+const {Fixture} = require("./fixture/Fixture");
 test('seqDsl should parse the to and method', () => {
-    let rootContext = seqDsl.RootContext('"b:B".method()');
-  const messageBody = rootContext.block().stat()[0].message().messageBody()
+  const messageBody = Fixture.firstStatement('"b:B".method()').message().messageBody()
   let func = messageBody.func();
     expect(messageBody.to().getText()).toBe('"b:B"');
     expect(func.signature()[0].getText()).toBe('method()')
 })
 
 test('seqDsl should get all participants', () => {
-    let rootContext = seqDsl.RootContext('A 100\r\nC.method()\r\nnew B()');
+    let rootContext = seqDsl.RootContext('A\r\n @Starter(C)\r\nC.method()\r\nnew B()');
 
     let participants = seqDsl.Participants(rootContext);
     expect(participants.Names().length).toBe(3)

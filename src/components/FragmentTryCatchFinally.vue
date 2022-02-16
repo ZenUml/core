@@ -8,7 +8,7 @@
       </div>
 <!-- fragment-offset set as offsetX - 1 for fragment border     -->
       <block v-if="blockInTryBlock"
-             :fragment-offset="offsetX - 1"
+             :style="{paddingLeft: `${offsetX}px`}"
              :context="blockInTryBlock"
              :selfCallIndent="selfCallIndent"
       ></block>
@@ -18,7 +18,7 @@
         <div class="header" :key="index+1000">
           <label class="keyword catch">catch</label><label class="exception">{{exception(catchBlock) }}</label>
         </div>
-        <block :fragment-offset="offsetX - 1"
+        <block :style="{paddingLeft: `${offsetX}px`}"
                :context="blockInCatchBlock(catchBlock)"
                :selfCallIndent="selfCallIndent"
                :key="index+2000"></block>
@@ -27,7 +27,7 @@
     <template v-if="finallyBlock">
       <div class="segment">
         <div class="header finally"><div><label class="keyword finally">finally</label></div></div>
-        <block :fragment-offset="offsetX - 1"
+        <block :style="{paddingLeft: `${offsetX}px`}"
                :context="finallyBlock"
                :selfCallIndent="selfCallIndent"
         ></block>
@@ -41,7 +41,7 @@
 
   export default {
     name: 'fragment-tcf',
-    props: ['context', 'comment', 'selfCallIndent', 'fragmentOffset'],
+    props: ['context', 'comment', 'selfCallIndent'],
     mixins: [fragment],
     computed: {
       from: function() {

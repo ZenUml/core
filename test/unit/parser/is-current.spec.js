@@ -1,6 +1,4 @@
-let seqDsl = require('../../../src/parser/index');
-
-const sequenceParser = require('../../../src/generated-parser/sequenceParser')
+const {Fixture} = require("./fixture/Fixture");
 
 describe('Creation', () => {
   test.each([
@@ -12,8 +10,7 @@ describe('Creation', () => {
     ]
   )('is current', (cursor, expectedIsCurrent) => {
     const code = 'a=new A() {B.m}';
-    const rootContext = seqDsl.RootContext(code);
-    const stat = rootContext.block().stat()[0];
+    const stat = Fixture.firstStatement(code);
     const creation = stat.creation();
     expect(creation.isCurrent(cursor)).toBe(expectedIsCurrent);
   })

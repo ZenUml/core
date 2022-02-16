@@ -8,6 +8,14 @@ describe('Participants', ()=>{
     expect(participants.Starter()).toBeUndefined();
   });
 
+  test('Test order of participants', () => {
+    const participants = new Participants();
+    participants.Add('B');
+    participants.Add('A');
+    expect(participants.ImplicitArray()).toEqual([{name: 'B', isStarter: undefined, stereotype: undefined, width: undefined}, {name: 'A', isStarter: undefined, stereotype: undefined, width: undefined}]);
+    expect(participants.Starter()).toBeUndefined();
+  });
+
   test('Get Starter', () => {
     const participants = new Participants();
     participants.Add('A', true);

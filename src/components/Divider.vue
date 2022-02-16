@@ -1,5 +1,5 @@
 <template>
-  <div class="divider" :style="{width: width + 'px', transform: 'translateX(' + ((-1) * centerOfFrom + fragmentOffset + 10) + 'px)'}">
+  <div class="divider" :style="{width: width + 'px', transform: 'translateX(' + ((-1) * centerOfFrom + 10) + 'px)'}">
     <div class="left"></div>
     <div class="name">{{name}}</div>
     <div class="right"></div>
@@ -11,14 +11,14 @@
 
   export default {
     name: 'divider',
-    props: ['context', 'fragmentOffset'],
+    props: ['context'],
     computed: {
-      ...mapGetters(['participants', 'centerOf', 'rightOf']),
+      ...mapGetters(['participants', 'centerOf']),
       /* Dividers have the same width as the lifeline layer */
       width() {
         let rearParticipant = this.participants.Names().pop()
         // 20px for the right margin of the participant
-        return this.rightOf(rearParticipant)
+        return this.centerOf(rearParticipant) + 10
       },
       from: function() {
         return this.context.Origin()

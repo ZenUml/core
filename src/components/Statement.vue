@@ -1,14 +1,13 @@
 <template>
   <component v-bind:is="subStatement"
              :context="context"
-             :fragment-offset="fragmentOffset || 0"
              :comment="comment"
              :selfCallIndent="selfCallIndent"></component>
 </template>
 
 <script>
-  import Creation from './Creation.vue'
-  import Interaction from './Interaction.vue'
+  import Creation from './creation/Creation.vue'
+  import Interaction from './interaction/Interaction.vue'
   import InteractionAsync from './Interaction-async.vue'
   import FragmentAlt from './FragmentAlt.vue'
   import FragmentPar from './FragmentPar.vue'
@@ -20,7 +19,7 @@
 
   export default {
     name: 'statement',
-    props: ['context', 'selfCallIndent', 'fragmentOffset'],
+    props: ['context', 'selfCallIndent'],
     computed: {
       comment: function () {
         return this.context.getComment() ? this.context.getComment() : ''

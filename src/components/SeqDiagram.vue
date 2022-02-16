@@ -1,8 +1,7 @@
 <template>
-  <!-- py-8 to give space for icons -->
-  <div class="sequence-diagram py-8 mx-8" ref="diagram" >
+  <div class="sequence-diagram overflow-visible" :style="{width: `${width}px`}" ref="diagram" >
     <life-line-layer :context="rootContext.head()"/>
-    <message-layer :context="rootContext.block()" :key="generation"/>
+    <message-layer :context="rootContext.block()"/>
   </div>
 </template>
 
@@ -19,7 +18,10 @@
       MessageLayer
     },
     computed: {
-      ...mapGetters(['rootContext', 'generation'])
+      ...mapGetters(['rootContext', 'coordinates']),
+      width() {
+        return this.coordinates.getWidth() + 100;
+      },
     },
     methods: {
       toPng() {
@@ -46,6 +48,10 @@
     box-sizing: border-box; /* Reset box-sizing for the diagram */
     line-height: normal;    /* Reset line-height for the diagram */
     text-align: left;
+  }
+
+  .fragment {
+    padding-bottom: 10px;
   }
 
   /* .participant is shared by MessageLayer and LifeLineLayer */

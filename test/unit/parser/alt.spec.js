@@ -1,8 +1,9 @@
+import {Fixture} from "./fixture/Fixture";
+
 let seqDsl = require('../../../src/parser/index');
 
 test('Empty `if`', () => {
-    let rootContext = seqDsl.RootContext('if(x) {}');
-    let alt = rootContext.block().stat()[0].alt();
+    let alt = Fixture.firstStatement('if(x) {}').alt();
     expectText(alt).toBe('if(x){}')
     let ifBlock = alt.ifBlock();
     expectText(ifBlock).toBe('if(x){}')
@@ -27,15 +28,13 @@ test('`if` with comments and a block', () => {
 
 describe('if - incomplete', () => {
   test('', () => {
-    let rootContext = seqDsl.RootContext('if(x)');
-    expect(rootContext.block().stat()[0].alt().ifBlock().parExpr().condition().getText())
+    expect(Fixture.firstStatement('if(x)').alt().ifBlock().parExpr().condition().getText())
       .toBe('x')
   })
 })
 
 function braceBlockOfIf(code) {
-    let rootContext = seqDsl.RootContext(code);
-    return rootContext.block().stat()[0].alt().ifBlock().braceBlock();
+    return Fixture.firstStatement(code).alt().ifBlock().braceBlock();
 }
 
 function expectText(context) {

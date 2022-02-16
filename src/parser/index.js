@@ -9,6 +9,9 @@ require('./Owner');
 require('./ProgContext');
 require('./RetContext');
 require('./StatContext');
+require('./SignatureText')
+require('./From')
+require('./key/Key')
 
 const errors = [];
 class SeqErrorListener extends antlr4.error.ErrorListener {

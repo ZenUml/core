@@ -1,44 +1,40 @@
+import {Fixture} from "./fixture/Fixture";
+
 let seqDsl = require('../../../src/parser/index');
 
 test('Keyword "return" - in method block', () => {
-  let rootContext = seqDsl.RootContext('A.method() { return x1 }');
-  const ret = rootContext.block().stat()[0].message().braceBlock().block().stat()[0].ret()
+  const ret = Fixture.firstStatement('A.method() { return x1 }').message().braceBlock().block().stat()[0].ret()
   let returnedValue = ret.expr();
   expect(returnedValue.getText()).toBe('x1')
   expect(ret.ReturnTo()).toBe('_STARTER_')
 })
 
 test('defect - not returning to provided from', () => {
-  let rootContext = seqDsl.RootContext('@Starter(M) A->B.method() { return x1 }');
-  const ret = rootContext.block().stat()[0].message().braceBlock().block().stat()[0].ret()
+  const ret = Fixture.firstStatement('@Starter(M) A->B.method() { return x1 }').message().braceBlock().block().stat()[0].ret()
   let returnedValue = ret.expr();
   expect(returnedValue.getText()).toBe('x1')
   expect(ret.ReturnTo()).toBe('A')
 })
 
 test('Keyword "return" - in alt block', () => {
-  let rootContext = seqDsl.RootContext('if(condition) { return y1 }');
-  let returnedValue = rootContext.block().stat()[0].alt().ifBlock().braceBlock().block().stat()[0].ret().expr();
+  let returnedValue = Fixture.firstStatement('if(condition) { return y1 }').alt().ifBlock().braceBlock().block().stat()[0].ret().expr();
   expect(returnedValue.getText()).toBe('y1')
 })
 
 test('Keyword "return" - in alt block - if + else if + else', () => {
-  let rootContext = seqDsl.RootContext('if(condition) { return y1 } else if (condition1) { return y2 } else { return y3 }');
   expect(seqDsl.RootContext).not.toBeNull()
-  let returnedValueIf = rootContext.block().stat()[0]
+  let returnedValueIf = Fixture.firstStatement('if(condition) { return y1 } else if (condition1) { return y2 } else { return y3 }')
     .alt().ifBlock().braceBlock().block().stat()[0].ret().expr();
   expect(returnedValueIf.getText()).toBe('y1')
-  let returnedValueElseIf = rootContext.block().stat()[0]
+  let returnedValueElseIf = Fixture.firstStatement('if(condition) { return y1 } else if (condition1) { return y2 } else { return y3 }')
     .alt().elseIfBlock()[0].braceBlock().block().stat()[0].ret().expr();
   expect(returnedValueElseIf.getText()).toBe('y2')
-  let returnedValueElse = rootContext.block().stat()[0]
+  let returnedValueElse = Fixture.firstStatement('if(condition) { return y1 } else if (condition1) { return y2 } else { return y3 }')
     .alt().elseBlock().braceBlock().block().stat()[0].ret().expr();
   expect(returnedValueElse.getText()).toBe('y3')
 })
 
 test('Keyword "return" - in loop block', () => {
-  let rootContext = seqDsl.RootContext('while(condition) { return z1 }');
-  expect(seqDsl.RootContext).not.toBeNull()
-  let returnedValue = rootContext.block().stat()[0].loop().braceBlock().block().stat()[0].ret().expr();
+  let returnedValue = Fixture.firstStatement('while(condition) { return z1 }').loop().braceBlock().block().stat()[0].ret().expr();
   expect(returnedValue.getText()).toBe('z1')
 })

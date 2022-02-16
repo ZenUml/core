@@ -1,5 +1,6 @@
 <template>
-  <div class="comments" v-html="markedComment"></div>
+  <!-- TODO: 12px to align comment with async message, which as padding-left 10px and left 2px -->
+  <div class="comments text-left" style="padding-left: 12px" v-html="markedComment"></div>
 </template>
 
 <script type="text/babel">

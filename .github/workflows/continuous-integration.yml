@@ -28,7 +28,3 @@ jobs:
           architecture: x64
 
       - run: yarn test:unit
-      - run: echo installing gauge
-      - run: sudo apt-get install -y curl zip
-      - run: curl -SsL https://downloads.gauge.org/stable | sh
-      - run: yarn test:specs

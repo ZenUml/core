@@ -1,13 +1,10 @@
 <template>
   <div class="interaction async"
        v-on:click.stop="onClick"
-       v-on:mouseover.stop="mouseOver"
-       v-on:mouseout.stop="mouseOut"
-       :signature="signature"
-       :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent, 'hover': hover }"
+       :data-signature="signature"
+       :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent }"
        :style="{width: interactionWidth + 'px', transform: 'translateX(' + translateX + 'px)'}">
     <comment v-if="comment" :comment="comment"/>
-<!--    <message :content="signature" :rtl="rightToLeft" type="async"/>-->
     <component v-bind:is="invocation"
                :content="signature"
                :rtl="rightToLeft"
@@ -29,12 +26,7 @@
 
   export default {
     name: 'interaction-async',
-    data() {
-      return {
-        hover: false
-      }
-    },
-    props: ['context', 'comment', 'selfCallIndent', 'fragmentOffset'],
+    props: ['context', 'comment', 'selfCallIndent'],
     computed: {
       ...mapGetters(['distance', 'cursor', 'onElementClick']),
       from: function() {
@@ -49,13 +41,12 @@
           const averageWidthOfChar = 10
           return averageWidthOfChar * (this.signature?.length || 0) + leftOfMessage
         }
-        return Math.abs(this.distance(this.target, this.source)) + 1
+        return Math.abs(this.distance(this.target, this.source))
       },
       // Both 'left' and 'translateX' can be used to move the element horizontally.
       // Change it to use translate according to https://stackoverflow.com/a/53892597/529187.
       translateX: function () {
-        const leftOffset = this.rightToLeft ? this.distance(this.target, this.from) : this.distance(this.source, this.from)
-        return leftOffset - (this.selfCallIndent || 0) + this.fragmentOffset
+        return this.rightToLeft ? this.distance(this.target, this.from) : this.distance(this.source, this.from)
       },
       rightToLeft: function () {
         return this.distance(this.target, this.source) < 0
@@ -86,12 +77,6 @@
       onClick() {
         this.onElementClick(CodeRange.from(this.context))
       },
-      mouseOver() {
-        this.hover = true
-      },
-      mouseOut() {
-        this.hover = false
-      }
     },
     components: {
       Comment,

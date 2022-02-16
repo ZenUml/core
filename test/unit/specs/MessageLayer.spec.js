@@ -6,7 +6,7 @@ const localVue = createLocalVue()
 localVue.use(Vuex)
 const storeConfig = VueSequence.Store()
 storeConfig.state.code = 'a'
-storeConfig.getters.rightOf = function () {
+storeConfig.getters.centerOf = function () {
   return (p) => p === 'a' ? 100 : NaN
 }
 
@@ -18,8 +18,7 @@ describe('MessageLayer', () => {
     expect(messageLayerWrapper.find('.message-layer').exists()).toBeTruthy()
     // We do not need to wait until next tick in **test**.
     // await messageLayerWrapper.vm.$nextTick()
-    expect(messageLayerWrapper.find('.message-layer').attributes().style)
-      .toBe('width: 110px;')
+    expect(messageLayerWrapper.find('.pr-24').exists()).toBeTruthy()
   })
   it('gets participant names', async () => {
     expect(messageLayerWrapper.vm.participantNames()[0]).toBe('a')

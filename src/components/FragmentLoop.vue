@@ -5,7 +5,7 @@
       <div class="name"><label>Loop</label></div>
       <label class="condition">[{{condition}}]</label>
     </div>
-    <block :fragment-offset="offsetX - 1"
+    <block :style="{paddingLeft: `${offsetX}px`}"
            :context="blockInLoop"
            :selfCallIndent="selfCallIndent"
     ></block>
@@ -17,7 +17,7 @@
 
   export default {
     name: 'fragment-loop',
-    props: ['context', 'comment', 'selfCallIndent', 'fragmentOffset'],
+    props: ['context', 'comment', 'selfCallIndent'],
     mixins: [fragment],
     computed: {
       from: function() {

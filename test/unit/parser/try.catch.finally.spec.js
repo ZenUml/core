@@ -1,8 +1,9 @@
+import {Fixture} from "./fixture/Fixture";
+
 let seqDsl = require('../../../src/parser/index');
 
 test('Empty `try`', () => {
-    let rootContext = seqDsl.RootContext('try {}');
-    let tcf = rootContext.block().stat()[0].tcf();
+    let tcf = Fixture.firstStatement('try {}').tcf();
     expectText(tcf).toBe('try{}')
     let tryBlock = tcf.tryBlock();
     expectText(tryBlock).toBe('try{}')
@@ -26,15 +27,13 @@ test('`if` with comments and a block', () => {
 
 describe('if - incomplete', () => {
   test('', () => {
-    let rootContext = seqDsl.RootContext('try');
-    expect(rootContext.block().stat()[0].tcf().getText())
+    expect(Fixture.firstStatement('try').tcf().getText())
       .toBe('try')
   })
 })
 
 function braceBlockOfTry(code) {
-    let rootContext = seqDsl.RootContext(code);
-    return rootContext.block().stat()[0].tcf().tryBlock().braceBlock();
+    return Fixture.firstStatement(code).tcf().tryBlock().braceBlock();
 }
 
 function expectText(context) {

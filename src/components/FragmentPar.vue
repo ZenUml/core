@@ -4,7 +4,7 @@
     <div class="header">
       <div class="name"><label>Par</label></div>
     </div>
-    <block :fragmentOffset="offsetX - 1"
+    <block :style="{paddingLeft: `${offsetX}px`}"
            :context="par.braceBlock().block()"
            :selfCallIndent="selfCallIndent"
     ></block>
@@ -16,7 +16,7 @@
 
   export default {
     name: 'fragment-par',
-    props: ['context', 'comment', 'selfCallIndent', 'fragmentOffset'],
+    props: ['context', 'comment', 'selfCallIndent'],
     mixins: [fragment],
     computed: {
       from: function() {
