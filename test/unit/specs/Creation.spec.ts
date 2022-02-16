@@ -31,7 +31,6 @@ describe('Creation', () => {
      */
     let creationWrapper = mountCreationWithCode('a = new A', Fixture.firstStatement);
 
-    expect(creationWrapper.vm.hover).toBe(false)
     expect(creationWrapper.vm.from).toBe('_STARTER_')
     expect(creationWrapper.vm.signature).toBe('«create»')
     expect(creationWrapper.vm.assignee).toBe('a')
@@ -42,7 +41,6 @@ describe('Creation', () => {
 
   it('right to left', async () => {
     let creationWrapper = mountCreationWithCode('A.m{B.m{new A}}', Fixture.firstGrandChild);
-    expect(creationWrapper.vm.hover).toBe(false)
     expect(creationWrapper.vm.rightToLeft).toBeTruthy()
     expect(creationWrapper.vm.interactionWidth).toBe(120)
   })
@@ -52,7 +50,6 @@ describe('Creation', () => {
       return Fixture.firstGrandChild(code).alt().ifBlock().braceBlock().block().stat()[0]
     }
     let creationWrapper = mountCreationWithCode('A.m{B.m{if(x){new A}}}', contextLocator);
-    expect(creationWrapper.vm.hover).toBe(false)
     expect(creationWrapper.vm.rightToLeft).toBeTruthy()
     expect(creationWrapper.vm.interactionWidth).toBe(120)
   })
