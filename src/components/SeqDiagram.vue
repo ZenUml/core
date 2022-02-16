@@ -1,6 +1,6 @@
 <template>
   <!-- py-8 to give space for icons; overflow-hidden to hide bottom of lifelines in group -->
-  <div class="sequence-diagram overflow-hidden py-8" :style="{width: `${width}px`}" ref="diagram" >
+  <div class="sequence-diagram overflow-visible" :style="{width: `${width}px`}" ref="diagram" >
     <life-line-layer :context="rootContext.head()"/>
     <message-layer :context="rootContext.block()"/>
   </div>
@@ -19,11 +19,9 @@
       MessageLayer
     },
     computed: {
-      ...mapGetters(['rootContext', 'centerOf', 'participants']),
+      ...mapGetters(['rootContext', 'coordinates']),
       width() {
-        const first = this.participants.Array().slice(0)[0].name;
-        const last = this.participants.Array().slice(0).pop().name;
-        return this.centerOf(last) - this.centerOf(first) + 200
+        return this.coordinates.getWidth() + 100;
       },
     },
     methods: {
@@ -51,6 +49,10 @@
     box-sizing: border-box; /* Reset box-sizing for the diagram */
     line-height: normal;    /* Reset line-height for the diagram */
     text-align: left;
+  }
+
+  .fragment {
+    padding-bottom: 10px;
   }
 
   /* .participant is shared by MessageLayer and LifeLineLayer */

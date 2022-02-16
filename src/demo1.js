@@ -9,6 +9,7 @@ export default `
 @Lambda <<A>> A
 // comments at the beginning should be ignored
 group "B C" {@EC2 B @ECS C}
+"C 2" "B 1"
 // This is comment
 //
 // |col1|col2|

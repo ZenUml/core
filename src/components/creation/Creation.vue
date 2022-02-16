@@ -1,12 +1,9 @@
-<!--TODO: this can be implemented without globally calculated width!-->
 <template>
   <div class="interaction creation sync text-center"
        v-on:click.stop="onClick"
-       v-on:mouseover.stop="mouseOver"
-       v-on:mouseout.stop="mouseOut"
        :data-signature="signature"
-       :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent, 'hover': hover }"
-       :style="style">
+       :class="{ 'right-to-left':rightToLeft, '-translate-x-full': rightToLeft, 'highlight': isCurrent }"
+       :style="{width: interactionWidth + 'px'}">
     <comment v-if="comment" :comment="comment" />
     <!-- h-10 to push occurrence down -->
     <div class="message-container h-10">
@@ -19,7 +16,6 @@
         </div>
       </div>
       <message ref="messageEl"
-               :data-key="key"
                :data-to="to"
                data-type="creation"
                class="invocation" :content="signature" :rtl="rightToLeft" type="creation"/>
@@ -46,9 +42,7 @@
   declare module 'vue/types/vue' {
 
     interface Vue {
-      hover: boolean;
       interactionWidth: number;
-      style: Style;
       creation: {
         SignatureText: () => string;
         creationBody: () => {assignment: () => {
@@ -64,28 +58,9 @@
 
   export default Vue.extend({
     name: 'creation',
-    data() {
-      return {
-        hover: false
-      }
-    },
     props: ['context', 'comment', 'selfCallIndent'],
     computed: {
       ...mapGetters(['cursor', 'onElementClick', 'distance']),
-      key(): string {
-        return this.context.Key();
-      },
-      style(): Style {
-        const ret = {
-          width: this.interactionWidth + 'px'
-        } as Style;
-        if (!this.rightToLeft) {
-          ret.transform = 'translateX(' + 0 + 'px)'
-        } else {
-          ret.transform = 'translateX(calc(-100% + ' + 0 + 'px))'
-        }
-        return ret
-      },
       from(): string {
         return this.context.Origin()
       },
@@ -132,17 +107,11 @@
         const halfWidthOfPlaceholder = (this.$refs['participantPlaceHolder'] as HTMLElement).offsetWidth / 2;
         const placeHolderStyle = (this.$refs['participantPlaceHolder'] as HTMLElement).style;
         placeHolderStyle.marginRight = (-1) * (halfWidthOfPlaceholder + 6) + 'px';
-        ((this.$refs['messageEl'] as Vue).$el as HTMLElement).style.width = `calc(100% - ${halfWidthOfPlaceholder - 6}px`;
+        ((this.$refs['messageEl'] as Vue).$el as HTMLElement).style.width = `calc(100% - ${halfWidthOfPlaceholder - 4}px`;
       },
       onClick() {
         this.onElementClick(CodeRange.from(this.context))
       },
-      mouseOver() {
-        this.hover = true
-      },
-      mouseOut() {
-        this.hover = false
-      }
     },
     components: {
       Comment,
@@ -172,9 +141,4 @@
      */
     margin-left: auto;
   }
-
-  .right-to-left > .occurrence {
-    left: -8px;
-  }
-
 </style>

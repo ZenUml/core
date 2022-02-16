@@ -7,7 +7,7 @@
 
 <script>
   import Creation from './creation/Creation.vue'
-  import Interaction from './Interaction.vue'
+  import Interaction from './interaction/Interaction.vue'
   import InteractionAsync from './Interaction-async.vue'
   import FragmentAlt from './FragmentAlt.vue'
   import FragmentPar from './FragmentPar.vue'

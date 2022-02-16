@@ -1,6 +1,8 @@
 <template>
-  <div class="message" :class="{ 'right-to-left':rtl }" :style="{'border-bottom-style': borderStyle}">
-    <div class="name inline-block px-5">{{content}}</div>
+  <div class="message hover:bg-yellow-300"
+       :class="{ 'right-to-left':rtl, 'text-left': isAsync, 'text-center': !isAsync }"
+       :style="{'border-bottom-style': borderStyle}">
+    <div class="name inline-block" style="padding-left: 10px">{{content}}</div>
     <point :fill="fill" :rtl="rtl"/>
   </div>
 </template>
@@ -16,6 +18,9 @@
     name: 'message',
     props: ['content', 'rtl', 'type'],
     computed: {
+      isAsync: function () {
+        return this.type === 'async'
+      },
       borderStyle () {
         switch (this.type) {
           case 'sync':
@@ -60,6 +65,8 @@
     min-height: 1em;
   }
 
+  .creation > .message-container > .message,
+  .async > .message:not(.right-to-left),
   .sync > .message {
     /* (OccurrenceWidth-1)/2 - InteractionBorderWidth*/
     left: 2px;

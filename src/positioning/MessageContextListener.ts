@@ -4,6 +4,7 @@ import {antlr4} from "@/positioning/ParticipantListener";
 const sequenceParserListener = require('@/generated-parser/sequenceParserListener');
 
 export class MessageContextListener extends sequenceParserListener.sequenceParserListener {
+  private isBlind = false;
   private ownableMessages: Array<OwnableMessage> = [];
 
   enterMessage = (ctx: any) => this._addOwnedMessage(OwnableMessageType.SyncMessage)(ctx);
@@ -11,10 +12,21 @@ export class MessageContextListener extends sequenceParserListener.sequenceParse
   enterCreation = (ctx: any) => this._addOwnedMessage(OwnableMessageType.CreationMessage)(ctx);
 
   private _addOwnedMessage = (type: OwnableMessageType) => (ctx: any) => {
+    if (this.isBlind) {
+      return;
+    }
     let from = ctx.From();
     const owner = ctx?.Owner();
     const signature = ctx?.SignatureText();
     this.ownableMessages.push({from: from, signature: signature, type, to: owner});
+  }
+
+  enterParameters() {
+    this.isBlind = false;
+  }
+
+  exitParameters() {
+    this.isBlind = false;
   }
 
   result() {

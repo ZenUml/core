@@ -1,7 +1,7 @@
 import {createLocalVue, shallowMount} from '@vue/test-utils'
 import Vuex from 'vuex'
 import Interaction from './Interaction'
-import { VueSequence } from '../index'
+import { VueSequence } from '../../index'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
@@ -76,6 +76,7 @@ describe('Translate X', () => {
       store, localVue
     });
     expect(wrapper.vm.translateX).toBe(-15)
+    expect(wrapper.find('.right-to-left').exists()).toBeFalsy()
   });
 
   // A      B      C
@@ -96,5 +97,6 @@ describe('Translate X', () => {
       store, localVue
     });
     expect(wrapper.vm.translateX).toBe(-25)
+    expect(wrapper.find('.right-to-left').exists()).toBeTruthy()
   });
 })

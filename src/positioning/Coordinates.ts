@@ -2,7 +2,7 @@ import {ARROW_HEAD_WIDTH, MARGIN, MIN_PARTICIPANT_WIDTH, MINI_GAP} from "@/posit
 import {TextType, WidthFunc} from "@/positioning/Coordinate";
 import {OrderedParticipants} from "@/positioning/OrderedParticipants";
 import {IParticipantModel} from "@/positioning/ParticipantListener";
-import {final_pos} from "@/positioning/MatrixBasedAlgorithm";
+import {find_optimal} from "@/positioning/david/DavidEisenstat";
 import {AllMessages} from "@/positioning/MessageContextListener";
 import {OwnableMessage, OwnableMessageType} from "@/positioning/OwnableMessage";
 
@@ -25,7 +25,7 @@ export class Coordinates {
     if(pIndex === -1) {
       throw Error(`Participant ${participantName} not found`);
     }
-    return this.getParticipantGap(this.participantModels[0]) + final_pos(pIndex, this.m) + ARROW_HEAD_WIDTH;
+    return this.getParticipantGap(this.participantModels[0]) + find_optimal(this.m)[pIndex] + ARROW_HEAD_WIDTH;
   }
 
   walkThrough() {
@@ -37,10 +37,18 @@ export class Coordinates {
     ownableMessages.forEach((message) => {
       const indexFrom = participantModels.findIndex(p => p.name === message.from);
       const indexTo = participantModels.findIndex(p => p.name === message.to);
+      if(indexFrom === -1 || indexTo === -1) {
+        console.warn(`Participant ${message.from} or ${message.to} not found`);
+        return;
+      }
       let leftIndex = Math.min(indexFrom, indexTo);
       let rightIndex = Math.max(indexFrom, indexTo);
-      let messageWidth = this.getMessageWidth(message);
-      this.m[leftIndex][rightIndex] = Math.max(messageWidth + ARROW_HEAD_WIDTH, this.m[leftIndex][rightIndex]);
+      try {
+        let messageWidth = this.getMessageWidth(message);
+        this.m[leftIndex][rightIndex] = Math.max(messageWidth + ARROW_HEAD_WIDTH, this.m[leftIndex][rightIndex]);
+      } catch (e) {
+        console.warn(`Could not set message gap between ${message.from} and ${message.to}`);
+      }
     })
   }
 
@@ -82,5 +90,10 @@ export class Coordinates {
 
   private static _getParticipantWidth(widthProvider: WidthFunc, participant: string | undefined) {
     return Math.max(widthProvider(participant || '', TextType.ParticipantName), MIN_PARTICIPANT_WIDTH);
+  }
+
+  getWidth() {
+    const lastParticipant = this.participantModels[this.participantModels.length - 1].name;
+    return this.getPosition(lastParticipant) + Coordinates.halfWithMargin(this.widthProvider, lastParticipant);
   }
 }
