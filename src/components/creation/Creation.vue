@@ -1,10 +1,8 @@
 <template>
   <div class="interaction creation sync text-center"
        v-on:click.stop="onClick"
-       v-on:mouseover.stop="mouseOver"
-       v-on:mouseout.stop="mouseOut"
        :data-signature="signature"
-       :class="{ 'right-to-left':rightToLeft, '-translate-x-full': rightToLeft, 'highlight': isCurrent, 'hover': hover }"
+       :class="{ 'right-to-left':rightToLeft, '-translate-x-full': rightToLeft, 'highlight': isCurrent }"
        :style="{width: interactionWidth + 'px'}">
     <comment v-if="comment" :comment="comment" />
     <!-- h-10 to push occurrence down -->
@@ -44,7 +42,6 @@
   declare module 'vue/types/vue' {
 
     interface Vue {
-      hover: boolean;
       interactionWidth: number;
       creation: {
         SignatureText: () => string;
@@ -61,11 +58,6 @@
 
   export default Vue.extend({
     name: 'creation',
-    data() {
-      return {
-        hover: false
-      }
-    },
     props: ['context', 'comment', 'selfCallIndent'],
     computed: {
       ...mapGetters(['cursor', 'onElementClick', 'distance']),
@@ -120,12 +112,6 @@
       onClick() {
         this.onElementClick(CodeRange.from(this.context))
       },
-      mouseOver() {
-        this.hover = true
-      },
-      mouseOut() {
-        this.hover = false
-      }
     },
     components: {
       Comment,

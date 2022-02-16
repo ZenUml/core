@@ -1,12 +1,10 @@
 <template>
   <div class="interaction sync inline-block"
        v-on:click.stop="onClick"
-       v-on:mouseover.stop="mouseOver"
-       v-on:mouseout.stop="mouseOut"
        :data-to="to"
        data-type="interaction"
        :data-signature="signature"
-       :class="{'highlight': isCurrent, 'self': isSelf, 'hover': hover }"
+       :class="{'highlight': isCurrent, 'self': isSelf}"
        :style="{width: interactionWidth + 'px', transform: 'translateX(' + translateX + 'px)'}">
     <div v-if="(showStarter && isRootBlock) || outOfBand"
          class="occurrence source"
@@ -32,12 +30,10 @@
   import SelfInvocation from '../SelfInvocation'
   import {CodeRange} from '@/parser/CodeRange'
   import {ProgContext} from '@/parser'
-  import Hoverable  from '@/components/mixin/hoverable/Hoverable'
 
   export default {
     name: 'interaction',
     props: ['context', 'comment', 'selfCallIndent'],
-    mixins: [Hoverable],
     computed: {
       // add tracker to the mapGetters
       ...mapGetters(['participants', 'distance2', 'cursor', 'onElementClick']),

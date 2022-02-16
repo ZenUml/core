@@ -1,5 +1,5 @@
 <template>
-  <div class="message"
+  <div class="message hover:bg-yellow-300"
        :class="{ 'right-to-left':rtl, 'text-left': isAsync, 'text-center': !isAsync }"
        :style="{'border-bottom-style': borderStyle}">
     <div class="name inline-block" style="padding-left: 10px">{{content}}</div>

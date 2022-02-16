@@ -56,12 +56,6 @@ import {mapGetters, mapMutations} from 'vuex'
     border: 5px dashed transparent;
   }
 
-  .interaction.highlight,
-  .interaction.hover {
-    border-radius: 4px;
-    background-color: rgba(202, 235, 254, .5);
-  }
-
   .interaction:hover {
     cursor: pointer;
   }

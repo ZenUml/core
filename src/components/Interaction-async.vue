@@ -1,13 +1,10 @@
 <template>
   <div class="interaction async"
        v-on:click.stop="onClick"
-       v-on:mouseover.stop="mouseOver"
-       v-on:mouseout.stop="mouseOut"
-       :signature="signature"
-       :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent, 'hover': hover }"
+       :data-signature="signature"
+       :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent }"
        :style="{width: interactionWidth + 'px', transform: 'translateX(' + translateX + 'px)'}">
     <comment v-if="comment" :comment="comment"/>
-<!--    <message :content="signature" :rtl="rightToLeft" type="async"/>-->
     <component v-bind:is="invocation"
                :content="signature"
                :rtl="rightToLeft"
@@ -22,7 +19,7 @@
   import Message from './Message'
   import {mapGetters} from "vuex"
   import {CodeRange} from '@/parser/CodeRange'
-  import Hoverable from '@/components/mixin/hoverable/Hoverable'
+
   function isNullOrUndefined(value) {
     return value === null || value === undefined
   }
@@ -30,7 +27,6 @@
   export default {
     name: 'interaction-async',
     props: ['context', 'comment', 'selfCallIndent'],
-    mixins: [Hoverable],
     computed: {
       ...mapGetters(['distance', 'cursor', 'onElementClick']),
       from: function() {
