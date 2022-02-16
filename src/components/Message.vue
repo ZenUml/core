@@ -2,7 +2,7 @@
   <div class="message"
        :class="{ 'right-to-left':rtl, 'text-left': isAsync, 'text-center': !isAsync }"
        :style="{'border-bottom-style': borderStyle}">
-    <div class="name inline-block">{{content}}</div>
+    <div class="name inline-block" style="padding-left: 10px">{{content}}</div>
     <point :fill="fill" :rtl="rtl"/>
   </div>
 </template>
@@ -66,7 +66,7 @@
   }
 
   .creation > .message-container > .message,
-  .async > .message,
+  .async > .message:not(.right-to-left),
   .sync > .message {
     /* (OccurrenceWidth-1)/2 - InteractionBorderWidth*/
     left: 2px;
