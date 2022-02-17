@@ -63,7 +63,9 @@ describe('Participants.Order', () => {
 
     expect(getFlattenedParticipants('A B->A.m C->D.m')).toEqual([
       {name: 'B', left: ''},
-      {name: 'A', left: 'B'}
+      {name: 'A', left: 'B'},
+      {name: 'C', left: 'A'},
+      {name: 'D', left: 'C'},
     ]);
   })
 
