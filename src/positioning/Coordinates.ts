@@ -94,6 +94,7 @@ export class Coordinates {
 
   getWidth() {
     const lastParticipant = this.participantModels[this.participantModels.length - 1].name;
-    return this.getPosition(lastParticipant) + Coordinates.halfWithMargin(this.widthProvider, lastParticipant);
+    const calculatedWidth = this.getPosition(lastParticipant) + Coordinates.halfWithMargin(this.widthProvider, lastParticipant);
+    return Math.max(calculatedWidth, 200);
   }
 }
