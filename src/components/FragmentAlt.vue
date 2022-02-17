@@ -7,7 +7,6 @@
         <div class="name"><label>Alt</label></div>
         <label class="condition">[{{condition}}]</label>
       </div>
-<!-- fragment-offset set as offsetX - 1 for fragment border     -->
       <block v-if="blockInIfBlock"
              :style="{paddingLeft: `${offsetX}px`}"
              :context="blockInIfBlock"

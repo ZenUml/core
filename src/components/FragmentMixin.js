@@ -25,6 +25,7 @@ export default {
     },
     fragmentStyle: function () {
       return {
+        // +1px for the border of the fragment
         transform: 'translateX(' + ((this.offsetX + 1) * (-1)) + 'px)',
         width: (this.distance2(this.leftParticipant, this.rightParticipant) + 20 * this.depth + 50) + 'px',
       }
