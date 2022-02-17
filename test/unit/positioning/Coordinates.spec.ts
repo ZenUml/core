@@ -91,3 +91,11 @@ describe('get absolute position of a participant', () => {
     expect(coordinates.getPosition('C1')).toBe(positionC);
   })
 })
+
+describe('Let us focus on order', () => {
+  it('should add Starter to the left', () => {
+    let rootContext = seqDsl.RootContext('A1 B1->A1:m1');
+    const coordinates = new Coordinates(rootContext, stubWidthProvider);
+    expect(coordinates.getPosition('_STARTER_')).toBe(10);
+  })
+})
