@@ -54,17 +54,21 @@ describe('Participants.Order', () => {
     ]);
   })
 
-  it('should return the order of participants', () => {
+  it('should return the order of participants - Starter', () => {
     expect(getFlattenedParticipants('A B @Starter(C) C.m')).toEqual([
       {name: 'C', left: ''},
       {name: 'A', left: 'C'},
       {name: 'B', left: 'A'}
     ]);
+
+    expect(getFlattenedParticipants('A B->A.m C->D.m')).toEqual([
+      {name: 'B', left: ''},
+      {name: 'A', left: 'B'}
+    ]);
   })
 
   it('should return the order of participants', () => {
     const flattenedParticipants = getFlattenedParticipants('A B @Starter(B) A.m C.m');
-    console.log(flattenedParticipants);
     expect(flattenedParticipants).toEqual([
       {name: 'A', left: ''},
       {name: 'B', left: 'A'},
