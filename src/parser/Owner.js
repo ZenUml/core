@@ -22,11 +22,11 @@ MessageContext.prototype.Owner = function () {
   // Note: It may still be a self message if it has a `to` and `to === from`.
   const isImpliedSelf = !this.messageBody()?.to();
   if (isImpliedSelf) {
-    return this.parentCtx.Origin();
+    return this.ClosestAncestorStat().Origin();
   }
   return this.messageBody().to().getTextWithoutQuotes();
 }
 
 AsyncMessageContext.prototype.Owner = function () {
-  return this.to()?.getTextWithoutQuotes() || this.parentCtx.Origin();
+  return this.to()?.getTextWithoutQuotes() || this.ClosestAncestorStat().Origin();
 }

@@ -7,7 +7,7 @@ const MessageContext = seqParser.MessageContext
 const AsyncMessageContext = seqParser.AsyncMessageContext
 CreationContext.prototype.From = function () {
   if (this.parentCtx instanceof StatContext) {
-    return this.parentCtx?.Origin()
+    return this.ClosestAncestorStat().Origin()
   }
   return undefined;
 }
@@ -16,14 +16,14 @@ MessageContext.prototype.ProvidedFrom = function() {
   return this.messageBody()?.from()?.getTextWithoutQuotes();
 }
 MessageContext.prototype.From = function () {
-  return this.ProvidedFrom() || this.parentCtx.Origin();
+  return this.ProvidedFrom() || this.ClosestAncestorStat().Origin();
 }
 
 AsyncMessageContext.prototype.From = function () {
   if (this.from()) {
     return this.from().getTextWithoutQuotes();
   }
-  return this.parentCtx.Origin();
+  return this.ClosestAncestorStat().Origin();
 }
 
 export {}

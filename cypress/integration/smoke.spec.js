@@ -18,4 +18,13 @@ describe('Smoke test', function () {
         });
       })
   });
+
+  it('fragment', function () {
+    cy.visit('http://localhost:8080/smokeFragment')
+      .then(() => {
+        cy.document().toMatchImageSnapshot({
+          imageConfig: {"threshold": 0.001}, capture: "viewport"
+        });
+      })
+  });
 });
