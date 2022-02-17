@@ -5,6 +5,8 @@ const CreationContext = seqParser.CreationContext;
 const StatContext = seqParser.StatContext;
 const MessageContext = seqParser.MessageContext
 const AsyncMessageContext = seqParser.AsyncMessageContext
+const RetContext = seqParser.RetContext
+
 CreationContext.prototype.From = function () {
   if (this.parentCtx instanceof StatContext) {
     return this.ClosestAncestorStat().Origin()
@@ -26,4 +28,7 @@ AsyncMessageContext.prototype.From = function () {
   return this.ClosestAncestorStat().Origin();
 }
 
+RetContext.prototype.From = function () {
+  return this.ClosestAncestorStat().Origin();
+}
 export {}
