@@ -76,11 +76,7 @@ describe('get absolute position of a participant', () => {
     let rootContext = seqDsl.RootContext(code);
     const coordinates = new Coordinates(rootContext, stubWidthProvider);
 
-    const positionStarter = MARGIN/2;
-
-    expect(coordinates.getPosition('_STARTER_')).toBe(positionStarter);
-
-    const positionA = positionStarter + MIN_PARTICIPANT_WIDTH/2 + MARGIN/2;
+    const positionA = MARGIN / 2 + MIN_PARTICIPANT_WIDTH/2 + MARGIN/2;
     expect(coordinates.getPosition('A1')).toBe(positionA); //70
 
     // position is optimised for even distribution
@@ -89,5 +85,14 @@ describe('get absolute position of a participant', () => {
     // positionC is not impacted by position of B1
     const positionC = (messageLength + positionA) + ARROW_HEAD_WIDTH;
     expect(coordinates.getPosition('C1')).toBe(positionC);
+  })
+})
+
+describe('Let us focus on order', () => {
+  it('should add Starter to the left', () => {
+    let rootContext = seqDsl.RootContext('A1 B1->A1:m1');
+    const coordinates = new Coordinates(rootContext, stubWidthProvider);
+    expect(coordinates.getPosition('B1')).toBe(70);
+    expect(coordinates.getPosition('A1')).toBe(190);
   })
 })

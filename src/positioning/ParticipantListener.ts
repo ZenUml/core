@@ -1,6 +1,8 @@
 export const antlr4 = require('antlr4/index');
 export let seqDsl = require('../parser/index');
 const sequenceParserListener = require('@/generated-parser/sequenceParserListener');
+const sequenceParser = require('../generated-parser/sequenceParser');
+const seqParser = sequenceParser.sequenceParser;
 
 export interface IParticipantModel {
   name?: string;
@@ -22,7 +24,19 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
     this.explicitParticipants.push(participant);
   }
 
+  // 'A' is treated as a Starter in 'A->B:m'
   enterFrom(ctx: any) {
+    const name = ctx?.getTextWithoutQuotes()
+    if (ctx.ClosestAncestorBlock().parentCtx instanceof seqParser.ProgContext) {
+      if (ctx.ClosestAncestorStat() === ctx.ClosestAncestorBlock().children[0]) {
+        this.starter = name;
+        return;
+      }
+    }
+    this.enterTo(ctx);
+  }
+
+  enterTo(ctx: any) {
     const name = ctx?.getTextWithoutQuotes()
     if(name === this.starter) {
       return;
@@ -34,8 +48,6 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
     const participant = {name, left: ''};
     this.implicitParticipants.push(participant);
   }
-
-  enterTo = this.enterFrom
 
   enterCreation(ctx: any) {
     const name = ctx?.Owner();
