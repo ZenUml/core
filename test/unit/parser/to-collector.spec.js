@@ -123,6 +123,16 @@ describe('Add Starter to participants', () => {
     expect(participants.Get('_STARTER_').name).toBe('_STARTER_')
     expect(participants.Get('_STARTER_').isStarter).toBeTruthy()
   })
+
+  test('A B->A.m', () => {
+    let rootContext = seqDsl.RootContext('A B B->A.m')
+    const toCollector = new ToCollector()
+    const participants = toCollector.getParticipants(rootContext, true)
+    expect(participants.Size()).toBe(2)
+    expect(participants.Get('_STARTER_')).toBeUndefined()
+    expect(participants.Get('B').isStarter).toBeTruthy()
+    expect(participants.Names()).toStrictEqual(['B', 'A'])
+  })
 })
 
 describe('implicit', () => {
