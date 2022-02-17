@@ -3,7 +3,7 @@ import {mapGetters} from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters(['centerOf', 'coordinates']),
+    ...mapGetters(['coordinates', 'distance2']),
     localParticipants: function() {
       // [A, B, C, D] the order may not be the same as appeared on the Lifeline layer
       return [this.from, ...Participants(this.context).ImplicitArray().map(p => p.name)]
@@ -16,29 +16,17 @@ export default {
       const allParticipants = this.coordinates.participantModels.map(p => p.name);
       return allParticipants.reverse().find(p => this.localParticipants.includes(p))
     },
-    boundary: function () {
-      let min = this.centerOf(this.leftParticipant) - 10;
-      let max = this.centerOf(this.rightParticipant) + 10
-      return {
-        min: min,
-        max: max,
-        width: Math.max(max - min, 100)
-      }
-    },
     depth: function () {
       return Depth(this.context)
     },
-    centerOfFrom: function () {
-      return this.centerOf(this.from)
-    },
     offsetX: function () {
-      let extra = 10 * this.depth
-      return this.centerOfFrom - this.boundary.min + extra
+      let extra = 10 * (this.depth + 1)
+      return this.distance2(this.leftParticipant, this.from) + extra
     },
     fragmentStyle: function () {
       return {
         transform: 'translateX(' + ((this.offsetX + 1) * (-1)) + 'px)',
-        width: (this.boundary.width + 20 * this.depth + 50) + 'px',
+        width: (this.distance2(this.leftParticipant, this.rightParticipant) + 20 * this.depth + 50) + 'px',
       }
     }
   }
