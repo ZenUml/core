@@ -50,10 +50,6 @@
     text-align: left;
   }
 
-  .fragment {
-    padding-bottom: 10px;
-  }
-
   /* .participant is shared by MessageLayer and LifeLineLayer */
   .participant {
     border-width: 2px; /* don't put it in cosmetic or theme css */

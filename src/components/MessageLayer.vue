@@ -106,7 +106,8 @@ import {mapGetters, mapMutations} from 'vuex'
 
   .fragment {
     border-width: 1px;
-    margin: 2px 0;
+    margin: 8px 0 0 0;
+    padding-bottom: 10px;
   }
 
   .fragment .header label {
