@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Integration ZenUML Library with Vanilla JavaScript</title>
+  <script src="https://unpkg.com/vue@2.6.14"></script>
+  <script src="https://unpkg.com/vuex@3.6.2"></script>
+  <script src="https://unpkg.com/vue-sequence"></script>
+  <link rel="stylesheet" href="https://unpkg.com/vue-sequence/dist/vue-sequence.css">
+</head>
+<body>
+<div id="app" />
+<script>
+  Vue.use(Vuex);
+  const VueSequence = window['vue-sequence'].VueSequence;
+  const store = new Vuex.Store(VueSequence.Store());
+  store.dispatch('updateCode',{ code: `
+  @EC2 BookService
+  @DynamoDB BookRepository
+  BookService.saveBook(1) {
+    BookRepository.storeBook()
+  }
+  `});
+  new Vue({
+    el: '#app',
+    store,
+    render: h => h(VueSequence.DiagramFrame)
+  });
+</script>
+</body>
+</html>
