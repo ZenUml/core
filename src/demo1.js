@@ -59,7 +59,7 @@ RET ret = A.methodA(a, b) {
         // Right to left
         C.method() {
           // Further right to left
-          "b:B".method()
+          B.method()
         }
         self()
       }
