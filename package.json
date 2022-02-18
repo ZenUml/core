@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "private": false,
   "repository": {
-    "url": "https://github.com/ZenUml/"
+    "url": "https://github.com/ZenUml/vue-sequence.git"
   },
   "scripts": {
     "build": "yarn antlr:clear && yarn antlr && vue-cli-service build --target lib --name vue-sequence ./src/index.ts",
