@@ -21,7 +21,7 @@
                class="invocation" :content="signature" :rtl="rightToLeft" type="creation"/>
     </div>
     <occurrence :context="creation" :participant="to"/>
-    <message class="return" v-if="assignee" :content="assignee" :rtl="!rightToLeft" type="return"/>
+    <message class="return absolute bottom-0" v-if="assignee" :content="assignee" :rtl="!rightToLeft" type="return"/>
   </div>
 </template>
 

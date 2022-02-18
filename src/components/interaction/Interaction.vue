@@ -8,7 +8,7 @@
        :style="{width: interactionWidth + 'px', transform: 'translateX(' + translateX + 'px)'}">
 <!--Known limitation: `if(x) { m }` not showing source occurrence. -->
     <div v-if="(showStarter && isRootBlock) || outOfBand"
-         class="occurrence source"
+         class="occurrence source border-2"
          :class="{'right-to-left': rightToLeft}">
     </div>
     <comment v-if="comment" :comment="comment"/>
