@@ -63,6 +63,12 @@ import {mapGetters, mapMutations} from 'vuex'
     position: relative;   /* positioning Point */
   }
 
+  /* Attach to the end of the occurrence */
+  .message.return {
+    position: absolute;
+    bottom: 0;
+  }
+
   .message>.name {
     font-size: 13px;
     text-align: center;
