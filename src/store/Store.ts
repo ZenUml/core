@@ -1,5 +1,5 @@
 import _, {now} from 'lodash'
-import {RootContext, Participants, GroupContext, ParticipantContext} from './parser/index.js'
+import {RootContext, Participants, GroupContext, ParticipantContext} from '../parser/index.js'
 
 import WidthProviderOnBrowser from "@/positioning/WidthProviderFunc";
 import {Coordinates} from "@/positioning/Coordinates";
@@ -18,6 +18,7 @@ const Store = (debounce?: number) => {
       code: '',
       selected: [],
       cursor: null,
+      showTips: false,
       onElementClick: (codeRange: CodeRange) => {
         console.log('Element clicked', codeRange)
       }
