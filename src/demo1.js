@@ -6,6 +6,7 @@
 // Nested method
 // Assignment
 export default `
+title TTT 1
 @Lambda <<A>> A
 // comments at the beginning should be ignored
 group "B C" {@EC2 B @ECS C}

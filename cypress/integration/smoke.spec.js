@@ -19,6 +19,15 @@ describe('Smoke test', function () {
       })
   });
 
+  it('creation', function () {
+    cy.visit('http://localhost:8080/smokeCreation')
+      .then(() => {
+        cy.document().toMatchImageSnapshot({
+          imageConfig: {"threshold": 0.001}, capture: "viewport"
+        });
+      })
+  });
+
   it('fragment', function () {
     cy.visit('http://localhost:8080/smokeFragment')
       .then(() => {

@@ -19,6 +19,11 @@ module.exports = {
       entry: 'src/main.ts',
       template: 'public/smoke-fragment.html',
       filename: 'smoke-fragment.html'
+    },
+    smokeCreation: {
+      entry: 'src/main.ts',
+      template: 'public/smoke-creation.html',
+      filename: 'smoke-creation.html'
     }
   },
   chainWebpack: config =>{
