@@ -12,6 +12,7 @@ require('./StatContext');
 require('./SignatureText')
 require('./From')
 require('./key/Key')
+require('./utils/cloest-ancestor/ClosestAncestor')
 
 const errors = [];
 class SeqErrorListener extends antlr4.error.ErrorListener {

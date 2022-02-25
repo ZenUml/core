@@ -1,5 +1,5 @@
 <template>
-  <div class="sequence-diagram overflow-visible" :style="{width: `${width}px`}" ref="diagram" >
+  <div class="sequence-diagram overflow-visible px-8" :style="{width: `${width}px`}" ref="diagram" >
     <life-line-layer :context="rootContext.head()"/>
     <message-layer :context="rootContext.block()"/>
   </div>
@@ -48,10 +48,6 @@
     box-sizing: border-box; /* Reset box-sizing for the diagram */
     line-height: normal;    /* Reset line-height for the diagram */
     text-align: left;
-  }
-
-  .fragment {
-    padding-bottom: 10px;
   }
 
   /* .participant is shared by MessageLayer and LifeLineLayer */

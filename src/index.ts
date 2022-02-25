@@ -7,7 +7,7 @@ import './components/Cosmetic-blue.scss'
 import './components/Cosmetic-black-white.scss'
 import './components/theme-blue-river.scss'
 
-import Store from './Store'
+import Store from './store/Store'
 
 // @ts-ignore
 const Version = VERSION || ''

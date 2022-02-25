@@ -1,4 +1,5 @@
 import {ParticipantType} from '../../../src/parser/Participants'
+import {Fixture} from "./fixture/Fixture";
 
 let seqDsl = require('../../../src/parser/index');
 let ToCollector = require('../../../src/parser/ToCollector')
@@ -123,6 +124,16 @@ describe('Add Starter to participants', () => {
     expect(participants.Get('_STARTER_').name).toBe('_STARTER_')
     expect(participants.Get('_STARTER_').isStarter).toBeTruthy()
   })
+
+  test('A B->A.m', () => {
+    let rootContext = seqDsl.RootContext('A B B->A.m')
+    const toCollector = new ToCollector()
+    const participants = toCollector.getParticipants(rootContext, true)
+    expect(participants.Size()).toBe(2)
+    expect(participants.Get('_STARTER_')).toBeUndefined()
+    expect(participants.Get('B').isStarter).toBeTruthy()
+    expect(participants.Names()).toStrictEqual(['B', 'A'])
+  })
 })
 
 describe('implicit', () => {
@@ -165,6 +176,43 @@ describe('implicit', () => {
     test('seqDsl should get all participants including from', () => {
       let participants = getParticipants('A->B.m', true);
       expect(participants.Size()).toBe(2)
+    })
+  })
+
+  describe('partial context', () => {
+    // TODO: this was to reproduce an issue. It can be simplified.
+    test('seqDsl should get all participants from a node of the root context', () => {
+      const firstGrandChild = Fixture.firstGrandChild(`A->B.m {
+        C.m {
+          D.m {
+            if(x) {
+              @return B->A:m
+            }
+          }
+        }
+      }`);
+
+      const ifBlock = firstGrandChild.children[0].braceBlock().block().stat()[0];
+      const toCollector = new ToCollector()
+      const participants = toCollector.getParticipants(ifBlock, false)
+      expect(participants.ImplicitArray().map(p => p.name)).toStrictEqual(['B', 'A'])
+    })
+
+    test('seqDsl should get all participants from a node of the root context', () => {
+      const firstGrandChild = Fixture.firstGrandChild(`A->B.m {
+        C.m {
+          D.m {
+            if(x) {
+              return m
+            }
+          }
+        }
+      }`);
+
+      const ifBlock = firstGrandChild.children[0].braceBlock().block().stat()[0];
+      const toCollector = new ToCollector()
+      const participants = toCollector.getParticipants(ifBlock, false)
+      expect(participants.ImplicitArray().map(p => p.name)).toStrictEqual(['D', 'C'])
     })
   })
 })

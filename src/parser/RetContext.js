@@ -21,8 +21,8 @@ RetContext.prototype.ReturnTo = function() {
       ctx = ctx.parentCtx;
     }
     if(ctx instanceof MessageContext) {
-      return ctx.messageBody()?.from()?.getTextWithoutQuotes() || ctx.parentCtx.Origin();
+      return ctx.messageBody()?.from()?.getTextWithoutQuotes() || ctx.ClosestAncestorStat().Origin();
     }
-    return ctx.parentCtx.Origin();
+    return ctx.ClosestAncestorStat().Origin();
   }
 }

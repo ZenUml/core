@@ -72,6 +72,10 @@ ToCollector.prototype.exitGroup = function () {
 }
 
 ToCollector.prototype.enterRet = function (ctx) {
+  if (ctx.asyncMessage()) {
+    return;
+  }
+  participants.Add(ctx.From())
   participants.Add(ctx.ReturnTo())
 }
 

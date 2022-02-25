@@ -51,7 +51,6 @@ import {mapGetters, mapMutations} from 'vuex'
    */
   .interaction {
     position: relative;   /* To provide width for .return */
-    margin-top: 5px;     /* To create some margin for cosmetic only */
     /*Keep dashed here otherwise no space is given to the border*/
     border: 5px dashed transparent;
   }
@@ -85,12 +84,10 @@ import {mapGetters, mapMutations} from 'vuex'
   }
 
   .occurrence {
-    position: relative;
     width: 15px;
-    left: calc(100% - 2px);   /* This 100% will only consider the content width of interaction. */
-    padding: 16px 0;          /* Provide default height for the occurrence bar */
-    padding-left: 5px;        /* (OccurrenceWidth-1)/2 - OccurrenceBorderWidth*/
-    border-width: 2px;
+    left: calc(100% - 2px);
+    /* 5 = (OccurrenceWidth(15)-1)/2 - OccurrenceBorderWidth(2)*/
+    padding: 16px 0 16px 5px;
   }
 
   .interaction.right-to-left > .occurrence {
@@ -106,7 +103,8 @@ import {mapGetters, mapMutations} from 'vuex'
 
   .fragment {
     border-width: 1px;
-    margin: 2px 0;
+    margin: 8px 0 0 0;
+    padding-bottom: 10px;
   }
 
   .fragment .header label {
