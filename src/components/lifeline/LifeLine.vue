@@ -41,9 +41,9 @@ export default {
     setTop() {
       const firstMessage = this.$root.$el.querySelector(`[data-to="${this.entity.name}"]`);
       if (firstMessage && firstMessage.attributes['data-type'].value === 'creation') {
-        const rootY = this.$root.$el.getBoundingClientRect().y
+        const rootY = this.$el.getBoundingClientRect().y
         const messageY = firstMessage.getBoundingClientRect().y
-        this.top = messageY - rootY - 46
+        this.top = messageY - rootY
       } else {
         this.top = 0
       }
