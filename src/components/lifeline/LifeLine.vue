@@ -29,10 +29,10 @@ export default {
     },
   },
   mounted() {
-    this.$nextTick(this.setTop)
+    setImmediate(this.setTop)
   },
   updated() {
-    this.$nextTick(this.setTop)
+    setImmediate(this.setTop)
   },
   methods: {
     onSelect() {
