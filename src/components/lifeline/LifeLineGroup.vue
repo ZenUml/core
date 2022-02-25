@@ -7,7 +7,7 @@
 <!--      <div class="h-14 absolute" :class="{'-mt-12': !!name}">-->
 <!--        <label class="block text-center font-semibold">{{name}}</label>-->
 <!--      </div>-->
-      <div class="lifeline-group relative flex-grow">
+      <div class="lifeline-group relative flex-grow hover:bg-green-100">
         <life-line v-for="entity in entities"
                    inGroup="true"
                    :key="entity.name"
@@ -40,12 +40,12 @@
       left() {
         const first = this.entities[0].name;
         const width = Math.max(WidthProviderOnBrowser(first, TextType.ParticipantName), '100');
-        return this.centerOf(first) - (width / 2);
+        return this.centerOf(first) - (width / 2) - 8;
       },
       right() {
         const width = Math.max(WidthProviderOnBrowser(this.entities.slice(-1).name, TextType.ParticipantName), '100');
         const last = this.entities.slice(0).pop().name
-        return this.centerOf(last) + (width / 2);
+        return this.centerOf(last) + (width / 2) + 20;
       },
       entities() {
         return Participants(this.context).Array()
