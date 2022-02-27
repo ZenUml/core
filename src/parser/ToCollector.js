@@ -61,6 +61,14 @@ ToCollector.prototype.exitParameters = function () {
   isBlind = false;
 }
 
+ToCollector.prototype.enterCondition = function () {
+  isBlind = true;
+}
+
+ToCollector.prototype.exitCondition = function () {
+  isBlind = false;
+}
+
 ToCollector.prototype.enterGroup = function (ctx) {
   // group { A } => groupId = undefined
   // group group1 { A } => groupId = "group1"

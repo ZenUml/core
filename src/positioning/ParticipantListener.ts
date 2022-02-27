@@ -15,6 +15,14 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
   private implicitParticipants: IParticipantModel[] = [];
   private isBlind: boolean = false;
 
+  enterCondition() {
+    this.isBlind = true;
+  }
+
+  exitCondition() {
+    this.isBlind = false;
+  }
+
   enterParameters() {
     this.isBlind = true;
   }

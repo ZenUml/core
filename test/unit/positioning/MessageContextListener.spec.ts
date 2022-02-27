@@ -65,4 +65,23 @@ describe('MessageListener', () => {
       ]
     )
   })
+
+  it('ignores expression in conditions', () => {
+    const code = `if(A.isGood()) {B.m}`
+    let rootContext = seqDsl.RootContext(code);
+    const walker = antlr4.tree.ParseTreeWalker.DEFAULT
+
+    const messageContextListener = new MessageContextListener();
+    walker.walk(messageContextListener, rootContext);
+
+    expect(messageContextListener.result()).toStrictEqual([
+        {
+          "from": "_STARTER_",
+          "signature": "m",
+          "to": "B",
+          "type": 0
+        }
+      ]
+    )
+  })
 })
