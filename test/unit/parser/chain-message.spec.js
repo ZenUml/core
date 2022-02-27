@@ -14,7 +14,7 @@ test('chain method call as a parameter', () => {
 test('chain method call as implementation', () => {
     expect(Fixture.firstStatement('B.method() { getCount().toString() }')
       .message().SignatureText()).toBe('method()')
-    expect(Fixture.firstStatement('B.method() { getCount().toString() }').message().braceBlock().block().getTextWithoutQuotes())
+    expect(Fixture.firstStatement('B.method() { getCount().toString() }').message().braceBlock().block().getFormattedText())
         .toBe('getCount().toString()')
 })
 

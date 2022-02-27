@@ -52,7 +52,7 @@
       },
       assignee: function () {
         function safeCodeGetter (context) {
-          return (context && context.getTextWithoutQuotes()) || ''
+          return (context && context.getFormattedText()) || ''
         }
         let assignment = this.message?.messageBody().assignment()
         if (!assignment) return ''

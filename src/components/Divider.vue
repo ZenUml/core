@@ -27,7 +27,7 @@
         return this.centerOf(this.from)
       },
       name: function () {
-        return this.context.divider().name().getTextWithoutQuotes()
+        return this.context.divider().name().getFormattedText()
       }
     }
   }

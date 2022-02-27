@@ -31,7 +31,7 @@ function rootContext(code) {
   return parser._syntaxErrors ? null : parser.prog();
 }
 
-antlr4.ParserRuleContext.prototype.getTextWithoutQuotes = function() {
+antlr4.ParserRuleContext.prototype.getFormattedText = function() {
   const code = this.parser.getTokenStream().getText(this.getSourceInterval());
   // remove extra quotes, spaces and new lines
   return formatText(code);

@@ -24,9 +24,9 @@ MessageContext.prototype.Owner = function () {
   if (isImpliedSelf) {
     return this.ClosestAncestorStat().Origin();
   }
-  return this.messageBody().to().getTextWithoutQuotes();
+  return this.messageBody().to().getFormattedText();
 }
 
 AsyncMessageContext.prototype.Owner = function () {
-  return this.to()?.getTextWithoutQuotes() || this.ClosestAncestorStat().Origin();
+  return this.to()?.getFormattedText() || this.ClosestAncestorStat().Origin();
 }

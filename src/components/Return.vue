@@ -39,13 +39,13 @@
         return this.distance(this.target, this.source) < 0
       },
       signature: function () {
-        return this.asyncMessage?.content()?.getTextWithoutQuotes() || this.context?.ret()?.expr()?.getTextWithoutQuotes()
+        return this.asyncMessage?.content()?.getFormattedText() || this.context?.ret()?.expr()?.getFormattedText()
       },
       source: function () {
-        return this.asyncMessage?.from()?.getTextWithoutQuotes() || this.from
+        return this.asyncMessage?.from()?.getFormattedText() || this.from
       },
       target: function () {
-        return this.asyncMessage?.to()?.getTextWithoutQuotes() || this.context?.ret()?.ReturnTo()
+        return this.asyncMessage?.to()?.getFormattedText() || this.context?.ret()?.ReturnTo()
       },
       isCurrent: function () {
         return false

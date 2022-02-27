@@ -32,7 +32,7 @@
     computed: {
       ...mapGetters(['centerOf']),
       name() {
-        return this.context?.name()?.getTextWithoutQuotes()
+        return this.context?.name()?.getFormattedText()
       },
       offset() {
         return 0;

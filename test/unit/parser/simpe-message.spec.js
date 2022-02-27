@@ -44,7 +44,7 @@ test('Simple method: A->B.method()', () => {
 test('Simple method: "A".method()', () => {
   const message = Fixture.firstStatement('"A".method()').message();
   let messageBody = message.messageBody();
-  expect(messageBody.to().getTextWithoutQuotes()).toBe('A');
+  expect(messageBody.to().getFormattedText()).toBe('A');
   expect(message.SignatureText()).toBe('method()');
 })
 

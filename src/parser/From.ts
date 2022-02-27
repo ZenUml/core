@@ -15,7 +15,7 @@ CreationContext.prototype.From = function () {
 }
 
 MessageContext.prototype.ProvidedFrom = function() {
-  return this.messageBody()?.from()?.getTextWithoutQuotes();
+  return this.messageBody()?.from()?.getFormattedText();
 }
 MessageContext.prototype.From = function () {
   return this.ProvidedFrom() || this.ClosestAncestorStat().Origin();
@@ -23,7 +23,7 @@ MessageContext.prototype.From = function () {
 
 AsyncMessageContext.prototype.From = function () {
   if (this.from()) {
-    return this.from().getTextWithoutQuotes();
+    return this.from().getFormattedText();
   }
   return this.ClosestAncestorStat().Origin();
 }

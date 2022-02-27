@@ -24,11 +24,11 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
   }
 
   enterStarter(ctx: any) {
-    this.starter = ctx.getTextWithoutQuotes();
+    this.starter = ctx.getFormattedText();
   }
 
   enterParticipant(ctx: any) {
-    const name = ctx?.name()?.getTextWithoutQuotes() || 'Missing `Participant` name';
+    const name = ctx?.name()?.getFormattedText() || 'Missing `Participant` name';
     const participant = {name, left: ''};
     this.explicitParticipants.push(participant);
   }
@@ -39,7 +39,7 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
       return;
     }
 
-    const name = ctx?.getTextWithoutQuotes()
+    const name = ctx?.getFormattedText()
     if (ctx.ClosestAncestorBlock().parentCtx instanceof seqParser.ProgContext) {
       if (ctx.ClosestAncestorStat() === ctx.ClosestAncestorBlock().children[0]) {
         this.starter = name;
@@ -53,7 +53,7 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
     if (this.isBlind) {
       return;
     }
-    const name = ctx?.getTextWithoutQuotes()
+    const name = ctx?.getFormattedText()
     if(name === this.starter) {
       return;
     }
