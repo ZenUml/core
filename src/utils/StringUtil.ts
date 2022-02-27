@@ -1,5 +1,4 @@
-import {replace} from "rambda";
-import {pipe} from "rambda/immutable";
+import {replace, pipe} from "ramda";
 
 const removeChangeLines = replace(/[\n\r]/g, ' ');
 const removeExtraSpaces = replace(/\s+/g, ' ');
