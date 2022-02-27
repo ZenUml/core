@@ -4,32 +4,15 @@
       <label>Hello world</label>
     </DiagramFrame>
     <button @click="exportPng">Export PNG</button>
+    <button @click="exportJpeg">Export JPEG</button>
+    <button @click="exportBlob">Export Blob</button>
+    <button @click="exportSvg">Export Svg</button>
   </div>
 </template>
 
 <script>
 import DiagramFrame from "@/components/DiagramFrame";
-
-const saveAs = (blob, fileName) =>{
-  var elem = window.document.createElement('a');
-  elem.href = blob
-  elem.download = fileName;
-  elem.style = 'display:none;';
-  (document.body || document.documentElement).appendChild(elem);
-  if (typeof elem.click === 'function') {
-    elem.click();
-  } else {
-    elem.target = '_blank';
-    elem.dispatchEvent(new MouseEvent('click', {
-      view: window,
-      bubbles: true,
-      cancelable: true
-    }));
-  }
-  URL.revokeObjectURL(elem.href);
-  elem.remove()
-}
-
+import { saveAs } from "file-saver";
 export default {
   name: "Demo",
   methods: {
@@ -37,6 +20,21 @@ export default {
       const png = await this.$refs.diagram.toPng();
       saveAs(png, 'diagram.png');
       console.log(png);
+    },
+    async exportJpeg() {
+      const png = await this.$refs.diagram.toJpeg();
+      saveAs(png, 'diagram.jpeg');
+      console.log(png);
+    },
+    async exportBlob() {
+      const blob = await this.$refs.diagram.toBlob();
+      saveAs(blob, 'diagram-blob.png');
+      console.log(blob);
+    },
+    async exportSvg() {
+      const svg = await this.$refs.diagram.toSvg();
+      saveAs(svg, 'diagram-svg.svg');
+      console.log(svg);
     }
   },
   components: {DiagramFrame}

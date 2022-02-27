@@ -3,7 +3,7 @@
   <div class="frame relative pb-8 ml-1">
     <div ref="content">
       <div class="header flex">
-        <div class="left">
+        <div class="left hide-export">
           <slot></slot>
         </div>
         <div class="right">
@@ -31,7 +31,7 @@ import DiagramTitle from "@/components/DiagramTitle";
 import SeqDiagram from "@/components/SeqDiagram";
 import TipsDialog from "@/components/tutorial/TipsDialog";
 import WidthProvider from "@/components/positioning/WidthProvider";
-import domtoimage from 'dom-to-image-more'
+import * as htmlToImage from 'html-to-image'
 
 
 export default {
@@ -59,14 +59,37 @@ export default {
       }
     },
     toPng() {
-      return domtoimage.toPng(this.$refs['content'], {})
+      return htmlToImage.toPng(this.$refs['content'], {
+        backgroundColor: 'white',
+        filter: (node) => {
+          return !node?.classList?.contains('hide-export')
+        }
+      })
+    },
+    toSvg() {
+      return htmlToImage.toSvg(this.$refs['content'], {
+        backgroundColor: 'white',
+        filter: (node) => {
+          return !node?.classList?.contains('hide-export')
+        }
+      })
     },
     toBlob() {
-      return domtoimage.toBlob(this.$refs['content'], {})
+      return htmlToImage.toBlob(this.$refs['content'], {
+        backgroundColor: 'white',
+        filter: (node) => {
+          return !node?.classList?.contains('hide-export')
+        }
+      })
     },
     toJpeg() {
       // It does not render the 'User' svg icon.
-      return domtoimage.toJpeg(this.$refs['content'], { quality: 0.95, bgcolor: 'white' })
+      return htmlToImage.toJpeg(this.$refs['content'], {
+        backgroundColor: 'white',
+        filter: (node) => {
+          return !node?.classList?.contains('hide-export')
+        }
+      })
     }
   },
   components: {
