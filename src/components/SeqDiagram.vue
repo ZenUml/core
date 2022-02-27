@@ -8,7 +8,6 @@
 <script>
   import LifeLineLayer from './lifeline/LifeLineLayer.vue'
   import MessageLayer from './MessageLayer.vue'
-  import domtoimage from 'dom-to-image-more'
   import {mapGetters} from 'vuex'
 
   export default {
@@ -23,18 +22,6 @@
         return this.coordinates.getWidth() + 100;
       },
     },
-    methods: {
-      toPng() {
-        return domtoimage.toPng(this.$refs['diagram'], {})
-      },
-      toBlob() {
-        return domtoimage.toBlob(this.$refs['diagram'], {})
-      },
-      toJpeg() {
-        // It does not render the 'User' svg icon.
-        return domtoimage.toJpeg(this.$refs['diagram'], { quality: 0.95, bgcolor: 'white' })
-      }
-    }
   }
 </script>
 
