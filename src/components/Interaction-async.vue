@@ -52,13 +52,13 @@
         return this.distance(this.target, this.source) < 0
       },
       signature: function () {
-        return this.asyncMessage?.content()?.getTextWithoutQuotes()
+        return this.asyncMessage?.content()?.getFormattedText()
       },
       source: function () {
-        return this.asyncMessage?.from()?.getTextWithoutQuotes() || this.from
+        return this.asyncMessage?.from()?.getFormattedText() || this.from
       },
       target: function () {
-        return this.asyncMessage?.to()?.getTextWithoutQuotes()
+        return this.asyncMessage?.to()?.getFormattedText()
       },
       isCurrent: function () {
         const start = this.asyncMessage.start.start

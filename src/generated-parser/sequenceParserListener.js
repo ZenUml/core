@@ -434,12 +434,12 @@ sequenceParserListener.prototype.exitLoop = function(ctx) {
 };
 
 
-// Enter a parse tree produced by sequenceParser#notExpr.
-sequenceParserListener.prototype.enterNotExpr = function(ctx) {
+// Enter a parse tree produced by sequenceParser#assignmentExpr.
+sequenceParserListener.prototype.enterAssignmentExpr = function(ctx) {
 };
 
-// Exit a parse tree produced by sequenceParser#notExpr.
-sequenceParserListener.prototype.exitNotExpr = function(ctx) {
+// Exit a parse tree produced by sequenceParser#assignmentExpr.
+sequenceParserListener.prototype.exitAssignmentExpr = function(ctx) {
 };
 
 
@@ -449,33 +449,6 @@ sequenceParserListener.prototype.enterFuncExpr = function(ctx) {
 
 // Exit a parse tree produced by sequenceParser#funcExpr.
 sequenceParserListener.prototype.exitFuncExpr = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#unaryMinusExpr.
-sequenceParserListener.prototype.enterUnaryMinusExpr = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#unaryMinusExpr.
-sequenceParserListener.prototype.exitUnaryMinusExpr = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#creationExpr.
-sequenceParserListener.prototype.enterCreationExpr = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#creationExpr.
-sequenceParserListener.prototype.exitCreationExpr = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#multiplicationExpr.
-sequenceParserListener.prototype.enterMultiplicationExpr = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#multiplicationExpr.
-sequenceParserListener.prototype.exitMultiplicationExpr = function(ctx) {
 };
 
 
@@ -515,21 +488,66 @@ sequenceParserListener.prototype.exitRelationalExpr = function(ctx) {
 };
 
 
-// Enter a parse tree produced by sequenceParser#equalityExpr.
-sequenceParserListener.prototype.enterEqualityExpr = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#equalityExpr.
-sequenceParserListener.prototype.exitEqualityExpr = function(ctx) {
-};
-
-
 // Enter a parse tree produced by sequenceParser#plusExpr.
 sequenceParserListener.prototype.enterPlusExpr = function(ctx) {
 };
 
 // Exit a parse tree produced by sequenceParser#plusExpr.
 sequenceParserListener.prototype.exitPlusExpr = function(ctx) {
+};
+
+
+// Enter a parse tree produced by sequenceParser#notExpr.
+sequenceParserListener.prototype.enterNotExpr = function(ctx) {
+};
+
+// Exit a parse tree produced by sequenceParser#notExpr.
+sequenceParserListener.prototype.exitNotExpr = function(ctx) {
+};
+
+
+// Enter a parse tree produced by sequenceParser#unaryMinusExpr.
+sequenceParserListener.prototype.enterUnaryMinusExpr = function(ctx) {
+};
+
+// Exit a parse tree produced by sequenceParser#unaryMinusExpr.
+sequenceParserListener.prototype.exitUnaryMinusExpr = function(ctx) {
+};
+
+
+// Enter a parse tree produced by sequenceParser#creationExpr.
+sequenceParserListener.prototype.enterCreationExpr = function(ctx) {
+};
+
+// Exit a parse tree produced by sequenceParser#creationExpr.
+sequenceParserListener.prototype.exitCreationExpr = function(ctx) {
+};
+
+
+// Enter a parse tree produced by sequenceParser#parenthesizedExpr.
+sequenceParserListener.prototype.enterParenthesizedExpr = function(ctx) {
+};
+
+// Exit a parse tree produced by sequenceParser#parenthesizedExpr.
+sequenceParserListener.prototype.exitParenthesizedExpr = function(ctx) {
+};
+
+
+// Enter a parse tree produced by sequenceParser#multiplicationExpr.
+sequenceParserListener.prototype.enterMultiplicationExpr = function(ctx) {
+};
+
+// Exit a parse tree produced by sequenceParser#multiplicationExpr.
+sequenceParserListener.prototype.exitMultiplicationExpr = function(ctx) {
+};
+
+
+// Enter a parse tree produced by sequenceParser#equalityExpr.
+sequenceParserListener.prototype.enterEqualityExpr = function(ctx) {
+};
+
+// Exit a parse tree produced by sequenceParser#equalityExpr.
+sequenceParserListener.prototype.exitEqualityExpr = function(ctx) {
 };
 
 

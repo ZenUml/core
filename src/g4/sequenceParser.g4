@@ -266,6 +266,8 @@ expr
  | (to DOT)? func                       #funcExpr
  | creation                             #creationExpr
  | atom                                 #atomExpr
+ | OPAR expr CPAR                       #parenthesizedExpr
+ | assignment expr                      #assignmentExpr
  ;
 
 // [Perf tuning] Merging below tokens does not help.

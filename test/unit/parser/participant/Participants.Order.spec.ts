@@ -92,4 +92,11 @@ describe('Participants.Order', () => {
       {"left": "_STARTER_", "name": "A"}
     ]);
   })
+
+  it('should return the order of participants - ignore expression in condition', () => {
+    expect(getFlattenedParticipants('if(B.m1){A.m2}')).toEqual([
+      {"left": "", "name": "_STARTER_"},
+      {"left": "_STARTER_", "name": "A"}
+    ]);
+  })
 })

@@ -21,11 +21,11 @@ ToCollector.prototype = Object.create(sequenceParserListener.sequenceParserListe
 let onParticipant = function (ctx) {
   // if(!(ctx?.name())) return;
   if (isBlind) return;
-  const type = ctx?.participantType()?.getTextWithoutQuotes().replace('@', '');
-  const participant = ctx?.name()?.getTextWithoutQuotes() || 'Missing `Participant`';
-  const stereotype = ctx.stereotype()?.name()?.getTextWithoutQuotes();
+  const type = ctx?.participantType()?.getFormattedText().replace('@', '');
+  const participant = ctx?.name()?.getFormattedText() || 'Missing `Participant`';
+  const stereotype = ctx.stereotype()?.name()?.getFormattedText();
   const width = (ctx.width && ctx.width()) && Number.parseInt(ctx.width().getText()) || undefined;
-  const label = ctx.label && ctx.label()?.name()?.getTextWithoutQuotes();
+  const label = ctx.label && ctx.label()?.name()?.getFormattedText();
   const explicit = true;
 
   participants.Add(participant, false, stereotype, width, groupId, label, explicit, type);
@@ -34,7 +34,7 @@ ToCollector.prototype.enterParticipant = onParticipant
 
 let onTo = function (ctx) {
   if (isBlind) return;
-  let participant = ctx.getTextWithoutQuotes();
+  let participant = ctx.getFormattedText();
   participants.Add(participant);
 };
 
@@ -43,7 +43,7 @@ ToCollector.prototype.enterFrom = onTo
 ToCollector.prototype.enterTo = onTo
 
 ToCollector.prototype.enterStarter = function(ctx) {
-  let participant = ctx.getTextWithoutQuotes();
+  let participant = ctx.getFormattedText();
   participants.Add(participant, true)
 }
 
@@ -61,10 +61,18 @@ ToCollector.prototype.exitParameters = function () {
   isBlind = false;
 }
 
+ToCollector.prototype.enterCondition = function () {
+  isBlind = true;
+}
+
+ToCollector.prototype.exitCondition = function () {
+  isBlind = false;
+}
+
 ToCollector.prototype.enterGroup = function (ctx) {
   // group { A } => groupId = undefined
   // group group1 { A } => groupId = "group1"
-  groupId = ctx.name()?.getTextWithoutQuotes();
+  groupId = ctx.name()?.getFormattedText();
 }
 
 ToCollector.prototype.exitGroup = function () {

@@ -56,7 +56,7 @@
       },
       assignee () {
         function safeCodeGetter (context) {
-          return (context && context.getTextWithoutQuotes()) || ''
+          return (context && context.getFormattedText()) || ''
         }
         let assignment = this.creation.creationBody().assignment()
         if (!assignment) return ''

@@ -13,7 +13,7 @@ require('./SignatureText')
 require('./From')
 require('./key/Key')
 require('./utils/cloest-ancestor/ClosestAncestor')
-import {formatText} from "@/utils/StringUtil";
+const formatText = require("@/utils/StringUtil").formatText
 
 const errors = [];
 class SeqErrorListener extends antlr4.error.ErrorListener {
@@ -31,7 +31,7 @@ function rootContext(code) {
   return parser._syntaxErrors ? null : parser.prog();
 }
 
-antlr4.ParserRuleContext.prototype.getTextWithoutQuotes = function() {
+antlr4.ParserRuleContext.prototype.getFormattedText = function() {
   const code = this.parser.getTokenStream().getText(this.getSourceInterval());
   // remove extra quotes, spaces and new lines
   return formatText(code);

@@ -80,5 +80,5 @@ test('A participant -  @actor <<Repo>> A 100 as label', () => {
 })
 
 function expectText(context) {
-  return expect(context.getTextWithoutQuotes())
+  return expect(context.getFormattedText())
 }
