@@ -6,7 +6,6 @@ import Demo from './components/demo/Demo.vue'
 import demo1 from './demo1.js'
 import demo2 from './demo2.js'
 import VueGtag from "vue-gtag";
-import './assets/themes/handwriting.css';
 Vue.use(Vuex)
 
 Vue.config.productionTip = false
