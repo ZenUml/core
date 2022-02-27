@@ -19,22 +19,18 @@ export default {
     async exportPng() {
       const png = await this.$refs.diagram.toPng();
       saveAs(png, 'diagram.png');
-      console.log(png);
     },
     async exportJpeg() {
       const png = await this.$refs.diagram.toJpeg();
       saveAs(png, 'diagram.jpeg');
-      console.log(png);
     },
     async exportBlob() {
       const blob = await this.$refs.diagram.toBlob();
       saveAs(blob, 'diagram-blob.png');
-      console.log(blob);
     },
     async exportSvg() {
       const svg = await this.$refs.diagram.toSvg();
       saveAs(svg, 'diagram-svg.svg');
-      console.log(svg);
     }
   },
   components: {DiagramFrame}
