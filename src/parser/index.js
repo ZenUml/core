@@ -13,7 +13,7 @@ require('./SignatureText')
 require('./From')
 require('./key/Key')
 require('./utils/cloest-ancestor/ClosestAncestor')
-import {formatText} from "@/utils/StringUtil";
+const formatText = require("@/utils/StringUtil").formatText
 
 const errors = [];
 class SeqErrorListener extends antlr4.error.ErrorListener {
