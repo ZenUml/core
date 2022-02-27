@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 // import log4V from './plugins/Log4V'
 import {VueSequence} from './index'
+import Demo from './components/demo/Demo.vue'
 import demo1 from './demo1.js'
 import demo2 from './demo2.js'
 import VueGtag from "vue-gtag";
@@ -33,7 +34,7 @@ store1.dispatch('updateCode', {
  * define the seq-diagram component here.
  */
 if (document.getElementById('demo1')) {
-  new Vue({el: '#demo1', store: store1, render: h => h(VueSequence.DiagramFrame) })
+  new Vue({el: '#demo1', store: store1, render: h => h(Demo) })
 }
 const store2 = VueSequence.Store()
 // @ts-ignore
