@@ -1,12 +1,14 @@
 <template>
   <div>
-    <SeqDiagram ref="diagram"/>
+    <DiagramFrame ref="diagram">
+      <label>Hello world</label>
+    </DiagramFrame>
     <button @click="exportPng">Export PNG</button>
   </div>
 </template>
 
 <script>
-import SeqDiagram from "../SeqDiagram";
+import DiagramFrame from "@/components/DiagramFrame";
 
 const saveAs = (blob, fileName) =>{
   var elem = window.document.createElement('a');
@@ -37,7 +39,7 @@ export default {
       console.log(png);
     }
   },
-  components: {SeqDiagram}
+  components: {DiagramFrame}
 
 }
 </script>
