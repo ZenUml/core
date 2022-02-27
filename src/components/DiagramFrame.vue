@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import {mapState, mapGetters} from "vuex";
+import {mapState, mapGetters, mapMutations} from "vuex";
 import DiagramTitle from "@/components/DiagramTitle";
 import SeqDiagram from "@/components/SeqDiagram";
 import TipsDialog from "@/components/tutorial/TipsDialog";
@@ -43,13 +43,8 @@ import * as htmlToImage from 'html-to-image'
 
 export default {
   name: "DiagramFrame",
-  data() {
-    return {
-      scale: 1,
-    }
-  },
   computed: {
-    ...mapState(['showTips']),
+    ...mapState(['showTips', 'scale']),
     ...mapGetters(['rootContext']),
     title() {
       if(!this.rootContext) {
@@ -59,6 +54,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['setScale',]),
     showTipsDialog() {
       this.$store.state.showTips = true;
 
@@ -104,10 +100,10 @@ export default {
       })
     },
     zoomIn() {
-      this.scale += 0.1;
+      this.setScale(this.scale + 0.1)
     },
     zoomOut() {
-      this.scale -= 0.1;
+      this.setScale(this.scale - 0.1)
     },
   },
   components: {
