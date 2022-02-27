@@ -153,7 +153,7 @@ export default {
     closeTipsDialog() {
       this.$store.state.showTips = false
       try {
-        this.$gtag.event('close', {
+        this.$gtag?.event('close', {
           'event_category': 'help', 'event_label': 'tips dialog'
         })
       } catch (e) {

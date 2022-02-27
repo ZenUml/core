@@ -60,7 +60,7 @@ export default {
       this.$store.state.showTips = true;
 
       try {
-        this.$gtag.event('view', {
+        this.$gtag?.event('view', {
           'event_category': 'help', 'event_label': 'tips dialog'
         })
       } catch (e) {
