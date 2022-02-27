@@ -11752,6 +11752,11 @@ quick-lru@^5.1.1:
   resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-5.1.1.tgz#366493e6b3e42a3a6885e2e99d18f80fb7a8c932"
   integrity sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==
 
+rambda@^7.0.3:
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/rambda/-/rambda-7.0.3.tgz#35730cb9ac24943c1231f74e6fddd46ae594d3c0"
+  integrity sha512-vRkFoukpx9PTmYyOjMZ6+anbDI9BrjaAepigsSOVQcgy7dZKMHM26m1/r8BvegeBCM8qBwr1m/+rufgNKRrofw==
+
 randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5, randombytes@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/randombytes/-/randombytes-2.1.0.tgz#df6f84372f0270dc65cdf6291349ab7a473d4f2a"

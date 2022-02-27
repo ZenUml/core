@@ -31,7 +31,7 @@ test('seqDsl should parse a simple method with a method call as parameter', () =
 
 test('seqDsl should parse a simple method with quoted method name', () => {
   let signatureElement = Fixture.firstStatement('B."method. {a,b} 1"(1,2)').message().SignatureText();
-  expect(signatureElement).toBe('"method. {a,b} 1"(1,2)')
+  expect(signatureElement).toBe('"method.{a,b} 1"(1,2)')
 })
 
 test('Simple method: A->B.method()', () => {

@@ -58,7 +58,7 @@ describe('MessageListener', () => {
     expect(messageContextListener.result()).toStrictEqual([
         {
           "from": "_STARTER_",
-          "signature": "m(newB,C.m)",
+          "signature": "m(new B,C.m)",
           "to": "A",
           "type": 0
         }
