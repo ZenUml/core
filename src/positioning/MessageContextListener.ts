@@ -22,7 +22,7 @@ export class MessageContextListener extends sequenceParserListener.sequenceParse
   }
 
   enterParameters() {
-    this.isBlind = false;
+    this.isBlind = true;
   }
 
   exitParameters() {

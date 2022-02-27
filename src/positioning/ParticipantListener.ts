@@ -13,6 +13,15 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
   private explicitParticipants: IParticipantModel[] = [];
   private starter: string = '';
   private implicitParticipants: IParticipantModel[] = [];
+  private isBlind: boolean = false;
+
+  enterParameters() {
+    this.isBlind = true;
+  }
+
+  exitParameters() {
+    this.isBlind = false;
+  }
 
   enterStarter(ctx: any) {
     this.starter = ctx.getTextWithoutQuotes();
@@ -26,6 +35,10 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
 
   // 'A' is treated as a Starter in 'A->B:m'
   enterFrom(ctx: any) {
+    if (this.isBlind) {
+      return;
+    }
+
     const name = ctx?.getTextWithoutQuotes()
     if (ctx.ClosestAncestorBlock().parentCtx instanceof seqParser.ProgContext) {
       if (ctx.ClosestAncestorStat() === ctx.ClosestAncestorBlock().children[0]) {
@@ -37,6 +50,9 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
   }
 
   enterTo(ctx: any) {
+    if (this.isBlind) {
+      return;
+    }
     const name = ctx?.getTextWithoutQuotes()
     if(name === this.starter) {
       return;
@@ -50,6 +66,9 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
   }
 
   enterCreation(ctx: any) {
+    if (this.isBlind) {
+      return;
+    }
     const name = ctx?.Owner();
     if(name === this.starter) {
       return;

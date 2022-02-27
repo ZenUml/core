@@ -5,7 +5,7 @@ const antlr4 = require('antlr4/index');
 describe('MessageListener', () => {
   it('can handle Message and Creation', () => {
     const code = `
-    A.method {
+    A.method(E.m) {
       B->C.method
     }
     new B
@@ -21,7 +21,7 @@ describe('MessageListener', () => {
       [
         {
           "from": "_STARTER_",
-          "signature": "method",
+          "signature": "method(E.m)",
           "to": "A",
           "type": 0
         },
@@ -44,5 +44,25 @@ describe('MessageListener', () => {
           "type": 1
         }
       ]);
+  })
+
+  it('ignores expression in parameters', () => {
+    const code = `A.m(new B,
+     C.m)`
+    let rootContext = seqDsl.RootContext(code);
+    const walker = antlr4.tree.ParseTreeWalker.DEFAULT
+
+    const messageContextListener = new MessageContextListener();
+    walker.walk(messageContextListener, rootContext);
+
+    expect(messageContextListener.result()).toStrictEqual([
+        {
+          "from": "_STARTER_",
+          "signature": "m(newB,C.m)",
+          "to": "A",
+          "type": 0
+        }
+      ]
+    )
   })
 })
