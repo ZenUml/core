@@ -16,6 +16,7 @@ const Store = (debounce?: number) => {
   return {
     state: {
       code: '',
+      scale: 1,
       selected: [],
       cursor: null,
       showTips: false,
@@ -64,6 +65,9 @@ const Store = (debounce?: number) => {
     mutations: {
       code: function (state: any, payload: any) {
         state.code = payload;
+      },
+      setScale: function (state: any, payload: any) {
+        state.scale = payload;
       },
       onSelect: function (state: any, payload: any) {
         if (state.selected.includes(payload)) {

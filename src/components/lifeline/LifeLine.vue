@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapGetters, mapState} from 'vuex'
 import Participant from "@/components/lifeline/Participant";
 
 export default {
@@ -24,6 +24,7 @@ export default {
   },
   computed: {
     ...mapGetters(['centerOf']),
+    ...mapState(['scale']),
     left() {
       return this.centerOf(this.entity.name) - 8 - (this.groupLeft || 0)
     },
@@ -43,7 +44,7 @@ export default {
       if (firstMessage && firstMessage.attributes['data-type'].value === 'creation') {
         const rootY = this.$el.getBoundingClientRect().y
         const messageY = firstMessage.getBoundingClientRect().y
-        this.top = messageY - rootY
+        this.top = (messageY - rootY) / this.scale
       } else {
         this.top = 0
       }
