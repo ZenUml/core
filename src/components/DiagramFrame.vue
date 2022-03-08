@@ -2,12 +2,13 @@
   <!-- pb-8 is to offset pt-8 in SeqDiagram component -->
   <div class="frame relative ml-1 origin-top-left" :style="{transform: `scale(${scale})`}">
     <div ref="content">
-      <div class="header flex">
+      <div class="header flex justify-between">
         <div class="left hide-export">
           <slot></slot>
         </div>
-        <div class="right">
+        <div class="right flex-grow flex justify-between">
           <diagram-title :context="title"/>
+          <privacy />
         </div>
       </div>
       <div>
@@ -34,6 +35,7 @@
 
 <script>
 import {mapState, mapGetters, mapMutations} from "vuex";
+import Privacy from "@/components/privacy/Privacy.vue";
 import DiagramTitle from "@/components/DiagramTitle";
 import SeqDiagram from "@/components/SeqDiagram";
 import TipsDialog from "@/components/tutorial/TipsDialog";
@@ -110,7 +112,8 @@ export default {
     WidthProvider,
     TipsDialog,
     DiagramTitle,
-    SeqDiagram
+    SeqDiagram,
+    Privacy,
   },
 }
 </script>

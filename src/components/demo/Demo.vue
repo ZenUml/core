@@ -1,7 +1,7 @@
 <template>
   <div>
     <DiagramFrame ref="diagram">
-      <label>Hello world</label>
+      <label>Left side</label>
     </DiagramFrame>
     <button @click="exportPng">Export PNG</button>
     <button @click="exportJpeg">Export JPEG</button>
