@@ -1,6 +1,6 @@
 <template>
   <!-- pb-8 is to offset pt-8 in SeqDiagram component -->
-  <div class="frame relative ml-1 origin-top-left" :style="{transform: `scale(${scale})`}">
+  <div class="zenuml frame relative ml-1 origin-top-left" :style="{transform: `scale(${scale})`}">
     <div ref="content">
       <div class="header flex">
         <div class="left hide-export">
