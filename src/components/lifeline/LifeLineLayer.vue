@@ -1,7 +1,6 @@
 <template>
   <div class="life-line-layer absolute h-full" :style="{'min-width': '400px'}">
     <life-line
-      :style="{'margin-left': invisibleStarter ? '-40px!important': '0'}"
       v-if="starterOnTheLeft"
       :entity="starterParticipant"
       class="starter"
