@@ -2,7 +2,7 @@
 import 'cypress-plugin-snapshots/commands';
 describe('Smoke test', function () {
   it('should load the home page', function () {
-    cy.visit('http://localhost:8080/smoke')
+    cy.visit('http://localhost:8080/smoke.html')
       .then(() => {
         cy.document().toMatchImageSnapshot({
           imageConfig: {"threshold": 0.001}, capture: "fullPage"
@@ -11,7 +11,7 @@ describe('Smoke test', function () {
   });
 
   it('interaction', function () {
-    cy.visit('http://localhost:8080/smokeInteraction')
+    cy.visit('http://localhost:8080/smoke-interaction.html')
       .then(() => {
         cy.document().toMatchImageSnapshot({
           imageConfig: {"threshold": 0.001}, capture: "viewport"
@@ -20,7 +20,7 @@ describe('Smoke test', function () {
   });
 
   it('creation', function () {
-    cy.visit('http://localhost:8080/smokeCreation')
+    cy.visit('http://localhost:8080/smoke-creation.html')
       .then(() => {
         cy.document().toMatchImageSnapshot({
           imageConfig: {"threshold": 0.001}, capture: "viewport"
@@ -29,7 +29,7 @@ describe('Smoke test', function () {
   });
 
   it('fragment', function () {
-    cy.visit('http://localhost:8080/smokeFragment')
+    cy.visit('http://localhost:8080/smoke-fragment.html')
       .then(() => {
         cy.document().toMatchImageSnapshot({
           imageConfig: {"threshold": 0.001}, capture: "viewport"

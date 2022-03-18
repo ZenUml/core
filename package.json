@@ -6,6 +6,7 @@
     "url": "https://github.com/ZenUml/vue-sequence.git"
   },
   "scripts": {
+    "build:site": "vue-cli-service build",
     "build": "yarn antlr:clear && yarn antlr && vue-cli-service build --target lib --name vue-sequence ./src/index.ts",
     "test:unit": "yarn antlr && vue-cli-service test:unit",
     "test:unit:watch": "yarn antlr && vue-cli-service test:unit --watch",
