@@ -24,6 +24,7 @@ export class Participant {
   isStarter: boolean | undefined;
   private label: string | undefined;
   private type: string | undefined;
+  private color: string | undefined;
 
   constructor(name: string,
               isStarter?: boolean,
@@ -32,7 +33,8 @@ export class Participant {
               groupId?: number | string,
               label?: string,
               explicit?: boolean,
-              type?: string
+              type?: string,
+              color?: string
   ) {
     this.name = name;
     this.stereotype = stereotype;
@@ -42,6 +44,7 @@ export class Participant {
     this.isStarter = isStarter;
     this.label = label;
     this.type = type;
+    this.color = color;
   }
 
   public Type(): ParticipantType {
@@ -97,8 +100,9 @@ export class Participants {
              groupId?: number | string,
              label?: string,
              explicit?: boolean,
-             type?: string): void {
-    const participant = new Participant(name, isStarter, stereotype, width, groupId, label, explicit, type);
+             type?: string,
+             color?: string): void {
+    const participant = new Participant(name, isStarter, stereotype, width, groupId, label, explicit, type, color);
     this.participants.set(name, _.mergeWith({}, this.Get(name), participant, (a, b) => a || b));
   }
 

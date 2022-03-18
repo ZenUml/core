@@ -1,6 +1,8 @@
 <template>
   <div class="relative participant flex flex-col justify-center z-10"
-       :class="{'selected': selected, 'border-transparent': !!icon}" @click="onSelect">
+       :class="{'selected': selected, 'border-transparent': !!icon}"
+       :style="{backgroundColor: entity.color}"
+       @click="onSelect">
     <img v-if="!!icon" :src="icon" class="absolute left-1/2 transform -translate-x-1/2 -translate-y-full h-8" :alt="`icon for ${entity.name}`">
     <!-- Put in a div to give it a fixed height, because stereotype is dynamic. -->
     <div class="h-5 flex flex-col justify-center">
