@@ -4,19 +4,18 @@ on: [push]
 
 jobs:
   cypress-run:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [12]
+        node-version: [12.x]
 
     steps:
-      - name: Setup Node
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node }}
-      - name: Checkout
-        uses: actions/checkout@v2
+          node-version: ${{ matrix.node-version }}
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
