@@ -32,7 +32,7 @@ describe('Smoke test', function () {
     cy.visit('http://localhost:8080/smoke-fragment.html')
       .then(() => {
         cy.document().toMatchImageSnapshot({
-          imageConfig: {"threshold": 0.001}, capture: "viewport"
+          imageConfig: {"threshold": 0.005}, capture: "viewport"
         });
       })
   });
