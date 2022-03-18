@@ -71,7 +71,6 @@
     "babel-eslint": "^10.1.0",
     "core-js": "^3.8.3",
     "cypress": "^9.4.1",
-    "cypress-plugin-snapshots": "^1.4.4",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.6.0",
     "node-sass": "^5.0.0",
