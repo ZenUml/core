@@ -11,6 +11,10 @@ jobs:
         node-version: [ 12.x ]
 
     steps:
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
       - name: Checkout
         uses: actions/checkout@v2
       - name: Cypress run
