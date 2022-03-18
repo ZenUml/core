@@ -21,3 +21,8 @@ jobs:
         with:
           build: yarn build
           start: yarn start
+      - name: Upload artifacts  # Find artifacts under actions/jobs
+        uses: actions/upload-artifact@v2
+        with:
+          name: snapshots
+          path: ./cypress/
