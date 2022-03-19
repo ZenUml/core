@@ -9,7 +9,7 @@ describe('Smoke test', function () {
     })
       .then(() => {
         cy.document().toMatchImageSnapshot({
-          imageConfig: {"threshold": 0.001}, capture: "fullPage"
+          imageConfig: {"threshold": 0.01}, capture: "fullPage"
         });
       })
   });
