@@ -5,7 +5,10 @@ describe('Smoke test', function () {
     cy.visit('http://localhost:8080/smoke.html', {
       headers: {
         "Accept-Encoding": "gzip, deflate"
-      }
+      },
+      retryOnStatusCodeFailure: true,
+      retryOnNetworkFailure: true,
+      timeout: 30000
     })
       .then(() => {
         cy.document().toMatchImageSnapshot({
