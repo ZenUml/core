@@ -12,7 +12,7 @@ describe('Smoke test', function () {
     })
       .then(() => {
         cy.document().toMatchImageSnapshot({
-          imageConfig: {"threshold": 0.05}, capture: "fullPage"
+          imageConfig: {"threshold": 0.005}, capture: "viewport"
         });
       })
   });
