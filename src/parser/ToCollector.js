@@ -27,8 +27,8 @@ let onParticipant = function (ctx) {
   const width = (ctx.width && ctx.width()) && Number.parseInt(ctx.width().getText()) || undefined;
   const label = ctx.label && ctx.label()?.name()?.getFormattedText();
   const explicit = true;
-
-  participants.Add(participant, false, stereotype, width, groupId, label, explicit, type);
+  const color = ctx.COLOR()?.getText();
+  participants.Add(participant, false, stereotype, width, groupId, label, explicit, type, color);
 };
 ToCollector.prototype.enterParticipant = onParticipant
 

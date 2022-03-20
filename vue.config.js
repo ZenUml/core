@@ -7,7 +7,7 @@ module.exports = {
     },
     smoke: {
       entry: 'src/main.ts',
-      template: 'public/smoke-1.html',
+      template: 'public/smoke.html',
       filename: 'smoke.html'
     },
     smokeInteraction: {

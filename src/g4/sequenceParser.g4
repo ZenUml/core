@@ -40,7 +40,7 @@ starter
  ;
 
 participant
- : participantType? stereotype? name width? label?
+ : participantType? stereotype? name width? label? COLOR?
  | stereotype
  | participantType
  ;

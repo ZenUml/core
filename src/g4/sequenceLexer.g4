@@ -22,6 +22,15 @@ ARROW
  : '->'
  ;
 
+// Tokens
+fragment HEX
+    : [0-9a-fA-F]
+    ;
+
+COLOR
+ : '#' HEX+
+ ;
+
 OR : '||';
 AND : '&&';
 EQ : '==';
@@ -104,6 +113,8 @@ COMMENT
 OTHER
  : .
  ;
+
+
 
 mode EVENT;
 

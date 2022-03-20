@@ -79,6 +79,13 @@ test('A participant -  @actor <<Repo>> A 100 as label', () => {
   expectText(participants[0].label().name()).toBe('label')
 })
 
+test('A participant -  A #123456', () => {
+  let rootContext = seqDsl.RootContext('A #12345');
+  let participants = rootContext.head().participant();
+  expectText(participants[0].name()).toBe('A')
+  expect(participants[0].COLOR().getText()).toBe('#12345')
+})
+
 function expectText(context) {
   return expect(context.getFormattedText())
 }

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>vue-sequence smoke 1</title>
+    <style>
+      body {
+        margin: 0; /* mostly for demo on mobile */
+      }
+    </style>
+  </head>
+  <body class="handwriting">
+    <div id="diagram">
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function(event) {
+        window.store2.state.code = `
+title ABCD Title
+// Generating Sequence Diagrams from Java code is experimental.
+// Please report errors to https://github.com/ZenUml/jetbrains-zenuml/discussions
+MarkdownJavaFxHtmlPanel
+MarkdownJavaFxHtmlPanel.readFromInputStream(inputStream) {
+  StringBuilder resultStringBuilder = new StringBuilder();
+  try {
+    // String line;
+    while((line = br.readLine()) != null) {
+      resultStringBuilder.append(line).append("\\n");
+    }
+  }
+  catch(IOException) {
+    return "";
+  }
+  return "resultStringBuilder.toString()";
+}
+`
+      });
+
+    </script>
+    <!-- built files will be auto injected -->
+  </body>
+</html>
