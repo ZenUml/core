@@ -5,11 +5,14 @@ describe('Smoke test', function () {
     cy.visit('http://localhost:8080/smoke.html', {
       headers: {
         "Accept-Encoding": "gzip, deflate"
-      }
+      },
+      retryOnStatusCodeFailure: true,
+      retryOnNetworkFailure: true,
+      timeout: 30000
     })
       .then(() => {
         cy.document().toMatchImageSnapshot({
-          imageConfig: {"threshold": 0.01}, capture: "fullPage"
+          imageConfig: {"threshold": 0.005}, capture: "viewport"
         });
       })
   });
@@ -18,7 +21,7 @@ describe('Smoke test', function () {
     cy.visit('http://localhost:8080/smoke-interaction.html')
       .then(() => {
         cy.document().toMatchImageSnapshot({
-          imageConfig: {"threshold": 0.001}, capture: "viewport"
+          imageConfig: {"threshold": 0.005}, capture: "viewport"
         });
       })
   });
@@ -27,7 +30,7 @@ describe('Smoke test', function () {
     cy.visit('http://localhost:8080/smoke-creation.html')
       .then(() => {
         cy.document().toMatchImageSnapshot({
-          imageConfig: {"threshold": 0.001}, capture: "viewport"
+          imageConfig: {"threshold": 0.005}, capture: "viewport"
         });
       })
   });

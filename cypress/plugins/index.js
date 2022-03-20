@@ -20,5 +20,11 @@ module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
   initPlugin(on, config);
+  // force color profile
+  on('before:browser:launch', (browser = {}, launchOptions) => {
+    if (browser.family === 'chromium' && browser.name !== 'electron') {
+      launchOptions.args.push('--force-color-profile=srgb');
+    }
+  });
   return config;
 }
