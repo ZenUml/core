@@ -37,7 +37,6 @@
     "html-to-image": "^1.9.0",
     "lodash": "^4.17.20",
     "marked": "^2.0.0",
-    "memoizee": "^0.4.15",
     "postcss": "^7",
     "ramda": "^0.28.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
