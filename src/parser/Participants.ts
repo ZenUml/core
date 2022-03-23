@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import mergeWith from 'lodash/mergeWith';
 export enum ParticipantType {
   Actor = 1,
   Boundary,
@@ -103,7 +103,7 @@ export class Participants {
              type?: string,
              color?: string): void {
     const participant = new Participant(name, isStarter, stereotype, width, groupId, label, explicit, type, color);
-    this.participants.set(name, _.mergeWith({}, this.Get(name), participant, (a, b) => a || b));
+    this.participants.set(name, mergeWith({}, this.Get(name), participant, (a, b) => a || b));
   }
 
   // Returns an array of participants that are deduced from messages

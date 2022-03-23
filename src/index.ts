@@ -1,3 +1,5 @@
+import Vue from 'vue'
+import Vuex from 'vuex'
 import DiagramFrame from './components/DiagramFrame.vue'
 import SeqDiagram from './components/SeqDiagram.vue'
 
@@ -15,6 +17,8 @@ const Version = VERSION || ''
 // @ts-ignore
 const BuildTime = BUILD_TIME || ''
 const VueSequence = {
+  Vue,
+  Vuex,
   Version,
   BuildTime,
   Store,

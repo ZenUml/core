@@ -1,4 +1,5 @@
-import {replace, pipe} from "ramda";
+import pipe from "ramda/src/pipe";
+import replace from "ramda/src/replace";
 
 const removeChangeLines = replace(/[\n\r]/g, ' ');
 const removeExtraSpaces = replace(/\s+/g, ' ');
