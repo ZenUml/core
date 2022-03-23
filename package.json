@@ -31,7 +31,6 @@
     "@types/assert": "^1.5.4",
     "@types/ramda": "^0.28.0",
     "antlr4": "~4.8.0",
-    "autoprefixer": "^9",
     "dom-to-image-more": "^2.9.5",
     "file-saver": "^2.0.5",
     "highlight.js": "^10.1.1",
