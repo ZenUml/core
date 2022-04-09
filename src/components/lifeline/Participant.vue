@@ -1,7 +1,8 @@
 <template>
   <div class="relative participant flex flex-col justify-center z-10"
        :class="{'selected': selected, 'border-transparent': !!icon}"
-       :style="{backgroundColor: entity.color}"
+       ref="participant"
+       :style="{backgroundColor: backgroundColor, color: color}"
        @click="onSelect">
     <img v-if="!!icon" :src="icon" class="absolute left-1/2 transform -translate-x-1/2 -translate-y-full h-8" :alt="`icon for ${entity.name}`">
     <!-- Put in a div to give it a fixed height, because stereotype is dynamic. -->
@@ -13,6 +14,7 @@
 </template>
 
 <script>
+import {brightnessIgnoreAlpha, removeAlpha} from '../../utils/Color'
 const iconPath = {
   actor:      require('../../assets/actor.svg'),
   boundary:   require('../../assets/Robustness_Diagram_Boundary.svg'),
@@ -82,6 +84,17 @@ export default {
       required: true
     },
   },
+  data() {
+    return {
+      color: '#000'
+    }
+  },
+  mounted() {
+    this.updateFontColor();
+  },
+  updated() {
+    this.updateFontColor();
+  },
   computed: {
     selected () {
       return this.$store.state.selected.includes(this.entity.name)
@@ -92,10 +105,28 @@ export default {
     icon() {
       return iconPath[this.entity.type?.toLowerCase()]
     },
+    backgroundColor() {
+      try {
+        // Remove alpha for such a case:
+        // 1. Background color for parent has low brightness (e.g. #000)
+        // 2. Alpha is low (e.g. 0.1)
+        // 3. Entity background has high brightness (e.g. #fff)
+        // If we do not remove alpha, the computed background color will be bright while the perceived brightness is low.
+        // This will cause issue when calculating font color.
+        return this.entity.color && removeAlpha(this.entity.color);
+      } catch (e) {
+        return undefined;
+      }
+    },
   },
   methods: {
     onSelect () {
       this.$store.commit('onSelect', this.entity.name)
+    },
+    updateFontColor () {
+      let backgroundColor = window.getComputedStyle(this.$refs.participant).getPropertyValue('background-color');
+      let b = brightnessIgnoreAlpha(backgroundColor);
+      this.color = b > 128 ? '#000' : '#fff';
     }
   }
 }
