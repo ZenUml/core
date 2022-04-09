@@ -125,6 +125,9 @@ export default {
     },
     updateFontColor () {
       let backgroundColor = window.getComputedStyle(this.$refs.participant).getPropertyValue('background-color');
+      if (!backgroundColor) {
+        return;
+      }
       let b = brightnessIgnoreAlpha(backgroundColor);
       this.color = b > 128 ? '#000' : '#fff';
     }
