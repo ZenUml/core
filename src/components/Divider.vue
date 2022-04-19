@@ -39,7 +39,8 @@
   align-items: center;
 }
 .name {
-  margin: 0 5px;
+  margin: 0;
+  padding: 2px 6px 2px 6px;
 }
 .left, .right {
   height: 1px;

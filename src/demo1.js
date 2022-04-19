@@ -65,6 +65,7 @@ RET ret = A.methodA(a, b) {
         self()
       }
     }
+    =====divider=====
   } else if (Y) {
     C.method()
     par {
