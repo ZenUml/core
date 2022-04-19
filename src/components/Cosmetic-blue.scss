@@ -12,12 +12,10 @@ $dividerBackgroundColor: #E28553;
 $dividerBorderColor: #E28553;
 $dividerTextColor: #E28553;
 
-.theme-blue.sequence-diagram {
+.theme-blue .sequence-diagram {
   .divider {
     .name {
-      padding: 2px 6px 2px 6px;
       border-radius: 4px;
-      margin: 0px;
       border-color: $dividerBorderColor;
       color: $dividerTextColor;
     }
