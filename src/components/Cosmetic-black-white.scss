@@ -12,11 +12,9 @@ $dividerBorderColor: #000;
 .theme-black-white .sequence-diagram {
   .divider {
     .name {
-      padding: 2px 6px 2px 6px;
-      border-radius: 0px;
-      margin: 0px;
+      border-radius: 0;
       border-color: $dividerBorderColor;
-      box-shadow: 2px 2px 0px $dividerBorderColor;
+      box-shadow: 2px 2px 0 $dividerBorderColor;
     }
 
     .left {
