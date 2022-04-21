@@ -1,8 +1,8 @@
 $fragmentBorderColor: rgba(0, 0, 0, 0.30);
 $nameBackgroundColor: rgba(0, 0, 0, 0.07);
 $messageLineColor: #000;
-$occuranceBorderColor: #000;
-$occuranceBackgroundColor: #F5F5F5;
+$occurrenceBorderColor: #000;
+$occurrenceBackgroundColor: #F5F5F5;
 $participantLineColor: rgba(0, 0, 0, 0.40);
 $participantBorderColor: #000;
 $participantBackgroundColor: #fff;
@@ -28,14 +28,9 @@ $dividerBorderColor: #000;
 
   .lifeline {
     .participant {
-      font-weight: 400;
       border-color: $participantBorderColor;
       background: $participantBackgroundColor;
-      box-shadow: 2px 2px 0px $participantBorderColor;
-
-      label {
-        text-decoration: underline;
-      }
+      box-shadow: 2px 2px 0 $participantBorderColor;
     }
 
     .line {
@@ -45,53 +40,33 @@ $dividerBorderColor: #000;
 
   .message {
     .name {
-      padding-bottom: 1px;
+      color: $messageLineColor;
     }
 
     border-bottom-color: $messageLineColor;
 
     svg {
       polyline {
-        fill: $messageLineColor;
         stroke: $messageLineColor;
       }
-    }
-  }
-
-  .message.self {
-    svg > polyline:not(.head) {
-      fill: none;
+      polyline.head {
+        fill: $messageLineColor;
+      }
     }
   }
 
   .occurrence {
-    border-color: $occuranceBorderColor;
-    background-color: $occuranceBackgroundColor;
+    border-color: $occurrenceBorderColor;
+    background-color: $occurrenceBackgroundColor;
   }
 
   .fragment {
-    margin-top: 8px;
-    margin-bottom: 8px;
-    border-radius: 0;
     border-color: $fragmentBorderColor;
-
-    .fragment.par > .block > .statement-container:not(:first-child), .segment:not(:first-child) {
-      border-top: 1px solid $fragmentBorderColor;
-    }
 
     .header {
       .name {
         background: $nameBackgroundColor;
-
-        label { /* name label */
-          background: transparent;
-          padding: 0px;
-        }
       }
     }
-  }
-
-  .statement-container {
-    margin-bottom: 8px;
   }
 }
