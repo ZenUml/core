@@ -38,10 +38,7 @@
     text-align: left;
   }
 
-  .message.self svg.arrow polyline {
-    fill: none;
-  }
-  .message.self svg.arrow polyline.head {
+  svg.arrow polyline.head {
     fill: #000;
   }
 
