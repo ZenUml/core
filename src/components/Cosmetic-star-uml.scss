@@ -1,0 +1,38 @@
+// This is a sample
+$borderColor: #b94065;
+.theme-star-uml {
+  .sequence-diagram {
+    .lifeline {
+      .participant {
+        font-weight: 400;
+        border: 2px solid $borderColor;
+        background: #fffec8;
+
+        label {
+          text-decoration: underline;
+        }
+      }
+      .line {
+        border-left-color: $borderColor;
+      }
+    }
+    .message {
+      border-bottom-color: $borderColor;
+      svg {
+        polyline {
+          fill: $borderColor;
+          stroke: $borderColor;
+        }
+      }
+    }
+    .message.self {
+      svg>polyline:not(.head) {
+        fill: none;
+      }
+    }
+    .occurrence {
+      background-color: white;
+      border: 2px solid $borderColor;
+    }
+  }
+}
