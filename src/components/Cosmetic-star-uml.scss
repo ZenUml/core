@@ -1,16 +1,11 @@
-// This is a sample
 $borderColor: #b94065;
+$backgroundColor: #fffec8;
 .theme-star-uml {
   .sequence-diagram {
     .lifeline {
       .participant {
-        font-weight: 400;
-        border: 2px solid $borderColor;
-        background: #fffec8;
-
-        label {
-          text-decoration: underline;
-        }
+        border-color: $borderColor;
+        background-color: $backgroundColor;
       }
       .line {
         border-left-color: $borderColor;
@@ -20,19 +15,16 @@ $borderColor: #b94065;
       border-bottom-color: $borderColor;
       svg {
         polyline {
-          fill: $borderColor;
           stroke: $borderColor;
+        }
+        polyline.head {
+          fill: $borderColor;
         }
       }
     }
-    .message.self {
-      svg>polyline:not(.head) {
-        fill: none;
-      }
-    }
     .occurrence {
-      background-color: white;
-      border: 2px solid $borderColor;
+      background-color: $backgroundColor;
+      border-color: $borderColor;
     }
   }
 }
