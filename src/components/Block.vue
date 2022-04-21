@@ -1,6 +1,6 @@
 <template>
   <div class="block">
-    <div class="statement-container" v-for="(stat, index) in statements" :key="index">
+    <div class="statement-container mb-2" v-for="(stat, index) in statements" :key="index">
       <statement :context="stat" :selfCallIndent="selfCallIndent"/>
     </div>
   </div>
