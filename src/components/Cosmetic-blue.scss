@@ -29,11 +29,9 @@ $dividerTextColor: #E28553;
     }
     .lifeline {
       .participant {
-        font-weight: 400;
         border-color: $participantBorderColor;
         background: $participantBackgroundColor;
         label {
-          text-decoration: underline;
           color: $participantTextColor;
         }
       }
@@ -43,7 +41,6 @@ $dividerTextColor: #E28553;
     }
     .message {
       .name {
-        padding-bottom: 1px;
         color: $messageLineColor;
       }
       border-bottom-color: $messageLineColor;
@@ -64,8 +61,6 @@ $dividerTextColor: #E28553;
       background-color: $occuranceBackgroundColor;
     }
     .fragment {
-      margin-top: 8px;
-      margin-bottom: 8px;
       border-radius: 4px;
       border-color: $fragmentBorderColor;
       .fragment.par>.block>.statement-container:not(:first-child), .segment:not(:first-child) {
