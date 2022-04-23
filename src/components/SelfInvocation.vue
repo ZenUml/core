@@ -38,8 +38,9 @@
     text-align: left;
   }
 
-  svg.arrow polyline.head {
-    fill: #000;
+  svg polyline {
+    fill: none;
+    stroke-width: 2px;
   }
 
 </style>
