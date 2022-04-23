@@ -12,8 +12,6 @@
   }
   .message {
     .name {
-      padding-bottom: 1px;
-      padding-left: 1px;
       color: #000;
     }
     border-bottom-color: #000;
@@ -38,9 +36,6 @@
   .fragment {
     border-radius: 4px;
     border-color: rgba(0, 0, 0, 0.30);
-    .fragment.par>.block>.statement-container:not(:first-child), .segment:not(:first-child) {
-      border-top: 1px solid rgba(0, 0, 0, 0.30);
-    }
     .header {
       .name {
         padding: 4px 4px 4px 6px;
@@ -69,12 +64,10 @@
   }
   .lifeline {
     .participant {
-      font-weight: 400;
       border-color: #000;
       background: #FFF;
     }
   }
-
 
   .selected {
     border-color: rgba(3, 3, 3, 0.55);
