@@ -1,5 +1,5 @@
 <template>
-  <div ref="export" class="p-1">
+  <div ref="export" class="p-1 inline-block">
   <!-- pb-8 is to offset pt-8 in SeqDiagram component -->
   <div class="zenuml frame relative m-1 origin-top-left" :style="{transform: `scale(${scale})`}">
     <div ref="content">
