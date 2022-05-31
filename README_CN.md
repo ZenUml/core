@@ -1,3 +1,10 @@
+# Development
+
+````
+yarn install
+yarn start
+````
+
 # 代码结构
 
 DSL解析器和渲染器都在这个代码库中。
