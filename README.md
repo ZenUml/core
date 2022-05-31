@@ -1,3 +1,10 @@
+# Development
+
+````
+yarn install
+yarn start
+````
+
 # Code Structure
 This repository contains both the DSL parser and the renderer.
 
