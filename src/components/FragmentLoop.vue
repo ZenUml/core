@@ -30,7 +30,7 @@
         return this.loop?.braceBlock()?.block()
       },
       condition: function () {
-        return this.loop?.parExpr()?.condition()?.getText()
+        return this.loop?.parExpr()?.condition()?.getFormattedText()
       }
     },
     beforeCreate: function () {
