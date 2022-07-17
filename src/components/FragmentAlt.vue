@@ -64,7 +64,7 @@
     },
     methods: {
       conditionFromIfElseBlock(ctx) {
-        return ctx?.parExpr()?.condition()?.getText()
+        return ctx?.parExpr()?.condition()?.getFormattedText()
       },
       blockInElseIfBlock(ctx) {
         return ctx?.braceBlock()?.block()
