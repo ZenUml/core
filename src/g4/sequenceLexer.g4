@@ -70,6 +70,7 @@ AS : 'as';
 TRY: 'try';
 CATCH: 'catch';
 FINALLY: 'finally';
+IN: 'in';
 
 STARTER_LXR: '@Starter' | '@starter';
 ANNOTATION_RET: '@Return' | '@return' | '@Reply' | '@reply';

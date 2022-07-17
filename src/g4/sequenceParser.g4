@@ -290,5 +290,9 @@ parExpr
 condition
  : atom
  | expr
+ | inExpr
  ;
 
+inExpr
+ : ID IN ID
+ ;

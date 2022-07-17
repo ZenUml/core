@@ -15,4 +15,14 @@ describe('Conditions', () => {
     const ast = Fixture.firstStatement(code);
     expect(ast.alt().ifBlock().parExpr().condition().getFormattedText()).toBe('a == 1 && b != 2 || c = A.isGood(B.isBad())');
   });
+
+  it('parse in express in loop as condition', () => {
+    const code = `
+      forEach(x in xes) {
+        A.method
+      }
+    `
+    const ast = Fixture.firstStatement(code);
+    expect(ast.loop().parExpr().condition().getFormattedText()).toBe('x in xes');
+  })
 })
