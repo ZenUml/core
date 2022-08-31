@@ -70,12 +70,20 @@ export class Coordinates {
   }
 
   private getParticipantGap(p: IParticipantModel) {
-    const halfLeft = Coordinates.half(this.widthProvider, p.left);
-    const halfSelf = Coordinates.half(this.widthProvider, p.name);
+    let leftNameOrLabel = this.labelOrName(p.left);
+    const halfLeft = Coordinates.half(this.widthProvider, leftNameOrLabel);
+    const halfSelf = Coordinates.half(this.widthProvider, p.label || p.name);
     const leftIsVisible = p.left && p.left !== '_STARTER_';
     const selfIsVisible = p.name && p.name !== '_STARTER_';
     return ((leftIsVisible && halfLeft) || 0) + ((selfIsVisible && halfSelf) || 0);
   }
+
+  private labelOrName(name: string) {
+    const pIndex = this.participantModels.findIndex(p => p.name === name);
+    if (pIndex === -1) return '';
+    return this.participantModels[pIndex].label || this.participantModels[pIndex].name;
+  }
+
   private static half(widthProvider: WidthFunc, participantName: string | undefined) {
     if (participantName === '_STARTER_') {
       return MARGIN/2;

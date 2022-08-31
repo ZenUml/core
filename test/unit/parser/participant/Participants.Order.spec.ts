@@ -46,10 +46,10 @@ function getFlattenedParticipants(code: string) {
 
 describe('Participants.Order', () => {
   it('should return the order of participants', () => {
-    expect(getFlattenedParticipants('A B C.m')).toEqual([
+    expect(getFlattenedParticipants('A as A1 B C.m')).toEqual([
       {name: '_STARTER_', left: ''},
-      {name: 'A', left: '_STARTER_'},
-      {name: 'B', left: 'A'},
+      {name: 'A', label: 'A1', left: '_STARTER_'},
+      {name: 'B', label: undefined, left: 'A'},
       {name: 'C', left: 'B'}
     ]);
   })

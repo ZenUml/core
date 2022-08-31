@@ -7,6 +7,7 @@ const seqParser = sequenceParser.sequenceParser;
 export interface IParticipantModel {
   name?: string;
   left: string;
+  label?: string;
 }
 
 export class ParticipantListener extends sequenceParserListener.sequenceParserListener {
@@ -37,7 +38,8 @@ export class ParticipantListener extends sequenceParserListener.sequenceParserLi
 
   enterParticipant(ctx: any) {
     const name = ctx?.name()?.getFormattedText() || 'Missing `Participant` name';
-    const participant = {name, left: ''};
+    const label = ctx.label()?.name()?.getFormattedText();
+    const participant = {name, label, left: ''};
     this.explicitParticipants.push(participant);
   }
 
