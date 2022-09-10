@@ -134,6 +134,7 @@
     position: absolute;
     height: calc(100% + 14px);
     left: -12px;
+    display: none;
   }
 
   .interaction .occurrence.source.right-to-left {
