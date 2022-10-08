@@ -1,37 +1,41 @@
 <template>
-  <div ref="export" class="p-1 inline-block">
-  <!-- pb-8 is to offset pt-8 in SeqDiagram component -->
-  <div class="zenuml frame relative m-1 origin-top-left" :style="{transform: `scale(${scale})`}">
-    <div ref="content">
-      <div class="header flex justify-between">
-        <div class="left hide-export">
-          <slot></slot>
+  <!-- We have enabled important: ".zenuml" for tailwind.
+        1. Don't use inline-block as class name here. Other clients may not have .zenuml at ancestor level.
+        2. .zenuml is used to make sure tailwind css takes effect.
+   -->
+  <div ref="export" class="zenuml" style="display: inline-block">
+    <!-- pb-8 is to offset pt-8 in SeqDiagram component -->
+    <div class="frame relative m-1 origin-top-left" :style="{transform: `scale(${scale})`}">
+      <div ref="content">
+        <div class="header flex justify-between">
+          <div class="left hide-export">
+            <slot></slot>
+          </div>
+          <div class="right flex-grow flex justify-between">
+            <diagram-title :context="title"/>
+            <privacy class="hide-export" />
+          </div>
         </div>
-        <div class="right flex-grow flex justify-between">
-          <diagram-title :context="title"/>
-          <privacy class="hide-export" />
+        <div>
+          <div v-show="showTips" class="fixed z-40 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+            <TipsDialog />
+          </div>
         </div>
+        <seq-diagram/>
       </div>
-      <div>
-        <div v-show="showTips" class="fixed z-40 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-          <TipsDialog />
+      <div class="footer mt-10 flex justify-between hide-export">
+        <button class="bottom-1 left-1" @click="showTipsDialog()">
+          <svg class="filter grayscale" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M514 912c-219.9 0-398.8-178.9-398.8-398.9 0-219.9 178.9-398.8 398.8-398.8s398.9 178.9 398.9 398.8c-0.1 220-179 398.9-398.9 398.9z m0-701.5c-166.9 0-302.7 135.8-302.7 302.7S347.1 815.9 514 815.9s302.7-135.8 302.7-302.7S680.9 210.5 514 210.5z" fill="#BDD2EF" /><path d="M431.1 502.4c-0.1 0.3 0.3 0.4 0.4 0.2 6.9-11.7 56.5-89.1 23.4 167.3-17.4 134.7 122.9 153.6 142.3-7.9 0.1-1-1.3-1.4-1.7-0.4-11.9 37.2-49.6 104.9-4.7-155.2 18.6-107.2-127.6-146-159.7-4z" fill="#2867CE" /><path d="M541.3 328m-68 0a68 68 0 1 0 136 0 68 68 0 1 0-136 0Z" fill="#2867CE" /></svg>
+        </button>
+        <div class="zoom-controls flex justify-between w-28 bg-blue-100" :style="{transform: `scale(${1/scale})`}">
+          <button class="zoom-in px-1" @click="zoomIn()">+</button>
+          <label>{{Number(scale * 100).toFixed(0)}} %</label>
+          <button class="zoom-out  px-1" @click="zoomOut()">-</button>
         </div>
+        <width-provider/>
+        <a target="_blank" href="https://zenuml.com" class="absolute bottom-1 right-1 text-xs opacity-0 hover:opacity-100 duration-300 ">ZenUML.com</a>
       </div>
-      <seq-diagram/>
     </div>
-    <div class="footer mt-10 flex justify-between hide-export">
-      <button class="bottom-1 left-1" @click="showTipsDialog()">
-        <svg class="filter grayscale" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M514 912c-219.9 0-398.8-178.9-398.8-398.9 0-219.9 178.9-398.8 398.8-398.8s398.9 178.9 398.9 398.8c-0.1 220-179 398.9-398.9 398.9z m0-701.5c-166.9 0-302.7 135.8-302.7 302.7S347.1 815.9 514 815.9s302.7-135.8 302.7-302.7S680.9 210.5 514 210.5z" fill="#BDD2EF" /><path d="M431.1 502.4c-0.1 0.3 0.3 0.4 0.4 0.2 6.9-11.7 56.5-89.1 23.4 167.3-17.4 134.7 122.9 153.6 142.3-7.9 0.1-1-1.3-1.4-1.7-0.4-11.9 37.2-49.6 104.9-4.7-155.2 18.6-107.2-127.6-146-159.7-4z" fill="#2867CE" /><path d="M541.3 328m-68 0a68 68 0 1 0 136 0 68 68 0 1 0-136 0Z" fill="#2867CE" /></svg>
-      </button>
-      <div class="zoom-controls flex justify-between w-28 bg-blue-100" :style="{transform: `scale(${1/scale})`}">
-        <button class="zoom-in px-1" @click="zoomIn()">+</button>
-        <label>{{Number(scale * 100).toFixed(0)}} %</label>
-        <button class="zoom-out  px-1" @click="zoomOut()">-</button>
-      </div>
-      <width-provider/>
-      <a target="_blank" href="https://zenuml.com" class="absolute bottom-1 right-1 text-xs opacity-0 hover:opacity-100 duration-300 ">ZenUML.com</a>
-    </div>
-  </div>
   </div>
 </template>
 
