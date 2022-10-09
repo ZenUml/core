@@ -21,7 +21,7 @@
       </div>
     </div>
     <occurrence :context="creation" :participant="to"/>
-    <message class="return bottom-0" v-if="assignee" :content="assignee" :rtl="!rightToLeft" type="return"/>
+    <message class="return transform -translate-y-full" v-if="assignee" :content="assignee" :rtl="!rightToLeft" type="return"/>
   </div>
 </template>
 
