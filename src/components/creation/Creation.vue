@@ -5,20 +5,20 @@
        :class="{ 'right-to-left':rightToLeft, '-translate-x-full': rightToLeft, 'highlight': isCurrent }"
        :style="{width: interactionWidth + 'px'}">
     <comment v-if="comment" :comment="comment" />
-    <!-- h-10 to push occurrence down -->
-    <div class="message-container h-10">
+    <!-- flex items-center is an idiom that vertically align items left and right. -->
+    <div ref="messageContainer" class="message-container flex items-center">
+      <message ref="messageEl"
+             :data-to="to"
+             data-type="creation"
+             class="invocation w-full transform -translate-y-1/2" :content="signature" :rtl="rightToLeft" type="creation"/>
       <!-- TODO: replace the following with a participant component. -->
       <div ref="participantPlaceHolder"
-           class="participant absolute invisible right-0 flex flex-col justify-center">
+           class="participant right-0 flex flex-col justify-center flex-shrink-0">
         <!-- Put in a div to give it a fixed height, because stereotype is dynamic. -->
         <div class="h-5 flex flex-col justify-center">
           <label class="name">{{ to }}</label>
         </div>
       </div>
-      <message ref="messageEl"
-               :data-to="to"
-               data-type="creation"
-               class="invocation" :content="signature" :rtl="rightToLeft" type="creation"/>
     </div>
     <occurrence :context="creation" :participant="to"/>
     <message class="return absolute bottom-0" v-if="assignee" :content="assignee" :rtl="!rightToLeft" type="return"/>
@@ -79,11 +79,9 @@
     },
     methods: {
       layoutMessageContainer() {
-        if (!this.$refs.participantPlaceHolder || !this.$refs.messageEl) return
+        if (!this.$refs.participantPlaceHolder || !this.$refs.messageContainer) return
         const halfWidthOfPlaceholder = this.$refs['participantPlaceHolder'].offsetWidth / 2;
-        const placeHolderStyle = this.$refs['participantPlaceHolder'].style;
-        placeHolderStyle.marginRight = (-1) * (halfWidthOfPlaceholder + 6) + 'px';
-        ((this.$refs['messageEl']).$el).style.width = `calc(100% - ${halfWidthOfPlaceholder - 4}px`;
+        ((this.$refs['messageContainer'])).style.width = `calc(100% + ${halfWidthOfPlaceholder + 6}px`;
       },
       onClick() {
         this.onElementClick(CodeRange.from(this.context))
