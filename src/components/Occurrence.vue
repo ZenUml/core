@@ -1,5 +1,5 @@
 <template>
-  <div class="occurrence border-2 relative" :class="{'right-to-left': rtl}" data-el-type="occurrence" :data-belongs-to="participant" :data-x-offset="center" :data-debug-center-of="computedCenter">
+  <div class="occurrence border-2 relative left-full" :class="{'right-to-left': rtl}" data-el-type="occurrence" :data-belongs-to="participant" :data-x-offset="center" :data-debug-center-of="computedCenter">
     <block v-if="this.context.braceBlock()"
            :context="context.braceBlock().block()"
            :selfCallIndent="selfCallIndent"
@@ -38,6 +38,13 @@ import {mapState, mapGetters} from 'vuex'
 
 <style scoped>
 
+  .occurrence {
+    width: 15px;
+    /* 5 = (OccurrenceWidth(15)-1)/2 - OccurrenceBorderWidth(2)*/
+    padding: 16px 0 16px 5px;
+  }
+
+
   >>> >.statement-container:last-child>.interaction.return:last-of-type {
     margin-bottom: 0;
     border-bottom: 0;
@@ -50,7 +57,7 @@ import {mapState, mapGetters} from 'vuex'
   }
 
   .right-to-left.occurrence {
-    left: -12px;
+    left: -14px;
   }
 </style>
 

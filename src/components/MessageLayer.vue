@@ -25,7 +25,7 @@ import {mapGetters, mapMutations} from 'vuex'
       paddingLeft() {
         if (this.participants.Array().length >= 1) {
           const first = this.participants.Array().slice(0)[0].name;
-          return this.centerOf(first) - 1;
+          return this.centerOf(first);
         }
         return 0;
       }
@@ -48,11 +48,16 @@ import {mapGetters, mapMutations} from 'vuex'
   /* Avoid moving interaction to the left or right with margins.
   We can always assume that an interaction's border is the lifeline.
   Moving content with padding is OK.
+  Don't move this to the Interaction component. This is also used by Interaction-async
    */
   .interaction {
     position: relative;   /* To provide width for .return */
-    /*Keep dashed here otherwise no space is given to the border*/
-    border: 5px dashed transparent;
+    /*Keep dashed or solid here otherwise no space is given to the border*/
+    border: dashed transparent;
+    /* This border width configuration make sure the content width is
+       the same as from the source occurrence's right border to target
+       occurrence's left boarder (boarder not inclusive).*/
+    border-width: 0 7px;
   }
 
   .interaction:hover {
@@ -72,13 +77,6 @@ import {mapGetters, mapMutations} from 'vuex'
     width: 40px;
   }
 
-  .occurrence {
-    width: 15px;
-    /* 2 = occurrenceBorderWidth*/
-    left: calc(100% - 2px);
-    /* 6 = (OccurrenceWidth(15)+1)/2 - OccurrenceBorderWidth(2)*/
-    padding: 16px 0 16px 5px;
-  }
 
   .interaction.right-to-left > .occurrence {
     /* InteractionBorderWidth + (OccurrenceWidth-1)/2 */
