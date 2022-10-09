@@ -1,9 +1,8 @@
 <template>
   <div class="message border-b-2 flex items-end hover:bg-yellow-300"
-       :class="{ 'right-to-left':rtl, 'text-left': isAsync, 'text-center': !isAsync }"
+       :class="{ 'flex-row-reverse': rtl, 'right-to-left':rtl, 'text-left': isAsync, 'text-center': !isAsync }"
        :style="{'border-bottom-style': borderStyle}">
     <div class="name flex-grow"
-         :class="{ 'order-last': rtl }"
          style="padding-left: 10px">{{content}}</div>
     <point class="flex-shrink-0 transform translate-y-1/2 -my-px" :fill="fill" :rtl="rtl"/>
   </div>

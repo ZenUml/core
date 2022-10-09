@@ -23,6 +23,44 @@ element. The parent element get the height from the `message-layer`.
 
 == The message layer
 
+=== Occurrence
+_TODO_: explain misalignment of the occurrence concept and the spec.
+
+image::images/occurrence.png[width=304,alt="occurrence"]
+
+The occurrence is the bar (or invisible bar for async messages) that
+represents the execution of a message.
+
+It has a width of 15px and border of 2px. These two values #must not#
+be overridden in themes.
+
+It has a padding-left of 5px which pushes the children `interaction` to
+the middle of the occurrence.
+....
+(occurrenceWidth - occurrenceBorderWidth x 2 - lifelineWidth) / 2
+= (15 - 2 x 2 - 1) / 2
+= 5
+....
+
+Because the lifeline has width of 1px, for normal (left to right) `interaction` s
+we give it a margin left of 1px to avoid the overlap of the lifeline and the
+interaction border. See `interaction` for more details.
+
+=== Interaction
+The `interaction` is one of the key conceptual elements. It works with
+the `occurrence` to influence high-level layout. The `interaction` is the container
+of the message, children interactions and the response.
+
+The `interaction` has a border of 5px. This value #must not# be overridden in themes.
+....
+(occurrenceWidth - occurrenceBorderWidth x 2 - lifelineWidth) / 2
+= (15 - 2 x 2 - 1) / 2
+= 5
+....
+Normal (left to right) `interaction` s have a margin-left of 1px to avoid the
+overlap of the lifeline and the interaction border.
+
+
 === Message arrow
 .Message arrow (the dashed line and arrow head)
 image::images/creation-component.png[width=224]
