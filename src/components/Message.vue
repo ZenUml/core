@@ -2,7 +2,9 @@
   <div class="message border-b-2 flex items-end hover:bg-yellow-300"
        :class="{ 'right-to-left':rtl, 'text-left': isAsync, 'text-center': !isAsync }"
        :style="{'border-bottom-style': borderStyle}">
-    <div class="name flex-grow" style="padding-left: 10px">{{content}}</div>
+    <div class="name flex-grow"
+         :class="{ 'order-last': rtl }"
+         style="padding-left: 10px">{{content}}</div>
     <point class="flex-shrink-0 transform translate-y-1/2 -my-px" :fill="fill" :rtl="rtl"/>
   </div>
 </template>
@@ -49,23 +51,3 @@
     }
   }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
-  .message .name {
-    min-height: 1em;
-  }
-
-  .creation > .message-container > .message,
-  .async > .message,
-  .sync > .message {
-    /* (OccurrenceWidth-1)/2 - InteractionBorderWidth*/
-    left: 2px;
-  }
-
-  .sync > .right-to-left.message {
-    /* (OccurrenceWidth-1)/2 - InteractionBorderWidth + LifelineCenter*/
-    left: 3px;
-  }
-</style>

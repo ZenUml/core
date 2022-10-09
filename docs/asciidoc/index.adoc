@@ -23,37 +23,8 @@ element. The parent element get the height from the `message-layer`.
 
 == The message layer
 
-=== Creation
-
-image::images/creation-component.png[width=224]
-
-==== Pattern 1: Vertically aligning
-image::images/vertical-alignment.svg[width=40]
-
-....
-<div class="flex items-center">
-  <div class="w-10 h-8 bg-blue-200"></div>
-  <div class="w-10 h-20 bg-green-200"></div>
-</div>
-....
-
-==== Pattern 2: Shift half the height
-image::images/shift-up-half-the-height.png[width=50]
-
-The message arrow is supposed to point to the middle of the participant
-box. It is not he whole message that is aligned with the participant
-box. So we have to shift the message up half the height of the message.
-....
-<div class="flex items-center m-10">
-  <div class="w-10 h-8 bg-blue-200 transform -translate-y-1/2"></div>
-  <div class="w-10 h-20 bg-green-200"></div>
-</div>
-....
-
-This pattern is also used at the arrows. See the image for creation.
-
 === Message arrow
-.Message arrow (same image as above)
+.Message arrow (the dashed line and arrow head)
 image::images/creation-component.png[width=224]
 
 This time we focus on how to align the arrow line and the arrow head.
@@ -84,6 +55,56 @@ when the message name is too long.
 ===== .transform .translate-y-1/2
 The `transform` and `translate-y-1/2` classes are used to shift the
 arrow head down half the height of the arrow head.
+
+=== Message arrow right to left
+image::images/message-arrow-rtl.png[width=200,alt="message arrow right to left"]
+
+....
+  <div class="message flex items-end"
+    <div class="name flex-grow"
+        :class="{ 'order-last': rtl }"
+          >{{content}}</div>
+    <point class="flex-shrink-0 transform translate-y-1/2 -my-px"/>
+  </div>
+....
+
+==== Key classes
+===== .order-last
+The `order-last` class is used to move the message name to the right
+of the arrow head.
+
+
+=== Creation
+
+image::images/creation-component.png[width=240]
+
+
+
+==== Pattern 1: Vertically aligning
+image::images/vertical-alignment.svg[width=40]
+
+....
+<div class="flex items-center">
+  <div class="w-10 h-8 bg-blue-200"></div>
+  <div class="w-10 h-20 bg-green-200"></div>
+</div>
+....
+
+==== Pattern 2: Shift half the height
+image::images/shift-up-half-the-height.png[width=50]
+
+The message arrow is supposed to point to the middle of the participant
+box. It is not he whole message that is aligned with the participant
+box. So we have to shift the message up half the height of the message.
+....
+<div class="flex items-center m-10">
+  <div class="w-10 h-8 bg-blue-200 transform -translate-y-1/2"></div>
+  <div class="w-10 h-20 bg-green-200"></div>
+</div>
+....
+
+This pattern is also used at the arrows. See the image for creation.
+
 
 
 

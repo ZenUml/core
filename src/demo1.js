@@ -6,4 +6,8 @@
 // Nested method
 // Assignment
 export default `
-new A`
+A B
+A.method() {
+  B.method() 
+}
+`
