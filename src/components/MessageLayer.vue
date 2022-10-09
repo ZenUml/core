@@ -80,9 +80,10 @@ import {mapGetters, mapMutations} from 'vuex'
 
   .occurrence {
     width: 15px;
+    /* 2 = occurrenceBorderWidth*/
     left: calc(100% - 2px);
-    /* 5 = (OccurrenceWidth(15)-1)/2 - OccurrenceBorderWidth(2)*/
-    padding: 16px 0 16px 5px;
+    /* 6 = (OccurrenceWidth(15)+1)/2 - OccurrenceBorderWidth(2)*/
+    padding: 16px 0 16px 6px;
   }
 
   .interaction.right-to-left > .occurrence {
