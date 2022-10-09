@@ -19,7 +19,7 @@
              :rtl="rightToLeft"
              type="sync"></component>
     <occurrence :context="message" :participant="to" :selfCallIndent="passOnOffset" :rtl="rightToLeft"/>
-    <message class="return" v-if="assignee && !isSelf" :content="assignee" :rtl="!rightToLeft" type="return"/>
+    <message class="return transform -translate-y-full" v-if="assignee && !isSelf" :content="assignee" :rtl="!rightToLeft" type="return"/>
   </div>
 </template>
 

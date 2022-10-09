@@ -1,6 +1,8 @@
 <template>
   <div class="message border-b-2 flex items-end hover:bg-yellow-300"
-       :class="{ 'flex-row-reverse': rtl, 'right-to-left':rtl, 'text-left': isAsync, 'text-center': !isAsync }"
+       :class="{ 'flex-row-reverse': rtl,
+          'return': type === 'return',
+          'right-to-left':rtl, 'text-left': isAsync, 'text-center': !isAsync }"
        :style="{'border-bottom-style': borderStyle}">
     <div class="name flex-grow"
          style="padding-left: 10px">{{content}}</div>
@@ -50,3 +52,9 @@
     }
   }
 </script>
+
+<style>
+.return.right-to-left {
+  left: -2px;
+}
+</style>

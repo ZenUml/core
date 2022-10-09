@@ -1,5 +1,6 @@
-= The two layer structure
+:icons: font
 
+== The two layer structure
 At the highest level, the diagram is rendered in two layers:
 the lifeline layer and the message layer.
 
@@ -12,12 +13,12 @@ the lifeline layer and the message layer.
 </div>
 ....
 
-== Key classes
-=== .absolute
+=== Key classes
+==== .absolute
 The `absolute` class is used to remove the lifeline layer from the normal
 flow of the document.
 
-=== .h-full
+==== .h-full
 The `h-full` class is used to make the lifeline layer as tall as the parent
 element. The parent element get the height from the `message-layer`.
 
@@ -72,6 +73,53 @@ All the three work as a container for the message, children interactions and the
 response. In the normal direction (left to right), they start with the middle
 of the source lifeline and end with the middle of the target lifeline.
 
+=== Return message
+
+=== Return message
+The return message is the message that is sent back to the sender of the original
+message. It is rendered as a dashed line.
+
+A return message is rendered from three places:
+
+* within `statement`, when the statement is a return message (e.g. `return x`)
+* within `interaction`, when it has an `assignment` clause (e.g. `x=A.m`)
+* within `creation`, when it has an `assignment` clause (e.g. `x=new A()`)
+
+==== Return message from `statement`
+If the statement is the last statement we set the height of the message to 0px,
+so that it does not push the message down further. This is because a return message
+does not have children and does not need an occurrence.
+
+....
+.statement-container:last-child>.return {
+    height: 0;
+}
+....
+
+==== Return message from `x=A.m` or `x=new A`
+This is implemented in Interaction and Creation components.
+
+....
+<message class="return transform -translate-y-full"/>
+....
+
+==== Conflicting return messages
+We provide two ways in DSL to represent `return` messages:
+
+....
+// option 1
+x = A.method
+// option 2
+A.method() {
+  return y
+}
+....
+
+If you use both, we will render both with overlapping. This is on purpose to expose
+the conflict to the user.
+
+.Return message conflict
+image::images/return-message-conflict.png[width=200,alt="return message conflict"]
 
 === Message arrow
 .Message arrow (the dashed line and arrow head)
