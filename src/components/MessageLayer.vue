@@ -73,19 +73,14 @@ import {mapGetters, mapMutations} from 'vuex'
     text-align: center;
   }
 
-  .message.self svg {
-    width: 40px;
-  }
-
-
   .interaction.right-to-left > .occurrence {
     /* InteractionBorderWidth + (OccurrenceWidth-1)/2 */
     left: -12px;               /* overlay occurrence bar on the existing bar. */
   }
 
   .interaction.self > .occurrence {
-    /* width of InteractionBorderWidth 5px + lifeline center 1px */
-    left: -6px;               /* overlay occurrence bar on the existing bar. */
+    /* width of InteractionBorderWidth 7px + lifeline center 1px */
+    left: -8px;               /* overlay occurrence bar on the existing bar. */
     margin-top: -10px;
   }
 
