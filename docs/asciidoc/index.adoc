@@ -60,19 +60,17 @@ arrow head down half the height of the arrow head.
 image::images/message-arrow-rtl.png[width=200,alt="message arrow right to left"]
 
 ....
-  <div class="message flex items-end"
+  <div class="message flex items-end" :class="{'flex-row-reverse': rtl}">
     <div class="name flex-grow"
-        :class="{ 'order-last': rtl }"
           >{{content}}</div>
     <point class="flex-shrink-0 transform translate-y-1/2 -my-px"/>
   </div>
 ....
 
 ==== Key classes
-===== .order-last
-The `order-last` class is used to move the message name to the right
-of the arrow head.
-
+===== .flex-row-reverse
+The `flex-row-reverse` class is used to reverse the order of the name and
+the arrow head.
 
 === Creation
 
@@ -105,7 +103,11 @@ box. So we have to shift the message up half the height of the message.
 
 This pattern is also used at the arrows. See the image for creation.
 
+=== Creation right to left
+image::images/creation-rtl.png[width=240,alt="creation right to left"]
 
-
+On top of normal Creation, we need to flip the participant placeholder
+and the message container. We use the `flex-row-reverse` class to flip.
+See "Message right to left" for example using `flex-row-reverse`.
 
 

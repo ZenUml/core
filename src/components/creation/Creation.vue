@@ -6,14 +6,14 @@
        :style="{width: interactionWidth + 'px'}">
     <comment v-if="comment" :comment="comment" />
     <!-- flex items-center is an idiom that vertically align items left and right. -->
-    <div ref="messageContainer" class="message-container flex items-center">
+    <div ref="messageContainer" class="message-container flex items-center" :class="{ 'flex-row-reverse': rightToLeft}">
       <message ref="messageEl"
              :data-to="to"
              data-type="creation"
              class="invocation w-full transform -translate-y-1/2" :content="signature" :rtl="rightToLeft" type="creation"/>
       <!-- TODO: replace the following with a participant component. -->
       <div ref="participantPlaceHolder"
-           class="participant right-0 flex flex-col justify-center flex-shrink-0">
+           class="participant invisible right-0 flex flex-col justify-center flex-shrink-0">
         <!-- Put in a div to give it a fixed height, because stereotype is dynamic. -->
         <div class="h-5 flex flex-col justify-center">
           <label class="name">{{ to }}</label>
@@ -82,6 +82,9 @@
         if (!this.$refs.participantPlaceHolder || !this.$refs.messageContainer) return
         const halfWidthOfPlaceholder = this.$refs['participantPlaceHolder'].offsetWidth / 2;
         ((this.$refs['messageContainer'])).style.width = `calc(100% + ${halfWidthOfPlaceholder + 6}px`;
+        if(this.rightToLeft) {
+          ((this.$refs['messageContainer'])).style.transform = `translateX( ${-(halfWidthOfPlaceholder + 6)}px`;
+        }
       },
       onClick() {
         this.onElementClick(CodeRange.from(this.context))
