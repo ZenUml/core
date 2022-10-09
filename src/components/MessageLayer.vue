@@ -74,11 +74,6 @@ import {mapGetters, mapMutations} from 'vuex'
     text-align: center;
   }
 
-  .message svg {
-    position: absolute;
-    width: 10px;
-  }
-
   .message.self svg {
     width: 40px;
   }

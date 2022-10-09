@@ -1,9 +1,9 @@
 <template>
-  <div class="message hover:bg-yellow-300"
+  <div class="message border-b-2 flex items-end hover:bg-yellow-300"
        :class="{ 'right-to-left':rtl, 'text-left': isAsync, 'text-center': !isAsync }"
        :style="{'border-bottom-style': borderStyle}">
-    <div class="name inline-block" style="padding-left: 10px">{{content}}</div>
-    <point :fill="fill" :rtl="rtl"/>
+    <div class="name flex-grow" style="padding-left: 10px">{{content}}</div>
+    <point class="flex-shrink-0 transform translate-y-1/2 -my-px" :fill="fill" :rtl="rtl"/>
   </div>
 </template>
 
@@ -52,14 +52,6 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .message {
-    box-sizing: content-box;
-    /* 100% is the width of the content of interaction. */
-    /* 100% + InteractionBorderWidth x 2 - ((OccurrenceWidth-1)/2)x2*/
-    width: calc(100% - 4px);
-    border-bottom-width: 2px;
-    white-space: nowrap;
-  }
 
   .message .name {
     min-height: 1em;

@@ -44,7 +44,7 @@ export default {
       if (firstMessage && firstMessage.attributes['data-type'].value === 'creation') {
         const rootY = this.$el.getBoundingClientRect().y
         const messageY = firstMessage.getBoundingClientRect().y
-        this.top = (messageY - rootY) / this.scale
+        this.top = (messageY - rootY - 4) / this.scale
       } else {
         this.top = 0
       }
