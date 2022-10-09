@@ -57,8 +57,20 @@ The `interaction` has a border of 5px. This value #must not# be overridden in th
 = (15 - 2 x 2 - 1) / 2
 = 5
 ....
-Normal (left to right) `interaction` s have a margin-left of 1px to avoid the
-overlap of the lifeline and the interaction border.
+
+==== Do not add margin to interaction
+It is on purpose that interaction box overlaps source lifeline but not the target
+lifeline. Do not add #margin# to interaction components. This margin will cause
+interaction's right board overlaps target lifeline and that is accumulative.
+
+==== Debugging
+Disable transparency of the interaction borders.
+
+=== Common features among Interaction, Interaction and Creation
+
+All the three work as a container for the message, children interactions and the
+response. In the normal direction (left to right), they start with the middle
+of the source lifeline and end with the middle of the target lifeline.
 
 
 === Message arrow
