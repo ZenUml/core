@@ -76,6 +76,21 @@ The `interaction` has a border of 5px. This value #must not# be overridden in th
 = 5
 ....
 
+Within Interaction, the DOM structure is like below:
+
+....
+<div class="interaction">
+    <div class="occurrence source"></div>
+    <comment/>
+    <invocation/> <1>
+    <occurrence/>
+    <message type="return">
+</div>
+
+....
+<1> SelfInvocation or Message
+
+
 ==== Do not add margin to interaction
 It is on purpose that interaction box overlaps source lifeline but not the target
 lifeline. Do not add #margin# to interaction components. This margin will cause
