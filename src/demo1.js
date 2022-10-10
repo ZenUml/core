@@ -9,6 +9,8 @@ export default `
 BookLibService.Borrow(id) {
   User = Session.GetUser()
   if(User.isActive) {
+    Self()
+    A->A: Self
     try {
       BookRepository.Update(id, onLoan, User)
       receipt = new Receipt(id, dueDate)

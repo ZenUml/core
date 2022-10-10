@@ -1,5 +1,6 @@
 <template>
-  <div class="message self flex items-start">
+  <!-- style border-width means not to be overridden. -->
+  <div class="message self flex items-start" style="border-width: 0">
     <svg class="arrow" width="34" height="34">
       <polyline points="0,2 28,2 28,25 1,25"></polyline>
       <polyline class="head" points="11,19 1,25 11,31"></polyline>
@@ -24,9 +25,9 @@
     transform: translateX(-5px);
   }
 
-
   .message.self svg.arrow polyline {
     fill: none;
+    stroke-width: 2px;
   }
   .message.self svg.arrow polyline.head {
     fill: none;
