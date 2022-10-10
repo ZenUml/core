@@ -6,10 +6,10 @@
        :style="{width: interactionWidth + 'px'}">
     <comment v-if="comment" :comment="comment" />
     <!-- flex items-center is an idiom that vertically align items left and right. -->
-    <div ref="messageContainer" class="message-container flex items-center" :class="{ 'flex-row-reverse': rightToLeft}">
+    <div ref="messageContainer" class="message-container flex items-center"
+         data-type="creation" :data-to="to"
+         :class="{ 'flex-row-reverse': rightToLeft}">
       <message ref="messageEl"
-             :data-to="to"
-             data-type="creation"
              class="invocation w-full transform -translate-y-1/2" :content="signature" :rtl="rightToLeft" type="creation"/>
       <!-- TODO: replace the following with a participant component. -->
       <div ref="participantPlaceHolder"
@@ -79,12 +79,14 @@
     },
     methods: {
       layoutMessageContainer() {
-        if (!this.$refs.participantPlaceHolder || !this.$refs.messageContainer) return
-        const halfWidthOfPlaceholder = this.$refs['participantPlaceHolder'].offsetWidth / 2;
-        ((this.$refs['messageContainer'])).style.width = `calc(100% + ${halfWidthOfPlaceholder + 6}px`;
-        if(this.rightToLeft) {
-          ((this.$refs['messageContainer'])).style.transform = `translateX( ${-(halfWidthOfPlaceholder + 6)}px`;
-        }
+        setTimeout(() => {
+          if (!this.$refs.participantPlaceHolder || !this.$refs.messageContainer) return
+          const halfWidthOfPlaceholder = this.$refs['participantPlaceHolder'].offsetWidth / 2;
+          ((this.$refs['messageContainer'])).style.width = `calc(100% + ${halfWidthOfPlaceholder + 6}px`;
+          if(this.rightToLeft) {
+            ((this.$refs['messageContainer'])).style.transform = `translateX( ${-(halfWidthOfPlaceholder + 6)}px`;
+          }
+        }, 500)
       },
       onClick() {
         this.onElementClick(CodeRange.from(this.context))
