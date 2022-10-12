@@ -4,8 +4,8 @@
           'return': type === 'return',
           'right-to-left':rtl, 'text-left': isAsync, 'text-center': !isAsync }"
        :style="{'border-bottom-style': borderStyle}">
-    <div class="name flex-grow"
-         style="padding-left: 10px">{{content}}</div>
+    <div class="name flex-grow truncate hover:whitespace-normal"
+         style="padding-left: 10px; float: left">{{content}}</div>
     <point class="flex-shrink-0 transform translate-y-1/2 -my-px" :fill="fill" :rtl="rtl"/>
   </div>
 </template>

@@ -7,7 +7,7 @@
       <!--TODO: What is the below line used for?-->
       <!--<polyline class="closed" points="28,32 28,18"></polyline>-->
     </svg>
-    <label class="name whitespace-nowrap hover:bg-yellow-300"><span v-if="assignee">{{assignee}} = </span> {{content}}</label>
+    <label class="name hover:bg-yellow-300"><span v-if="assignee">{{assignee}} = </span> {{content}}</label>
   </div>
 </template>
 
