@@ -10,6 +10,11 @@ module.exports = {
       template: 'public/smoke.html',
       filename: 'smoke.html'
     },
+    smokeReturn: {
+      entry: 'src/main.ts',
+      template: 'public/smoke-return.html',
+      filename: 'smoke-return.html'
+    },
     smokeInteraction: {
       entry: 'src/main.ts',
       template: 'public/smoke-interaction.html',
