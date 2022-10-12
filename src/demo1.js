@@ -35,17 +35,19 @@ ReturnType ret = ParticipantName.methodA(a, b) {
       return from_creation
     }
     return "from if to original source"
-    self {
-      return C
-    }
-    C: async call from implied source
-    B.alternative() {
+    try {
       new AHasAVeryLongNameLongNameLongNameLongName() {
         new CreatWithinCreat()
         C.rightToLeftFromCreation() {
           B.FurtherRightToLeftFromCreation()
         }
       }
+    } catch (Exception) {
+      self {
+        return C
+      }
+    } finally {
+      C: async call from implied source  
     }
     ====="divider can be anywhere"=====
   } else if ("another condition") {
@@ -54,9 +56,6 @@ ReturnType ret = ParticipantName.methodA(a, b) {
       C.method
     }
   } else {
-    D.method() {
-      return D
-    }
     // A comment for loop
     forEach(Z) {
       Z.method() {
