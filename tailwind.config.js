@@ -6,7 +6,10 @@ module.exports = {
     extend: {},
   },
   variants: {
-    extend: {},
+    extend: {
+      overflow: ['hover', 'focus'],
+      whitespace: ['hover', 'focus'],
+    },
   },
   plugins: [],
 }

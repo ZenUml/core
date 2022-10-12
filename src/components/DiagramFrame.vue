@@ -4,8 +4,10 @@
         2. .zenuml is used to make sure tailwind css takes effect.
    -->
   <div ref="export" class="zenuml" style="display: inline-block">
-    <!-- pb-8 is to offset pt-8 in SeqDiagram component -->
-    <div class="frame relative m-1 origin-top-left" :style="{transform: `scale(${scale})`}">
+    <!-- pb-8 is to offset pt-8 in SeqDiagram component
+        .whitespace-nowrap will be inherited by all children
+     -->
+    <div class="frame relative m-1 origin-top-left whitespace-nowrap" :style="{transform: `scale(${scale})`}">
       <div ref="content">
         <div class="header flex justify-between">
           <div class="left hide-export">
