@@ -1,5 +1,6 @@
 <template>
-  <div class="interaction return"
+  <!-- .relative to allow left style -->
+  <div class="interaction return relative"
        v-on:click.stop="onClick"
        :data-signature="signature"
        :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent }"

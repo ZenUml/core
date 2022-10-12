@@ -107,17 +107,39 @@ of the source lifeline and end with the middle of the target lifeline.
 
 === Return message
 
-=== Return message
 The return message is the message that is sent back to the sender of the original
 message. It is rendered as a dashed line.
 
-A return message is rendered from three places:
+A return message is rendered from three syntax:
 
-* within `statement`, when the statement is a return message (e.g. `return x`)
-* within `interaction`, when it has an `assignment` clause (e.g. `x=A.m`)
-* within `creation`, when it has an `assignment` clause (e.g. `x=new A()`)
+* `return x`
+* `@return A->B: ret`
+* `x=A.m` or `x=new A()`
 
-==== Return message from `statement`
+
+==== Statement `return x` or `@return A->B: ret`
+
+`return x` or `@return A->B: ret` is implemented via the `Return` component.
+In such cases, it has its own context and can have a comment. Then it
+delegates to `SelfInvocation` or `Message`.
+
+===== When do we need `@return A->B: ret`?
+
+....
+Browser->BookController.onPost() {
+  BookLibService.Borrow(id) {
+      receipt = process(id)
+      if (receipt != null) {
+        return receipt
+        @return BookController->Browser: receipt
+      } else {
+        return null
+        @return BookController->Browser: 404
+      }
+  }
+}
+....
+
 If the statement is the last statement we set the height of the message to 0px,
 so that it does not push the message down further. This is because a return message
 does not have children and does not need an occurrence.

@@ -51,7 +51,6 @@ import {mapGetters, mapMutations} from 'vuex'
   Don't move this to the Interaction component. This is also used by Interaction-async
    */
   .interaction {
-    position: relative;   /* To provide width for .return */
     /*Keep dashed or solid here otherwise no space is given to the border*/
     border: dashed transparent;
     /* This border width configuration make sure the content width is

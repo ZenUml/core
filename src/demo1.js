@@ -5,7 +5,15 @@
 // Self-method
 // Nested method
 // Assignment
-export default `B A
-A.method() {
-  new B
+export default `Browser->BookController.onPost() {
+  BookLibService.Borrow(id) { 
+      receipt = process(id)
+      if (receipt != null) {
+        return receipt
+        @return BookController->Browser: receipt  
+      } else {
+        return null
+        @return BookController->Browser: 404  
+      }
+  }
 }`
