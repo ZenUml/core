@@ -1,0 +1,25 @@
+= Creat my own theme
+
+Since the elements on the rendered diagram is based on HTML Dom (and svg), it is simple
+to create your own theme. There is a repository on GitHub that have some themes collected
+by third party. You may be able to get some inspiration from there. https://github.com/abruzzi/zenuml-css-overrides
+
+== where can I apply themes
+
+You can apply themes on the follow products:
+
+. JetBrains plugins (Intellij IDEA, WebStore, PhpStore, etc.)
+. https://app.zenuml.com
+
+With stylebot browser extension, you can apply themes in any browsers.
+
+=== JetBrains
+
+=== app.zenuml.com
+
+== Tips
+
+=== Give occurrence a boarder
+
+
+

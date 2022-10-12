@@ -5,8 +5,9 @@
        :class="{ 'right-to-left':rightToLeft, '-translate-x-full': rightToLeft, 'highlight': isCurrent }"
        :style="{width: interactionWidth + 'px'}">
     <comment v-if="comment" :comment="comment" />
-    <!-- flex items-center is an idiom that vertically align items left and right. -->
-    <div ref="messageContainer" class="message-container flex items-center"
+    <!-- flex items-center is an idiom that vertically align items left and right.
+     h-10 fixes the height as the same as participant boxes.-->
+    <div ref="messageContainer" class="message-container flex items-center h-10"
          data-type="creation" :data-to="to"
          :class="{ 'flex-row-reverse': rightToLeft}">
       <message ref="messageEl"
