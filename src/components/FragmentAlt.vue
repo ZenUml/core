@@ -14,7 +14,7 @@
       ></block>
     </div>
     <template v-for="(elseIfBlock, index) in alt.elseIfBlock()">
-      <div class="segment" :key="index+500">
+      <div class="segment mt-2 border-t border-solid" :key="index+500">
         <div class="header" :key="index+1000">
           <label class="else-if">else if</label>
           <label class="condition">[{{conditionFromIfElseBlock(elseIfBlock)}}]</label>
@@ -27,7 +27,7 @@
       </div>
     </template>
     <template v-if="elseBlock">
-      <div class="segment">
+      <div class="segment mt-2 border-t border-solid">
         <div class="header"><label>[else]</label></div>
         <block :style="{paddingLeft: `${offsetX}px`}"
                :context="elseBlock"
@@ -77,8 +77,3 @@
   }
 </script>
 
-<style scoped>
-  .segment:not(:first-child) {
-    border-top: 1px dashed;
-  }
-</style>
