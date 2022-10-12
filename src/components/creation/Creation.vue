@@ -1,5 +1,5 @@
 <template>
-  <div class="interaction creation sync text-center"
+  <div class="interaction creation sync text-center transform"
        v-on:click.stop="onClick"
        :data-signature="signature"
        :class="{ 'right-to-left':rightToLeft, '-translate-x-full': rightToLeft, 'highlight': isCurrent }"
@@ -80,14 +80,16 @@
     },
     methods: {
       layoutMessageContainer() {
-        setTimeout(() => {
+        let _layoutMessageContainer = () => {
           if (!this.$refs.participantPlaceHolder || !this.$refs.messageContainer) return
           const halfWidthOfPlaceholder = this.$refs['participantPlaceHolder'].offsetWidth / 2;
           ((this.$refs['messageContainer'])).style.width = `calc(100% + ${halfWidthOfPlaceholder + 6}px`;
           if(this.rightToLeft) {
             ((this.$refs['messageContainer'])).style.transform = `translateX( ${-(halfWidthOfPlaceholder + 6)}px`;
           }
-        }, 500)
+        };
+        _layoutMessageContainer();
+        // setTimeout(_layoutMessageContainer)
       },
       onClick() {
         this.onElementClick(CodeRange.from(this.context))
@@ -100,25 +102,3 @@
     }
   }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-  .interaction.creation.right-to-left {
-    transform: translateX(-100%);
-  }
-
-  .participant.place-holder {
-    margin-top: -19px;
-    white-space: nowrap;
-  }
-
-  .creation.right-to-left > .message-container > .message.invocation {
-    /* 3 = (15:occurrenceWidth - 1) / 2 - 5:InteractionBorderWidth
-    We can also set right: 3px; but we will also need to reset left: auto */
-    left: -2px;
-    /* moving .message to the right so that margin will take up the "available" space. It works like float: right.
-       But this won't remove .message from the flow.
-     */
-    margin-left: auto;
-  }
-</style>

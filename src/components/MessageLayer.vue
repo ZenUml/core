@@ -75,7 +75,7 @@ import {mapGetters, mapMutations} from 'vuex'
 
   .interaction.right-to-left > .occurrence {
     /* InteractionBorderWidth + (OccurrenceWidth-1)/2 */
-    left: -12px;               /* overlay occurrence bar on the existing bar. */
+    left: -14px;               /* overlay occurrence bar on the existing bar. */
   }
 
   .interaction.self > .occurrence {
