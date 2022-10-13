@@ -6,19 +6,26 @@
        :class="{ 'right-to-left':rightToLeft, 'highlight': isCurrent }"
        :style="{width: width + 'px', left: left + 'px'}">
     <comment v-if="comment" :comment="comment"/>
-    <component v-bind:is="invocation"
-               :content="signature"
-               :rtl="rightToLeft"
-               type="return" />
+    <div v-if="isSelf" class="flex items-center">
+      <svg class="w-3 h-3 flex-shrink-0"   viewBox="0 0 512 512"><path class="cls-1" d="M256 0C114.84 0 0 114.84 0 256s114.84 256 256 256 256-114.84 256-256S397.16 0 256 0Zm0 469.33c-117.63 0-213.33-95.7-213.33-213.33S138.37 42.67 256 42.67 469.33 138.37 469.33 256 373.63 469.33 256 469.33Z"/><path class="cls-1" d="M288 192h-87.16l27.58-27.58a21.33 21.33 0 1 0-30.17-30.17l-64 64a21.33 21.33 0 0 0 0 30.17l64 64a21.33 21.33 0 0 0 30.17-30.17l-27.58-27.58H288a53.33 53.33 0 0 1 0 106.67h-32a21.33 21.33 0 0 0 0 42.66h32a96 96 0 0 0 0-192Z"/></svg>
+      <span>{{signature}}</span>
+    </div>
+    <Message v-if="!isSelf"
+        :content="signature"
+        :rtl="rightToLeft"
+        type="return" />
   </div>
 </template>
 
 <script type="text/babel">
+  // Return is defined with `RETURN expr? SCOL?` or `ANNOTATION_RET asyncMessage EVENT_END?`.
+  // It is rare that you need the latter format. Probably only when you have two consecutive returns.
   import Comment from './Comment.vue'
-  import SelfInvocationAsync from './SelfInvocation-async'
   import Message from './Message'
   import {mapGetters} from "vuex";
   import {CodeRange} from '@/parser/CodeRange'
+  import WidthProviderOnBrowser from "@/positioning/WidthProviderFunc";
+  import {TextType} from "@/positioning/Coordinate";
   export default {
     name: 'return',
     props: ['context', 'comment'],
@@ -31,7 +38,7 @@
         return this.context?.ret().asyncMessage()
       },
       width: function () {
-        return Math.abs(this.distance(this.target, this.source))
+        return this.isSelf? WidthProviderOnBrowser(this.signature, TextType.MessageContent) : Math.abs(this.distance(this.target, this.source))
       },
       left: function () {
         return this.rightToLeft ? (this.distance(this.target, this.from) + 2): (this.distance(this.source, this.from) + 2)
@@ -54,9 +61,6 @@
       isSelf: function () {
         return this.source === this.target
       },
-      invocation: function () {
-        return this.isSelf ? 'SelfInvocationAsync' : 'Message'
-      }
     },
     methods: {
       onClick() {
@@ -65,7 +69,6 @@
     },
     components: {
       Comment,
-      SelfInvocationAsync,
       Message
     }
   }
