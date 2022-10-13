@@ -112,9 +112,9 @@ message. It is rendered as a dashed line.
 
 A return message is rendered from three syntax:
 
-* `return x`
-* `@return A->B: ret`
-* `x=A.m` or `x=new A()`
+* `return x` which matches `RETURN expr? SCOL?`
+* `@return A->B: ret` which matches `ANNOTATION_RET asyncMessage EVENT_END?`
+* `x=A.m` or `x=new A()` which matches `assignment? ((from ARROW)? to DOT)? func` or `assignment? NEW construct(OPAR parameters? CPAR)?`
 
 
 ==== Statement `return x` or `@return A->B: ret`
