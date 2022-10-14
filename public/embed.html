@@ -6,10 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>ZenUML</title>
   </head>
-  <!-- .zenuml will enable "important" feature of tailwindcss. This class is also added to
-    DiagramFrame so the diagram itself always works fine. This .zenuml is to make sure the
-    editor and other layouts work properly.-->
-  <body class="zenuml">
+  <body>
     <noscript>
       <strong>We're sorry but ZenUML doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
@@ -27,14 +24,24 @@
         if (data.action !== 'load') return;
         const code = data && data.code;
         updateCode(code);
+        setTimeout(() => {
+          // get the first element with class .zenuml
+          const zenuml = document.getElementsByClassName('zenuml')[0];
+          window.parent.postMessage(JSON.stringify({event: 'resize', rect: zenuml.getBoundingClientRect()}), '*');
+        }, 2000);
       }, false);
       document.addEventListener("DOMContentLoaded", function() {
         updateCode('A.method');
+        setTimeout(() => {
+          // get the first element with class .zenuml
+          const zenuml = document.getElementsByClassName('zenuml')[0];
+          window.parent.postMessage(JSON.stringify({event: 'resize', rect: zenuml.getBoundingClientRect()}), '*');
+        }, 500);
       }, false);
     </script>
 
 
-    <div id="diagram">
+    <div id="diagram" class="diagram">
       diagram
     </div>
     <!-- built files will be auto injected -->
