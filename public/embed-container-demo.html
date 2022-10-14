@@ -15,10 +15,13 @@
         if (data && data.event === 'resize') {
           iframe.style.height = data.rect.height + 'px';
           iframe.style.width = data.rect.width + 'px';
+          // add log for the above changes
+          console.log('iframe.style.height', iframe.style.height);
+          console.log('iframe.style.width', iframe.style.width);
         }
       })
     </script>
-    <iframe src="embed.html">
+    <iframe src="embed.html" style="border: none">
 
     </iframe>
   </body>
