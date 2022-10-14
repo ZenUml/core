@@ -23,7 +23,7 @@
             <TipsDialog />
           </div>
         </div>
-        <seq-diagram :style="{paddingLeft: `${paddingLeft}px`}"/>
+        <seq-diagram/>
       </div>
       <div class="footer mt-10 flex justify-between hide-export">
         <button class="bottom-1 left-1" @click="showTipsDialog()">
@@ -49,8 +49,6 @@ import SeqDiagram from "@/components/SeqDiagram";
 import TipsDialog from "@/components/tutorial/TipsDialog";
 import WidthProvider from "@/components/positioning/WidthProvider";
 import * as htmlToImage from 'html-to-image'
-import {Depth} from "@/parser";
-
 
 export default {
   name: "DiagramFrame",
@@ -63,12 +61,6 @@ export default {
       }
       return this.rootContext?.title()
     },
-    depth: function () {
-      return Depth(this.rootContext)
-    },
-    paddingLeft: function () {
-      return 10 * (this.depth + 1)
-    }
   },
   methods: {
     ...mapMutations(['setScale',]),

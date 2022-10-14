@@ -1,6 +1,9 @@
 import {Depth, Participants} from '../parser'
 import {mapGetters} from 'vuex'
 
+export const FRAGMENT_LEFT_BASE_OFFSET = 30;
+export const FRAGMENT_RIGHT_BASE_OFFSET = 100;
+
 export default {
   computed: {
     ...mapGetters(['coordinates', 'distance2']),
@@ -21,13 +24,13 @@ export default {
     },
     offsetX: function () {
       let extra = 10 * (this.depth + 1)
-      return this.distance2(this.leftParticipant, this.from) + extra
+      return this.distance2(this.leftParticipant, this.from) + extra + FRAGMENT_LEFT_BASE_OFFSET
     },
     fragmentStyle: function () {
       return {
         // +1px for the border of the fragment
         transform: 'translateX(' + ((this.offsetX + 1) * (-1)) + 'px)',
-        width: (this.distance2(this.leftParticipant, this.rightParticipant) + 20 * this.depth + 50) + 'px',
+        width: (this.distance2(this.leftParticipant, this.rightParticipant) + 20 * this.depth + FRAGMENT_LEFT_BASE_OFFSET + FRAGMENT_RIGHT_BASE_OFFSET) + 'px',
       }
     }
   }
