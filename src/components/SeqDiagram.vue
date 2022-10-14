@@ -1,5 +1,5 @@
 <template>
-  <div class="sequence-diagram overflow-visible px-8" :style="{width: `${width}px`}" ref="diagram" >
+  <div class="sequence-diagram overflow-visible mr-2" :style="{width: `${width}px`, paddingLeft: `${paddingLeft}px`}" ref="diagram" >
     <life-line-layer :context="rootContext.head()"/>
     <message-layer :context="rootContext.block()"/>
   </div>
@@ -9,6 +9,8 @@
   import LifeLineLayer from './lifeline/LifeLineLayer.vue'
   import MessageLayer from './MessageLayer.vue'
   import {mapGetters} from 'vuex'
+  import {Depth} from "@/parser";
+  import {FRAGMENT_LEFT_BASE_OFFSET, FRAGMENT_RIGHT_BASE_OFFSET} from "@/components/FragmentMixin";
 
   export default {
     name: 'seq-diagram',
@@ -19,7 +21,13 @@
     computed: {
       ...mapGetters(['rootContext', 'coordinates']),
       width() {
-        return this.coordinates.getWidth() + 100;
+        return this.coordinates.getWidth() + 10 * (this.depth + 1) + FRAGMENT_RIGHT_BASE_OFFSET;
+      },
+      depth: function () {
+        return Depth(this.rootContext)
+      },
+      paddingLeft: function () {
+        return 10 * (this.depth + 1) + FRAGMENT_LEFT_BASE_OFFSET
       },
     },
   }
