@@ -12,7 +12,7 @@
     </noscript>
     <script>
       function updateCode(c) {
-        document.getElementsByClassName('sequence-diagram')[0].__vue__.$store.dispatch('updateCode', {code:c})
+        document.getElementsByClassName('sequence-diagram')[0].__vue__.$store.state.code = c
       }
       window.addEventListener('message', (e) => {
         if (!e.data) return;
