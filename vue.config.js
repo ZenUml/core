@@ -5,6 +5,11 @@ module.exports = {
       template: 'public/index.html',
       filename: 'index.html'
     },
+    embed: {
+      entry: 'src/main.ts',
+      template: 'public/embed.html',
+      filename: 'embed.html'
+    },
     smoke: {
       entry: 'src/main.ts',
       template: 'public/smoke.html',
