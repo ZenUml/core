@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="tooltip bottom" data-tooltip="We (the vendor) do not have access to your data. The diagram is generated in this browser.">
+    <div class="tooltip bottom whitespace-normal" data-tooltip="We (the vendor) do not have access to your data. The diagram is generated in this browser.">
       <img :src="iconPath" alt="Privacy Icon" class="object-contain h-6 w-6 m-auto" />
     </div>
   </div>
