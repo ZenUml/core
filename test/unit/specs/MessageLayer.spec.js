@@ -18,7 +18,7 @@ describe('MessageLayer', () => {
     expect(messageLayerWrapper.find('.message-layer').exists()).toBeTruthy()
     // We do not need to wait until next tick in **test**.
     // await messageLayerWrapper.vm.$nextTick()
-    expect(messageLayerWrapper.find('.pr-24').exists()).toBeTruthy()
+    expect(messageLayerWrapper.find('.pt-24').exists()).toBeTruthy()
   })
   it('gets participant names', async () => {
     expect(messageLayerWrapper.vm.participantNames()[0]).toBe('a')
