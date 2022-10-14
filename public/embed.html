@@ -27,7 +27,9 @@
         setTimeout(() => {
           // get the first element with class .zenuml
           const zenuml = document.getElementsByClassName('zenuml')[0];
-          window.parent.postMessage(JSON.stringify({event: 'resize', rect: zenuml.getBoundingClientRect()}), '*');
+          // window.parent.postMessage(JSON.stringify({event: 'resize', rect: zenuml.getBoundingClientRect()}), '*');
+          window.parent.document.getElementsByTagName('iframe')[0].style.height = zenuml.getBoundingClientRect().height + 'px';
+          window.parent.document.getElementsByTagName('iframe')[0].style.width = zenuml.getBoundingClientRect().width + 'px';
         }, 2000);
       }, false);
       document.addEventListener("DOMContentLoaded", function() {
