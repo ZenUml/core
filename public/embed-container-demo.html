@@ -13,15 +13,15 @@
   </head>
   <body>
     <script>
-      window.addEventListener('message', (e) => {
-        if (!e.data || typeof e.data !== 'string') return;
-        const data = JSON.parse(e.data);
-        const iframe = document.getElementsByTagName('iframe')[0];
-        if (data && data.event === 'resize') {
-          iframe.style.height = data.rect.height + 'px';
-          iframe.style.width = data.rect.width + 'px';
-        }
-      })
+      // window.addEventListener('message', (e) => {
+      //   if (!e.data || typeof e.data !== 'string') return;
+      //   const data = JSON.parse(e.data);
+      //   const iframe = document.getElementsByTagName('iframe')[0];
+      //   if (data && data.event === 'resize') {
+      //     iframe.style.height = data.rect.height + 'px';
+      //     iframe.style.width = data.rect.width + 'px';
+      //   }
+      // })
     </script>
 
     <div class="m-1 grid grid-cols-6" id="diagram1">
