@@ -16,8 +16,6 @@ reports
 node_modules
 
 .DS_Store
-node_modules
-/dist
 
 # antlr4
 gen
@@ -25,11 +23,6 @@ gen
 src/g4/sequenceLexer.tokens
 src/generated-parser/sequenceParser.interp
 src/generated-parser/sequenceLexer.interp
-
-# gauge
-.gauge
-reports
-logs
 
 # local env files
 .env.local
