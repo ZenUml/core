@@ -23,7 +23,7 @@
             <TipsDialog />
           </div>
         </div>
-        <seq-diagram/>
+        <seq-diagram :style="{paddingLeft: `${paddingLeft}px`}"/>
       </div>
       <div class="footer mt-10 flex justify-between hide-export">
         <button class="bottom-1 left-1" @click="showTipsDialog()">
@@ -49,6 +49,7 @@ import SeqDiagram from "@/components/SeqDiagram";
 import TipsDialog from "@/components/tutorial/TipsDialog";
 import WidthProvider from "@/components/positioning/WidthProvider";
 import * as htmlToImage from 'html-to-image'
+import {Depth} from "@/parser";
 
 
 export default {
@@ -61,6 +62,12 @@ export default {
         console.error('`rootContext` is empty. Please make sure `store` is properly configured.')
       }
       return this.rootContext?.title()
+    },
+    depth: function () {
+      return Depth(this.rootContext)
+    },
+    paddingLeft: function () {
+      return 10 * (this.depth + 1)
     }
   },
   methods: {

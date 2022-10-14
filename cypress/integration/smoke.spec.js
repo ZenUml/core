@@ -35,6 +35,15 @@ describe('Smoke test', function () {
       })
   });
 
+  it('return', function () {
+    cy.visit('http://localhost:8080/smoke-return.html')
+      .then(() => {
+        cy.document().toMatchImageSnapshot({
+          imageConfig: {"threshold": 0.005}, capture: "viewport"
+        });
+      })
+  });
+
   it('creation', function () {
     cy.visit('http://localhost:8080/smoke-creation.html')
       .then(() => {
@@ -44,12 +53,21 @@ describe('Smoke test', function () {
       })
   });
 
+  it('fragmentIssue', function () {
+    cy.visit('http://localhost:8080/smoke-fragment-issue.html')
+        .then(() => {
+          cy.document().toMatchImageSnapshot({
+            imageConfig: {"threshold": 0.005}, capture: "viewport"
+          });
+        })
+  });
+
   it('fragment', function () {
     cy.visit('http://localhost:8080/smoke-fragment.html')
-      .then(() => {
-        cy.document().toMatchImageSnapshot({
-          imageConfig: {"threshold": 0.005}, capture: "viewport"
-        });
-      })
+        .then(() => {
+          cy.document().toMatchImageSnapshot({
+            imageConfig: {"threshold": 0.005}, capture: "viewport"
+          });
+        })
   });
 });

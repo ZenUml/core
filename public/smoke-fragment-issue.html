@@ -19,20 +19,19 @@
       // on documentready
       document.addEventListener("DOMContentLoaded", function() {
         window.store2.state.code = `
-if(x) {
-  loop(y) {
-    par {
-      try {
-        A.m
-      } catch(e) {
-        B.m
-      } finally {
-        C.m
+        // This sample is carefully crafted. It shows a known issues: fragment stretched to
+        // svc (should not), because parser thinks the return statement returns to svc.
+group G {@VPC svc @RDS rep} Client
+Client->SGW."Get order by id" {
+  svc.Get(id) {
+    rep."load order" {
+      if(order == null) {
+        @return
+        SGW->Client:401
       }
     }
   }
-}
-        `
+}`
       });
 
     </script>
