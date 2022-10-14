@@ -7,9 +7,9 @@
 // Assignment
 export default `
 A.method() {
-  self() {
-    @reply A->B: x
-    return abcdefghijklmnopqrstuvwxyz
-    @return B->A: z
+  try {
+    B.method() 
+  } catch (E) {
+    C.method
   }
 }`

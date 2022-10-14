@@ -20,6 +20,11 @@ module.exports = {
       template: 'public/smoke-interaction.html',
       filename: 'smoke-interaction.html'
     },
+    smokeFragmentIssue: {
+      entry: 'src/main.ts',
+      template: 'public/smoke-fragment-issue.html',
+      filename: 'smoke-fragment-issue.html'
+    },
     smokeFragment: {
       entry: 'src/main.ts',
       template: 'public/smoke-fragment.html',
