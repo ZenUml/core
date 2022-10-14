@@ -6,6 +6,8 @@
     "url": "https://github.com/ZenUml/vue-sequence.git"
   },
   "scripts": {
+    "gh-deploy-embed": "git push origin :gh-pages && git subtree push --prefix dist origin gh-pages",
+    "gh-deploy-embed-init": "vue-cli-service build && git push origin && git subtree push --prefix dist origin gh-pages",
     "build:site": "vue-cli-service build",
     "build": "yarn antlr:clear && yarn antlr && vue-cli-service build --target lib --name vue-sequence ./src/index.ts",
     "build:report": "yarn antlr:clear && yarn antlr && vue-cli-service build --report --target lib --inline-vue --name vue-sequence ./src/index.ts",

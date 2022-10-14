@@ -41,7 +41,8 @@
       editor.on("change", function(cm) {
         // get the first iframe
         const iframe = document.getElementsByTagName('iframe')[0];
-        iframe.contentWindow.postMessage(JSON.stringify({action: 'load', code: cm.getValue()}), '*');
+        iframe.contentWindow.postMessage(JSON.stringify({action: 'load',
+           code: cm.getValue()}), '*');
       });
     </script>
 
