@@ -1,5 +1,5 @@
 <template>
-  <div class="life-line-layer absolute h-full" :style="{'min-width': '400px'}">
+  <div class="life-line-layer absolute h-full" :style="{'min-width': '200px'}">
     <life-line
       v-if="starterOnTheLeft"
       :entity="starterParticipant"

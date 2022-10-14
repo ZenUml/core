@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>ZenUML</title>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but ZenUML doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <script>
+      function updateCode(c) {
+        document.getElementsByClassName('sequence-diagram')[0].__vue__.$store.state.code = c
+      }
+      window.addEventListener('message', (e) => {
+        if (!e.data) return;
+        console.log('e.data', e.data);
+        // return if typeof e.data is not string
+        if(typeof e.data !== 'string') return;
+
+        const data = JSON.parse(e.data);
+        if (data.action !== 'load') return;
+        const code = data && data.code;
+        updateCode(code);
+        setTimeout(() => {
+          // get the first element with class .zenuml
+          const zenuml = document.getElementsByClassName('zenuml')[0];
+          // window.parent.postMessage(JSON.stringify({event: 'resize', rect: zenuml.getBoundingClientRect()}), '*');
+          window.parent.document.getElementsByTagName('iframe')[0].style.height = zenuml.getBoundingClientRect().height + 'px';
+          window.parent.document.getElementsByTagName('iframe')[0].style.width = zenuml.getBoundingClientRect().width + 'px';
+        }, 2000);
+      }, false);
+      document.addEventListener("DOMContentLoaded", function() {
+        updateCode('A.method');
+        setTimeout(() => {
+          // get the first element with class .zenuml
+          const zenuml = document.getElementsByClassName('zenuml')[0];
+          window.parent.postMessage(JSON.stringify({event: 'resize', rect: zenuml.getBoundingClientRect()}), '*');
+        }, 500);
+      }, false);
+    </script>
+
+
+    <div id="diagram" class="diagram">
+      diagram
+    </div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>
