@@ -146,6 +146,13 @@
         });
 
 
+        const original_trace = console.trace;
+
+        console.trace = (...args) => {
+          const stack = new Error().stack;
+          parent.postMessage({ action: 'console', level: 'trace', args, stack }, '*');
+          original_trace(...args);
+        };
 
 
         function stringify(args) {
