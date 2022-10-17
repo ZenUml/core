@@ -63,5 +63,8 @@ module.exports = {
           .loader('svg-url-loader')
           .end()
 
+  },
+  devServer: {
+    allowedHosts: ["air.zenuml.com", "yanhui.zenuml.com", "localhost"],
   }
 }
