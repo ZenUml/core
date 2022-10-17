@@ -37,5 +37,5 @@ if (document.getElementById('demo1')) {
 }
 const store2 = VueSequence.Store()
 // @ts-ignore
-window.store2 = store2
+window.store = store2
 new Vue({el: '#diagram', store: new Vuex.Store(store2), render: h => h(VueSequence.DiagramFrame) })
