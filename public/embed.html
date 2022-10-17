@@ -116,14 +116,14 @@
                 previous.args &&
                 previous.args === stringifiedArgs
             ) {
-              parent.postMessage({ action: 'console', level, duplicate: true }, '*');
+              parent !== window && parent.postMessage({ action: 'console', level, duplicate: true }, '*');
             } else {
               previous = { level, args: stringifiedArgs };
 
               try {
-                parent.postMessage({ action: 'console', level, args }, '*');
+                parent !== window && parent.postMessage({ action: 'console', level, args }, '*');
               } catch (err) {
-                parent.postMessage({ action: 'console', level, args: args.map(a => {
+                parent !== window && parent.postMessage({ action: 'console', level, args: args.map(a => {
                     return a instanceof Error ? a.message : String(a)
                   }) }, '*');
               }
