@@ -3,7 +3,7 @@
         1. Don't use inline-block as class name here. Other clients may not have .zenuml at ancestor level.
         2. .zenuml is used to make sure tailwind css takes effect.
    -->
-  <div ref="export" class="zenuml" style="display: inline-block">
+  <div ref="export" class="zenuml" style="display: inline-block" :class="theme">
     <!-- pb-8 is to offset pt-8 in SeqDiagram component
         .whitespace-nowrap will be inherited by all children
      -->
@@ -52,6 +52,11 @@ import * as htmlToImage from 'html-to-image'
 
 export default {
   name: "DiagramFrame",
+  data() {
+    return {
+      theme: 'default'
+    }
+  },
   computed: {
     ...mapState(['showTips', 'scale']),
     ...mapGetters(['rootContext']),
@@ -114,6 +119,55 @@ export default {
     zoomOut() {
       this.setScale(this.scale - 0.1)
     },
+    setTheme(theme) {
+      this.theme = theme
+    },
+    setStyle(style) {
+      const styleElementId = 'zenuml-style';
+      // check if style element exists
+      let styleElement = document.getElementById(styleElementId);
+      if (!styleElement) {
+        // create a style element and inject the content as textContent
+        styleElement = document.createElement('style')
+        // give the element a unique id
+        styleElement.id = styleElementId
+        document.head.append(styleElement)
+      }
+      styleElement.textContent = style
+    },
+    setRemoteCss(url) {
+      // if url is from github, we fetch the raw content and set the style
+      // if url contains github.com or githubusercontent.com, we fetch the raw content and set the style
+      if (url.includes('github.com') || url.includes('githubusercontent.com')) {
+        fetch(url.replace('github.com', 'raw.githubusercontent.com').replace('blob/', ''))
+          .then(response => response.text())
+          .then(text => {
+            this.setStyle(text)
+            console.log('set remote css from github', text)
+          })
+        return;
+      }
+      if (url.includes('github.com') || url.includes('githubusercontent.com')) {
+        const rawUrl = url.replace('github.com', 'raw.githubusercontent.com').replace('/blob', '')
+        fetch(rawUrl)
+          .then(response => response.text())
+          .then(text => this.setStyle(text))
+        return;
+      }
+      console.log('setRemoteCss', url)
+      const remoteCssUrlId = 'zenuml-remote-css';
+      // check if remote css element exists
+      let remoteCssElement = document.getElementById(remoteCssUrlId);
+      if (!remoteCssElement) {
+        // create a style element and inject the content as textContent
+        remoteCssElement = document.createElement('link')
+        // give the element a unique id
+        remoteCssElement.id = remoteCssUrlId
+        remoteCssElement.rel = 'stylesheet'
+        document.head.append(remoteCssElement)
+      }
+      remoteCssElement.href = url
+    }
   },
   components: {
     WidthProvider,
