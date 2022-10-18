@@ -34,6 +34,20 @@ devServer: {
 }
 ```
 
+# Integration
+An important goal of this project is to be easily integrated into other projects.
+There are mainly two ways to do this.
+
+## As a library [TODO]
+
+## As an iframe
+To test this out open `https://embed.zenuml.com/embed.html`. In the developer console, type in the
+following command.
+
+```js
+window.postMessage( {action: 'eval', args: { script: ['ZenUML.Hello'] }})
+```
+
 # Code Structure
 This repository contains both the DSL parser and the renderer.
 

@@ -27,10 +27,8 @@
 
           if (action === 'eval') {
             try {
-
               let { script: scripts } = ev.data.args
               if (typeof scripts === 'string') scripts = [scripts]
-              console.log('scripts: $$$$$$', scripts);
               store.state.code = scripts[0]
               send_ok()
             } catch (e) {
@@ -164,35 +162,6 @@
         }
       })()
 
-      function updateCode(c) {
-        document.getElementsByClassName('sequence-diagram')[0].__vue__.$store.state.code = c
-      }
-      window.addEventListener('message', (e) => {
-        if (!e.data) return;
-        console.log('e.data', e.data);
-        // return if typeof e.data is not string
-        if(typeof e.data !== 'string') return;
-
-        const data = JSON.parse(e.data);
-        if (data.action !== 'load') return;
-        const code = data && data.code;
-        updateCode(code);
-        setTimeout(() => {
-          // get the first element with class .zenuml
-          const zenuml = document.getElementsByClassName('zenuml')[0];
-          // window.parent.postMessage(JSON.stringify({event: 'resize', rect: zenuml.getBoundingClientRect()}), '*');
-          window.parent.document.getElementsByTagName('iframe')[0].style.height = zenuml.getBoundingClientRect().height + 'px';
-          window.parent.document.getElementsByTagName('iframe')[0].style.width = zenuml.getBoundingClientRect().width + 'px';
-        }, 2000);
-      }, false);
-      document.addEventListener("DOMContentLoaded", function() {
-        updateCode('A.method');
-        setTimeout(() => {
-          // get the first element with class .zenuml
-          const zenuml = document.getElementsByClassName('zenuml')[0];
-          window.parent.postMessage(JSON.stringify({event: 'resize', rect: zenuml.getBoundingClientRect()}), '*');
-        }, 500);
-      }, false);
     </script>
 
 
