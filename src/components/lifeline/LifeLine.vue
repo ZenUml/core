@@ -30,10 +30,10 @@ export default {
     },
   },
   mounted() {
-    setImmediate(this.setTop)
+    setTimeout(this.setTop, 0)
   },
   updated() {
-    setImmediate(this.setTop)
+    setTimeout(this.setTop, 0)
   },
   methods: {
     onSelect() {

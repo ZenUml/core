@@ -51,18 +51,13 @@ module.exports = {
       definitions[0]['BUILD_TIME'] = JSON.stringify(new Date());
       return definitions;
     });
-
-    // We need to clear the pre-built svg rule
-    // use `vue-cli-service inspect to check the webpack
-    // the built-in webpack uses file-loader
-    const svgRule = config.module.rule('svg')
-    svgRule.uses.clear();
-        svgRule
-          //.test(/\.svg$/)  // this is not required because the built-in svg rule already defined `test`
-          .use('svg-url-loader')
-          .loader('svg-url-loader')
-          .end()
-
+  },
+  configureWebpack: {
+    resolve: {
+      fallback: {
+        "fs": false,
+      }
+    }
   },
   devServer: {
     allowedHosts: ["air.zenuml.com", "yanhui.zenuml.com", "localhost"],
