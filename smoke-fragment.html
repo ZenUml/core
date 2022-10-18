@@ -1,0 +1,20 @@
+<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>vue-sequence smoke 1</title><style>body {
+        margin: 0; /* mostly for demo on mobile */
+      }</style><script defer="defer" type="module" src="/js/chunk-vendors.b7f7f43f.js"></script><script defer="defer" type="module" src="/js/chunk-common.e1cbd9d7.js"></script><script defer="defer" type="module" src="/js/smokeFragment.468bc23c.js"></script><link href="/css/chunk-common.4a03e8c2.css" rel="stylesheet"><script defer="defer" src="/js/chunk-vendors-legacy.b7f7f43f.js" nomodule></script><script defer="defer" src="/js/chunk-common-legacy.c8aeab19.js" nomodule></script><script defer="defer" src="/js/smokeFragment-legacy.468bc23c.js" nomodule></script></head><body><div id="diagram"></div><script>// on documentready
+      document.addEventListener("DOMContentLoaded", function() {
+        window.store2.state.code = `
+if(x) {
+  loop(y) {
+    par {
+      try {
+        A.m
+      } catch(e) {
+        B.m
+      } finally {
+        C.m
+      }
+    }
+  }
+}
+        `
+      });</script></body></html>
