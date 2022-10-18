@@ -27,8 +27,11 @@
 
           if (action === 'eval') {
             try {
-              let { code } = ev.data.args
+              let { code, theme, style, css } = ev.data.args
               store.state.code = code
+              app.$children[0].setTheme(theme)
+              app.$children[0].setStyle(style)
+              app.$children[0].setRemoteCss(css)
               send_ok()
             } catch (e) {
               send_error(e.message, e.stack);
@@ -165,7 +168,9 @@
 
 
     <div id="diagram" class="diagram">
-      Loading ZenUML...
+      <div id="mounting-point">
+        Loading ZenUML...
+      </div>
     </div>
     <!-- built files will be auto injected -->
   </body>

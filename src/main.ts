@@ -38,4 +38,5 @@ if (document.getElementById('demo1')) {
 const store2 = VueSequence.Store()
 // @ts-ignore
 window.store = store2
-new Vue({el: '#diagram', store: new Vuex.Store(store2), render: h => h(VueSequence.DiagramFrame) })
+// @ts-ignore
+window.app = new Vue({el: '#mounting-point', store: new Vuex.Store(store2), render: h => h(VueSequence.DiagramFrame) })

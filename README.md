@@ -55,8 +55,9 @@ The protocol is a simple JSON object with the following fields.
   "action": "eval",
   "args": {
     "code": "ZenUML.Hello",
-    "style": "#diagram { background-color: red; }", // TODO
-    "theme": "dark" // TODO
+    "style": "#diagram { background-color: red; }", 
+    "theme": "blue"
+    "css": "https://github.com/abruzzi/zenuml-css-overrides/blob/master/zenuml-override.css"
   }
 }
 ```
