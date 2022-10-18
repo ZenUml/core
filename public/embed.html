@@ -27,9 +27,8 @@
 
           if (action === 'eval') {
             try {
-              let { script: scripts } = ev.data.args
-              if (typeof scripts === 'string') scripts = [scripts]
-              store.state.code = scripts[0]
+              let { code } = ev.data.args
+              store.state.code = code
               send_ok()
             } catch (e) {
               send_error(e.message, e.stack);
