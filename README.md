@@ -22,10 +22,16 @@ tunnels for this.
 4. Add your subdomain to `vue.config.js` so that it is allowed to access the dev server.
 
 ```js
-  devServer: {
-    allowedHosts: ["air.zenuml.com", "yanhui.zenuml.com", "localhost"],
-    public: "air.zenuml.com:8080",    
+devServer: {
+  allowedHosts: "all",
+      historyApiFallback: true,
+      hot: true,
+      host: '0.0.0.0',
+      port: 8080,
+      client: {
+    webSocketURL: 'auto://0.0.0.0:0/ws',
   }
+}
 ```
 
 # Code Structure
