@@ -47,6 +47,19 @@ following command.
 ```js
 window.postMessage( {action: 'eval', args: { script: ['ZenUML.Hello'] }})
 ```
+### The protocol
+
+The protocol is a simple JSON object with the following fields.
+```json
+{
+  "action": "eval",
+  "args": {
+    "code": "ZenUML.Hello",
+    "style": "#diagram { background-color: red; }", // TODO
+    "theme": "dark" // TODO
+  }
+}
+```
 
 # Code Structure
 This repository contains both the DSL parser and the renderer.
