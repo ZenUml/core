@@ -60,6 +60,13 @@ module.exports = {
     }
   },
   devServer: {
-    allowedHosts: ["air.zenuml.com", "yanhui.zenuml.com", "localhost"],
+    allowedHosts: "all",
+    historyApiFallback: true,
+    hot: true,
+    host: '0.0.0.0',
+    port: 8080,
+    client: {
+      webSocketURL: 'auto://0.0.0.0:0/ws',
+    }
   }
 }
