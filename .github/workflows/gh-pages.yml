@@ -22,26 +22,7 @@ concurrency:
 
 jobs:
   # Build job
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: "14"
-          cache: ${{ env.package_manager }}
-      - name: Install dependencies
-        run: yarn install
-      - name: Static HTML export with Nuxt
-        run: yarn build:site
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: ./dist
-  # Test
-  test:
+  install:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -58,15 +39,33 @@ jobs:
           java-version: '11.0.202'
           java-package: jdk
           architecture: x64
+  # Test
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
       - name: Run tests
         run: yarn test:unit
+
+  # Build the site for embed view and other demo
+  build-site:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Static HTML export with Nuxt
+        run: yarn build:site
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./dist
+
   # Single deploy job since we're just deploying
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: test
+    needs: build-site
     steps:
       - name: Deploy to GitHub Pages
         id: deployment

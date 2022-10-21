@@ -14,7 +14,7 @@ This workflow has two jobs: `build` -> `deploy`.
 ````text
 build -> test -> npm publish 
               -> cy tests
-              -> deploy gh-pages
+              -> build site -> deploy gh-pages
 ````
 
 This workflow is triggered on every push to the `main` branch. 
