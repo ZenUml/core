@@ -12,11 +12,15 @@
     </style>
   </head>
   <body class="handwriting">
-    <div id="diagram">
+    <div id="diagram" class="diagram">
+      <div id="mounting-point">
+        Loading ZenUML...
+      </div>
     </div>
+
     <script>
       document.addEventListener("DOMContentLoaded", function(event) {
-        window.store2.state.code = `
+        window.store.state.code = `
 title ABCD Title
 // Generating Sequence Diagrams from Java code is experimental.
 // Please report errors to https://github.com/ZenUml/jetbrains-zenuml/discussions

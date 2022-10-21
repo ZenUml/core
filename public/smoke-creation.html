@@ -12,13 +12,16 @@
     </style>
   </head>
   <body>
-
-    <div id="diagram">
+    <div id="diagram" class="diagram">
+      <div id="mounting-point">
+        Loading ZenUML...
+      </div>
     </div>
+
     <script>
       // on documentready
       document.addEventListener("DOMContentLoaded", function(event) {
-        window.store2.state.code = `title Title 1
+        window.store.state.code = `title Title 1
 A.m {
   new B(1,2,3,4)
 }`

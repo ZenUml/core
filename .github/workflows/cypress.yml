@@ -5,7 +5,7 @@ on: [push]
 jobs:
   cypress-run:
     runs-on: ${{ matrix.os }}
-
+    needs: test
     strategy:
       matrix:
         node-version: [12, 14]
