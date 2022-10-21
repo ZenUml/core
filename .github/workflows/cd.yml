@@ -28,10 +28,6 @@ jobs:
           cache: yarn
       - name: Install dependencies
         run: yarn install
-      - uses: actions/setup-java@v2
-        with:
-          distribution: 'zulu'
-          java-version: '11'
       - name: Run tests
         run: yarn test:unit
 
@@ -71,11 +67,6 @@ jobs:
           cache: yarn
       - name: Install dependencies
         run: yarn install
-      - uses: actions/setup-java@v1
-        with:
-          java-version: '11.0.3'
-          java-package: jdk
-          architecture: x64
       - name: Build the site for demo page and embed view
         run: yarn build:site
       - name: Upload artifact
