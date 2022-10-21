@@ -30,9 +30,8 @@ jobs:
         run: yarn install
       - uses: actions/setup-java@v2
         with:
-          java-version: '11.0.3'
-          java-package: jdk
-          architecture: x64
+          distribution: 'zulu'
+          java-version: '11'
       - name: Run tests
         run: yarn test:unit
 
