@@ -11,6 +11,12 @@ CI/CD is done with GitHub Actions. The workflow is defined in `.github/workflows
 ## gh-pages.yml
 This workflow has two jobs: `build` -> `deploy`.
 
+````text
+build -> test -> npm publish 
+              -> cy tests
+              -> deploy gh-pages
+````
+
 This workflow is triggered on every push to the `main` branch. 
 It will build the project and publish the `dist` folder to the `gh-pages` branch.
 

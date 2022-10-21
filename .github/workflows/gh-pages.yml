@@ -40,13 +40,33 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           path: ./dist
+  # Test
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "14"
+          cache: ${{ env.package_manager }}
+      - name: Install dependencies
+        run: yarn install
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '8.0.202'
+          java-package: jdk
+          architecture: x64
+      - name: Run tests
+        run: yarn test:unit
   # Single deploy job since we're just deploying
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: build
+    needs: test
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
