@@ -21,9 +21,10 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # Build job
-  install:
+  # Test
+  test:
     runs-on: ubuntu-latest
+    needs: install
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -39,11 +40,6 @@ jobs:
           java-version: '11.0.3'
           java-package: jdk
           architecture: x64
-  # Test
-  test:
-    runs-on: ubuntu-latest
-    needs: install
-    steps:
       - name: Run tests
         run: yarn test:unit
 
