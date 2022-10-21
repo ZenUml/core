@@ -31,7 +31,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "14"
-          cache: ${{ env.package_manager }}
+          cache: yarn
       - name: Install dependencies
         run: yarn install
       - uses: actions/setup-java@v1
