@@ -42,7 +42,7 @@ jobs:
   # Test
   test:
     runs-on: ubuntu-latest
-    needs: build
+    needs: install
     steps:
       - name: Run tests
         run: yarn test:unit
