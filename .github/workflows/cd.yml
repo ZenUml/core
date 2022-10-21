@@ -76,7 +76,7 @@ jobs:
           java-version: '11.0.3'
           java-package: jdk
           architecture: x64
-      - name: Static HTML export with Nuxt
+      - name: Build the site for demo page and embed view
         run: yarn build:site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
