@@ -7,6 +7,7 @@
     <!-- pb-8 is to offset pt-8 in SeqDiagram component
         .whitespace-nowrap will be inherited by all children
      -->
+    <debug />
     <div class="frame relative m-1 origin-top-left whitespace-nowrap" :style="{transform: `scale(${scale})`}">
       <div ref="content">
         <div class="header flex justify-between">
@@ -49,6 +50,7 @@ import SeqDiagram from "@/components/SeqDiagram";
 import TipsDialog from "@/components/tutorial/TipsDialog";
 import WidthProvider from "@/components/positioning/WidthProvider";
 import * as htmlToImage from 'html-to-image'
+import Debug from "@/components/Debug/Debug";
 
 export default {
   name: "DiagramFrame",
@@ -170,6 +172,7 @@ export default {
     }
   },
   components: {
+    Debug,
     WidthProvider,
     TipsDialog,
     DiagramTitle,

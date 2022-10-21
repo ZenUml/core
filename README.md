@@ -5,6 +5,16 @@ yarn install
 yarn start
 ````
 
+## CI/CD
+CI/CD is done with GitHub Actions. The workflow is defined in `.github/workflows/*.yml`.
+
+## gh-pages.yml
+This workflow has two jobs: `build` -> `deploy`.
+
+This workflow is triggered on every push to the `main` branch. 
+It will build the project and publish the `dist` folder to the `gh-pages` branch.
+
+
 ## Put localhost on the internet
 We sometimes need to put our localhost on the internet so that we can test it remotely.
 
