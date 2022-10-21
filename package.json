@@ -6,8 +6,6 @@
     "url": "https://github.com/ZenUml/vue-sequence.git"
   },
   "scripts": {
-    "gh-deploy-embed": "git push origin :gh-pages && git subtree push --prefix dist origin gh-pages",
-    "gh-deploy-embed-init": "vue-cli-service build && git push origin && git subtree push --prefix dist origin gh-pages",
     "build:site": "vue-cli-service build",
     "build": "yarn antlr:clear && yarn antlr && vue-cli-service build --target lib --name vue-sequence ./src/index.ts",
     "build:report": "yarn antlr:clear && yarn antlr && vue-cli-service build --report --target lib --inline-vue --name vue-sequence ./src/index.ts",
@@ -19,7 +17,6 @@
     "antlr:clear": "rm -rf src/generated-parser/*",
     "antlr:lexer": "java -Duser.dir=$(pwd)/src/g4 -cp $(pwd)/antlr/antlr-4.8-complete.jar org.antlr.v4.Tool -o ./src/generated-parser -Dlanguage=JavaScript sequenceLexer.g4",
     "antlr:parser": "java -Duser.dir=$(pwd)/src/g4 -cp $(pwd)/antlr/antlr-4.8-complete.jar org.antlr.v4.Tool -o ./src/generated-parser -Dlanguage=JavaScript sequenceParser.g4",
-    "babel": "babel --presets es2015 dist/vue-sequence.umd.js -o dist/vue-sequence.umd.es5.js",
     "build-crx": "vue-cli-service build --mode production --target lib --name vue-sequence ./src/index.js",
     "start": "yarn antlr && vue-cli-service serve",
     "git:branch:clean:gone": "git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -d",
