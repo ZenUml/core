@@ -55,7 +55,7 @@ jobs:
         run: yarn install
       - uses: actions/setup-java@v1
         with:
-          java-version: '8.0.202'
+          java-version: '11.0.202'
           java-package: jdk
           architecture: x64
       - name: Run tests
