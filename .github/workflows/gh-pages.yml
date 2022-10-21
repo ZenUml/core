@@ -103,19 +103,16 @@ jobs:
         uses: actions/deploy-pages@v1
 
   cypress-run:
-    runs-on: ${{ matrix.os }}
+    runs-on: macos-latest
     needs: test
-    strategy:
-      matrix:
-        node-version: [12, 14]
-        os: [macos-latest]
-
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: "14"
+          cache: yarn
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
