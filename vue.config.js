@@ -55,6 +55,16 @@ module.exports = {
       definitions[0]['BUILD_TIME'] = JSON.stringify(new Date());
       return definitions;
     });
+
+    // We need to clear the pre-built svg rule
+    // use `vue-cli-service inspect to check the webpack
+    // the built-in webpack uses file-loader
+    const svgRule = config.module.rule('svg')
+    svgRule.store.clear();
+    svgRule
+        .test(/\.svg$/)
+        .type('asset/inline')
+        .end();
   },
   configureWebpack: {
     resolve: {
