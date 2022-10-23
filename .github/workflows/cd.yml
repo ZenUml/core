@@ -91,7 +91,7 @@ jobs:
           SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
         with:
           source-directory: './dist'
-          destination-github-username: 'zenuml-bot'
+          destination-github-username: 'zenuml'
           destination-repository-name: 'zenuml-embed'
           user-email: github.bot@zenuml.com
           target-branch: main
