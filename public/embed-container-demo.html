@@ -50,10 +50,8 @@
         lineNumbers: true
       });
       editor.on("change", function(cm) {
-
-
         const iframe = document.getElementsByTagName('iframe')[0];
-        iframe.contentWindow.postMessage(JSON.stringify({action: 'load', code: cm.getValue()}), '*');
+        iframe.contentWindow.postMessage({action: 'eval', args: { code: cm.getValue()}}, '*');
       });
     </script>
 

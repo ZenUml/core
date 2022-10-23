@@ -72,12 +72,18 @@ The protocol is a simple JSON object with the following fields.
   "args": {
     "code": "ZenUML.Hello",
     "style": "#diagram { background-color: red; }", 
-    "theme": "blue"
+    "theme": "blue",
     "css": "https://github.com/abruzzi/zenuml-css-overrides/blob/master/zenuml-override.css"
   }
 }
 ```
 
+### Example
+```js
+document.getElementsByTagName('iframe')[0] // get iframe
+    .contentWindow  // get target window
+    .postMessage({action: "eval", args: { code: 'A.m' }})
+```
 # Code Structure
 This repository contains both the DSL parser and the renderer.
 
