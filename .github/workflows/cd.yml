@@ -69,11 +69,15 @@ jobs:
         run: yarn install
       - name: Build the site for demo page and embed view
         run: yarn build:site
-      - name: Upload artifact
+      - name: Upload artifact for pages
         uses: actions/upload-pages-artifact@v1
         with:
           path: ./dist
-
+      - name: Upload artifact for embed view (push to zenuml-embed)
+        uses: actions/upload-artifact@v3
+        with:
+          name: zenuml-embed
+          path: ./dist # or path/to/artifact
   # Single deploy job since we're just deploying
   deploy:
     environment:
@@ -87,7 +91,7 @@ jobs:
         uses: actions/deploy-pages@v1
       - uses: actions/download-artifact@v3
         with:
-          name: github-pages
+          name: zenuml-embed
           path: ./dist
       - name: Pushes to another repository
         uses: cpina/github-action-push-to-another-repository@main
