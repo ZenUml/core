@@ -92,8 +92,8 @@ jobs:
 
   push-to-zenuml-embed:
     environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      name: github-pages  # use the same environment as publish-to-gh-pages on purpose
+      url: https://github.com/ZenUml/zenuml-embed
     runs-on: ubuntu-latest
     needs: build-site
     steps:
