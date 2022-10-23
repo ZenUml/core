@@ -56,7 +56,7 @@ jobs:
   build-site:
     runs-on: ubuntu-latest
     needs: test
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/push-to-zenuml-embed'
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -85,6 +85,17 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: './dist'
+          destination-github-username: 'zenuml-bot'
+          destination-repository-name: 'zenuml-embed'
+          user-email: github.bot@zenuml.com
+          target-branch: main
 
   cypress-run:
     runs-on: macos-latest
