@@ -69,17 +69,17 @@ jobs:
         run: yarn install
       - name: Build the site for demo page and embed view
         run: yarn build:site
-      - name: Upload artifact for pages
+      - name: Upload artifact for pages # upload zipped artifact named 'gh-pages' for actions/deploy-pages@v1
         uses: actions/upload-pages-artifact@v1
         with:
           path: ./dist
-      - name: Upload artifact for embed view (push to zenuml-embed)
+      - name: Upload artifact for embed view # upload unzipped artifact named 'zenuml-embed' for cpina/github-action-push-to-another-repository@main
         uses: actions/upload-artifact@v3
         with:
           name: zenuml-embed
-          path: ./dist # or path/to/artifact
+          path: ./dist
   # Single deploy job since we're just deploying
-  deploy:
+  publish-to-gh-pages:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -89,6 +89,14 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
+
+  push-to-zenuml-embed:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build-site
+    steps:
       - uses: actions/download-artifact@v3
         with:
           name: zenuml-embed
