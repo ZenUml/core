@@ -85,6 +85,10 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
+      - uses: actions/download-artifact@v3
+        with:
+          name: github-pages
+          path: ./dist
       - name: Pushes to another repository
         uses: cpina/github-action-push-to-another-repository@main
         env:
