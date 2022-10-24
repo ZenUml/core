@@ -12,10 +12,27 @@ setTimeout(function () {
     console.warn('[vue-sequence] Store is a function and is not initiated in 1 second.')
   }
 }, 1000)
+
+export interface Warning {
+  title: string
+  message: string
+}
+
+export interface StoreState {
+  warning: Warning | undefined
+  code: string
+  scale: number
+  selected: any[]
+  cursor: any
+  showTips: boolean
+  onElementClick: (codeRange: CodeRange) => void
+}
+
 const Store = (debounceTime?: number) => {
   storeInitiationTime = now()
   return {
     state: {
+      warning: undefined,
       code: '',
       scale: 1,
       selected: [],
@@ -24,7 +41,7 @@ const Store = (debounceTime?: number) => {
       onElementClick: (codeRange: CodeRange) => {
         console.log('Element clicked', codeRange)
       }
-    },
+    } as StoreState,
     getters: {
       rootContext: (state: any) => {
         return RootContext(state.code)
