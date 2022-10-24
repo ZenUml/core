@@ -1,50 +1,31 @@
+const fs = require('fs');
 const {execSync} = require("child_process");
 process.env.VUE_APP_GIT_HASH = execSync('git rev-parse --short HEAD').toString().trim()
 process.env.VUE_APP_GIT_BRANCH = execSync('git branch --show-current').toString().trim();
 
+// https://cli.vuejs.org/config/#pages
+function getPages() {
+  const files = fs.readdirSync('public');
+
+  const pages = files.filter(file => file.endsWith('.html') && file !== 'embed-container-demo.html')
+    .map(file => {
+      const name = file.substring(0, file.length - 5);
+      // produce camel case from kebab case
+      const camelName = name.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
+      return {
+        [camelName]: {
+          entry: 'src/main.ts',
+          template: `public/${file}`,
+          filename: file
+        }
+      };
+    });
+  // merge items in pages array into one object
+  return Object.assign({}, ...pages);
+}
+
 module.exports = {
-  pages: {
-    index: {
-      entry: 'src/main.ts',
-      template: 'public/index.html',
-      filename: 'index.html'
-    },
-    embed: {
-      entry: 'src/main.ts',
-      template: 'public/embed.html',
-      filename: 'embed.html'
-    },
-    smoke: {
-      entry: 'src/main.ts',
-      template: 'public/smoke.html',
-      filename: 'smoke.html'
-    },
-    smokeReturn: {
-      entry: 'src/main.ts',
-      template: 'public/smoke-return.html',
-      filename: 'smoke-return.html'
-    },
-    smokeInteraction: {
-      entry: 'src/main.ts',
-      template: 'public/smoke-interaction.html',
-      filename: 'smoke-interaction.html'
-    },
-    smokeFragmentIssue: {
-      entry: 'src/main.ts',
-      template: 'public/smoke-fragment-issue.html',
-      filename: 'smoke-fragment-issue.html'
-    },
-    smokeFragment: {
-      entry: 'src/main.ts',
-      template: 'public/smoke-fragment.html',
-      filename: 'smoke-fragment.html'
-    },
-    smokeCreation: {
-      entry: 'src/main.ts',
-      template: 'public/smoke-creation.html',
-      filename: 'smoke-creation.html'
-    }
-  },
+  pages: getPages(),
   chainWebpack: config =>{
     // A workaround that allows npm link or yarn link
     // https://cli.vuejs.org/guide/troubleshooting.html#symbolic-links-in-node-modules
