@@ -2,47 +2,52 @@ const config = require('./vue.config')
 describe('vue.config.js', function () {
   it('should get pages', () => {
     const expectedPages = {
-      index: {
-        entry: 'src/main.ts',
-        template: 'public/index.html',
-        filename: 'index.html'
+      "cy/smoke-creation.html": {
+        "entry": "src/main.ts",
+        "filename": "cy/smoke-creation.html",
+        "template": "public/cy/smoke-creation.html"
       },
-      embed: {
-        entry: 'src/main.ts',
-        template: 'public/embed.html',
-        filename: 'embed.html'
+      "cy/smoke-fragment-issue.html": {
+        "entry": "src/main.ts",
+        "filename": "cy/smoke-fragment-issue.html",
+        "template": "public/cy/smoke-fragment-issue.html"
       },
-      smoke: {
-        entry: 'src/main.ts',
-        template: 'public/smoke.html',
-        filename: 'smoke.html'
+      "cy/smoke-fragment.html": {
+        "entry": "src/main.ts",
+        "filename": "cy/smoke-fragment.html",
+        "template": "public/cy/smoke-fragment.html"
       },
-      smokeReturn: {
-        entry: 'src/main.ts',
-        template: 'public/smoke-return.html',
-        filename: 'smoke-return.html'
+      "cy/smoke-interaction.html": {
+        "entry": "src/main.ts",
+        "filename": "cy/smoke-interaction.html",
+        "template": "public/cy/smoke-interaction.html"
       },
-      smokeInteraction: {
-        entry: 'src/main.ts',
-        template: 'public/smoke-interaction.html',
-        filename: 'smoke-interaction.html'
+      "cy/smoke-return.html": {
+        "entry": "src/main.ts",
+        "filename": "cy/smoke-return.html",
+        "template": "public/cy/smoke-return.html"
       },
-      smokeFragmentIssue: {
-        entry: 'src/main.ts',
-        template: 'public/smoke-fragment-issue.html',
-        filename: 'smoke-fragment-issue.html'
+      "cy/smoke.html": {
+        "entry": "src/main.ts",
+        "filename": "cy/smoke.html",
+        "template": "public/cy/smoke.html"
       },
-      smokeFragment: {
-        entry: 'src/main.ts',
-        template: 'public/smoke-fragment.html',
-        filename: 'smoke-fragment.html'
+      "embed-container-demo.html": {
+        "entry": "src/main.ts",
+        "filename": "embed-container-demo.html",
+        "template": "public/embed-container-demo.html"
       },
-      smokeCreation: {
-        entry: 'src/main.ts',
-        template: 'public/smoke-creation.html',
-        filename: 'smoke-creation.html'
+      "embed.html": {
+        "entry": "src/main.ts",
+        "filename": "embed.html",
+        "template": "public/embed.html"
+      },
+      "index.html": {
+        "entry": "src/main.ts",
+        "filename": "index.html",
+        "template": "public/index.html"
       }
-    }
+    };
     expect(config.pages).toEqual(expectedPages)
   })
 });
