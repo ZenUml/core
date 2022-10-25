@@ -56,5 +56,24 @@ svgRule
 ....
 <1> `asset/inline` exports a data URI of the asset. Previously achievable by using `url-loader`. https://webpack.js.org/guides/asset-modules/#inlining-assets[See more]
 
+== Demo pages
+In the public folder, there are some demo pages for testing the library.
+
+=== How do they work?
+
+The demo pages^1^ are built with vue cli service. On the page, there needs to be a `pre`
+element with class `zenuml` and the content being the ZenUML DSL code.
+
+For example:
+[source, html]
+....
+<pre class="zenuml">
+A.method
+</pre>
+....
+
+The entry point of the demo pages is `src/main.ts`. It will find all the `pre` elements with
+class `zenuml` and render the ZenUML DSL code in it.
+
 
 

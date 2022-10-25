@@ -13,15 +13,8 @@
   </head>
   <body>
     <div id="diagram" class="diagram">
-      <div id="mounting-point">
-        Loading ZenUML...
-      </div>
-    </div>
-
-    <script>
-      // on documentready
-      document.addEventListener("DOMContentLoaded", function() {
-        window.store.state.code = `Browser->BookController.onPost() {
+<pre class="zenuml">
+  Browser->BookController.onPost() {
   BookLibService.Borrow(id) {
       receipt = process(id)
       if (receipt != null) {
@@ -35,10 +28,9 @@
         return a_long_value_from_self_call
       }
   }
-}`
-      });
-
-    </script>
+}
+</pre>
+    </div>
     <!-- built files will be auto injected -->
   </body>
 </html>

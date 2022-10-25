@@ -14,15 +14,7 @@
   <body>
 
     <div id="diagram" class="diagram">
-      <div id="mounting-point">
-        Loading ZenUML...
-      </div>
-    </div>
-
-    <script>
-      // on documentready
-      document.addEventListener("DOMContentLoaded", function() {
-        window.store.state.code = `
+<pre class="zenuml">
         // This sample is carefully crafted. It shows a known issues: fragment stretched to
         // svc (should not), because parser thinks the return statement returns to svc.
 group G {@VPC svc @RDS rep} Client
@@ -35,10 +27,9 @@ Client->SGW."Get order by id" {
       }
     }
   }
-}`
-      });
+}</pre>
 
-    </script>
+    </div>
     <!-- built files will be auto injected -->
   </body>
 </html>
