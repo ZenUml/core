@@ -1,5 +1,8 @@
 # Development
 
+## TODOs
+- [ ] Rename this repository to 'core' and rename the package to @zenuml/core
+
 ````
 yarn install
 yarn start
