@@ -13,15 +13,7 @@
   </head>
   <body>
     <div id="diagram" class="diagram">
-      <div id="mounting-point">
-        Loading ZenUML...
-      </div>
-    </div>
-
-    <script>
-      // on documentready
-      document.addEventListener("DOMContentLoaded", function(event) {
-        window.store.state.code = `if(x) {
+<pre class="zenuml">if(x) {
   A.method() {
     B.method() {
       BSelfMethod00000000000
@@ -31,10 +23,10 @@
       B->A.method
     }
   }
-}`
-      });
+}</pre>
 
-    </script>
+    </div>
+
     <!-- built files will be auto injected -->
   </body>
 </html>

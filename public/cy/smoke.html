@@ -13,14 +13,8 @@
   </head>
   <body class="handwriting">
     <div id="diagram" class="diagram">
-      <div id="mounting-point">
-        Loading ZenUML...
-      </div>
-    </div>
+<pre class="zenuml">
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function(event) {
-        window.store.state.code = `
 title ABCD Title
 // Generating Sequence Diagrams from Java code is experimental.
 // Please report errors to https://github.com/ZenUml/jetbrains-zenuml/discussions
@@ -30,7 +24,7 @@ MarkdownJavaFxHtmlPanel.readFromInputStream(inputStream) {
   try {
     // String line;
     while((line = br.readLine()) != null) {
-      resultStringBuilder.append(line).append("\\n");
+      resultStringBuilder.append(line).append("\n");
     }
   }
   catch(IOException) {
@@ -38,10 +32,9 @@ MarkdownJavaFxHtmlPanel.readFromInputStream(inputStream) {
   }
   return "resultStringBuilder.toString()";
 }
-`
-      });
 
-    </script>
+</pre>
+    </div>
     <!-- built files will be auto injected -->
   </body>
 </html>

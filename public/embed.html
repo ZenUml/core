@@ -28,6 +28,7 @@
           if (action === 'eval') {
             try {
               let { code, theme, style, css } = ev.data.args
+              const store = document.getElementsByClassName('sequence-diagram')[0].__vue__.$store
               store.state.code = code
               app.$children[0].setTheme(theme)
               app.$children[0].setStyle(style)
@@ -168,9 +169,9 @@
 
 
     <div id="diagram" class="diagram">
-      <div id="mounting-point">
-        Loading ZenUML...
-      </div>
+      <pre class="zenuml">
+
+      </pre>
     </div>
     <!-- built files will be auto injected -->
   </body>

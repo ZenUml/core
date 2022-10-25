@@ -1,42 +1,26 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-// import log4V from './plugins/Log4V'
 import {VueSequence} from './index'
-import Demo from './components/demo/Demo.vue'
 import demo1 from './demo1.js'
-import demo2 from './demo2.js'
-import VueGtag from "vue-gtag";
 Vue.use(Vuex)
 
 Vue.config.productionTip = false
 
-/* eslint-disable */
-Vue.use(VueGtag, {
-  config: {
-    id: 'UA-1234567-1'
-  }
-})
-
-// store1.state.onLifelineMounted = function(vueComp, elm) {
-//   console.log('Callback installed on', vueComp, elm)
-// }
-const store1 = new Vuex.Store(VueSequence.Store(50));
-store1.dispatch('updateCode', {
-  code: demo1
-})
 /**
  * el and render work together. They do nothing but replace el with a node created by 'h'.
  * There is no magic in 'h' it creates a "virtual node".
  * See https://vuejs.org/v2/guide/render-function.html#The-Virtual-DOM
- * These two Vue instances are rendered on public/index.html.
- * The previous version used h(App). That was kind of wrong, because when doing that we do not need to
- * define the seq-diagram component here.
  */
-if (document.getElementById('demo1')) {
-  new Vue({el: '#demo1', store: store1, render: h => h(Demo) })
-}
-const store2 = VueSequence.Store()
+
+// find the fist element with tag `pre` and class `zenuml`
+const elm = document.querySelector('pre.zenuml');
+// get the code from the element
+const code = elm?.textContent;
+// create a new store
+const store = VueSequence.Store();
+// dispatch the code to the store
 // @ts-ignore
-window.store = store2
+store.state.code = code;
+// create a new Vue instance
 // @ts-ignore
-window.app = new Vue({el: '#mounting-point', store: new Vuex.Store(store2), render: h => h(VueSequence.DiagramFrame) })
+new Vue({el: elm, store: new Vuex.Store(store), render: h => h(VueSequence.DiagramFrame) })
