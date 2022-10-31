@@ -1,7 +1,11 @@
+> Note: This repository has been renamed to `core` from `vue-sequence`. This is repository contains the core renderer and other core functionalities including
+export images.
+
 # Development
 
 ## TODOs
-- [ ] Rename this repository to 'core' and rename the package to @zenuml/core
+- [x] Rename this repository to 'core' 
+- [ ] and rename the package to @zenuml/core
 
 ````
 yarn install
