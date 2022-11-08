@@ -15,12 +15,11 @@ Vue.config.productionTip = false
 // find the fist element with tag `pre` and class `zenuml`
 const elm = document.querySelector('pre.zenuml');
 // get the code from the element
-const code = elm?.textContent;
+const code = elm?.textContent?.trim();
 // create a new store
 const store = VueSequence.Store();
 // dispatch the code to the store
 // @ts-ignore
-store.state.code = code;
-// create a new Vue instance
+store.state.code = code || demo1;
 // @ts-ignore
-new Vue({el: elm, store: new Vuex.Store(store), render: h => h(VueSequence.DiagramFrame) })
+window.app = new Vue({el: elm, store: new Vuex.Store(store), render: h => h(VueSequence.DiagramFrame) })
