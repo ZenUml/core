@@ -34,6 +34,7 @@ const Store = (debounceTime?: number) => {
     state: {
       warning: undefined,
       code: '',
+      theme: 'default',
       scale: 1,
       selected: [],
       cursor: null,

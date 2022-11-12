@@ -54,13 +54,8 @@ import Debug from "@/components/Debug/Debug";
 
 export default {
   name: "DiagramFrame",
-  data() {
-    return {
-      theme: 'default'
-    }
-  },
   computed: {
-    ...mapState(['showTips', 'scale']),
+    ...mapState(['showTips', 'scale', 'theme']),
     ...mapGetters(['rootContext']),
     title() {
       if(!this.rootContext) {
