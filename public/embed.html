@@ -27,11 +27,7 @@
           if (action === 'eval') {
             try {
               let { code, theme, style, css } = ev.data.args
-              const store = document.getElementsByClassName('sequence-diagram')[0].__vue__.$store
-              store.state.code = code
-              app.$children[0].setTheme(theme)
-              app.$children[0].setStyle(style)
-              app.$children[0].setRemoteCss(css)
+              await zenUml.render(code, theme)
               send_ok()
             } catch (e) {
               send_error(e.message, e.stack);
