@@ -1,16 +1,30 @@
-
-interface ZenUML {
-  // Resolve after rendering is finished. All three parameters are cached for one ZenUML
-  // instance.
-  render: (code: string, theme: string, el: Element | undefined) => Promise<ZenUML>
+interface IZenUml {
+  get code(): string | undefined;
+  get theme(): string | undefined;
+  // Resolve after rendering is finished.
+  render: (code: string | undefined, theme: string | undefined) => Promise<IZenUml>
 }
 
-function render(code: string, them: string, el: Element | undefined): Promise<ZenUML> {
-  return new Promise((resolve, reject) => {
-    resolve({} as ZenUML)
-  })
-}
+export default class ZenUml implements IZenUml{
+  private el: Element;
+  private _code: string | undefined;
+  private _theme: string | undefined;
 
-export {
-  render
+  constructor(el: Element) {
+    this.el = el;
+  }
+
+  render(code: string | undefined, theme: string | undefined): Promise<IZenUml> {
+    this._code = code || this._code;
+    this._theme = theme || this._theme;
+    return Promise.resolve(this);
+  }
+
+  get code(): string | undefined {
+    return this._code;
+  }
+
+  get theme(): string | undefined{
+    return this._theme;
+  }
 }

@@ -15,22 +15,17 @@ ZenUML Core exposes a simple API for integration:
 
 [source, typescript]
 ----
-interface ZenUML {
-  // Resolve after rendering is finished. All three parameters are cached for one ZenUML
-  // instance.
-  render: (code: string, theme: string, el: Element) => Promise<void>
+interface IZenUml {
+  get code(): string | undefined;
+  get theme(): string | undefined;
+  // Resolve after rendering is finished.
+  render: (code: string | undefined, theme: string | undefined) => Promise<IZenUml>
 }
 
 // client code
-import zenUML from '@ZenUML/core'
-import '@ZenUML/core/dist/style.css'
-const zenUmlInstance = await zenUML.render('A.method', 'theme-blue', '#id-1234')
-// update code only
-zenUmlInstance.render('B.method')
-// update theme only
-zenUmlInstance.render(null, 'theme-black-white')
-// empty diagram
-zenUmlInstance.render('')
+import ZenUml from '@ZenUML/core'
+const zenUml = new ZenUml(el)
+await zenUml.render('A.method', 'theme-blue')
 ----
 
 === As an iframe
