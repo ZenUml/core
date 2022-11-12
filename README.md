@@ -57,68 +57,6 @@ devServer: {
 }
 ```
 
-# Integration
-An important goal of this project is to be easily integrated into other projects.
-There are mainly two ways to do this.
-
-## As a library [TODO]
-
-## As an iframe
-
-You can embed the ZenUML core renderer as an application within another app, where you store the diagram
-data in the host app. It takes around 5 minutes to get a basic example running.
-
-### Quick test
-To test this out open `https://embed.zenuml.com/embed.html`. In the developer console, type in the
-following command.
-
-```js
-window.postMessage( {action: 'eval', args: { code: 'ZenUML.Hello' }})
-```
-### The protocol
-
-The protocol is a simple JSON object with the following fields.
-```json
-{
-  "action": "eval",
-  "args": {
-    "code": "ZenUML.Hello",
-    "style": "#diagram { background-color: red; }", 
-    "theme": "blue",
-    "css": "https://github.com/abruzzi/zenuml-css-overrides/blob/master/zenuml-override.css"
-  }
-}
-```
-
-### Example
-
-```html
-<iframe src="https://embed.zenuml.com/embed.html" id="zenuml-iframe" 
-        style="width: 100%; height: 100%; border: none;">
-  
-</iframe>
-<script>
-  const iframe = document.getElementById('zenuml-iframe');
-  const message = {
-    action: 'eval',
-    args: {
-      code: 'ZenUML.Hello',
-      style: '#diagram { background-color: red; }',
-      theme: 'blue',
-      css: ''
-    }
-  };
-  setTimeout(() => {
-    iframe.contentWindow.postMessage(message, '*');
-  }, 1000);
-</script>
-```
-
-```js
-document.getElementsByTagName('iframe')[0] // get iframe
-    .contentWindow  // get target window
-    .postMessage({action: "eval", args: { code: 'A.m' }})
-```
 # Code Structure
 This repository contains both the DSL parser and the renderer.
 
