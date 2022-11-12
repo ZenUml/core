@@ -1,14 +1,20 @@
-import {render} from './core'
+import ZenUml from './core'
 describe('@ZenUML/core', function () {
-  it('should return a ZenUML instance', async () => {
+  it('should render and cache the code and theme', async () => {
     const el = {} as Element
-    const zu = await render('A.method', 'theme-blue', el)
-    expect(zu).toBeDefined()
+    const zenUml = new ZenUml(el)
+    expect(zenUml).toBeInstanceOf(ZenUml)
+    expect(await zenUml.render('A.method', 'theme-blue')).toBeInstanceOf(ZenUml)
+    expect(zenUml.code).toBe('A.method')
+    expect(zenUml.theme).toBe('theme-blue')
+    await zenUml.render('B.method', 'theme-red')
+    expect(zenUml.code).toBe('B.method')
+    expect(zenUml.theme).toBe('theme-red')
+    await zenUml.render('C.method', undefined)
+    expect(zenUml.code).toBe('C.method')
+    expect(zenUml.theme).toBe('theme-red')
+    await zenUml.render(undefined, 'theme-green')
+    expect(zenUml.code).toBe('C.method')
+    expect(zenUml.theme).toBe('theme-green')
   })
-
-  // it('should throw exception if `el` is not provided in the first rendering', async () => {
-  //   expect(() => {
-  //     render('A.method', 'theme-blue', undefined)
-  //   }).toThrow()
-  // })
 });
