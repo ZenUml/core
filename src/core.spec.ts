@@ -1,7 +1,7 @@
 import ZenUml from './core'
 describe('@ZenUML/core', function () {
   it('should render and cache the code and theme', async () => {
-    const el = {} as Element
+    const el = document.createElement('div')
     const zenUml = new ZenUml(el)
     expect(zenUml).toBeInstanceOf(ZenUml)
     expect(await zenUml.render('A.method', 'theme-blue')).toBeInstanceOf(ZenUml)

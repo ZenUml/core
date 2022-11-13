@@ -7,7 +7,7 @@ const code = elm?.textContent?.trim() || 'A.method';
 // @ts-ignore
 const zenUml = new ZenUml(elm);
 zenUml.render(code, 'default').then(r => {
-  console.log(r);
+  console.log('render resolved', r);
 });
 // @ts-ignore
 window.zenUml = zenUml;

@@ -1,4 +1,5 @@
 = Integration Guide
+:icons: font
 
 == Audience
 This document is written for those want to integrate ZenUML to their applications. If you are an end
@@ -27,6 +28,35 @@ import ZenUml from '@ZenUML/core'
 const zenUml = new ZenUml(el)
 await zenUml.render('A.method', 'theme-blue')
 ----
+
+==== When rendering is finished
+When rendering is finished, the `render` method will return a promise that resolves to the
+instance of `IZenUml`. The `html` properties of the instance will be updated to the rendered
+HTML.
+
+[NOTE]
+====
+Vue's reactive system works against the `data`, `props` and `computed` properties of a component.
+This means a parent component is not necessarily be notified when a child component is `mounted` or `updated`.
+So this means we can not use the `mounted` or `updated` hook on `LifelineLayer` to emit `rendered` event.
+====
+
+It is tricky to know when the rendering is finished. The `Lifeline` components used `$nextTick`
+in their `mounted` and `updated` hooks to set the top when a `creation` message is sent to it.
+We have to wait until all those `$nextTick` calls are finished.
+
+[NOTE]
+====
+It seems that (to be confirmed) the `$nextTick` calls are queued and executed in ONE tick. This
+makes it easier to control the timing when to resolve the `render` promise. We only need to wait
+ONE `$nextTick` call to be finished.
+====
+
+The diagram is rendered in the following steps:
+
+1. The lifeline layer;
+2. The message layer;
+3. Update lifeline layer with `setTimeout` for `creation` messages.
 
 === As an iframe
 

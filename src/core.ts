@@ -26,22 +26,23 @@ export default class ZenUml implements IZenUml{
   private _code: string | undefined;
   private _theme: string | undefined;
   private readonly store: any;
+  private readonly app: any;
 
   constructor(el: Element) {
     this.el = el;
-    // create a new store
     this.store = Store();
-    new Vue({el: this.el, store: new Vuex.Store(this.store), render: h => h(DiagramFrame) })
+    this.app = new Vue({el: this.el, store: new Vuex.Store(this.store), render: h => h(DiagramFrame) })
   }
 
-  render(code: string | undefined, theme: string | undefined): Promise<IZenUml> {
+  async render(code: string | undefined, theme: string | undefined): Promise<IZenUml> {
+    console.log('rendering', code, theme)
     this._code = code || this._code;
     this._theme = theme || this._theme;
     // @ts-ignore
     this.store.state.code = this._code;
     // @ts-ignore
     this.store.state.theme = this._theme || 'default';
-
+    await this.app.$nextTick();
     return Promise.resolve(this);
   }
 

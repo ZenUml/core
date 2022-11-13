@@ -52,7 +52,9 @@
         lineNumbers: true
       });
       editor.on("change", function(cm, change) {
-        document.getElementsByClassName('sequence-diagram')[0].__vue__.$store.state.code = cm.getValue();
+        zenUml.render(cm.getValue(), 'default').then(r => {
+          console.log('render resolved', r);
+        });
       });
     </script>
     <!-- built files will be auto injected -->
