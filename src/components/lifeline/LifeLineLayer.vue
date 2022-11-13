@@ -57,8 +57,10 @@ export default {
     }
   },
   updated() {
+    console.log('LifeLineLayer updated');
   },
   mounted() {
+    console.log('LifeLineLayer mounted');
   },
   components: {
     LifeLine,

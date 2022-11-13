@@ -30,10 +30,20 @@ export default {
     },
   },
   mounted() {
-    setTimeout(this.setTop, 0)
+    console.log('LifeLine mounted', this.entity.name);
+    this.$nextTick( () => {
+      this.setTop()
+      this.$emit('rendered')
+      console.log('LifeLine mounted timeout', this.entity.name);
+    }, 0)
   },
   updated() {
-    setTimeout(this.setTop, 0)
+    console.log('LifeLine updated', this.entity.name);
+    this.$nextTick( () => {
+      this.setTop()
+      this.$emit('rendered')
+      console.log('LifeLine updated timeout', this.entity.name);
+    }, 0)
   },
   methods: {
     onSelect() {
