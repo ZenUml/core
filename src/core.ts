@@ -1,3 +1,4 @@
+import parentLogger from './logger/logger'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Store from './store/Store'
@@ -11,6 +12,7 @@ import './components/Cosmetic-star-uml.scss'
 import './components/theme-blue-river.scss'
 import './assets/themes/handwriting.css';
 
+const logger = parentLogger.child({component: 'core'})
 
 interface IZenUml {
   get code(): string | undefined;
@@ -35,7 +37,7 @@ export default class ZenUml implements IZenUml{
   }
 
   async render(code: string | undefined, theme: string | undefined): Promise<IZenUml> {
-    console.log('rendering', code, theme)
+    logger.debug('rendering', code, theme)
     this._code = code || this._code;
     this._theme = theme || this._theme;
     // @ts-ignore

@@ -9,9 +9,10 @@
 </template>
 
 <script>
+import parentLogger from '../../logger/logger'
 import {mapGetters, mapState} from 'vuex'
 import Participant from "@/components/lifeline/Participant";
-
+const logger = parentLogger.child({component: 'LifeLine'})
 export default {
   name: 'life-line',
   components: {Participant},
@@ -30,20 +31,20 @@ export default {
     },
   },
   mounted() {
-    console.log('LifeLine mounted', this.entity.name);
+    logger.debug('LifeLine mounted', this.entity.name);
     this.$nextTick( () => {
       this.setTop()
       this.$emit('rendered')
-      console.log('LifeLine mounted timeout', this.entity.name);
-    }, 0)
+      logger.debug('LifeLine mounted $nextTick', this.entity.name);
+    })
   },
   updated() {
-    console.log('LifeLine updated', this.entity.name);
+    logger.debug('LifeLine updated', this.entity.name);
     this.$nextTick( () => {
       this.setTop()
       this.$emit('rendered')
-      console.log('LifeLine updated timeout', this.entity.name);
-    }, 0)
+      logger.debug('LifeLine updated $nextTick', this.entity.name);
+    })
   },
   methods: {
     onSelect() {

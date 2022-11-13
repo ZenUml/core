@@ -53,7 +53,7 @@
       });
       editor.on("change", function(cm, change) {
         zenUml.render(cm.getValue(), 'default').then(r => {
-          console.log('render resolved', r);
+          parentLogger.child({module: 'index.html'}).debug('render resolved', r);
         });
       });
     </script>
