@@ -19,11 +19,12 @@
 </template>
 
 <script>
+import parentLogger from '../../logger/logger'
 import {GroupContext, ParticipantContext, Participants} from '../../parser/index.js'
-
 import {mapGetters, mapMutations} from 'vuex'
 import LifeLine from './LifeLine.vue'
 import LifeLineGroup from './LifeLineGroup'
+const logger = parentLogger.child({component: 'LifeLineLayer'})
 
 export default {
   name: 'life-line-layer',
@@ -57,10 +58,10 @@ export default {
     }
   },
   updated() {
-    console.log('LifeLineLayer updated');
+    logger.debug('LifeLineLayer updated');
   },
   mounted() {
-    console.log('LifeLineLayer mounted');
+    logger.debug('LifeLineLayer mounted');
   },
   components: {
     LifeLine,

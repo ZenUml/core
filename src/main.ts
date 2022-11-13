@@ -1,4 +1,6 @@
+import parentLogger from './logger/logger'
 import ZenUml from "@/core";
+const logger = parentLogger.child({component: 'main'})
 
 // find the fist element with tag `pre` and class `zenuml`
 const elm = document.querySelector('pre.zenuml');
@@ -7,7 +9,9 @@ const code = elm?.textContent?.trim() || 'A.method';
 // @ts-ignore
 const zenUml = new ZenUml(elm);
 zenUml.render(code, 'default').then(r => {
-  console.log('render resolved', r);
+  logger.debug('render resolved', r);
 });
 // @ts-ignore
 window.zenUml = zenUml;
+// @ts-ignore
+window.parentLogger = parentLogger;
