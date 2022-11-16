@@ -31,19 +31,19 @@ export default {
     },
   },
   mounted() {
-    logger.debug('LifeLine mounted', this.entity.name);
-    this.$nextTick( () => {
+    logger.debug(`LifeLine mounted for ${this.entity.name}`);
+    setTimeout( () => {
       this.setTop()
       this.$emit('rendered')
-      logger.debug('LifeLine mounted $nextTick', this.entity.name);
+      logger.debug(`setTimeout after mounted for ${this.entity.name}`);
     })
   },
   updated() {
-    logger.debug('LifeLine updated', this.entity.name);
-    this.$nextTick( () => {
+    logger.debug(`updated for ${this.entity.name}`);
+    setTimeout( () => {
       this.setTop()
       this.$emit('rendered')
-      logger.debug('LifeLine updated $nextTick', this.entity.name);
+      logger.debug(`setTimeout after updated for ${this.entity.name}`);
     })
   },
   methods: {
@@ -53,6 +53,7 @@ export default {
     setTop() {
       const firstMessage = this.$root.$el.querySelector(`[data-to="${this.entity.name}"]`);
       if (firstMessage && firstMessage.attributes['data-type'].value === 'creation') {
+        logger.debug(`First message to ${this.entity.name} is creation`);
         const rootY = this.$el.getBoundingClientRect().y
         const messageY = firstMessage.getBoundingClientRect().y
         this.top = (messageY - rootY) / this.scale
