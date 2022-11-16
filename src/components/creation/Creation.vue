@@ -27,11 +27,15 @@
 </template>
 
 <script type="text/babel">
+  import parentLogger from '../../logger/logger'
+
   import {mapGetters} from 'vuex'
   import Comment from '../Comment.vue'
   import Message from '../Message.vue'
   import Occurrence from '../Occurrence.vue'
   import {CodeRange} from '@/parser/CodeRange'
+
+  const logger = parentLogger.child({component: 'Creation'})
 
   export default {
     name: 'creation',
@@ -74,9 +78,11 @@
     },
     mounted() {
       this.layoutMessageContainer()
+      logger.debug(`mounted for ${this.to}`);
     },
     updated() {
       this.layoutMessageContainer()
+      logger.debug(`mounted for ${this.to}`);
     },
     methods: {
       layoutMessageContainer() {
