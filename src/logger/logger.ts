@@ -9,8 +9,29 @@ const logger = pino({
     serialize: true,
     write: (inputData) => {
       const prettifiedOutput = pretty(inputData);
-      console.log(prettifiedOutput);
-      },
+      // switch on inputData.level and map to console.log, console.warn, console.error, etc.
+      // @ts-ignore
+      switch (inputData.level) {
+        case 10:
+          console.trace(prettifiedOutput);
+          break;
+        case 20:
+          console.debug(prettifiedOutput);
+          break;
+        case 30:
+          console.info(prettifiedOutput);
+          break;
+        case 40:
+          console.warn(prettifiedOutput);
+          break;
+        case 50:
+        case 60:
+          console.error(prettifiedOutput);
+          break;
+        default:
+          console.log(prettifiedOutput);
+      }
+    },
   }
 });
 

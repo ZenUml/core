@@ -1,6 +1,6 @@
 import parentLogger from './logger/logger'
 import ZenUml from "@/core";
-const logger = parentLogger.child({component: 'main'})
+const logger = parentLogger.child({name: 'main'})
 
 // find the fist element with tag `pre` and class `zenuml`
 const elm = document.querySelector('pre.zenuml');
