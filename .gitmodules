@@ -1,0 +1,3 @@
+[submodule "src/pino-pretty-browser"]
+	path = src/pino-pretty-browser
+	url = https://github.com/ZenUml/pino-pretty-browser.git

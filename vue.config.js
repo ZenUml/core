@@ -12,6 +12,7 @@ module.exports = {
     config.plugin('define').tap((definitions) => {
       definitions[0]['VERSION'] = JSON.stringify(require('./package.json').version);
       definitions[0]['BUILD_TIME'] = JSON.stringify(new Date());
+      definitions[0]['process'] = {};
       return definitions;
     });
 
@@ -29,6 +30,11 @@ module.exports = {
     resolve: {
       fallback: {
         "fs": false,
+        "tty": false,
+        "path": false,
+        "util": false,
+        "stream": false,
+        "worker_threads": false,
       }
     }
   },
