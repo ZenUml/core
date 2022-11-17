@@ -1,6 +1,6 @@
 import pino from 'pino';
 import {prettyFactory} from '../pino-pretty-browser/index'
-const pretty = prettyFactory({ sync: true, colorize: true });
+const pretty = prettyFactory({ sync: true, colorize: true, singleLine: true });
 
 const logger = pino({
   level: 'debug',
