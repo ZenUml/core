@@ -7,8 +7,8 @@
   },
   "scripts": {
     "build:site": "vue-cli-service build",
-    "build": "vue-cli-service build --target lib --name vue-sequence ./src/index.ts",
-    "build:report": "vue-cli-service build --report --target lib --inline-vue --name vue-sequence ./src/index.ts",
+    "build": "vue-cli-service build --target lib --name vue-sequence ./src/core.ts",
+    "build:report": "vue-cli-service build --report --target lib --inline-vue --name vue-sequence ./src/core.ts",
     "test:unit": "vue-cli-service test:unit",
     "test:unit:watch": "yarn antlr && vue-cli-service test:unit --watch",
     "cy": "cypress run",
@@ -39,6 +39,7 @@
     "lodash": "^4.17.20",
     "marked": "^2.0.0",
     "pino": "^8.7.0",
+    "pino-pretty-browser": "^9.1.1",
     "postcss": "^7",
     "ramda": "^0.28.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
