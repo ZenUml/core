@@ -10055,10 +10055,10 @@ pino-abstract-transport@^1.0.0, pino-abstract-transport@v1.0.0:
     readable-stream "^4.0.0"
     split2 "^4.0.0"
 
-pino-pretty-browser@^9.1.1:
-  version "9.1.1"
-  resolved "https://registry.yarnpkg.com/pino-pretty-browser/-/pino-pretty-browser-9.1.1.tgz#c76010ca90a65e20d12e787226269caf525c2792"
-  integrity sha512-O44YN8k6nuZe9G5dEoPKmHeRBvYUUnAaNxDivdh9JSZUmrXZSrj86Fxkp1iZt/BgezpzvdfYIV9xC8D+ZgbtbQ==
+pino-pretty-browser@^9.1.2:
+  version "9.1.2"
+  resolved "https://registry.yarnpkg.com/pino-pretty-browser/-/pino-pretty-browser-9.1.2.tgz#41a67c50c6c97b1d18346504ed717afb40528b46"
+  integrity sha512-7QCjhgv/QeTnLLdcL0vQ8fsD0YJn780eT16ql1V0nGl0tYHwGseO7Z5B2PVzTJcJpZJGm5rMaKn7S4fDfu17AA==
   dependencies:
     colorette "^2.0.7"
     dateformat "^4.6.3"
