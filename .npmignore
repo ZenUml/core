@@ -17,6 +17,10 @@ dist/vue-sequence.common.*
 dist/vue-sequence.umd.js
 dist/*.map
 
+cypress
+gen
+coverage
+
 manifest.json
 jest.config.js
 babel.config.js
