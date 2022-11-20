@@ -11,7 +11,7 @@ the [ZenUML Live Editor](https://app.zenuml.com).
 
 You can use it ZenUML on your favorite platforms and applications:
 * [Confluence](https://marketplace.atlassian.com/apps/1218380/zenuml-diagrams-for-confluence-freemium?hosting=cloud&tab=overview)
-* [Web App](https://www.zenuml.com/)
+* [Web App](https://app.zenuml.com/)
 * [JetBrains Plugin](https://plugins.jetbrains.com/plugin/12437-zenuml-support)
 * [Chrome Extension](https://chrome.google.com/webstore/detail/zenuml-sequence/kcpganeflmhffnlofpdmcjklmdpbbmef)
 
