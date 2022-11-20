@@ -1,6 +1,6 @@
 ![editor](./docs/images/editor-sample.png)
 # ZenUML/Core
-ZenUML is JavaScript-based diagramming tool that uses Markdown-inspired text definitions
+ZenUML is JavaScript-based diagramming tool that requires **no server**. It uses Markdown-inspired text definitions
 and a renderer to create and modify sequence diagrams. The main purpose of ZenUML is to
 help documentation catch up with development.
 
