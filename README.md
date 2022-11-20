@@ -1,6 +1,4 @@
-> Note: This repository has been renamed to `core` from `vue-sequence`. This is repository contains the core renderer and other core functionalities including
-export images.
-
+![editor](./docs/images/editor-sample.png)
 # ZenUML/Core
 ZenUML is JavaScript-based diagramming tool that uses Markdown-inspired text definitions
 and a renderer to create and modify sequence diagrams. The main purpose of ZenUML is to
