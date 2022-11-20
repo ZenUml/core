@@ -15,10 +15,6 @@ You can use it ZenUML on your favorite platforms and applications:
 
 # Development
 
-## TODOs
-- [x] Rename this repository to 'core' 
-- [ ] and rename the package to @zenuml/core
-
 ````
 yarn install
 yarn start
