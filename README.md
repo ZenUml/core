@@ -13,6 +13,11 @@ You can use it ZenUML on your favorite platforms and applications:
 * [JetBrains Plugin](https://plugins.jetbrains.com/plugin/12437-zenuml-support)
 * [Chrome Extension](https://chrome.google.com/webstore/detail/zenuml-sequence/kcpganeflmhffnlofpdmcjklmdpbbmef)
 
+# Integrations
+
+ZenUML can be integrated with your favorite tools and platforms as a library or an embeddable widget.
+Please follow the [integration guide](./docs/asciidoc/integration-guide.adoc) for detailed steps.
+
 # Development
 
 ````
