@@ -1,7 +1,17 @@
 # Simple workflow for deploying static content to GitHub Pages
 name: Build, Test, npm Publish, and Deploy
 
-on: [push, pull_request]
+on:
+  push:
+    paths-ignore:
+      - 'docs/**'
+      - 'integration/**'
+      - '*.md'
+  pull_request:
+    paths-ignore:
+      - 'docs/**'
+      - 'integration/**'
+      - '*.md'
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:

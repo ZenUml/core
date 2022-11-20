@@ -5,27 +5,22 @@
   <title>Integration ZenUML Library with Vanilla JavaScript</title>
   <script src="https://unpkg.com/vue@2.6.14"></script>
   <script src="https://unpkg.com/vuex@3.6.2"></script>
-  <script src="https://unpkg.com/vue-sequence"></script>
-  <link rel="stylesheet" href="https://unpkg.com/vue-sequence/dist/vue-sequence.css">
+  <script src="https://unpkg.com/@zenuml/core@2.0.1/dist/zenuml/core.umd.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/@zenuml/core@2.0.1/dist/zenuml/core.css">
 </head>
 <body>
-<div id="app" />
+<div id="app"></div>
 <script>
-  Vue.use(Vuex);
-  const VueSequence = window['vue-sequence'].VueSequence;
-  const store = new Vuex.Store(VueSequence.Store());
-  store.dispatch('updateCode',{ code: `
+  const ZenUml = window['zenuml/core'].default;
+  const zenuml = new ZenUml(document.getElementById('app'));
+  const code = `
   @EC2 BookService
   @DynamoDB BookRepository
   BookService.saveBook(1) {
     BookRepository.storeBook()
   }
-  `});
-  new Vue({
-    el: '#app',
-    store,
-    render: h => h(VueSequence.DiagramFrame)
-  });
+  `
+  zenuml.render(code, 'theme-blue')
 </script>
 </body>
 </html>
