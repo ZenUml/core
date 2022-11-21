@@ -5,7 +5,10 @@ const logger = parentLogger.child({component: 'main'})
 // find the fist element with tag `pre` and class `zenuml`
 const elm = document.querySelector('pre.zenuml');
 // get the code from the element
-const code = elm?.textContent?.trim() || 'A.method';
+const code = elm?.textContent?.trim() || ` 
+// comment
+A
+A.method`;
 // @ts-ignore
 const zenUml = new ZenUml(elm);
 zenUml.render(code, 'default').then(r => {

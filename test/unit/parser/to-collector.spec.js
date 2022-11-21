@@ -1,4 +1,3 @@
-import {ParticipantType} from '../../../src/parser/Participants'
 import {Fixture} from "./fixture/Fixture";
 
 let seqDsl = require('../../../src/parser/index');
@@ -6,6 +5,7 @@ let ToCollector = require('../../../src/parser/ToCollector')
 test('smoke test2', () => {
   const code = `
     C
+    // comment
     <<A>> "B 1" 1024
     @Starter("B 1")
     C.m
@@ -13,7 +13,7 @@ test('smoke test2', () => {
     new F
   `
   let participants = getParticipants(code);
-  expect(participants.Get('B 1')).toEqual({name: 'B 1', isStarter: true, explicit: true, groupId: undefined, stereotype: 'A', 'width': 1024, 'type': undefined})
+  expect(participants.Get('B 1')).toEqual({name: 'B 1', comment: ' comment\n', color: undefined, label: undefined, isStarter: true, explicit: true, groupId: undefined, stereotype: 'A', 'width': 1024, 'type': undefined})
 })
 
 describe('Plain participants', () => {

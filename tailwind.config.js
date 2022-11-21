@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       overflow: ['hover', 'focus'],
       whitespace: ['hover', 'focus'],
+      display: ['group-hover'],
     },
   },
   plugins: [],

@@ -87,10 +87,10 @@ test('A participant -  A #123456', () => {
 })
 
 test('A participant with comments', () => {
-  let rootContext = seqDsl.RootContext('// comment \n A');
+  let rootContext = seqDsl.RootContext('\n// comment\nA\nA.method');
   let participants = rootContext.head().participant();
   expectText(participants[0].name()).toBe('A')
-  expect(participants[0].getComment()).toBe(' comment \n')
+  expect(participants[0].getComment()).toBe(' comment\n')
 })
 
 function expectText(context) {

@@ -104,8 +104,9 @@ export class Participants {
              label?: string,
              explicit?: boolean,
              type?: string,
-             color?: string): void {
-    const participant = new Participant(name, isStarter, stereotype, width, groupId, label, explicit, type, color);
+             color?: string,
+             comment?: string): void {
+    const participant = new Participant(name, isStarter, stereotype, width, groupId, label, explicit, type, color, comment);
     this.participants.set(name, mergeWith({}, this.Get(name), participant, (a, b) => a || b));
   }
 

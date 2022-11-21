@@ -8,7 +8,10 @@
        @click="onSelect">
     <img v-if="!!icon" :src="icon" class="absolute left-1/2 transform -translate-x-1/2 -translate-y-full h-8" :alt="`icon for ${entity.name}`">
     <!-- Put in a div to give it a fixed height, because stereotype is dynamic. -->
-    <div class="h-5 flex flex-col justify-center">
+    <div class="h-5 group flex flex-col justify-center">
+      <span class="absolute hidden rounded-lg transform -translate-y-8 bg-gray-400 px-2 py-1 text-center text-sm text-white group-hover:flex">
+        {{comment}}
+      </span>
       <label class="interface" v-if="stereotype">«{{ stereotype }}»</label>
       <label class="name">{{ entity.label || entity.name }}</label>
     </div>
@@ -103,6 +106,9 @@ export default {
     },
     stereotype () {
       return this.entity.stereotype
+    },
+    comment() {
+      return this.entity.comment
     },
     icon() {
       return iconPath[this.entity.type?.toLowerCase()]
