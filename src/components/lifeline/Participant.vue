@@ -2,6 +2,7 @@
   <!-- h-10 gives participant a fixed height same as message container in Creation.
    recommendation to theme creators are not to override. -->
   <div class="relative participant flex flex-col justify-center z-10 h-10"
+       data-no-override="h-10"
        :class="{'selected': selected, 'border-transparent': !!icon}"
        ref="participant"
        :style="{backgroundColor: backgroundColor, color: color}"
