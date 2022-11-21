@@ -86,6 +86,13 @@ test('A participant -  A #123456', () => {
   expect(participants[0].COLOR().getText()).toBe('#12345')
 })
 
+test('A participant with comments', () => {
+  let rootContext = seqDsl.RootContext('// comment \n A');
+  let participants = rootContext.head().participant();
+  expectText(participants[0].name()).toBe('A')
+  expect(participants[0].getComment()).toBe(' comment \n')
+})
+
 function expectText(context) {
   return expect(context.getFormattedText())
 }

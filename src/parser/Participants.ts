@@ -25,6 +25,7 @@ export class Participant {
   private label: string | undefined;
   private type: string | undefined;
   private color: string | undefined;
+  private comment: string | undefined;
 
   constructor(name: string,
               isStarter?: boolean,
@@ -34,7 +35,8 @@ export class Participant {
               label?: string,
               explicit?: boolean,
               type?: string,
-              color?: string
+              color?: string,
+              comment?: string
   ) {
     this.name = name;
     this.stereotype = stereotype;
@@ -45,6 +47,7 @@ export class Participant {
     this.label = label;
     this.type = type;
     this.color = color;
+    this.comment = comment;
   }
 
   public Type(): ParticipantType {
