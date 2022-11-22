@@ -7,7 +7,7 @@
     <img v-if="!!icon" :src="icon" class="absolute left-1/2 transform -translate-x-1/2 -translate-y-full h-8" :alt="`icon for ${entity.name}`">
     <!-- Put in a div to give it a fixed height, because stereotype is dynamic. -->
     <div class="h-5 group flex flex-col justify-center">
-      <span class="absolute hidden rounded-lg transform -translate-y-8 bg-gray-400 px-2 py-1 text-center text-sm text-white group-hover:flex">
+      <span v-if="!!comment" class="absolute hidden rounded-lg transform -translate-y-8 bg-gray-400 px-2 py-1 text-center text-sm text-white group-hover:flex">
         {{comment}}
       </span>
       <label class="interface" v-if="stereotype">«{{ stereotype }}»</label>
