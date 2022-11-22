@@ -1,9 +1,9 @@
 <template>
   <div class="point" :class="{ 'fill': fill, 'no-fill': !fill, 'right-to-left':rtl }">
-    <svg v-if="!rtl" class="arrow" height="10" width="10">
+    <svg v-if="!rtl" class="arrow stroke-2" height="10" width="10">
       <polyline class="right head" points="0,0 10,5 0,10"></polyline>
     </svg>
-    <svg v-if="rtl" class="arrow" height="10" width="10">
+    <svg v-if="rtl" class="arrow stroke-2" height="10" width="10">
       <polyline class="left head" points="10,0 0,5 10,10"></polyline>
     </svg>
   </div>
@@ -18,11 +18,6 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .point {
-    /*position:absolute;*/
-    /*margin-top: -12px;*/
-    /*right: 10px;*/
-  }
 
   .fill svg.arrow polyline {
     fill: #000;
