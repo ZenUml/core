@@ -9,7 +9,8 @@ require('./Owner');
 require('./ProgContext');
 require('./RetContext');
 require('./StatContext');
-require('./SignatureText')
+require('./SignatureText');
+require('./Messages/MessageContext');
 require('./From')
 require('./key/Key')
 require('./utils/cloest-ancestor/ClosestAncestor')

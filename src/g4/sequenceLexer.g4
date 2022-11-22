@@ -1,7 +1,17 @@
 lexer grammar sequenceLexer;
 channels {
-  COMMENT_CHANNEL
+  COMMENT_CHANNEL,
+  MODIFIER_CHANNEL
 }
+
+// variable modifiers
+CONSTANT:   'const' -> channel(MODIFIER_CHANNEL);
+READONLY:   'readonly' -> channel(MODIFIER_CHANNEL);
+STATIC:     'static' -> channel(MODIFIER_CHANNEL);
+
+// method modifiers
+AWAIT:      'await' -> channel(MODIFIER_CHANNEL);
+
 TITLE
  : 'title' -> pushMode(TITLE_MODE)
  ;
@@ -55,26 +65,26 @@ CPAR : ')';
 OBRACE : '{';
 CBRACE : '}';
 
-TRUE : 'true';
-FALSE : 'false';
-NIL : 'nil';
-IF : 'if';
-ELSE : 'else';
-WHILE : 'while' | 'for' | 'foreach' | 'forEach' | 'loop';
-RETURN : 'return';
-NEW: 'new';
-PAR : 'par';
-GROUP : 'group';
-OPT : 'opt';
-AS : 'as';
-TRY: 'try';
-CATCH: 'catch';
-FINALLY: 'finally';
-IN: 'in';
+TRUE:       'true';
+FALSE:      'false';
+NIL:        'nil' | 'null';
+IF:         'if';
+ELSE:       'else';
+WHILE:      'while' | 'for' | 'foreach' | 'forEach' | 'loop';
+RETURN:     'return';
+NEW:        'new';
+PAR :       'par';
+GROUP:      'group';
+OPT:        'opt';
+AS:         'as';
+TRY:        'try';
+CATCH:      'catch';
+FINALLY:    'finally';
+IN:         'in';
 
-STARTER_LXR: '@Starter' | '@starter';
-ANNOTATION_RET: '@Return' | '@return' | '@Reply' | '@reply';
-ANNOTATION: '@'[a-zA-Z_0-9]*;
+STARTER_LXR:        '@Starter' | '@starter';
+ANNOTATION_RET:     '@Return' | '@return' | '@Reply' | '@reply';
+ANNOTATION:         '@'[a-zA-Z_0-9]*;
 
 DOT
  : '.'

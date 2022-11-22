@@ -254,7 +254,8 @@ loop
 // [Perf tuning] Merging expr op expr does not help.
 // Removing `func` and `creation` could improve by 5 ~ 10%, but we cannot do that.
 expr
- : MINUS expr                           #unaryMinusExpr
+ : atom                                 #atomExpr
+ | MINUS expr                           #unaryMinusExpr
  | NOT expr                             #notExpr
  | expr op=(MULT | DIV | MOD) expr      #multiplicationExpr
  | expr op=(PLUS | MINUS) expr          #additiveExpr
@@ -265,7 +266,6 @@ expr
  | expr PLUS expr                       #plusExpr
  | (to DOT)? func                       #funcExpr
  | creation                             #creationExpr
- | atom                                 #atomExpr
  | OPAR expr CPAR                       #parenthesizedExpr
  | assignment expr                      #assignmentExpr
  ;

@@ -51,14 +51,9 @@
         return !!this.providedFrom && (this.providedFrom !== this.origin)
       },
       assignee: function () {
-        function safeCodeGetter (context) {
-          return (context && context.getFormattedText()) || ''
-        }
-        let assignment = this.message?.messageBody().assignment()
+        let assignment = this.message?.Assignment()
         if (!assignment) return ''
-        let assignee = safeCodeGetter(assignment.assignee())
-        const type = safeCodeGetter(assignment.type())
-        return assignee + (type ? ':' + type : '')
+        return assignment.getText()
       },
       signature: function () {
         return this.message?.SignatureText()
