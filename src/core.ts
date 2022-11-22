@@ -13,7 +13,7 @@ import './components/Cosmetic-star-uml.scss'
 import './components/theme-blue-river.scss'
 import './assets/themes/handwriting.css';
 
-const logger = parentLogger.child({component: 'core'})
+const logger = parentLogger.child({name: 'core'})
 
 interface IZenUml {
   get code(): string | undefined;

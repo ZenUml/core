@@ -24,7 +24,7 @@ import {GroupContext, ParticipantContext, Participants} from '../../parser/index
 import {mapGetters, mapMutations} from 'vuex'
 import LifeLine from './LifeLine.vue'
 import LifeLineGroup from './LifeLineGroup'
-const logger = parentLogger.child({component: 'LifeLineLayer'})
+const logger = parentLogger.child({name: 'LifeLineLayer'})
 
 export default {
   name: 'life-line-layer',
