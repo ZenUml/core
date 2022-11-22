@@ -12,7 +12,7 @@
 import parentLogger from '../../logger/logger'
 import {mapGetters, mapState} from 'vuex'
 import Participant from "@/components/lifeline/Participant";
-const logger = parentLogger.child({component: 'LifeLine'})
+const logger = parentLogger.child({name: 'LifeLine'})
 export default {
   name: 'life-line',
   components: {Participant},

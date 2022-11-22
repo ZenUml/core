@@ -35,7 +35,7 @@
   import Occurrence from '../Occurrence.vue'
   import {CodeRange} from '@/parser/CodeRange'
 
-  const logger = parentLogger.child({component: 'Creation'})
+  const logger = parentLogger.child({name: 'Creation'})
 
   export default {
     name: 'creation',
@@ -78,7 +78,7 @@
     },
     mounted() {
       this.layoutMessageContainer()
-      logger.debug(`mounted for ${this.to}`);
+      logger.log(`mounted for ${this.to}`);
     },
     updated() {
       this.layoutMessageContainer()
