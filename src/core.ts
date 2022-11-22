@@ -3,6 +3,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Store from './store/Store'
 import DiagramFrame from "@/components/DiagramFrame.vue";
+import SeqDiagram from "@/components/SeqDiagram.vue";
 
 import './assets/tailwind.css'
 import './components/Cosmetic.scss'
@@ -30,10 +31,10 @@ export default class ZenUml implements IZenUml{
   private readonly store: any;
   private readonly app: any;
 
-  constructor(el: Element) {
+  constructor(el: Element, naked: boolean = false) {
     this.el = el;
     this.store = Store();
-    this.app = new Vue({el: this.el, store: new Vuex.Store(this.store), render: h => h(DiagramFrame) })
+    this.app = new Vue({el: this.el, store: new Vuex.Store(this.store), render: h => h(naked ? SeqDiagram : DiagramFrame) })
   }
 
   async render(code: string | undefined, theme: string | undefined): Promise<IZenUml> {
