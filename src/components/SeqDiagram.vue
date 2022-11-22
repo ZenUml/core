@@ -1,5 +1,6 @@
 <template>
-  <div class="sequence-diagram overflow-visible mr-2" :style="{width: `${width}px`, paddingLeft: `${paddingLeft}px`}" ref="diagram" >
+  <!-- .zenuml is used to make sure tailwind css takes effect when naked == true -->
+  <div class="zenuml sequence-diagram overflow-visible mr-2" :style="{width: `${width}px`, paddingLeft: `${paddingLeft}px`}" ref="diagram" >
     <life-line-layer :context="rootContext.head()"/>
     <message-layer :context="rootContext.block()"/>
   </div>
