@@ -16,7 +16,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <link rel="stylesheet"
           href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css" crossOrigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.1/lib/codemirror.min.js"></script>
@@ -51,11 +50,32 @@
       const editor = CodeMirror.fromTextArea(document.getElementById("text"), {
         lineNumbers: true
       });
-      editor.on("change", function(cm, change) {
-        zenUml.render(cm.getValue(), 'default').then(r => {
-          parentLogger.child({module: 'index.html'}).debug('render resolved', r);
+
+      // implement a waitUntil function
+      function waitUntil(condition, callback) {
+        if (condition()) {
+          callback();
+        } else {
+          setTimeout(function () {
+            waitUntil(condition, callback);
+          }, 100);
+        }
+      }
+
+      editor.on("change", function(cm) {
+        waitUntil( () => {return window.zenUml}, () => {
+          window.zenUml.render(cm.getValue(), 'default').then(r => {
+            window.parentLogger.child({module: 'index.html'}).debug('render resolved', r);
+          });
         });
+        // write cm.getValue() to localStorage
+        localStorage.setItem('zenuml-cm-code', cm.getValue());
       });
+      // read localStorage and set to code mirror
+      const code = localStorage.getItem('zenuml-cm-code');
+      if (code) {
+        editor.setValue(code);
+      }
     </script>
     <!-- built files will be auto injected -->
   </body>

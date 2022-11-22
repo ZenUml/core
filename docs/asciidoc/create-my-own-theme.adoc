@@ -11,7 +11,48 @@ You can apply themes on the follow products:
 . JetBrains plugins (Intellij IDEA, WebStore, PhpStore, etc.)
 . https://app.zenuml.com
 
-With stylebot browser extension, you can apply themes in any browsers.
+With https://chrome.google.com/webstore/detail/user-css/okpjlejfhacmgjkmknjhadmkdbcldfcb[User CSS]
+browser extension, you can apply themes anywhere (e.g. https://zenuml.cn).
+
+== Principles of creating themes
+
+=== 1. Do not override tailwind classes
+The tailwind classes directly applied on the elements are important for layout so
+they are NOT meant be overridden.
+
+For example,
+[html]
+....
+// Participant.vue
+<div class="participant relative flex flex-col justify-center z-10 h-10"
+....
+
+=== 2. Use provided class selectors
+Important elements are provided with a semantic class selector. You can use them
+to override the style.
+
+For the above example, the class selector is `participant`. You can override the
+style by using this selector.
+
+[css]
+....
+// use `.zenuml .sequence-diagram` to increase specificity
+.zenuml .sequence-diagram .participant {
+  background-color: #f00;
+}
+....
+
+=== 3. Debug your theme
+
+You can use the browser extension https://chrome.google.com/webstore/detail/user-css/okpjlejfhacmgjkmknjhadmkdbcldfcb[User CSS]
+to debug your theme.
+
+image::user-css.png[User CSS]
+
+Alternatively, you can use our web app https://app.zenuml.com[app.zenuml.com]. Go to the CSS tab
+and paste your theme there. You can see the result immediately.
+
+image::theme-debug-web-app.png[]
 
 === JetBrains
 
