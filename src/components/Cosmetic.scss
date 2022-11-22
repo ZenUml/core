@@ -1,10 +1,7 @@
-/*Color, font and position of labels (not the component itself)*/
-
+// This file provides basic but essential styling for the diagram.
 .sequence-diagram {
   font-family: Helvetica, Verdana, serif;
   font-size: 16px;
-  /* Limit the size when exporting to images */
-  display: inline-block;
 
   .occurrence {
     border-color: #000;
@@ -65,6 +62,7 @@
   }
   .lifeline {
     .participant {
+      border-radius: 4px;
       border-color: #000;
       background: #FFF;
     }

@@ -1,5 +1,7 @@
 <template>
-  <div class="interaction creation sync text-center transform"
+  <!-- .point-events-none allows hover over the participant underneath (from lifeline layer)
+       .point-events-auto allows hover over the messages (from message layer, default behaviour) -->
+  <div class="interaction creation sync text-center transform pointer-events-none"
        v-on:click.stop="onClick"
        :data-signature="signature"
        :class="{ 'right-to-left':rightToLeft, '-translate-x-full': rightToLeft, 'highlight': isCurrent }"
@@ -11,13 +13,13 @@
          data-type="creation" :data-to="to"
          :class="{ 'flex-row-reverse': rightToLeft}">
       <message ref="messageEl"
-             class="invocation w-full transform -translate-y-1/2" :content="signature" :rtl="rightToLeft" type="creation"/>
+             class="invocation w-full transform -translate-y-1/2 pointer-events-auto" :content="signature" :rtl="rightToLeft" type="creation"/>
       <div ref="participantPlaceHolder" class="invisible right-0 flex flex-col justify-center flex-shrink-0">
         <participant :entity="{name: to}" />
       </div>
     </div>
     <occurrence :context="creation" :participant="to"/>
-    <message class="return transform -translate-y-full" v-if="assignee" :content="assignee" :rtl="!rightToLeft" type="return"/>
+    <message class="return transform -translate-y-full pointer-events-auto" v-if="assignee" :content="assignee" :rtl="!rightToLeft" type="return"/>
   </div>
 </template>
 
