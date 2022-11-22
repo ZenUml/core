@@ -12,13 +12,8 @@
          :class="{ 'flex-row-reverse': rightToLeft}">
       <message ref="messageEl"
              class="invocation w-full transform -translate-y-1/2" :content="signature" :rtl="rightToLeft" type="creation"/>
-      <!-- TODO: replace the following with a participant component. -->
-      <div ref="participantPlaceHolder"
-           class="participant invisible right-0 flex flex-col justify-center flex-shrink-0">
-        <!-- Put in a div to give it a fixed height, because stereotype is dynamic. -->
-        <div class="h-5 flex flex-col justify-center">
-          <label class="name">{{ to }}</label>
-        </div>
+      <div ref="participantPlaceHolder" class="invisible right-0 flex flex-col justify-center flex-shrink-0">
+        <participant :entity="{name: to}" />
       </div>
     </div>
     <occurrence :context="creation" :participant="to"/>
@@ -34,6 +29,7 @@
   import Message from '../Message.vue'
   import Occurrence from '../Occurrence.vue'
   import {CodeRange} from '@/parser/CodeRange'
+  import Participant from '@/components/lifeline/Participant'
 
   const logger = parentLogger.child({name: 'Creation'})
 
@@ -102,6 +98,7 @@
       },
     },
     components: {
+      Participant,
       Comment,
       Occurrence,
       Message
