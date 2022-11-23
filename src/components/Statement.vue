@@ -1,8 +1,10 @@
 <template>
-  <component v-bind:is="subStatement"
-             :context="context"
-             :comment="comment"
-             :selfCallIndent="selfCallIndent"></component>
+  <!-- Always reset the text alignment for each statement: https://github.com/ZenUml/core/issues/406 -->
+  <component class="text-left"
+      v-bind:is="subStatement"
+      :context="context"
+      :comment="comment"
+      :selfCallIndent="selfCallIndent"></component>
 </template>
 
 <script>
