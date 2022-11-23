@@ -1,7 +1,7 @@
 <template>
   <!-- .point-events-none allows hover over the participant underneath (from lifeline layer)
        .point-events-auto allows hover over the messages (from message layer, default behaviour) -->
-  <div class="interaction creation sync text-center transform pointer-events-none"
+  <div class="interaction creation sync text-center transform"
        v-on:click.stop="onClick"
        :data-signature="signature"
        :class="{ 'right-to-left':rightToLeft, '-translate-x-full': rightToLeft, 'highlight': isCurrent }"
@@ -9,16 +9,16 @@
     <comment v-if="comment" :comment="comment" />
     <!-- flex items-center is an idiom that vertically align items left and right.
      h-10 fixes the height as the same as participant boxes.-->
-    <div ref="messageContainer" class="message-container flex items-center h-10"
+    <div ref="messageContainer" class="message-container pointer-events-none flex items-center h-10"
          data-type="creation" :data-to="to"
          :class="{ 'flex-row-reverse': rightToLeft}">
       <message ref="messageEl"
              class="invocation w-full transform -translate-y-1/2 pointer-events-auto" :content="signature" :rtl="rightToLeft" type="creation"/>
-      <div ref="participantPlaceHolder" class="invisible right-0 flex flex-col justify-center flex-shrink-0">
+      <div ref="participantPlaceHolder" class=" invisible right-0 flex flex-col justify-center flex-shrink-0">
         <participant :entity="{name: to}" />
       </div>
     </div>
-    <occurrence :context="creation" :participant="to"/>
+    <occurrence :context="creation" class="pointer-events-auto" :participant="to"/>
     <message class="return transform -translate-y-full pointer-events-auto" v-if="assignee" :content="assignee" :rtl="!rightToLeft" type="return"/>
   </div>
 </template>
