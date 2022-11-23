@@ -1,6 +1,6 @@
 <template>
   <!-- .zenuml is used to make sure tailwind css takes effect when naked == true -->
-  <div class="zenuml sequence-diagram overflow-visible mr-2" :style="{width: `${width}px`, paddingLeft: `${paddingLeft}px`}" ref="diagram" >
+  <div class="zenuml sequence-diagram relative box-border text-left overflow-visible mr-2" :style="{width: `${width}px`, paddingLeft: `${paddingLeft}px`}" ref="diagram" >
     <life-line-layer :context="rootContext.head()"/>
     <message-layer :context="rootContext.block()"/>
   </div>
@@ -40,10 +40,7 @@
   }
 
   .sequence-diagram {
-    position: relative;     /* Make sure its descendants can be positioned */
-    box-sizing: border-box; /* Reset box-sizing for the diagram */
     line-height: normal;    /* Reset line-height for the diagram */
-    text-align: left;
   }
 
   /* .participant is shared by MessageLayer and LifeLineLayer */
