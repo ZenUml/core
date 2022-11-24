@@ -9,7 +9,6 @@ import './components/Cosmetic-blue.scss'
 import './components/Cosmetic-black-white.scss'
 import './components/Cosmetic-star-uml.scss'
 import './components/theme-blue-river.scss'
-import './assets/themes/handwriting.css';
 
 import Store from './store/Store'
 
