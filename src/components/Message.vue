@@ -13,10 +13,10 @@
 <script type="text/babel">
   import Point from './Point'
 
-  // An asynchronous Message (messageSort equals asynchCall or asynchSignal) has an open arrow head.
-  // A synchronous Message (messageSort equals synchCall) has a filled arrow head.
-  // A reply Message (messageSort equals reply) has a dashed line with either an open or filled arrow head.
-  // An object creation Message (messageSort equals createMessage) has a dashed line with an open arrow head.
+  // async: open arrow head.
+  // sync: filled arrow head.
+  // reply: dashed line with either an open or filled arrow head.
+  // creation: a dashed line with an open arrow head.
   export default {
     name: 'message',
     props: ['content', 'rtl', 'type'],
