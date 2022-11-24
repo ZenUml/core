@@ -9,7 +9,7 @@ const logger = pino({
   level: 'warn'
 });
 
-const LEVELS = ['trace', 'debug', 'info', 'warn', 'error'];
+const LEVELS = ['log', 'trace', 'debug', 'info', 'warn', 'error'];
 
 function bind(logger: any, level: string) {
   // @ts-ignore
