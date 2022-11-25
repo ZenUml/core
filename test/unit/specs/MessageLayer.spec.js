@@ -1,7 +1,7 @@
 import {mount, createLocalVue} from "@vue/test-utils";
 import Vuex from 'vuex'
 import {VueSequence} from '@/index'
-import MessageLayer from '@/components/MessageLayer'
+import MessageLayer from '@/components/DiagramFrame/SeqDiagram/MessageLayer/MessageLayer.vue'
 const localVue = createLocalVue()
 localVue.use(Vuex)
 const storeConfig = VueSequence.Store()

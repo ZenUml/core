@@ -1,7 +1,7 @@
 import {mount, createLocalVue} from "@vue/test-utils";
 import Vuex from 'vuex'
 import {VueSequence} from '@/index'
-import Participant from '@/components/lifeline/Participant'
+import Participant from '@/components/DiagramFrame/SeqDiagram/LifeLineLayer/Participant.vue'
 const localVue = createLocalVue()
 localVue.use(Vuex)
 const storeConfig = VueSequence.Store()
