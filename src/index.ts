@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import DiagramFrame from './components/DiagramFrame.vue'
-import SeqDiagram from './components/SeqDiagram.vue'
+import DiagramFrame from './components/DiagramFrame/DiagramFrame.vue'
+import SeqDiagram from './components/DiagramFrame/SeqDiagram/SeqDiagram.vue'
 
 import './assets/tailwind.css'
 import './components/Cosmetic.scss'
