@@ -38,6 +38,8 @@ antlr4.ParserRuleContext.prototype.getFormattedText = function() {
   return formatText(code);
 };
 
+// Comment is where users have the most flexibility. The parser should make minimal assumptions about
+// the content and the style including change of line, indentation, etc.
 antlr4.ParserRuleContext.prototype.getComment = function() {
   let tokenIndex = this.start.tokenIndex;
   let channel = sequenceLexer.sequenceLexer.prototype.channelNames.indexOf('COMMENT_CHANNEL');

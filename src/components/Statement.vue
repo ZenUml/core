@@ -4,6 +4,7 @@
       v-bind:is="subStatement"
       :context="context"
       :comment="comment"
+      :commentObj="commentObj"
       :selfCallIndent="selfCallIndent"></component>
 </template>
 
@@ -18,6 +19,7 @@
   import FragmentTryCatchFinally from "./FragmentTryCatchFinally"
   import Return from './Return.vue'
   import Divider from './Divider.vue'
+  import Comment from './Comment/Comment'
 
   export default {
     name: 'statement',
@@ -25,6 +27,9 @@
     computed: {
       comment: function () {
         return this.context.getComment() ? this.context.getComment() : ''
+      },
+      commentObj: function () {
+        return new Comment(this.comment)
       },
       subStatement: function () {
         let that = this
@@ -58,22 +63,3 @@
     }
   }
 </script>
-<style>
-  .comments {
-    font-size: 0.8em;
-    line-height: 1.5em;
-    opacity: 0.5;
-  }
-
-  .comments:hover {
-    opacity: 0.9;
-  }
-
-  .fragment>.comments {
-    width: 100%;
-    border-bottom: solid 1px;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-  }
-</style>

@@ -1,7 +1,7 @@
 <template>
   <div class="fragment alt" :style="fragmentStyle">
     <div class="segment">
-      <comment v-if="comment" :comment="comment"/>
+      <comment v-if="comment" :comment="comment" :commentObj="commentObj"/>
 
       <div class="header">
         <div class="name"><label>Alt</label></div>
@@ -43,7 +43,7 @@
 
   export default {
     name: 'fragment-alt',
-    props: ['context', 'comment', 'selfCallIndent'],
+    props: ['context', 'comment', 'selfCallIndent', 'commentObj'],
     mixins: [fragment],
     computed: {
       from: function() {

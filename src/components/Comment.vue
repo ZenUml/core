@@ -1,6 +1,8 @@
 <template>
   <!-- TODO: 12px to align comment with async message, which as padding-left 10px and left 2px -->
-  <div class="comments text-left" style="padding-left: 12px" v-html="markedComment"></div>
+  <div class="comments text-left pl-1 text-sm opacity-50 hover:opacity-100"
+       :style="{color: color}"
+       v-html="markedComment"></div>
 </template>
 
 <script type="text/babel">
@@ -44,17 +46,21 @@
       }
       const validLanguage = highlightjs.getLanguage(language) ? language : 'plaintext'
       return highlightjs.highlight(validLanguage, code).value
-    }
+    },
+    breaks: true
   })
 
   marked.use({ renderer });
 
   export default {
     name: 'comment',
-    props: ['comment'],
+    props: ['comment', 'commentObj'],
     computed: {
       markedComment() {
-        return marked(this.comment)
+        return (this.commentObj?.text && marked(this.commentObj?.text)) || (this.comment && marked(this.comment))
+      },
+      color() {
+        return this.commentObj?.color
       }
     }
   }
