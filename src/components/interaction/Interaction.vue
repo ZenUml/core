@@ -11,9 +11,10 @@
          class="occurrence source border-2"
          :class="{'right-to-left': rightToLeft}">
     </div>
-    <comment v-if="comment" :comment="comment"/>
+    <comment v-if="commentObj.text" :comment="commentObj.text" :commentObj="commentObj"/>
     <component v-bind:is="invocation"
                class="text-center"
+               :color="commentObj.color"
              :content="signature"
              :assignee="assignee"
              :rtl="rightToLeft"
@@ -34,7 +35,7 @@
 
   export default {
     name: 'interaction',
-    props: ['context', 'comment', 'selfCallIndent'],
+    props: ['context', 'selfCallIndent', 'commentObj'],
     computed: {
       // add tracker to the mapGetters
       ...mapGetters(['participants', 'distance2', 'cursor', 'onElementClick']),

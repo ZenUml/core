@@ -5,9 +5,10 @@ module.exports = {
   ],
   globals: {
     'ts-jest': {
-      diagnostics: false
+      diagnostics: false,
+      isolatedModules: true
     },
     VERSION: '1.2.3',
-    BUILD_TIME: 'Just now'
+    BUILD_TIME: 'Just now',
   }
 }
