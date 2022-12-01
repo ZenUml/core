@@ -1,6 +1,6 @@
 <template>
   <!-- TODO: 12px to align comment with async message, which as padding-left 10px and left 2px -->
-  <div class="comments text-left pl-1 text-sm opacity-50 hover:opacity-100"
+  <div class="comments flex justify-around text-left text-sm opacity-50 hover:opacity-100"
        :style="{color: color}"
        v-html="markedComment"></div>
 </template>
