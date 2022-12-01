@@ -7,7 +7,7 @@
   },
   "scripts": {
     "build:site": "vue-cli-service build",
-    "build": "vue-cli-service build --target lib --name zenuml/core ./src/core.ts",
+    "build": "vue-cli-service build --target lib --inline-vue --name zenuml/core ./src/core.ts",
     "build:report": "vue-cli-service build --report --target lib --inline-vue --name zenuml/core ./src/core.ts",
     "test:unit": "vue-cli-service test:unit",
     "test:unit:watch": "yarn antlr && vue-cli-service test:unit --watch",
