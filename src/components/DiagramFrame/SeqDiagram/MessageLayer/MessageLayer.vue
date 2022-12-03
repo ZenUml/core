@@ -68,7 +68,6 @@ import {mapGetters, mapMutations} from 'vuex'
   }
 
   .message>.name {
-    font-size: 13px;
     text-align: center;
   }
 
