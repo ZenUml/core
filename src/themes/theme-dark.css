@@ -30,6 +30,10 @@ body {
     font-weight: bold;
 }
 
+.zenuml .sequence-diagram .lifeline-group:hover {
+    background-color: #223049;
+}
+
 .zenuml .sequence-diagram .lifeline .participant {
     border-color: var(--border);
     border-radius: 2px;
