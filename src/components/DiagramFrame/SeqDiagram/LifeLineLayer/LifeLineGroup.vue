@@ -7,7 +7,7 @@
 <!--      <div class="h-14 absolute" :class="{'-mt-12': !!name}">-->
 <!--        <label class="block text-center font-semibold">{{name}}</label>-->
 <!--      </div>-->
-      <div class="lifeline-group relative flex-grow hover:bg-green-100">
+      <div class="lifeline-group relative flex-grow">
         <life-line v-for="entity in entities"
                    inGroup="true"
                    :key="entity.name"
