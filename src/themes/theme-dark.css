@@ -1,0 +1,122 @@
+/* palette */
+
+:root {
+    /* mostly from https://github.com/dracula/dracula-theme#color-palette */
+    --background: #282a36;
+    --hover: #2b2b2b; /* I made this up */
+    --occurance-border: #6e7191; /* I made this up */
+    --border: #585b74; /* I made this up */
+    --white: #f8f8f2; /* the "foreground" */
+    --current: #44475a;
+    --comment: #6272a4;
+    --cyan: #8be9fd;
+    --green: #50fa7b;
+    --orange: #ffb86c;
+    --pink: #ff79c6;
+    --purple: #bd93f9;
+    --red: #ff5555;
+    --yellow: #f1fa8c;
+    --crayola: #A9B7C6;
+}
+
+body {
+    background-color: var(--background);
+}
+
+/* participant */
+
+.zenuml .header {
+    color: var(--crayola);
+    font-weight: bold;
+}
+
+.zenuml .sequence-diagram .lifeline .participant {
+    border-color: var(--border);
+    border-radius: 2px;
+    background: var(--background);
+}
+
+.zenuml .sequence-diagram .lifeline .participant label {
+    color: var(--cyan);
+}
+
+.zenuml .sequence-diagram .lifeline .line {
+    background: var(--border);
+}
+
+/* fragment */
+
+.zenuml .fragment>.header>.condition
+{
+    color: var(--crayola);
+    padding: 6px;
+}
+.zenuml .sequence-diagram .fragment .header label {
+    color: var(--crayola);
+    padding: 6px;
+}
+.zenuml .sequence-diagram .fragment .header .name {
+    border-bottom-color: var(--border);
+}
+.zenuml .sequence-diagram .fragment .header .name label {
+    color: var(--pink);
+    font-weight: 400;
+}
+.zenuml .sequence-diagram .fragment {
+    border-color: var(--border);
+}
+.zenuml .sequence-diagram .comments {
+    border: none;
+    background: transparent;
+    color: var(--comment);
+}
+.zenuml  .sequence-diagram .fragment .segment:not(:first-child) {
+    border-top-color: var(--border);
+}
+
+/* interaction */
+.zenuml .sequence-diagram .interaction{
+    color: var(--orange);
+}
+
+/* message */
+
+.zenuml .sequence-diagram .message {
+    border-bottom-color: var(--border);
+}
+
+.zenuml .sequence-diagram .message .name:hover {
+    color: var(--crayola);
+}
+
+.zenuml .sequence-diagram .message svg polyline {
+    fill: var(--border);
+    stroke: var(--border);
+}
+.zenuml .sequence-diagram .message.self svg > polyline:not(.head) {
+    fill: none;
+}
+
+/* occurance */
+
+.zenuml .sequence-diagram .occurrence {
+    background-color: var(--current);
+    box-shadow: 0 0 0 1px var(--occurance-border);
+    border-radius: 2px;
+}
+
+/* divider */
+
+.zenuml .sequence-diagram .divider .left,.zenuml  .sequence-diagram .divider .right {
+    background: var(--border);
+}
+
+.zenuml .sequence-diagram .divider .name {
+    color: var(--comment);
+}
+
+/* hover */
+.zenuml .interaction .message>.name:hover {
+    background-color: forestgreen; /* 40% */
+    color: white;
+}
