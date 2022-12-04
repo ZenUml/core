@@ -11,7 +11,7 @@ A
 A.method`;
 // @ts-ignore
 const zenUml = new ZenUml(elm);
-zenUml.render(code, 'dark').then(r => {
+zenUml.render(code, 'theme-dark').then(r => {
   logger.debug('render resolved', r);
 });
 // @ts-ignore

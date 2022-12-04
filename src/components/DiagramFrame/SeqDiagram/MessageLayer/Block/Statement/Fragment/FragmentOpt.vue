@@ -1,5 +1,5 @@
 <template>
-  <div class="fragment opt" :style="fragmentStyle">
+  <div class="fragment opt text-base" :style="fragmentStyle">
     <comment v-if="comment" :comment="comment" />
     <div class="header">
       <div class="name"><label>Opt</label></div>

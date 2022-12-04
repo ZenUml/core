@@ -4,6 +4,59 @@ Since the elements on the rendered diagram is based on HTML Dom (and svg), it is
 to create your own theme. There is a repository on GitHub that have some themes collected
 by third party. You may be able to get some inspiration from there. https://github.com/abruzzi/zenuml-css-overrides
 
+== The Information Architecture
+image::./images/three-layer-info-arch.png[width=600]
+
+The diagram is rendered in two layers. The back layer is the lifeline layer. The front layer
+is the message layer.
+
+Key information on the diagram can be grouped in the following structure:
+
+
+[%autowidth]
+|===
+|Category | Diagram Frame |Lifeline Layer | Message Layer
+
+h|Text Info
+a|* Title
+* Brand
+a|* Participant name
+* Stereotype
+* Comment
+
+a|* Message name
+* Fragment type
+* Fragment condition
+* Comment
+* Divider name
+
+h|Shapes
+a|* Security (icon)
+* Tips (icon)
+a|* Participant box (rectangle)
+* Lifeline (vertical line)
+a|* Message arrow (line and head)
+* Fragment (rectangle)
+* Divider line (left and right)
+
+|===
+
+Each of the elements has a semantic selector that can be used to customize the appearance.
+
+The component has basic styling in itself mostly to support layout and positioning. Then
+the core renderer comes with a default theme that defines the appearance of the elements.
+
+[source,css]
+----
+
+----
+
+A typical custom theme will be like below:
+
+[source,css]
+----
+----
+
 == where can I apply themes
 
 You can apply themes on the follow products:
