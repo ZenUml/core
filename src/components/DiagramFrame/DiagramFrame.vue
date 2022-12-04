@@ -36,7 +36,7 @@
           <button class="zoom-out  px-1" @click="zoomOut()">-</button>
         </div>
         <width-provider/>
-        <a target="_blank" href="https://zenuml.com" class="absolute bottom-1 right-1 text-xs">ZenUML.com</a>
+        <a target="_blank" href="https://zenuml.com" class="brand absolute bottom-1 right-1 text-xs">ZenUML.com</a>
       </div>
     </div>
   </div>

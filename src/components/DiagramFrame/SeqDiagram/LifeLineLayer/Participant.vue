@@ -113,6 +113,9 @@ export default {
     },
     backgroundColor() {
       try {
+        if (!this.entity.color) {
+          return '#fff'
+        }
         // Remove alpha for such a case:
         // 1. Background color for parent has low brightness (e.g. #000)
         // 2. Alpha is low (e.g. 0.1)
@@ -121,7 +124,7 @@ export default {
         // This will cause issue when calculating font color.
         return this.entity.color && removeAlpha(this.entity.color);
       } catch (e) {
-        return undefined;
+        return '#FFF';
       }
     },
   },

@@ -19,91 +19,91 @@
     --crayola: #A9B7C6;
 }
 
-body {
+body .zenuml.theme-dark {
     background-color: var(--background);
 }
 
 /* participant */
 
-.zenuml .header {
+.zenuml.theme-dark .header {
     color: var(--crayola);
     font-weight: bold;
 }
 
-.zenuml .sequence-diagram .lifeline-group:hover {
+.zenuml.theme-dark .sequence-diagram .lifeline-group:hover {
     background-color: #223049;
 }
 
-.zenuml .sequence-diagram .lifeline .participant {
+.zenuml.theme-dark .sequence-diagram .lifeline .participant {
     border-color: var(--border);
     border-radius: 2px;
     background: var(--background);
 }
 
-.zenuml .sequence-diagram .lifeline .participant label {
+.zenuml.theme-dark .sequence-diagram .lifeline .participant label {
     color: var(--cyan);
 }
 
-.zenuml .sequence-diagram .lifeline .line {
+.zenuml.theme-dark .sequence-diagram .lifeline .line {
     background: var(--border);
 }
 
 /* fragment */
 
-.zenuml .fragment>.header>.condition
+.zenuml.theme-dark .fragment>.header>.condition
 {
     color: var(--crayola);
     padding: 6px;
 }
-.zenuml .sequence-diagram .fragment .header label {
+.zenuml.theme-dark .sequence-diagram .fragment .header label {
     color: var(--crayola);
     padding: 6px;
 }
-.zenuml .sequence-diagram .fragment .header .name {
+.zenuml.theme-dark .sequence-diagram .fragment .header .name {
     border-bottom-color: var(--border);
 }
-.zenuml .sequence-diagram .fragment .header .name label {
+.zenuml.theme-dark .sequence-diagram .fragment .header .name label {
     color: var(--pink);
     font-weight: 400;
 }
-.zenuml .sequence-diagram .fragment {
+.zenuml.theme-dark .sequence-diagram .fragment {
     border-color: var(--border);
 }
-.zenuml .sequence-diagram .comments {
+.zenuml.theme-dark .sequence-diagram .comments {
     border: none;
     background: transparent;
     color: var(--comment);
 }
-.zenuml  .sequence-diagram .fragment .segment:not(:first-child) {
+.zenuml.theme-dark .sequence-diagram .fragment .segment:not(:first-child) {
     border-top-color: var(--border);
 }
 
 /* interaction */
-.zenuml .sequence-diagram .interaction{
+.zenuml.theme-dark .sequence-diagram .interaction{
     color: var(--orange);
 }
 
 /* message */
 
-.zenuml .sequence-diagram .message {
+.zenuml.theme-dark .sequence-diagram .message {
     border-bottom-color: var(--border);
 }
 
-.zenuml .sequence-diagram .message .name:hover {
+.zenuml.theme-dark .sequence-diagram .message .name:hover {
     color: var(--crayola);
 }
 
-.zenuml .sequence-diagram .message svg polyline {
+.zenuml.theme-dark .sequence-diagram .message svg polyline {
     fill: var(--border);
     stroke: var(--border);
 }
-.zenuml .sequence-diagram .message.self svg > polyline:not(.head) {
+.zenuml.theme-dark .sequence-diagram .message.self svg > polyline:not(.head) {
     fill: none;
 }
 
 /* occurance */
 
-.zenuml .sequence-diagram .occurrence {
+.zenuml.theme-dark .sequence-diagram .occurrence {
     background-color: var(--current);
     box-shadow: 0 0 0 1px var(--occurance-border);
     border-radius: 2px;
@@ -111,16 +111,16 @@ body {
 
 /* divider */
 
-.zenuml .sequence-diagram .divider .left,.zenuml  .sequence-diagram .divider .right {
+.zenuml.theme-dark .sequence-diagram .divider .left,.zenuml.theme-dark .sequence-diagram .divider .right {
     background: var(--border);
 }
 
-.zenuml .sequence-diagram .divider .name {
+.zenuml.theme-dark .sequence-diagram .divider .name {
     color: var(--comment);
 }
 
 /* hover */
-.zenuml .interaction .message>.name:hover {
+.zenuml.theme-dark .interaction .message>.name:hover {
     background-color: forestgreen; /* 40% */
     color: white;
 }

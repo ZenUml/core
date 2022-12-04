@@ -1,135 +1,159 @@
+:root {
+  --black: #000;
+  --white: #fff;
+}
 // This file provides basic but essential styling for the diagram.
-.sequence-diagram {
+.zenuml {
+  // Choose a safe font, or make sure it is available at the target device.
+  // https://web.mit.edu/jmorzins/www/fonts.html.
+  // https://visme.co/blog/infographic-font/
   font-family: Helvetica, Verdana, serif;
+  // In most modern browsers (all that @zenuml/core supports), the default font size is 16px.
+  // We reset it to 16px in case the user has changed it.
   font-size: 16px;
-
-  .occurrence {
-    border-radius: 2px;
-    border-color: #000;
-    background-color: #DEDEDE;
-  }
-  .message {
-    border-bottom-color: #000;
-    svg {
-      polyline {
-        stroke: #000;
-        &.head {
-          fill: #000;
-        }
-      }
-    }
-  }
-
-  .divider{
-    .left {
-      background: #000;
-    }
-    .right {
-      background: #000;
-    }
-  }
-
-  .fragment {
-    border-radius: 4px;
-    border-color: rgba(0, 0, 0, 0.30);
+  background: white;
+  color: black;
+  .frame {
     .header {
-      .name {
-        padding: 4px 4px 4px 6px;
-        background: none;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.30);
-        label { /* name label */
-          font-weight: 700;
-          background: transparent;
-          padding: 0;
-          color: #000;
+      .title {
+        font-size: 1.2em;
+        font-weight: bold;
+      }
+    }
+    .sequence-diagram {
+      .life-line-layer {
+        .lifeline {
+          .participant {
+            border-color: black;
+            border-radius: 4px;
+            &.selected {
+              // TODO: find a better way to highlight the selected participant.
+              font-weight: bold;
+            }
+          }
         }
       }
-      label { /* other labels e.g. condition */
-        display: inline-block;
-        padding: 6px 4px 4px 6px;
-        color: #000;
-        &.else-if {
-          display: none;
+      .message-layer {
+        .message {
+          border-bottom-color: #000;
+          svg {
+            polyline {
+              stroke: #000;
+              &.head {
+                fill: #000;
+              }
+            }
+          }
         }
       }
-    }
+      .occurrence {
+        border-radius: 2px;
+        border-color: #000;
+        background-color: #DEDEDE;
+      }
 
-    &.alt div.divider {
-      border-bottom-color: #555;
-    }
-  }
-  .lifeline {
-    .participant {
-      border-radius: 4px;
-      border-color: #000;
-      background: #FFF;
-    }
-  }
-
-  .selected {
-    border-color: rgba(3, 3, 3, 0.55);
-  }
-
-  .comments {
-    pre, p {
-      margin: 0;
-      line-height: 1.5em;
-    }
-
-    code {
-      font-size: 90%;
-      background-color: #f9f2f4;
-      border-radius: 4px;
-    }
-
-    .rest-api .http-method-post {
-      color: #0d4b3b;
-    }
-
-    .rest-api .http-method-get {
-      color: #2f3d89;
-    }
-
-    .rest-api .http-method-delete {
-      color: #7e1e23;
-    }
-
-    ol {
-      margin: 0;
-      padding-left: 20px;
-    }
-
-    ul {
-      margin: 0;
-      padding-left: 20px;
-
-      li {
-        list-style-type: none;
-
-        input[type="checkbox"] {
-          margin-left: -1em;
+      .divider{
+        .left {
+          background: #000;
+        }
+        .right {
+          background: #000;
         }
       }
-    }
 
-    table {
-      /* Remove spacing between table cells (from Normalize.css) */
-      border-collapse: collapse;
-      border-spacing: 0;
-      empty-cells: show;
-      border-color: #cbcbcb;
+      .fragment {
+        border-radius: 4px;
+        border-color: rgba(0, 0, 0, 0.30);
+        .header {
+          .name {
+            padding: 4px 4px 4px 6px;
+            background: none;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.30);
+            label { /* name label */
+              font-weight: 700;
+              background: transparent;
+              padding: 0;
+              color: #000;
+            }
+          }
+          label { /* other labels e.g. condition */
+            display: inline-block;
+            padding: 6px 4px 4px 6px;
+            color: #000;
+            &.else-if {
+              display: none;
+            }
+          }
+        }
 
-      td, th {
-        padding: 0.5em;
+        &.alt div.divider {
+          border-bottom-color: #555;
+        }
       }
 
-      thead {
-        background-color: #e0e0e0;
-      }
+      .comments {
+        pre, p {
+          margin: 0;
+          line-height: 1.5em;
+        }
 
-      td {
-        background-color: transparent;
+        code {
+          font-size: 90%;
+          background-color: #f9f2f4;
+          border-radius: 4px;
+        }
+
+        .rest-api .http-method-post {
+          color: #0d4b3b;
+        }
+
+        .rest-api .http-method-get {
+          color: #2f3d89;
+        }
+
+        .rest-api .http-method-delete {
+          color: #7e1e23;
+        }
+
+        ol {
+          margin: 0;
+          padding-left: 20px;
+        }
+
+        ul {
+          margin: 0;
+          padding-left: 20px;
+
+          li {
+            list-style-type: none;
+
+            input[type="checkbox"] {
+              margin-left: -1em;
+            }
+          }
+        }
+
+        table {
+          /* Remove spacing between table cells (from Normalize.css) */
+          border-collapse: collapse;
+          border-spacing: 0;
+          empty-cells: show;
+          border-color: #cbcbcb;
+
+          td, th {
+            padding: 0.5em;
+          }
+
+          thead {
+            background-color: #e0e0e0;
+          }
+
+          td {
+            background-color: transparent;
+          }
+        }
       }
     }
   }
 }
+
