@@ -14,8 +14,8 @@
       <span v-if="!!comment" class="absolute hidden rounded-lg transform -translate-y-8 bg-gray-400 px-2 py-1 text-center text-sm text-white group-hover:flex">
         {{comment}}
       </span>
-      <label class="interface text-skin-secondary" v-if="stereotype">«{{ stereotype }}»</label>
-      <label class="name text-skin-secondary">{{ entity.label || entity.name }}</label>
+      <label class="interface text-skin-secondary leading-4" v-if="stereotype">«{{ stereotype }}»</label>
+      <label class="name text-skin-secondary leading-4">{{ entity.label || entity.name }}</label>
     </div>
   </div>
 </template>
