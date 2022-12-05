@@ -4,18 +4,22 @@
 
 @layer base {
   :root {
+    --color-bg-base: #ffffff;
+    --color-bg-hover: #A6D2FF;
+    --color-bg-secondary: #cccccc;
+    --color-bg-fill: #cccccc;
+
     --color-text-base: #000000;       /* Messages */
-    --color-text-header: #555555;     /* Title, Fragment Headers (not conditions) */
+    --color-text-header: #555555;     /* Title, Participant, Fragment Headers (not conditions) */
     --color-text-muted: #666666;      /* Comments */
     --color-text-hover: #174AD4;      /* Hover on messages */
     --color-text-secondary: #000000;  /* Everything else */
     --color-text-link: #A6D2FF;
     --color-text-fill: #000000;       /* Arrows */
-    --color-bg-base: #ffffff;
-    --color-bg-hover: #A6D2FF;
-    --color-bg-secondary: #cccccc;
+
     --color-border-base: #000000;
     --color-border-secondary: #999999;
+    --color-border-fill: #999999;
   }
   .theme-darcula {
     --color-text-base: #ffb86c;
@@ -28,7 +32,81 @@
     --color-bg-base: #2b2b2b;       /* Main background. From Intellij Darcula theme. */
     --color-bg-hover: #A6D2FF;      /* Hover on messages */
     --color-bg-secondary: #44475a;
-    --color-border-base: #cccccc;
-    --color-border-secondary: #555555;
+    --color-bg-fill: #44475a;      /* Lifeline */
+    --color-border-base: #cccccc;  /* Participant, Fragment */
+    --color-border-secondary: #555555;  /* Occurrence */
+    --color-border-fill: #555555;  /* Occurrence */
+  }
+
+  .theme-sky {
+    --color-bg-base: #ffffff;       /* Main background. From Intellij Darcula theme. */
+    --color-bg-hover: #A6D2FF;      /* Hover on messages */
+    --color-bg-secondary: #DEECFB;  /* Participant, Occurrence */
+    --color-bg-fill: #032C72;       /* Lifeline */
+
+    --color-text-base: #032C72;     /* Messages */
+    --color-text-header: #E28553;   /* Title, Participant, Fragment Headers (not conditions) */
+    --color-text-secondary: #032C72;    /* Everything else */
+    --color-text-muted: #666666;
+    --color-text-hover: #174AD4;    /* Hover on messages */
+    --color-text-link: #A6D2FF;
+    --color-text-fill: #032C72;     /* Arrows. Should be same as --color-border-base */
+
+    --color-border-base: #032C72;  /* Participant, Fragment, Message arrow line */
+    --color-border-secondary: #032C72;
+  }
+
+  .theme-blue-and-orange {
+    --color-bg-base: #FFFFFF;       /* Main background. From Intellij Darcula theme. */
+    --color-bg-hover: #C7C09A;      /* Hover on messages */
+    --color-bg-secondary: #E5E5E5;  /* Participant, Occurrence */
+    --color-bg-fill: #FCA311;       /* Lifeline */
+
+    --color-text-base: #000000;     /* Messages */
+    --color-text-header: #14213D;   /* Title, Participant, Fragment Headers (not conditions) */
+    --color-text-secondary: #14213D;    /* Everything else */
+    --color-text-muted: #666666;
+    --color-text-hover: #000000;    /* Hover on messages */
+    --color-text-link: #A6D2FF;
+    --color-text-fill: #FCA311;     /* Arrows. Should be same as --color-border-base */
+
+    --color-border-base: #FCA311;  /* Participant, Fragment, Message arrow line */
+    --color-border-secondary: #4E8BBC; /* Occurrence */
+  }
+
+  .theme-princess {
+    --color-bg-base: #edf6f9;       /* Main background. From Intellij Darcula theme. */
+    --color-bg-hover: #C7C09A;      /* Hover on messages */
+    --color-bg-secondary: #b8c0ff;  /* Participant, Occurrence */
+    --color-bg-fill: #e7c6ff;       /* Lifeline */
+
+    --color-text-base: #f15bb5;     /* Messages */
+    --color-text-header: #9b5de5;   /* Title, Participant, Fragment Headers (not conditions) */
+    --color-text-secondary: #14213D;    /* Everything else */
+    --color-text-muted: #666666;
+    --color-text-hover: #000000;    /* Hover on messages */
+    --color-text-link: #A6D2FF;
+    --color-text-fill: #f15bb5;     /* Arrows. Should be same as --color-border-base */
+
+    --color-border-base: #f15bb5;  /* Participant, Fragment, Message arrow line */
+    --color-border-secondary: #c8b6ff; /* Occurrence */
+  }
+
+  .theme-autumn {
+    --color-bg-base: #3B1404;       /* Main background. From Intellij Darcula theme. */
+    --color-bg-hover: #CD3D04;      /* Hover on messages */
+    --color-bg-secondary: #034F65;  /* Participant, Occurrence */
+    --color-bg-fill: #034F65;       /* Lifeline */
+
+    --color-text-base: #E6EAF2;     /* Messages */
+    --color-text-header: #F69D2D;   /* Title, Participant, Fragment Headers (not conditions) */
+    --color-text-secondary: #E2BA88;    /* Everything else */
+    --color-text-muted: #344337;
+    --color-text-hover: #E2BA88;    /* Hover on messages */
+    --color-text-link: #344337;
+    --color-text-fill: #CD3D04;     /* Arrows. Should be same as --color-border-base */
+
+    --color-border-base: #CD3D04;  /* Participant, Fragment, Message arrow line */
+    --color-border-secondary: #344337; /* Occurrence */
   }
 }

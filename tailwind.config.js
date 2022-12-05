@@ -20,6 +20,7 @@ module.exports = {
           base: 'var(--color-bg-base)',
           secondary: 'var(--color-bg-secondary)',
           hover: 'var(--color-bg-hover)',
+          fill: 'var(--color-bg-fill)',
         },
       },
       borderColor: {
