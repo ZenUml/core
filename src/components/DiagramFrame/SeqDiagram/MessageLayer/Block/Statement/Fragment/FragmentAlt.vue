@@ -3,7 +3,7 @@
     <div class="segment">
       <comment v-if="comment" :comment="comment" :commentObj="commentObj"/>
 
-      <div class="header text-skin-secondary">
+      <div class="header text-skin-header">
         <div class="name text-skin-header font-semibold p-1 border-b"><label class="p-0">Alt</label></div>
         <label class="condition p-1">[{{condition}}]</label>
       </div>
@@ -15,7 +15,7 @@
     </div>
     <template v-for="(elseIfBlock, index) in alt.elseIfBlock()">
       <div class="segment mt-2 border-t border-solid" :key="index+500">
-        <div class="header text-skin-secondary" :key="index+1000">
+        <div class="header text-skin-header" :key="index+1000">
           <label class="else-if hidden">else if</label>
           <label class="condition p-1">[{{conditionFromIfElseBlock(elseIfBlock)}}]</label>
         </div>
@@ -28,7 +28,7 @@
     </template>
     <template v-if="elseBlock">
       <div class="segment mt-2 border-t border-solid">
-        <div class="header text-skin-secondary"><label class="p-1">[else]</label></div>
+        <div class="header text-skin-header"><label class="p-1">[else]</label></div>
         <block :style="{paddingLeft: `${offsetX}px`}"
                :context="elseBlock"
                :selfCallIndent="selfCallIndent"

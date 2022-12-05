@@ -1,7 +1,7 @@
 <template>
   <div class="fragment loop border-skin-base rounded" :style="fragmentStyle">
     <comment v-if="comment" :comment="comment" />
-    <div class="header text-skin-secondary">
+    <div class="header text-skin-header">
       <div class="name text-skin-header font-semibold p-1 border-b"><label class="p-0">Loop</label></div>
       <label class="condition p-1">[{{condition}}]</label>
     </div>

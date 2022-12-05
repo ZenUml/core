@@ -4,7 +4,7 @@
         :class="{'mt-8': !inGroup}"
         :style="{'paddingTop': top + 'px', left: left + 'px'} ">
     <participant :entity="entity"/>
-    <div class="line bg-skin-secondary w0 mx-auto flex-grow w-px"></div>
+    <div class="line bg-skin-fill w0 mx-auto flex-grow w-px"></div>
   </div>
 </template>
 
