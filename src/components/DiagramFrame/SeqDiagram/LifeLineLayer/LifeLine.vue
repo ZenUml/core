@@ -4,7 +4,7 @@
         :class="{'mt-8': !inGroup}"
         :style="{'paddingTop': top + 'px', left: left + 'px'} ">
     <participant :entity="entity"/>
-    <div class="line w0 mx-auto flex-grow w-px"></div>
+    <div class="line bg-skin-secondary w0 mx-auto flex-grow w-px"></div>
   </div>
 </template>
 
@@ -69,7 +69,7 @@ export default {
 <style scoped>
 
   .lifeline .line {
-    background: linear-gradient(to bottom, transparent 50%, #223049 50%);
+    /*background: linear-gradient(to bottom, transparent 50%, #223049 50%);*/
     background-size: 1px 20px;
   }
 

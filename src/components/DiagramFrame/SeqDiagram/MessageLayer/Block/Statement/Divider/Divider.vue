@@ -1,8 +1,8 @@
 <template>
   <div class="divider" :style="{width: width + 'px', transform: 'translateX(' + ((-1) * centerOfFrom + 10) + 'px)'}">
-    <div class="left"></div>
+    <div class="left bg-skin-secondary"></div>
     <div class="name">{{name}}</div>
-    <div class="right"></div>
+    <div class="right bg-skin-secondary"></div>
   </div>
 </template>
 
@@ -16,6 +16,7 @@
       ...mapGetters(['participants', 'centerOf']),
       /* Dividers have the same width as the lifeline layer */
       width() {
+        // TODO: with should be the width of the whole diagram
         let rearParticipant = this.participants.Names().pop()
         // 20px for the right margin of the participant
         return this.centerOf(rearParticipant) + 10

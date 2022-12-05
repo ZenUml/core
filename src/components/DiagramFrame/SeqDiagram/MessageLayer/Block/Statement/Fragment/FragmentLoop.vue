@@ -1,9 +1,9 @@
 <template>
-  <div class="fragment loop" :style="fragmentStyle">
+  <div class="fragment loop border-skin-base rounded" :style="fragmentStyle">
     <comment v-if="comment" :comment="comment" />
-    <div class="header">
-      <div class="name"><label>Loop</label></div>
-      <label class="condition">[{{condition}}]</label>
+    <div class="header text-skin-secondary">
+      <div class="name text-skin-header font-semibold p-1 border-b"><label class="p-0">Loop</label></div>
+      <label class="condition p-1">[{{condition}}]</label>
     </div>
     <block :style="{paddingLeft: `${offsetX}px`}"
            :context="blockInLoop"
@@ -39,3 +39,9 @@
     }
   }
 </script>
+<style scoped>
+/* We need to do this because tailwind 3.2.4 set border-color to #e5e7eb via '*'. */
+* {
+  border-color: inherit;
+}
+</style>

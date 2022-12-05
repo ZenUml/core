@@ -1,8 +1,8 @@
 <template>
-  <div class="fragment opt text-base" :style="fragmentStyle">
+  <div class="fragment opt border-skin-base rounded" :style="fragmentStyle">
     <comment v-if="comment" :comment="comment" />
     <div class="header">
-      <div class="name"><label>Opt</label></div>
+      <div class="name text-skin-header font-semibold p-1 border-b"><label>Opt</label></div>
     </div>
     <block :style="{paddingLeft: `${offsetX}px`}"
            :context="opt.braceBlock().block()"
@@ -32,3 +32,10 @@
     }
   }
 </script>
+
+<style scoped>
+/* We need to do this because tailwind 3.2.4 set border-color to #e5e7eb via '*'. */
+* {
+  border-color: inherit;
+}
+</style>

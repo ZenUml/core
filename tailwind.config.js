@@ -3,7 +3,38 @@ module.exports = {
   content: ['./public/**/*.html', './src/**/*.vue'],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      textColor: {
+        skin: {
+          base: 'var(--color-text-base)',
+          header: 'var(--color-text-header)',
+          secondary: 'var(--color-text-secondary)',
+          muted: 'var(--color-text-muted)',
+          hover: 'var(--color-text-hover)',
+          link: `var(--color-text-link)`,
+          fill: `var(--color-text-fill)`,
+        },
+      },
+      backgroundColor: {
+        skin: {
+          base: 'var(--color-bg-base)',
+          secondary: 'var(--color-bg-secondary)',
+          hover: 'var(--color-bg-hover)',
+        },
+      },
+      borderColor: {
+        skin: {
+          base: 'var(--color-border-base)',
+          secondary: 'var(--color-border-secondary)',
+        },
+      },
+      gradientColorStops: {
+        skin: {
+          base: 'var(--color-bg-base)',
+          secondary: 'var(--color-bg-secondary)',
+        },
+      },
+    },
   },
   variants: {
     extend: {

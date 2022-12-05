@@ -12,6 +12,12 @@ is the message layer.
 
 Key information on the diagram can be grouped in the following structure:
 
+Text messages are internally styled at four levels:
+
+1. text-skin-base: used for all messages
+2. text-skin-muted: used for comments
+3. text-skin-link: used for links
+4. text-skin-secondary: used for everything else, such as title, participant, divider notes, etc.
 
 [%autowidth]
 |===
@@ -56,6 +62,14 @@ A typical custom theme will be like below:
 [source,css]
 ----
 ----
+
+== What can a theme change?
+
+A theme can change two aspects of the diagram:
+
+1. colors
+2. slightly change the layout (e.g. padding, margin, etc.). For example, you can make the
+diagram more compact by reducing the padding.
 
 == where can I apply themes
 

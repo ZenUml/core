@@ -1,5 +1,9 @@
 <template>
-  <div class="participant relative flex flex-col justify-center z-10 h-10"
+  <!-- Set the background and text color with bg-skin-base and text-skin-base.
+       Override background color if it is defined in participant declaration (e.g. A #FFFFFF).
+       TODO: Add a default .selected style
+   -->
+  <div class="participant bg-skin-base border-skin-base rounded text-base relative flex flex-col justify-center z-10 h-10"
        :class="{'selected': selected, 'border-transparent': !!icon}"
        ref="participant"
        :style="{backgroundColor: backgroundColor, color: color}"
@@ -10,8 +14,8 @@
       <span v-if="!!comment" class="absolute hidden rounded-lg transform -translate-y-8 bg-gray-400 px-2 py-1 text-center text-sm text-white group-hover:flex">
         {{comment}}
       </span>
-      <label class="interface" v-if="stereotype">«{{ stereotype }}»</label>
-      <label class="name">{{ entity.label || entity.name }}</label>
+      <label class="interface text-skin-secondary" v-if="stereotype">«{{ stereotype }}»</label>
+      <label class="name text-skin-header">{{ entity.label || entity.name }}</label>
     </div>
   </div>
 </template>
@@ -89,7 +93,7 @@ export default {
   },
   data() {
     return {
-      color: '#000'
+      color: undefined
     }
   },
   mounted() {
@@ -112,10 +116,12 @@ export default {
       return iconPath[this.entity.type?.toLowerCase()]
     },
     backgroundColor() {
+      // Returning `undefined` so that background-color is not set at all in the style attribute
       try {
         if (!this.entity.color) {
-          return '#fff'
+          return undefined;
         }
+        // TODO: review this decision later; tinycolor2 should be considered as recommended by openai
         // Remove alpha for such a case:
         // 1. Background color for parent has low brightness (e.g. #000)
         // 2. Alpha is low (e.g. 0.1)
@@ -124,7 +130,7 @@ export default {
         // This will cause issue when calculating font color.
         return this.entity.color && removeAlpha(this.entity.color);
       } catch (e) {
-        return '#FFF';
+        return undefined;
       }
     },
   },
@@ -133,11 +139,15 @@ export default {
       this.$store.commit('onSelect', this.entity.name)
     },
     updateFontColor () {
-      let backgroundColor = window.getComputedStyle(this.$refs.participant).getPropertyValue('background-color');
-      if (!backgroundColor) {
-        return;
+      // Returning `undefined` so that background-color is not set at all in the style attribute
+      if (!this.backgroundColor) {
+        return undefined;
       }
-      let b = brightnessIgnoreAlpha(backgroundColor);
+      let bgColor = window.getComputedStyle(this.$refs.participant).getPropertyValue('background-color');
+      if (!bgColor) {
+        return undefined;
+      }
+      let b = brightnessIgnoreAlpha(bgColor);
       this.color = b > 128 ? '#000' : '#fff';
     }
   }

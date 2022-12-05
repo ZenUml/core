@@ -14,93 +14,14 @@
   background: white;
   color: black;
   .frame {
-    .header {
-      .title {
-        font-size: 1.2em;
-        font-weight: bold;
-      }
-    }
     .sequence-diagram {
-      .life-line-layer {
-        .lifeline {
-          .participant {
-            border-color: black;
-            border-radius: 4px;
-            &.selected {
-              // TODO: find a better way to highlight the selected participant.
-              font-weight: bold;
-            }
-          }
-        }
-      }
-      .message-layer {
-        .message {
-          border-bottom-color: #000;
-          svg {
-            polyline {
-              stroke: #000;
-              &.head {
-                fill: #000;
-              }
-            }
-          }
-        }
-      }
-      .occurrence {
-        border-radius: 2px;
-        border-color: #000;
-        background-color: #DEDEDE;
-      }
-
-      .divider{
-        .left {
-          background: #000;
-        }
-        .right {
-          background: #000;
-        }
-      }
-
-      .fragment {
-        border-radius: 4px;
-        border-color: rgba(0, 0, 0, 0.30);
-        .header {
-          .name {
-            padding: 4px 4px 4px 6px;
-            background: none;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.30);
-            label { /* name label */
-              font-weight: 700;
-              background: transparent;
-              padding: 0;
-              color: #000;
-            }
-          }
-          label { /* other labels e.g. condition */
-            display: inline-block;
-            padding: 6px 4px 4px 6px;
-            color: #000;
-            &.else-if {
-              display: none;
-            }
-          }
-        }
-
-        &.alt div.divider {
-          border-bottom-color: #555;
-        }
-      }
-
       .comments {
-        pre, p {
-          margin: 0;
-          line-height: 1.5em;
-        }
 
         code {
-          font-size: 90%;
           background-color: #f9f2f4;
-          border-radius: 4px;
+          padding: 2px;
+          margin: 1px 0;
+          border-radius: 2px;
         }
 
         .rest-api .http-method-post {

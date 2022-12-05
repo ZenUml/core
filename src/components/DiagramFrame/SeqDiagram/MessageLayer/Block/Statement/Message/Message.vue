@@ -1,12 +1,12 @@
 <template>
-  <div class="message border-b-2 flex items-end"
+  <div class="message border-skin-base border-b-2 flex items-end"
        :class="{ 'flex-row-reverse': rtl,
           'return': type === 'return',
           'right-to-left':rtl, 'text-left': isAsync, 'text-center': !isAsync }"
        :style="{'border-bottom-style': borderStyle}">
-    <div class="name flex-grow text-sm truncate hover:whitespace-normal hover:bg-yellow-300"
+    <div class="name flex-grow text-sm truncate hover:whitespace-normal hover:bg-skin-hover hover:text-skin-hover"
          :style="{color: color}"
-         style="padding-left: 10px; float: left">{{content}}</div>
+         style="padding-left: 5px; float: left">{{content}}</div>
     <point class="flex-shrink-0 transform translate-y-1/2 -my-px" :fill="fill" :rtl="rtl"/>
   </div>
 </template>

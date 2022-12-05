@@ -1,6 +1,7 @@
 <template>
-  <!-- Always reset the text alignment for each statement: https://github.com/ZenUml/core/issues/406 -->
-  <component class="text-left text-sm"
+  <!-- Always reset the text alignment for each statement: https://github.com/ZenUml/core/issues/406
+       Set text color to text-skin-base for all messages and allow fragments to override it. -->
+  <component class="text-left text-sm text-skin-base"
       v-bind:is="subStatement"
       :context="context"
       :comment="comment"
