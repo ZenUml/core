@@ -3,7 +3,7 @@
        Override background color if it is defined in participant declaration (e.g. A #FFFFFF).
        TODO: Add a default .selected style
    -->
-  <div class="participant bg-skin-secondary border-skin-base rounded text-base relative flex flex-col justify-center z-10 h-10"
+  <div class="participant bg-skin-secondary border-skin-secondary rounded text-base relative flex flex-col justify-center z-10 h-10"
        :class="{'selected': selected, 'border-transparent': !!icon}"
        ref="participant"
        :style="{backgroundColor: backgroundColor, color: color}"
@@ -14,8 +14,8 @@
       <span v-if="!!comment" class="absolute hidden rounded-lg transform -translate-y-8 bg-gray-400 px-2 py-1 text-center text-sm text-white group-hover:flex">
         {{comment}}
       </span>
-      <label class="interface text-skin-header" v-if="stereotype">«{{ stereotype }}»</label>
-      <label class="name text-skin-header">{{ entity.label || entity.name }}</label>
+      <label class="interface text-skin-secondary" v-if="stereotype">«{{ stereotype }}»</label>
+      <label class="name text-skin-secondary">{{ entity.label || entity.name }}</label>
     </div>
   </div>
 </template>
