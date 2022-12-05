@@ -153,4 +153,84 @@
     --color-border-base: #2B272A;  /* Fragment, Message arrow line */
     --color-border-secondary: #344337; /* Participant, Occurrence */
   }
+
+  .theme-mulled-wine {
+    --color-bg-base: #B9B8BD;       /* Main background. From Intellij Darcula theme. */
+    --color-bg-secondary: #F4F2F4;  /* Participant, Occurrence */
+    --color-bg-hover: #B9C1CE;      /* Hover on messages */
+    --color-bg-fill: #8E8990;       /* Lifeline */
+
+    --color-text-base: #600046;     /* Messages */
+    --color-text-secondary: #05060C;    /* participant text (name, stereotype), must be high contrast to bg-secondary */
+    --color-text-header: #0B2239;   /* Title, Participant, Fragment Headers (not conditions) */
+    --color-text-muted: #8E8990;      /* Comment */
+    --color-text-hover: #1F1316;    /* Hover on messages */
+    --color-text-link: #344337;
+    --color-text-fill: #920004;     /* Arrows. Should be same as --color-border-base */
+    --color-text-control: #97A49B;    /* Everything else */
+
+    --color-border-base: #920004;  /* Fragment, Message arrow line */
+    --color-border-secondary: #344337; /* Participant, Occurrence */
+  }
+
+  .theme-lake-house {
+    --color-bg-base: #E7EEEF;       /* Main background. From Intellij Darcula theme. */
+    --color-bg-secondary: #F7F1E7;  /* Participant, Occurrence */
+    --color-bg-hover: #CAE2E6;      /* Hover on messages */
+    --color-bg-fill: #B9C2C4;       /* Lifeline */
+
+    --color-text-base: #A8512A;     /* Messages */
+    --color-text-secondary: #000000;    /* participant text (name, stereotype), must be high contrast to bg-secondary */
+    --color-text-header: #DAB892;   /* Title, Participant, Fragment Headers (not conditions) */
+    --color-text-muted: #8E8990;      /* Comment */
+    --color-text-hover: #1F1316;    /* Hover on messages */
+    --color-text-link: #344337;
+    --color-text-fill: #A1AFB1;     /* Arrows. Should be same as --color-border-base */
+    --color-text-control: #97A49B;    /* Everything else */
+
+    --color-border-base: #A1AFB1;  /* Fragment, Message arrow line */
+    --color-border-secondary: #344337; /* Participant, Occurrence */
+  }
+
+  .theme-dancing-in-the-rain {
+    --color-bg-base: #021A39;       /* Main background. From Intellij Darcula theme. */
+    --color-bg-secondary: #003E69;  /* Participant, Occurrence */
+    --color-bg-hover: #E3E9F4;      /* Hover on messages */
+    --color-bg-fill: #B6CDDE;       /* Lifeline */
+
+    --color-text-base: #C9D8E7;     /* Messages */
+    --color-text-secondary: #98B9D0;    /* participant text (name, stereotype), must be high contrast to bg-secondary */
+    --color-text-header: #B6CDDE;   /* Title, Participant, Fragment Headers (not conditions) */
+    --color-text-muted: #69A4CE;      /* Comment */
+    --color-text-hover: #011938;    /* Hover on messages */
+    --color-text-link: #C9D8E7;
+    --color-text-fill: #B6CDDE;     /* Arrows. Should be same as --color-border-base */
+    --color-text-control: #335C80;    /* Everything else */
+
+    --color-border-base: #B6CDDE;  /* Fragment, Message arrow line */
+    --color-border-secondary: #344337; /* Participant, Occurrence */
+  }
+
+  .theme-coles {
+    --color-bg-base: #FFFFFF;       /* Main background. From Intellij Darcula theme. */
+    --color-bg-secondary: #FFFFFF;  /* Participant, Occurrence */
+    --color-bg-hover: #EE141F;      /* Hover on messages */
+    --color-bg-fill: #EE141F;       /* Lifeline */
+
+    --color-text-base: #000000;     /* Messages */
+    --color-text-secondary: #000000;    /* participant text (name, stereotype), must be high contrast to bg-secondary */
+    --color-text-header: #EE141F;   /* Title, Participant, Fragment Headers (not conditions) */
+    --color-text-muted: #000000;      /* Comment */
+    --color-text-hover: #FFFFFF;    /* Hover on messages */
+    --color-text-link: #C9D8E7;
+    --color-text-fill: #EE141F;     /* Arrows. Should be same as --color-border-base */
+    --color-text-control: #335C80;    /* Everything else */
+
+    --color-border-base: #EE141F;  /* Fragment, Message arrow line */
+    --color-border-secondary: #344337; /* Participant, Occurrence */
+  }
+
+  .theme-coles .frame .sequence-diagram {
+    background-color: #FFDE00;
+  }
 }

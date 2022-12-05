@@ -3,14 +3,14 @@
         1. Don't use inline-block as class name here. Other clients may not have .zenuml at ancestor level.
         2. .zenuml is used to make sure tailwind css takes effect.
    -->
-  <div ref="export" class="zenuml theme-darcula text-skin-base bg-skin-base p-1" style="display: inline-block" :class="theme">
+  <div ref="export" class="zenuml text-skin-base bg-skin-base p-1" style="display: inline-block" :class="theme">
     <!-- pb-8 is to offset pt-8 in SeqDiagram component
         .whitespace-nowrap will be inherited by all children
      -->
     <debug />
     <div class="frame relative m-1 origin-top-left whitespace-nowrap border-skin-base border rounded" :style="{transform: `scale(${scale})`}">
       <div ref="content">
-        <div class="header text-skin-header border-b p-1 flex justify-between">
+        <div class="header text-skin-header border-skin-base border-b p-1 flex justify-between">
           <div class="left hide-export">
             <slot></slot>
           </div>
