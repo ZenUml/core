@@ -1,7 +1,7 @@
 <template>
   <!-- pr-24 to give space for the right most participant.
   TODO: we may need to consider the width of self message on right most participant. -->
-  <div class="message-layer pt-24 pb-1">
+  <div class="message-layer pt-24 pb-10">
     <block :context="context" :style="{'padding-left': paddingLeft + 'px'}"/>
   </div>
 </template>

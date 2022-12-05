@@ -1,7 +1,7 @@
 <template>
   <div  :id="entity.name"
         class="lifeline absolute flex flex-col mx-2 transform -translate-x-1/2 h-full"
-        :class="{'mt-8': !inGroup}"
+
         :style="{'paddingTop': top + 'px', left: left + 'px'} ">
     <participant :entity="entity"/>
     <div class="line bg-skin-fill w0 mx-auto flex-grow w-px"></div>

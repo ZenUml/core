@@ -1,20 +1,22 @@
 <template>
-  <div class="life-line-layer lifeline-layer absolute h-full" :style="{'min-width': '200px'}">
-    <life-line
-      v-if="starterOnTheLeft"
-      :entity="starterParticipant"
-      class="starter"
-      :class="{invisible: invisibleStarter}"
-    />
-    <template v-for="(child, index) in explicitGroupAndParticipants">
-      <life-line-group :key="index"
-                       v-if="child instanceof GroupContext"
-                       :context="child"/>
-      <life-line :key="index"
-                 v-if="child instanceof ParticipantContext"
-                 :entity="getParticipantEntity(child)"/>
-    </template>
-    <life-line v-for="entity in implicitParticipants" :key="entity.name" :entity="entity"/>
+  <div class="life-line-layer lifeline-layer absolute h-full flex flex-col pt-8" :style="{'min-width': '200px'}">
+    <div class="container relative grow">
+      <life-line
+        v-if="starterOnTheLeft"
+        :entity="starterParticipant"
+        class="starter"
+        :class="{invisible: invisibleStarter}"
+      />
+      <template v-for="(child, index) in explicitGroupAndParticipants">
+        <life-line-group :key="index"
+                         v-if="child instanceof GroupContext"
+                         :context="child"/>
+        <life-line :key="index"
+                   v-if="child instanceof ParticipantContext"
+                   :entity="getParticipantEntity(child)"/>
+      </template>
+      <life-line v-for="entity in implicitParticipants" :key="entity.name" :entity="entity"/>
+    </div>
   </div>
 </template>
 
