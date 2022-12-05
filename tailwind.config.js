@@ -9,6 +9,7 @@ module.exports = {
           base: 'var(--color-text-base)',
           header: 'var(--color-text-header)',
           secondary: 'var(--color-text-secondary)',
+          control: 'var(--color-text-control)',
           muted: 'var(--color-text-muted)',
           hover: 'var(--color-text-hover)',
           link: `var(--color-text-link)`,
