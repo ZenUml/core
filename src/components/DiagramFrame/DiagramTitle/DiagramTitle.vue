@@ -1,5 +1,5 @@
 <template>
-  <div class="diagram-title font-semibold">{{title}}</div>
+  <div class="diagram-title text-lg font-semibold">{{title}}</div>
 </template>
 
 <script>

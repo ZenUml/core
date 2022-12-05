@@ -16,14 +16,17 @@
 <pre class="zenuml">
 if(x) {
   loop(y) {
-    par {
-      try {
-        A.m
-      } catch(e) {
-        B.m
-      } finally {
-        C.m
+    try {
+      par {
+        A.m();
+        B.m();
       }
+    } catch(e) {
+      opt {
+        new C
+      }
+    } finally {
+      C.m
     }
   }
 }

@@ -88,11 +88,4 @@ import {mapGetters, mapMutations} from 'vuex'
     padding-bottom: 10px;
   }
 
-  .fragment .header label {
-    padding: 0 10px;
-  }
-  .fragment .header .name label {
-    padding: 0 10px;
-    background: rgba(170, 170, 170, 0.1);
-  }
 </style>

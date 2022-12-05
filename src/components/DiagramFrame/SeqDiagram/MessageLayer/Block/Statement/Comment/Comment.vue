@@ -1,8 +1,9 @@
 <template>
   <!-- TODO: 12px to align comment with async message, which as padding-left 10px and left 2px -->
-  <div class="comments flex justify-around text-left text-sm opacity-50 hover:opacity-100"
-       :style="{color: color}"
-       v-html="markedComment"></div>
+  <div class="comments text-skin-muted min-w-[200px] flex justify-around text-left text-sm opacity-50 hover:opacity-100"
+       :style="{color: color}">
+    <div v-html="markedComment"></div>
+  </div>
 </template>
 
 <script type="text/babel">

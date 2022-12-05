@@ -1,10 +1,10 @@
 <template>
-  <div class="point" :class="{ 'fill': fill, 'no-fill': !fill, 'right-to-left':rtl }">
+  <div class="point text-skin-fill" :class="{ 'fill': fill, 'no-fill': !fill, 'right-to-left':rtl }">
     <svg v-if="!rtl" class="arrow stroke-2" height="10" width="10">
-      <polyline class="right head" points="0,0 10,5 0,10"></polyline>
+      <polyline class="right head fill-current stroke-current" points="0,0 10,5 0,10"></polyline>
     </svg>
     <svg v-if="rtl" class="arrow stroke-2" height="10" width="10">
-      <polyline class="left head" points="10,0 0,5 10,10"></polyline>
+      <polyline class="left head fill-current stroke-current" points="10,0 0,5 10,10"></polyline>
     </svg>
   </div>
 </template>
@@ -18,10 +18,6 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-  .fill svg.arrow polyline {
-    fill: #000;
-  }
 
   .no-fill svg.arrow polyline {
     fill: none !important;
