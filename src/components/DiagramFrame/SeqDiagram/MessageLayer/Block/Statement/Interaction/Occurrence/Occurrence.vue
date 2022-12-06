@@ -1,5 +1,5 @@
 <template>
-  <div class="occurrence border-skin-secondary bg-skin-secondary rounded-sm border-2 relative left-full" :class="{'right-to-left': rtl}" data-el-type="occurrence" :data-belongs-to="participant" :data-x-offset="center" :data-debug-center-of="computedCenter">
+  <div class="occurrence border-skin-secondary bg-skin-fill rounded-sm border-2 relative left-full" :class="{'right-to-left': rtl}" data-el-type="occurrence" :data-belongs-to="participant" :data-x-offset="center" :data-debug-center-of="computedCenter">
     <block v-if="this.context.braceBlock()"
            :context="context.braceBlock().block()"
            :selfCallIndent="selfCallIndent"

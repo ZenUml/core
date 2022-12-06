@@ -6,20 +6,20 @@
   :root {
     --color-bg-base: #ffffff;
     --color-bg-hover: #A6D2FF;
-    --color-bg-secondary: #cccccc;
+    --color-bg-secondary: #ffffff;
     --color-bg-fill: #cccccc;
 
     --color-text-base: #000000;       /* Messages */
-    --color-text-header: #555555;     /* Title, Participant, Fragment Headers (not conditions) */
+    --color-text-header: #000000;     /* Title, Participant, Fragment Headers (not conditions) */
     --color-text-muted: #666666;      /* Comments */
     --color-text-hover: #174AD4;      /* Hover on messages */
     --color-text-secondary: #000000;  /* Everything else */
-    --color-text-control: #E2BA88;    /* Everything else */
+    --color-text-control: #cccccc;    /* Everything else */
     --color-text-link: #A6D2FF;
     --color-text-fill: #000000;       /* Arrows */
 
     --color-border-base: #000000;
-    --color-border-secondary: #999999;
+    --color-border-secondary: #000000;
   }
   .theme-darcula {
     --color-bg-base: #2b2b2b;       /* Main background. From Intellij Darcula theme. */
@@ -215,7 +215,7 @@
     --color-bg-base: #FFFFFF;       /* Main background. From Intellij Darcula theme. */
     --color-bg-secondary: #FFFFFF;  /* Participant, Occurrence */
     --color-bg-hover: #EE141F;      /* Hover on messages */
-    --color-bg-fill: #EE141F;       /* Lifeline */
+    --color-bg-fill: #FFFFFF;       /* Lifeline */
 
     --color-text-base: #000000;     /* Messages */
     --color-text-secondary: #000000;    /* participant text (name, stereotype), must be high contrast to bg-secondary */
@@ -233,4 +233,21 @@
   .theme-coles .frame .sequence-diagram {
     background-color: #FFDE00;
   }
+
+  .theme-coles .frame .message {
+    border-color: #000000;
+  }
+
+  .theme-coles .frame .message>.point {
+    color: #000000;
+  }
+
+  .theme-coles .frame .fragment .header {
+    background-color: #EE141F;
+  }
+
+  .theme-coles .frame .fragment .header .name {
+    color: white;
+  }
+
 }

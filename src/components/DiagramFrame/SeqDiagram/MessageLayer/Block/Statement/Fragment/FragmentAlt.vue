@@ -3,7 +3,7 @@
     <div class="segment">
       <comment v-if="comment" :comment="comment" :commentObj="commentObj"/>
 
-      <div class="header text-skin-header">
+      <div class="header text-skin-header rounded-t">
         <div class="name text-skin-header font-semibold p-1 border-b"><label class="p-0">Alt</label></div>
         <label class="condition p-1">[{{condition}}]</label>
       </div>
