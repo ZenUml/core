@@ -7,6 +7,7 @@
     /* Frame */
     --color-bg-canvas: #FFFFFF;
     --color-bg-frame: #FFFFFF;
+    --color-border-frame: #E6E6E6;
 
     /* Title */
     --color-bg-title: #FFFFFF;
@@ -15,7 +16,7 @@
     /* Participant */
     --color-bg-participant: #FFFFFF;
     --color-text-participant: #000000;      /* Participant name, stereotype */
-    --color-border-participant: #000000;    /* Participant border and Lifeline */
+    --color-border-participant: #888888;    /* Participant border and Lifeline */
 
     /* Messages */
     --color-text-message: #000000;
@@ -25,12 +26,12 @@
     --color-text-comment: #000000;
 
     /* Fragment */
-    --color-bg-fragment-header: #F0F0F0;
+    --color-bg-fragment-header: transparent;
     --color-text-frangment: #000000;        /* Fragment Headers and conditions */
-    --color-border-fragment: #000000;
+    --color-border-fragment: #0000004d;
 
     /* Occurrence */
-    --color-bg-occurrence: #FFFFFF;
+    --color-bg-occurrence: #DEDEDE;
     --color-border-occurrence: #000000;
 
     /* Other */

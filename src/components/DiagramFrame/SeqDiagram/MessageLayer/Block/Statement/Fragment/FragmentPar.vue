@@ -1,7 +1,7 @@
 <template>
   <div class="fragment par border-skin-fragment rounded" :style="fragmentStyle">
     <comment v-if="comment" :comment="comment" />
-    <div class="header bg-skin-fragment-header text-skin-fragment rounded-t">
+    <div class="header bg-skin-fragment-header text-skin-fragment text-base leading-4 rounded-t">
       <div class="name font-semibold p-1 border-b"><label>Par</label></div>
     </div>
     <block :style="{paddingLeft: `${offsetX}px`}"
