@@ -1,8 +1,8 @@
 <template>
   <div class="fragment opt border-skin-fragment rounded" :style="fragmentStyle">
     <comment v-if="comment" :comment="comment" />
-    <div class="header bg-skin-fragment-header">
-      <div class="name text-skin-fragment font-semibold p-1 border-b"><label>Opt</label></div>
+    <div class="header bg-skin-fragment-header text-skin-fragment text-base leading-4">
+      <div class="name font-semibold p-1 border-b"><label>Opt</label></div>
     </div>
     <block :style="{paddingLeft: `${offsetX}px`}"
            :context="opt.braceBlock().block()"

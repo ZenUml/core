@@ -3,7 +3,7 @@
        Override background color if it is defined in participant declaration (e.g. A #FFFFFF).
        TODO: Add a default .selected style
    -->
-  <div class="participant bg-skin-participant border-skin-participant text-skin-participant rounded text-base relative flex flex-col justify-center z-10 h-10"
+  <div class="participant bg-skin-participant border-skin-participant text-skin-participant rounded text-base leading-4 relative flex flex-col justify-center z-10 h-10"
        :class="{'selected': selected, 'border-transparent': !!icon}"
        ref="participant"
        :style="{backgroundColor: backgroundColor, color: color}"
