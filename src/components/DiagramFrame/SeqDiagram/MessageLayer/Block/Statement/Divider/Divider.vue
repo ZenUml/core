@@ -1,8 +1,8 @@
 <template>
   <div class="divider" :style="{width: width + 'px', transform: 'translateX(' + ((-1) * centerOfFrom + 10) + 'px)'}">
-    <div class="left bg-skin-fill"></div>
+    <div class="left bg-skin-divider"></div>
     <div class="name">{{name}}</div>
-    <div class="right bg-skin-fill"></div>
+    <div class="right bg-skin-divider"></div>
   </div>
 </template>
 

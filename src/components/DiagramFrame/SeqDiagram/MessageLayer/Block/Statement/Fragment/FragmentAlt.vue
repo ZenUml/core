@@ -1,13 +1,13 @@
 <template>
-  <div class="fragment alt border-skin-base rounded" :style="fragmentStyle">
+  <div class="fragment alt border-skin-fragment rounded" :style="fragmentStyle">
     <div class="segment">
       <comment v-if="comment" :comment="comment" :commentObj="commentObj"/>
 
-      <div class="header text-skin-header rounded-t">
-        <div class="name text-skin-header font-semibold p-1 border-b"><label class="p-0">Alt</label></div>
+      <div class="header bg-skin-fragment-header text-skin-fragment rounded-t">
+        <div class="name font-semibold p-1 border-b"><label class="p-0">Alt</label></div>
       </div>
       <div class="segment">
-        <div class="text-skin-header">
+        <div class="text-skin-fragment">
           <label class="condition p-1">[{{condition}}]</label>
         </div>
         <block v-if="blockInIfBlock"
@@ -19,7 +19,7 @@
     </div>
     <template v-for="(elseIfBlock, index) in alt.elseIfBlock()">
       <div class="segment mt-2 border-t border-solid" :key="index+500">
-        <div class="text-skin-header" :key="index+1000">
+        <div class="text-skin-fragment" :key="index+1000">
           <label class="else-if hidden">else if</label>
           <label class="condition p-1">[{{conditionFromIfElseBlock(elseIfBlock)}}]</label>
         </div>
@@ -32,7 +32,7 @@
     </template>
     <template v-if="elseBlock">
       <div class="segment mt-2 border-t border-solid">
-        <div class="text-skin-header"><label class="p-1">[else]</label></div>
+        <div class="text-skin-fragment"><label class="p-1">[else]</label></div>
         <block :style="{paddingLeft: `${offsetX}px`}"
                :context="elseBlock"
                :selfCallIndent="selfCallIndent"

@@ -1,14 +1,18 @@
 <template>
-  <div class="fragment loop border-skin-base rounded" :style="fragmentStyle">
+  <div class="fragment loop border-skin-fragment rounded" :style="fragmentStyle">
     <comment v-if="comment" :comment="comment" />
-    <div class="header text-skin-header">
-      <div class="name text-skin-header font-semibold p-1 border-b"><label class="p-0">Loop</label></div>
-      <label class="condition p-1">[{{condition}}]</label>
+    <div class="header text-skin-fragment bg-skin-fragment-header">
+      <div class="name font-semibold p-1 border-b"><label class="p-0">Loop</label></div>
     </div>
-    <block :style="{paddingLeft: `${offsetX}px`}"
-           :context="blockInLoop"
-           :selfCallIndent="selfCallIndent"
-    ></block>
+    <div class="segment">
+      <div class="text-skin-fragment">
+        <label class="condition p-1">[{{condition}}]</label>
+      </div>
+      <block :style="{paddingLeft: `${offsetX}px`}"
+             :context="blockInLoop"
+             :selfCallIndent="selfCallIndent"
+      ></block>
+    </div>
   </div>
 </template>
 
