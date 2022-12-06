@@ -1,5 +1,5 @@
 <template>
-  <div class="point text-skin-fill" :class="{ 'fill': fill, 'no-fill': !fill, 'right-to-left':rtl }">
+  <div class="point text-skin-message-arrow" :class="{ 'fill': fill, 'no-fill': !fill, 'right-to-left':rtl }">
     <svg v-if="!rtl" class="arrow stroke-2" height="10" width="10">
       <polyline class="right head fill-current stroke-current" points="0,0 10,5 0,10"></polyline>
     </svg>

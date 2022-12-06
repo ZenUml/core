@@ -1,9 +1,9 @@
 <template>
-  <div class="fragment tcf border-skin-base rounded" :style="fragmentStyle">
+  <div class="fragment tcf border-skin-fragment rounded" :style="fragmentStyle">
     <div class="segment">
       <comment v-if="comment" :comment="comment"/>
-      <div class="header">
-        <div class="name text-skin-header font-semibold p-1 border-b"><label>Try</label></div>
+      <div class="header bg-skin-fragment-header text-skin-fragment rounded">
+        <div class="name font-semibold p-1 border-b"><label>Try</label></div>
       </div>
 <!-- fragment-offset set as offsetX - 1 for fragment border     -->
       <block v-if="blockInTryBlock"
@@ -14,7 +14,7 @@
     </div>
     <template v-for="(catchBlock, index) in tcf.catchBlock()">
       <div class="segment mt-2 border-t border-solid" :key="index+500">
-        <div class="header" :key="index+1000">
+        <div class="header bg-skin-fragment-header text-skin-fragment" :key="index+1000">
           <label class="keyword catch p-1">catch</label><label class="exception p-1">{{exception(catchBlock) }}</label>
         </div>
         <block :style="{paddingLeft: `${offsetX}px`}"
@@ -25,7 +25,7 @@
     </template>
     <template v-if="finallyBlock">
       <div class="segment mt-2 border-t border-solid">
-        <div class="header finally"><label class="keyword finally p-1">finally</label></div>
+        <div class="header bg-skin-fragment-header text-skin-fragment finally"><label class="keyword finally p-1">finally</label></div>
         <block :style="{paddingLeft: `${offsetX}px`}"
                :context="finallyBlock"
                :selfCallIndent="selfCallIndent"

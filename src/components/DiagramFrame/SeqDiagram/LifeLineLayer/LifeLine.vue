@@ -4,7 +4,7 @@
 
         :style="{'paddingTop': top + 'px', left: left + 'px'} ">
     <participant :entity="entity"/>
-    <div class="line bg-skin-fill w0 mx-auto flex-grow w-px"></div>
+    <div class="line bg-skin-lifeline w0 mx-auto flex-grow w-px"></div>
   </div>
 </template>
 
