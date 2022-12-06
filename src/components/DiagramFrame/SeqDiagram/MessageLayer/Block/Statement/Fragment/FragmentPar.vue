@@ -1,7 +1,7 @@
 <template>
   <div class="fragment par border-skin-base rounded" :style="fragmentStyle">
     <comment v-if="comment" :comment="comment" />
-    <div class="header">
+    <div class="header rounded-t">
       <div class="name text-skin-header font-semibold p-1 border-b"><label>Par</label></div>
     </div>
     <block :style="{paddingLeft: `${offsetX}px`}"
@@ -39,7 +39,13 @@
 }
 </style>
 <style>
+/* Knowledge: Shortcut version `border-top: 1px solid` will reset border-top-color to not specified.
+   Then according to the spec, it will use text color for border-top-color.
+   https://stackoverflow.com/a/8663547/529187
+ */
   .fragment.par>.block>.statement-container:not(:first-child) {
-    border-top: 1px dashed;
+    border-top-color: inherit;
+    border-top-width: 1px;
+    border-top-style: solid;
   }
 </style>
