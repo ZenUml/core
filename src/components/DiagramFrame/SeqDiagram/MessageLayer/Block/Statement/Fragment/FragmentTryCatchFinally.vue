@@ -25,7 +25,7 @@
     </template>
     <template v-if="finallyBlock">
       <div class="segment mt-2 border-t border-solid">
-        <div class="header finally"><div><label class="keyword finally p-1">finally</label></div></div>
+        <div class="header finally"><label class="keyword finally p-1">finally</label></div>
         <block :style="{paddingLeft: `${offsetX}px`}"
                :context="finallyBlock"
                :selfCallIndent="selfCallIndent"
