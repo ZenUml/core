@@ -3,7 +3,7 @@
     <div class="segment">
       <comment v-if="comment" :comment="comment" :commentObj="commentObj"/>
 
-      <div class="header bg-skin-fragment-header text-skin-fragment text-base leading-4 rounded-t">
+      <div class="header bg-skin-fragment-header text-skin-fragment-header text-base leading-4 rounded-t">
         <div class="name font-semibold p-1 border-b"><label class="p-0">Alt</label></div>
       </div>
       <div class="segment">

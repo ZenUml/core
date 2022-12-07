@@ -4,8 +4,9 @@
 
 @layer base {
   :root {
-    --color-text-base: #000;
     --color-bg-base: #FFF;
+    --color-text-base: #000;
+    --color-text-secondary: #666;
     --color-border-base: #000;
   }
 
@@ -276,18 +277,11 @@
 
     /* Messages */
     --color-text-message: #C30000;
-    --color-bg-message-hover: #000000;
-    --color-text-message-hover: #FFFFFF;
-    --color-text-comment: #000000;
 
-    /* Other */
-    --color-text-link: #C9D8E7;
-    --color-text-control: #335C80;
+    /* Fragment */
+    --color-text-fragment-header: #FFFFFF;  /* Fragment Headers */
   }
 
-  .theme-nab .fragment .header {
-    color: white;
-  }
 
   .theme-google {
     --color-white: #FFFFFF;
