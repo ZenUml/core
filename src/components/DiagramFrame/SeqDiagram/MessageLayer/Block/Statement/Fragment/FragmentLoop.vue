@@ -1,7 +1,7 @@
 <template>
   <div class="fragment loop border-skin-fragment rounded" :style="fragmentStyle">
     <comment v-if="comment" :comment="comment" />
-    <div class="header text-skin-fragment bg-skin-fragment-header text-base leading-4">
+    <div class="header text-skin-fragment-header bg-skin-fragment-header text-base leading-4">
       <div class="name font-semibold p-1 border-b"><label class="p-0">Loop</label></div>
     </div>
     <div class="segment">
