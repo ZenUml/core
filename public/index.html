@@ -64,7 +64,7 @@
 
       editor.on("change", function(cm) {
         waitUntil( () => {return window.zenUml}, () => {
-          window.zenUml.render(cm.getValue(), 'theme-mermaid').then(r => {
+          window.zenUml.render(cm.getValue(), 'theme-default').then(r => {
             window.parentLogger.child({module: 'index.html'}).debug('render resolved', r);
           });
         });
