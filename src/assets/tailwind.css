@@ -18,6 +18,18 @@
     --color-bg-occurrence: #DEDEDE;
   }
 
+  .theme-mermaid {
+    --color-bg-base: #FFF;
+    --color-text-base: #222;
+    --color-border-base: #666;
+    /* Occurrence */
+    --color-bg-occurrence: #DEDEDE;
+  }
+
+  .theme-mermaid .footer {
+    visibility: hidden;
+  }
+
   .theme-darcula {
     /* Frame */
     --color-bg-canvas: #FFFFFF;
