@@ -19,6 +19,22 @@ Text messages are internally styled at four levels:
 3. text-skin-link: used for links
 4. text-skin-secondary: used for everything else, such as title, participant, divider notes, etc.
 
+When it comes to branding, the following elements are the most important:
+
+1. Canvas background, however, it can easily be overwhelming if you use high contrast color to the
+overall page background.
+2. Title background, participant background and fragment header background are the most attractive
+elements to brand. These are where your brand color should be used.
+3. The background of the occurrence (message bar) is also a good place to use your brand color, but
+less attractive than the above three.
+4. The borders of the frame, participant, fragment, occurrence and lifeline can add a bit
+of color to the diagram.
+5. The color of the message and the arrow  are the most important information on
+the diagram. Choose a striking and comfortable color for them. You can use the brand color here, but
+they should not be the only elements that reflect your brand color. Same principles apply to the
+background and text color for hover state.
+6. Then is the color of link and control. They should avoid attracting too much attention
+
 [%autowidth]
 |===
 |Category | Diagram Frame |Lifeline Layer | Message Layer
