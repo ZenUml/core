@@ -67,3 +67,9 @@
   }
 </script>
 
+<style scoped>
+p {
+  margin: 0;
+  line-height: 1.25em;
+}
+</style>
