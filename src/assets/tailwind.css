@@ -6,40 +6,16 @@
   :root {
     --color-bg-base: #FFF;
     --color-text-base: #000;
-    --color-text-secondary: #666;
+    --color-text-secondary: #333;
     --color-border-base: #000;
   }
 
-  .default {
-    /* Frame */
-    --color-bg-canvas: #FFFFFF;
-    --color-border-frame: #E6E6E6;
-
-    /* Title */
-    --color-bg-title: #FFFFFF;
-    --color-text-title: #000000;
-
-    /* Participant */
-    --color-bg-participant: #FFFFFF;
-    --color-text-participant: #000000;      /* Participant name, stereotype */
-
-    /* Messages */
-    --color-text-message: #000000;
-    --color-message-arrow: #000000;
-    --color-bg-message-hover: #000000;
-    --color-text-message-hover: #FFFFFF;
-    --color-text-comment: #000000;
-
-    /* Fragment */
-    --color-bg-fragment-header: transparent;
-    --color-text-frangment: #000000;        /* Fragment Headers and conditions */
-
+  .theme-default {
+    --color-bg-base: #FFF;
+    --color-text-base: #222;
+    --color-border-base: #666;
     /* Occurrence */
     --color-bg-occurrence: #DEDEDE;
-
-    /* Other */
-    --color-text-link: #C9D8E7;
-    --color-text-control: #335C80;
   }
 
   .theme-darcula {
@@ -279,6 +255,7 @@
     --color-text-message: #C30000;
 
     /* Fragment */
+    --color-bg-fragment-header: #C30000;  /* Fragment Headers */
     --color-text-fragment-header: #FFFFFF;  /* Fragment Headers */
   }
 
