@@ -1,5 +1,5 @@
 <template>
-  <div class="title text-skin-title text-lg font-semibold">{{title}}</div>
+  <div class="title text-skin-title text-base font-semibold">{{title}}</div>
 </template>
 
 <script>

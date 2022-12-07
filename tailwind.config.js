@@ -33,7 +33,7 @@ module.exports = {
           lifeline: 'var(--color-border-participant, var(--color-border-participant, var(--color-border-frame, var(--color-border-base, #000))))',
           divider: 'var(--color-border-participant)',
           "message-hover": 'var(--color-bg-message-hover, var(--color-text-base, #000))',
-          "fragment-header": 'var(--color-bg-fragment-header, var(--color-bg-participant, var(--color-bg-frame, var(--color-bg-canvas, var(--color-bg-base, #fff)))))',
+          "fragment-header": 'var(--color-bg-fragment-header, transparent)',
           occurrence: 'var(--color-bg-occurrence, var(--color-bg-participant, var(--color-bg-frame, var(--color-bg-canvas, var(--color-bg-base, #fff)))))',
           base: 'var(--color-bg-base)',
           secondary: 'var(--color-bg-secondary)',
