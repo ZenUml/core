@@ -267,7 +267,7 @@
     /* Frame */
     --color-bg-canvas: #F2F4F6;
     --color-bg-frame: #F2F4F6;
-    --color-border-frame: #089FD8;
+    --color-border-frame: #000000;
 
     /* Title */
     --color-bg-title: #F2F4F6;
