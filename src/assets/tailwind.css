@@ -11,9 +11,12 @@
   }
 
   .theme-default {
-    --color-bg-base: #FFF;
     --color-text-base: #222;
     --color-border-base: #666;
+
+    /* Message */
+    --color-message-arrow: #000;
+
     /* Occurrence */
     --color-bg-occurrence: #DEDEDE;
   }
