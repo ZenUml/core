@@ -34,6 +34,15 @@
             }
           }
 
+          if (action === 'get_png') {
+            try {
+              let png = await zenUml.getPng()
+              send_reply({ action: 'cmd_ok', png })
+            } catch (e) {
+              send_error(e.message, e.stack);
+            }
+          }
+
           if (action === 'catch_clicks') {
             try {
               const top_origin = ev.origin;

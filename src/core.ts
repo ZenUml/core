@@ -56,4 +56,8 @@ export default class ZenUml implements IZenUml{
   get theme(): string | undefined{
     return this._theme;
   }
+
+  async getPng(): Promise<string> {
+    return this.app.$children[0].toPng();
+  }
 }
