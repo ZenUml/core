@@ -37,7 +37,7 @@
           if (action === 'get_png') {
             try {
               let png = await zenUml.getPng()
-              send_reply({ action: 'cmd_ok', png })
+              send_reply({ action: 'cmd_png', png })
             } catch (e) {
               send_error(e.message, e.stack);
             }
