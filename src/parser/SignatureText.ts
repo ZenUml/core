@@ -14,12 +14,14 @@ MessageContext.prototype.SignatureText = function () {
 
 // @ts-ignore
 AsyncMessageContext.prototype.SignatureText = function () {
+  // @ts-ignore
   return this.content()?.getFormattedText()
 }
 
 // @ts-ignore
 CreationContext.prototype.SignatureText = function () {
   const params = this.creationBody().parameters()
+  // @ts-ignore
   const text = (params?.parameter()?.length > 0) ? params.getFormattedText() : 'create'
   return '«' + text + '»'
 }
