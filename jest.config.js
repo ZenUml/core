@@ -3,6 +3,7 @@ module.exports = {
   "testMatch": [
     "**/__tests__/**/*.[jt]s?(x)", "**/(test|src)/**/?(*.)+(spec|test).[jt]s?(x)", "vue.config.spec.js"
   ],
+  "transformIgnorePatterns": ["/node_modules/(?!antlr4)"],
   globals: {
     'ts-jest': {
       diagnostics: false,
