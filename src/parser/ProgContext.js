@@ -1,6 +1,5 @@
 const sequenceParser = require('../generated-parser/sequenceParser').default;
-const seqParser = sequenceParser;
-const ProgContext = seqParser.ProgContext;
+const ProgContext = sequenceParser.ProgContext;
 
 ProgContext.prototype.Starter = function () {
   const declaredStarter = this.head()?.starterExp()?.starter()?.getFormattedText()
@@ -17,10 +16,10 @@ ProgContext.prototype.Starter = function () {
     const children = this.head()?.children;
     if(children && children[0]) {
       const child = children[0];
-      if (child instanceof sequenceParser.sequenceParser.ParticipantContext) {
+      if (child instanceof sequenceParser.ParticipantContext) {
         starterFromParticipant = child.name()?.getFormattedText();
       }
-      if (child instanceof sequenceParser.sequenceParser.GroupContext) {
+      if (child instanceof sequenceParser.GroupContext) {
         const participants = child.participant();
         if(participants && participants[0]) {
           starterFromParticipantGroup = participants[0].name()?.getFormattedText();
