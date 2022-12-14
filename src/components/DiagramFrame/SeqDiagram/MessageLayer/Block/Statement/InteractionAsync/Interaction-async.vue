@@ -9,7 +9,6 @@
                :content="signature"
                :rtl="rightToLeft"
                type="async" />
-    <div class="invisible-occurrence"></div>
   </div>
 </template>
 

@@ -1,5 +1,5 @@
-const sequenceParser = require('../generated-parser/sequenceParser')
-const seqParser = sequenceParser.sequenceParser;
+const sequenceParser = require('../generated-parser/sequenceParser').default
+const seqParser = sequenceParser;
 
 const CreationContext = seqParser.CreationContext;
 CreationContext.prototype.Body = CreationContext.prototype.creationBody;

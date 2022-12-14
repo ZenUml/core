@@ -1,5 +1,5 @@
-const sequenceParser = require('../generated-parser/sequenceParser');
-const seqParser = sequenceParser.sequenceParser;
+const sequenceParser = require('../generated-parser/sequenceParser').default;
+const seqParser = sequenceParser;
 const ProgContext = seqParser.ProgContext;
 
 ProgContext.prototype.Starter = function () {

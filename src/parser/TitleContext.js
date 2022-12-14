@@ -1,8 +1,7 @@
-const sequenceParser = require('../generated-parser/sequenceParser');
+const sequenceParser = require('../generated-parser/sequenceParser').default;
 
-const seqParser = sequenceParser.sequenceParser;
+const seqParser = sequenceParser;
 const TitleContext = seqParser.TitleContext;
-
 TitleContext.prototype.content = function() {
   if(this.children.length < 2) {
     return 'Untiled'

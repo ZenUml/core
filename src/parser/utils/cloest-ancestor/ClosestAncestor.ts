@@ -1,11 +1,12 @@
-const antlr4 = require('antlr4/index');
-const sequenceParser = require('../../../generated-parser/sequenceParser')
+const antlr4 = require('antlr4').default;
+const sequenceParser = require('../../../generated-parser/sequenceParser').default
 
-const seqParser = sequenceParser.sequenceParser;
+const seqParser = sequenceParser;
 const StatContext = seqParser.StatContext;
 
 antlr4.ParserRuleContext.prototype.ClosestAncestorStat = function() {
   let current = this;
+  console.log('stat context', StatContext);
   while(!(current instanceof StatContext)) {
     current = current.parentCtx;
   }
