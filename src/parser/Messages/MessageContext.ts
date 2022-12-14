@@ -28,7 +28,9 @@ export class Assignment implements IAssignment {
 // @ts-ignore
 MessageContext.prototype.Assignment = function() {
   let assignmentContext = this.messageBody().assignment();
+// @ts-ignore
   const assignee = assignmentContext?.assignee()?.getFormattedText();
+// @ts-ignore
   const type = assignmentContext?.type()?.getFormattedText();
   if(assignee) {
     return new Assignment(assignee, type);

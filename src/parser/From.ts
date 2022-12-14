@@ -19,6 +19,7 @@ CreationContext.prototype.From = function () {
 
 // @ts-ignore
 MessageContext.prototype.ProvidedFrom = function() {
+  // @ts-ignore
   return this.messageBody()?.from()?.getFormattedText();
 }
 // @ts-ignore
@@ -30,6 +31,7 @@ MessageContext.prototype.From = function () {
 // @ts-ignore
 AsyncMessageContext.prototype.From = function () {
   if (this.from()) {
+    // @ts-ignore
     return this.from().getFormattedText();
   }
   // @ts-ignore
