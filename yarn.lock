@@ -2151,6 +2151,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/antlr4@^4.11.2":
+  version "4.11.2"
+  resolved "https://registry.yarnpkg.com/@types/antlr4/-/antlr4-4.11.2.tgz#46b70713b38eecb2d1a8e2ffd14544367067b41e"
+  integrity sha512-WVDiUppozGAKAL76KbXX63A4U4a0HfHM/5X7+GWzen7OaS/7eJEMdd61B+Hhl52Kedcmr80/jNeeWrM3Z/icig==
+
 "@types/assert@^1.5.4":
   version "1.5.6"
   resolved "https://registry.yarnpkg.com/@types/assert/-/assert-1.5.6.tgz#a8b5a94ce5fb8f4ba65fdc37fc9507609114189e"

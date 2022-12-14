@@ -34,7 +34,7 @@
   "dependencies": {
     "@types/assert": "^1.5.4",
     "@types/ramda": "^0.28.0",
-    "antlr4": "~4.11.1",
+    "antlr4": "^4.11.0",
     "color-string": "1.5.2",
     "dom-to-image-more": "^2.9.5",
     "file-saver": "^2.0.5",
@@ -60,6 +60,7 @@
     "@babel/polyfill": "^7.10.1",
     "@babel/preset-env": "^7.13.5",
     "@babel/runtime-corejs2": "^7.12.13",
+    "@types/antlr4": "^4.11.2",
     "@types/color-string": "^1.5.2",
     "@types/jest": "^24.0.19",
     "@types/lodash": "^4.14.168",
