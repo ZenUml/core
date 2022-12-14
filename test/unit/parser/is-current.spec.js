@@ -32,6 +32,7 @@ describe('isCurrent', () => {
   it('Do not throw error', () => {
     const code = 'A.m { /\n m1 }'
     const message = Fixture.firstStatement(code).children[0];
-    expect(message.isCurrent(1)).toBe(false);
+    expect(message.isCurrent(1)).toBe(true);
+    expect(message.isCurrent(4)).toBe(false);
   })
 });

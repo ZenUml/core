@@ -1,6 +1,6 @@
 import {MessageContextListener} from "../../../src/positioning/MessageContextListener";
 let seqDsl = require('../../../src/parser/index');
-const antlr4 = require('antlr4/index');
+const antlr4 = require('antlr4').default;
 
 describe('MessageListener', () => {
   it('can handle Message and Creation', () => {

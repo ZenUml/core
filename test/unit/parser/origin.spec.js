@@ -26,7 +26,7 @@ describe('Get `from` from context', () => {
     expect(stat1.Origin()).toBe('_STARTER_');
     let m1 = stat1.message()
     // expectText(m1).toBe('A.m1{B.m2}')
-    const stat2 = m1.braceBlock().block().stat()[1]
+    const stat2 = m1.braceBlock().block().stat()[0]
     expect(stat2.Origin()).toBe('A');
     let m2 = stat2.message();
     expectText(m2).toBe('B.m2')
