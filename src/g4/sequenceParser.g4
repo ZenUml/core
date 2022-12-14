@@ -81,12 +81,15 @@ ret
  ;
 
 // Design considerations:
-// 1. whether we should trigger it with == or more? Triggering it with '==' is easier for the users.
-// 1. whether we should allow `== any thing including '123', ',', etc.
-//    to allow this we need to go into a different mode and we have to consdier when '==' appears elsewhere.
-// 1. whether this should be treated as a statement or be sent to a separate channel
+// 1. triggered with '=='+'='*
+// 1. any charactor except for newline can be used as dividerNote
+// 1. it is treated as a statement
 divider
- : EQ (EQ|ASSIGN)* name EQ (EQ|ASSIGN)*
+ : dividerNote
+ ;
+
+dividerNote
+ : DIVIDER
  ;
 
 // [Perf] Removing par and opt would improve if/else by about 10%; consider merging loop, par and opt.

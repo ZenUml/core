@@ -1,6 +1,6 @@
 import sequenceParser from '../../generated-parser/sequenceParser'
 
-const seqParser = sequenceParser.sequenceParser;
+const seqParser = sequenceParser;
 const MessageContext = seqParser.MessageContext
 
 interface IAssignment {
@@ -25,6 +25,7 @@ export class Assignment implements IAssignment {
   }
 }
 
+// @ts-ignore
 MessageContext.prototype.Assignment = function() {
   let assignmentContext = this.messageBody().assignment();
   const assignee = assignmentContext?.assignee()?.getFormattedText();

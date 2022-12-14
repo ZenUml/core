@@ -1,636 +1,639 @@
-// Generated from sequenceParser.g4 by ANTLR 4.8
+// Generated from java-escape by ANTLR 4.11.1
 // jshint ignore: start
-var antlr4 = require('antlr4/index');
+import antlr4 from 'antlr4';
 
 // This class defines a complete listener for a parse tree produced by sequenceParser.
-function sequenceParserListener() {
-	antlr4.tree.ParseTreeListener.call(this);
-	return this;
+export default class sequenceParserListener extends antlr4.tree.ParseTreeListener {
+
+	// Enter a parse tree produced by sequenceParser#prog.
+	enterProg(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#prog.
+	exitProg(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#title.
+	enterTitle(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#title.
+	exitTitle(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#head.
+	enterHead(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#head.
+	exitHead(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#group.
+	enterGroup(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#group.
+	exitGroup(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#starterExp.
+	enterStarterExp(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#starterExp.
+	exitStarterExp(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#starter.
+	enterStarter(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#starter.
+	exitStarter(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#participant.
+	enterParticipant(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#participant.
+	exitParticipant(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#stereotype.
+	enterStereotype(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#stereotype.
+	exitStereotype(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#label.
+	enterLabel(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#label.
+	exitLabel(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#participantType.
+	enterParticipantType(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#participantType.
+	exitParticipantType(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#name.
+	enterName(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#name.
+	exitName(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#width.
+	enterWidth(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#width.
+	exitWidth(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#block.
+	enterBlock(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#block.
+	exitBlock(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#ret.
+	enterRet(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#ret.
+	exitRet(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#divider.
+	enterDivider(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#divider.
+	exitDivider(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#dividerNote.
+	enterDividerNote(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#dividerNote.
+	exitDividerNote(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#stat.
+	enterStat(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#stat.
+	exitStat(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#par.
+	enterPar(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#par.
+	exitPar(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#opt.
+	enterOpt(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#opt.
+	exitOpt(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#creation.
+	enterCreation(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#creation.
+	exitCreation(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#creationBody.
+	enterCreationBody(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#creationBody.
+	exitCreationBody(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#message.
+	enterMessage(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#message.
+	exitMessage(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#messageBody.
+	enterMessageBody(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#messageBody.
+	exitMessageBody(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#func.
+	enterFunc(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#func.
+	exitFunc(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#from.
+	enterFrom(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#from.
+	exitFrom(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#to.
+	enterTo(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#to.
+	exitTo(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#signature.
+	enterSignature(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#signature.
+	exitSignature(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#invocation.
+	enterInvocation(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#invocation.
+	exitInvocation(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#assignment.
+	enterAssignment(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#assignment.
+	exitAssignment(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#asyncMessage.
+	enterAsyncMessage(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#asyncMessage.
+	exitAsyncMessage(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#content.
+	enterContent(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#content.
+	exitContent(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#construct.
+	enterConstruct(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#construct.
+	exitConstruct(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#type.
+	enterType(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#type.
+	exitType(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#assignee.
+	enterAssignee(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#assignee.
+	exitAssignee(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#methodName.
+	enterMethodName(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#methodName.
+	exitMethodName(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#parameters.
+	enterParameters(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#parameters.
+	exitParameters(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#parameter.
+	enterParameter(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#parameter.
+	exitParameter(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#declaration.
+	enterDeclaration(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#declaration.
+	exitDeclaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#tcf.
+	enterTcf(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#tcf.
+	exitTcf(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#tryBlock.
+	enterTryBlock(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#tryBlock.
+	exitTryBlock(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#catchBlock.
+	enterCatchBlock(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#catchBlock.
+	exitCatchBlock(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#finallyBlock.
+	enterFinallyBlock(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#finallyBlock.
+	exitFinallyBlock(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#alt.
+	enterAlt(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#alt.
+	exitAlt(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#ifBlock.
+	enterIfBlock(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#ifBlock.
+	exitIfBlock(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#elseIfBlock.
+	enterElseIfBlock(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#elseIfBlock.
+	exitElseIfBlock(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#elseBlock.
+	enterElseBlock(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#elseBlock.
+	exitElseBlock(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#braceBlock.
+	enterBraceBlock(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#braceBlock.
+	exitBraceBlock(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#loop.
+	enterLoop(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#loop.
+	exitLoop(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#assignmentExpr.
+	enterAssignmentExpr(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#assignmentExpr.
+	exitAssignmentExpr(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#funcExpr.
+	enterFuncExpr(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#funcExpr.
+	exitFuncExpr(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#atomExpr.
+	enterAtomExpr(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#atomExpr.
+	exitAtomExpr(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#orExpr.
+	enterOrExpr(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#orExpr.
+	exitOrExpr(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#additiveExpr.
+	enterAdditiveExpr(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#additiveExpr.
+	exitAdditiveExpr(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#relationalExpr.
+	enterRelationalExpr(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#relationalExpr.
+	exitRelationalExpr(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#plusExpr.
+	enterPlusExpr(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#plusExpr.
+	exitPlusExpr(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#notExpr.
+	enterNotExpr(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#notExpr.
+	exitNotExpr(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#unaryMinusExpr.
+	enterUnaryMinusExpr(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#unaryMinusExpr.
+	exitUnaryMinusExpr(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#creationExpr.
+	enterCreationExpr(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#creationExpr.
+	exitCreationExpr(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#parenthesizedExpr.
+	enterParenthesizedExpr(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#parenthesizedExpr.
+	exitParenthesizedExpr(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#multiplicationExpr.
+	enterMultiplicationExpr(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#multiplicationExpr.
+	exitMultiplicationExpr(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#equalityExpr.
+	enterEqualityExpr(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#equalityExpr.
+	exitEqualityExpr(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#andExpr.
+	enterAndExpr(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#andExpr.
+	exitAndExpr(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#numberAtom.
+	enterNumberAtom(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#numberAtom.
+	exitNumberAtom(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#booleanAtom.
+	enterBooleanAtom(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#booleanAtom.
+	exitBooleanAtom(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#idAtom.
+	enterIdAtom(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#idAtom.
+	exitIdAtom(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#stringAtom.
+	enterStringAtom(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#stringAtom.
+	exitStringAtom(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#nilAtom.
+	enterNilAtom(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#nilAtom.
+	exitNilAtom(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#parExpr.
+	enterParExpr(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#parExpr.
+	exitParExpr(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#condition.
+	enterCondition(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#condition.
+	exitCondition(ctx) {
+	}
+
+
+	// Enter a parse tree produced by sequenceParser#inExpr.
+	enterInExpr(ctx) {
+	}
+
+	// Exit a parse tree produced by sequenceParser#inExpr.
+	exitInExpr(ctx) {
+	}
+
+
+
 }
-
-sequenceParserListener.prototype = Object.create(antlr4.tree.ParseTreeListener.prototype);
-sequenceParserListener.prototype.constructor = sequenceParserListener;
-
-// Enter a parse tree produced by sequenceParser#prog.
-sequenceParserListener.prototype.enterProg = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#prog.
-sequenceParserListener.prototype.exitProg = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#title.
-sequenceParserListener.prototype.enterTitle = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#title.
-sequenceParserListener.prototype.exitTitle = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#head.
-sequenceParserListener.prototype.enterHead = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#head.
-sequenceParserListener.prototype.exitHead = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#group.
-sequenceParserListener.prototype.enterGroup = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#group.
-sequenceParserListener.prototype.exitGroup = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#starterExp.
-sequenceParserListener.prototype.enterStarterExp = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#starterExp.
-sequenceParserListener.prototype.exitStarterExp = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#starter.
-sequenceParserListener.prototype.enterStarter = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#starter.
-sequenceParserListener.prototype.exitStarter = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#participant.
-sequenceParserListener.prototype.enterParticipant = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#participant.
-sequenceParserListener.prototype.exitParticipant = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#stereotype.
-sequenceParserListener.prototype.enterStereotype = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#stereotype.
-sequenceParserListener.prototype.exitStereotype = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#label.
-sequenceParserListener.prototype.enterLabel = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#label.
-sequenceParserListener.prototype.exitLabel = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#participantType.
-sequenceParserListener.prototype.enterParticipantType = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#participantType.
-sequenceParserListener.prototype.exitParticipantType = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#name.
-sequenceParserListener.prototype.enterName = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#name.
-sequenceParserListener.prototype.exitName = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#width.
-sequenceParserListener.prototype.enterWidth = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#width.
-sequenceParserListener.prototype.exitWidth = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#block.
-sequenceParserListener.prototype.enterBlock = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#block.
-sequenceParserListener.prototype.exitBlock = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#ret.
-sequenceParserListener.prototype.enterRet = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#ret.
-sequenceParserListener.prototype.exitRet = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#divider.
-sequenceParserListener.prototype.enterDivider = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#divider.
-sequenceParserListener.prototype.exitDivider = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#stat.
-sequenceParserListener.prototype.enterStat = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#stat.
-sequenceParserListener.prototype.exitStat = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#par.
-sequenceParserListener.prototype.enterPar = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#par.
-sequenceParserListener.prototype.exitPar = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#opt.
-sequenceParserListener.prototype.enterOpt = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#opt.
-sequenceParserListener.prototype.exitOpt = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#creation.
-sequenceParserListener.prototype.enterCreation = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#creation.
-sequenceParserListener.prototype.exitCreation = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#creationBody.
-sequenceParserListener.prototype.enterCreationBody = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#creationBody.
-sequenceParserListener.prototype.exitCreationBody = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#message.
-sequenceParserListener.prototype.enterMessage = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#message.
-sequenceParserListener.prototype.exitMessage = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#messageBody.
-sequenceParserListener.prototype.enterMessageBody = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#messageBody.
-sequenceParserListener.prototype.exitMessageBody = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#func.
-sequenceParserListener.prototype.enterFunc = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#func.
-sequenceParserListener.prototype.exitFunc = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#from.
-sequenceParserListener.prototype.enterFrom = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#from.
-sequenceParserListener.prototype.exitFrom = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#to.
-sequenceParserListener.prototype.enterTo = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#to.
-sequenceParserListener.prototype.exitTo = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#signature.
-sequenceParserListener.prototype.enterSignature = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#signature.
-sequenceParserListener.prototype.exitSignature = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#invocation.
-sequenceParserListener.prototype.enterInvocation = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#invocation.
-sequenceParserListener.prototype.exitInvocation = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#assignment.
-sequenceParserListener.prototype.enterAssignment = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#assignment.
-sequenceParserListener.prototype.exitAssignment = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#asyncMessage.
-sequenceParserListener.prototype.enterAsyncMessage = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#asyncMessage.
-sequenceParserListener.prototype.exitAsyncMessage = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#content.
-sequenceParserListener.prototype.enterContent = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#content.
-sequenceParserListener.prototype.exitContent = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#construct.
-sequenceParserListener.prototype.enterConstruct = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#construct.
-sequenceParserListener.prototype.exitConstruct = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#type.
-sequenceParserListener.prototype.enterType = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#type.
-sequenceParserListener.prototype.exitType = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#assignee.
-sequenceParserListener.prototype.enterAssignee = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#assignee.
-sequenceParserListener.prototype.exitAssignee = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#methodName.
-sequenceParserListener.prototype.enterMethodName = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#methodName.
-sequenceParserListener.prototype.exitMethodName = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#parameters.
-sequenceParserListener.prototype.enterParameters = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#parameters.
-sequenceParserListener.prototype.exitParameters = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#parameter.
-sequenceParserListener.prototype.enterParameter = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#parameter.
-sequenceParserListener.prototype.exitParameter = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#declaration.
-sequenceParserListener.prototype.enterDeclaration = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#declaration.
-sequenceParserListener.prototype.exitDeclaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#tcf.
-sequenceParserListener.prototype.enterTcf = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#tcf.
-sequenceParserListener.prototype.exitTcf = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#tryBlock.
-sequenceParserListener.prototype.enterTryBlock = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#tryBlock.
-sequenceParserListener.prototype.exitTryBlock = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#catchBlock.
-sequenceParserListener.prototype.enterCatchBlock = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#catchBlock.
-sequenceParserListener.prototype.exitCatchBlock = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#finallyBlock.
-sequenceParserListener.prototype.enterFinallyBlock = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#finallyBlock.
-sequenceParserListener.prototype.exitFinallyBlock = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#alt.
-sequenceParserListener.prototype.enterAlt = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#alt.
-sequenceParserListener.prototype.exitAlt = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#ifBlock.
-sequenceParserListener.prototype.enterIfBlock = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#ifBlock.
-sequenceParserListener.prototype.exitIfBlock = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#elseIfBlock.
-sequenceParserListener.prototype.enterElseIfBlock = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#elseIfBlock.
-sequenceParserListener.prototype.exitElseIfBlock = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#elseBlock.
-sequenceParserListener.prototype.enterElseBlock = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#elseBlock.
-sequenceParserListener.prototype.exitElseBlock = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#braceBlock.
-sequenceParserListener.prototype.enterBraceBlock = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#braceBlock.
-sequenceParserListener.prototype.exitBraceBlock = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#loop.
-sequenceParserListener.prototype.enterLoop = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#loop.
-sequenceParserListener.prototype.exitLoop = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#assignmentExpr.
-sequenceParserListener.prototype.enterAssignmentExpr = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#assignmentExpr.
-sequenceParserListener.prototype.exitAssignmentExpr = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#funcExpr.
-sequenceParserListener.prototype.enterFuncExpr = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#funcExpr.
-sequenceParserListener.prototype.exitFuncExpr = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#atomExpr.
-sequenceParserListener.prototype.enterAtomExpr = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#atomExpr.
-sequenceParserListener.prototype.exitAtomExpr = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#orExpr.
-sequenceParserListener.prototype.enterOrExpr = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#orExpr.
-sequenceParserListener.prototype.exitOrExpr = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#additiveExpr.
-sequenceParserListener.prototype.enterAdditiveExpr = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#additiveExpr.
-sequenceParserListener.prototype.exitAdditiveExpr = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#relationalExpr.
-sequenceParserListener.prototype.enterRelationalExpr = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#relationalExpr.
-sequenceParserListener.prototype.exitRelationalExpr = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#plusExpr.
-sequenceParserListener.prototype.enterPlusExpr = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#plusExpr.
-sequenceParserListener.prototype.exitPlusExpr = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#notExpr.
-sequenceParserListener.prototype.enterNotExpr = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#notExpr.
-sequenceParserListener.prototype.exitNotExpr = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#unaryMinusExpr.
-sequenceParserListener.prototype.enterUnaryMinusExpr = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#unaryMinusExpr.
-sequenceParserListener.prototype.exitUnaryMinusExpr = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#creationExpr.
-sequenceParserListener.prototype.enterCreationExpr = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#creationExpr.
-sequenceParserListener.prototype.exitCreationExpr = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#parenthesizedExpr.
-sequenceParserListener.prototype.enterParenthesizedExpr = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#parenthesizedExpr.
-sequenceParserListener.prototype.exitParenthesizedExpr = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#multiplicationExpr.
-sequenceParserListener.prototype.enterMultiplicationExpr = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#multiplicationExpr.
-sequenceParserListener.prototype.exitMultiplicationExpr = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#equalityExpr.
-sequenceParserListener.prototype.enterEqualityExpr = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#equalityExpr.
-sequenceParserListener.prototype.exitEqualityExpr = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#andExpr.
-sequenceParserListener.prototype.enterAndExpr = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#andExpr.
-sequenceParserListener.prototype.exitAndExpr = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#numberAtom.
-sequenceParserListener.prototype.enterNumberAtom = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#numberAtom.
-sequenceParserListener.prototype.exitNumberAtom = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#booleanAtom.
-sequenceParserListener.prototype.enterBooleanAtom = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#booleanAtom.
-sequenceParserListener.prototype.exitBooleanAtom = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#idAtom.
-sequenceParserListener.prototype.enterIdAtom = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#idAtom.
-sequenceParserListener.prototype.exitIdAtom = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#stringAtom.
-sequenceParserListener.prototype.enterStringAtom = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#stringAtom.
-sequenceParserListener.prototype.exitStringAtom = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#nilAtom.
-sequenceParserListener.prototype.enterNilAtom = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#nilAtom.
-sequenceParserListener.prototype.exitNilAtom = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#parExpr.
-sequenceParserListener.prototype.enterParExpr = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#parExpr.
-sequenceParserListener.prototype.exitParExpr = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#condition.
-sequenceParserListener.prototype.enterCondition = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#condition.
-sequenceParserListener.prototype.exitCondition = function(ctx) {
-};
-
-
-// Enter a parse tree produced by sequenceParser#inExpr.
-sequenceParserListener.prototype.enterInExpr = function(ctx) {
-};
-
-// Exit a parse tree produced by sequenceParser#inExpr.
-sequenceParserListener.prototype.exitInExpr = function(ctx) {
-};
-
-
-
-exports.sequenceParserListener = sequenceParserListener;

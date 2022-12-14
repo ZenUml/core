@@ -1,6 +1,6 @@
-const antlr4 = require('antlr4/index');
-const sequenceLexer = require('../generated-parser/sequenceLexer');
-const sequenceParser = require('../generated-parser/sequenceParser');
+const antlr4 = require('antlr4').default;
+const sequenceLexer = require('../generated-parser/sequenceLexer').default;
+const sequenceParser = require('../generated-parser/sequenceParser').default;
 const ToCollector = require('./ToCollector');
 const ChildFragmentDetector = require('./ChildFragmentDetecotr');
 require('./TitleContext');
@@ -25,9 +25,9 @@ class SeqErrorListener extends antlr4.error.ErrorListener {
 
 function rootContext(code) {
   const chars = new antlr4.InputStream(code);
-  const lexer = new sequenceLexer.sequenceLexer(chars);
+  const lexer = new sequenceLexer(chars);
   const tokens = new antlr4.CommonTokenStream(lexer);
-  const parser = new sequenceParser.sequenceParser(tokens);
+  const parser = new sequenceParser(tokens);
   parser.addErrorListener(new SeqErrorListener());
   return parser._syntaxErrors ? null : parser.prog();
 }
@@ -42,7 +42,7 @@ antlr4.ParserRuleContext.prototype.getFormattedText = function() {
 // the content and the style including change of line, indentation, etc.
 antlr4.ParserRuleContext.prototype.getComment = function() {
   let tokenIndex = this.start.tokenIndex;
-  let channel = sequenceLexer.sequenceLexer.prototype.channelNames.indexOf('COMMENT_CHANNEL');
+  let channel = sequenceLexer.channelNames.indexOf('COMMENT_CHANNEL');
   if (this.constructor.name === 'BraceBlockContext') {
     tokenIndex = this.stop.tokenIndex
   }
@@ -60,11 +60,11 @@ antlr4.ParserRuleContext.prototype.returnedValue = function() {
 
 module.exports =  {
   RootContext: rootContext,
-  ProgContext: sequenceParser.sequenceParser.ProgContext,
-  GroupContext: sequenceParser.sequenceParser.GroupContext,
-  ParticipantContext: sequenceParser.sequenceParser.ParticipantContext,
+  ProgContext: sequenceParser.ProgContext,
+  GroupContext: sequenceParser.GroupContext,
+  ParticipantContext: sequenceParser.ParticipantContext,
   Participants: function(ctx, withStarter) {
-    const toCollector = new ToCollector();
+    const toCollector = ToCollector;
     return toCollector.getParticipants(ctx, withStarter)
   },
   Errors: errors,
@@ -72,7 +72,7 @@ module.exports =  {
    * @return {number} how many levels of embedded fragments
    */
   Depth: function(ctx) {
-    const childFragmentDetector = new ChildFragmentDetector();
+    const childFragmentDetector = ChildFragmentDetector;
     return  childFragmentDetector.depth(childFragmentDetector)(ctx)
   }
 }

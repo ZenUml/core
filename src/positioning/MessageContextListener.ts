@@ -1,9 +1,9 @@
 import {OwnableMessage, OwnableMessageType} from "./OwnableMessage";
 import {antlr4} from "@/positioning/ParticipantListener";
 
-const sequenceParserListener = require('@/generated-parser/sequenceParserListener');
+const sequenceParserListener = require('@/generated-parser/sequenceParserListener').default;
 
-export class MessageContextListener extends sequenceParserListener.sequenceParserListener {
+export class MessageContextListener extends sequenceParserListener {
   private isBlind = false;
   private ownableMessages: Array<OwnableMessage> = [];
 
@@ -36,7 +36,7 @@ export class MessageContextListener extends sequenceParserListener.sequenceParse
 
 // Returns all messages grouped by owner participant
 export function AllMessages(ctx: any) {
-  const walker = antlr4.tree.ParseTreeWalker.DEFAULT
+  const walker = antlr4.default.tree.ParseTreeWalker.DEFAULT
 
   const listener = new MessageContextListener();
   walker.walk(listener, ctx);

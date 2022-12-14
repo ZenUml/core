@@ -1,57 +1,51 @@
-var antlr4  = require('antlr4/index')
-var sequenceParserListener = require('../generated-parser/sequenceParserListener')
+var antlr4  = require('antlr4').default
+var sequenceParserListener = require('../generated-parser/sequenceParserListener').default
 
 const walker = antlr4.tree.ParseTreeWalker.DEFAULT
 
-var ChildFragmentDetector = function () {
-    sequenceParserListener.sequenceParserListener.call(this)
-    return this
-}
-
-ChildFragmentDetector.prototype = Object.create(sequenceParserListener.sequenceParserListener.prototype)
-ChildFragmentDetector.prototype.constructor = ChildFragmentDetector
+var ChildFragmentDetector = new sequenceParserListener();
 
 var cursor = 0
 var max = 0
 
-ChildFragmentDetector.prototype.enterTcf = function () {
+ChildFragmentDetector.enterTcf = function () {
     cursor++
 }
-ChildFragmentDetector.prototype.enterOpt = function () {
+ChildFragmentDetector.enterOpt = function () {
     cursor++
 }
-ChildFragmentDetector.prototype.enterPar = function () {
+ChildFragmentDetector.enterPar = function () {
     cursor++
 }
-ChildFragmentDetector.prototype.enterAlt = function () {
+ChildFragmentDetector.enterAlt = function () {
     cursor++
 }
-ChildFragmentDetector.prototype.enterLoop = function () {
+ChildFragmentDetector.enterLoop = function () {
     cursor++
 }
 
-ChildFragmentDetector.prototype.exitTcf = function () {
+ChildFragmentDetector.exitTcf = function () {
     max = Math.max(max, cursor)
     cursor--
 }
-ChildFragmentDetector.prototype.exitOpt = function () {
+ChildFragmentDetector.exitOpt = function () {
     max = Math.max(max, cursor)
     cursor--
 }
-ChildFragmentDetector.prototype.exitPar = function () {
+ChildFragmentDetector.exitPar = function () {
     max = Math.max(max, cursor)
     cursor--
 }
-ChildFragmentDetector.prototype.exitAlt = function () {
+ChildFragmentDetector.exitAlt = function () {
     max = Math.max(max, cursor)
     cursor--
 }
-ChildFragmentDetector.prototype.exitLoop = function () {
+ChildFragmentDetector.exitLoop = function () {
     max = Math.max(max, cursor)
     cursor--
 }
 
-ChildFragmentDetector.prototype.depth = function (me) {
+ChildFragmentDetector.depth = function (me) {
     return function (context) {
         cursor = 0
         max = 0

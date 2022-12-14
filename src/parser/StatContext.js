@@ -1,6 +1,6 @@
-const sequenceParser = require('../generated-parser/sequenceParser');
+const sequenceParser = require('../generated-parser/sequenceParser').default;
 
-const seqParser = sequenceParser.sequenceParser;
+const seqParser = sequenceParser;
 const StatContext = seqParser.StatContext;
 const ProgContext = seqParser.ProgContext;
 const BraceBlockContext = seqParser.BraceBlockContext;

@@ -1,7 +1,7 @@
 // Owner is the `to` for a message or the name in the creation.
-const sequenceParser = require('../generated-parser/sequenceParser')
+const sequenceParser = require('../generated-parser/sequenceParser').default
 
-const seqParser = sequenceParser.sequenceParser;
+const seqParser = sequenceParser;
 const CreationContext = seqParser.CreationContext;
 const MessageContext = seqParser.MessageContext
 const AsyncMessageContext = seqParser.AsyncMessageContext

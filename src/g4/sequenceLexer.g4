@@ -4,6 +4,8 @@ channels {
   MODIFIER_CHANNEL
 }
 
+WS: [ \t] -> channel(HIDDEN);
+
 // variable modifiers
 CONSTANT:   'const' -> channel(MODIFIER_CHANNEL);
 READONLY:   'readonly' -> channel(MODIFIER_CHANNEL);
@@ -114,10 +116,6 @@ CR
  : [\r\n] -> channel(HIDDEN)
  ;
 
-SPACE
- : [ \t] -> channel(HIDDEN)
- ;
-
 COMMENT
  : '//' .*? '\n' -> channel(COMMENT_CHANNEL)
  ;
@@ -125,10 +123,15 @@ OTHER
  : .
  ;
 
+// https://stackoverflow.com/a/74752939/529187 for semantic predicates
+// Divider notes can be characters other than changeline.
+// So it must not be tokenized by other Lexer rules.
+// Thus this is not suitable for the parser to parse.
+DIVIDER: {this.column === 0}? WS* '==' ~[\r\n]*;
 
+DIVIDER2: '\n' WS* '==' ~[\r\n]*;
 
 mode EVENT;
-
 EVENT_PAYLOAD_LXR
  : ~[\r\n]+
  ;
@@ -136,10 +139,6 @@ EVENT_PAYLOAD_LXR
 EVENT_END
  : [\r\n] -> popMode
  ;
-
-WS
-: [ ] -> channel(HIDDEN)
-;
 
 mode TITLE_MODE;
 TITLE_CONTENT
