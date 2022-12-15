@@ -21,12 +21,12 @@ describe('Get `from` from context', () => {
     expect(Fixture.firstStatement('A->B.m1').Origin()).toBe('A')
   })
 
-  test('Embedded', () => {
+  test('Embedded with divider', () => {
     const stat1 = Fixture.firstStatement('A.m1 { \n==x==\n B.m2 }');
     expect(stat1.Origin()).toBe('_STARTER_');
     let m1 = stat1.message()
     // expectText(m1).toBe('A.m1{B.m2}')
-    const stat2 = m1.braceBlock().block().stat()[0]
+    const stat2 = m1.braceBlock().block().stat()[1]
     expect(stat2.Origin()).toBe('A');
     let m2 = stat2.message();
     expectText(m2).toBe('B.m2')
@@ -41,6 +41,21 @@ describe('Get `from` from context', () => {
     expect(stat2.Origin()).toBe('A');
     let m2 = stat2.message();
     expectText(m2).toBe('B.m2')
+  })
+
+  test('Embedded 3-layer', () => {
+    const stat1 = Fixture.firstStatement('A.m1 { B.m2 { C.m3 } }')
+    let m1 = stat1.message()
+    expect(stat1.Origin()).toBe('_STARTER_');
+    expectText(m1).toBe('A.m1{B.m2{C.m3}}')
+    const stat2 = m1.braceBlock().block().stat()[0]
+    expect(stat2.Origin()).toBe('A');
+    let m2 = stat2.message();
+    expectText(m2).toBe('B.m2{C.m3}')
+    const stat3 = m2.braceBlock().block().stat()[0]
+    let m3 = stat3.message();
+    expectText(m3).toBe('C.m3');
+    expect(stat3.Origin()).toBe('B');
   })
 
   test('Embedded', () => {
