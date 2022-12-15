@@ -129,8 +129,6 @@ OTHER
 // Thus this is not suitable for the parser to parse.
 DIVIDER: {this.column === 0}? WS* '==' ~[\r\n]*;
 
-DIVIDER2: '\n' WS* '==' ~[\r\n]*;
-
 mode EVENT;
 EVENT_PAYLOAD_LXR
  : ~[\r\n]+

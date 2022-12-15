@@ -1,26 +1,24 @@
 const sequenceParser = require('../generated-parser/sequenceParser').default;
 
-const seqParser = sequenceParser;
-const StatContext = seqParser.StatContext;
-const ProgContext = seqParser.ProgContext;
-const BraceBlockContext = seqParser.BraceBlockContext;
+const StatContext = sequenceParser.StatContext;
+const ProgContext = sequenceParser.ProgContext;
+const MessageContext = sequenceParser.MessageContext
+const CreationContext = sequenceParser.CreationContext
 
+// Origin is essentially the 'from' of a message.
+// For example, in `S -> A.m1 {B.m2 {C.m3}}`,
+//                  |    |     |
+// Origin of        m1   m2    m3
 StatContext.prototype.Origin = function() {
-  const block = this.parentCtx;
-  const blockParent = block.parentCtx;
-  if(blockParent instanceof ProgContext) {
-    return blockParent.Starter();
-  } else if (blockParent instanceof BraceBlockContext) {
-    let ctx = blockParent.parentCtx;
-    while (ctx && !(ctx instanceof StatContext)) {
-      if (ctx instanceof seqParser.MessageContext) {
-        return ctx.Owner();
-      }
-      if (ctx instanceof seqParser.CreationContext) {
-        return ctx.Owner();
-      }
-      ctx = ctx.parentCtx;
+  let ctx = this.parentCtx;
+  while (ctx) {
+    if (ctx instanceof ProgContext) {
+      return ctx.Starter();
     }
-    return ctx.Origin();
+    if (ctx instanceof MessageContext || ctx instanceof CreationContext) {
+      return ctx.Owner();
+    }
+    ctx = ctx.parentCtx;
   }
+  return undefined;
 }

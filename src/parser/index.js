@@ -9,6 +9,7 @@ require('./Owner');
 require('./ProgContext');
 require('./RetContext');
 require('./StatContext');
+require('./Divider/DividerContext');
 require('./SignatureText');
 require('./Messages/MessageContext');
 require('./From')

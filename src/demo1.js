@@ -49,7 +49,7 @@ ReturnType ret = ParticipantName.methodA(a, b) {
     } finally {
       C: async call from implied source  
     }
-    ====="divider can be anywhere"=====
+    =====divider can be anywhere=====
   } else if ("another condition") {
     par {
       B.method
