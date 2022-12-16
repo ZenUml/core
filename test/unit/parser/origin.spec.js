@@ -122,23 +122,24 @@ describe('Origin Function', () => {
     expect(m2.braceBlock().block().stat()[0].Origin()).toBe('A')
   })
 
-  test('Embedded in Self', () => {
+  test('Embedded in Self with Starter', () => {
     let m1 = Fixture.firstStatement('@Starter(X) m1 { m2 {m3} }').message()
     expectText(m1).toBe('m1{m2{m3}}')
-    let m2 = m1.braceBlock().block().stat()[0].message();
-    expectText(m2).toBe('m2{m3}')
-    expect(m1.braceBlock().block().stat()[0].Origin()).toBe('X')
+    const m2Stat = m1.braceBlock().block().stat()[0]
+    let m2 = m2Stat.message();
+    expectText(m2Stat).toBe('m2{m3}')
+    expect(m2Stat.Origin()).toBe('X')
     let m3 = m2.braceBlock().block().stat()[0].message();
     expectText(m3).toBe('m3')
 
     expect(m2.braceBlock().block().stat()[0].Origin()).toBe('X')
   })
 
-  test('root', () => {
+  test('root with default _STARTER_', () => {
     expectText(Fixture.firstStatement('A.m1').message()).toBe('A.m1')
     expect(Fixture.firstStatement('A.m1').Origin()).toBe('_STARTER_')
   })
-  test('root', () => {
+  test('root with explicit Starter', () => {
     let message = Fixture.firstStatement('@Starter(X)\nA.m1').message();
     expectText(message).toBe('A.m1')
     expect(Fixture.firstStatement('@Starter(X)\nA.m1').Origin()).toBe('X')

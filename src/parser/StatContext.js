@@ -16,7 +16,10 @@ StatContext.prototype.Origin = function() {
       return ctx.Starter();
     }
     if (ctx instanceof MessageContext || ctx instanceof CreationContext) {
-      return ctx.Owner();
+      const receiver = ctx.Owner();
+      if(receiver) {
+        return receiver;
+      }
     }
     ctx = ctx.parentCtx;
   }
