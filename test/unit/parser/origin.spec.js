@@ -7,7 +7,7 @@ import {Fixture} from "./fixture/Fixture";
 // 2. Fragments (alt, par, loop): for boundary and offsetX
 // 3. Creation: for invocationWidth
 
-describe('Get `from` from context', () => {
+describe('Origin Function', () => {
   test('Origin', () => {
     let stat = Fixture.firstStatement('A->B.m1')
 
@@ -80,6 +80,14 @@ describe('Get `from` from context', () => {
     let m2 = creation.braceBlock().block().stat()[0].message();
     expectText(m2).toBe('m2')
     expect(creation.braceBlock().block().stat()[0].Origin()).toBe('A')
+  })
+
+  test('Embedded incomplete creation', () => {
+    let creation = Fixture.firstStatement('new { m2 }').creation()
+    expectText(creation).toBe('new{m2}') // invalid code, so
+    let m2 = creation.braceBlock().block().stat()[0].message();
+    expectText(m2).toBe('m2')
+    expect(creation.braceBlock().block().stat()[0].Origin()).toBe('Missing Constructor')
   })
 
   test('Embedded in if', () => {
