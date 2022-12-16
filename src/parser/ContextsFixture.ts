@@ -22,3 +22,12 @@ export function DividerContextFixture(code: any) {
   parser.addErrorListener(new SeqErrorListener());
   return parser._syntaxErrors ? null : parser.divider();
 }
+
+export function CreationContextFixture(code: any) {
+  const chars = new antlr4.InputStream(code);
+  const lexer = new sequenceLexer(chars);
+  const tokens = new antlr4.CommonTokenStream(lexer);
+  const parser = new sequenceParser(tokens);
+  parser.addErrorListener(new SeqErrorListener());
+  return parser._syntaxErrors ? null : parser.creation();
+}
