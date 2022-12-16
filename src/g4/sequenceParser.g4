@@ -133,6 +133,7 @@ creation
 // new A(
 creationBody
  : assignment? NEW construct(OPAR parameters? CPAR)?
+ | NEW  // Added this so we can parse `new { m1 }` correctly, even though it is invalid.
  ;
 
 message
