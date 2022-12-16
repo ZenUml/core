@@ -5,28 +5,46 @@ const seqParser = sequenceParser;
 const CreationContext = seqParser.CreationContext;
 const MessageContext = seqParser.MessageContext
 const AsyncMessageContext = seqParser.AsyncMessageContext
+
 CreationContext.prototype.Assignee = function () {
-  return this.creationBody()?.assignment()?.assignee()?.getText();
+  return this.creationBody()?.assignment()?.assignee()?.getFormattedText();
+}
+
+CreationContext.prototype.Constructor = function () {
+  return this.creationBody()?.construct()?.getFormattedText();
 }
 
 CreationContext.prototype.Owner = function () {
-  const assignee = this.Assignee();
-  const type = this.creationBody()?.construct()?.getText();
-  if (!type) {
+  if (!this.Constructor()) {
     return 'Missing Constructor'
   }
+  const assignee = this.Assignee();
+  const type = this.Constructor();
   return assignee ? `${assignee}:${type}`: type;
 }
 
+MessageContext.prototype.To = function () {
+  return this.messageBody()?.to()?.getFormattedText();
+}
+
 MessageContext.prototype.Owner = function () {
-  // Note: It may still be a self message if it has a `to` and `to === from`.
-  const isImpliedSelf = !this.messageBody()?.to();
-  if (isImpliedSelf) {
-    return this.ClosestAncestorStat().Origin();
+  return this.To() || getOwnerFromAncestor(this.parentCtx)
+}
+
+function getOwnerFromAncestor(ctx) {
+  while (ctx) {
+    if (ctx instanceof CreationContext || ctx instanceof MessageContext) {
+      return ctx.Owner()
+    }
+    ctx = ctx.parentCtx
   }
-  return this.messageBody().to().getFormattedText();
+  return undefined
+}
+
+AsyncMessageContext.prototype.To = function () {
+  return this.to()?.getFormattedText();
 }
 
 AsyncMessageContext.prototype.Owner = function () {
-  return this.to()?.getFormattedText() || this.ClosestAncestorStat().Origin();
+  return this.To() || getOwnerFromAncestor(this.parentCtx)
 }

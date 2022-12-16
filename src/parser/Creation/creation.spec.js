@@ -3,10 +3,13 @@ import {CreationContextFixture} from '../ContextsFixture'
 
 describe('CreationContext', () => {
   test.each([
-    ['new A', '«create»', 'A'],
-    ['new A{m1}', '«create»', 'A'],
-    ['new', '«create»', 'Missing Constructor'],
-    ['new{m1}', '«create»', 'Missing Constructor']
+    ['new A',               '«create»',     'A'],
+    ['new A(x)',            '«x»',          'A'],
+    ['new A{m1}',           '«create»',     'A'],
+    ['x = new A{m1}',       '«create»',     'x:A'],
+    ['X x = new A{m1}',       '«create»',   'x:A'],
+    ['new',                 '«create»',     'Missing Constructor'],
+    ['new{m1}',             '«create»',     'Missing Constructor']
   ])('should parse %s', (code, signature, owner) => {
     const creationContext = CreationContextFixture(code);
     expect(creationContext.SignatureText()).toBe(signature);
