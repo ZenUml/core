@@ -31,7 +31,7 @@ import {mapState, mapGetters} from 'vuex'
       },
     },
     components: {
-      Block: () => import('../../../Block')
+      Block: () => import('../../../Block.vue')
     },
   }
 </script>

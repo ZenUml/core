@@ -11,7 +11,7 @@
 <script>
 import parentLogger from '../../../../logger/logger'
 import {mapGetters, mapState} from 'vuex'
-import Participant from "@/components/DiagramFrame/SeqDiagram/LifeLineLayer/Participant";
+import Participant from "./Participant.vue";
 const logger = parentLogger.child({name: 'LifeLine'})
 export default {
   name: 'life-line',

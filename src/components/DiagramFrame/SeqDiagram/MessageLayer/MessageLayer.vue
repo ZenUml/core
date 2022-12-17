@@ -8,7 +8,7 @@
 
 <script>
 import {mapGetters, mapMutations} from 'vuex'
-  import Block from './Block/Block'
+  import Block from './Block/Block.vue'
 
   export default {
     name: 'message-layer',

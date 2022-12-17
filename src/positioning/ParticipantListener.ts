@@ -1,7 +1,7 @@
-import sequenceParser from '../generated-parser/sequenceParser'
-export const antlr4 = require('antlr4');
-export let seqDsl = require('../parser/index');
-import sequenceParserListener from '@/generated-parser/sequenceParserListener'
+import sequenceParser from '../generated-parser/sequenceParser';
+import sequenceParserListener from '../generated-parser/sequenceParserListener';
+
+
 const seqParser = sequenceParser;
 
 export interface IParticipantModel {
@@ -39,7 +39,7 @@ export class ParticipantListener extends sequenceParserListener {
   enterParticipant(ctx: any) {
     const name = ctx?.name()?.getFormattedText() || 'Missing `Participant` name';
     const label = ctx.label()?.name()?.getFormattedText();
-    const participant = {name, label, left: ''};
+    const participant = { name, label, left: '' };
     this.explicitParticipants.push(participant);
   }
 
@@ -49,7 +49,7 @@ export class ParticipantListener extends sequenceParserListener {
       return;
     }
 
-    const name = ctx?.getFormattedText()
+    const name = ctx?.getFormattedText();
     if (ctx.ClosestAncestorBlock().parentCtx instanceof seqParser.ProgContext) {
       if (ctx.ClosestAncestorStat() === ctx.ClosestAncestorBlock().children[0]) {
         this.starter = name;
@@ -63,15 +63,15 @@ export class ParticipantListener extends sequenceParserListener {
     if (this.isBlind) {
       return;
     }
-    const name = ctx?.getFormattedText()
-    if(name === this.starter) {
+    const name = ctx?.getFormattedText();
+    if (name === this.starter) {
       return;
     }
     // if explicitParticipants includes name, skip
-    if(this.explicitParticipants.some(p => p.name === name)) {
+    if (this.explicitParticipants.some((p) => p.name === name)) {
       return;
     }
-    const participant = {name, left: ''};
+    const participant = { name, left: '' };
     this.implicitParticipants.push(participant);
   }
 
@@ -80,14 +80,14 @@ export class ParticipantListener extends sequenceParserListener {
       return;
     }
     const name = ctx?.Owner();
-    if(name === this.starter) {
+    if (name === this.starter) {
       return;
     }
     // if explicitParticipants includes name, skip
-    if(this.explicitParticipants.some(p => p.name === name)) {
+    if (this.explicitParticipants.some((p) => p.name === name)) {
       return;
     }
-    const participant = {name, left: ''};
+    const participant = { name, left: '' };
     this.implicitParticipants.push(participant);
   }
 
@@ -102,23 +102,32 @@ export class ParticipantListener extends sequenceParserListener {
   }
 
   private _isStarterExplicitlyPositioned() {
-    return this.starter && this.explicitParticipants.find(p => p.name === this.starter);
+    return this.starter && this.explicitParticipants.find((p) => p.name === this.starter);
   }
 
   private _getStarter() {
-    return {name: this.starter || '_STARTER_', left: ''};
+    return { name: this.starter || '_STARTER_', left: '' };
   }
 
   private _dedup(array: IParticipantModel[]) {
     return array.filter((p, index) => {
-      return array.findIndex(p1 => { return p1.name === p.name }) === index;
-    })
+      return (
+        array.findIndex((p1) => {
+          return p1.name === p.name;
+        }) === index
+      );
+    });
   }
 
   private static _assignLeft(array: IParticipantModel[]) {
-    array.reduce((pre: IParticipantModel, curr: IParticipantModel) => {
-      curr.left = pre.name || ''
-      return curr;
-    }, {name: '', left: ''});
+    array.reduce(
+      (pre: IParticipantModel, curr: IParticipantModel) => {
+        curr.left = pre.name || '';
+        return curr;
+      },
+      { name: '', left: '' }
+    );
   }
 }
+
+export default {}

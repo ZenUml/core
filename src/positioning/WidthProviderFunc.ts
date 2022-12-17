@@ -1,10 +1,10 @@
-import {TextType} from "@/positioning/Coordinate";
+import { TextType } from '@/positioning/Coordinate';
 
 export default function WidthProviderOnBrowser(text: string, type: TextType): number {
   let hiddenDiv = document.querySelector('.textarea-hidden-div') as HTMLDivElement;
   if (!hiddenDiv) {
     const newDiv = document.createElement('div');
-    newDiv.className = 'textarea-hidden-div '
+    newDiv.className = 'textarea-hidden-div ';
     newDiv.style.fontSize = '13px';
     newDiv.style.fontFamily = 'Helvetica, Verdana, serif';
     newDiv.style.display = 'inline';

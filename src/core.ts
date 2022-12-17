@@ -2,8 +2,8 @@ import parentLogger from './logger/logger'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Store from './store/Store'
-import DiagramFrame from "@/components/DiagramFrame/DiagramFrame.vue";
-import SeqDiagram from "@/components/DiagramFrame/SeqDiagram/SeqDiagram.vue";
+import DiagramFrame from "./components/DiagramFrame/DiagramFrame.vue";
+import SeqDiagram from "./components/DiagramFrame/SeqDiagram/SeqDiagram.vue";
 
 import './assets/tailwind.css'
 import './components/Cosmetic.scss'
