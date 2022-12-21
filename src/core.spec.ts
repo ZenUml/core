@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import ZenUml from './core'
 describe('@ZenUML/core', function () {
-  it.skip('should render and cache the code and theme', async () => {
+  it('should render and cache the code and theme', async () => {
     const el = document.createElement('div')
     const zenUml = new ZenUml(el)
     expect(zenUml).toBeInstanceOf(ZenUml)

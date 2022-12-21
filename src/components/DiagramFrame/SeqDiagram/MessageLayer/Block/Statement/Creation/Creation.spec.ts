@@ -1,8 +1,9 @@
+import { describe, expect, it } from 'vitest'
 import {createLocalVue, mount} from "@vue/test-utils";
 import Vuex from 'vuex'
-import {VueSequence} from '@/index'
-import Creation from '../../../src/components/DiagramFrame/SeqDiagram/MessageLayer/Block/Statement/Creation/Creation.vue'
-import {Fixture} from "../parser/fixture/Fixture";
+import {VueSequence} from '../../../../../../../index'
+import Creation from './Creation.vue'
+import {Fixture} from "../../../../../../../../test/unit/parser/fixture/Fixture";
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
