@@ -19,11 +19,6 @@ permissions:
   pages: write
   id-token: write
 
-# Allow one concurrent pipeline to run
-concurrency:
-  group: "default-pipeline"
-  cancel-in-progress: true
-
 jobs:
   # Test
   test:
