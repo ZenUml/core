@@ -134,7 +134,7 @@ jobs:
           node-version: "18"
           cache: pnpm
       - name: Cypress run
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v4
         with:
           start: pnpm dev
           wait-on: 'http://localhost:8080'
