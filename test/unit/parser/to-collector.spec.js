@@ -3,7 +3,7 @@ import { Fixture } from './fixture/Fixture'
 import { describe, expect, test } from 'vitest'
 import {RootContext} from "../../../src/parser/index";
 
-let ToCollector = require('../../../src/parser/ToCollector')
+import ToCollector from '../../../src/parser/ToCollector';
 test('smoke test2', () => {
   const code = `
     C

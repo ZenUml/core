@@ -1,7 +1,6 @@
+import { describe, expect, it } from 'vitest'
 import {Coordinates} from "../../../src/positioning/Coordinates";
 import {stubWidthProvider} from "../parser/fixture/Fixture";
-
-import { describe, expect, test } from 'vitest'
 import {RootContext} from "../../../src/parser/index";
 
 
