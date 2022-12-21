@@ -31,15 +31,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: "14"
-          cache: yarn
+          cache: pnpm
       - name: Install dependencies
-        run: yarn install
+        run: pnpm install
       - name: Run tests
-        run: yarn test:unit
+        run: pnpm test
 
   npm-publish:
     runs-on: ubuntu-latest
