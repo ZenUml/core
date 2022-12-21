@@ -1,12 +1,14 @@
+import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import { createVuePlugin as vue } from 'vite-plugin-vue2'
 
 export default defineConfig({
     build: {
-      lib: {
-        entry: 'src/core.ts',
-        name: '@zenuml/core',
-        fileName: 'zenuml-core',
+      rollupOptions: {
+        input: {
+          index: resolve(__dirname, 'index.html'),
+          embed: resolve(__dirname, './public/embed.html'),
+        }
       }
     },
     plugins: [vue()],
