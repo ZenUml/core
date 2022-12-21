@@ -1,7 +1,6 @@
-import { describe, expect, test } from 'vitest'
-import {RootContext} from "../../../src/parser/index";
+import { expect, test } from 'vitest'
 
-const {Fixture} = require("./fixture/Fixture");
+import {Fixture} from "./fixture/Fixture";
 
 test('chain method', () => {
     expect(Fixture.firstStatement('B.method().toString()')
