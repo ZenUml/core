@@ -77,7 +77,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Build the site for demo page and embed view
-        run: yarn build:site
+        run: pnpm build:site
       - name: Upload artifact for pages # upload zipped artifact named 'gh-pages' for actions/deploy-pages@v1
         uses: actions/upload-pages-artifact@v1
         with:
@@ -127,15 +127,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: "14"
-          cache: yarn
+          node-version: "18"
+          cache: pnpm
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
-          start: yarn start
+          start: pnpm dev
           wait-on: 'http://localhost:8080'
           wait-on-timeout: 110
       - name: Upload artifacts  # Find artifacts under actions/jobs
