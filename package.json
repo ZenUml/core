@@ -11,6 +11,7 @@
     "build": "vue-cli-service build --target lib --inline-vue --name zenuml/core ./src/core.ts",
     "build:report": "vue-cli-service build --report --target lib --inline-vue --name zenuml/core ./src/core.ts",
     "test:unit": "jest",
+    "test": "vitest",
     "test:unit:watch": "pnpm run antlr && vue-cli-service test:unit --watch",
     "cy": "cypress run",
     "cy:open": "cypress open",
@@ -84,6 +85,7 @@
     "typescript": "^4.7.4",
     "vite": "^4.0.1",
     "vite-plugin-vue2": "^2.0.2",
+    "vitest": "^0.26.1",
     "vue-template-compiler": "^2.7.14"
   },
   "eslintConfig": {
