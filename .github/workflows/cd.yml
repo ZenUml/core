@@ -133,16 +133,10 @@ jobs:
         with:
           node-version: "18"
           cache: pnpm
-      - name: Install Packages
-        run: |
-          pnpm install --frozen-lockfile
-          ./node_modules/cypress/bin/cypress install
-        env:
-          CYPRESS_CACHE_FOLDER: .cache/Cypress
       - name: Cypress run
         uses: cypress-io/github-action@v4
         with:
-          start: pnpm dev
+          start: pnpm install --frozen-lockfile && ./node_modules/cypress/bin/cypress install && pnpm dev
           wait-on: 'http://localhost:8080'
           wait-on-timeout: 110
       - name: Upload artifacts  # Find artifacts under actions/jobs
