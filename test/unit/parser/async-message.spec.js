@@ -1,7 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import {RootContext} from "../../../src/parser/index";
-
-const {Fixture} = require("./fixture/Fixture");
+import {Fixture} from "./fixture/Fixture";
 
 describe('Async Message', () => {
   test.each(

@@ -1,7 +1,9 @@
+import { expect } from 'vitest'
+import {RootContext} from "../parser/index";
 // max(MIN_GAP, old_g, new_g, w/2 + left-part-w/2 + MARGIN)
 import {ARROW_HEAD_WIDTH, MARGIN, MIN_PARTICIPANT_WIDTH} from "../positioning/Constants";
-import {Coordinates} from "@/positioning/Coordinates";
-import {stubWidthProvider} from "../parser/fixture/Fixture";
+import {Coordinates} from "./Coordinates";
+import {stubWidthProvider} from "../../test/unit/parser/fixture/Fixture";
 
 describe('get absolute position of a participant', () => {
 
