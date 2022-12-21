@@ -1,7 +1,7 @@
 module.exports = {
   preset: '@vue/cli-plugin-unit-jest/presets/typescript-and-babel',
   "testMatch": [
-    "**/__tests__/**/*.[jt]s?(x)", "**/(test|src)/**/?(*.)+(spec|test).[jt]s?(x)", "vue.config.spec.js"
+    "**/__tests__/**/*.[jt]s?(x)", "**/(test|src)/**/?(*.)+(spec|test).[jt]s?(x)"
   ],
   "transformIgnorePatterns": ["/node_modules/(?!antlr4)"],
   globals: {

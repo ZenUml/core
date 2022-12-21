@@ -23,10 +23,7 @@ coverage
 
 manifest.json
 jest.config.js
-babel.config.js
 package-lock.json
-vue.config.js
-yarn.lock
 tsconfig.json
 
 yarn-error.log
