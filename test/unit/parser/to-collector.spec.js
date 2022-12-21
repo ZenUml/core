@@ -1,6 +1,8 @@
 import { Fixture } from './fixture/Fixture'
 
-let seqDsl = require('../../../src/parser/index');
+import { describe, expect, test } from 'vitest'
+import {RootContext} from "../../../src/parser/index";
+
 let ToCollector = require('../../../src/parser/ToCollector')
 test('smoke test2', () => {
   const code = `
@@ -110,13 +112,13 @@ describe('with participantType', () => {
 })
 
 function getParticipants(code, withStarter) {
-  let rootContext = seqDsl.RootContext(code)
+  let rootContext = RootContext(code)
   return ToCollector.getParticipants(rootContext, withStarter)
 }
 
 describe('Add Starter to participants', () => {
   test('Empty context', () => {
-    let rootContext = seqDsl.RootContext('')
+    let rootContext = RootContext('')
     const participants = ToCollector.getParticipants(rootContext, true)
     expect(participants.Size()).toBe(1)
     expect(participants.Get('_STARTER_').name).toBe('_STARTER_')
@@ -124,7 +126,7 @@ describe('Add Starter to participants', () => {
   })
 
   test('A B->A.m', () => {
-    let rootContext = seqDsl.RootContext('A B B->A.m')
+    let rootContext = RootContext('A B B->A.m')
     const participants = ToCollector.getParticipants(rootContext, true)
     expect(participants.Size()).toBe(2)
     expect(participants.Get('_STARTER_')).toBeUndefined()

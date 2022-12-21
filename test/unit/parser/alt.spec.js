@@ -1,6 +1,8 @@
 import {Fixture} from "./fixture/Fixture";
 
-let seqDsl = require('../../../src/parser/index');
+import { describe, expect, test } from 'vitest'
+import {RootContext} from "../../../src/parser/index";
+
 
 test('Empty `if`', () => {
     let alt = Fixture.firstStatement('if(x) {}').alt();
