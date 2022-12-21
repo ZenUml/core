@@ -1,5 +1,5 @@
-import {DividerContextFixture} from "@/parser/ContextsFixture";
-import "@/parser/Divider/DividerContext"
+import {DividerContextFixture} from "../../parser/ContextsFixture";
+import "../../parser/Divider/DividerContext"
 import {Fixture} from "../../../test/unit/parser/fixture/Fixture";
 
 describe('Divider', function () {
