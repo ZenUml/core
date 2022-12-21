@@ -133,6 +133,11 @@ jobs:
         with:
           node-version: "18"
           cache: pnpm
+      - name: Install Packages
+        run: |
+          pnpm install --frozen-lockfile
+        env:
+          CYPRESS_CACHE_FOLDER: .cache/Cypress
       - name: Cypress run
         uses: cypress-io/github-action@v4
         with:
