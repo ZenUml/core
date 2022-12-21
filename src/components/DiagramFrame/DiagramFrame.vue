@@ -21,7 +21,7 @@
           </div>
         </div>
         <div>
-          <div v-show="showTips" class="fixed z-40 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+          <div v-if="showTips" class="fixed z-40 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
             <TipsDialog />
           </div>
         </div>

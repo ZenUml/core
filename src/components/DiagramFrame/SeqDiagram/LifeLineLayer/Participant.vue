@@ -8,7 +8,7 @@
        ref="participant"
        :style="{backgroundColor: backgroundColor, color: color}"
        @click="onSelect">
-    <img v-if="!!icon" :src="icon" class="absolute left-1/2 transform -translate-x-1/2 -translate-y-full h-8" :alt="`icon for ${entity.name}`">
+    <div v-if="!!icon" v-html="icon" class="absolute left-1/2 transform -translate-x-1/2 -translate-y-full h-8 [&>svg]:w-full [&>svg]:h-full" :alt="`icon for ${entity.name}`"></div>
     <!-- Put in a div to give it a fixed height, because stereotype is dynamic. -->
     <div class="h-5 group flex flex-col justify-center">
       <span v-if="!!comment" class="absolute hidden rounded-lg transform -translate-y-8 bg-gray-400 px-2 py-1 text-center text-sm text-white group-hover:flex">
@@ -22,7 +22,7 @@
 
 <script>
 import {brightnessIgnoreAlpha, removeAlpha} from '../../../../utils/Color'
-const iconPath = {}
+import iconPath from '../../Tutorial/Icons'
 
 export default {
   name: "Participant",

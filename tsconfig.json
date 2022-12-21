@@ -40,7 +40,11 @@
     "tests/**/*.ts",
     "tests/**/*.tsx"
   ],
-    "exclude": [
+  "exclude": [
     "node_modules"
-    ]
+  ],
+  "files": [
+    "types/index.d.ts",
+    "types/svg.d.ts"
+  ]
 }
