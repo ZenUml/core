@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest'
 const config = require('./vue.config')
 describe('vue.config.js', function () {
   it('should get pages', () => {

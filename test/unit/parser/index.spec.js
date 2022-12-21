@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import {RootContext} from "../../../src/parser/index";
+import {RootContext, Participants} from "../../../src/parser/index";
 
 import {Fixture} from "./fixture/Fixture";
 

@@ -1,4 +1,4 @@
-import { expect } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import {RootContext} from "../parser/index";
 // max(MIN_GAP, old_g, new_g, w/2 + left-part-w/2 + MARGIN)
 import {ARROW_HEAD_WIDTH, MARGIN, MIN_PARTICIPANT_WIDTH} from "../positioning/Constants";
