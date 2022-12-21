@@ -136,6 +136,7 @@ jobs:
       - name: Install Packages
         run: |
           pnpm install --frozen-lockfile
+          ./node_modules/cypress/bin/cypress install
         env:
           CYPRESS_CACHE_FOLDER: .cache/Cypress
       - name: Cypress run
