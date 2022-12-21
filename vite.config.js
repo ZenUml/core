@@ -1,14 +1,24 @@
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import { createVuePlugin as vue } from 'vite-plugin-vue2'
+import { execSync } from 'child_process'
 
+function getCypressHtmlFiles() {
+  const cypressFolder = resolve(__dirname, 'cy')
+  const strings = execSync(`find ${cypressFolder} -name '*.html'`)
+    .toString()
+    .split('\n')
+  // remove empty string
+  strings.pop()
+  return strings;
+}
+
+const cypressHtmlFiles = getCypressHtmlFiles();
+console.log(cypressHtmlFiles);
 export default defineConfig({
     build: {
       rollupOptions: {
-        input: {
-          index: resolve(__dirname, 'index.html'),
-          embed: resolve(__dirname, './public/embed.html'),
-        }
+        input: ['index.html', 'embed.html', ...cypressHtmlFiles]
       }
     },
     plugins: [vue()],
