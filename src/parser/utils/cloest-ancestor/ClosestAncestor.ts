@@ -6,7 +6,6 @@ const StatContext = seqParser.StatContext;
 
 antlr4.ParserRuleContext.prototype.ClosestAncestorStat = function() {
   let current = this;
-  console.log('stat context', StatContext);
   while(!(current instanceof StatContext)) {
     current = current.parentCtx;
   }

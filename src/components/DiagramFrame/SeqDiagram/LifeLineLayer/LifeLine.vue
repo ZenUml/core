@@ -32,19 +32,27 @@ export default {
   },
   mounted() {
     logger.debug(`LifeLine mounted for ${this.entity.name}`);
-    setTimeout( () => {
+    this.$nextTick(() => {
       this.setTop()
-      this.$emit('rendered')
-      logger.debug(`setTimeout after mounted for ${this.entity.name}`);
+      logger.debug(`nextTick after updated for ${this.entity.name}`);
     })
+    // setTimeout( () => {
+    //   this.setTop()
+    //   this.$emit('rendered')
+    //   logger.debug(`setTimeout after mounted for ${this.entity.name}`);
+    // })
   },
   updated() {
     logger.debug(`updated for ${this.entity.name}`);
-    setTimeout( () => {
+    this.$nextTick(() => {
       this.setTop()
-      this.$emit('rendered')
-      logger.debug(`setTimeout after updated for ${this.entity.name}`);
+      logger.debug(`nextTick after updated for ${this.entity.name}`);
     })
+    // setTimeout( () => {
+    //   this.setTop()
+    //   this.$emit('rendered')
+    //   logger.debug(`setTimeout after updated for ${this.entity.name}`);
+    // })
   },
   methods: {
     onSelect() {

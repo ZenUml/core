@@ -13,7 +13,13 @@ import './components/Cosmetic-star-uml.scss'
 import './components/theme-blue-river.scss'
 import './themes/theme-dark.css'
 
+// @ts-ignore
+import LogLifecycles from 'vue-lifecycle-log'
+import Block from "./components/DiagramFrame/SeqDiagram/MessageLayer/Block/Block.vue";
+
 const logger = parentLogger.child({name: 'core'})
+
+Vue.component('Block', Block)
 
 interface IZenUml {
   get code(): string | undefined;
@@ -23,6 +29,7 @@ interface IZenUml {
 }
 
 Vue.use(Vuex)
+Vue.use(LogLifecycles)
 
 export default class ZenUml implements IZenUml{
   private readonly el: Element;
@@ -42,10 +49,12 @@ export default class ZenUml implements IZenUml{
     this._code = code || this._code;
     this._theme = theme || this._theme;
     // @ts-ignore
-    this.store.state.code = this._code;
-    // @ts-ignore
     this.store.state.theme = this._theme || 'default';
-    await this.app.$nextTick();
+    // await dispatch will wait until the diagram is finished rendering.
+    // It includes the time adjusting the top of participants for creation message.
+    // $nextTick is different from setTimeout. The latter will be executed after dispatch has returned.
+    // @ts-ignore
+    await this.app.$store.dispatch('updateCode', {code: this._code});
     return Promise.resolve(this);
   }
 

@@ -27,7 +27,7 @@ export interface StoreState {
   showTips: boolean;
   onElementClick: (codeRange: CodeRange) => void;
 }
-
+// vuex 101: Deal with sync in mutation, async in actions
 const Store = (debounceTime?: number) => {
   storeInitiationTime = now();
   return {
@@ -109,7 +109,7 @@ const Store = (debounceTime?: number) => {
           );
         }
         commit('code', payload.code);
-      }, debounceTime || 1000),
+      }, debounceTime || 50),
     },
     // TODO: Enable strict for development?
     strict: false,
