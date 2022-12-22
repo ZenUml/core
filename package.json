@@ -6,8 +6,8 @@
     "url": "https://github.com/ZenUml/core.git"
   },
   "scripts": {
-    "dev": "vite dev",
-    "build:site": "vite build --port 8080",
+    "dev": "vite dev --port 8080",
+    "build:site": "vite build",
     "build": "vite build -c vite.config.lib.js",
     "build:report": "vue-cli-service build --report --target lib --inline-vue --name zenuml/core ./src/core.ts",
     "test:unit": "jest",
