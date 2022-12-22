@@ -32,3 +32,9 @@ jobs:
           start: pnpm run dev
           command: pnpm run cy
           wait-on: http://127.0.0.1:8080
+      - name: Upload artifacts  # Find artifacts under actions/jobs
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: snapshots
+          path: ./cypress/
