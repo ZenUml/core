@@ -13,8 +13,6 @@ import './components/Cosmetic-star-uml.scss'
 import './components/theme-blue-river.scss'
 import './themes/theme-dark.css'
 
-// @ts-ignore
-import LogLifecycles from 'vue-lifecycle-log'
 import Block from "./components/DiagramFrame/SeqDiagram/MessageLayer/Block/Block.vue";
 
 const logger = parentLogger.child({name: 'core'})
@@ -29,7 +27,6 @@ interface IZenUml {
 }
 
 Vue.use(Vuex)
-Vue.use(LogLifecycles)
 
 export default class ZenUml implements IZenUml{
   private readonly el: Element;
