@@ -31,3 +31,4 @@ jobs:
         with:
           start: pnpm run dev
           command: curl http://localhost:8080
+          wait-on: 'http://localhost:8080'
