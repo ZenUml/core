@@ -13,7 +13,7 @@
     "test:unit": "jest",
     "test": "vitest",
     "test:unit:watch": "pnpm run antlr && vue-cli-service test:unit --watch",
-    "cy": "cypress run",
+    "cy": "echo '$$$$$$cy'",
     "cy:open": "cypress open",
     "lint": "vue-cli-service lint",
     "antlr:setup": "python3 -m pip install antlr4-tools",

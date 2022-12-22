@@ -27,8 +27,8 @@ jobs:
       # Install NPM dependencies, cache them correctly
       # and run all Cypress tests
       - name: Cypress run
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v5
         with:
           start: pnpm run dev
-          command: echo 'hello' && curl http://localhost:8080 && pnpm run cy
+          command: pnpm run cy
           wait-on: 'http://localhost:8080'
