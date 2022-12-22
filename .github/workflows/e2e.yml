@@ -30,4 +30,5 @@ jobs:
         uses: cypress-io/github-action@v4
         with:
           start: pnpm run dev
+          command: pnpm run cy
           wait-on: 'http://localhost:8080'
