@@ -69,7 +69,7 @@
     "babel-eslint": "^10.1.0",
     "babel-jest": "^27.5.1",
     "concurrently": "^7.5.0",
-    "cypress": "^9.4.1",
+    "cypress": "10",
     "cypress-plugin-snapshots": "^1.4.4",
     "eslint": "^8.30.0",
     "eslint-plugin-vue": "^8.7.1",

@@ -20,7 +20,7 @@ specifiers:
   babel-jest: ^27.5.1
   color-string: 1.5.2
   concurrently: ^7.5.0
-  cypress: ^9.4.1
+  cypress: '10'
   cypress-plugin-snapshots: ^1.4.4
   dom-to-image-more: ^2.9.5
   eslint: ^8.30.0
@@ -88,8 +88,8 @@ devDependencies:
   babel-eslint: 10.1.0_eslint@8.30.0
   babel-jest: 27.5.1
   concurrently: 7.6.0
-  cypress: 9.7.0
-  cypress-plugin-snapshots: 1.4.4_cypress@9.7.0
+  cypress: 10.11.0
+  cypress-plugin-snapshots: 1.4.4_cypress@10.11.0
   eslint: 8.30.0
   eslint-plugin-vue: 8.7.1_eslint@8.30.0
   global-jsdom: 8.6.0_jsdom@20.0.3
@@ -4427,13 +4427,13 @@ packages:
   /csstype/3.1.1:
     resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}
 
-  /cypress-plugin-snapshots/1.4.4_cypress@9.7.0:
+  /cypress-plugin-snapshots/1.4.4_cypress@10.11.0:
     resolution: {integrity: sha512-rijq3RTEZNtxQA4KCUwjXinmE1Ww+z6cQW0B14iodFM/HlX5LN16XT/2QS3X1nUXRKt0QdTrAC5MQfMUrjBkSQ==}
     engines: {node: '>=8.2.1'}
     peerDependencies:
       cypress: ^4.5.0
     dependencies:
-      cypress: 9.7.0
+      cypress: 10.11.0
       diff2html: 2.12.2
       fs-extra: 7.0.1
       image-size: 0.7.5
@@ -4455,8 +4455,8 @@ packages:
       - utf-8-validate
     dev: true
 
-  /cypress/9.7.0:
-    resolution: {integrity: sha512-+1EE1nuuuwIt/N1KXRR2iWHU+OiIt7H28jJDyyI4tiUftId/DrXYEwoDa5+kH2pki1zxnA0r6HrUGHV5eLbF5Q==}
+  /cypress/10.11.0:
+    resolution: {integrity: sha512-lsaE7dprw5DoXM00skni6W5ElVVLGAdRUUdZjX2dYsGjbY/QnpzWZ95Zom1mkGg0hAaO/QVTZoFVS7Jgr/GUPA==}
     engines: {node: '>=12.0.0'}
     hasBin: true
     requiresBuild: true
