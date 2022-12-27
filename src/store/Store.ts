@@ -1,5 +1,4 @@
 import now from 'lodash/now';
-import debounce from 'lodash/debounce';
 import { RootContext, Participants, GroupContext, ParticipantContext } from '../parser/index.js';
 
 import WidthProviderOnBrowser from '../positioning/WidthProviderFunc';
@@ -102,14 +101,14 @@ const Store = (debounceTime?: number) => {
     actions: {
       // Why debounce is here instead of mutation 'code'?
       // Both code and cursor must be mutated together, especially during typing.
-      updateCode: debounce(function ({ commit, getters }: any, payload: any) {
+      updateCode: function ({ commit, getters }: any, payload: any) {
         if (typeof payload === 'string') {
           throw Error(
             'You are using a old version of vue-sequence. New version requires {code, cursor}.'
           );
         }
         commit('code', payload.code);
-      }, debounceTime || 50),
+      }
     },
     // TODO: Enable strict for development?
     strict: false,
