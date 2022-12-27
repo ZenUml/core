@@ -5,7 +5,7 @@ describe('Smoke test', function () {
     cy.visit('http://127.0.0.1:8080/cy/smoke.html')
     cy.wait(1500);
     cy.document().toMatchImageSnapshot({
-      imageConfig: {"threshold": 0.005}, capture: "viewport"
+      imageConfig: {"threshold": 0.05}, capture: "viewport"
     });
   });
 
@@ -13,7 +13,7 @@ describe('Smoke test', function () {
     cy.visit('http://127.0.0.1:8080/cy/smoke-interaction.html')
     cy.wait(1500);
     cy.document().toMatchImageSnapshot({
-      imageConfig: {"threshold": 0.005}, capture: "viewport"
+      imageConfig: {"threshold": 0.05}, capture: "viewport"
     });
   });
 
@@ -21,7 +21,7 @@ describe('Smoke test', function () {
     cy.visit('http://127.0.0.1:8080/cy/smoke-return.html')
     cy.wait(1500);
     cy.document().toMatchImageSnapshot({
-      imageConfig: {"threshold": 0.005}, capture: "viewport"
+      imageConfig: {"threshold": 0.05}, capture: "viewport"
     });
   });
 
@@ -29,7 +29,7 @@ describe('Smoke test', function () {
     cy.visit('http://127.0.0.1:8080/cy/smoke-creation.html')
     cy.wait(1500);
     cy.document().toMatchImageSnapshot({
-      imageConfig: {"threshold": 0.005}, capture: "viewport"
+      imageConfig: {"threshold": 0.05}, capture: "viewport"
     });
   });
 
@@ -37,7 +37,7 @@ describe('Smoke test', function () {
     cy.visit('http://127.0.0.1:8080/cy/smoke-fragment-issue.html')
     cy.wait(1500);
     cy.document().toMatchImageSnapshot({
-      imageConfig: {"threshold": 0.005}, capture: "viewport"
+      imageConfig: {"threshold": 0.05}, capture: "viewport"
     });
   });
 
@@ -45,7 +45,7 @@ describe('Smoke test', function () {
     cy.visit('http://127.0.0.1:8080/cy/smoke-fragment.html')
     cy.wait(1500);
     cy.document().toMatchImageSnapshot({
-      imageConfig: {"threshold": 0.005}, capture: "viewport"
+      imageConfig: {"threshold": 0.05}, capture: "viewport"
     });
   });
 });
