@@ -15,6 +15,7 @@
     "test:unit:watch": "pnpm run antlr && vue-cli-service test:unit --watch",
     "cy": "cypress run",
     "cy:open": "cypress open",
+    "cy:smoke": "cypress run --spec cypress/e2e/smoke.spec.js",
     "lint": "vue-cli-service lint",
     "antlr:setup": "python3 -m pip install antlr4-tools",
     "antlr:generate": "pwd && cd ./src/g4-units/hello-world && antlr4 Hello.g4",
