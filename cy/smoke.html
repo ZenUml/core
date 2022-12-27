@@ -24,7 +24,7 @@ MarkdownJavaFxHtmlPanel.readFromInputStream(inputStream) {
   try {
     // String line;
     while((line = br.readLine()) != null) {
-      resultStringBuilder.append(line).append("\n");
+      resultStringBuilder.append(line);
     }
   }
   catch(IOException) {
