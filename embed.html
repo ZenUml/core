@@ -34,6 +34,15 @@
             }
           }
 
+          if (action === 'get_png') {
+            try {
+              let png = await zenUml.getPng()
+              send_reply({ action: 'cmd_png', png })
+            } catch (e) {
+              send_error(e.message, e.stack);
+            }
+          }
+
           if (action === 'catch_clicks') {
             try {
               const top_origin = ev.origin;
@@ -163,7 +172,7 @@
     </script>
 
 
-    <div id="diagram" class="diagram">
+    <div id="diagram" class="diagram" style="text-align: center">
       <pre class="zenuml">
 
       </pre>
