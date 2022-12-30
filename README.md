@@ -65,3 +65,4 @@ Parser enhancement with customised functionalities is in the `src/parser` folder
 
 Almost everything else under serc are for the renderer. The render is based on VueJs 2.x.
 
+The building version of node must be v14. The latest version of node is not supported.
