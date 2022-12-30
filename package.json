@@ -58,7 +58,6 @@
     "@babel/eslint-parser": "^7.19.1",
     "@babel/preset-env": "^7.20.2",
     "@types/antlr4": "^4.11.2",
-    "@types/antlr4": "^4.11.2",
     "@types/color-string": "^1.5.2",
     "@types/jest": "^27.5.2",
     "@types/lodash": "^4.14.168",
