@@ -1,6 +1,8 @@
 import {Fixture} from "./fixture/Fixture";
 
-let seqDsl = require('../../../src/parser/index');
+import { describe, expect, test } from 'vitest'
+import {RootContext} from "../../../src/parser/index";
+
 
 test('Keyword "return" - in method block', () => {
   const ret = Fixture.firstStatement('A.method() { return x1 }').message().braceBlock().block().stat()[0].ret()
@@ -22,7 +24,7 @@ test('Keyword "return" - in alt block', () => {
 })
 
 test('Keyword "return" - in alt block - if + else if + else', () => {
-  expect(seqDsl.RootContext).not.toBeNull()
+  expect(RootContext).not.toBeNull()
   let returnedValueIf = Fixture.firstStatement('if(condition) { return y1 } else if (condition1) { return y2 } else { return y3 }')
     .alt().ifBlock().braceBlock().block().stat()[0].ret().expr();
   expect(returnedValueIf.getText()).toBe('y1')

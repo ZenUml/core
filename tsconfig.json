@@ -18,7 +18,8 @@
     "baseUrl": ".",
     "types": [
       "webpack-env",
-      "jest"
+      "jest",
+      "vitest/globals"
     ],
     "paths": {
       "@/*": [
@@ -40,7 +41,11 @@
     "tests/**/*.ts",
     "tests/**/*.tsx"
   ],
-    "exclude": [
+  "exclude": [
     "node_modules"
-    ]
+  ],
+  "files": [
+    "types/index.d.ts",
+    "types/svg.d.ts"
+  ]
 }

@@ -52,23 +52,10 @@ tunnels for this.
 
 ### Cloudflare tunnels [for collaborators only]
 
-1. Request a subdomain from the team. For example, `air.zenuml.com`.
-2. You will be given a command that install a service locally. Run it.
-3. Your localhost:8080 will be available at `air.zenuml.com`.
-4. Add your subdomain to `vue.config.js` so that it is allowed to access the dev server.
-
-```js
-devServer: {
-  allowedHosts: "all",
-      historyApiFallback: true,
-      hot: true,
-      host: '0.0.0.0',
-      port: 8080,
-      client: {
-    webSocketURL: 'auto://0.0.0.0:0/ws',
-  }
-}
-```
+1. Start your local dev server at `8080` with `pnpm dev`.
+2. Request a subdomain from the team. For example, `air.zenuml.com`.
+3. You will be given a command that install a service locally. Run it.
+4. Your localhost:8080 will be available at `air.zenuml.com`.
 
 # Code Structure
 This repository contains both the DSL parser and the renderer.
@@ -78,4 +65,3 @@ Parser enhancement with customised functionalities is in the `src/parser` folder
 
 Almost everything else under serc are for the renderer. The render is based on VueJs 2.x.
 
-The building version of node must be v14. The latest version of node is not supported.

@@ -6,4 +6,3 @@ export enum TextType {
 export interface WidthFunc {
   (text: string, type: TextType): number;
 }
-
