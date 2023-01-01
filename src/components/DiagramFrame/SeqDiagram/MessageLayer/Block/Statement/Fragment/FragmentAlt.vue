@@ -79,10 +79,6 @@ export default {
       return ctx?.braceBlock()?.block();
     },
   },
-  components: {
-    Block: () => import('../../Block.vue'),
-    Comment: () => import('../Comment/Comment.vue'),
-  },
 };
 </script>
 

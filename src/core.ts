@@ -14,9 +14,10 @@ import './components/theme-blue-river.scss';
 import './themes/theme-dark.css';
 
 import Block from './components/DiagramFrame/SeqDiagram/MessageLayer/Block/Block.vue';
-
+import Comment from './components/DiagramFrame/SeqDiagram/MessageLayer/Block/Statement/Comment/Comment.vue';
 const logger = parentLogger.child({ name: 'core' });
 
+Vue.component('Comment', Comment);
 Vue.component('Block', Block);
 
 interface IZenUml {
@@ -67,11 +68,3 @@ export default class ZenUml implements IZenUml {
     return this._theme;
   }
 }
-
-export const VueSequence = {
-  Vue,
-  Vuex,
-  Store,
-  SeqDiagram,
-  DiagramFrame,
-};
