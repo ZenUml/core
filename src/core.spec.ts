@@ -1,4 +1,4 @@
-import ZenUml from './core';
+import ZenUml, {VueSequence} from './core';
 describe('@ZenUML/core', function () {
   it('should render and cache the code and theme', async () => {
     const el = document.createElement('div');
@@ -16,5 +16,11 @@ describe('@ZenUML/core', function () {
     await zenUml.render(undefined, 'theme-green');
     expect(zenUml.code).toBe('C.method');
     expect(zenUml.theme).toBe('theme-green');
+  });
+});
+
+describe('VueSequence', () => {
+  it('should export a VueSequence', () => {
+    expect(VueSequence).toBeDefined();
   });
 });
