@@ -21,7 +21,5 @@ So `onParticipant` must overwrite that.
 `getInheritedFrom` function. It will be convenient that it returns
 `from` directly.
 
-
- However, we also need the `InheritedFrom` and `ProvidedFrom`
-  to calculate the translateX for Interactions.
-
+However, we also need the `InheritedFrom` and `ProvidedFrom`
+to calculate the translateX for Interactions.

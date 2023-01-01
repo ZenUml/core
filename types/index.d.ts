@@ -1,4 +1,4 @@
-import { VueConstructor } from "vue";
+import { VueConstructor } from 'vue';
 
 interface VueSequence {
   Version: string;
@@ -14,21 +14,21 @@ declare module '*.vue' {
 }
 
 declare module '*.vue' {
-  import Vue from 'vue'
+  import Vue from 'vue';
   // noinspection JSDuplicatedDeclaration
-  export default Vue
+  export default Vue;
 }
 
 declare module '@/src/components/*' {
-  import Vue from 'vue'
+  import Vue from 'vue';
   // noinspection JSDuplicatedDeclaration
-  export default Vue
+  export default Vue;
 }
 
 declare module '@/spa/components/*' {
-  import Vue from 'vue'
+  import Vue from 'vue';
   // noinspection JSDuplicatedDeclaration
-  export default Vue
+  export default Vue;
 }
 
 export const VueSequence: VueSequence;

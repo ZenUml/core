@@ -1,4 +1,4 @@
-import antlr4 from 'antlr4'
+import antlr4 from 'antlr4';
 import { default as sequenceLexer } from '../generated-parser/sequenceLexer';
 import { default as sequenceParser } from '../generated-parser/sequenceParser';
 import ToCollector from './ToCollector';
@@ -49,10 +49,10 @@ antlr4.ParserRuleContext.prototype.getComment = function () {
   }
   let hiddenTokensToLeft = this.parser.getTokenStream().getHiddenTokensToLeft(tokenIndex, channel);
   return (
-      hiddenTokensToLeft &&
-      hiddenTokensToLeft
-          .map((t) => t.text.substring(2)) // skip '//'
-          .join('')
+    hiddenTokensToLeft &&
+    hiddenTokensToLeft
+      .map((t) => t.text.substring(2)) // skip '//'
+      .join('')
   );
 };
 

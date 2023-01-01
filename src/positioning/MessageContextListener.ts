@@ -1,7 +1,7 @@
 import { OwnableMessage, OwnableMessageType } from './OwnableMessage';
 import antlr4 from 'antlr4';
 
-import sequenceParserListener from "../generated-parser/sequenceParserListener";
+import sequenceParserListener from '../generated-parser/sequenceParserListener';
 
 export class MessageContextListener extends sequenceParserListener {
   private isBlind = false;

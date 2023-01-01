@@ -6,6 +6,7 @@ The `divider` statement is used to separate the sequence of statements into logi
 groups.
 
 For example, a HTTPS sequence can be separated into three logical groups:
+
 1. Connect establishment
 2. TLS handshake
 3. HTTP request/response
@@ -32,7 +33,6 @@ Server->Client: HTTP Response
 
 ## The Lexer
 
-
 ## `divider` is a statement
 
-`divider` is treated as a statement as any other messages. 
+`divider` is treated as a statement as any other messages.

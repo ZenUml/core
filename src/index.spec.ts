@@ -1,7 +1,6 @@
-import { describe, expect, it } from 'vitest'
 import vue from 'vue';
 import vuex from 'vuex';
-import { VueSequence } from './index'
+import { VueSequence } from './index';
 vue.use(vuex);
 
 describe('index (store)', () => {
@@ -11,14 +10,14 @@ describe('index (store)', () => {
     store.commit('code', 'title abcd');
     expect(store.state.code).toBe('title abcd');
     expect(store.getters.title).toBe('abcd');
-  })
+  });
 
   it('may not have title', () => {
     const storeInstance = VueSequence.Store();
     const store = new vuex.Store(storeInstance);
     store.commit('code', 'title ');
     expect(store.state.code).toBe('title ');
-    expect(store.getters.title).toBe("");
+    expect(store.getters.title).toBe('');
 
     store.commit('code', 'A.m');
     expect(store.state.code).toBe('A.m');
@@ -27,5 +26,5 @@ describe('index (store)', () => {
     store.commit('code', '');
     expect(store.state.code).toBe('');
     expect(store.getters.title).toBeUndefined();
-  })
-})
+  });
+});

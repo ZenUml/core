@@ -1,9 +1,8 @@
-import antlr4 from "antlr4";
-import '../parser/index'
+import antlr4 from 'antlr4';
+import '../parser/index';
 import sequenceLexer from '../generated-parser/sequenceLexer';
 import sequenceParser from '../generated-parser/sequenceParser';
 class SeqErrorListener extends antlr4.error.ErrorListener {}
-
 
 export function AsyncMessageContextFixture(code: any) {
   const chars = new antlr4.InputStream(code);

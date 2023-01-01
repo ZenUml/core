@@ -5,13 +5,13 @@ const CreationContext = seqParser.CreationContext;
 CreationContext.prototype.Body = CreationContext.prototype.creationBody;
 CreationContext.prototype.isCurrent = function (cursor) {
   return isCurrent.bind(this)(cursor);
-}
+};
 
-const MessageContext = seqParser.MessageContext
+const MessageContext = seqParser.MessageContext;
 MessageContext.prototype.Body = MessageContext.prototype.messageBody;
 MessageContext.prototype.isCurrent = function (cursor) {
   return isCurrent.bind(this)(cursor);
-}
+};
 
 function isCurrent(cursor) {
   try {

@@ -1,6 +1,5 @@
-import { describe, expect, it } from 'vitest'
-import {Fixture} from "../../test/unit/parser/fixture/Fixture";
-import {CodeRange} from "./CodeRange";
+import { Fixture } from '../../test/unit/parser/fixture/Fixture';
+import { CodeRange } from './CodeRange';
 
 describe('CodeRange', () => {
   it('should have an start and an end', () => {

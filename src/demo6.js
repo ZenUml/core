@@ -3,4 +3,4 @@
 export default `A->A:: Hello
 A->B:: Hello B
 B->A: So what
-`
+`;

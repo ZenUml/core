@@ -1,16 +1,14 @@
-import { describe, expect, test } from 'vitest'
-import {RootContext, Depth} from "../../../src/parser/index";
-
+import { RootContext, Depth } from '../../../src/parser/index';
 
 function getDepth(code) {
-    let rootContext = RootContext(code);
-    return Depth(rootContext);
+  let rootContext = RootContext(code);
+  return Depth(rootContext);
 }
 
 test('get depth 0', () => {
-    let depth = getDepth('//C1\n//C2\nA.method()');
-    expect(depth).toBe(0)
-})
+  let depth = getDepth('//C1\n//C2\nA.method()');
+  expect(depth).toBe(0);
+});
 
 describe('Depth 1', () => {
   test.each([
@@ -18,29 +16,29 @@ describe('Depth 1', () => {
     ['loop(x) {A.m}'],
     ['par {A.m}'],
     ['opt {A.m}'],
-    ['A.method() { if (c1) { B.m() }}']
+    ['A.method() { if (c1) { B.m() }}'],
   ])(`%s`, (code) => {
     let depth = getDepth(code);
-    expect(depth).toBe(1)
-  })
-})
+    expect(depth).toBe(1);
+  });
+});
 
 test('get depth 2', () => {
-    let depth = getDepth('A.method() { if (c1) { if (c2) { B.m() }}}');
-    expect(depth).toBe(2)
-})
+  let depth = getDepth('A.method() { if (c1) { if (c2) { B.m() }}}');
+  expect(depth).toBe(2);
+});
 
 test('get depth 2 while / if', () => {
-    let depth = getDepth('A.method() { while (c1) { if (c2) { B.m() }}}');
-    expect(depth).toBe(2)
-})
+  let depth = getDepth('A.method() { while (c1) { if (c2) { B.m() }}}');
+  expect(depth).toBe(2);
+});
 
 test('get depth 2 if / while', () => {
-    let depth = getDepth('A.method() { if (c1) { while (c2) { B.m() }}}');
-    expect(depth).toBe(2)
-})
+  let depth = getDepth('A.method() { if (c1) { while (c2) { B.m() }}}');
+  expect(depth).toBe(2);
+});
 
 test('get depth 3 if / while / par', () => {
-    let depth = getDepth('A.method() { if (c1) { while (c2) { B.m() par { C.m } }}}');
-    expect(depth).toBe(3)
-})
+  let depth = getDepth('A.method() { if (c1) { while (c2) { B.m() par { C.m } }}}');
+  expect(depth).toBe(3);
+});

@@ -1,6 +1,5 @@
-import {WidthFunc} from "../../../../src/positioning/Coordinate";
-
-import {RootContext} from "../../../../src/parser/index";
+import { WidthFunc } from '../../../../src/positioning/Coordinate';
+import { RootContext } from '../../../../src/parser/index';
 
 export class Fixture {
   static firstStatement(code: string) {
@@ -15,7 +14,6 @@ export class Fixture {
   static firstGrandChild(code: string) {
     return Fixture.firstChild(code).children[0].braceBlock().block().stat()[0];
   }
-
 }
 
 export let stubWidthProvider: WidthFunc = (text, _) => {

@@ -1,4 +1,5 @@
 Async:
+
 ```
 asyncMessage
  : source ARROW target COL content
@@ -17,7 +18,9 @@ target
  : ID | STRING
  ;
 ```
+
 Sync:
+
 ```
 message
  : messageBody (SCOL | braceBlock)?
@@ -52,8 +55,8 @@ assignment
  : (type? assignee ASSIGN)
  ;
 ```
-First of all, `from->to` and `source->target` are very similar. Let's first merge them.
 
+First of all, `from->to` and `source->target` are very similar. Let's first merge them.
 
       if(!this.rightToLeft) {
         if(this.outOfBand) {

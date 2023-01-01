@@ -1,34 +1,34 @@
-import parentLogger from './logger/logger'
-import Vue from 'vue'
-import Vuex from 'vuex'
-import Store from './store/Store'
-import DiagramFrame from "./components/DiagramFrame/DiagramFrame.vue";
-import SeqDiagram from "./components/DiagramFrame/SeqDiagram/SeqDiagram.vue";
+import parentLogger from './logger/logger';
+import Vue from 'vue';
+import Vuex from 'vuex';
+import Store from './store/Store';
+import DiagramFrame from './components/DiagramFrame/DiagramFrame.vue';
+import SeqDiagram from './components/DiagramFrame/SeqDiagram/SeqDiagram.vue';
 
-import './assets/tailwind.css'
-import './components/Cosmetic.scss'
-import './components/Cosmetic-blue.scss'
-import './components/Cosmetic-black-white.scss'
-import './components/Cosmetic-star-uml.scss'
-import './components/theme-blue-river.scss'
-import './themes/theme-dark.css'
+import './assets/tailwind.css';
+import './components/Cosmetic.scss';
+import './components/Cosmetic-blue.scss';
+import './components/Cosmetic-black-white.scss';
+import './components/Cosmetic-star-uml.scss';
+import './components/theme-blue-river.scss';
+import './themes/theme-dark.css';
 
-import Block from "./components/DiagramFrame/SeqDiagram/MessageLayer/Block/Block.vue";
+import Block from './components/DiagramFrame/SeqDiagram/MessageLayer/Block/Block.vue';
 
-const logger = parentLogger.child({name: 'core'})
+const logger = parentLogger.child({ name: 'core' });
 
-Vue.component('Block', Block)
+Vue.component('Block', Block);
 
 interface IZenUml {
   get code(): string | undefined;
   get theme(): string | undefined;
   // Resolve after rendering is finished.
-  render: (code: string | undefined, theme: string | undefined) => Promise<IZenUml>
+  render: (code: string | undefined, theme: string | undefined) => Promise<IZenUml>;
 }
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
-export default class ZenUml implements IZenUml{
+export default class ZenUml implements IZenUml {
   private readonly el: Element;
   private _code: string | undefined;
   private _theme: string | undefined;
@@ -38,11 +38,15 @@ export default class ZenUml implements IZenUml{
   constructor(el: Element, naked: boolean = false) {
     this.el = el;
     this.store = Store();
-    this.app = new Vue({el: this.el, store: new Vuex.Store(this.store), render: h => h(naked ? SeqDiagram : DiagramFrame) })
+    this.app = new Vue({
+      el: this.el,
+      store: new Vuex.Store(this.store),
+      render: (h) => h(naked ? SeqDiagram : DiagramFrame),
+    });
   }
 
   async render(code: string | undefined, theme: string | undefined): Promise<IZenUml> {
-    logger.debug('rendering', code, theme)
+    logger.debug('rendering', code, theme);
     this._code = code || this._code;
     this._theme = theme || this._theme;
     // @ts-ignore
@@ -51,7 +55,7 @@ export default class ZenUml implements IZenUml{
     // It includes the time adjusting the top of participants for creation message.
     // $nextTick is different from setTimeout. The latter will be executed after dispatch has returned.
     // @ts-ignore
-    await this.app.$store.dispatch('updateCode', {code: this._code});
+    await this.app.$store.dispatch('updateCode', { code: this._code });
     return Promise.resolve(this);
   }
 
@@ -59,11 +63,7 @@ export default class ZenUml implements IZenUml{
     return this._code;
   }
 
-  get theme(): string | undefined{
+  get theme(): string | undefined {
     return this._theme;
-  }
-
-  async getPng(): Promise<string> {
-    return this.app.$children[0].toPng();
   }
 }

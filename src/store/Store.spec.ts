@@ -1,9 +1,8 @@
-import {describe, it, expect} from "vitest";
-import Store from "./Store";
+import Store from './Store';
 
 describe('Store', () => {
   it('should create an instance', () => {
-    expect( Store().state.showTips).toBeDefined();
-    expect( Store().state.showTips).toBeFalsy();
+    expect(Store().state.showTips).toBeDefined();
+    expect(Store().state.showTips).toBeFalsy();
   });
 });

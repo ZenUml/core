@@ -1,5 +1,4 @@
-import { test } from 'vitest'
-import {RootContext} from "../../../src/parser/index";
+import { RootContext } from '../../../src/parser/index';
 
 // Performance base line 1.966 ~ 2.1s on My MBP.
 // 2021-02-14: Improved to 1.4s.
@@ -16,38 +15,38 @@ import {RootContext} from "../../../src/parser/index";
 // 2021-02-21: Improved to 824 after moved 'to DOT' to messageBody.
 // 2021-02-21: Improved to 765 after merged 'source->target' to 'from->to'.
 test('Profiling sync message', () => {
-  var t0 = performance.now()
+  var t0 = performance.now();
   for (let i = 0; i < 100; i++) {
-    let rootContext = RootContext('x = B."method. {a,b} 1"(1,2)');
+    RootContext('x = B."method. {a,b} 1"(1,2)');
   }
-  var t1 = performance.now()
+  var t1 = performance.now();
   console.log('parsing', t1 - t0);
-})
+});
 
 // Perf baseline 100ms
 // 2021-02-21: Re-baselined to 110 after merged 'source->target' to 'from->to'.
 // 2021-02-23: Re-baselined to 1500(!) after enabled optional (from->). The default message in cloud version has that.
 test('Profiling async message', () => {
-  var t0 = performance.now()
+  var t0 = performance.now();
   for (let i = 0; i < 1000; i++) {
-    let rootContext = RootContext('A->B:m');
+    RootContext('A->B:m');
   }
-  var t1 = performance.now()
+  var t1 = performance.now();
   console.log('parsing', t1 - t0);
-})
+});
 
 // Perf baseline: 814ms on my MBP.
 // 2021-02-14: Improved to 243ms.
 // 2021-02-14: Improved to 228ms (10%) by simplifying starterEpx
 // 2021-02-21: Improved to 204 by merging 'AT' into ANNOTATION in lexer.
 test('Profiling prog.head', () => {
-  var t0 = performance.now()
+  var t0 = performance.now();
   for (let i = 0; i < 100; i++) {
-    let rootContext = RootContext('<<>> A group B {C} @Starter(D)');
+    RootContext('<<>> A group B {C} @Starter(D)');
   }
-  var t1 = performance.now()
+  var t1 = performance.now();
   console.log('parsing', t1 - t0);
-})
+});
 
 // Perf re-baseline: 11461 on my MBP.
 // 2021-02-14: Improved to 2499ms.
@@ -58,11 +57,10 @@ test('Profiling prog.head', () => {
 // 2021-02-16: Improved to 1694 after removed alternative rule for braceBlock.
 // 2021-02-21: Improved to 1560 after merged 'source->target' to 'from->to'.
 test('Profiling if/else', () => {
-  const t0 = performance.now()
+  const t0 = performance.now();
   for (let i = 0; i < 100; i++) {
-    let rootContext = RootContext('if(x>1){A.m} else if(y>1){B.m}else{C.m}');
+    RootContext('if(x>1){A.m} else if(y>1){B.m}else{C.m}');
   }
-  const t1 = performance.now()
+  const t1 = performance.now();
   console.log('parsing', t1 - t0);
-})
-
+});

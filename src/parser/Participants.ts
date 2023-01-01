@@ -13,7 +13,7 @@ export enum ParticipantType {
   Lambda,
   RDS,
   S3,
-  Undefined
+  Undefined,
 }
 export class Participant {
   name: string;
@@ -27,16 +27,17 @@ export class Participant {
   private color: string | undefined;
   private comment: string | undefined;
 
-  constructor(name: string,
-              isStarter?: boolean,
-              stereotype?: string,
-              width?: number,
-              groupId?: number | string,
-              label?: string,
-              explicit?: boolean,
-              type?: string,
-              color?: string,
-              comment?: string
+  constructor(
+    name: string,
+    isStarter?: boolean,
+    stereotype?: string,
+    width?: number,
+    groupId?: number | string,
+    label?: string,
+    explicit?: boolean,
+    type?: string,
+    color?: string,
+    comment?: string
   ) {
     this.name = name;
     this.stereotype = stereotype;
@@ -89,47 +90,63 @@ export class Participants {
 
   public Add(name: string): void;
   public Add(name: string, isStarter: boolean): void;
-  public Add(name: string,
-             isStarter?: boolean,
-             stereotype?: string,
-             width?: number,
-             groupId?: number | string,
-             label?: string,
-             explicit?: boolean): void;
-  public Add(name: string,
-             isStarter?: boolean,
-             stereotype?: string,
-             width?: number,
-             groupId?: number | string,
-             label?: string,
-             explicit?: boolean,
-             type?: string,
-             color?: string,
-             comment?: string): void {
-    const participant = new Participant(name, isStarter, stereotype, width, groupId, label, explicit, type, color, comment);
-    this.participants.set(name, mergeWith({}, this.Get(name), participant, (a, b) => a || b));
+  public Add(
+    name: string,
+    isStarter?: boolean,
+    stereotype?: string,
+    width?: number,
+    groupId?: number | string,
+    label?: string,
+    explicit?: boolean
+  ): void;
+  public Add(
+    name: string,
+    isStarter?: boolean,
+    stereotype?: string,
+    width?: number,
+    groupId?: number | string,
+    label?: string,
+    explicit?: boolean,
+    type?: string,
+    color?: string,
+    comment?: string
+  ): void {
+    const participant = new Participant(
+      name,
+      isStarter,
+      stereotype,
+      width,
+      groupId,
+      label,
+      explicit,
+      type,
+      color,
+      comment
+    );
+    this.participants.set(
+      name,
+      mergeWith({}, this.Get(name), participant, (a, b) => a || b)
+    );
   }
 
   // Returns an array of participants that are deduced from messages
   // It does not include the Starter.
   ImplicitArray() {
-    return this.Array()
-      .filter(p => !p.explicit && !p.isStarter)
+    return this.Array().filter((p) => !p.explicit && !p.isStarter);
   }
 
   // Items in entries are in the order of entry insertion:
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
   private Array() {
-    return Array.from(this.participants.entries())
-      .map(entry => entry[1]);
+    return Array.from(this.participants.entries()).map((entry) => entry[1]);
   }
 
   Names() {
-    return Array.from(this.participants.keys())
+    return Array.from(this.participants.keys());
   }
 
   First() {
-    return this.participants.values().next().value
+    return this.participants.values().next().value;
   }
 
   Get(name: string) {
@@ -143,6 +160,6 @@ export class Participants {
   Starter() {
     const first = this.First();
     // const type = first.name === 'User' || first.name === 'Actor' ? 'actor' : undefined;
-    return first.isStarter? first : undefined;
+    return first.isStarter ? first : undefined;
   }
 }

@@ -1,11 +1,11 @@
-import sequenceParser from '../../generated-parser/sequenceParser'
+import sequenceParser from '../../generated-parser/sequenceParser';
 
 const seqParser = sequenceParser;
-const MessageContext = seqParser.MessageContext
+const MessageContext = seqParser.MessageContext;
 
 interface IAssignment {
-  assignee: string | undefined
-  type: string | undefined
+  assignee: string | undefined;
+  type: string | undefined;
 }
 
 export class Assignment implements IAssignment {
@@ -26,14 +26,14 @@ export class Assignment implements IAssignment {
 }
 
 // @ts-ignore
-MessageContext.prototype.Assignment = function() {
+MessageContext.prototype.Assignment = function () {
   let assignmentContext = this.messageBody().assignment();
-// @ts-ignore
+  // @ts-ignore
   const assignee = assignmentContext?.assignee()?.getFormattedText();
-// @ts-ignore
+  // @ts-ignore
   const type = assignmentContext?.type()?.getFormattedText();
-  if(assignee) {
+  if (assignee) {
     return new Assignment(assignee, type);
   }
   return undefined;
-}
+};

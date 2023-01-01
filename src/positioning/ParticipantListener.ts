@@ -1,7 +1,6 @@
 import sequenceParser from '../generated-parser/sequenceParser';
 import sequenceParserListener from '../generated-parser/sequenceParserListener';
 
-
 const seqParser = sequenceParser;
 
 export interface IParticipantModel {
@@ -130,4 +129,4 @@ export class ParticipantListener extends sequenceParserListener {
   }
 }
 
-export default {}
+export default {};

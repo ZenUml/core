@@ -15,4 +15,4 @@ export default `RET ret = A.methodA() {
       }
     } 
    }
- }`
+ }`;

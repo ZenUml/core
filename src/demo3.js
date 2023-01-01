@@ -40,4 +40,4 @@ export default `RET ret = a:A.methodA() {
       method2() 
     }
   }
-}`
+}`;
