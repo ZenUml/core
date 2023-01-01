@@ -67,3 +67,11 @@ export default class ZenUml implements IZenUml {
     return this._theme;
   }
 }
+
+export const VueSequence = {
+  Vue,
+  Vuex,
+  Store,
+  SeqDiagram,
+  DiagramFrame,
+};
