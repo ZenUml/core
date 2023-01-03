@@ -2,6 +2,7 @@
 import { resolve } from 'path'
 import { defineConfig } from 'vite';
 import { createVuePlugin as vue } from 'vite-plugin-vue2';
+import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js'
 
 export default defineConfig({
   build: {
@@ -34,7 +35,7 @@ export default defineConfig({
       ]
     }
   },
-  plugins: [vue()],
+  plugins: [vue(), cssInjectedByJsPlugin()],
   test: {
     environment: 'jsdom',
     globals: true,

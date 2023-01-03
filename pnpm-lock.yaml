@@ -46,6 +46,7 @@ specifiers:
   ts-node: ^10.9.1
   typescript: ^4.7.4
   vite: ^4.0.1
+  vite-plugin-css-injected-by-js: ^2.2.0
   vite-plugin-vue2: ^2.0.2
   vitest: ^0.26.1
   vue: 2.7.14
@@ -104,6 +105,7 @@ devDependencies:
   ts-node: 10.9.1_awa2wsr5thmg3i7jqycphctjfq
   typescript: 4.9.4
   vite: 4.0.1_zyu4rslkg7fnkjhpf6tprcslnq
+  vite-plugin-css-injected-by-js: 2.2.0_vite@4.0.1
   vite-plugin-vue2: 2.0.2_eylnpsnqtexsstg5rpaovix6ea
   vitest: 0.26.1_jsdom@20.0.3+sass@1.57.0
   vue-template-compiler: 2.7.14
@@ -9042,6 +9044,14 @@ packages:
       - sugarss
       - supports-color
       - terser
+    dev: true
+
+  /vite-plugin-css-injected-by-js/2.2.0_vite@4.0.1:
+    resolution: {integrity: sha512-SRGuyY1WUHj7cPzv7AIE0bG5Cb+vioxuq3CkFc1j0b8z5Cy3rXLG8SwxjriylFcZAY7tH2jU4i1bsCJRE/ou6g==}
+    peerDependencies:
+      vite: '>2.0.0-0'
+    dependencies:
+      vite: 4.0.1_zyu4rslkg7fnkjhpf6tprcslnq
     dev: true
 
   /vite-plugin-vue2/2.0.2_eylnpsnqtexsstg5rpaovix6ea:
