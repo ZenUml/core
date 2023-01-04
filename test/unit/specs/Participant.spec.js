@@ -1,13 +1,12 @@
-import { mount, createLocalVue } from '@vue/test-utils';
-import Vuex from 'vuex';
+import { mount } from '@vue/test-utils';
+import { createStore } from 'vuex'
 import { VueSequence } from '../../../src/index';
 import Participant from '../../../src/components/DiagramFrame/SeqDiagram/LifeLineLayer/Participant.vue';
-const localVue = createLocalVue();
-localVue.use(Vuex);
+
 const storeConfig = VueSequence.Store();
 storeConfig.state.code = 'abc';
 
-const store = new Vuex.Store(storeConfig);
+const store = createStore(storeConfig);
 describe('select a participant', () => {
   it('For VM and HTML and store', async () => {
     store.state.firstInvocations = {
@@ -15,8 +14,8 @@ describe('select a participant', () => {
         top: 3,
       },
     };
-    const propsData = { entity: { name: 'A' } };
-    let participantWrapper = mount(Participant, { store, localVue, propsData });
+    const props = { entity: { name: 'A' } };
+    let participantWrapper = mount(Participant, { global: { plugins: [store]}, props });
     expect(participantWrapper.vm.selected).toBeFalsy();
     expect(participantWrapper.find('.selected').exists()).toBeFalsy();
 

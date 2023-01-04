@@ -1,24 +1,21 @@
-import { createLocalVue, mount } from '@vue/test-utils';
-import Vuex from 'vuex';
+import { mount } from '@vue/test-utils';
+import {createStore} from 'vuex';
 import { VueSequence } from '../../../../../../../index';
 import Creation from './Creation.vue';
 import { Fixture } from '../../../../../../../../test/unit/parser/fixture/Fixture';
 
-const localVue = createLocalVue();
-localVue.use(Vuex);
-
 function mountCreationWithCode(code: string, contextLocator: Function) {
   const storeConfig = VueSequence.Store();
   storeConfig.state.code = code;
-  const store = new Vuex.Store(storeConfig);
+  const store = createStore(storeConfig);
 
   let creationContext = contextLocator(code);
-  const propsData = {
+  const props = {
     context: creationContext,
     fragmentOffset: 100,
   };
 
-  return mount(Creation, { store, localVue, propsData });
+  return mount(Creation, { global: { plugins: [store] }, props });
 }
 
 describe('Creation', () => {
