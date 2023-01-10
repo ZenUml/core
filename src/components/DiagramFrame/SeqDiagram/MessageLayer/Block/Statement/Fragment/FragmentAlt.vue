@@ -20,8 +20,8 @@
         ></block>
       </div>
     </div>
-    <template v-for="(elseIfBlock, index) in alt.elseIfBlock()">
-      <div class="segment mt-2 border-t border-solid" :key="index + 500">
+    <template v-for="(elseIfBlock, index) in alt.elseIfBlock()" :key="index + 500">
+      <div class="segment mt-2 border-t border-solid">
         <div class="text-skin-fragment" :key="index + 1000">
           <label class="else-if hidden">else if</label>
           <label class="condition p-1">[{{ conditionFromIfElseBlock(elseIfBlock) }}]</label>
