@@ -60,7 +60,8 @@ export default {
       this.$store.commit('onSelect', this.entity.name);
     },
     setTop() {
-      const firstMessage = this.$root.$el.querySelector(`[data-to="${this.entity.name}"]`);
+      const $el = this.$root.$refs.diagram.$el
+      const firstMessage = $el.querySelector(`[data-to="${this.entity.name}"]`);
       if (firstMessage && firstMessage.attributes['data-type'].value === 'creation') {
         logger.debug(`First message to ${this.entity.name} is creation`);
         const rootY = this.$el.getBoundingClientRect().y;
