@@ -1,12 +1,12 @@
 <template>
-  <!-- .zenuml is used to make sure tailwind css takes effect when naked == true;
-       .bg-skin-base is repeated because .zenuml reset it to default theme.
-   -->
   <div
     class="zenuml sequence-diagram relative box-border text-left overflow-visible"
     :style="{ width: `${width}px`, paddingLeft: `${paddingLeft}px` }"
     ref="diagram"
   >
+    <!-- .zenuml is used to make sure tailwind css takes effect when naked == true;
+         .bg-skin-base is repeated because .zenuml reset it to default theme.
+     -->
     <life-line-layer :context="rootContext.head()" />
     <message-layer :context="rootContext.block()" />
   </div>
