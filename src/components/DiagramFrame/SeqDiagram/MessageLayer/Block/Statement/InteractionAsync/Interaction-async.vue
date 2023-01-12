@@ -93,7 +93,7 @@ export default {
   height: 20px;
 }
 
-.interaction.async >>> .message {
+.interaction.async :deep(.message) {
   width: 100%;
 }
 </style>
