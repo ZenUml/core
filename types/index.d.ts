@@ -1,12 +1,5 @@
-import { VueConstructor } from 'vue';
+// import { VueConstructor } from 'vue';
 
-interface VueSequence {
-  Version: string;
-  BuildTime: string;
-  Store: any;
-  SeqDiagram: VueConstructor;
-  DiagramFrame: VueConstructor;
-}
 
 declare module '*.vue' {
   const SFC: Vue.Component;
@@ -32,3 +25,7 @@ declare module '@/spa/components/*' {
 }
 
 export const VueSequence: VueSequence;
+
+export default ZenUml;
+
+export const debug;

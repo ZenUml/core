@@ -8,6 +8,21 @@ export default defineConfig({
       name: '@zenuml/core',
       fileName: 'zenuml-core',
     },
+    rollupOptions: {
+      output: [
+        {
+          format: 'esm',
+          sourcemap: true,
+          entryFileNames: `zenuml.esm.mjs`,
+        },
+        {
+          name: 'zenuml',
+          format: 'umd',
+          sourcemap: true,
+          entryFileNames: `zenuml.js`,
+        },
+      ]
+    },
   },
   plugins: [vue()],
   test: {
