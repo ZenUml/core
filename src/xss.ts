@@ -3,17 +3,11 @@ import ZenUml from './core';
 const logger = parentLogger.child({ name: 'main' });
 
 // find the fist element with tag `pre` and class `zenuml`
-const elm = document.querySelector('pre.zenuml');
+const elm = document.querySelector('#diagram');
 // get the code from the element
-const code =
-  elm?.textContent?.trim() ||
-  ` 
-// comment
-A
-A.method`;
+const code = `"><img src=x onerror=alert(1)>ent #FFEBE6`;
 // @ts-ignore
 const zenUml = new ZenUml(elm);
-console.log('set zenUML to window');
 // @ts-ignore
 window.zenUml = zenUml;
 zenUml.render(code, 'theme-default').then((r) => {
