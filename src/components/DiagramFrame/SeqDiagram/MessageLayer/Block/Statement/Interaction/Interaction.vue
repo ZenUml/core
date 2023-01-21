@@ -7,7 +7,7 @@
     :data-signature="signature"
     :class="{ highlight: isCurrent, self: isSelf }"
     :style="{
-      width: !isSelf && interactionWidth + 'px',
+      width: !isSelf && (interactionWidth + 'px'),
       transform: 'translateX(' + translateX + 'px)',
     }"
   >
@@ -130,7 +130,8 @@ export default {
       return this.context?.message()?.Owner();
     },
     isSelf: function () {
-      return this.to === this.from;
+      // this.to === undefined if it is a self interaction and root message.
+      return !this.to || this.to === this.from;
     },
     invocation: function () {
       // return 'Message'
