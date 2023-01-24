@@ -26,12 +26,12 @@ The following content is known to pop an alert box:
 
 # What is the cause of the vulnerability?
 
-The cause of the XSS vulnerability in [library name] is due to a lack of proper input validation in the 
+The cause of the XSS vulnerability in @zenuml/core is due to accepting an arbitrary text as `innerHTML` in the
 WidthProviderFunc.ts file. Specifically, the vulnerability is located in the code that measures the width 
 of the message or participant element in the library. The issue is present in line 29 of the file, which 
 can be found at [this URL](https://github.com/ZenUml/core/blob/577f2a550a0b82a392215875298bc358a8feff0d/src/positioning/WidthProviderFunc.ts#L29). 
 In this line, the code uses unsanitized user input which is passed as an argument in the function, this 
-allows an attacker to inject malicious JavaScript code into the web page viewed by other users.
+allows an attacker to inject malicious JavaScript code into the web page viewed potentially by other users.
 
 ```
   let hiddenDiv = document.querySelector('.textarea-hidden-div') as HTMLDivElement;
@@ -42,6 +42,18 @@ allows an attacker to inject malicious JavaScript code into the web page viewed 
     hiddenDiv = newDiv;
   }
   hiddenDiv.innerHTML = text;
+  const scrollWidth = hiddenDiv.scrollWidth;
+  return scrollWidth;
+```
+
+# Fix of the vulnerability
+
+The fix is to replace the `innerHTML` with `textContent` in the code. This will prevent the browser from
+interpreting the text as HTML and will treat it as plain text.
+
+```
+  ...
+  hiddenDiv.textContent = text;
   const scrollWidth = hiddenDiv.scrollWidth;
   return scrollWidth;
 ```
