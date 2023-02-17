@@ -1,7 +1,6 @@
 module.exports = {
   important: '.zenuml',
   content: ['./**/*.html', './src/**/*.vue'],
-  darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
       textColor: {
