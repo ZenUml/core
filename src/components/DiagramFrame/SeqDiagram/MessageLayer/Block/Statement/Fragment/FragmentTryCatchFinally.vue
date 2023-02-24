@@ -15,8 +15,8 @@
         :selfCallIndent="selfCallIndent"
       ></block>
     </div>
-    <template v-for="(catchBlock, index) in tcf.catchBlock()">
-      <div class="segment mt-2 border-t border-solid" :key="index + 500">
+    <template v-for="(catchBlock, index) in tcf.catchBlock()" :key="index + 500">
+      <div class="segment mt-2 border-t border-solid">
         <div class="header text-skin-fragment" :key="index + 1000">
           <label class="keyword catch p-1">catch</label
           ><label class="exception p-1">{{ exception(catchBlock) }}</label>

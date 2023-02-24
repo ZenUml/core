@@ -1,12 +1,10 @@
-import vue from 'vue';
-import vuex from 'vuex';
+import { createStore } from 'vuex';
 import { VueSequence } from './index';
-vue.use(vuex);
 
 describe('index (store)', () => {
   it('should have title', () => {
     const storeInstance = VueSequence.Store();
-    const store = new vuex.Store(storeInstance);
+    const store = createStore(storeInstance);
     store.commit('code', 'title abcd');
     expect(store.state.code).toBe('title abcd');
     expect(store.getters.title).toBe('abcd');
@@ -14,7 +12,7 @@ describe('index (store)', () => {
 
   it('may not have title', () => {
     const storeInstance = VueSequence.Store();
-    const store = new vuex.Store(storeInstance);
+    const store = createStore(storeInstance);
     store.commit('code', 'title ');
     expect(store.state.code).toBe('title ');
     expect(store.getters.title).toBe('');

@@ -1,10 +1,8 @@
-import { createLocalVue, shallowMount } from '@vue/test-utils';
-import Vuex from 'vuex';
+import { shallowMount } from '@vue/test-utils';
+import { createStore } from 'vuex';
 import Interaction from './Interaction.vue';
 import { VueSequence } from '../../../../../../../index';
-
-const localVue = createLocalVue();
-localVue.use(Vuex);
+import { ProgContextFixture } from '../../../../../../../parser/ContextsFixture';
 
 describe('Highlight current interact based on position of cursor', () => {
   test.each([
@@ -22,13 +20,14 @@ describe('Highlight current interact based on position of cursor', () => {
     (code, cursor, isCurrent) => {
       const storeConfig = VueSequence.Store();
       storeConfig.state.cursor = cursor;
-      const store = new Vuex.Store(storeConfig);
+      const store = createStore(storeConfig);
       store.state.code = code;
       const rootContext = store.getters.rootContext;
       const wrapper = shallowMount(Interaction, {
-        store,
-        localVue,
-        propsData: {
+        global: {
+          plugins: [store],
+        },
+        props: {
           from: 'A',
           context: rootContext.block().stat()[0],
         },
@@ -51,17 +50,14 @@ describe('Interaction width', () => {
         if (participant === 'A') return a;
         if (participant === 'B') return b;
       };
-      const store = new Vuex.Store(storeConfig);
+      const store = createStore(storeConfig);
       const wrapper = shallowMount(Interaction, {
-        store,
-        localVue,
-        propsData: {
-          selfCallIndent: selfCallIndent,
+        global: {
+          plugins: [store],
         },
-        computed: {
-          from: function () {
-            return 'A';
-          },
+        props: {
+          selfCallIndent: selfCallIndent,
+          context: ProgContextFixture('A->B.method()').block().stat()[0],
         },
       });
       expect(wrapper.vm.interactionWidth).toBe(width);
@@ -83,10 +79,11 @@ describe('Translate X', () => {
       if (participant === 'C') return 35;
     };
 
-    const store = new Vuex.Store(storeConfig);
+    const store = createStore(storeConfig);
     const wrapper = shallowMount(Interaction, {
-      store,
-      localVue,
+      global: {
+        plugins: [store],
+      },
     });
     expect(wrapper.vm.translateX).toBe(-15);
     expect(wrapper.find('.right-to-left').exists()).toBeFalsy();
@@ -105,10 +102,11 @@ describe('Translate X', () => {
       if (participant === 'C') return 35;
     };
 
-    const store = new Vuex.Store(storeConfig);
+    const store = createStore(storeConfig);
     const wrapper = shallowMount(Interaction, {
-      store,
-      localVue,
+      global: {
+        plugins: [store],
+      },
     });
     expect(wrapper.vm.translateX).toBe(-25);
     expect(wrapper.find('.right-to-left').exists()).toBeTruthy();

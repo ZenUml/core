@@ -62,7 +62,8 @@ export default {
     setTop() {
       // escape entity name to avoid 'not a valid selector' error.
       const escapedName = this.entity.name.replace(/([ #;&,.+*~\':"!^$[\]()=>|\/@])/g, '\\$1');
-      const firstMessage = this.$root.$el.querySelector(`[data-to="${escapedName}"]`);
+      const $el = this.$root.$refs.diagram.$el;
+      const firstMessage = $el.querySelector(`[data-to="${escapedName}"]`);
       if (firstMessage && firstMessage.attributes['data-type'].value === 'creation') {
         logger.debug(`First message to ${this.entity.name} is creation`);
         const rootY = this.$el.getBoundingClientRect().y;

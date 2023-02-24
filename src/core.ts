@@ -1,6 +1,6 @@
 import parentLogger from './logger/logger';
-import Vue from 'vue';
-import Vuex from 'vuex';
+import { createApp } from 'vue';
+import { createStore } from 'vuex';
 import Store from './store/Store';
 import DiagramFrame from './components/DiagramFrame/DiagramFrame.vue';
 import SeqDiagram from './components/DiagramFrame/SeqDiagram/SeqDiagram.vue';
@@ -17,17 +17,13 @@ import Block from './components/DiagramFrame/SeqDiagram/MessageLayer/Block/Block
 import Comment from './components/DiagramFrame/SeqDiagram/MessageLayer/Block/Statement/Comment/Comment.vue';
 const logger = parentLogger.child({ name: 'core' });
 
-Vue.component('Comment', Comment);
-Vue.component('Block', Block);
-
 interface IZenUml {
   get code(): string | undefined;
   get theme(): string | undefined;
   // Resolve after rendering is finished.
-  render: (code: string | undefined, theme: string | undefined) => Promise<IZenUml>;
+  // eslint-disable-next-line no-unused-vars
+  render(code: string | undefined, theme: string | undefined): Promise<IZenUml>;
 }
-
-Vue.use(Vuex);
 
 export default class ZenUml implements IZenUml {
   private readonly el: Element;
@@ -38,12 +34,12 @@ export default class ZenUml implements IZenUml {
 
   constructor(el: Element, naked: boolean = false) {
     this.el = el;
-    this.store = Store();
-    this.app = new Vue({
-      el: this.el,
-      store: new Vuex.Store(this.store),
-      render: (h) => h(naked ? SeqDiagram : DiagramFrame),
-    });
+    this.store = createStore(Store());
+    this.app = createApp(naked ? SeqDiagram : DiagramFrame);
+    this.app.component('Comment', Comment);
+    this.app.component('Block', Block);
+    this.app.use(this.store);
+    this.app.mount(this.el);
   }
 
   async render(code: string | undefined, theme: string | undefined): Promise<IZenUml> {
@@ -56,7 +52,7 @@ export default class ZenUml implements IZenUml {
     // It includes the time adjusting the top of participants for creation message.
     // $nextTick is different from setTimeout. The latter will be executed after dispatch has returned.
     // @ts-ignore
-    await this.app.$store.dispatch('updateCode', { code: this._code });
+    await this.store.dispatch('updateCode', { code: this._code });
     return Promise.resolve(this);
   }
 
@@ -74,8 +70,8 @@ export default class ZenUml implements IZenUml {
 }
 
 export const VueSequence = {
-  Vue,
-  Vuex,
+  createApp,
+  createStore,
   Store,
   SeqDiagram,
   DiagramFrame,

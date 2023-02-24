@@ -1,6 +1,6 @@
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
-import { createVuePlugin as vue } from 'vite-plugin-vue2';
+import createVuePlugin from '@vitejs/plugin-vue';
 import { execSync } from 'child_process';
 
 function getCypressHtmlFiles() {
@@ -19,7 +19,22 @@ export default defineConfig({
       input: ['index.html', 'embed.html', ...cypressHtmlFiles],
     },
   },
-  plugins: [vue()],
+  resolve: {
+    alias: {
+      vue: '@vue/compat',
+    },
+  },
+  plugins: [
+    createVuePlugin({
+      template: {
+        compilerOptions: {
+          compatConfig: {
+            MODE: 2,
+          },
+        },
+      },
+    }),
+  ],
   test: {
     environment: 'jsdom',
     globals: true,

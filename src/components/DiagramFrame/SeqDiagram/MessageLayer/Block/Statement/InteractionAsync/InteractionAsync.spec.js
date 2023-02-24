@@ -1,20 +1,17 @@
-import { createLocalVue, shallowMount } from '@vue/test-utils';
-import Vuex from 'vuex';
+import { shallowMount } from '@vue/test-utils';
+import { createStore } from 'vuex';
 import InteractionAsync from './Interaction-async.vue';
 import { VueSequence } from '../../../../../../../index';
-
-const localVue = createLocalVue();
-localVue.use(Vuex);
 
 function renderCode(code) {
   const storeConfig = VueSequence.Store();
   storeConfig.state.code = code;
-
-  const store = new Vuex.Store(storeConfig);
+  const store = createStore(storeConfig);
   return shallowMount(InteractionAsync, {
-    store,
-    localVue,
-    propsData: {
+    global: {
+      plugins: [store],
+    },
+    props: {
       context: store.getters.rootContext.block().stat()[0],
     },
   });
