@@ -34,21 +34,6 @@ export default defineConfig({
         },
       ],
     },
-    rollupOptions: {
-      output: [
-        {
-          format: 'esm',
-          sourcemap: true,
-          entryFileNames: `zenuml.esm.mjs`,
-        },
-        {
-          name: 'zenuml',
-          format: 'umd',
-          sourcemap: true,
-          entryFileNames: `zenuml.js`,
-        },
-      ]
-    },
   },
   plugins: [
     createVuePlugin({
