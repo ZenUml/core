@@ -60,8 +60,10 @@ export default {
       this.$store.commit('onSelect', this.entity.name);
     },
     setTop() {
+      // escape entity name to avoid 'not a valid selector' error.
+      const escapedName = this.entity.name.replace(/([ #;&,.+*~\':"!^$[\]()=>|\/@])/g, '\\$1');
       const $el = this.$root.$refs.diagram.$el;
-      const firstMessage = $el.querySelector(`[data-to="${this.entity.name}"]`);
+      const firstMessage = $el.querySelector(`[data-to="${escapedName}"]`);
       if (firstMessage && firstMessage.attributes['data-type'].value === 'creation') {
         logger.debug(`First message to ${this.entity.name} is creation`);
         const rootY = this.$el.getBoundingClientRect().y;
