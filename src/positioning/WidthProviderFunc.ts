@@ -26,7 +26,7 @@ export default function WidthProviderOnBrowser(text: string, type: TextType): nu
   }
   // hiddenDiv.className = 'textarea-hidden-div ' + (type === TextType.ParticipantName ? 'participant' : 'message');
 
-  hiddenDiv.innerHTML = text;
+  hiddenDiv.textContent = text;
   const scrollWidth = hiddenDiv.scrollWidth;
   return scrollWidth;
 }

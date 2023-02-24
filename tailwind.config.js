@@ -1,6 +1,19 @@
 module.exports = {
   important: '.zenuml',
   content: ['./**/*.html', './src/**/*.vue'],
+  safelist: [
+    // add classes from tailwind.css
+    'theme-default',
+    'theme-mermaid',
+    'theme-darcula',
+    'theme-sky',
+    'theme-idle-afternoon',
+    'theme-coles',
+    'theme-woolworths',
+    'theme-anz',
+    'theme-nab',
+    'theme-google',
+  ],
   theme: {
     extend: {
       textColor: {
@@ -23,8 +36,8 @@ module.exports = {
             'var(--color-text-control, var(--color-text-secondary, var(--color-text-base, #000)))',
           muted: 'var(--color-text-muted)',
           hover: 'var(--color-text-hover)',
-          link: `var(--color-text-link, var(--color-text-secondary, var(--color-text-base, #000)))`,
-          fill: `var(--color-text-fill)`,
+          link: 'var(--color-text-link, var(--color-text-secondary, var(--color-text-base, #000)))',
+          fill: 'var(--color-text-fill)',
         },
       },
       backgroundColor: {
