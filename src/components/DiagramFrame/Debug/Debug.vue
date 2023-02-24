@@ -18,21 +18,23 @@
           <circle cx="6" cy="18" r="3"></circle>
           <path d="M18 9a9 9 0 0 1-9 9"></path>
         </svg>
-        <span class="inline-block px-2">{{ gitBranch }}:{{ commitHash }}</span>
+        <span class="inline-block px-2">{{ gitBranch }} ({{ gitTag }}) {{ commitHash }}</span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-const commitHash = 'process.env.VUE_APP_GIT_HASH';
-const gitBranch = 'process.env.VUE_APP_GIT_BRANCH';
+const commitHash = import.meta.env.VITE_COMMIT_HASH;
+const gitBranch = import.meta.env.VITE_GIT_BRANCH;
+const gitTag = import.meta.env.VITE_GIT_TAG;
 export default {
   name: 'Debug',
   data() {
     return {
       commitHash,
       gitBranch,
+      gitTag,
     };
   },
   computed: {
