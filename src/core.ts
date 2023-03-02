@@ -65,7 +65,8 @@ export default class ZenUml implements IZenUml {
   }
 
   async getPng(): Promise<string> {
-    return this.app.$children[0].toPng();
+    // @ts-ignore
+    return this.el.children[0].__vue__.toPng();
   }
 }
 
