@@ -105,6 +105,11 @@ export default {
       return this.rootContext?.title();
     },
   },
+  mounted () {
+    // https://stackoverflow.com/a/64429013/529187
+    // Expose component instance so we can access toPng and other methods.
+    this.$el.__vue__ = this;
+  },
   methods: {
     ...mapMutations(['setScale']),
     showTipsDialog() {
