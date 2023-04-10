@@ -1,8 +1,8 @@
-import { shallowMount } from '@vue/test-utils';
-import { createStore } from 'vuex';
-import Interaction from './Interaction.vue';
-import { VueSequence } from '../../../../../../../index';
-import { ProgContextFixture } from '../../../../../../../parser/ContextsFixture';
+import { shallowMount } from '@vue/test-utils'
+import { createStore } from 'vuex'
+import Interaction from './Interaction.vue'
+import { VueSequence } from '../../../../../../../index'
+import { ProgContextFixture } from '../../../../../../../parser/ContextsFixture'
 
 describe('Highlight current interact based on position of cursor', () => {
   test.each([
@@ -36,6 +36,17 @@ describe('Highlight current interact based on position of cursor', () => {
     }
   );
 });
+
+// function positionParticipantsInStore () {
+//   const storeConfig = VueSequence.Store()
+//   storeConfig.getters.centerOf = () => (participant) => {
+//     if (participant === 'A') return 10
+//     if (participant === 'B') return 25
+//     if (participant === 'C') return 35
+//   }
+//   return createStore(storeConfig)
+// }
+
 describe('Interaction width', () => {
   test.each([
     // A --- ?px ---> B
@@ -65,21 +76,35 @@ describe('Interaction width', () => {
   );
 });
 
-describe('Translate X', () => {
+describe('Calculate translateX and rtl when an explict from is provided (i.e. From -> To)', () => {
   // A          B           C
-  // provided   inherited   to
-  it('when left to right', function () {
-    Interaction.computed.providedFrom = () => 'A';
-    Interaction.computed.origin = () => 'B';
-    Interaction.computed.to = () => 'C';
-    const storeConfig = VueSequence.Store();
-    storeConfig.getters.centerOf = () => (participant) => {
-      if (participant === 'A') return 10;
-      if (participant === 'B') return 25;
-      if (participant === 'C') return 35;
-    };
+  // 10         25          35
+  // given a dictionary of participants and their center positions like: { A: 10, B: 25, C: 35 }
+  // return a store with a getter that returns the center position of a participant
+  function positionParticipantsInStore (participants) {
+    const storeConfig = VueSequence.Store()
+    storeConfig.getters.centerOf = () => (participant) => participants[participant]
+    return createStore(storeConfig)
+  }
 
-    const store = createStore(storeConfig);
+  // given an interaction component and a dictionary of field name to participant like:
+  // { providedFrom: 'A', origin: 'B', to: 'C' }
+  // set the computed properties of the interaction component to return the participant
+  function mapParticipantsToOriginProvidedAndTo (InteractionComp, participants) {
+    // set up interaction component
+    InteractionComp.computed.providedFrom = () => participants.providedFrom
+    InteractionComp.computed.origin = () => participants.origin
+    InteractionComp.computed.to = () => participants.to
+  }
+  // set up store
+  const store = positionParticipantsInStore({ A: 10, B: 25, C: 35 });
+
+  // A          B           C
+  // provided  origin      to
+  //   ------------------->
+  // 10         25          35
+  it('when left to right', function () {
+    mapParticipantsToOriginProvidedAndTo(Interaction, { providedFrom: 'A', origin: 'B', to: 'C' });
     const wrapper = shallowMount(Interaction, {
       global: {
         plugins: [store],
@@ -89,20 +114,13 @@ describe('Translate X', () => {
     expect(wrapper.find('.right-to-left').exists()).toBeFalsy();
   });
 
-  // A      B      C
-  // to   real     from
-  it('when right to left', function () {
-    Interaction.computed.providedFrom = () => 'B';
-    Interaction.computed.origin = () => 'C';
-    Interaction.computed.to = () => 'A';
-    const storeConfig = VueSequence.Store();
-    storeConfig.getters.centerOf = () => (participant) => {
-      if (participant === 'A') return 10;
-      if (participant === 'B') return 25;
-      if (participant === 'C') return 35;
-    };
+  // A <-- B             C
+  // to    provided      origin
+  // 10    25            35
+  it('right to left', function () {
+    // set up interaction component
+    mapParticipantsToOriginProvidedAndTo(Interaction, { providedFrom: 'B', origin: 'C', to: 'A' });
 
-    const store = createStore(storeConfig);
     const wrapper = shallowMount(Interaction, {
       global: {
         plugins: [store],
