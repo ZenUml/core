@@ -57,7 +57,7 @@ export default {
   props: ['context', 'selfCallIndent', 'commentObj'],
   computed: {
     // add tracker to the mapGetters
-    ...mapGetters(['participants', 'distance2', 'cursor', 'onElementClick']),
+    ...mapGetters(['participants', 'distance2', 'cursor', 'onElementClick', 'leftMost']),
     hasComment() {
       return this.commentObj?.text !== '' || this.commentObj?.color !== '';
     },
@@ -85,17 +85,10 @@ export default {
       return this.message?.SignatureText();
     },
     translateX: function () {
-      const fragmentOff = 0 || 0;
-      // ** Starting point is always the center of 'origin' **
-      // Normal flow
-      if (!this.rightToLeft && !this.outOfBand) {
-        return fragmentOff;
-      }
-
-      const moveTo = !this.rightToLeft ? this.providedFrom : this.to;
-      const dist = this.distance2(this.origin, moveTo);
+      const leftMostParticipant = this.leftMost([this.from, this.to, this.providedFrom]);
+      const dist = this.distance2(this.origin, leftMostParticipant);
       const indent = this.selfCallIndent || 0;
-      return dist + fragmentOff - indent;
+      return dist - indent;
     },
     rightToLeft: function () {
       return this.distance2(this.from, this.to) < 0;

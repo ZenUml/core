@@ -53,5 +53,8 @@ export default defineConfig({
     deps: {
       inline: [''],
     },
+    coverage: {
+      provider: 'istanbul'
+    }
   },
 });

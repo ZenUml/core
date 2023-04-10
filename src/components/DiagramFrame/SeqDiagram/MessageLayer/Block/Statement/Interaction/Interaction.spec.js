@@ -99,6 +99,18 @@ describe('Calculate translateX and rtl when an explict from is provided (i.e. Fr
   // set up store
   const store = positionParticipantsInStore({ A: 10, B: 25, C: 35 });
 
+  it('when left to right and no explict form is provided', function () {
+    // set up interaction component
+    mapParticipantsToOriginProvidedAndTo(Interaction, { providedFrom: null, origin: 'A', to: 'B' });
+    const wrapper = shallowMount(Interaction, {
+      global: {
+        plugins: [store],
+      },
+    });
+    expect(wrapper.vm.translateX).toBe(0);
+    expect(wrapper.find('.right-to-left').exists()).toBeFalsy();
+  });
+
   // A          B           C
   // provided  origin      to
   //   ------------------->

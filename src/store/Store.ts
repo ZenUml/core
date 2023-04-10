@@ -57,14 +57,14 @@ const Store = () => {
       },
       centerOf: (state: any, getters: any) => (entity: any) => {
         if (!entity) {
-          console.error('[vue-sequence] centerOf: entity is undefined');
-          return 0;
+          console.error('[@zenuml/core] centerOf: entity has falsy value: ', entity);
+          return -1;
         }
         try {
           return getters.coordinates.getPosition(entity) || 0;
         } catch (e) {
           console.error(e);
-          return 0;
+          return -1;
         }
       },
       GroupContext: () => GroupContext,
@@ -79,6 +79,19 @@ const Store = () => {
         return getters.centerOf(to) - getters.centerOf(from);
       },
       onElementClick: (state: any) => state.onElementClick,
+      leftMost: (state: any, getters: any) => (participantNames: string[]) => {
+        let min = Infinity;
+        let leftMostParticipant;
+
+        for (const key of participantNames) {
+          if (key && getters.centerOf(key) !== -1 && getters.centerOf(key) < min) {
+            min = getters.centerOf(key);
+            leftMostParticipant = key;
+          }
+        }
+
+        return leftMostParticipant;
+      }
     },
     mutations: {
       code: function (state: any, payload: any) {
