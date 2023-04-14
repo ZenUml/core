@@ -1,5 +1,5 @@
 # Simple workflow for deploying static content to GitHub Pages
-name: Build, Test, npm Publish, and Deploy
+name: Build, Test, npm Publish
 
 on:
   push:
