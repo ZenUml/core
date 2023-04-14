@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "private": false,
   "repository": {
-    "url": "https://github.com/ZenUml/core.git"
+    "url": "https://github.com/mermaid-js/zenuml-core"
   },
   "scripts": {
     "dev": "vite dev --port 8080",
