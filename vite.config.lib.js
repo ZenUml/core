@@ -47,6 +47,9 @@ export default defineConfig({
     }),
     cssInjectedByJsPlugin(),
   ],
+  define: {
+    'process.env.NODE_ENV': '"production"'
+  },
   test: {
     environment: 'jsdom',
     globals: true,
