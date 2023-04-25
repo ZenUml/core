@@ -1,6 +1,6 @@
 {
   "name": "@zenuml/core",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "private": false,
   "repository": {
     "url": "https://github.com/mermaid-js/zenuml-core"
