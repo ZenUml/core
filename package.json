@@ -2,6 +2,7 @@
   "name": "@zenuml/core",
   "version": "3.0.0",
   "private": false,
+  "license": "MIT",
   "repository": {
     "url": "https://github.com/mermaid-js/zenuml-core"
   },
