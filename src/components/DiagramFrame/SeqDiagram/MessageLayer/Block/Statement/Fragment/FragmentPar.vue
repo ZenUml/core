@@ -4,17 +4,23 @@
     <div
       class="header bg-skin-fragment-header text-skin-fragment-header text-base leading-4 rounded-t"
     >
-      <div class="name font-semibold p-1 border-b"><label>Par</label></div>
+      <div class="name font-semibold p-1 border-b" style="display: flex; width: 100%; justify-content: space-between;">
+        <label>Par</label>
+        <collapsible-button />
+      </div>
     </div>
-    <block
-      :style="{ paddingLeft: `${offsetX}px` }"
-      :context="par.braceBlock().block()"
-      :selfCallIndent="selfCallIndent"
-    ></block>
+    <b-collapse visible id="collapse-1" class="mt-2">
+      <block
+        :style="{ paddingLeft: `${offsetX}px` }"
+        :context="par.braceBlock().block()"
+        :selfCallIndent="selfCallIndent"
+      ></block>
+    </b-collapse>
   </div>
 </template>
 
 <script>
+import CollapsibleButton from './CollapsibleButton.vue';
 import fragment from './FragmentMixin';
 
 export default {
@@ -29,6 +35,7 @@ export default {
       return this.context.par();
     },
   },
+  components: { CollapsibleButton },
 };
 </script>
 <style scoped>

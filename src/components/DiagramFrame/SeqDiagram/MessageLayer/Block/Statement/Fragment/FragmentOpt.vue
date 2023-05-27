@@ -2,17 +2,23 @@
   <div class="fragment opt border-skin-fragment rounded" :style="fragmentStyle">
     <comment v-if="comment" :comment="comment" />
     <div class="header bg-skin-fragment-header text-skin-fragment-header text-base leading-4">
-      <div class="name font-semibold p-1 border-b"><label>Opt</label></div>
+      <div class="name font-semibold p-1 border-b" style="display: flex; width: 100%; justify-content: space-between;">
+        <label>Opt</label>
+        <collapsible-button />
+      </div>
     </div>
-    <block
-      :style="{ paddingLeft: `${offsetX}px` }"
-      :context="opt.braceBlock().block()"
-      :selfCallIndent="selfCallIndent"
-    ></block>
+    <b-collapse visible id="collapse-1" class="mt-2">
+      <block
+        :style="{ paddingLeft: `${offsetX}px` }"
+        :context="opt.braceBlock().block()"
+        :selfCallIndent="selfCallIndent"
+      ></block>
+    </b-collapse>
   </div>
 </template>
 
 <script>
+import CollapsibleButton from './CollapsibleButton.vue';
 import fragment from './FragmentMixin';
 
 export default {
@@ -27,6 +33,7 @@ export default {
       return this.context.opt();
     },
   },
+  components: { CollapsibleButton },
 };
 </script>
 
