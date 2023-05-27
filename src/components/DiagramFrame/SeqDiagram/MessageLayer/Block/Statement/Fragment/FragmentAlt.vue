@@ -3,22 +3,27 @@
     <div class="segment">
       <comment v-if="comment" :comment="comment" :commentObj="commentObj" />
 
-      <div
-        class="header bg-skin-fragment-header text-skin-fragment-header text-base leading-4 rounded-t"
-      >
-        <div class="name font-semibold p-1 border-b"><label class="p-0">Alt</label></div>
-      </div>
-      <div class="segment">
-        <div class="text-skin-fragment">
-          <label class="condition p-1">[{{ condition }}]</label>
+      <div class="header bg-skin-fragment-header text-skin-fragment-header text-base leading-4 rounded-t" >
+        <div class="name font-semibold p-1 border-b">
+          <div style="display: flex; width: 100%; justify-content: space-between;" >
+            <label class="p-0">Alt</label>
+            <collapsible-button :element-id="`collapse-${uuid}`" />
+          </div>
         </div>
-        <block
-          v-if="blockInIfBlock"
-          :style="{ paddingLeft: `${offsetX}px` }"
-          :context="blockInIfBlock"
-          :selfCallIndent="selfCallIndent"
-        ></block>
       </div>
+      
+    </div>
+    <b-collapse visible :id="`collapse-${uuid}`" class="mt-2">
+    <div class="segment">
+      <div class="text-skin-fragment">
+        <label class="condition p-1">[{{ condition }}]</label>
+      </div>
+      <block
+        v-if="blockInIfBlock"
+        :style="{ paddingLeft: `${offsetX}px` }"
+        :context="blockInIfBlock"
+        :selfCallIndent="selfCallIndent"
+      ></block>
     </div>
     <template v-for="(elseIfBlock, index) in alt.elseIfBlock()" :key="index + 500">
       <div class="segment mt-2 border-t border-solid">
@@ -44,11 +49,14 @@
         ></block>
       </div>
     </template>
+    </b-collapse>
   </div>
 </template>
 
 <script>
 import fragment from './FragmentMixin';
+import CollapsibleButton from './CollapsibleButton.vue'
+import { v4 as uuidv4 } from 'uuid';
 
 export default {
   name: 'fragment-alt',
@@ -70,6 +78,9 @@ export default {
     elseBlock: function () {
       return this.alt?.elseBlock()?.braceBlock()?.block();
     },
+    uuid: function () {
+      return uuidv4();
+    }
   },
   methods: {
     conditionFromIfElseBlock(ctx) {
@@ -79,6 +90,7 @@ export default {
       return ctx?.braceBlock()?.block();
     },
   },
+  components: { CollapsibleButton },
 };
 </script>
 
@@ -86,5 +98,9 @@ export default {
 /* We need to do this because tailwind 3.2.4 set border-color to #e5e7eb via '*'. */
 * {
   border-color: inherit;
+}
+.collapsed > .when-open,
+.not-collapsed > .when-closed {
+  display: none;
 }
 </style>

@@ -2,11 +2,16 @@
   <div class="fragment tcf border-skin-fragment rounded" :style="fragmentStyle">
     <div class="segment">
       <comment v-if="comment" :comment="comment" />
-      <div
-        class="header bg-skin-fragment-header text-skin-fragment-header text-base leading-4 rounded-t"
-      >
-        <div class="name font-semibold p-1 border-b"><label>Try</label></div>
+      <div class="header bg-skin-fragment-header text-skin-fragment-header text-base leading-4 rounded-t" >
+        <div class="name font-semibold p-1 border-b" style="display: flex; width: 100%; justify-content: space-between;">
+          <label>Try</label>
+          <collapsible-button :element-id="`collapse-${uuid}`" />
+        </div>
       </div>
+    </div>
+    
+    <b-collapse visible :id="`collapse-${uuid}`" class="mt-2">
+    <div class="segment">
       <!-- fragment-offset set as offsetX - 1 for fragment border     -->
       <block
         v-if="blockInTryBlock"
@@ -41,13 +46,17 @@
         ></block>
       </div>
     </template>
+    </b-collapse>
   </div>
 </template>
 
 <script>
+import CollapsibleButton from './CollapsibleButton.vue';
 import fragment from './FragmentMixin';
+import { v4 as uuidv4 } from 'uuid';
 
 export default {
+  components: { CollapsibleButton },
   name: 'fragment-tcf',
   props: ['context', 'comment', 'selfCallIndent'],
   mixins: [fragment],
@@ -63,6 +72,9 @@ export default {
     },
     finallyBlock: function () {
       return this.tcf?.finallyBlock()?.braceBlock()?.block();
+    },
+    uuid: function () {
+      return uuidv4();
     },
   },
   methods: {

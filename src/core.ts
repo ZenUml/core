@@ -1,9 +1,11 @@
 import parentLogger from './logger/logger';
+import Vue from 'vue';
 import { createApp } from 'vue';
 import { createStore } from 'vuex';
 import Store from './store/Store';
 import DiagramFrame from './components/DiagramFrame/DiagramFrame.vue';
 import SeqDiagram from './components/DiagramFrame/SeqDiagram/SeqDiagram.vue';
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 import './assets/tailwind.css';
 import './components/Cosmetic.scss';
@@ -13,9 +15,18 @@ import './components/Cosmetic-star-uml.scss';
 import './components/theme-blue-river.scss';
 import './themes/theme-dark.css';
 
+// Import Bootstrap and BootstrapVue CSS files (order is important)
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
 import Block from './components/DiagramFrame/SeqDiagram/MessageLayer/Block/Block.vue';
 import Comment from './components/DiagramFrame/SeqDiagram/MessageLayer/Block/Statement/Comment/Comment.vue';
 const logger = parentLogger.child({ name: 'core' });
+
+// Make BootstrapVue available throughout your project
+Vue.use(BootstrapVue)
+// Optionally install the BootstrapVue icon components plugin
+Vue.use(IconsPlugin)
 
 interface IZenUml {
   get code(): string | undefined;
