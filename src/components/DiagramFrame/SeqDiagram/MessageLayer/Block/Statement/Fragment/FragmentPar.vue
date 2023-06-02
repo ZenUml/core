@@ -5,7 +5,7 @@
       class="header bg-skin-fragment-header text-skin-fragment-header text-base leading-4 rounded-t"
     >
       <div class="name font-semibold p-1 border-b" style="display: flex; width: 100%; justify-content: space-between;">
-        <label>Par</label>
+        <label class="mb-0">Par</label>
         <collapsible-button :element-id="`collapse-${uuid}`" />
       </div>
     </div>

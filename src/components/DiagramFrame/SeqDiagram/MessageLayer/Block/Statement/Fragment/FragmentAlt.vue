@@ -6,7 +6,7 @@
       <div class="header bg-skin-fragment-header text-skin-fragment-header text-base leading-4 rounded-t" >
         <div class="name font-semibold p-1 border-b">
           <div style="display: flex; width: 100%; justify-content: space-between;" >
-            <label class="p-0">Alt</label>
+            <label class="p-0 mb-0">Alt</label>
             <collapsible-button :element-id="`collapse-${uuid}`" />
           </div>
         </div>

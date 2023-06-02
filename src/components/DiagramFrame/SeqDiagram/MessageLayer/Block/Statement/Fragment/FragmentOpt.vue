@@ -3,7 +3,7 @@
     <comment v-if="comment" :comment="comment" />
     <div class="header bg-skin-fragment-header text-skin-fragment-header text-base leading-4">
       <div class="name font-semibold p-1 border-b" style="display: flex; width: 100%; justify-content: space-between;">
-        <label>Opt</label>
+        <label class="mb-0">Opt</label>
         <collapsible-button :element-id="`collapse-${uuid}`" />
       </div>
     </div>
