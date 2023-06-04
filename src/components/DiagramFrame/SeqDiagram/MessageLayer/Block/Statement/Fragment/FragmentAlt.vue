@@ -15,7 +15,7 @@
       </div>
     </div>
 
-    <div :class="{hidden: !collapsed}">
+    <div :class="{hidden: collapsed}">
     <div class="segment">
       <div class="text-skin-fragment">
         <label class="condition p-1">[{{ condition }}]</label>
@@ -80,7 +80,7 @@ export default {
     },
   },
   data: function() {
-    return {collapsed: true};
+    return {collapsed: false};
   },
   methods: {
     conditionFromIfElseBlock(ctx) {
