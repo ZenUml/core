@@ -7,13 +7,15 @@
         <div class="name font-semibold p-1 border-b">
           <div style="display: flex; width: 100%; justify-content: space-between;" >
             <label class="p-0 mb-0">Alt</label>
-            <button @click="this.collapsed = !this.collapsed">Toggle</button>
+            <svg width="16px" height="16px" :class="{hidden: collapsed}" @click="this.toggle()" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="miter"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><line x1="14" y1="10" x2="21" y2="3"></line><polyline points="20 10 14 10 14 4"></polyline><line x1="3" y1="21" x2="10" y2="14"></line><polyline points="4 14 10 14 10 20"></polyline></g></svg>
+            
+            <svg width="16px" height="16px" viewBox="0 0 24 24" :class="{hidden: !collapsed}" @click="this.toggle()" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title></title> <g id="Complete"> <g id="expand"> <g> <polyline data-name="Right" fill="none" id="Right-2" points="3 17.3 3 21 6.7 21" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></polyline> <line fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" x1="10" x2="3.8" y1="14" y2="20.2"></line> <line fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" x1="14" x2="20.2" y1="10" y2="3.8"></line> <polyline data-name="Right" fill="none" id="Right-3" points="21 6.7 21 3 17.3 3" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></polyline> </g> </g> </g> </g></svg>
           </div>
         </div>
       </div>
     </div>
 
-    <div :class="{collapsed: !collapsed}">
+    <div :class="{hidden: !collapsed}">
     <div class="segment">
       <div class="text-skin-fragment">
         <label class="condition p-1">[{{ condition }}]</label>
@@ -87,6 +89,9 @@ export default {
     blockInElseIfBlock(ctx) {
       return ctx?.braceBlock()?.block();
     },
+    toggle() {
+      this.collapsed = !this.collapsed;
+    }
   },
 };
 </script>
@@ -95,8 +100,5 @@ export default {
 /* We need to do this because tailwind 3.2.4 set border-color to #e5e7eb via '*'. */
 * {
   border-color: inherit;
-}
-.collapsed {
-  display: none;
 }
 </style>
