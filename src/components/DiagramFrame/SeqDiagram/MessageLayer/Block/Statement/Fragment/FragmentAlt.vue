@@ -3,22 +3,27 @@
     <div class="segment">
       <comment v-if="comment" :comment="comment" :commentObj="commentObj" />
 
-      <div
-        class="header bg-skin-fragment-header text-skin-fragment-header text-base leading-4 rounded-t"
-      >
-        <div class="name font-semibold p-1 border-b"><label class="p-0">Alt</label></div>
-      </div>
-      <div class="segment">
-        <div class="text-skin-fragment">
-          <label class="condition p-1">[{{ condition }}]</label>
+      <div class="header bg-skin-fragment-header text-skin-fragment-header text-base leading-4 rounded-t" >
+        <div class="name font-semibold p-1 border-b">
+          <div style="display: flex; width: 100%; justify-content: space-between;" >
+            <label class="p-0 mb-0">Alt</label>
+            <button @click="this.collapsed = !this.collapsed">Toggle</button>
+          </div>
         </div>
-        <block
-          v-if="blockInIfBlock"
-          :style="{ paddingLeft: `${offsetX}px` }"
-          :context="blockInIfBlock"
-          :selfCallIndent="selfCallIndent"
-        ></block>
       </div>
+    </div>
+
+    <div :class="{collapsed: !collapsed}">
+    <div class="segment">
+      <div class="text-skin-fragment">
+        <label class="condition p-1">[{{ condition }}]</label>
+      </div>
+      <block
+        v-if="blockInIfBlock"
+        :style="{ paddingLeft: `${offsetX}px` }"
+        :context="blockInIfBlock"
+        :selfCallIndent="selfCallIndent"
+      ></block>
     </div>
     <template v-for="(elseIfBlock, index) in alt.elseIfBlock()" :key="index + 500">
       <div class="segment mt-2 border-t border-solid">
@@ -44,6 +49,7 @@
         ></block>
       </div>
     </template>
+  </div>
   </div>
 </template>
 
@@ -71,6 +77,9 @@ export default {
       return this.alt?.elseBlock()?.braceBlock()?.block();
     },
   },
+  data: function() {
+    return {collapsed: true};
+  },
   methods: {
     conditionFromIfElseBlock(ctx) {
       return ctx?.parExpr()?.condition()?.getFormattedText();
@@ -86,5 +95,8 @@ export default {
 /* We need to do this because tailwind 3.2.4 set border-color to #e5e7eb via '*'. */
 * {
   border-color: inherit;
+}
+.collapsed {
+  display: none;
 }
 </style>
